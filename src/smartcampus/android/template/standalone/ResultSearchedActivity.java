@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,6 +68,25 @@ public class ResultSearchedActivity extends Activity {
 		ArrayAdapter adapterCursesList = new ArrayAdapter<String>(ResultSearchedActivity.this, android.R.layout.simple_list_item_1, arrayCourseSearched);
 		
 	    listView.setAdapter(adapterCursesList);
+	    
+	    
+	    
+	    ListView listView1 = (ListView)findViewById(R.id.listView1);
+	    
+	    listView1.setOnItemClickListener(new ListView.OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				String courseSelected = (String)arg0.getItemAtPosition(arg2);
+				Intent i = new Intent(ResultSearchedActivity.this, FindRecensioniActivity.class);
+				i.putExtra("courseSelected", courseSelected);
+				startActivity(i);
+			}
+
+			});
+	    
 	}
 
 	@Override
