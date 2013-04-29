@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Corsi">
+        <item>Programmazione 1</item>
+        <item>Programmazione 2</item>
+        <item>HCI</item>
+        <item>Reti di calcolatori</item>
+        <item>Basi di dati</item>
+        <item>Algoritmi e strutture dati</item>
+        <item>LFC</item>
+    </string-array>
+
+</resources>

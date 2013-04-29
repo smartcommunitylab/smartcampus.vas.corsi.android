@@ -27,6 +27,50 @@
                 android:id="@+id/tab3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Swicth api 14+" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Button01"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="23dp"
+                    android:text="hard_coded_NOME CORSO" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="19dp"
+                    android:text="@string/rating" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView2"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/ratingBar1"
+                    android:layout_alignRight="@+id/ratingBar1"
+                    android:layout_below="@+id/ratingBar1"
+                    android:layout_marginTop="29dp"
+                    android:text="Descrizione corso: immagino che occorra recuperare la descrizione da fonte esterna" />
+
             </RelativeLayout>
 
             <LinearLayout
