@@ -30,7 +30,7 @@ public class MyUniActivity extends Activity {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(MyUniActivity.this,
-								FindCoursesActivity.class);
+								FindHomeActivity.class);
 						MyUniActivity.this.startActivity(intent);
 					}
 				});

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <string-array name="drop_down_spinner_departments">
+        <item>Tutto</item>
+        <item>Economia e management</item>
+        <item>Giurisprudenza</item>
+        <item>Ingegneria e scienza dell informazione</item>
+        <item>Lettere e filosofia</item>
+        <item>Matematica</item>
+        <item>Psicologia e scienze cognitive</item>
+        <item>Sociologia e ricerca sociale</item>
+        <item>Ingegneria civile ambientale e meccanica</item>
+        <item>Ingegneria industriale</item>
+      
+    </string-array>
+</resources>

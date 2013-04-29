@@ -20,7 +20,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -112,8 +112,13 @@
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
-            android:name="smartcampus.android.template.standalone.FindCoursesActivity"
-            android:label="@string/title_activity_find_courses" >
+            android:name="smartcampus.android.template.standalone.FindHomeActivity"
+            android:label="@string/title_activity_find_courses"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.template.standalone.ResultSearchedActivity"
+            android:label="@string/title_activity_result_searched" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindRecensioniActivity"

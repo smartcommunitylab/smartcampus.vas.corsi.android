@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="drop_down_spinner_courses_psic">
+        <item>Tutto</item>
+        <item>Scienze e tecniche di psicologia cognitiva</item>
+        <item>Interfacce e tecnologie della comunicazione</item>
+
+    </string-array>
+</resources>

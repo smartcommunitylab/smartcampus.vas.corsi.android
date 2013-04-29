@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="drop_down_spinner_singlecourses_IT">
+        <item>Analisi matematica</item>
+        <item>Programmazione 1</item>
+        <item>Matematica discreta 1</item>
+        <item>Programmazione 2</item>
+        <item>Programmazione funzionale</item>
+        <item>Architettura degli elaboratori</item>
+        <item>Matematica discreta 2</item>
+        <item>Reti di calcolatori</item>
+        <item>Programmazione per il web</item>
+        <item>Sistemi operativi</item>
+        <item>Basi di dati</item>
+        <item>Sistemi informativi</item>
+        <item>Algoritmi e strutture dati</item>
+        <item>Ingegneria del software</item>
+        <item>Reti di calcolatori: applicazioni</item>
+    </string-array>
+
+</resources>

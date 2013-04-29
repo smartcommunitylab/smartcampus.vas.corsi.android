@@ -62,4 +62,20 @@
     <string name="corso6">Dati</string>
     
 
+    <string name="title_activity_search_home">Ricerca dei corsi</string>
+
+    <!-- RICERCA -->
+    <string name="search_label_department"> Dipartimento </string>
+    <string name="search_label_courseDegree"> Corso di laurea </string>
+    <string name="search_label_course"> Corso </string>
+    <string name="search_button_search"> Ricerca </string>
+    <string name="search_hint_course"> Nome del corso </string>
+    <string name="title_activity_result_searched">Risultati della ricerca</string>
+    <string name="search_label_searchedList">Ricerca per:</string>
+    <string name="find_label_searchingnow">"Stai cercando: "</string>
+    <string name="find_label_searching">"Cerca un corso: "</string>
+    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="add_event">Aggiungi evento</string>
+    <string name="agenda_label_tab_overview">Overview</string>
+    
 </resources>
