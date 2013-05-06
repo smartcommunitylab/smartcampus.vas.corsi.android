@@ -17,7 +17,7 @@
         android:text="Swicth api 14+" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewDatetimeRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
@@ -26,10 +26,10 @@
         android:text="hard_coded_NOME CORSO" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewUserRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textViewDatetimeRow"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
         android:text="@string/rating" />
@@ -38,7 +38,7 @@
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/textViewUserRow"
         android:layout_centerHorizontal="true" />
 
     <TextView

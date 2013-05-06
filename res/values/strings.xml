@@ -77,5 +77,7 @@
     <string name="title_activity_agenda">AgendaActivity</string>
     <string name="add_event">Aggiungi evento</string>
     <string name="agenda_label_tab_overview">Overview</string>
+    <string name="notices_string_titlelist">Non ci sono notifiche</string>
+    <string name="notices_string_titlelistExist">Lista delle notifiche aggiornate il: </string>
     
 </resources>

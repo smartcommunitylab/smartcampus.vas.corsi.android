@@ -28,7 +28,7 @@ public class ResultSearchedActivity extends Activity {
 		String department = i.getStringExtra("department");
 		String degree = i.getStringExtra("courseDegree");
 		String course = i.getStringExtra("course").toLowerCase();
-		TextView tv = (TextView)findViewById(R.id.textView1);
+		TextView tv = (TextView)findViewById(R.id.textViewDatetimeRow);
 		if(course.equals("")){
 			if(department.equals("Tutto"))
 			tv.setText(tv.getText()+"Tutto");

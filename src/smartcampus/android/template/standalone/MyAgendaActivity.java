@@ -1,8 +1,12 @@
 package smartcampus.android.template.standalone;
 
+
+import android.app.ActionBar;
 import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -16,6 +20,9 @@ public class MyAgendaActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_agenda);
 
+		ActionBar ab = getActionBar();
+		ab.setHomeButtonEnabled(true);
+		ab.setDisplayHomeAsUpEnabled(true);
 		/** TabHost will have Tabs */
 		TabHost tabHost = getTabHost();
 		String tab1 = getResources().getString(R.string.tab_home);
@@ -46,8 +53,25 @@ public class MyAgendaActivity extends TabActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_agenda, menu);
+		getMenuInflater().inflate(R.menu.agenda, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent intentHome = new Intent(MyAgendaActivity.this, MyUniActivity.class);
+			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentHome);
+			return true;
+		case R.id.add_event:
+			
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
 	}
 
 }
