@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MyUniActivity" >
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MyUniActivity" 
+    android:background="#FFFFFFFF">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -14,17 +16,19 @@
         <Button
             android:id="@+id/my_agenda_btn"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="150dp"
             android:layout_weight="50"
             android:background="#FFFFFFFF"
+            android:drawableTop="@drawable/myagenda"
             android:text="@string/my_agenda_btn_label" />
 
         <Button
             android:id="@+id/find_courses_btn"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="150dp"
             android:layout_weight="50"
             android:background="#FFFFFFFF"
+            android:drawableTop="@drawable/findcourses"
             android:text="@string/find_courses_btn_label" />
     </LinearLayout>
 
@@ -36,18 +40,21 @@
         <Button
             android:id="@+id/phl_btn"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="150dp"
             android:layout_weight="50"
             android:background="#FFFFFFFF"
+            android:drawableTop="@drawable/phl"
             android:text="@string/phl_btn_label" />
 
         <Button
             android:id="@+id/notices_btn"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="150dp"
             android:layout_weight="50"
             android:background="#FFFFFFFF"
-            android:text="@string/notices_btn_label"/>
+            android:drawableTop="@drawable/notices"
+            android:text="@string/notices_btn_label" />
+
     </LinearLayout>
 
 </LinearLayout>
