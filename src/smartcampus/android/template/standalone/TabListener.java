@@ -24,7 +24,7 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 		// Check if the fragment is already initialized
 		if (mFragment == null) {
 			// If not, instantiate and add it to the activity
-			mFragment = (SherlockFragment) Fragment.instantiate(mActivity,
+			mFragment = (Fragment) Fragment.instantiate(mActivity,
 					mClass.getName());
 			ft.add(android.R.id.content, mFragment, mTag);
 		} else {

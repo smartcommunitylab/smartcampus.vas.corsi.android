@@ -107,6 +107,7 @@
         <activity
             android:name="smartcampus.android.template.standalone.MyAgendaActivity"
             android:label="@string/title_activity_my_agenda" 
+            android:configChanges="orientation|screenSize"
             android:icon="@drawable/myagenda_white" >
         </activity>
         <activity
@@ -128,6 +129,7 @@
         <activity
             android:name="smartcampus.android.template.standalone.FindRecensioniActivity"
             android:label="@string/title_activity_find_recensioni" 
+            android:configChanges="orientation|screenSize"
             android:icon="@drawable/findcourses_white" >
         </activity>
         <activity
