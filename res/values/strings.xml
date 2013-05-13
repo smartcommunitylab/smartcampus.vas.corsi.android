@@ -53,15 +53,7 @@
     <string name="title_activity_find_home_course">FindHomeCourse</string>
     <string name="rating">Rating Average:</string>
     <string name="title_activity_dati">Dati</string>
-    
-    <string name="corso1">Programmazione1</string>
-    <string name="corso2">Programmazione2</string>
-    <string name="corso3">HCI</string>
-    <string name="corso4">Dati</string>
-    <string name="corso5">Dati</string>
-    <string name="corso6">Dati</string>
-    
-
+    <string name="my_courses">Corsi che seguo</string>
     <string name="title_activity_search_home">Ricerca dei corsi</string>
 
     <!-- RICERCA -->

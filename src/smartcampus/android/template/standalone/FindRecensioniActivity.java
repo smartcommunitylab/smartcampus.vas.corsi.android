@@ -1,38 +1,52 @@
 package smartcampus.android.template.standalone;
 
-import android.app.TabActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 
-@SuppressWarnings("deprecation")
-public class FindRecensioniActivity extends TabActivity {
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+public class FindRecensioniActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_recensioni);
 
+		final ActionBar ab = getSupportActionBar();
+		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		ab.setHomeButtonEnabled(true);
+		ab.setDisplayHomeAsUpEnabled(true);
+
 		/** TabHost will have Tabs */
-		TabHost tabHost = getTabHost();
-		String tab1 = getResources().getString(R.string.tab_home);
-		String tab2 = getResources().getString(R.string.tab_recensioni);
+		String tab1_txt = getResources().getString(R.string.tab_home);
+		String tab2_txt = getResources().getString(R.string.tab_recensioni);
 
-		TabSpec ts1 = tabHost.newTabSpec("tab_test3");
-		TabSpec ts2 = tabHost.newTabSpec("tab_test4");
+		Tab tab1 = ab
+				.newTab()
+				.setText(tab1_txt)
+				.setTabListener(
+						new TabListener<RecensioniHomeFragment>(this, "tab1",
+								RecensioniHomeFragment.class));
+		ab.addTab(tab1);
 
-		tabHost.addTab(ts1.setIndicator(tab1).setContent(R.id.tab3));
-		tabHost.addTab(ts2.setIndicator(tab2).setContent(R.id.tab4));
-
-		tabHost.setCurrentTab(0);
+		Tab tab2 = ab
+				.newTab()
+				.setText(tab2_txt)
+				.setTabListener(
+						new TabListener<RecensioniRateFragment>(this, "tab2",
+								RecensioniRateFragment.class));
+		ab.addTab(tab2);
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.find_recensioni, menu);
-		return true;
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.find_recensioni, menu);
+		return super.onCreateOptionsMenu(menu);
+
 	}
 
 }
