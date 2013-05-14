@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import smartcampus.android.template.standalone.R;
 
@@ -16,10 +17,10 @@ import android.widget.TextView;
 
 
 public class AdapterNoticesList extends ArrayAdapter<Notice>{
-	private ArrayList<Notice> notices;
+	private List<Notice> notices;
 	private Context mContext = null;
 
-	public AdapterNoticesList(Context context, int layoutId, ArrayList<Notice> n) {
+	public AdapterNoticesList(Context context, int layoutId, List<Notice> n) {
 		super(context, layoutId, n);
 		notices = n;
 		mContext = context;
@@ -35,15 +36,15 @@ public class AdapterNoticesList extends ArrayAdapter<Notice>{
 
 		TextView noticeUser = (TextView) view
 				.findViewById(smartcampus.android.template.standalone.R.id.textViewUserRow);
-		noticeUser.setText(notice.getUser());
+		noticeUser.setText(notice.getAuthor().getName());
 		
 		TextView noticeDatetime = (TextView) view
 				.findViewById(smartcampus.android.template.standalone.R.id.textViewDatetimeRow);
-		noticeUser.setText(notice.getDatetime());
+		noticeDatetime.setText(notice.getUpdateTime());
 		
 		TextView noticeDescription = (TextView) view
 				.findViewById(smartcampus.android.template.standalone.R.id.textViewDescriptionRow);
-		noticeUser.setText(notice.getDescription());
+		noticeDescription.setText(notice.getDescription());
 
 		return view;
 	}

@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragment;
 
 public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 	private Fragment mFragment;

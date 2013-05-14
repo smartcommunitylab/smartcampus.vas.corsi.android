@@ -1,6 +1,5 @@
 package smartcampus.android.template.standalone;
 
-import android.R.integer;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

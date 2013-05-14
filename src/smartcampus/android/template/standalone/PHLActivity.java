@@ -1,7 +1,6 @@
 package smartcampus.android.template.standalone;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
