@@ -101,45 +101,49 @@
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.NoticesActivity"
-            android:label="@string/title_activity_notices" 
-            android:icon="@drawable/notices_white" >
+            android:icon="@drawable/notices_white"
+            android:label="@string/title_activity_notices" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.MyAgendaActivity"
-            android:label="@string/title_activity_my_agenda" 
             android:configChanges="orientation|screenSize"
-            android:icon="@drawable/myagenda_white" >
+            android:icon="@drawable/myagenda_white"
+            android:label="@string/title_activity_my_agenda" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.PHLActivity"
-            android:label="@string/title_activity_phl" 
-            android:icon="@drawable/phl_white" >
+            android:icon="@drawable/phl_white"
+            android:label="@string/title_activity_phl" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeActivity"
-            android:label="@string/title_activity_find_courses"
             android:icon="@drawable/findcourses_white"
+            android:label="@string/title_activity_find_courses"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.ResultSearchedActivity"
-            android:label="@string/title_activity_result_searched" 
-            android:icon="@drawable/findcourses_white" >
+            android:icon="@drawable/findcourses_white"
+            android:label="@string/title_activity_result_searched" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindRecensioniActivity"
-            android:label="@string/title_activity_find_recensioni" 
             android:configChanges="orientation|screenSize"
-            android:icon="@drawable/findcourses_white" >
+            android:icon="@drawable/findcourses_white"
+            android:label="@string/title_activity_find_recensioni" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeCourseActivity"
-            android:label="@string/title_activity_find_home_course" 
-            android:icon="@drawable/findcourses_white" >
+            android:icon="@drawable/findcourses_white"
+            android:label="@string/title_activity_find_home_course" >
         </activity>
         <activity
             android:name="android.smartcampus.datifuffa.Dati"
             android:label="@string/title_activity_dati" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.template.standalone.AddEventActivity"
+            android:label="@string/title_activity_add_event" >
         </activity>
     </application>
 

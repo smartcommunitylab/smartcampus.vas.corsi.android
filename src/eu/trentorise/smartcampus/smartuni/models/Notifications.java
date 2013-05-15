@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Notifications {
 

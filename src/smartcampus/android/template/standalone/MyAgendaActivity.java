@@ -59,7 +59,10 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			startActivity(intentHome);
 			return true;
 		case R.id.add_event:
-
+			Intent intentEvent = new Intent(MyAgendaActivity.this,
+					AddEventActivity.class);
+			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentEvent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
