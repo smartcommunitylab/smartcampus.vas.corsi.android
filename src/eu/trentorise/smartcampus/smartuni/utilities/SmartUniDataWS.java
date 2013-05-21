@@ -15,10 +15,23 @@ public final class SmartUniDataWS {
 	// Courses
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corsi/frequentati";
 	public static final String GET_WS_ALLCOURSES = "/corsi/all";
+	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(String department){
+		return "/corsi/"+department;	
+	}
+	public static String GET_WS_ALLCOURSES_OF_DEGREE(String degree){
+		return "/corsi/"+degree;	
+	}
+	
+	// Courses complete
+	public static final String GET_WS_COURSE_COMPLETE_DATA(String idCourse){
+		return "/corso/"+idCourse;
+	}
 	
 	
 	// Events
 	public static final String GET_WS_ALLEVENTS = "/events/all";
+	
+	
 	
 	
 	

@@ -51,7 +51,7 @@
     <string name="find_recensioni_per">Recensioni per: MATERIA</string>
     <string name="rate">Rate!</string>
     <string name="title_activity_find_home_course">FindHomeCourse</string>
-    <string name="rating">Rating Average:</string>
+    <string name="rating">Voto degli studenti:</string>
     <string name="title_activity_dati">Dati</string>
     <string name="my_courses">Corsi che seguo</string>
     <string name="title_activity_search_home">Ricerca dei corsi</string>
@@ -70,8 +70,10 @@
     <string name="title_activity_agenda">AgendaActivity</string>
     <string name="add_event">Aggiungi evento</string>
     <string name="agenda_label_tab_overview">Overview</string>
-    <string name="notices_string_titlelist">Non ci sono notifiche</string>
+    <string name="notices_string_titlelist"></string>
     <string name="notices_string_titlelistExist">Lista delle notifiche aggiornate il: </string>
-    <string name="title_activity_add_event">AddEventActivity</string>
-
+    <string name="switch_on">Seguo</string>
+    <string name="switch_off">Non seguo</string>
+    <string name="title_activity_add_event">Aggiungi evento</string>
+    
 </resources>

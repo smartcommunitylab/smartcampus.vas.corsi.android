@@ -1,20 +1,31 @@
 package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import eu.trentorise.smartcampus.smartuni.models.CourseLite;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ResultSearchedActivity extends Activity {
+
+	public List<CourseLite> courses;
+	public ArrayList<String> coursesFiltered;
+	String department;
+	String degree;
+	String course;
+	public static ProgressDialog pd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,70 +34,39 @@ public class ResultSearchedActivity extends Activity {
 		ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		
+
 		Intent i = getIntent();
-		String department = i.getStringExtra("department");
-		String degree = i.getStringExtra("courseDegree");
-		String course = i.getStringExtra("course").toLowerCase();
-		TextView tv = (TextView)findViewById(R.id.textViewDatetimeRow);
-		if(course.equals("")){
-			if(department.equals("Tutto"))
-			tv.setText(tv.getText()+"Tutto");
-			else
-				if(degree.equals("Tutto"))
-					tv.setText(tv.getText()+" Dipartimento di "+department.toString());
-				else
-					tv.setText(tv.getText()+" Dipartimento di "+department.toString()+", corso di laurea in "+degree.toString());	
-		}else{
-			if(department.equals("Tutto")){
-				if(degree.equals("Tutto"))
-					tv.setText(tv.getText()+" "+course.toString());	
-				else
-					tv.setText(tv.getText()+" "+course.toString()+ " del corso di laurea in "+degree.toString());	
-			}else{
-				if(degree.equals("Tutto"))
-					tv.setText(tv.getText()+" "+course.toString()+ " del dipartimento di "+department.toString());	
-				else
-					tv.setText(tv.getText()+" "+course.toString()+ " del dipartimento di "+department.toString()+", corso di laurea in "+degree.toString());	
-			}
-				
-			
-		}
-		
-		String[] mTempArray = getResources().getStringArray(R.array.drop_down_spinner_singlecourses_IT);
-	    
-		ListView listView = (ListView)findViewById(R.id.listView1);
-		
-		int length = mTempArray.length;
-		ArrayList<String> arrayCourseSearched = new ArrayList<String>();
-		
-		for(int k=0;k<length;k++){
-			if(mTempArray[k].toLowerCase().contains(course)){
-				arrayCourseSearched.add(mTempArray[k]);
-			}
-		}
-		ArrayAdapter adapterCursesList = new ArrayAdapter<String>(ResultSearchedActivity.this, android.R.layout.simple_list_item_1, arrayCourseSearched);
-		
-	    listView.setAdapter(adapterCursesList);
-	    
-	    
-	    
-	    ListView listView1 = (ListView)findViewById(R.id.listView1);
-	    
-	    listView1.setOnItemClickListener(new ListView.OnItemClickListener(){
+		department = i.getStringExtra("department");
+		degree = i.getStringExtra("courseDegree");
+		course = i.getStringExtra("course").toLowerCase();
+
+		pd = new ProgressDialog(ResultSearchedActivity.this).show(
+				ResultSearchedActivity.this, "Risultati della ricerca",
+				"Caricamento dei corsi...");
+
+		TextView tv = (TextView) findViewById(R.id.textViewDatetimeRow);
+		ListView listView = (ListView) findViewById(R.id.listView1);
+
+		// get data from web service
+		new CoursesHandlerLite(getApplicationContext(), department, degree,
+				course, listView, tv).execute();
+
+		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				String courseSelected = (String)arg0.getItemAtPosition(arg2);
-				Intent i = new Intent(ResultSearchedActivity.this, FindRecensioniActivity.class);
-				i.putExtra("courseSelected", courseSelected);
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) { // TODO Auto-generated method stub String
+				String courseSelectedName = (String) arg0
+						.getItemAtPosition(arg2);
+				Intent i = new Intent(ResultSearchedActivity.this,
+						FindHomeCourseActivity.class);
+
+				i.putExtra("courseSelectedName", courseSelectedName);
+				i.putExtra("courseSelectedId", CoursesHandlerLite.getIDCourseSelected(arg2));
 				startActivity(i);
 			}
 
-			});
-	    
+		});
 	}
 
 	@Override
@@ -96,13 +76,12 @@ public class ResultSearchedActivity extends Activity {
 		return true;
 	}
 
-	
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intentHome = new Intent(ResultSearchedActivity.this, FindHomeActivity.class);
+			Intent intentHome = new Intent(ResultSearchedActivity.this,
+					FindHomeActivity.class);
 			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentHome);
 			return true;
@@ -111,4 +90,5 @@ public class ResultSearchedActivity extends Activity {
 
 		}
 	}
+
 }

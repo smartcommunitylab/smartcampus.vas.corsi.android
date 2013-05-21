@@ -19,4 +19,8 @@
 
 <resources>
     <color name="pressed_smartn_theme">#CC33B5E5</color>
+    <color name="smartn_theme_color">#0066cc</color>
+    <color name="white_smartn_theme">#FFFFFF</color>
+    <color name="black_smartn_theme">#000000</color>
 </resources>
+

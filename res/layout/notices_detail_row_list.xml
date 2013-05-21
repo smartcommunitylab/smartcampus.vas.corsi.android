@@ -9,18 +9,15 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textViewDatetimeRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="@dimen/activity_vertical_margin"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textViewUserRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/smartn_theme_color"
             android:paddingLeft="@dimen/activity_vertical_margin"
-            android:text="TextView" />
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:text="TextView"
+            android:textColor="@color/white_smartn_theme"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -31,11 +28,26 @@
         android:paddingBottom="@dimen/activity_horizontal_margin" >
 
         <TextView
+            android:id="@+id/textViewDatetimeRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:text="TextView" />
+
+        <TextView
             android:id="@+id/textViewDescriptionRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black_smartn_theme" />
+
+        <TextView
+            android:id="@+id/textViewUserRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:text="TextView" />
 
     </LinearLayout>
 

@@ -7,6 +7,8 @@ public class Notice {
 	public Author author;
 	public String title;
 	public String updateTime;
+	public String timestamp;
+	public String user;
 
 	public Notice() {
 		// TODO Auto-generated constructor stub
@@ -50,5 +52,24 @@ public class Notice {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
 	}
 }

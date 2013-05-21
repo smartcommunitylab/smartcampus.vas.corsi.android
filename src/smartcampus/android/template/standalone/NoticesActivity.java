@@ -13,9 +13,11 @@ import eu.trentorise.smartcampus.smartuni.models.Notice;
 import eu.trentorise.smartcampus.smartuni.models.Notifications;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterNoticesList;
 import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
+import eu.trentorise.smartcampus.template.MainActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +37,9 @@ public class NoticesActivity extends Activity {
 	private String dateString;
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;
+	public static ProgressDialog pd;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,69 +51,13 @@ public class NoticesActivity extends Activity {
 
 		textViewTitleNotices = (TextView) findViewById(R.id.textViewTitleNotices);
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
-		try {
-			notifies = (List<Notice>) new NotificationHandler(
-					getApplicationContext()).execute().get();
 
-			if (notifies == null) {
-				setVoidNotify();
-			} else
-				setListNotifications();
+		pd = new ProgressDialog(NoticesActivity.this).show(NoticesActivity.this, "Bacheca notifiche",
+				"Caricamento...");
+		
+		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
+				lvAllNotices).execute();
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void setListNotifications() {
-
-		textViewTitleNotices.setText(R.string.notices_string_titlelist);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
-				Locale.ITALY);
-		Date date = new Date();
-		dateString = dateFormat.format(date);
-
-		textViewTitleNotices.setText(R.string.notices_string_titlelistExist);
-		textViewTitleNotices.setText(textViewTitleNotices.getText() + " "
-				+ dateString);
-
-		Iterator<Notice> i = notifies.iterator();
-
-		datetimeList = new ArrayList<String>();
-		usersList = new ArrayList<String>();
-		descriptionsList = new ArrayList<String>();
-
-		while (i.hasNext()) {
-			Notice t = new Notice();
-			t = (Notice) i.next();
-
-			descriptionsList.add(t.getDescription());
-			/*
-			 * datetimeList.add(t.getDatetime()); usersList.add(t.getUser());
-			 */
-		}
-
-		AdapterNoticesList adapterNotices = new AdapterNoticesList(
-				NoticesActivity.this, R.id.listViewNotices, notifies);
-		lvAllNotices.setAdapter(adapterNotices);
-
-	}
-
-	private void setVoidNotify() {
-		textViewTitleNotices.setText(R.string.notices_string_titlelist);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
-				Locale.ITALY);
-		Date date = new Date();
-		dateString = dateFormat.format(date);
-
-		textViewTitleNotices.setText(R.string.notices_string_titlelistExist);
-		textViewTitleNotices.setText(textViewTitleNotices.getText() + " "
-				+ dateString);
 	}
 
 	@Override

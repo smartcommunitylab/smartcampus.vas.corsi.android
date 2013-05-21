@@ -1,13 +1,22 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
+import java.security.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import smartcampus.android.template.standalone.R;
+import smartcampus.android.template.standalone.TitledItem;
 
 import eu.trentorise.smartcampus.smartuni.models.Notice;
 
 import android.content.Context;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +27,87 @@ import android.widget.TextView;
 
 public class AdapterNoticesList extends ArrayAdapter<Notice>{
 	private List<Notice> notices;
-	private Context mContext = null;
+	private Context context = null;
 
-	public AdapterNoticesList(Context context, int layoutId, List<Notice> n) {
-		super(context, layoutId, n);
+	public AdapterNoticesList(Context mcontext, int layoutId, List<Notice> n) {
+		super(mcontext, layoutId, n);
 		notices = n;
-		mContext = context;
+		context = mcontext;
 	}
 
 	@Override
-	public View getView(int position, View view, ViewGroup parent) {
-		LayoutInflater vi = (LayoutInflater) mContext
+	public View getView(int position, View convertView, ViewGroup parent) {
+		/*LayoutInflater vi = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = vi.inflate(R.layout.notices_detail_row_list, null);
+		convertView = vi.inflate(R.layout.notices_detail_row_list, null);*/
 
-		Notice notice = notices.get(position);
+		
+		View row = convertView;
+		Notice item = getItem(position);
 
+		if (row == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			row = inflater.inflate(R.layout.notices_detail_row_list, parent, false);
+		}
+
+		TextView title = (TextView) row.findViewById(R.id.textViewTitle);
+		TextView date = (TextView) row.findViewById(R.id.textViewDatetimeRow);
+		TextView content = (TextView) row.findViewById(R.id.textViewDescriptionRow);
+		TextView author = (TextView) row.findViewById(R.id.textViewUserRow);
+
+		title.setText(item.getTitle());
+		
+		String dateTS = item.getTimestamp();
+		
+		Date d = new Date(Long.parseLong(dateTS));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
+				Locale.ITALY);
+
+		String dateString = dateFormat.format(d);
+		date.setText(dateString);
+		content.setText(item.getDescription());
+		content.setPadding(
+				(int) context.getResources().getDimension(
+						R.dimen.activity_horizontal_margin),
+				0,
+				(int) context.getResources().getDimension(
+						R.dimen.activity_horizontal_margin), 0);
+		Notice prev = null;
+		if (position > 0)
+			prev = getItem(position - 1);
+
+		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
+			date.setVisibility(View.VISIBLE);
+		} else {
+			date.setVisibility(View.GONE);
+		}
+		
+		
+		// row.setPadding(
+		// (int)context.getResources().getDimension(
+		// R.dimen.activity_horizontal_margin),
+		// 0,
+		// (int)context.getResources().getDimension(
+		// R.dimen.activity_horizontal_margin), 0);
+		
+		author.setText(item.getUser());
+		
+		return row;
+		
+		
+		/*Notice notice = notices.get(position);
+
+		Notice noticePrec = notices.get(position-1);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String dateToday = dateFormat.format(date);
+		
+		
+		if(noticePrec.getTimestamp() == notice.getTimestamp()){
+			
+		}
 		TextView noticeUser = (TextView) view
 				.findViewById(smartcampus.android.template.standalone.R.id.textViewUserRow);
 		noticeUser.setText(notice.getAuthor().getName());
@@ -46,6 +120,8 @@ public class AdapterNoticesList extends ArrayAdapter<Notice>{
 				.findViewById(smartcampus.android.template.standalone.R.id.textViewDescriptionRow);
 		noticeDescription.setText(notice.getDescription());
 
-		return view;
+		return view;*/
 	}
+	
+
 }

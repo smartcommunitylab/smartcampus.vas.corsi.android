@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 public class CourseLite {
 	
-	public String name;
+	public String nome;
 	public String id;
 	
 	public CourseLite() {
@@ -14,7 +14,7 @@ public class CourseLite {
 	}
 	
 	public String getName() {
-		return name;
+		return nome;
 	}
 	
 	public void setId(String id) {
@@ -22,7 +22,7 @@ public class CourseLite {
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.nome = name;
 	}
 
 	
