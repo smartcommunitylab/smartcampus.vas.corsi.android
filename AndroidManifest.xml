@@ -95,10 +95,12 @@
         <activity
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
-       <!--  <activity
+        <!--
+        <activity
             android:name="smartcampus.android.template.standalone.MyUniActivity"
             android:label="@string/title_activity_my_uni" >
-        </activity>-->
+        </activity>
+        -->
         <activity
             android:name="smartcampus.android.template.standalone.NoticesActivity"
             android:icon="@drawable/notices_white"
@@ -114,6 +116,12 @@
             android:name="smartcampus.android.template.standalone.PHLActivity"
             android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.template.standalone.PHL4Courses"
+            android:icon="@drawable/phl_white"
+            android:label="@string/title_activity_phl" 
+            android:configChanges="orientation|screenSize">
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeActivity"

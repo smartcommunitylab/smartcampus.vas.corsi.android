@@ -57,6 +57,8 @@
     <string name="title_activity_search_home">Ricerca dei corsi</string>
     <string name="choose_data">Data:</string>
 	<string name="add_event_corsi">Corso:</string>
+	<string name="tab_PHL">PHL</string>
+	<string name="tab_moodle">MOODLE</string>
     <!-- RICERCA -->
     <string name="search_label_department"> Dipartimento </string>
     <string name="search_label_courseDegree"> Corso di laurea </string>
