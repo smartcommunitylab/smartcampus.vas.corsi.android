@@ -20,7 +20,7 @@ public class AddEventActivity extends FragmentActivity {
 
 	@SuppressWarnings("unused")
 	private TextView mDateDisplay;
-	private EditText mPickDate;
+	//private EditText mPickDate;
 
 	static final int DATE_DIALOG_ID = 0;
 
