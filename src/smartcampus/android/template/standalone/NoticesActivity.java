@@ -1,19 +1,7 @@
 package smartcampus.android.template.standalone;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.ExecutionException;
-
-import eu.trentorise.smartcampus.smartuni.models.Notice;
-import eu.trentorise.smartcampus.smartuni.models.Notifications;
-import eu.trentorise.smartcampus.smartuni.utilities.AdapterNoticesList;
-import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
-import eu.trentorise.smartcampus.template.MainActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -22,10 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.smartuni.models.Notice;
+import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
 
 public class NoticesActivity extends Activity {
 
