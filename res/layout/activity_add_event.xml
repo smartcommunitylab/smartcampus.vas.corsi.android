@@ -36,13 +36,17 @@
             android:id="@+id/myDatePickerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
             android:onClick="showDatePickerDialog" />
 
-        <Button
+        <EditText
+            android:id="@+id/myTimePickerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showTimePickerDialog"
-            android:text="pick_time" />
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:onClick="showTimePickerDialog" />
     </LinearLayout>
 
     <LinearLayout
