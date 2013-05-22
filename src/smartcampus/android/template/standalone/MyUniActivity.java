@@ -2,16 +2,6 @@ package smartcampus.android.template.standalone;
 
 import java.io.IOException;
 
-import eu.trentorise.smartcampus.ac.ACService;
-import eu.trentorise.smartcampus.ac.AcServiceException;
-import eu.trentorise.smartcampus.ac.Constants;
-import eu.trentorise.smartcampus.ac.SCAccessProvider;
-import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
-import eu.trentorise.smartcampus.ac.model.Attribute;
-import eu.trentorise.smartcampus.ac.model.UserData;
-import eu.trentorise.smartcampus.profileservice.ProfileService;
-import eu.trentorise.smartcampus.profileservice.ProfileServiceException;
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
@@ -25,8 +15,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.ac.ACService;
+import eu.trentorise.smartcampus.ac.AcServiceException;
+import eu.trentorise.smartcampus.ac.Constants;
+import eu.trentorise.smartcampus.ac.SCAccessProvider;
+import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
+import eu.trentorise.smartcampus.ac.model.UserData;
+import eu.trentorise.smartcampus.profileservice.ProfileService;
+import eu.trentorise.smartcampus.profileservice.ProfileServiceException;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 
 
 public class MyUniActivity extends Activity {
@@ -45,7 +43,11 @@ public class MyUniActivity extends Activity {
 	private String mToken = null;
 	
 	public static ProgressDialog pd;
-
+@Override
+protected void onStart() {
+	// TODO Auto-generated method stub
+	super.onStart();
+}
 	
 	protected void onResume() {
 		// TODO Auto-generated method stub

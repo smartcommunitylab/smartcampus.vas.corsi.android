@@ -6,8 +6,10 @@ import android.os.Bundle;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
-public class PHLActivity extends SherlockFragmentActivity {
+public class PHLActivity extends SherlockFragmentActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,9 @@ public class PHLActivity extends SherlockFragmentActivity {
 		ab.addTab(tab2);
 	}
 
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.phl, menu);
 		return super.onCreateOptionsMenu(menu);
 	}

@@ -38,6 +38,7 @@
         android:icon="@drawable/smartuni_logo"
         android:label="@string/app_name"
         android:theme="@style/Theme.Smartn_theme" >
+        <uses-library android:name="com.google.android.maps" />
         <meta-data
             android:name="SHARED_PACKAGE"
             android:value="smartcampus.android.template.standalone" />
@@ -95,19 +96,19 @@
         <activity
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
-        <!--
-        <activity
+
+<!--         <activity
             android:name="smartcampus.android.template.standalone.MyUniActivity"
             android:label="@string/title_activity_my_uni" >
-        </activity>
-        -->
+        </activity> -->
+
         <activity
             android:name="smartcampus.android.template.standalone.NoticesActivity"
             android:icon="@drawable/notices_white"
             android:label="@string/title_activity_notices" >
         </activity>
         <activity
-            android:name="smartcampus.android.template.standalone.MyAgendaActivity"
+            android:name="MyAgendaActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/myagenda_white"
             android:label="@string/title_activity_my_agenda" >

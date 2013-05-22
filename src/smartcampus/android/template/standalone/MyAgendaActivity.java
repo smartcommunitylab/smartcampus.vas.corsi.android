@@ -1,11 +1,13 @@
 package smartcampus.android.template.standalone;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
 
