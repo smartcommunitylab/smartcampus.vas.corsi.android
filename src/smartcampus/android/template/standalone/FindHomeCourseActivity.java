@@ -66,6 +66,13 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
+	
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
+			finish();
+			return super.onOptionsItemSelected(item);
+
+	}
 
 	public void getDescription() {
 
