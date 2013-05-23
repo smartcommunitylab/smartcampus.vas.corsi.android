@@ -56,6 +56,7 @@
     <string name="my_courses">Corsi che seguo</string>
     <string name="title_activity_search_home">Ricerca dei corsi</string>
     <string name="choose_data">Data:</string>
+    <string name="choose_time">Ora:</string>
 	<string name="add_event_corsi">Corso:</string>
 	<string name="tab_PHL">PHL</string>
 	<string name="tab_moodle">MOODLE</string>
@@ -77,5 +78,9 @@
     <string name="switch_on">Seguo</string>
     <string name="switch_off">Non seguo</string>
     <string name="title_activity_add_event">Aggiungi evento</string>
+        <string name="tab_home_course">Descrizione</string>
+    <string name="tab_feedback">Commenti</string>
+    <string name="feedback_title_of_list">Recensioni per:</string>
+    <string name="textview_description_label">Descrizione:</string>
     
 </resources>
