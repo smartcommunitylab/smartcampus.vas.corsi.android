@@ -48,7 +48,7 @@ public class FeedbackFragment extends SherlockFragment {
 			auth.setName("Nome" + i);
 			feedb.setAuthor(auth);
 			feedb.setRating(i);
-			feedb.setComment("Commento numero " + i);
+			feedb.setComment("Commento numero " + i+": corso molto interessante, il professore espone gli argomenti in modo chiaro e preciso, anche se alcuni concetti sono difficili. E' sempre disponibile ad eventuali domande a fine lezione ma non risponde alle email.");
 			ratings.add(feedb);
 		}
 

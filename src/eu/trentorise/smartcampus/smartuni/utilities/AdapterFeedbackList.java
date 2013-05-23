@@ -89,7 +89,8 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter{
 	  heading.setText(headerInfo.getAuthor().getName().trim());
 	  
 	  RatingBar rb = (RatingBar)view.findViewById(R.id.ratingBarRow);
-	  rb.setNumStars(headerInfo.getRating());
+	  //rb.setNumStars(headerInfo.getRating());
+	  rb.setRating(headerInfo.getRating());
 	   
 	  return view;
 	 }
