@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -41,34 +42,41 @@ public class FeedbackFragment extends SherlockFragment {
 
 		ArrayList<String> comments = new ArrayList<String>();
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 14; i++) {
 			FeedbackRowGroup feedb = new FeedbackRowGroup();
 			Author auth = new Author();
 			auth.setName("Nome" + i);
 			feedb.setAuthor(auth);
 			feedb.setRating(i);
+			feedb.setComment("Commento numero " + i);
 			ratings.add(feedb);
-			comments.add("Commento numero " + i);
 		}
 
 		mAdapter = new AdapterFeedbackList(getActivity(), ratings);
 
 		list = (ExpandableListView) view
 				.findViewById(R.id.expandableListViewFeedback);
-
+		
 		list.setAdapter(mAdapter);
-
-		list.setOnGroupExpandListener(new OnGroupExpandListener() {
-
-			public void onGroupExpand(int groupPosition) {
-
-				list.expandGroup(groupPosition, true);
-
+		list.setGroupIndicator(null);
+		list.setOnGroupClickListener(new OnGroupClickListener() {
+			
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v,
+					int groupPosition, long id) {
+				// TODO Auto-generated method stub
+				if(parent.isGroupExpanded(groupPosition))
+					parent.collapseGroup(groupPosition);
+				else
+					parent.expandGroup(groupPosition, true);
+				return true;
 			}
-
 		});
+		
+		
 
 		return view;
 	}
+	
 
 }
