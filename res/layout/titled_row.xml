@@ -8,7 +8,7 @@
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/sc_dark_gray"
+        android:background="@color/smartn_theme_color"
         android:orientation="vertical"
         android:visibility="visible" >
 
