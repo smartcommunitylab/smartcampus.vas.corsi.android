@@ -1,8 +1,5 @@
 package smartcampus.android.template.standalone;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,17 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
-import eu.trentorise.smartcampus.smartuni.models.Notice;
 import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
 
 public class NoticesActivity extends Activity {
 
-	private List<Notice> notifies;
-	private ArrayList<Notice> notificationsList;
-	private ArrayList<String> descriptionsList;
-	private ArrayList<String> datetimeList;
-	private ArrayList<String> usersList;
-	private String dateString;
+//	private List<Notice> notifies;
+//	private ArrayList<Notice> notificationsList;
+//	private ArrayList<String> descriptionsList;
+//	private ArrayList<String> datetimeList;
+//	private ArrayList<String> usersList;
+//	private String dateString;
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;
 	public static ProgressDialog pd;
@@ -40,7 +36,8 @@ public class NoticesActivity extends Activity {
 		textViewTitleNotices = (TextView) findViewById(R.id.textViewTitleNotices);
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
-		pd = new ProgressDialog(NoticesActivity.this).show(NoticesActivity.this, "Bacheca notifiche",
+		new ProgressDialog(NoticesActivity.this);
+		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
 				"Caricamento...");
 		
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,

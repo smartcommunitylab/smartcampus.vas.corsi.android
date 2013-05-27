@@ -2,17 +2,15 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.ArrayList;
 
-import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
-
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 
 public class AdapterFeedbackList extends BaseExpandableListAdapter{
 	

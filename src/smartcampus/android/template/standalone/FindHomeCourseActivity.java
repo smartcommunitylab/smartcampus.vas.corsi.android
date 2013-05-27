@@ -1,12 +1,10 @@
 package smartcampus.android.template.standalone;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.ActionBar.Tab;
-
 import android.os.Bundle;
-import android.content.Intent;
-import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
 

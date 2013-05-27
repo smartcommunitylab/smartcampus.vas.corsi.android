@@ -1,7 +1,5 @@
 package smartcampus.android.template.standalone;
 
-import java.util.Date;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockListFragment;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 

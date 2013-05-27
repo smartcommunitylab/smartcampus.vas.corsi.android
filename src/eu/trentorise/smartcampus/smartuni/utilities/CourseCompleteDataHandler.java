@@ -13,8 +13,6 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Course;
-import eu.trentorise.smartcampus.smartuni.models.CourseLite;
-import eu.trentorise.smartcampus.smartuni.models.Notice;
 
 public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 

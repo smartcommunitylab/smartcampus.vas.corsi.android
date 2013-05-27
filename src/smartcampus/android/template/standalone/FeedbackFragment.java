@@ -2,23 +2,20 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
-import eu.trentorise.smartcampus.smartuni.models.Author;
-import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
-import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockFragment;
+
+import eu.trentorise.smartcampus.smartuni.models.Author;
+import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
+import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 
 public class FeedbackFragment extends SherlockFragment {
 
@@ -48,7 +45,7 @@ public class FeedbackFragment extends SherlockFragment {
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
-		ArrayList<String> comments = new ArrayList<String>();
+		//ArrayList<String> comments = new ArrayList<String>();
 
 		for (int i = 0; i < 14; i++) {
 			FeedbackRowGroup feedb = new FeedbackRowGroup();

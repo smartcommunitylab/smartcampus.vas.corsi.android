@@ -61,8 +61,8 @@ public class FileActivity extends Activity {
 	private String mToken = null;
 	/** Filestorage connector reference */
 	private Filestorage mFilestorage = null;
-	/** ID of the resource stored */
-	private String imageResourceId = null;
+//	/** ID of the resource stored */
+//	private String imageResourceId = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

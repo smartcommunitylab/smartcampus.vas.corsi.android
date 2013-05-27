@@ -40,7 +40,8 @@ public class ResultSearchedActivity extends Activity {
 		degree = i.getStringExtra("courseDegree");
 		course = i.getStringExtra("course").toLowerCase();
 
-		pd = new ProgressDialog(ResultSearchedActivity.this).show(
+		new ProgressDialog(ResultSearchedActivity.this);
+		pd = ProgressDialog.show(
 				ResultSearchedActivity.this, "Risultati della ricerca",
 				"Caricamento dei corsi...");
 

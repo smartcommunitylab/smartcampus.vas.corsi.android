@@ -1,31 +1,22 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
-import java.security.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import smartcampus.android.template.standalone.R;
-import smartcampus.android.template.standalone.TitledItem;
-
-import eu.trentorise.smartcampus.smartuni.models.Notice;
-
 import android.content.Context;
-import android.text.format.DateFormat;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.smartuni.models.Notice;
 
 
 public class AdapterNoticesList extends ArrayAdapter<Notice>{
+	@SuppressWarnings("unused")
 	private List<Notice> notices;
 	private Context context = null;
 

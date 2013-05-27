@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-import android.widget.RatingBar;
 
 public class FeedbackRowGroup {
 

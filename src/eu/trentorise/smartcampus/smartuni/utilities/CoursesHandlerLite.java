@@ -3,16 +3,10 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartcampus.android.template.standalone.FindHomeCourseActivity;
-import smartcampus.android.template.standalone.NoticesActivity;
 import smartcampus.android.template.standalone.R;
 import smartcampus.android.template.standalone.ResultSearchedActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +18,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.Course;
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
 
 public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> {

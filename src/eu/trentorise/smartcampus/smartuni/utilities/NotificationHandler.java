@@ -10,7 +10,10 @@ import java.util.Locale;
 
 import smartcampus.android.template.standalone.NoticesActivity;
 import smartcampus.android.template.standalone.R;
-
+import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.ListView;
+import android.widget.TextView;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -19,14 +22,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-
 import eu.trentorise.smartcampus.smartuni.models.Notice;
-import eu.trentorise.smartcampus.smartuni.models.Notifications;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class NotificationHandler extends AsyncTask<Void,Void,List<Notice>> {
 
@@ -39,11 +35,13 @@ public class NotificationHandler extends AsyncTask<Void,Void,List<Notice>> {
 	TextView textViewTitleNotices;
 	private ListView lvAllNotices;
 	private String dateString;
-	private ArrayList<Notice> notificationsList;
+//	private ArrayList<Notice> notificationsList;
 	private ArrayList<String> descriptionsList;
+	@SuppressWarnings("unused")
 	private ArrayList<String> datetimeList;
+	@SuppressWarnings("unused")
 	private ArrayList<String> usersList;
-	private static ProgressDialog pd;
+//	private static ProgressDialog pd;
 	
 	
 	public NotificationHandler(Context applicationContext, TextView textViewTitleNotices, ListView lvAllNotices) {

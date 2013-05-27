@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
-import eu.trentorise.smartcampus.smartuni.models.Notice;
 
 public class FilterSearched {
 

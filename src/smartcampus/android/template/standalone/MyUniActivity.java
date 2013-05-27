@@ -53,7 +53,8 @@ protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-		pd = new ProgressDialog(MyUniActivity.this).show(MyUniActivity.this, "Accesso account",
+		new ProgressDialog(MyUniActivity.this);
+		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
 				"Accesso in corso...");
 		
 		setContentView(R.layout.activity_my_uni);
