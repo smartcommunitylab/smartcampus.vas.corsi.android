@@ -22,8 +22,8 @@ public class AddEventActivity extends FragmentActivity {
 
 	private int hour;
 	private int minute;
-	
-	//private TextView mDateDisplay;
+
+	// private TextView mDateDisplay;
 	private EditText mPickDate;
 	private EditText mPickTime;
 
@@ -53,9 +53,14 @@ public class AddEventActivity extends FragmentActivity {
 				// Month is 0 based so add 1
 				.append(mDay).append("-").append(mMonth + 1).append("-")
 				.append(mYear).append(" "));
-		
-		this.mPickTime.setText(new StringBuilder()
-		.append(hour).append(":").append(minute));
+		if (minute < 10) {
+			this.mPickTime.setText(new StringBuilder().append(hour)
+					.append(":0").append(minute));
+		} else {
+			this.mPickTime.setText(new StringBuilder().append(hour).append(":")
+					.append(minute));
+
+		}
 	}
 
 	@Override
@@ -117,10 +122,15 @@ public class AddEventActivity extends FragmentActivity {
 
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
-			((EditText) findViewById(R.id.myTimePickerButton))
-			.setText(hourOfDay + ":" + minute);
-		}
+			if (minute < 10) {
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":0" + minute);
+			} else {
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":" + minute);
 
+			}
+		}
 	}
 
 }
