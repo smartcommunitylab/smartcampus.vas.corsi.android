@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/itemAddRating"
+        android:icon="@drawable/add_rating"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/add_rating_feedback_button">
+    </item>
 
 </menu>

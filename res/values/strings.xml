@@ -82,5 +82,6 @@
     <string name="tab_feedback">Commenti</string>
     <string name="feedback_title_of_list">Recensioni per:</string>
     <string name="textview_description_label">Descrizione:</string>
+    <string name="add_rating_feedback_button">Aggiungi commento</string>
     
 </resources>

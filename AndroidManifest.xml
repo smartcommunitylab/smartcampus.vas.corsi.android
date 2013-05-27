@@ -144,6 +144,7 @@
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeCourseActivity"
             android:icon="@drawable/findcourses_white"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_find_home_course" >
         </activity>
         <activity
