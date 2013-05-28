@@ -16,7 +16,7 @@ public class MaterialiPhlFragment extends SherlockListFragment {
 			@SuppressWarnings("deprecation")
 			Date d = new Date(Date.parse(itms[0]));
 			CourseEvent e = new CourseEvent(d, itms[1]);
-			items[i++] = new EventItem(e);
+			items[i++] = new CourseItem(e);
 		}
 
 		TitledAdapter adapter = new TitledAdapter(getSherlockActivity(), items);

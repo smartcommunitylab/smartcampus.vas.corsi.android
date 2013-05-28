@@ -11,5 +11,9 @@
         <item >12/21/2012,Fine del Mondo</item>
         <item >12/21/2012,Brindisi di fine mondo</item>
     </string-array>
-
+    <string-array name="NewEventiFuffa">
+        <item >12/12/2012,Quasi Maya, ci siamo!, 20.00</item>
+        <item >12/21/2012,Fine del Mondo, vediamo!, 00.00</item>
+        <item >12/21/2012,Brindisi di fine mondo, SALUTE!, 00.01</item>
+    </string-array>
 </resources>

@@ -1,13 +1,12 @@
-
 package smartcampus.android.template.standalone;
 
 import java.text.SimpleDateFormat;
 
-public class EventItem extends EventItem4Adapter {
+public class CourseItem extends TitledItem {
 
-	private DetailedEvent object;
+	private CourseEvent object;
 		
-	public EventItem(DetailedEvent obj) {
+	public CourseItem(CourseEvent obj) {
 		super();
 		
 		this.object = obj;
@@ -23,14 +22,5 @@ public class EventItem extends EventItem4Adapter {
 	public String getContent() {
 		return object.getName();
 	}
-	
-	@Override
-	public String getDescription() {
-		return object.getDescription();
-	}
-	
-	@Override
-	public String getOra() {
-		return object.getOra();
-	}
+
 }

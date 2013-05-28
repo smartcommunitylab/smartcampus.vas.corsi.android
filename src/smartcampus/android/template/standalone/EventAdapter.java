@@ -5,25 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 // in EventsListingFragment
-public class TitledAdapter extends ArrayAdapter<TitledItem> {
+public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 
 	private Context context;
 	private int layoutResourceId;
 
-	public TitledAdapter(Context context, TitledItem[] arr) {
-		super(context, R.layout.titled_row, arr);
+	public EventAdapter(Context context, EventItem4Adapter[] arr) {
+		super(context, R.layout.event_row, arr);
 		this.context = context;
-		this.layoutResourceId = R.layout.titled_row;
+		this.layoutResourceId = R.layout.event_row;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View row = convertView;
-		TitledItem item = getItem(position);
+		EventItem4Adapter item = getItem(position);
 
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -31,19 +32,24 @@ public class TitledAdapter extends ArrayAdapter<TitledItem> {
 			row = inflater.inflate(layoutResourceId, parent, false);
 		}
 
-		TextView title = (TextView) row.findViewById(R.id.title_text);
-		TextView content = (TextView) row.findViewById(R.id.item_text);
-
+		TextView title = (TextView) row.findViewById(R.id.title_ev_text);
+		TextView content = (TextView) row.findViewById(R.id.item_ev_text);
+		TextView description = (TextView) row.findViewById(R.id.description_ev_text);
+		EditText ora = (EditText) row.findViewById(R.id.time_ev_edit);
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
+		description.setText(item.getDescription());
+		ora.setText(item.getOra());
 		content.setPadding(
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin),
-						(int) context.getResources().getDimension(
-								R.dimen.adpt_activity_vertical_margin),
+						0,
 				(int) context.getResources().getDimension(
-						R.dimen.activity_horizontal_margin),(int) context.getResources().getDimension(R.dimen.adpt_activity_vertical_margin));
-		TitledItem prev = null;
+						R.dimen.activity_horizontal_margin),0);
+		
+		description.setPadding((int) context.getResources().getDimension(
+						R.dimen.activity_horizontal_margin), 0, 0, (int) context.getResources().getDimension(R.dimen.adpt_activity_vertical_margin));
+		EventItem4Adapter prev = null;
 		if (position > 0)
 			prev = getItem(position - 1);
 
@@ -52,12 +58,6 @@ public class TitledAdapter extends ArrayAdapter<TitledItem> {
 		} else {
 			title.setVisibility(View.GONE);
 		}
-		// row.setPadding(
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin),
-		// 0,
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin), 0);
 		return row;
 	}
 

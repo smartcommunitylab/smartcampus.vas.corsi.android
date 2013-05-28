@@ -1,133 +1,129 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textViewCorso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="@string/add_event_corsi" />
-
-    <Spinner
-        android:id="@+id/spinnerCorsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewCorso"
-        android:entries="@array/drop_down_spinner_courses_all"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin" />
-
-    <TextView
-        android:id="@+id/textViewData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/myDatePickerButton"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/spinnerCorsi"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="@string/choose_data" />
-
-    <EditText
-        android:id="@+id/myDatePickerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerCorsi"
-        android:layout_toRightOf="@+id/textViewData"
-        android:cursorVisible="false"
-        android:focusableInTouchMode="false"
-        android:onClick="showDatePickerDialog" />
-
-    <TextView
-        android:id="@+id/textViewOra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/myDatePickerButton"
-        android:layout_alignTop="@+id/textViewData"
-        android:layout_toRightOf="@+id/myDatePickerButton"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="@string/choose_time" />
-
-    <EditText
-        android:id="@+id/myTimePickerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/myDatePickerButton"
-        
-        android:layout_toRightOf="@+id/textViewOra"
-        android:cursorVisible="false"
-        android:focusableInTouchMode="false"
-        android:onClick="showTimePickerDialog" />
-
-    <TextView
-        android:id="@+id/textViewLabelCercando"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/myDatePickerButton"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="10dp"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Titolo" />
+        android:text="Titolo"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/editTextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewTitle"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewCorso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="@string/add_event_corsi"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/spinnerCorsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/drop_down_spinner_courses_all"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <TextView
+            android:id="@+id/textViewData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="@string/choose_data"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/myDatePickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:onClick="showDatePickerDialog" />
+
+        <TextView
+            android:id="@+id/textViewOra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="@string/choose_time"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/myTimePickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:onClick="showTimePickerDialog" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLabelCercando"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextTitle"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Descrizione" />
+        android:text="Descrizione"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewDescription"
         android:ems="10"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/button_annulla"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="16dp"
-        android:text="Cancel" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
 
-    <Button
-        android:id="@+id/button_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_annulla"
-        android:layout_alignBottom="@+id/button_annulla"
-        android:layout_alignParentRight="true"
-        android:text="OK" />
+        <Button
+            android:id="@+id/button_annulla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="OK" />
+    </LinearLayout>
+
+</LinearLayout>

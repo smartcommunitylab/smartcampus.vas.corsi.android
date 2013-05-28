@@ -17,18 +17,18 @@ public class OverviewFragment extends SherlockListFragment {
 
 	public void onStart() {
 		super.onStart();
-		String[] events = getResources().getStringArray(R.array.EventiFuffa);
-		TitledItem[] items = new TitledItem[events.length];
+		String[] events = getResources().getStringArray(R.array.NewEventiFuffa);
+		EventItem[] items = new EventItem[events.length];
 
 		int i = 0;
 		for (String s : events) {
 			String[] itms = s.split(",");
 			Date d = new Date(Date.parse(itms[0]));
-			CourseEvent e = new CourseEvent(d, itms[1]);
+			DetailedEvent e = new DetailedEvent(d, itms[1], itms[2], itms[3]);
 			items[i++] = new EventItem(e);
 		}
 
-		TitledAdapter adapter = new TitledAdapter(getSherlockActivity(), items);
+		EventAdapter adapter = new EventAdapter(getSherlockActivity(), items);
 		//ListView listView = (ListView) getSherlockActivity().findViewById(R.id.listViewEventi);
 		setListAdapter(adapter);
 

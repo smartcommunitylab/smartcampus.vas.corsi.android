@@ -13,7 +13,7 @@
         android:visibility="visible" >
 
         <TextView
-            android:id="@+id/title_text"
+            android:id="@+id/title_ev_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -24,14 +24,37 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
+    
+        <TextView
+            android:id="@+id/item_ev_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@android:color/transparent"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/sc_dark_gray" />
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:gravity="right">
+        
+        <EditText
+            android:id="@+id/time_ev_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center" />
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/item_text"
+        android:id="@+id/description_ev_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:background="@android:color/transparent"
-        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textAppearance="@android:style/TextAppearance.Medium"
         android:textColor="@color/sc_dark_gray" />
 
-   
 </LinearLayout>
