@@ -24,7 +24,7 @@ public final class SmartUniDataWS {
 	
 	// Courses complete
 	public static final String GET_WS_COURSE_COMPLETE_DATA(String idCourse){
-		return "/corso/"+idCourse;
+		return "/corsi/"+idCourse;
 	}
 	
 	

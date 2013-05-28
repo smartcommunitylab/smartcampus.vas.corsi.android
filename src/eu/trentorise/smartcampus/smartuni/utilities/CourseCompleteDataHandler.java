@@ -1,6 +1,8 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
 
+import smartcampus.android.template.standalone.FindHomeCourseActivity;
+import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
 import smartcampus.android.template.standalone.NoticesActivity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -28,7 +30,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 		this.idCourse = idCourse;
 	}
 
-	private Course getCourse() {
+	private Course getFullCourseById() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -76,7 +78,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 		// TODO Auto-generated method stub
 		super.onPostExecute(course);
 
-		NoticesActivity.pd.dismiss();
+		HomeCourseDescriptionFragment.pd.dismiss();
 
 		if (course != null) {
 			setDataCourse(course);
@@ -91,6 +93,6 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 	@Override
 	protected Course doInBackground(Void... params) {
 		// TODO Auto-generated method stub
-		return getCourse();
+		return getFullCourseById();
 	}
 }

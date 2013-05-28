@@ -39,9 +39,9 @@ public class FeedbackFragment extends SherlockFragment {
 
 		Intent intent = getActivity().getIntent();
 		TextView tvCourseName = (TextView) view
-				.findViewById(R.id.textViewTitleFeedback);
+				.findViewById(R.id.textViewTitleFeedbackCourse);
 		String courseName = intent.getStringExtra("courseSelectedName");
-		tvCourseName.setText(tvCourseName.getText() + " " + courseName);
+		tvCourseName.setText(courseName);
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
