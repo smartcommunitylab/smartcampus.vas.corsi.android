@@ -9,13 +9,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/activity_vertical_margin"
-        android:text="@string/notices_string_titlelist"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/notices_string_titlelist" />
 
     <ListView
         android:id="@+id/listViewNotices"
         android:layout_width="match_parent"
-        android:layout_height="411dp" >
+        android:layout_height="match_parent" >
     </ListView>
 
 </LinearLayout>

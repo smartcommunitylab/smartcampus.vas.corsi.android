@@ -3,11 +3,11 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFFFF"
     android:orientation="vertical"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MyUniActivity" 
-    android:background="#FFFFFFFF">
-    
+    android:paddingTop="40dp"
+    tools:context=".MyUniActivity" >
+
     <!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -29,54 +29,58 @@
 </LinearLayout>
     -->
 
-
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50" >
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
         <Button
             android:id="@+id/my_agenda_btn"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_weight="50"
+            android:layout_width="130dp"
+            android:layout_height="90dp"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/myagenda"
+            android:paddingRight="10dp"
             android:text="@string/my_agenda_btn_label" />
 
         <Button
             android:id="@+id/find_courses_btn"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_weight="50"
+            android:layout_width="130dp"
+            android:layout_height="90dp"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/findcourses"
+            android:paddingLeft="10dp"
             android:text="@string/find_courses_btn_label" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50" >
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
         <Button
             android:id="@+id/phl_btn"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_weight="50"
+            android:layout_width="130dp"
+            android:layout_height="90dp"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/phl"
+            android:paddingRight="10dp"
             android:text="@string/phl_btn_label" />
 
         <Button
             android:id="@+id/notices_btn"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_weight="50"
+            android:layout_width="130dp"
+            android:layout_height="90dp"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/notices"
+            android:paddingLeft="10dp"
             android:text="@string/notices_btn_label" />
-
     </LinearLayout>
 
 </LinearLayout>

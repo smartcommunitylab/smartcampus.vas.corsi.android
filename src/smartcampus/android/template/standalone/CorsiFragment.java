@@ -13,6 +13,8 @@ public class CorsiFragment extends SherlockListFragment {
 //	}
 	public void onStart(){
 		super.onStart();
+		MyAgendaActivity.agendaState = false;
+		getActivity().invalidateOptionsMenu();
 		String[] corsi = getResources().getStringArray(R.array.Corsi);
 		String[] corsiInt = getResources().getStringArray(R.array.CorsiInteresse);
 		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];	

@@ -1,21 +1,22 @@
 package smartcampus.android.template.standalone;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
+	public static Boolean agendaState = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_my_agenda);
-
+		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -44,15 +45,25 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.agenda, menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		if (!agendaState) {
+			inflater.inflate(R.menu.agenda, menu);
+		}
+		else{
+			inflater.inflate(R.menu.det_event, menu);
+			//agendaState = false;
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
-
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
+@Override
+public void onBackPressed() {			
+	agendaState = false;
+	invalidateOptionsMenu();
+	super.onBackPressed();
+}
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(MyAgendaActivity.this,
@@ -66,6 +77,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEvent);
 			return true;
+			case R.id.choose_option:
+				
 		default:
 			return super.onOptionsItemSelected(item);
 

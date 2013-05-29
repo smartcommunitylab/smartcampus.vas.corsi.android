@@ -2,21 +2,30 @@ package smartcampus.android.template.standalone;
 
 import java.util.Date;
 
-import com.actionbarsherlock.app.SherlockListFragment;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class OverviewFragment extends SherlockListFragment {
-	@SuppressWarnings("deprecation")
+import com.actionbarsherlock.app.SherlockFragment;
+
+public class OverviewFragment extends SherlockFragment {
 	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		// Inflate the layout for this fragment
-//		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
-//				container, false);
-//		return view;
-//	}
 
+	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	 Bundle savedInstanceState) {
+	 // Inflate the layout for this fragment
+	 View view = inflater.inflate(R.layout.fragment_myagenda_overview,
+	 container, false);
+	 return view;
+	 }
 	public void onStart() {
 		super.onStart();
+
 		String[] events = getResources().getStringArray(R.array.NewEventiFuffa);
 		EventItem[] items = new EventItem[events.length];
 
@@ -24,13 +33,43 @@ public class OverviewFragment extends SherlockListFragment {
 		for (String s : events) {
 			String[] itms = s.split(",");
 			Date d = new Date(Date.parse(itms[0]));
-			DetailedEvent e = new DetailedEvent(d, itms[1], itms[2], itms[3]);
+			AdptDetailedEvent e = new AdptDetailedEvent(d, itms[1], itms[2],
+					itms[3]);
 			items[i++] = new EventItem(e);
 		}
 
+
 		EventAdapter adapter = new EventAdapter(getSherlockActivity(), items);
-		//ListView listView = (ListView) getSherlockActivity().findViewById(R.id.listViewEventi);
-		setListAdapter(adapter);
+		ListView listView = (ListView)
+		getSherlockActivity().findViewById(R.id.listViewEventi);
+		listView.setAdapter(adapter);
+		//setListAdapter(adapter);
+		//ListView listView = getListView();
+		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				MyAgendaActivity.agendaState = true;
+			getActivity().invalidateOptionsMenu();
+				FragmentTransaction ft = getSherlockActivity()
+						.getSupportFragmentManager().beginTransaction();
+				Fragment fragment = new DettailOfEventFragment();
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				ft.replace(R.id.tabOverview, fragment);
+				ft.addToBackStack(null);
+
+				// fragmentTransaction.addToBackStack(fragment.getTag());
+				ft.commit();
+			}
+
+			// Intent intent = new Intent();
+			// intent.setClass(getActivity(), DettailOfEventFragment.class);
+			//
+			// startActivity(intent);
+			// }
+			//
+		});
 
 	}
 }

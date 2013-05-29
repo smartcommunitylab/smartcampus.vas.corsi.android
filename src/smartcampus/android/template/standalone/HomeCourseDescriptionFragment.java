@@ -23,10 +23,10 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		View view = inflater.inflate(R.layout.fragment_home_course_description, container, false);
 		
 		Intent intent = getActivity().getIntent();
-		TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
-		String courseName = intent.getStringExtra("courseSelectedName");
-		tvCourseName.setText(courseName);
-		pd = ProgressDialog.show(getActivity(), "Informazioni del corso di "+courseName, "Caricamento...",
+		//TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
+		//String courseName = intent.getStringExtra("courseSelectedName");
+		//tvCourseName.setText(courseName);
+		pd = ProgressDialog.show(getActivity(), "Informazioni del corso", "Caricamento...",
                 true);
 		
 		String idCourse = intent.getStringExtra("courseSelectedId");

@@ -3,13 +3,13 @@ package smartcampus.android.template.standalone;
 import java.util.Date;
 
 
-public class DetailedEvent {
+public class AdptDetailedEvent {
 	private Date date;
 	private String name;
 	private String description;
 	private String ora;
 	
-	public DetailedEvent(Date date, String name, String description, String ora) {
+	public AdptDetailedEvent(Date date, String name, String description, String ora) {
 	super();
 		this.date = date;
 		this.name = name;

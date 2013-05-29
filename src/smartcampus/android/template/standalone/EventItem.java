@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 
 public class EventItem extends EventItem4Adapter {
 
-	private DetailedEvent object;
+	private AdptDetailedEvent object;
 		
-	public EventItem(DetailedEvent obj) {
+	public EventItem(AdptDetailedEvent obj) {
 		super();
 		
 		this.object = obj;
