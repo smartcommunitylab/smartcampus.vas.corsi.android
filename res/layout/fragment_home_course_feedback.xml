@@ -14,7 +14,16 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/feedback_title_of_list"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+    
+    <TextView
+        android:id="@+id/textViewTitleFeedbackCourse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/smartn_theme_color"
+        android:text="Large Text"
+        android:textColor="@color/white_smartn_theme"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
     <ExpandableListView
         android:id="@+id/expandableListViewFeedback"
         android:layout_width="match_parent"
@@ -29,13 +38,6 @@
         android:splitMotionEvents="true" >
     </ExpandableListView>
 
-    <TextView
-        android:id="@+id/textViewTitleFeedbackCourse"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/smartn_theme_color"
-        android:text="Large Text"
-        android:textColor="@color/white_smartn_theme"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
 </LinearLayout>

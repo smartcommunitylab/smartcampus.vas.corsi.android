@@ -42,14 +42,13 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 	TextView descriptionCourse;
 	ExpandableListView listComments;
 
-	public CourseCompleteDataHandler(Context applicationContext, String idCourse, TextView courseName, TextView descriptionCourse,
-			RatingBar ratingAverage, ExpandableListView listComments) {
+	public CourseCompleteDataHandler(Context applicationContext, String idCourse) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
-		this.tvCourseName = courseName;
+		/*this.tvCourseName = courseName;
 		this.ratingAverage = ratingAverage;
 		this.descriptionCourse = descriptionCourse;
-		this.listComments = listComments;
+		this.listComments = listComments;*/
 	}
 
 

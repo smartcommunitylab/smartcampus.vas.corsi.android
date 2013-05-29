@@ -34,9 +34,7 @@ public class FeedbackFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = null;
-		if(savedInstanceState==null){
-		view = inflater.inflate(R.layout.fragment_home_course_feedback,
+		View view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
 
 //		Intent intent = getActivity().getIntent();
@@ -121,7 +119,6 @@ public class FeedbackFragment extends SherlockFragment {
 
 
 		return view;
-		}else return view;
 	}
 
 

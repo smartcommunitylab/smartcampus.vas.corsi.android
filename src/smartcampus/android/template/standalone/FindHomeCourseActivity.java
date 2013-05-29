@@ -59,8 +59,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		TextView tvCourseName = (TextView) findViewById(R.id.textViewNameCourseHome);
 		String courseName = intent.getStringExtra("courseSelectedName");
 		//tvCourseName.setText(courseName);
-		TextView descriptionCourse = (TextView) findViewById(R.id.textViewDescriptioonCourse);
-		RatingBar ratingAverage = (RatingBar)findViewById(R.id.ratingBarCourse);
+		//TextView descriptionCourse = (TextView) findViewById(R.id.textViewDescriptioonCourse);
+		//RatingBar ratingAverage = (RatingBar)findViewById(R.id.ratingBarCourse);
 		ExpandableListView listComments = (ExpandableListView)findViewById(R.id.expandableListViewFeedback);
 
 		new ProgressDialog(FindHomeCourseActivity.this);
@@ -68,7 +68,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 		String idCourse = intent.getStringExtra("courseSelectedId");
 		try {
-			courseInfo = new CourseCompleteDataHandler(FindHomeCourseActivity.this, idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute().get();
+			courseInfo = new CourseCompleteDataHandler(FindHomeCourseActivity.this, idCourse).execute().get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

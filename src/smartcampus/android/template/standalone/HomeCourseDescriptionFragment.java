@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.smartuni.models.Author;
 import eu.trentorise.smartcampus.smartuni.models.Comment;
@@ -47,13 +49,10 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 //		
 //		String idCourse = intent.getStringExtra("courseSelectedId");
 //		new CourseCompleteDataHandler(getActivity(), idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute();
-		TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
-		TextView descriptionCourse = (TextView) view.findViewById(R.id.textViewDescriptioonCourse);
-		RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourse);
-		ExpandableListView listComments = (ExpandableListView)view.findViewById(R.id.expandableListViewFeedback);
+		TextView descriptionCourse = (TextView) view.findViewById(R.id.textViewDescriptioonCourseHome);
+		RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourseAverage);
+		
 
-
-		tvCourseName.setText(FindHomeCourseActivity.courseInfo.getNome());
 		ratingAverage.setRating((float)FindHomeCourseActivity.courseInfo.getValutazione_media());
 		descriptionCourse.setText(FindHomeCourseActivity.courseInfo.getDescrizione());
 
@@ -93,6 +92,12 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		*/
 
 		return view;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 

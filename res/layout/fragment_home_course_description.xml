@@ -57,9 +57,9 @@
         android:text="@string/rating" />
 
     <RatingBar
-        android:id="@+id/ratingBarCourse"
+        android:id="@+id/ratingBarCourseAverage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="fill_parent"
@@ -67,7 +67,7 @@
         android:background="@color/smartn_theme_color" />
 
     <TextView
-        android:id="@+id/textViewDescriptioonCourse"
+        android:id="@+id/textViewDescriptioonCourseHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.70"
