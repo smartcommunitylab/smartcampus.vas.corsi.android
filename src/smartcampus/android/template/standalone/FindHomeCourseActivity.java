@@ -1,13 +1,29 @@
 package smartcampus.android.template.standalone;
 
+import java.util.concurrent.ExecutionException;
+
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ExpandableListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.smartuni.models.Course;
+import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
+
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
+	public static ProgressDialog pd;
+	public static Course courseInfo;
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,8 +55,32 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 								FeedbackFragment.class));
 		ab.addTab(tab2);
 
+		Intent intent = getIntent();
+		TextView tvCourseName = (TextView) findViewById(R.id.textViewNameCourseHome);
+		String courseName = intent.getStringExtra("courseSelectedName");
+		//tvCourseName.setText(courseName);
+		TextView descriptionCourse = (TextView) findViewById(R.id.textViewDescriptioonCourse);
+		RatingBar ratingAverage = (RatingBar)findViewById(R.id.ratingBarCourse);
+		ExpandableListView listComments = (ExpandableListView)findViewById(R.id.expandableListViewFeedback);
+		
+		new ProgressDialog(FindHomeCourseActivity.this);
+		pd = ProgressDialog.show(FindHomeCourseActivity.this, "Informazioni del corso di "+courseName, "Caricamento...");
+		
+		String idCourse = intent.getStringExtra("courseSelectedId");
+		try {
+			courseInfo = new CourseCompleteDataHandler(FindHomeCourseActivity.this, idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
