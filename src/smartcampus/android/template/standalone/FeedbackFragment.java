@@ -23,13 +23,13 @@ public class FeedbackFragment extends SherlockFragment {
 
 	ExpandableListView list;
 	AdapterFeedbackList mAdapter;
-	
+
 	@Override
 	public void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -79,15 +79,15 @@ public class FeedbackFragment extends SherlockFragment {
 //				return true;
 //			}
 //		});
-		
-		
+
+
 		TextView titleCourseFeedback = (TextView)view.findViewById(R.id.textViewTitleFeedbackCourse);
 		titleCourseFeedback.setText(FindHomeCourseActivity.courseInfo.getNome());
-		
+
 		List<Comment> comments = FindHomeCourseActivity.courseInfo.getCommenti();
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
-		
+
 		for (int i = 0; i < comments.size(); i++) {
 			FeedbackRowGroup feedb = new FeedbackRowGroup();
 			Author auth = new Author();
@@ -101,12 +101,12 @@ public class FeedbackFragment extends SherlockFragment {
 		ExpandableListView listComments = (ExpandableListView)view.findViewById(R.id.expandableListViewFeedback);
 		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
 
-		
-		
+
+
 		listComments.setAdapter(mAdapter);
 		listComments.setGroupIndicator(null);
 		listComments.setOnGroupClickListener(new OnGroupClickListener() {
-			
+
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
@@ -118,11 +118,11 @@ public class FeedbackFragment extends SherlockFragment {
 				return true;
 			}
 		});
-		
+
 
 		return view;
 		}else return view;
 	}
-	
+
 
 }

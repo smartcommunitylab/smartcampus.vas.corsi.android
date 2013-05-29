@@ -21,9 +21,9 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
 	public static Course courseInfo;
-	
-	
-	
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,10 +62,10 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		TextView descriptionCourse = (TextView) findViewById(R.id.textViewDescriptioonCourse);
 		RatingBar ratingAverage = (RatingBar)findViewById(R.id.ratingBarCourse);
 		ExpandableListView listComments = (ExpandableListView)findViewById(R.id.expandableListViewFeedback);
-		
+
 		new ProgressDialog(FindHomeCourseActivity.this);
 		pd = ProgressDialog.show(FindHomeCourseActivity.this, "Informazioni del corso di "+courseName, "Caricamento...");
-		
+
 		String idCourse = intent.getStringExtra("courseSelectedId");
 		try {
 			courseInfo = new CourseCompleteDataHandler(FindHomeCourseActivity.this, idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute().get();
@@ -76,11 +76,11 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -89,13 +89,13 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		inflater.inflate(R.menu.find_home_course, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
 	    outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -104,7 +104,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
-	
+
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
 			finish();

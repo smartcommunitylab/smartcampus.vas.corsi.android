@@ -25,30 +25,75 @@ import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 
 
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.fragment_home_course_description, container, false);
-		
 
-		Intent intent = getActivity().getIntent();
-
-		ProgressDialog pd = ProgressDialog.show(getActivity(), "Informazioni del corso", "Caricamento...",true);
-
+//		Intent intent = getActivity().getIntent();
+//		TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
+//		String courseName = intent.getStringExtra("courseSelectedName");
+//		//tvCourseName.setText(courseName);
+//		
+//		
+//		TextView descriptionCourse = (TextView) getActivity().findViewById(R.id.textViewDescriptioonCourse);
+//		RatingBar ratingAverage = (RatingBar)getActivity().findViewById(R.id.ratingBarCourse);
+//		ExpandableListView listComments = (ExpandableListView)getActivity().findViewById(R.id.expandableListViewFeedback);
+//		
+//		pd = ProgressDialog.show(getActivity(), "Informazioni del corso di "+courseName, "Caricamento...",
+//                true);
+//		
+//		String idCourse = intent.getStringExtra("courseSelectedId");
+//		new CourseCompleteDataHandler(getActivity(), idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute();
 		TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
 		TextView descriptionCourse = (TextView) view.findViewById(R.id.textViewDescriptioonCourse);
 		RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourse);
 		ExpandableListView listComments = (ExpandableListView)view.findViewById(R.id.expandableListViewFeedback);
-		
-		
+
+
 		tvCourseName.setText(FindHomeCourseActivity.courseInfo.getNome());
 		ratingAverage.setRating((float)FindHomeCourseActivity.courseInfo.getValutazione_media());
 		descriptionCourse.setText(FindHomeCourseActivity.courseInfo.getDescrizione());
 
+		/*List<Comment> comments = FindHomeCourseActivity.courseInfo.getCommenti();
+
+		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
+		
+		for (int i = 0; i < comments.size(); i++) {
+			FeedbackRowGroup feedb = new FeedbackRowGroup();
+			Author auth = new Author();
+			auth.setName(comments.get(i).getAutore().getNome());
+			feedb.setAuthor(auth);
+			feedb.setRating(comments.get(i).getValutazione());
+			feedb.setComment(comments.get(i).getTesto());
+			ratings.add(feedb);
+		}
+
+		AdapterFeedbackList mAdapter = new AdapterFeedbackList(context, ratings);
+
+		
+		
+		listComments.setAdapter(mAdapter);
+		listComments.setGroupIndicator(null);
+		listComments.setOnGroupClickListener(new OnGroupClickListener() {
+			
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v,
+					int groupPosition, long id) {
+				// TODO Auto-generated method stub
+				if(parent.isGroupExpanded(groupPosition))
+					parent.collapseGroup(groupPosition);
+				else
+					parent.expandGroup(groupPosition, true);
+				return true;
+			}
+		});
+		*/
+
 		return view;
 	}
-	
-	
+
+
 }

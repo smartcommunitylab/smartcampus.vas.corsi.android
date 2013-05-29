@@ -74,10 +74,10 @@
     <string name="add_event">Aggiungi evento</string>
     <string name="agenda_label_tab_overview">Overview</string>
     <string name="notices_string_titlelist"></string>
-    <string name="notices_string_titlelistExist">Lista delle notifiche aggiornate il: </string>
+    <string name="notices_string_titlelistExist">Lista aggiornata al: </string>
     <string name="switch_on">ON</string>
     <string name="switch_off">OFF</string>
-    <string name="monitor">Segui: </string>
+    <string name="monitor">Segnalazioni attive</string>
     <string name="title_activity_add_event">Aggiungi evento</string>
         <string name="tab_home_course">Descrizione</string>
     <string name="tab_feedback">Commenti</string>
@@ -85,5 +85,5 @@
     <string name="textview_description_label">Descrizione:</string>
     <string name="add_rating_feedback_button">Aggiungi commento</string>
     <string name="label_title_description_course">Descrizione</string>
-    
+
 </resources>

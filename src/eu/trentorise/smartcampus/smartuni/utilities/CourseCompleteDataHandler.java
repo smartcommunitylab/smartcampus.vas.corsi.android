@@ -102,14 +102,14 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 		super.onPostExecute(course);
 
 		FindHomeCourseActivity.pd.dismiss();
-		
+
 		//loadDataLayout(course);
-		
-		
+
+
 
 	}
-	
-	
+
+
 	protected void loadDataLayout(Course course){
 //		tvCourseName.setText(course.getNome());
 //		ratingAverage.setRating((float)course.getValutazione_media());
@@ -148,9 +148,9 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 //				return true;
 //			}
 //		});
-		
-		
-		
+
+
+
 	}
 
 	private void setDataCourse(Course course) {
