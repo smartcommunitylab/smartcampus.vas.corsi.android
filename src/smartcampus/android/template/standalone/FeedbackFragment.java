@@ -1,6 +1,7 @@
 package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Author;
+import eu.trentorise.smartcampus.smartuni.models.Comment;
 import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 
@@ -37,34 +39,73 @@ public class FeedbackFragment extends SherlockFragment {
 		view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
 
-		Intent intent = getActivity().getIntent();
-		TextView tvCourseName = (TextView) view
-				.findViewById(R.id.textViewTitleFeedbackCourse);
-		String courseName = intent.getStringExtra("courseSelectedName");
-		tvCourseName.setText(courseName);
+//		Intent intent = getActivity().getIntent();
+//		TextView tvCourseName = (TextView) view
+//				.findViewById(R.id.textViewTitleFeedbackCourse);
+//		String courseName = intent.getStringExtra("courseSelectedName");
+//		tvCourseName.setText(courseName);
+//
+//		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
+//
+//		//ArrayList<String> comments = new ArrayList<String>();
+//
+//		for (int i = 0; i < 14; i++) {
+//			FeedbackRowGroup feedb = new FeedbackRowGroup();
+//			Author auth = new Author();
+//			auth.setName("Nome" + i);
+//			feedb.setAuthor(auth);
+//			feedb.setRating(i);
+//			feedb.setComment("Commento numero " + i+": corso molto interessante, il professore espone gli argomenti in modo chiaro e preciso, anche se alcuni concetti sono difficili. E' sempre disponibile ad eventuali domande a fine lezione ma non risponde alle email.");
+//			ratings.add(feedb);
+//		}
+//
+//		mAdapter = new AdapterFeedbackList(getActivity(), ratings);
+//
+//		list = (ExpandableListView) view
+//				.findViewById(R.id.expandableListViewFeedback);
+//		
+//		list.setAdapter(mAdapter);
+//		list.setGroupIndicator(null);
+//		list.setOnGroupClickListener(new OnGroupClickListener() {
+//			
+//			@Override
+//			public boolean onGroupClick(ExpandableListView parent, View v,
+//					int groupPosition, long id) {
+//				// TODO Auto-generated method stub
+//				if(parent.isGroupExpanded(groupPosition))
+//					parent.collapseGroup(groupPosition);
+//				else
+//					parent.expandGroup(groupPosition, true);
+//				return true;
+//			}
+//		});
+		
+		
+		TextView titleCourseFeedback = (TextView)view.findViewById(R.id.textViewTitleFeedbackCourse);
+		titleCourseFeedback.setText(FindHomeCourseActivity.courseInfo.getNome());
+		
+		List<Comment> comments = FindHomeCourseActivity.courseInfo.getCommenti();
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
-
-		//ArrayList<String> comments = new ArrayList<String>();
-
-		for (int i = 0; i < 14; i++) {
+		
+		for (int i = 0; i < comments.size(); i++) {
 			FeedbackRowGroup feedb = new FeedbackRowGroup();
 			Author auth = new Author();
-			auth.setName("Nome" + i);
+			auth.setName(comments.get(i).getAutore().getNome());
 			feedb.setAuthor(auth);
-			feedb.setRating(i);
-			feedb.setComment("Commento numero " + i+": corso molto interessante, il professore espone gli argomenti in modo chiaro e preciso, anche se alcuni concetti sono difficili. E' sempre disponibile ad eventuali domande a fine lezione ma non risponde alle email.");
+			feedb.setRating(comments.get(i).getValutazione());
+			feedb.setComment(comments.get(i).getTesto());
 			ratings.add(feedb);
 		}
 
-		mAdapter = new AdapterFeedbackList(getActivity(), ratings);
+		ExpandableListView listComments = (ExpandableListView)view.findViewById(R.id.expandableListViewFeedback);
+		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
 
-		list = (ExpandableListView) view
-				.findViewById(R.id.expandableListViewFeedback);
 		
-		list.setAdapter(mAdapter);
-		list.setGroupIndicator(null);
-		list.setOnGroupClickListener(new OnGroupClickListener() {
+		
+		listComments.setAdapter(mAdapter);
+		listComments.setGroupIndicator(null);
+		listComments.setOnGroupClickListener(new OnGroupClickListener() {
 			
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
@@ -77,7 +118,6 @@ public class FeedbackFragment extends SherlockFragment {
 				return true;
 			}
 		});
-		
 		
 
 		return view;

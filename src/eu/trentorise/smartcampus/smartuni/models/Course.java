@@ -6,62 +6,72 @@ import java.util.List;
 public class Course {
 
 	public int id; // id
-	public String name; // name
-	public Date date_start; // start date
-	public Date date_end; // end date
-	public String description; // description
-	public List<Comment> comments; // list of comments
+	public String nome; // name
+	public Date data_inizio; // start date
+	public Date data_fine; // end date
+	public String descrizione; // description
+	public List<Comment> commenti; // list of comments
+	public int valutazione_media;
 
 	public Course() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public Date getDate_end() {
-		return date_end;
-	}
-
-	public Date getDate_start() {
-		return date_start;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public void setDate_end(Date date_end) {
-		this.date_end = date_end;
-	}
-
-	public void setDate_start(Date date_start) {
-		this.date_start = date_start;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public List<Comment> getCommenti() {
+		return commenti;
+	}
+
+	public Date getData_fine() {
+		return data_fine;
+	}
+
+	public Date getData_inizio() {
+		return data_inizio;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setCommenti(List<Comment> commenti) {
+		this.commenti = commenti;
+	}
+
+	public void setData_fine(Date data_fine) {
+		this.data_fine = data_fine;
+	}
+
+	public void setData_inizio(Date data_inizio) {
+		this.data_inizio = data_inizio;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setValutazione_media(int valutazione_media) {
+		valutazione_media = (valutazione_media*5)/10;
+		this.valutazione_media = valutazione_media;
+	}
+
+	public int getValutazione_media() {
+		return valutazione_media;
 	}
 
 }
