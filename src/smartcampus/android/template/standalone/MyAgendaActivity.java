@@ -1,7 +1,12 @@
 package smartcampus.android.template.standalone;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -78,12 +83,63 @@ public void onBackPressed() {
 			startActivity(intentEvent);
 			return true;
 		case R.id.menu_add_note:
+			
+			AlertDialog.Builder alertNote = new AlertDialog.Builder(
+					MyAgendaActivity.this);
+			final EditText inputNote = new EditText(
+					MyAgendaActivity.this);
+			alertNote.setView(inputNote);
+			alertNote.setTitle("Inserisci nota");
+			alertNote.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(
+								DialogInterface dialog,
+								int which) {
+							//Editable value = input.getText();
+								Toast.makeText(
+										getApplicationContext(),
+										"Nota...",
+										Toast.LENGTH_SHORT)
+										.show();
+								//e.printStackTrace();
+							}
+						}
+					);
+			alertNote.show();
+			
 			return true;
 		case R.id.menu_add_notification:
+			
+			AlertDialog.Builder alertnotification = new AlertDialog.Builder(
+					MyAgendaActivity.this);
+			final EditText inputNotification = new EditText(
+					MyAgendaActivity.this);
+			alertnotification.setView(inputNotification);
+			alertnotification.setTitle("Invia Segnalazione");
+			alertnotification.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(
+								DialogInterface dialog,
+								int which) {
+							//Editable value = input.getText();
+								Toast.makeText(
+										getApplicationContext(),
+										"Notifica...",
+										Toast.LENGTH_SHORT)
+										.show();
+								//e.printStackTrace();
+							}
+						}
+					);
+			alertnotification.show();
 			return true;
 		case R.id.menu_share:
 			return true;
 		case R.id.menu_modify_event:
+			Intent intentEvent2 = new Intent(MyAgendaActivity.this,
+					AddEventActivity.class);
+			intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentEvent2);
 			return true;
 		case R.id.menu_delete_event:
 			return true;

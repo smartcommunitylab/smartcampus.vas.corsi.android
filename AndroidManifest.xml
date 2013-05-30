@@ -116,6 +116,7 @@
         <activity
             android:name="smartcampus.android.template.standalone.PHLActivity"
             android:icon="@drawable/phl_white"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
