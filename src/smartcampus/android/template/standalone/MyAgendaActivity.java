@@ -77,7 +77,19 @@ public void onBackPressed() {
 			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEvent);
 			return true;
-			case R.id.choose_option:
+		case R.id.menu_add_note:
+			return true;
+		case R.id.menu_add_notification:
+			return true;
+		case R.id.menu_share:
+			return true;
+		case R.id.menu_modify_event:
+			return true;
+		case R.id.menu_delete_event:
+			return true;
+			
+				
+				
 				
 		default:
 			return super.onOptionsItemSelected(item);
