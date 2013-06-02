@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,11 +15,14 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
-	public static Boolean agendaState = false;
+	public boolean agendaState;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		agendaState = false;
+		
 		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -152,5 +154,14 @@ public void onBackPressed() {
 
 		}
 	}
+
+	public boolean isAgendaState() {
+		return agendaState;
+	}
+
+	public void setAgendaState(boolean agendaState) {
+		this.agendaState = agendaState;
+	}
+	
 
 }

@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class OverviewFragment extends SherlockFragment {
+public class OverviewFilterFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class OverviewFragment extends SherlockFragment {
 		ListView listView = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewEventi);
 		listView.setAdapter(adapter);
-
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
 			@Override
@@ -58,7 +57,9 @@ public class OverviewFragment extends SherlockFragment {
 				ft.replace(R.id.tabOverview, fragment);
 				ft.addToBackStack(null);
 				ft.commit();
+				//getActivity().onCreateOptionsMenu(R.menu.test);
 			}
+
 		});
 
 	}

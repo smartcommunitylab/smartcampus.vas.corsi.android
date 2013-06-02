@@ -38,18 +38,6 @@ public class PHL4Courses extends SherlockFragmentActivity {
 						new TabListener<MaterialiMoodleFragment>(this, "tab2",
 								MaterialiMoodleFragment.class));
 		ab.addTab(tab2);
-//		String[] corsi = getResources().getStringArray(R.array.Corsi);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_1, corsi);
-//		ListView listView = (ListView) findViewById(R.id.listViewCorsiPHL);
-//		listView.setAdapter(adapter);
-//		
-//		String[] corsiInt = getResources().getStringArray(R.array.CorsiInteresse);
-//		
-//		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_1, corsiInt);
-//		ListView listView2 = (ListView) findViewById(R.id.listViewCorsiInteressePHL);
-//		listView2.setAdapter(adapter2);
 	}
 
 	

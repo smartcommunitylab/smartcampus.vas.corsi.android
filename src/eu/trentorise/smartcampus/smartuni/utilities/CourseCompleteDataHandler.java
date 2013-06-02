@@ -1,21 +1,12 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import smartcampus.android.template.standalone.FindHomeCourseActivity;
-import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
-import smartcampus.android.template.standalone.NoticesActivity;
-import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -24,10 +15,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.Author;
-import eu.trentorise.smartcampus.smartuni.models.Comment;
 import eu.trentorise.smartcampus.smartuni.models.Course;
-import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 
 public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Course> {
 
