@@ -113,6 +113,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			final EditText inputNote = new EditText(MyAgendaActivity.this);
 			alertNote.setView(inputNote);
 			alertNote.setTitle("Inserisci nota");
+			inputNote.setHint("Inserisci la nota qui...");
 			alertNote.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -133,6 +134,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 					MyAgendaActivity.this);
 			alertnotification.setView(inputNotification);
 			alertnotification.setTitle("Invia Segnalazione");
+			inputNotification.setHint("Inserisci la segnalazione qui...");
 			alertnotification.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
