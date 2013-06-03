@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.smartuni.models.Course;
 import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
@@ -187,5 +188,22 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		popDialog.create();
 		popDialog.show();
 
+	}
+	
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			/*Intent intentHome = new Intent(FindHomeCourseActivity.this,
+					ResultSearchedActivity.class);
+			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentHome);*/
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
 	}
 }

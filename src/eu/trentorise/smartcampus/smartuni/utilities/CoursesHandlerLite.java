@@ -268,9 +268,8 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 
 		ArrayList<String> coursesFiltered_onlyName = new ArrayList<String>();
 		for(int i = 0;i<coursesFiltered.size();i++){
-			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).nome);
+			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).getName());
 		}
-		
 		
 		ArrayAdapter<String> adapterCursesList = new ArrayAdapter<String>(
 				context,

@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -43,6 +46,29 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		ratingAverage.setRating((float)FindHomeCourseActivity.courseInfo.getValutazione_media());
 		descriptionCourse.setText(FindHomeCourseActivity.courseInfo.getDescrizione());
 
+		
+		
+		Switch switchFollow = (Switch)view.findViewById(R.id.switchFollow);
+		final TextView txtMonitor = (TextView)view.findViewById(R.id.txt_monitor);
+		if(txtMonitor.isPressed())
+			txtMonitor.setText(getResources().getText(R.string.label_txtMonitor_on));
+		else
+			txtMonitor.setText(getResources().getText(R.string.label_txtMonitor_off));
+		
+		switchFollow.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					txtMonitor.setText(getResources().getText(R.string.label_txtMonitor_on));
+				}else{
+					txtMonitor.setText(getResources().getText(R.string.label_txtMonitor_off));
+				}
+			}
+		});
+		
+		
 		/*List<Comment> comments = FindHomeCourseActivity.courseInfo.getCommenti();
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();

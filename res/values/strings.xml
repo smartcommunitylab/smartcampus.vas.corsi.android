@@ -85,5 +85,6 @@
     <string name="textview_description_label">Descrizione:</string>
     <string name="add_rating_feedback_button">Aggiungi commento</string>
     <string name="label_title_description_course">Descrizione</string>
-
+    <string name="label_txtMonitor_on">Segnalazioni attive</string>
+    <string name="label_txtMonitor_off">Segnalazioni non attive</string>
 </resources>
