@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,14 +18,18 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
-	public boolean agendaState;
+	public int agendaState;
 
+	// 0 = elenco base
+	// 1 = overview filter
+	// 2 = detail of event
+	// 3 = detail of event for course
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		agendaState = false;
-		
+
+		agendaState = 0;
+
 		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -55,21 +62,36 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
-		if (!agendaState) {
+		if (agendaState == 0) {
 			inflater.inflate(R.menu.agenda, menu);
 		}
-		else{
+		if (agendaState == 1) {
+			inflater.inflate(R.menu.add_event, menu);
+			// agendaState = false;
+		}
+		if ((agendaState == 2) || (agendaState == 3)){
 			inflater.inflate(R.menu.det_event, menu);
-			//agendaState = false;
+			// agendaState = false;
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
-@Override
-public void onBackPressed() {			
-	agendaState = false;
-	invalidateOptionsMenu();
-	super.onBackPressed();
-}
+
+	@Override
+	public void onBackPressed() {
+		if (agendaState == 3) {
+			agendaState = 1;
+		}
+		if (agendaState == 2) {
+			agendaState = 0;
+		}
+//		if (agendaState == 1) {
+//			agendaState = 0;
+//
+//		}
+		invalidateOptionsMenu();
+		super.onBackPressed();
+	}
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
@@ -85,33 +107,26 @@ public void onBackPressed() {
 			startActivity(intentEvent);
 			return true;
 		case R.id.menu_add_note:
-			
+
 			AlertDialog.Builder alertNote = new AlertDialog.Builder(
 					MyAgendaActivity.this);
-			final EditText inputNote = new EditText(
-					MyAgendaActivity.this);
+			final EditText inputNote = new EditText(MyAgendaActivity.this);
 			alertNote.setView(inputNote);
 			alertNote.setTitle("Inserisci nota");
 			alertNote.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
-						public void onClick(
-								DialogInterface dialog,
-								int which) {
-							//Editable value = input.getText();
-								Toast.makeText(
-										getApplicationContext(),
-										"Nota...",
-										Toast.LENGTH_SHORT)
-										.show();
-								//e.printStackTrace();
-							}
+						public void onClick(DialogInterface dialog, int which) {
+							// Editable value = input.getText();
+							Toast.makeText(getApplicationContext(), "Nota...",
+									Toast.LENGTH_SHORT).show();
+							// e.printStackTrace();
 						}
-					);
+					});
 			alertNote.show();
-			
+
 			return true;
 		case R.id.menu_add_notification:
-			
+
 			AlertDialog.Builder alertnotification = new AlertDialog.Builder(
 					MyAgendaActivity.this);
 			final EditText inputNotification = new EditText(
@@ -120,19 +135,13 @@ public void onBackPressed() {
 			alertnotification.setTitle("Invia Segnalazione");
 			alertnotification.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
-						public void onClick(
-								DialogInterface dialog,
-								int which) {
-							//Editable value = input.getText();
-								Toast.makeText(
-										getApplicationContext(),
-										"Notifica...",
-										Toast.LENGTH_SHORT)
-										.show();
-								//e.printStackTrace();
-							}
+						public void onClick(DialogInterface dialog, int which) {
+							// Editable value = input.getText();
+							Toast.makeText(getApplicationContext(),
+									"Notifica...", Toast.LENGTH_SHORT).show();
+							// e.printStackTrace();
 						}
-					);
+					});
 			alertnotification.show();
 			return true;
 		case R.id.menu_share:
@@ -145,23 +154,43 @@ public void onBackPressed() {
 			return true;
 		case R.id.menu_delete_event:
 			return true;
-			
-				
-				
-				
+		case R.id.menu_add_event:
+			Intent intentEventAddEvent = new Intent(MyAgendaActivity.this,
+					AddEventActivity.class);
+			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentEventAddEvent);
+			return true;
+		case R.id.menu_add_rating:
+			AlertDialog.Builder alert = new AlertDialog.Builder(
+					MyAgendaActivity.this);
+			LayoutInflater inflater = getLayoutInflater();
+			View dialoglayout = inflater.inflate(R.layout.dialog_layout,
+					(ViewGroup) getCurrentFocus());
+
+			alert.setView(dialoglayout);
+			alert.setTitle("Esprimi un giudizio");
+			alert.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// Editable value = input.getText();
+							Toast.makeText(getApplicationContext(), "rating",
+									Toast.LENGTH_SHORT).show();
+							// e.printStackTrace();
+						}
+					});
+			alert.show();
 		default:
 			return super.onOptionsItemSelected(item);
 
 		}
 	}
 
-	public boolean isAgendaState() {
+	public int isAgendaState() {
 		return agendaState;
 	}
 
-	public void setAgendaState(boolean agendaState) {
+	public void setAgendaState(int agendaState) {
 		this.agendaState = agendaState;
 	}
-	
 
 }

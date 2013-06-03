@@ -25,7 +25,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	public void onStart() {
 		super.onStart();
-
+		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
+		parent.setAgendaState(0);
 		String[] events = getResources().getStringArray(R.array.NewEventiFuffa);
 		EventItem[] items = new EventItem[events.length];
 
@@ -48,16 +49,15 @@ public class OverviewFilterFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(true);
+				parent.setAgendaState(3);
 				getActivity().invalidateOptionsMenu();
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new DettailOfEventFragment();
+				Fragment fragment = new DettailOfEventFragment4Courses();
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.tabOverview, fragment);
+				ft.replace(R.id.tabCorsi, fragment);
 				ft.addToBackStack(null);
 				ft.commit();
-				//getActivity().onCreateOptionsMenu(R.menu.test);
 			}
 
 		});

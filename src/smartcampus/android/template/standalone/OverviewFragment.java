@@ -49,7 +49,7 @@ public class OverviewFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(true);
+				parent.setAgendaState(2);
 				getActivity().invalidateOptionsMenu();
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
