@@ -7,10 +7,17 @@
         android:id="@+id/textViewTitleNotices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="@dimen/activity_vertical_margin"
+        android:gravity="left"
+        android:paddingLeft="8dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="@string/notices_string_titlelist" />
-
+<View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
     <ListView
         android:id="@+id/listViewNotices"
         android:layout_width="match_parent"

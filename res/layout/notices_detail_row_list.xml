@@ -3,11 +3,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <View
+<!--     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/smartn_theme_color"
-        android:paddingBottom="20dp" />
+        android:paddingBottom="20dp" /> -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,17 +19,18 @@
             android:layout_height="fill_parent"
             android:paddingLeft="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_vertical_margin"
+            android:paddingTop="3dp"
             android:text="TextView"
             android:textColor="@color/smartn_theme_color"
             android:textSize="18dp" />
     </LinearLayout>
 
-    <View
+    <!-- <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/smartn_theme_color"
         android:paddingBottom="20dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp" /> -->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            
             android:textColor="@color/black_smartn_theme" />
 
         <TextView

@@ -24,8 +24,8 @@ public class CorsiFragment extends SherlockFragment {
 
 	public void onStart() {
 		super.onStart();
-//		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-//		parent.setAgendaState(0);
+		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
+		parent.setAgendaState(0);
 
 		getActivity().invalidateOptionsMenu();
 		String[] corsi = getResources().getStringArray(R.array.Corsi);

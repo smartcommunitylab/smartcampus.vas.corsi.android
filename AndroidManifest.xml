@@ -156,6 +156,11 @@
             android:name="smartcampus.android.template.standalone.AddEventActivity"
             android:label="@string/title_activity_add_event" >
         </activity>
+        
+        <activity
+            android:name="smartcampus.android.template.standalone.AddEvent4coursesActivity"
+            android:label="@string/title_activity_add_event" >
+        </activity>
     </application>
 
 </manifest>

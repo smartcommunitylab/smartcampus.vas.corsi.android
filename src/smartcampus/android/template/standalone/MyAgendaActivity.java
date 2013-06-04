@@ -29,7 +29,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		agendaState = 0;
-
+		AddEvent4coursesActivity.state = 1;
 		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -63,6 +63,11 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		if (agendaState == 0) {
+			if (AddEvent4coursesActivity.state == 0){
+				inflater.inflate(R.menu.add_event, menu);
+				AddEvent4coursesActivity.state = 1;
+			}
+			else
 			inflater.inflate(R.menu.agenda, menu);
 		}
 		if (agendaState == 1) {
@@ -134,7 +139,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 					MyAgendaActivity.this);
 			alertnotification.setView(inputNotification);
 			alertnotification.setTitle("Invia Segnalazione");
-			inputNotification.setHint("Inserisci la segnalazione qui...");
+			inputNotification.setHint("");
 			alertnotification.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -156,9 +161,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_delete_event:
 			return true;
-		case R.id.menu_add_event:
+		case R.id.menu_add_event_4_course:
 			Intent intentEventAddEvent = new Intent(MyAgendaActivity.this,
-					AddEventActivity.class);
+					AddEvent4coursesActivity.class);
 			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEventAddEvent);
 			return true;

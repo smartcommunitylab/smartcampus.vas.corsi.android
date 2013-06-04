@@ -15,7 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-public class AddEventActivity extends FragmentActivity {
+public class AddEvent4coursesActivity extends FragmentActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -26,6 +26,7 @@ public class AddEventActivity extends FragmentActivity {
 	// private TextView mDateDisplay;
 	private EditText mPickDate;
 	private EditText mPickTime;
+public static int state;
 	static final int DATE_DIALOG_ID = 0;
 
 	@Override
@@ -45,6 +46,7 @@ public class AddEventActivity extends FragmentActivity {
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();
+		state = 0;
 	}
 
 	public void updateDisplay() {

@@ -25,7 +25,9 @@ public class OverviewFragment extends SherlockFragment {
 
 	public void onStart() {
 		super.onStart();
-
+		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
+		parent.setAgendaState(0);
+		getActivity().invalidateOptionsMenu();
 		String[] events = getResources().getStringArray(R.array.NewEventiFuffa);
 		EventItem[] items = new EventItem[events.length];
 
