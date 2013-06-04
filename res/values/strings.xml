@@ -17,7 +17,7 @@
 <resources>
 
     <string name="app_uid_label">SmartCampus</string>
-    <string name="app_name">StudyMaze</string>
+    <string name="app_name">StudyMate</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="tv_data">User Data</string>

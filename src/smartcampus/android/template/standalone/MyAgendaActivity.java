@@ -199,5 +199,18 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	public void setAgendaState(int agendaState) {
 		this.agendaState = agendaState;
 	}
-
+	
+//	@Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		invalidateOptionsMenu();
+//		super.onResume();
+//	}
+//
+//	@Override
+//	protected void onRestart() {
+//		// TODO Auto-generated method stub
+//		invalidateOptionsMenu();
+//		super.onRestart();
+//	}
 }
