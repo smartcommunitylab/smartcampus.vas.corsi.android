@@ -9,3 +9,4 @@
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:textColor="@color/black_smartn_theme"
 />
+

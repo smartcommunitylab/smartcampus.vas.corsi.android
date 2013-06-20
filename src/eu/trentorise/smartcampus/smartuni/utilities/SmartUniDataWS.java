@@ -2,37 +2,56 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 public final class SmartUniDataWS {
 	
-
-	public static final String URL_WS_SMARTUNI = "http://unicorsi.app.smartcampuslab.it"; 
+	
+		public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it"; 
+	//public static final String URL_WS_SMARTUNI = "http://unicorsi.app.smartcampuslab.it"; 
 	public static final String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	public static final String TOKEN_NAME = "test smartcampus";
 	
 	
 	// Notices
-	public static final String GET_WS_NOTIFICATIONS = "/notifiche/get"; 
+	public static final String GET_WS_NOTIFICATIONS = "/notification/all"; 
 	
 	
-	// Courses
-	public static final String GET_WS_FREQUENTEDCOURSES = "/corsi/frequentati";
-	public static final String GET_WS_ALLCOURSES = "/corsi/all";
-	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(String department){
-		return "/corsi/"+department;	
+	// Courses ///////////////////////////////////////////////////////////
+	public static final String GET_WS_FREQUENTEDCOURSES = "/corso/me";
+	public static final String GET_WS_ALLCOURSES = "/corso/all";
+	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(String id_department){
+		return "/corso/dipartimento/"+id_department;	
 	}
-	public static String GET_WS_ALLCOURSES_OF_DEGREE(String degree){
-		return "/corsi/"+degree;	
+	
+	public static String GET_WS_ALLCOURSES_OF_DEGREE(String id_degree){
+		return "/corso/corsolaurea/"+id_degree;	
 	}
+
 	
 	// Courses complete
 	public static final String GET_WS_COURSE_COMPLETE_DATA(String idCourse){
-		return "/corsi/"+idCourse;
+		return "/corso/"+idCourse;
+	}
+	
+
+	
+	// Events /////////////////////////////////////////////////////////////
+	public static final String GET_WS_MYEVENTS = "/evento/me";
+	
+	public static final String GET_WS_EVENTS_OF_COURSE(String idCourse){
+		return "/evento/"+idCourse;
 	}
 	
 	
-	// Events
-	public static final String GET_WS_ALLEVENTS = "/events/all";
+		
+	// Student //////////////////////////////////////////////////////////
+	public static final String GET_WS_STUDENT_DATA = "/studente/me";
 	
 	
+	// Departments //////////////////////////////////////////////////////////
+	public static final String GET_WS_DEPARTMENTS_ALL = "/dipartimento/all";
 	
 	
+	// Courses degree //////////////////////////////////////////////////////
+	public static String GET_WS_COURSESDEGREE_OF_DEPARTMENT(long idDepartment){
+		return "/corsolaurea/"+String.valueOf(idDepartment);
+	}
 	
 }

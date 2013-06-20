@@ -20,19 +20,21 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Event>>{
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
 	String body;
+	String id_course;
 
 	
 	
-	public EventsHandler(Context applicationContext) {
+	public EventsHandler(Context applicationContext, String id_course) {
 		this.context = applicationContext;
+		this.id_course = id_course; 
 	}
 
-	private List<Event> getAllEvents() {
+	private List<Event> getAllEventsOfCourse(String id_course) {
 		
 		mProtocolCarrier = new ProtocolCarrier(context, SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.GET_WS_ALLEVENTS);
+				SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.GET_WS_EVENTS_OF_COURSE(id_course));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -66,6 +68,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Event>>{
 	@Override
 	protected List<Event> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
-		return getAllEvents();
+		return getAllEventsOfCourse(id_course);
 	}
 }

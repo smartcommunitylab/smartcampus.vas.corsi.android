@@ -273,7 +273,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 		
 		ArrayAdapter<String> adapterCursesList = new ArrayAdapter<String>(
 				context,
-				R.layout.list_courses_row_list_simple, coursesFiltered_onlyName);
+				R.layout.list_studymate_row_list_simple, coursesFiltered_onlyName);
 
 		listView.setAdapter(adapterCursesList);
 		
