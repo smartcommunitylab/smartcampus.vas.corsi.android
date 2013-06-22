@@ -1,10 +1,11 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 
 
-public class Dipartimento {
+public class Dipartimento implements Serializable {
 
 	private static final long serialVersionUID = 8681710690984301605L;
 

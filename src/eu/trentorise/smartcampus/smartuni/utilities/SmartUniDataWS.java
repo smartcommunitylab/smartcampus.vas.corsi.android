@@ -16,12 +16,12 @@ public final class SmartUniDataWS {
 	// Courses ///////////////////////////////////////////////////////////
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corso/me";
 	public static final String GET_WS_ALLCOURSES = "/corso/all";
-	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(String id_department){
-		return "/corso/dipartimento/"+id_department;	
+	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(long id_department){
+		return "/corso/dipartimento/"+String.valueOf(id_department);	
 	}
 	
-	public static String GET_WS_ALLCOURSES_OF_DEGREE(String id_degree){
-		return "/corso/corsolaurea/"+id_degree;	
+	public static String GET_WS_ALLCOURSES_OF_DEGREE(long id_degree){
+		return "/corso/corsolaurea/"+String.valueOf(id_degree);	
 	}
 
 	

@@ -13,6 +13,8 @@ public class FilterSearched {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	// filtro in base a quello che ho cercato controllando se le parole sono contenute nella lista
 	public ArrayList<CourseLite> filterListWithCourseSearched(String searched,
 			List<CourseLite> startList) {
 

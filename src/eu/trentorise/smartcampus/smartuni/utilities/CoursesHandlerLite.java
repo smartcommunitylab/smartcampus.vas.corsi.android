@@ -18,7 +18,9 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
+import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
 public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> {
 
@@ -26,16 +28,16 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	public Context context;
 	public String appToken = "test smartcampus";
 	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
-	private String department;
-	private String degree;
+	private Dipartimento department;
+	private CorsoLaurea degree;
 	private String course;
 	private String body;
 	public static ArrayList<CourseLite> coursesFiltered;
 	ListView listView;
 	TextView tvTitleNotices;
 
-	public CoursesHandlerLite(Context applicationContext, String department,
-			String degree, String course, ListView listView, TextView tvTitleNotices) {
+	public CoursesHandlerLite(Context applicationContext, Dipartimento department,
+			CorsoLaurea degree, String course, ListView listView, TextView tvTitleNotices) {
 		this.context = applicationContext;
 		this.department = department;
 		this.degree = degree;
@@ -83,14 +85,14 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 
 	
 	// return all courses of a department
-	private List<CourseLite> getAllCoursesOfDepartment(String dep){
+	private List<CourseLite> getAllCoursesOfDepartment(Dipartimento dep){
 		
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEPARTMENT(dep));
+				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEPARTMENT(dep.getId()));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -160,11 +162,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	protected List<CourseLite> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		
-		if(department.equals("Tutto")){
+		if(department.getNome().equals("Tutto")){
 			return getAllCourses();
 			
 		}else{
-			if(degree.equals("Tutto")){
+			if(degree.getNome().equals("Tutto")){
 				return getAllCoursesOfDepartment(department);
 			}else{
 				return getAllCoursesOfFaculty(degree);
@@ -174,13 +176,13 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	}
 
 	// return all courses of a degree
-	private List<CourseLite> getAllCoursesOfFaculty(String deg) {
+	private List<CourseLite> getAllCoursesOfFaculty(CorsoLaurea deg) {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(deg));
+				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(deg.getId()));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -219,26 +221,26 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 				tvTitleNotices.setText(tvTitleNotices.getText() + "Tutto");
 			else if (degree.equals("Tutto"))
 				tvTitleNotices.setText(tvTitleNotices.getText() + " Dipartimento di "
-						+ department.toString());
+						+ department.getNome().toString());
 			else
 				tvTitleNotices.setText(tvTitleNotices.getText() + " Dipartimento di "
-						+ department.toString() + ", corso di laurea in "
-						+ degree.toString());
+						+ department.getNome().toString() + ", corso di laurea in "
+						+ degree.getNome().toString());
 		} else {
 			if (department.equals("Tutto")) {
 				if (degree.equals("Tutto"))
 					tvTitleNotices.setText(tvTitleNotices.getText() + " " + course.toString());
 				else
 					tvTitleNotices.setText(tvTitleNotices.getText() + " " + course.toString()
-							+ " del corso di laurea in " + degree.toString());
+							+ " del corso di laurea in " + degree.getNome().toString());
 			} else {
 				if (degree.equals("Tutto"))
 					tvTitleNotices.setText(tvTitleNotices.getText() + " " + course.toString()
-							+ " del dipartimento di " + department.toString());
+							+ " del dipartimento di " + department.getNome().toString());
 				else
 					tvTitleNotices.setText(tvTitleNotices.getText() + " " + course.toString()
-							+ " del dipartimento di " + department.toString()
-							+ ", corso di laurea in " + degree.toString());
+							+ " del dipartimento di " + department.getNome().toString()
+							+ ", corso di laurea in " + degree.getNome().toString());
 			}
 
 		}
@@ -260,7 +262,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 		
 	}
 	
-	
+	// setto la lista dei corsi e la filtro
 	private void setListCourses(List<CourseLite> courses) {
 
 		FilterSearched filter = new FilterSearched();

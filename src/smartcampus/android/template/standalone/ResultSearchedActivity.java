@@ -3,9 +3,6 @@ package smartcampus.android.template.standalone;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.trentorise.smartcampus.smartuni.models.CourseLite;
-import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -17,6 +14,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.CourseLite;
+import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
 
 public class ResultSearchedActivity extends Activity {
 
@@ -26,6 +27,8 @@ public class ResultSearchedActivity extends Activity {
 	String degree;
 	String course;
 	public static ProgressDialog pd;
+	public Dipartimento depSelected;
+	public CorsoLaurea courseDegreeSelected;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class ResultSearchedActivity extends Activity {
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		Intent i = getIntent();
+		depSelected = (Dipartimento) i.getSerializableExtra("department");
+		courseDegreeSelected = (CorsoLaurea) i.getSerializableExtra("courseDegree");
 		department = i.getStringExtra("department");
 		degree = i.getStringExtra("courseDegree");
 		course = i.getStringExtra("course").toLowerCase();
@@ -49,7 +54,7 @@ public class ResultSearchedActivity extends Activity {
 		ListView listView = (ListView) findViewById(R.id.listView1);
 
 		// get data from web service
-		new CoursesHandlerLite(getApplicationContext(), department, degree,
+		new CoursesHandlerLite(getApplicationContext(), depSelected, courseDegreeSelected,
 				course, listView, tv).execute();
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {

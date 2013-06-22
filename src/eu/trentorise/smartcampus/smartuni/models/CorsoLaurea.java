@@ -1,11 +1,12 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class CorsoLaurea {
+public class CorsoLaurea implements Serializable{
 
 	private static final long serialVersionUID = 8681730600984301605L;
 

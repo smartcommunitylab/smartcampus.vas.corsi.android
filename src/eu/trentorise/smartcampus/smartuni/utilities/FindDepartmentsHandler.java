@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import smartcampus.android.template.standalone.FindHomeActivity;
 import android.R;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
@@ -20,14 +21,19 @@ import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 import eu.trentorise.smartcampus.smartuni.models.Notice;
 
-public class FindDepartmentsHandler extends AsyncTask<Void, Void, List<Dipartimento>> {
+public class FindDepartmentsHandler extends
+		AsyncTask<Void, Void, List<Dipartimento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
 	String body;
 	Spinner spinnerDepartments;
-	
-	public FindDepartmentsHandler(Context applicationContext, Spinner spinnerDepartments) {
+	List<Dipartimento> listDepartments = new ArrayList<Dipartimento>();
+	ProgressDialog pd;
+
+
+	public FindDepartmentsHandler(Context applicationContext,
+			Spinner spinnerDepartments) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.spinnerDepartments = spinnerDepartments;
@@ -37,20 +43,22 @@ public class FindDepartmentsHandler extends AsyncTask<Void, Void, List<Dipartime
 	protected List<Dipartimento> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 
-		
-		mProtocolCarrier = new ProtocolCarrier(context, SmartUniDataWS.TOKEN_NAME);
+		mProtocolCarrier = new ProtocolCarrier(context,
+				SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.GET_WS_DEPARTMENTS_ALL);
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_DEPARTMENTS_ALL);
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
 		try {
-			response = mProtocolCarrier.invokeSync(request, SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+			response = mProtocolCarrier.invokeSync(request,
+					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 
-				body = response.getBody();				
+				body = response.getBody();
 
 			} else {
 				return null;
@@ -65,30 +73,37 @@ public class FindDepartmentsHandler extends AsyncTask<Void, Void, List<Dipartime
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return Utils.convertJSONToObjects(body, Dipartimento.class);
 
-		
+		listDepartments = Utils.convertJSONToObjects(body, Dipartimento.class);
+
+		// aggiungo l'item "tutto" alla lista
+		Dipartimento depTutto = new Dipartimento();
+		depTutto.setNome("Tutto");
+		listDepartments.add(0, depTutto);
+
+		return listDepartments;
+
 	}
-	
+
 	@Override
 	protected void onPostExecute(List<Dipartimento> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-	
-	
+
 		ArrayList<String> listStringDepartments = new ArrayList<String>();
-		
-		for(Dipartimento d : result){
+
+		for (Dipartimento d : result) {
 			listStringDepartments.add(d.getNome());
 		}
- 		
+
 		// setto i dipartimenti nello spinner
-		ArrayAdapter adapter = new ArrayAdapter(context,smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple, listStringDepartments);
+		ArrayAdapter adapter = new ArrayAdapter(
+				context,
+				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
+				listStringDepartments);
 		spinnerDepartments.setAdapter(adapter);
-		
-		
-		FindHomeActivity.pd.dismiss();
+
+		// FindHomeActivity.pd.dismiss();
 	}
 
 }

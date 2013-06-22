@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import smartcampus.android.template.standalone.FindHomeActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
@@ -28,14 +29,17 @@ public class FindCoursesDegreeHandler extends
 	String body;
 	Spinner spinnerCorsiLaurea;
 	Dipartimento departSelected;
-
+	List<CorsoLaurea> listCourseDegree;
+	ProgressDialog pd;
+	
+	
 	public FindCoursesDegreeHandler(Context applicationContext,
 			Spinner spinnerCorsiLaurea, Dipartimento departSelected) {
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelected = departSelected;
 	}
-
+	
 	@Override
 	protected List<CorsoLaurea> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
@@ -73,7 +77,14 @@ public class FindCoursesDegreeHandler extends
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CorsoLaurea.class);
+		listCourseDegree = Utils.convertJSONToObjects(body, CorsoLaurea.class);
+
+		// aggiungo l'item "tutto" alla lista
+		CorsoLaurea courseTutto = new CorsoLaurea();
+		courseTutto.setNome("Tutto");
+		listCourseDegree.add(0, courseTutto);
+		
+		return listCourseDegree;
 
 	}
 
@@ -81,7 +92,7 @@ public class FindCoursesDegreeHandler extends
 	protected void onPostExecute(List<CorsoLaurea> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		FindHomeActivity.pd.dismiss();
+		
 		ArrayList<String> listStringDegree = new ArrayList<String>();
 
 		for (CorsoLaurea d : result) {
@@ -94,7 +105,7 @@ public class FindCoursesDegreeHandler extends
 				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
 				listStringDegree);
 		spinnerCorsiLaurea.setAdapter(adapter);
-
+		
 	}
 
 }
