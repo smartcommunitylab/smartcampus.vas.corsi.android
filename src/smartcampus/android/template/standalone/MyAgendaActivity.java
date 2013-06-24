@@ -168,24 +168,33 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			startActivity(intentEventAddEvent);
 			return true;
 		case R.id.menu_add_rating:
-			AlertDialog.Builder alert = new AlertDialog.Builder(
-					MyAgendaActivity.this);
-			LayoutInflater inflater = getLayoutInflater();
-			View dialoglayout = inflater.inflate(R.layout.dialog_layout,
-					(ViewGroup) getCurrentFocus());
-
-			alert.setView(dialoglayout);
-			alert.setTitle("Esprimi un giudizio");
-			alert.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							// Editable value = input.getText();
-							Toast.makeText(getApplicationContext(), "rating",
-									Toast.LENGTH_SHORT).show();
-							// e.printStackTrace();
-						}
-					});
-			alert.show();
+			
+			Intent intentAddRating = new Intent(MyAgendaActivity.this,
+					AddRateActivity.class);
+			intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentAddRating);
+			return true;
+			
+			
+			
+//			AlertDialog.Builder alert = new AlertDialog.Builder(
+//					MyAgendaActivity.this);
+//			LayoutInflater inflater = getLayoutInflater();
+//			View dialoglayout = inflater.inflate(R.layout.dialog_layout,
+//					(ViewGroup) getCurrentFocus());
+//
+//			alert.setView(dialoglayout);
+//			alert.setTitle("Esprimi un giudizio");
+//			alert.setPositiveButton("OK",
+//					new DialogInterface.OnClickListener() {
+//						public void onClick(DialogInterface dialog, int which) {
+//							// Editable value = input.getText();
+//							Toast.makeText(getApplicationContext(), "rating",
+//									Toast.LENGTH_SHORT).show();
+//							// e.printStackTrace();
+//						}
+//					});
+//			alert.show();
 		default:
 			return super.onOptionsItemSelected(item);
 

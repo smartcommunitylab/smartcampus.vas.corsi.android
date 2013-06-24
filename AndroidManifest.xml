@@ -39,6 +39,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Smartn_theme" >
         <uses-library android:name="com.google.android.maps" />
+
         <meta-data
             android:name="SHARED_PACKAGE"
             android:value="smartcampus.android.template.standalone" />
@@ -51,7 +52,8 @@
 
         <activity
             android:name="smartcampus.android.template.standalone.MyUniActivity"
-            android:label="@string/app_name"             android:screenOrientation="portrait">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -97,10 +99,12 @@
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
 
-<!--         <activity
+        <!--
+             <activity
             android:name="smartcampus.android.template.standalone.MyUniActivity"
             android:label="@string/title_activity_my_uni" >
-        </activity> -->
+        </activity>
+        -->
 
         <activity
             android:name="smartcampus.android.template.standalone.NoticesActivity"
@@ -115,15 +119,15 @@
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.PHLActivity"
-            android:icon="@drawable/phl_white"
             android:configChanges="orientation|screenSize"
+            android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.PHL4Courses"
+            android:configChanges="orientation|screenSize"
             android:icon="@drawable/phl_white"
-            android:label="@string/title_activity_phl" 
-            android:configChanges="orientation|screenSize">
+            android:label="@string/title_activity_phl" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeActivity"
@@ -144,8 +148,8 @@
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeCourseActivity"
-            android:icon="@drawable/findcourses_white"
             android:configChanges="orientation|screenSize"
+            android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_home_course" >
         </activity>
         <activity
@@ -156,10 +160,13 @@
             android:name="smartcampus.android.template.standalone.AddEventActivity"
             android:label="@string/title_activity_add_event" >
         </activity>
-        
         <activity
             android:name="smartcampus.android.template.standalone.AddEvent4coursesActivity"
             android:label="@string/title_activity_add_event" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.template.standalone.AddRateActivity"
+            android:label="@string/title_activity_rate" >
         </activity>
     </application>
 

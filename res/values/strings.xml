@@ -79,6 +79,7 @@
     <string name="switch_off">OFF</string>
     <string name="monitor">Segnalazioni attive</string>
     <string name="title_activity_add_event">Aggiungi evento</string>
+    <string name="title_activity_rate">Vota!</string>
         <string name="tab_home_course">Descrizione</string>
     <string name="tab_feedback">Commenti</string>
     <string name="feedback_title_of_list">Recensioni per:</string>

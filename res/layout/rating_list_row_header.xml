@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+<!-- style="?android:attr/ratingBarStyleSmall"-->
+<View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBarRowRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewAuthorRating"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:paddingLeft="5dp"
+        android:stepSize="0.1" />
+    
+
+
+</RelativeLayout>
