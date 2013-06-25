@@ -1,5 +1,6 @@
 package smartcampus.android.template.standalone;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import android.app.AlertDialog;
@@ -20,14 +21,19 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.smartuni.models.Commento;
+import eu.trentorise.smartcampus.smartuni.models.Corso;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.Course;
 import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
-	public static Course courseInfo;
-
+	public static Corso courseInfo;
+	public static List<Commento> feedbackInfoList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,10 +79,13 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(FindHomeCourseActivity.this,
 				"Informazioni del corso di " + courseName, "Caricamento...");
 
+		CorsoLite corsoAttuale = new CorsoLite();
+		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");
 		String idCourse = intent.getStringExtra("courseSelectedId");
 		try {
-			courseInfo = new CourseCompleteDataHandler(
-					FindHomeCourseActivity.this, idCourse).execute().get();
+			/*courseInfo = new CourseCompleteDataHandler(
+					FindHomeCourseActivity.this, corsoAttuale.getId()).execute().get();*/
+			feedbackInfoList = new FeedbackCourseHandler(FindHomeCourseActivity.this, corsoAttuale.getId()).execute().get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

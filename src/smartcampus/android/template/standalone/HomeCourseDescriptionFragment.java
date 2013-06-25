@@ -42,9 +42,9 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		TextView descriptionCourse = (TextView) view.findViewById(R.id.textViewDescriptioonCourseHome);
 		RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourseAverage);
 		
-		getActivity().getActionBar().setTitle(FindHomeCourseActivity.courseInfo.getNome());
-		ratingAverage.setRating((float)FindHomeCourseActivity.courseInfo.getValutazione_media());
-		descriptionCourse.setText(FindHomeCourseActivity.courseInfo.getDescrizione());
+		getActivity().getActionBar().setTitle(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getNome());
+		ratingAverage.setRating((float)FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getValutazione_media());
+		descriptionCourse.setText(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getDescrizione());
 
 		
 		

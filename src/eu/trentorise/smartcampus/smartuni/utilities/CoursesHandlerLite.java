@@ -19,10 +19,11 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
-public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> {
+public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -32,7 +33,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	private CorsoLaurea degree;
 	private String course;
 	private String body;
-	public static ArrayList<CourseLite> coursesFiltered;
+	public static ArrayList<CorsoLite> coursesFiltered;
 	ListView listView;
 	TextView tvTitleNotices;
 
@@ -48,7 +49,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 		
 	
 	// return list of all courses of all departments
-	private List<CourseLite> getAllCourses() {
+	private List<CorsoLite> getAllCourses() {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -80,12 +81,12 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CourseLite.class);
+		return Utils.convertJSONToObjects(body, CorsoLite.class);
 	}
 
 	
 	// return all courses of a department
-	private List<CourseLite> getAllCoursesOfDepartment(Dipartimento dep){
+	private List<CorsoLite> getAllCoursesOfDepartment(Dipartimento dep){
 		
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -118,11 +119,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 			e.printStackTrace();
 		}
 		
-		return Utils.convertJSONToObjects(body, CourseLite.class);
+		return Utils.convertJSONToObjects(body, CorsoLite.class);
 	}
 	
 	
-	private List<CourseLite> getFrequentedCourses() {
+	private List<CorsoLite> getFrequentedCourses() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -155,11 +156,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CourseLite.class);
+		return Utils.convertJSONToObjects(body, CorsoLite.class);
 	}
 
 	@Override
-	protected List<CourseLite> doInBackground(Void... params) {
+	protected List<CorsoLite> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		
 		if(department.getNome().equals("Tutto")){
@@ -176,7 +177,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	}
 
 	// return all courses of a degree
-	private List<CourseLite> getAllCoursesOfFaculty(CorsoLaurea deg) {
+	private List<CorsoLite> getAllCoursesOfFaculty(CorsoLaurea deg) {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -208,7 +209,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CourseLite.class);
+		return Utils.convertJSONToObjects(body, CorsoLite.class);
 	}
 
 
@@ -248,7 +249,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 
 
 	@Override
-	protected void onPostExecute(List<CourseLite> courses) {
+	protected void onPostExecute(List<CorsoLite> courses) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(courses);
 		
@@ -263,14 +264,14 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	}
 	
 	// setto la lista dei corsi e la filtro
-	private void setListCourses(List<CourseLite> courses) {
+	private void setListCourses(List<CorsoLite> courses) {
 
 		FilterSearched filter = new FilterSearched();
 		coursesFiltered = filter.filterListWithCourseSearched(course, courses);
 
 		ArrayList<String> coursesFiltered_onlyName = new ArrayList<String>();
 		for(int i = 0;i<coursesFiltered.size();i++){
-			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).getName());
+			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).getNome());
 		}
 		
 		ArrayAdapter<String> adapterCursesList = new ArrayAdapter<String>(
@@ -289,7 +290,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CourseLite>> 
 	}
 
 
-	public static String getIDCourseSelected(int position) {
+	public static long getIDCourseSelected(int position) {
 		// TODO Auto-generated method stub
 		return coursesFiltered.get(position).getId();
 	}

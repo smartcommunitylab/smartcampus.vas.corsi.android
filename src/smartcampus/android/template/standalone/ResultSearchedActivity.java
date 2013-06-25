@@ -2,6 +2,7 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
@@ -29,6 +31,7 @@ public class ResultSearchedActivity extends Activity {
 	public static ProgressDialog pd;
 	public Dipartimento depSelected;
 	public CorsoLaurea courseDegreeSelected;
+	List<CorsoLite> listCourses;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,16 @@ public class ResultSearchedActivity extends Activity {
 		ListView listView = (ListView) findViewById(R.id.listView1);
 
 		// get data from web service
-		new CoursesHandlerLite(getApplicationContext(), depSelected, courseDegreeSelected,
-				course, listView, tv).execute();
+		try {
+			listCourses = new CoursesHandlerLite(getApplicationContext(), depSelected, courseDegreeSelected,
+					course, listView, tv).execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
@@ -67,6 +78,11 @@ public class ResultSearchedActivity extends Activity {
 				Intent i = new Intent(ResultSearchedActivity.this,
 						FindHomeCourseActivity.class);
 
+				CorsoLite corsoSelezionato = new CorsoLite();
+				
+				corsoSelezionato = listCourses.get(arg2);
+				
+				i.putExtra("courseSelected", corsoSelezionato);
 				i.putExtra("courseSelectedName", courseSelectedName);
 				i.putExtra("courseSelectedId", CoursesHandlerLite.getIDCourseSelected(arg2));
 				startActivity(i);

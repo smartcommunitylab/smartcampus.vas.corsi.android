@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+import java.io.Serializable;
 
-public class CorsoLite {
+
+public class CorsoLite implements Serializable{
 
 
 

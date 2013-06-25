@@ -2,7 +2,10 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +18,21 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Author;
 import eu.trentorise.smartcampus.smartuni.models.Comment;
+import eu.trentorise.smartcampus.smartuni.models.Commento;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
+import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
 public class FeedbackFragment extends SherlockFragment {
 
 	ExpandableListView list;
 	AdapterFeedbackList mAdapter;
-
+	public static ProgressDialog pd;
+	List<Commento> commenti;
+	
+	
 	@Override
 	public void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -76,21 +86,30 @@ public class FeedbackFragment extends SherlockFragment {
 //				return true;
 //			}
 //		});
+		Intent intent = this.getActivity().getIntent();
+		CorsoLite corsoAttuale = new CorsoLite();
+		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");
+		String idCourse = intent.getStringExtra("courseSelectedId");
+		
 
 
 		TextView titleCourseFeedback = (TextView)view.findViewById(R.id.textViewTitleFeedbackCourse);
-		titleCourseFeedback.setText(FindHomeCourseActivity.courseInfo.getNome());
+		titleCourseFeedback.setText(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getNome());
 
-		List<Comment> comments = FindHomeCourseActivity.courseInfo.getCommenti();
+		List<Commento> comments = FindHomeCourseActivity.feedbackInfoList;
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
 		for (int i = 0; i < comments.size(); i++) {
 			FeedbackRowGroup feedb = new FeedbackRowGroup();
 			Author auth = new Author();
-			auth.setName(comments.get(i).getAutore().getNome());
+			auth.setName(comments.get(i).getId_studente().getNome());
 			feedb.setAuthor(auth);
-			feedb.setRating(comments.get(i).getValutazione());
+			feedb.setRating(comments.get(i).getRating_carico_studio());
+			feedb.setRating(comments.get(i).getRating_contenuto());
+			feedb.setRating(comments.get(i).getRating_esame());
+			feedb.setRating(comments.get(i).getRating_lezioni());
+			feedb.setRating(comments.get(i).getRating_materiali());
 			feedb.setComment(comments.get(i).getTesto());
 			ratings.add(feedb);
 		}

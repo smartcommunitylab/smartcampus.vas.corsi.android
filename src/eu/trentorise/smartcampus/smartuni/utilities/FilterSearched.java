@@ -3,11 +3,12 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.CourseLite;
 
 public class FilterSearched {
 
-	ArrayList<CourseLite> coursesList;
+	ArrayList<CorsoLite> coursesList;
 
 	public FilterSearched() {
 		// TODO Auto-generated constructor stub
@@ -15,11 +16,11 @@ public class FilterSearched {
 
 	
 	// filtro in base a quello che ho cercato controllando se le parole sono contenute nella lista
-	public ArrayList<CourseLite> filterListWithCourseSearched(String searched,
-			List<CourseLite> startList) {
+	public ArrayList<CorsoLite> filterListWithCourseSearched(String searched,
+			List<CorsoLite> startList) {
 
 		int length = startList.size();
-		coursesList = new ArrayList<CourseLite>(length);
+		coursesList = new ArrayList<CorsoLite>(length);
 		
 		if (searched.equals("")) {
 			for (int k = 0; k < length; k++) {
@@ -27,7 +28,7 @@ public class FilterSearched {
 			}
 		} else {
 			for (int k = 0; k < length; k++) {
-				if (startList.get(k).getName().toLowerCase().contains(searched)) {
+				if (startList.get(k).getNome().toLowerCase().contains(searched)) {
 					coursesList.add(startList.get(k));
 				}
 			}

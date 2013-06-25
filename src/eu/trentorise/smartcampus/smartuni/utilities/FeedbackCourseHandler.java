@@ -1,6 +1,8 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
 
+import java.util.List;
+
 import smartcampus.android.template.standalone.FindHomeCourseActivity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -15,10 +17,11 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.Commento;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.Course;
 
-public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
+public class FeedbackCourseHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -31,24 +34,20 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 	TextView descriptionCourse;
 	ExpandableListView listComments;
 
-	public CourseCompleteDataHandler(Context applicationContext, long idCourse) {
+	public FeedbackCourseHandler(Context applicationContext, long idCourse) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
-		/*this.tvCourseName = courseName;
-		this.ratingAverage = ratingAverage;
-		this.descriptionCourse = descriptionCourse;
-		this.listComments = listComments;*/
 	}
 
 
-	private Corso getFullCourseById() {
+	private List<Commento> getFullFeedbackById() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String.valueOf(idCourse)));
+				SmartUniDataWS.GET_WS_FEEDBACK_OF_COURSE(idCourse));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -74,7 +73,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObject(body, Corso.class);
+		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
 	@Override
@@ -85,69 +84,25 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 	}
 
 	@Override
-	protected void onPostExecute(Corso course) {
+	protected void onPostExecute(List<Commento> commenti) {
 		// TODO Auto-generated method stub
-		super.onPostExecute(course);
+		super.onPostExecute(commenti);
 
 		FindHomeCourseActivity.pd.dismiss();
 
 		//loadDataLayout(course);
 
-
-
 	}
 
 
-	protected void loadDataLayout(Corso course){
-//		tvCourseName.setText(course.getNome());
-//		ratingAverage.setRating((float)course.getValutazione_media());
-//		descriptionCourse.setText(course.getDescrizione());
-//		
-//		List<Comment> comments = course.getCommenti();
-//
-//		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
-//		
-//		for (int i = 0; i < comments.size(); i++) {
-//			FeedbackRowGroup feedb = new FeedbackRowGroup();
-//			Author auth = new Author();
-//			auth.setName(comments.get(i).getAutore().getNome());
-//			feedb.setAuthor(auth);
-//			feedb.setRating(comments.get(i).getValutazione());
-//			feedb.setComment(comments.get(i).getTesto());
-//			ratings.add(feedb);
-//		}
-//
-//		AdapterFeedbackList mAdapter = new AdapterFeedbackList(context, ratings);
-//
-//		
-//		
-//		listComments.setAdapter(mAdapter);
-//		listComments.setGroupIndicator(null);
-//		listComments.setOnGroupClickListener(new OnGroupClickListener() {
-//			
-//			@Override
-//			public boolean onGroupClick(ExpandableListView parent, View v,
-//					int groupPosition, long id) {
-//				// TODO Auto-generated method stub
-//				if(parent.isGroupExpanded(groupPosition))
-//					parent.collapseGroup(groupPosition);
-//				else
-//					parent.expandGroup(groupPosition, true);
-//				return true;
-//			}
-//		});
 
-
-
-	}
-
-	private void setDataCourse(Corso course) {
+	private void setDataCourse(Commento course) {
 
 	}
 
 	@Override
-	protected Corso doInBackground(Void... params) {
+	protected List<Commento> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
-		return getFullCourseById();
+		return getFullFeedbackById();
 	}
 }
