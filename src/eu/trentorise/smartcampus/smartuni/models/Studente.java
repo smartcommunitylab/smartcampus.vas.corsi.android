@@ -5,10 +5,7 @@ import java.util.Collection;
 
 public class Studente {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8681710690984309605L;
+	//private static final long serialVersionUID = 8681710690984309605L;
 
 	private long id;
 

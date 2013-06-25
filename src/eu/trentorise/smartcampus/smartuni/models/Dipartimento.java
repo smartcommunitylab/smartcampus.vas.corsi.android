@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 
 

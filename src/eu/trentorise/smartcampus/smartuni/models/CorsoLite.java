@@ -3,10 +3,7 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 public class CorsoLite {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1619282265752237328L;
+
 
 	// id del corso
 	private long id;

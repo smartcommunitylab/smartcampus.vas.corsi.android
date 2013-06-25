@@ -1,16 +1,11 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-import java.util.Collection;
-
 import java.util.Date;
 
 
 public class Corso extends CorsoLite {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 
 	// data di inizio del corso
 	private Date data_inizio;

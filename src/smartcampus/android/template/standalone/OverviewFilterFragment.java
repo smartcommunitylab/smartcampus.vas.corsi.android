@@ -33,6 +33,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 		int i = 0;
 		for (String s : events) {
 			String[] itms = s.split(",");
+			@SuppressWarnings("deprecation")
 			Date d = new Date(Date.parse(itms[0]));
 			AdptDetailedEvent e = new AdptDetailedEvent(d, itms[1], itms[2],
 					itms[3]);

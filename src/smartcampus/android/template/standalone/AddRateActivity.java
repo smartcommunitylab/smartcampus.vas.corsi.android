@@ -1,17 +1,12 @@
 package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.TextView;
-import eu.trentorise.smartcampus.smartuni.models.Author;
-import eu.trentorise.smartcampus.smartuni.models.Comment;
-import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 
@@ -35,7 +30,7 @@ public class AddRateActivity extends FragmentActivity {
 		// // TODO Auto-generated method stub
 		// View view = inflater.inflate(R.layout.activity_add_rating,
 		// container, false);
-		TextView titleCourseRating = (TextView) findViewById(R.id.textViewTitleRatingCourse);
+		//TextView titleCourseRating = (TextView) findViewById(R.id.textViewTitleRatingCourse);
 		//titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
 
 		ArrayList<RatingRowGroup> ratings = new ArrayList<RatingRowGroup>();

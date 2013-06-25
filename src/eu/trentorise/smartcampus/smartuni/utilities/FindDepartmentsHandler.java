@@ -2,8 +2,7 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
-import smartcampus.android.template.standalone.FindHomeActivity;
-import android.R;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -17,9 +16,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
-import eu.trentorise.smartcampus.smartuni.models.Notice;
 
 public class FindDepartmentsHandler extends
 		AsyncTask<Void, Void, List<Dipartimento>> {

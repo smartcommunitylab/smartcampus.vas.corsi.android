@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
-import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
-import eu.trentorise.smartcampus.smartuni.utilities.FindCoursesDegreeHandler;
-import eu.trentorise.smartcampus.smartuni.utilities.FindDepartmentsHandler;
-import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,7 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
+import eu.trentorise.smartcampus.smartuni.utilities.FindCoursesDegreeHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.FindDepartmentsHandler;
 
 public class FindHomeActivity extends Activity implements TextWatcher {
 	private Spinner spinner1;

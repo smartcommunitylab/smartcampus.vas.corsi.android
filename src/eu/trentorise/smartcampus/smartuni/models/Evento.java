@@ -4,10 +4,6 @@ import java.sql.Time;
 
 
 public class Evento {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4216708970101566299L;
 
 	// id dell'evento
 	private long id;

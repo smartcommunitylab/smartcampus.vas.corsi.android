@@ -108,6 +108,7 @@
 
         <activity
             android:name="smartcampus.android.template.standalone.NoticesActivity"
+            android:configChanges="orientation|keyboard"
             android:icon="@drawable/notices_white"
             android:label="@string/title_activity_notices" >
         </activity>
@@ -131,12 +132,14 @@
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.FindHomeActivity"
+            android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_courses"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.ResultSearchedActivity"
+            android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_result_searched" >
         </activity>
@@ -158,14 +161,17 @@
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.AddEventActivity"
+            android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.AddEvent4coursesActivity"
+            android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
             android:name="smartcampus.android.template.standalone.AddRateActivity"
+            android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_rate" >
         </activity>
     </application>
