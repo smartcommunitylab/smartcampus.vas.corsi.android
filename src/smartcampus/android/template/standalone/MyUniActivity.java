@@ -26,96 +26,99 @@ import eu.trentorise.smartcampus.profileservice.ProfileService;
 import eu.trentorise.smartcampus.profileservice.ProfileServiceException;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 
-
 public class MyUniActivity extends Activity {
 
 	/** Logging tag */
 	private static final String TAG = "Main";
-	
+
 	private static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/accesstoken-provider/ac";
-	
+
 	private static final String AC_SERVICE_ADDR = "https://vas-dev.smartcampuslab.it/acService";
 	private static final String PROFILE_SERVICE_ADDR = "https://vas-dev.smartcampuslab.it";
-	
-	/** Provides access to the authentication mechanism. Used to retrieve the token */ 
+
+	/**
+	 * Provides access to the authentication mechanism. Used to retrieve the
+	 * token
+	 */
 	private SCAccessProvider mAccessProvider = null;
 	/** Access token for the application user */
 	private String mToken = null;
-	
+
 	public static ProgressDialog pd;
-@Override
-protected void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
-}
-	
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	}
+
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
-		new ProgressDialog(MyUniActivity.this);
-		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
-				"Accesso in corso...");
-		
+//		new ProgressDialog(MyUniActivity.this);
+//		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
+//				"Accesso in corso...");
+
 		setContentView(R.layout.activity_my_uni);
-		
-		
+
 		if (mToken != null) {
 			// access the user data from the AC service remotely
 			new LoadUserDataFromACServiceTask().execute(mToken);
 			// access the basic user profile data remotely
 			new LoadUserDataFromProfileServiceTask().execute(mToken);
-		
-		findViewById(R.id.my_agenda_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								MyAgendaActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-		
-		findViewById(R.id.find_courses_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								FindHomeActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-		
-		findViewById(R.id.phl_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								PHLActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-		
-		findViewById(R.id.notices_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								NoticesActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-		
+
+			findViewById(R.id.my_agenda_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									MyAgendaActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+
+			findViewById(R.id.find_courses_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									FindHomeActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+
+			findViewById(R.id.phl_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									PHLActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+
+			findViewById(R.id.notices_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									NoticesActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+
 		}
 	}
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_uni);
 		
-		
+		new ProgressDialog(MyUniActivity.this);
+		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
+				"Accesso in corso...");
+
 		try {
 			Constants.setAuthUrl(getApplicationContext(), AUTH_URL);
 		} catch (NameNotFoundException e1) {
@@ -150,8 +153,7 @@ protected void onStart() {
 		getMenuInflater().inflate(R.menu.my_uni, menu);
 		return true;
 	}
-	
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// check the result of the authentication
@@ -175,8 +177,7 @@ protected void onStart() {
 				Log.i(TAG, "Authentication failed: " + error);
 			}
 		}
-		
-		
+
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -211,16 +212,15 @@ protected void onStart() {
 			}
 			return null;
 		}
-		
+
 		@Override
 		protected void onPostExecute(BasicProfile result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			
+
 			pd.dismiss();
 		}
-		
-		
+
 	}
 
 }
