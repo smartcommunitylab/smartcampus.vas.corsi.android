@@ -108,24 +108,7 @@ public class MyUniActivity extends Activity {
 					});
 
 		}
-		else{
-			try {
-				mToken = mAccessProvider.getAuthToken(this, null);
-
-			}
-
-			catch (OperationCanceledException e) {
-				Log.e(TAG, "Login cancelled.");
-				finish();
-			} catch (AuthenticatorException e) {
-				Log.e(TAG, "Login failed: " + e.getMessage());
-				finish();
-			} catch (IOException e) {
-				Log.e(TAG, "Login ended with error: " + e.getMessage());
-				finish();
-			}
-			
-		}
+//		 
 	}
 
 	@Override
