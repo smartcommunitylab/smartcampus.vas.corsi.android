@@ -3,6 +3,8 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import smartcampus.android.template.standalone.FindHomeActivity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -24,10 +26,10 @@ public class FindCoursesDegreeHandler extends
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	String body;
+	String body = null;
 	Spinner spinnerCorsiLaurea;
-	Dipartimento departSelected;
-	List<CorsoLaurea> listCourseDegree;
+	Dipartimento departSelected = null;
+	List<CorsoLaurea> listCourseDegree = null;
 	ProgressDialog pd;
 
 	public FindCoursesDegreeHandler(Context applicationContext,
@@ -35,6 +37,12 @@ public class FindCoursesDegreeHandler extends
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelected = departSelected;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		// TODO Auto-generated method stub
+		super.onPreExecute();
 	}
 
 	@Override
@@ -102,6 +110,8 @@ public class FindCoursesDegreeHandler extends
 				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
 				listStringDegree);
 		spinnerCorsiLaurea.setAdapter(adapter);
+		
+		FindHomeActivity.pd.dismiss();
 
 	}
 

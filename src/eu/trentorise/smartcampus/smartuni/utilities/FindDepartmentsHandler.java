@@ -3,6 +3,8 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import smartcampus.android.template.standalone.FindHomeActivity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -28,6 +30,12 @@ public class FindDepartmentsHandler extends
 	List<Dipartimento> listDepartments = new ArrayList<Dipartimento>();
 	ProgressDialog pd;
 
+	@Override
+	protected void onPreExecute() {
+		// TODO Auto-generated method stub
+		super.onPreExecute();
+
+	}
 
 	public FindDepartmentsHandler(Context applicationContext,
 			Spinner spinnerDepartments) {
@@ -100,7 +108,7 @@ public class FindDepartmentsHandler extends
 				listStringDepartments);
 		spinnerDepartments.setAdapter(adapter);
 
-		// FindHomeActivity.pd.dismiss();
+		FindHomeActivity.pd.dismiss();
 	}
 
 }

@@ -1,18 +1,44 @@
 package smartcampus.android.template.standalone;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.custom.RequestParam;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
+import eu.trentorise.smartcampus.smartuni.models.Evento;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
+import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.PostEvent;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.storage.model.UserAccount;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 public class AddEventActivity extends FragmentActivity {
@@ -27,7 +53,13 @@ public class AddEventActivity extends FragmentActivity {
 	private EditText mPickDate;
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
-
+	
+	public static ProgressDialog pd;
+	private Evento evento = null;
+	Spinner coursesSpinner;
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +77,15 @@ public class AddEventActivity extends FragmentActivity {
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();
+		
+		EditText title = (EditText)findViewById(R.id.editTextTitle);
+		EditText description = (EditText)findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner)findViewById(R.id.spinnerCorsi);
+		
+		
+		new CoursesLoader().execute();
+		
+		//new PostEvent(getApplicationContext(), evento).execute();
 	}
 
 	public void updateDisplay() {
@@ -130,6 +171,88 @@ public class AddEventActivity extends FragmentActivity {
 
 			}
 		}
+	}
+	
+	
+	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>> {
+
+		
+		private ProtocolCarrier mProtocolCarrier;
+		public Context context;
+		String body;
+		
+		@Override
+		protected List<CorsoLite> doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			return getFollowingCourses();
+		}
+		
+		private List<CorsoLite> getFollowingCourses() {
+			mProtocolCarrier = new ProtocolCarrier(context,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+			request.setMethod(Method.GET);
+			BasicProfile bp = new BasicProfile();
+			MessageResponse response;
+			try {
+				response = mProtocolCarrier.invokeSync(request,
+						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObjects(body, CorsoLite.class);
+		}
+		
+		@Override
+		protected void onPostExecute(List<CorsoLite> result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			
+			List<String> resultStrings = new ArrayList<String>();
+			
+			for(CorsoLite cl : result){
+				resultStrings.add(cl.getNome());
+			}
+			
+			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
+					AddEventActivity.this, R.layout.list_studymate_row_list_simple,
+					resultStrings);
+			
+			coursesSpinner.setAdapter(adapterInitialList);
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+
+			new ProgressDialog(AddEventActivity.this);
+			pd = ProgressDialog.show(AddEventActivity.this, "Salvataggio di un nuovo evento",
+					"Caricamento...");
+		}
+		
+		
+		
 	}
 
 }

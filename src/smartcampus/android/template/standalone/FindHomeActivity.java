@@ -27,15 +27,17 @@ import eu.trentorise.smartcampus.smartuni.utilities.FindDepartmentsHandler;
 public class FindHomeActivity extends Activity implements TextWatcher {
 	private Spinner spinner1;
 	private Spinner spinner2;
-	public String departSelectedName;
-	public String courseSelected;
+	public String departSelectedName  = null;
+	public String courseSelected = null;
 	public MultiAutoCompleteTextView searchTV;
 	public ArrayAdapter<String> adapter;
 	public static ProgressDialog pd;
-	public List<Dipartimento> listDep = new ArrayList<Dipartimento>();
-	public List<CorsoLaurea> listCorLaurea = new ArrayList<CorsoLaurea>();
+	public List<Dipartimento> listDep;
+	public List<CorsoLaurea> listCorLaurea;
 	Dipartimento departSelected;
 	CorsoLaurea corsoLaureaSelected;
+	FindDepartmentsHandler findDepHandler;
+	FindCoursesDegreeHandler findDegHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +65,10 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialList);
 
-		try {
-			listDep = new FindDepartmentsHandler(getApplicationContext(),
-					spinner1).execute().get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(getApplicationContext(),
+				spinner1).execute();
 
-		pd.dismiss();
+		//pd.dismiss();
 
 		spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -88,7 +82,18 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 				departSelectedName = parent.getItemAtPosition(pos).toString();
 
 				departSelected = new Dipartimento();
-
+				listDep = new ArrayList<Dipartimento>();
+				
+				try {
+					listDep = findDepHandler.get();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ExecutionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				departSelected = listDep.get(pos);
 
 				// Create an ArrayAdapter using the string array and a default
@@ -97,19 +102,11 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 				// do the background process or any work that takes
 				// time to see progreaa dialog
 
-				try {
-					listCorLaurea = new FindCoursesDegreeHandler(
-							getApplicationContext(), spinner2, departSelected)
-							.execute().get();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
+						getApplicationContext(), spinner2, departSelected)
+						.execute();
 
-				pd.dismiss();
+				//pd.dismiss();
 
 			}
 
@@ -125,7 +122,17 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 				courseSelected = parent.getItemAtPosition(pos).toString();
 
 				corsoLaureaSelected = new CorsoLaurea();
-
+				listCorLaurea = new ArrayList<CorsoLaurea>();
+				
+				try {
+					listCorLaurea = findDegHandler.get();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				corsoLaureaSelected = listCorLaurea.get(pos);
 
 			}
@@ -139,11 +146,11 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 
 		searchTV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 		searchTV.addTextChangedListener(FindHomeActivity.this);
-		adapter = new ArrayAdapter<String>(FindHomeActivity.this,
+		/*adapter = new ArrayAdapter<String>(FindHomeActivity.this,
 				android.R.layout.simple_dropdown_item_1line,
 				R.array.drop_down_spinner_singlecourses_IT);
 
-		searchTV.setAdapter(adapter);
+		searchTV.setAdapter(adapter);*/
 
 		pd.dismiss();
 	}

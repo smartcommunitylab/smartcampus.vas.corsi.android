@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -46,8 +47,8 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 		this.listView = listView;
 		this.tvTitleNotices = tvTitleNotices;
 	}
-		
-	
+
+
 	// return list of all courses of all departments
 	private List<CorsoLite> getAllCourses() {
 		mProtocolCarrier = new ProtocolCarrier(context,
