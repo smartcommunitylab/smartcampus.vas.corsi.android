@@ -46,46 +46,6 @@ public class FeedbackFragment extends SherlockFragment {
 		View view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
 
-//		Intent intent = getActivity().getIntent();
-//		TextView tvCourseName = (TextView) view
-//				.findViewById(R.id.textViewTitleFeedbackCourse);
-//		String courseName = intent.getStringExtra("courseSelectedName");
-//		tvCourseName.setText(courseName);
-//
-//		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
-//
-//		//ArrayList<String> comments = new ArrayList<String>();
-//
-//		for (int i = 0; i < 14; i++) {
-//			FeedbackRowGroup feedb = new FeedbackRowGroup();
-//			Author auth = new Author();
-//			auth.setName("Nome" + i);
-//			feedb.setAuthor(auth);
-//			feedb.setRating(i);
-//			feedb.setComment("Commento numero " + i+": corso molto interessante, il professore espone gli argomenti in modo chiaro e preciso, anche se alcuni concetti sono difficili. E' sempre disponibile ad eventuali domande a fine lezione ma non risponde alle email.");
-//			ratings.add(feedb);
-//		}
-//
-//		mAdapter = new AdapterFeedbackList(getActivity(), ratings);
-//
-//		list = (ExpandableListView) view
-//				.findViewById(R.id.expandableListViewFeedback);
-//		
-//		list.setAdapter(mAdapter);
-//		list.setGroupIndicator(null);
-//		list.setOnGroupClickListener(new OnGroupClickListener() {
-//			
-//			@Override
-//			public boolean onGroupClick(ExpandableListView parent, View v,
-//					int groupPosition, long id) {
-//				// TODO Auto-generated method stub
-//				if(parent.isGroupExpanded(groupPosition))
-//					parent.collapseGroup(groupPosition);
-//				else
-//					parent.expandGroup(groupPosition, true);
-//				return true;
-//			}
-//		});
 		Intent intent = this.getActivity().getIntent();
 		CorsoLite corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");

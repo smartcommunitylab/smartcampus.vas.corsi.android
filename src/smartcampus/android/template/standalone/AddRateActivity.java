@@ -35,6 +35,12 @@ public class AddRateActivity extends FragmentActivity {
 
 		ArrayList<RatingRowGroup> ratings = new ArrayList<RatingRowGroup>();
 		ExpandableListView list = (ExpandableListView) findViewById(R.id.expandableListViewRating);
+		
+		for (int i = 0; i < 5; i++) {
+			RatingRowGroup rrg = new RatingRowGroup();
+			rrg.setRating(0);
+			ratings.add(rrg);
+		}
 		AdapterRating mAdapter = new AdapterRating(this, ratings);
 
 		list.setAdapter(mAdapter);
