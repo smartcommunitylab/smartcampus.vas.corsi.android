@@ -2,6 +2,8 @@ package smartcampus.android.template.standalone;
 
 import java.util.Date;
 
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -26,7 +28,7 @@ public class OverviewFragment extends SherlockFragment {
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-		parent.setAgendaState(0);
+		parent.setAgendaState(MenuKind.BASE_MENU);
 		getActivity().invalidateOptionsMenu();
 		String[] events = getResources().getStringArray(R.array.NewEventiFuffa);
 		EventItem[] items = new EventItem[events.length];
@@ -52,7 +54,7 @@ public class OverviewFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(2);
+				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
 				getActivity().invalidateOptionsMenu();
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();

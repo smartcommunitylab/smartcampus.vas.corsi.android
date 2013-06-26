@@ -1,5 +1,6 @@
 package smartcampus.android.template.standalone;
 
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ public class DettailOfEventFragment4Courses extends SherlockFragment {
 	@Override
 	public void onStart() {
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-		parent.setAgendaState(3);
+		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 		getActivity().invalidateOptionsMenu();
 		super.onStart();
 	}

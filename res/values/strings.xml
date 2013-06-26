@@ -95,7 +95,7 @@
     <string name="rating_context_lezioni">Lezioni</string>
     <string name="rating_contextExplain_lezioni">Le lezioni sono state esaurienti?</string>
     <string name="rating_context_materiali">Materiali</string>
-    <string name="rating_contextExplain_materiali">I materiali dati a disposizione dal professore sono adatti a preparare l\'esame?</string>
+    <string name="rating_contextExplain_materiali">I materiali forniti sono adatti ai fini dell\'esame?</string>
     <string name="rating_context_esame">Esame</string>
-    <string name="rating_contextExplain_esame">Quanto è fattibile l\'esame e quanto è coerenti con gli argomenti trattati?</string>
+    <string name="rating_contextExplain_esame">L\'esame è coerente agli argomenti trattati?</string>
 </resources>

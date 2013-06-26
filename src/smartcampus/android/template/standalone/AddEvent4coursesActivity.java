@@ -26,7 +26,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 	// private TextView mDateDisplay;
 	private EditText mPickDate;
 	private EditText mPickTime;
-public static int state;
 	static final int DATE_DIALOG_ID = 0;
 
 	@Override
@@ -46,7 +45,6 @@ public static int state;
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();
-		state = 0;
 	}
 
 	public void updateDisplay() {

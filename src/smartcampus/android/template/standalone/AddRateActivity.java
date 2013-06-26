@@ -48,60 +48,63 @@ public class AddRateActivity extends FragmentActivity {
 
 		list.setAdapter(mAdapter);
 		list.setGroupIndicator(null);
+		list.expandGroup(0);
 		list.setOnGroupClickListener(new OnGroupClickListener() {
 
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
-				int count =  mAdapter.getGroupCount();
-				// TODO Auto-generated method stub
-				if (parent.isGroupExpanded(groupPosition)){
-					
-					for (int i = 0; i <count ; i++)
-						parent.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.white_smartn_theme));
+				int count = mAdapter.getGroupCount();
+
+				if (parent.isGroupExpanded(groupPosition)) {
+
+					for (int i = 0; i < count; i++) {
+						View elem = parent.getChildAt(i);
+						if (elem != null) {
+							elem.setBackgroundColor(getResources().getColor(
+									R.color.white_smartn_theme));
+						}
+					}
 
 					parent.collapseGroup(groupPosition);
-					
-				}else{
-					
-					
-					for (int i = 0; i <count ; i++){
-					  parent.collapseGroup(i);
-					
-					  if(i!=groupPosition){
-						  parent.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.white_smartn_theme));
-					  }
-					}
-					
-					
-					parent.expandGroup(groupPosition, true);
-					parent.getChildAt(groupPosition).setBackgroundColor(getResources().getColor(R.color.pressed_smartn_theme));
 
+				} else {
+
+					for (int i = 0; i < count; i++) {
+						parent.collapseGroup(i);
+
+						if (i != groupPosition) {
+							View elem = parent.getChildAt(i);
+							if (elem != null) {
+								elem.setBackgroundColor(getResources()
+										.getColor(R.color.white_smartn_theme));
+							}
+						}
+					}
+
+					parent.expandGroup(groupPosition, true);
+					View elem = parent.getChildAt(groupPosition);
+					if (elem != null) {
+						elem.setBackgroundColor(getResources().getColor(
+								R.color.pressed_smartn_theme));
+					}
 				}
-				
-				
+
 				return true;
 			}
-			
-		
+
 		});
-		
-		
+
 		list.setOnChildClickListener(new OnChildClickListener() {
-			
+
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 				// TODO Auto-generated method stub
-				
-				
-				
-				
+
 				return true;
 			}
 		});
-		
-		
 
 		// //return view;
 	}
@@ -145,20 +148,19 @@ public class AddRateActivity extends FragmentActivity {
 				R.string.rating_contextExplain_materiali));
 		ratings.add(rrg);
 
-		// CARICO DI STUDIO
-		rrg = new RatingRowGroup();
-		rrg.setRating(0);
-		rrg.setContext(getResources().getString(
-				R.string.rating_context_carico_studio));
-		rrg.setExplainContext(getResources().getString(
-				R.string.rating_contextExplain_carico_studio));
-		ratings.add(rrg);
+		// // CARICO DI STUDIO
+		// rrg = new RatingRowGroup();
+		// rrg.setRating(0);
+		// rrg.setContext(getResources().getString(
+		// R.string.rating_context_carico_studio));
+		// rrg.setExplainContext(getResources().getString(
+		// R.string.rating_contextExplain_carico_studio));
+		// ratings.add(rrg);
 
 		// CARICO DI STUDIO
 		rrg = new RatingRowGroup();
 		rrg.setRating(0);
-		rrg.setContext(getResources().getString(
-				R.string.rating_context_esame));
+		rrg.setContext(getResources().getString(R.string.rating_context_esame));
 		rrg.setExplainContext(getResources().getString(
 				R.string.rating_contextExplain_esame));
 		ratings.add(rrg);

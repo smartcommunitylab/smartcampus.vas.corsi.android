@@ -5,12 +5,12 @@
     android:orientation="horizontal" >
     
 <!-- style="?android:attr/ratingBarStyleSmall"-->
-<View
+<!-- <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/smartn_theme_color"
         android:paddingBottom="20dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp" /> -->
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewAuthorRating"

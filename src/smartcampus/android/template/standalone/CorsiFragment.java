@@ -1,5 +1,6 @@
 package smartcampus.android.template.standalone;
 
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +26,7 @@ public class CorsiFragment extends SherlockFragment {
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-		parent.setAgendaState(0);
+		parent.setAgendaState(MenuKind.BASE_MENU);
 
 		getActivity().invalidateOptionsMenu();
 		String[] corsi = getResources().getStringArray(R.array.Corsi);
@@ -52,7 +53,7 @@ public class CorsiFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(1);
+				parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
 				getActivity().invalidateOptionsMenu();
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();

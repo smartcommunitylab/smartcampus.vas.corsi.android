@@ -62,6 +62,13 @@
         android:layout_height="wrap_content"
         android:isIndicator="true" />
 
+    <ListView
+        android:id="@+id/list_view_expanded"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"

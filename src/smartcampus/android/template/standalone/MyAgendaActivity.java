@@ -15,18 +15,29 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
-	public int agendaState;
-
-	// 0 = elenco base
-	// 1 = overview filter
-	// 2 = detail of event
-	// 3 = detail of event for course
+	
+	public enum MenuKind {
+		BASE_MENU,
+		OVERVIEW_FILTERED_BY_COURSE,
+		DETAIL_OF_EVENT,
+		DETAIL_OF_EVENT_FOR_COURSE
+	}
+	
+	public enum ChildActivity {
+		ADD_EVENT_FOR_COURSES,
+		ADD_RATING,
+		NONE
+	}
+	
+	private MenuKind agendaState;
+	private ChildActivity mystate;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		agendaState = 0;
-		AddEvent4coursesActivity.state = 1;
+		agendaState = MenuKind.BASE_MENU;
+		mystate = ChildActivity.NONE;
 		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -54,37 +65,42 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 								CorsiFragment.class));
 		ab.addTab(tab2);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
-		if (agendaState == 0) {
-			if (AddEvent4coursesActivity.state == 0){
+		if (agendaState == MenuKind.BASE_MENU) {
+			if (mystate == ChildActivity.ADD_EVENT_FOR_COURSES){
 				inflater.inflate(R.menu.add_event, menu);
-				AddEvent4coursesActivity.state = 1;
 			}
-			else
-			inflater.inflate(R.menu.agenda, menu);
+			else if (mystate == ChildActivity.ADD_RATING) {
+				inflater.inflate(R.menu.add_event, menu);
+			}
+			else {
+				inflater.inflate(R.menu.agenda, menu);
+			}
 		}
-		if (agendaState == 1) {
+		else if (agendaState == MenuKind.OVERVIEW_FILTERED_BY_COURSE) {
 			inflater.inflate(R.menu.add_event, menu);
 			// agendaState = false;
 		}
-		if ((agendaState == 2) || (agendaState == 3)){
+		if ((agendaState == MenuKind.DETAIL_OF_EVENT) ||
+				(agendaState == MenuKind.DETAIL_OF_EVENT_FOR_COURSE)){
 			inflater.inflate(R.menu.det_event, menu);
 			// agendaState = false;
 		}
+		mystate = ChildActivity.NONE;
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public void onBackPressed() {
-		if (agendaState == 3) {
-			agendaState = 1;
+		if (agendaState == MenuKind.DETAIL_OF_EVENT_FOR_COURSE) {
+			agendaState = MenuKind.OVERVIEW_FILTERED_BY_COURSE;
 		}
-		if (agendaState == 2) {
-			agendaState = 0;
+		if (agendaState == MenuKind.DETAIL_OF_EVENT) {
+			agendaState = MenuKind.BASE_MENU;
 		}
 //		if (agendaState == 1) {
 //			agendaState = 0;
@@ -159,13 +175,14 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		case R.id.menu_delete_event:
 			return true;
 		case R.id.menu_add_event_4_course:
+			mystate = ChildActivity.ADD_EVENT_FOR_COURSES;
 			Intent intentEventAddEvent = new Intent(MyAgendaActivity.this,
 					AddEvent4coursesActivity.class);
 			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEventAddEvent);
 			return true;
 		case R.id.menu_add_rating:
-			
+			mystate = ChildActivity.ADD_RATING;
 			Intent intentAddRating = new Intent(MyAgendaActivity.this,
 					AddRateActivity.class);
 			intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -198,11 +215,11 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	public int isAgendaState() {
+	public MenuKind isAgendaState() {
 		return agendaState;
 	}
 
-	public void setAgendaState(int agendaState) {
+	public void setAgendaState(MenuKind agendaState) {
 		this.agendaState = agendaState;
 	}
 	

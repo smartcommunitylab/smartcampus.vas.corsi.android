@@ -1,18 +1,26 @@
 package smartcampus.android.template.standalone;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+
+import eu.trentorise.smartcampus.template.MainActivity;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 
@@ -22,7 +30,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_home_course_description, container, false);
+		final View view = inflater.inflate(R.layout.fragment_home_course_description, container, false);
 
 //		Intent intent = getActivity().getIntent();
 //		TextView tvCourseName = (TextView) view.findViewById(R.id.textViewNameCourseHome);
@@ -40,12 +48,32 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 //		String idCourse = intent.getStringExtra("courseSelectedId");
 //		new CourseCompleteDataHandler(getActivity(), idCourse, tvCourseName, descriptionCourse,ratingAverage, listComments).execute();
 		TextView descriptionCourse = (TextView) view.findViewById(R.id.textViewDescriptioonCourseHome);
-		RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourseAverage);
+		final RatingBar ratingAverage = (RatingBar)view.findViewById(R.id.ratingBarCourseAverage);
 		
 		getActivity().getActionBar().setTitle(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getNome());
 		ratingAverage.setRating((float)FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getValutazione_media());
 		descriptionCourse.setText(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getDescrizione());
-
+		
+		final ListView list = (ListView) view.findViewById(R.id.list_view_expanded);
+		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new String[]{"A", "B", "C"});
+		list.setAdapter(ad);
+		
+		ratingAverage.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                	Log.i("Mucca", "muuuuuuuuuuuu");
+    				int vis = list.getVisibility();
+    				if (vis != View.VISIBLE) {
+    					list.setVisibility(View.VISIBLE);
+    				}
+    				else {
+    					list.setVisibility(View.GONE);
+    				}
+    				view.invalidate();
+                }
+                return true;
+            }});
 		
 		
 		Switch switchFollow = (Switch)view.findViewById(R.id.switchFollow);

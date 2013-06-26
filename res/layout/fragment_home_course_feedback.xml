@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/smartn_theme_color"
-        android:paddingBottom="20dp"
-        android:paddingTop="10dp" />
+    
     <TextView
         android:id="@+id/textViewTitleFeedbackCourse"
         android:layout_width="fill_parent"
@@ -18,7 +13,12 @@
         android:text="Large Text"
         android:textColor="@color/smartn_theme_color"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-     
+     <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
     <ExpandableListView
         android:id="@+id/expandableListViewFeedback"
         android:layout_width="match_parent"
