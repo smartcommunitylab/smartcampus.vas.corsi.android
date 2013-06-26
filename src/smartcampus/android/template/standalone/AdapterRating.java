@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
 
 public class AdapterRating extends BaseExpandableListAdapter {
@@ -22,7 +23,14 @@ public class AdapterRating extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-		return ratings.get(groupPosition).getRating();
+
+//		if (childPosition == 0) {
+//			return ratings.get(groupPosition).getExplainContext();
+//		} else if (childPosition == 1){
+//			return ratings.get(groupPosition).getRating();
+//		}
+		
+		return ratings.get(groupPosition);
 	}
 
 	@Override
@@ -36,17 +44,30 @@ public class AdapterRating extends BaseExpandableListAdapter {
 
 		// DetailInfo detailInfo = (DetailInfo) getChild(groupPosition,
 		// childPosition);
-		//RatingRowGroup inf = new RatingRowGroup();
-		//inf.setComment((String) getChild(groupPosition, childPosition));
+
 		if (view == null) {
 			LayoutInflater infalInflater = (LayoutInflater) mcontext
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = infalInflater.inflate(R.layout.rating_list_row_child, null);
 		}
+		
+		RatingRowGroup inf = new RatingRowGroup();
+//		if(childPosition==0)
+//			inf.setExplainContext((String) getChild(groupPosition,
+//				childPosition));
+//		if(childPosition==1)
+//			inf.setRating((Integer) getChild(groupPosition,
+//					childPosition));
+		inf = (RatingRowGroup) getChild(groupPosition,childPosition);
 
-		// TextView textComment = (TextView)
-		// view.findViewById(R.id.textViewComment);
-		// textComment.setText(inf.getComment().toString());
+		TextView textExplain = (TextView) view
+					.findViewById(R.id.textViewExplainRate);
+			textExplain.setText(inf.getExplainContext());
+	
+			RatingBar rb = (RatingBar) view.findViewById(R.id.ratingBarContext);
+			// rb.setNumStars(headerInfo.getRating());
+			rb.setRating(inf.getRating());
+
 
 		return view;
 	}
@@ -76,7 +97,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isLastChild, View view,
 			ViewGroup parent) {
 
-		//RatingRowGroup headerInfo = (RatingRowGroup) getGroup(groupPosition);
+		RatingRowGroup headerInfo = (RatingRowGroup) getGroup(groupPosition);
 		if (view == null) {
 			LayoutInflater inf = (LayoutInflater) mcontext
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,10 +107,10 @@ public class AdapterRating extends BaseExpandableListAdapter {
 		// TextView heading = (TextView)
 		// view.findViewById(R.id.textViewAuthorRating);
 		// heading.setText(headerInfo.getAuthor().getName().trim());
-
-		RatingBar rb = (RatingBar) view.findViewById(R.id.ratingBarRowRating);
-		rb.setNumStars(5);
-//		rb.setRating(headerInfo.getRating());
+		TextView heading = (TextView) view
+				.findViewById(R.id.textViewContextRating);
+		heading.setText(headerInfo.getContext().trim());
+		// rb.setRating(headerInfo.getRating());
 
 		return view;
 	}

@@ -88,4 +88,14 @@
     <string name="label_title_description_course">Descrizione</string>
     <string name="label_txtMonitor_on">Segnalazioni attive</string>
     <string name="label_txtMonitor_off">Segnalazioni non attive</string>
+    <string name="rating_context_contenuti">Contenuti</string>
+    <string name="rating_contextExplain_contenuti">Gli argomenti trattati ti hanno soddisfatto?</string>
+    <string name="rating_context_carico_studio">Carico di studio/cfu</string>
+    <string name="rating_contextExplain_carico_studio">Il carico di studio è proporzionato con i cfu?</string>
+    <string name="rating_context_lezioni">Lezioni</string>
+    <string name="rating_contextExplain_lezioni">Le lezioni sono state esaurienti?</string>
+    <string name="rating_context_materiali">Materiali</string>
+    <string name="rating_contextExplain_materiali">I materiali dati a disposizione dal professore sono adatti a preparare l\'esame?</string>
+    <string name="rating_context_esame">Esame</string>
+    <string name="rating_contextExplain_esame">Quanto è fattibile l\'esame e quanto è coerenti con gli argomenti trattati?</string>
 </resources>

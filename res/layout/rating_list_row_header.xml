@@ -12,16 +12,18 @@
         android:paddingBottom="20dp"
         android:paddingTop="10dp" />
 
-    <RatingBar
-        android:id="@+id/ratingBarRowRating"
+ <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textViewContextRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewAuthorRating"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:paddingLeft="5dp"
-        android:stepSize="0.1" />
+        android:layout_alignParentTop="true"
+        android:gravity="left"
+        
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="TextView" />
     
 
 
