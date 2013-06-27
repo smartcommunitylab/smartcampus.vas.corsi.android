@@ -1,7 +1,6 @@
 package smartcampus.android.template.standalone;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,16 +13,14 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
-import eu.trentorise.smartcampus.template.MainActivity;
+import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
-
 
 
 	@Override
@@ -55,7 +52,12 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		descriptionCourse.setText(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getDescrizione());
 		
 		final ListView list = (ListView) view.findViewById(R.id.list_view_expanded);
-		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new String[]{"A", "B", "C"});
+		
+		
+		
+		
+		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(), 
+				android.R.layout.simple_list_item_1, new String[]{"A", "B", "C"});
 		list.setAdapter(ad);
 		
 		ratingAverage.setOnTouchListener(new OnTouchListener() {

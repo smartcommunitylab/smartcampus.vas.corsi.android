@@ -13,6 +13,7 @@
             android:id="@+id/textViewContenuti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="10dp"
             android:text="Contenuti" />
 
         <RatingBar
@@ -25,7 +26,6 @@
             android:layout_gravity="center_horizontal"
             android:isIndicator="true"
             android:numStars="5"
-            android:paddingLeft="5dp"
             android:stepSize="0.1" />
     </LinearLayout>
 
@@ -38,6 +38,7 @@
             android:id="@+id/textViewCfu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="10dp"
             android:text="Cfu" />
 
         <RatingBar
@@ -47,7 +48,6 @@
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
-            android:paddingLeft="5dp"
             android:stepSize="0.1" />
     </LinearLayout>
 
@@ -60,6 +60,7 @@
             android:id="@+id/textViewLezioni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="5dp"
             android:text="Lezioni" />
 
         <RatingBar
@@ -71,7 +72,6 @@
             android:layout_below="@+id/textViewAuthorRating"
             android:isIndicator="true"
             android:numStars="5"
-            android:paddingLeft="5dp"
             android:stepSize="0.1" />
     </LinearLayout>
 
@@ -84,6 +84,7 @@
             android:id="@+id/textViewMateriali"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="5dp"
             android:text="Materiali" />
 
         <RatingBar
@@ -95,7 +96,6 @@
             android:layout_below="@+id/textViewAuthorRating"
             android:isIndicator="true"
             android:numStars="5"
-            android:paddingLeft="5dp"
             android:stepSize="0.1" />
     </LinearLayout>
 
@@ -108,6 +108,7 @@
             android:id="@+id/textViewEsame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="5dp"
             android:text="Esame" />
 
         <RatingBar
@@ -118,8 +119,8 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textViewAuthorRating"
             android:isIndicator="true"
+
             android:numStars="5"
-            android:paddingLeft="5dp"
             android:stepSize="0.1" />
     </LinearLayout>
 

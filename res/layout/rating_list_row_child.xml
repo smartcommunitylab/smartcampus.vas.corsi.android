@@ -9,14 +9,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        
-        android:text="figlio" />
+        android:paddingLeft="@dimen/activity_vertical_margin"/>
 
         <RatingBar
-        android:id="@+id/ratingBarContext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            android:id="@+id/ratingBarContextContenuti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        
+        <RatingBar
+            android:id="@+id/ratingBarContextCfu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        <RatingBar
+            android:id="@+id/ratingBarContextLezioni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        <RatingBar
+            android:id="@+id/ratingBarContextMateriali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        <RatingBar
+            android:id="@+id/ratingBarContextEsame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     
     <!-- <View
         android:layout_width="fill_parent"

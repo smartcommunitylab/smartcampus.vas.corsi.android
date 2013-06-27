@@ -31,7 +31,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	public static ProgressDialog pd;
 	public static Corso courseInfo;
 	public static List<Commento> feedbackInfoList;
-	
+
+	public CorsoLite corsoAttuale;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,7 +78,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(FindHomeCourseActivity.this,
 				"Informazioni del corso di " + courseName, "Caricamento...");
 
-		CorsoLite corsoAttuale = new CorsoLite();
+		corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");
 		String idCourse = intent.getStringExtra("courseSelectedId");
 		try {
@@ -205,6 +206,14 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentHome);*/
 			finish();
+		
+			return true;
+		case R.id.itemAddRating:
+			
+			Intent intentAddRating = new Intent(FindHomeCourseActivity.this,
+					AddRateActivity.class);
+			intentAddRating.putExtra("Corso", corsoAttuale);
+			startActivity(intentAddRating);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

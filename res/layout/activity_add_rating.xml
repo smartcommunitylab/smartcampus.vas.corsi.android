@@ -63,14 +63,14 @@
         android:paddingTop="15dp" >
 
         <Button
-            android:id="@+id/button_annulla"
+            android:id="@+id/button_annulla_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel" />
 
         <Button
-            android:id="@+id/button_ok"
+            android:id="@+id/button_ok_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -2,12 +2,15 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
@@ -106,11 +109,28 @@ public class AddRateActivity extends FragmentActivity {
 			}
 		});
 
-		// //return view;
+		findViewById(R.id.button_ok_rate).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent();
+						intent.putExtra("Rating", ratings);
+						Toast.makeText(getApplicationContext(),
+								"Voto Aggiunto!", Toast.LENGTH_SHORT).show();
+						finish();
+					}
+				});
+		
+		findViewById(R.id.button_annulla_rate).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						finish();
+						}
+				});
 	}
 
 	private void setRatingContexts() {
-		// TODO Auto-generated method stub
 
 		// CONTENUTI
 		RatingRowGroup rrg = new RatingRowGroup();
@@ -148,16 +168,8 @@ public class AddRateActivity extends FragmentActivity {
 				R.string.rating_contextExplain_materiali));
 		ratings.add(rrg);
 
-		// // CARICO DI STUDIO
-		// rrg = new RatingRowGroup();
-		// rrg.setRating(0);
-		// rrg.setContext(getResources().getString(
-		// R.string.rating_context_carico_studio));
-		// rrg.setExplainContext(getResources().getString(
-		// R.string.rating_contextExplain_carico_studio));
-		// ratings.add(rrg);
 
-		// CARICO DI STUDIO
+		// Esame
 		rrg = new RatingRowGroup();
 		rrg.setRating(0);
 		rrg.setContext(getResources().getString(R.string.rating_context_esame));

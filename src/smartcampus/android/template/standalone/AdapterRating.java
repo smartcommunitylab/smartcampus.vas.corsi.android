@@ -24,12 +24,12 @@ public class AdapterRating extends BaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 
-//		if (childPosition == 0) {
-//			return ratings.get(groupPosition).getExplainContext();
-//		} else if (childPosition == 1){
-//			return ratings.get(groupPosition).getRating();
-//		}
-		
+		// if (childPosition == 0) {
+		// return ratings.get(groupPosition).getExplainContext();
+		// } else if (childPosition == 1){
+		// return ratings.get(groupPosition).getRating();
+		// }
+
 		return ratings.get(groupPosition);
 	}
 
@@ -50,25 +50,76 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = infalInflater.inflate(R.layout.rating_list_row_child, null);
 		}
-		
+
 		RatingRowGroup inf = new RatingRowGroup();
-//		if(childPosition==0)
-//			inf.setExplainContext((String) getChild(groupPosition,
-//				childPosition));
-//		if(childPosition==1)
-//			inf.setRating((Integer) getChild(groupPosition,
-//					childPosition));
-		inf = (RatingRowGroup) getChild(groupPosition,childPosition);
+		// if(childPosition==0)
+		// inf.setExplainContext((String) getChild(groupPosition,
+		// childPosition));
+		// if(childPosition==1)
+		// inf.setRating((Integer) getChild(groupPosition,
+		// childPosition));
+		inf = (RatingRowGroup) getChild(groupPosition, childPosition);
 
 		TextView textExplain = (TextView) view
-					.findViewById(R.id.textViewExplainRate);
-			textExplain.setText(inf.getExplainContext());
-	
-			RatingBar rb = (RatingBar) view.findViewById(R.id.ratingBarContext);
-			// rb.setNumStars(headerInfo.getRating());
-			rb.setRating(inf.getRating());
+				.findViewById(R.id.textViewExplainRate);
+		textExplain.setText(inf.getExplainContext());
 
+		RatingBar rbCont = (RatingBar) view
+				.findViewById(R.id.ratingBarContextContenuti);
+		RatingBar rbCfu = (RatingBar) view
+				.findViewById(R.id.ratingBarContextCfu);
+		RatingBar rbLez = (RatingBar) view
+				.findViewById(R.id.ratingBarContextLezioni);
+		RatingBar rbMat = (RatingBar) view
+				.findViewById(R.id.ratingBarContextMateriali);
+		RatingBar rbExam = (RatingBar) view
+				.findViewById(R.id.ratingBarContextEsame);
+		switch (groupPosition) {
+		case 0:
+			rbCont.setVisibility(View.VISIBLE);
 
+			rbCfu.setVisibility(View.GONE);
+			rbLez.setVisibility(View.GONE);
+			rbMat.setVisibility(View.GONE);
+			rbExam.setVisibility(View.GONE);
+			return view;
+			//rbCont.setRating(inf.getRating());
+		case 1:
+			rbCont.setVisibility(View.GONE);
+			rbCfu.setVisibility(View.VISIBLE);
+			rbLez.setVisibility(View.GONE);
+			rbMat.setVisibility(View.GONE);
+			rbExam.setVisibility(View.GONE);
+			return view;
+			//rbCfu.setRating(inf.getRating());
+		case 2:
+			rbCont.setVisibility(View.GONE);
+			rbCfu.setVisibility(View.GONE);
+			rbLez.setVisibility(View.VISIBLE);
+			rbMat.setVisibility(View.GONE);
+			rbExam.setVisibility(View.GONE);
+			return view;
+			// rbLez.setRating(inf.getRating());
+		case 3:
+			rbCont.setVisibility(View.GONE);
+			rbCfu.setVisibility(View.GONE);
+			rbLez.setVisibility(View.GONE);
+			rbMat.setVisibility(View.VISIBLE);
+			rbExam.setVisibility(View.GONE);
+			return view;
+
+			// rbMat.setRating(inf.getRating());
+		case 4:
+			rbCont.setVisibility(View.GONE);
+			rbCfu.setVisibility(View.GONE);
+			rbLez.setVisibility(View.GONE);
+			rbMat.setVisibility(View.GONE);
+			rbExam.setVisibility(View.VISIBLE);
+			return view;
+
+			// rbExam.setRating(inf.getRating());
+		}
+		//
 		return view;
 	}
 
