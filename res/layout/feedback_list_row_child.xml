@@ -4,6 +4,125 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewContenuti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contenuti" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRowContenuti"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewAuthorRating"
+            android:layout_gravity="center_horizontal"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:paddingLeft="5dp"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewCfu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cfu" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRowCfu"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:paddingLeft="5dp"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewLezioni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lezioni" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRowLezioni"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewAuthorRating"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:paddingLeft="5dp"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewMateriali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Materiali" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRowMateriali"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewAuthorRating"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:paddingLeft="5dp"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewEsame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esame" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRowEsame"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textViewAuthorRating"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:paddingLeft="5dp"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textViewComment"
         android:layout_width="wrap_content"
@@ -12,12 +131,5 @@
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="TextView" />
-
-    <!-- <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/smartn_theme_color"
-        android:paddingBottom="20dp"
-        android:paddingTop="10dp" /> -->
 
 </LinearLayout>

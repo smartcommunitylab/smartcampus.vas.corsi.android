@@ -24,8 +24,6 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.smartuni.models.Commento;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
-import eu.trentorise.smartcampus.smartuni.models.Course;
-import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
 import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
@@ -118,8 +116,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		AlertDialog.Builder alert = new AlertDialog.Builder(
 				FindHomeCourseActivity.this);

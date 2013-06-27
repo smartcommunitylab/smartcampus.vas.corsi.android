@@ -62,7 +62,6 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                	Log.i("Mucca", "muuuuuuuuuuuu");
     				int vis = list.getVisibility();
     				if (vis != View.VISIBLE) {
     					list.setVisibility(View.VISIBLE);
