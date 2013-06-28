@@ -1,10 +1,11 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 
-public class Evento {
+public class Evento implements Serializable {
 
 	// id dell'evento
 	private long id;

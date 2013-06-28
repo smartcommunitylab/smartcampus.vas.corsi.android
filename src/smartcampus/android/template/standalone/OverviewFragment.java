@@ -107,9 +107,17 @@ public class OverviewFragment extends SherlockFragment {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
 				getActivity().invalidateOptionsMenu();
+				
+				Evento evento = listaEventi.get(arg2);
+				
+				//Pass Data to other Fragment 
+			    Bundle arguments = new Bundle();
+			    arguments.putSerializable("eventSelected", evento);
+				
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new DettailOfEventFragment();
+				fragment.setArguments(arguments);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.tabOverview, fragment);
 				ft.addToBackStack(null);

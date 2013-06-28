@@ -49,6 +49,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+	
 		agendaState = MenuKind.BASE_MENU;
 		mystate = ChildActivity.NONE;
 		// setContentView(R.layout.activity_my_agenda);

@@ -48,7 +48,14 @@
         android:text="Descrizione" />
 
     <TextView
-        android:id="@+id/textMateriaEvent"
+        android:id="@+id/textAulaEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:text="Materia" />
+    
+        <TextView
+        android:id="@+id/textLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
