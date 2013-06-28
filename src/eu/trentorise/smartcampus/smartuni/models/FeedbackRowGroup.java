@@ -1,36 +1,44 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+public class FeedbackRowGroup
+{
 
-public class FeedbackRowGroup {
+	public Author	author;
+	public int		rating;
+	public String	comment;
 
-	public Author author;
-	public int rating;
-	public String comment;
-
-	public FeedbackRowGroup() {
+	public FeedbackRowGroup()
+	{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Author getAuthor() {
+	public Author getAuthor()
+	{
 		return author;
 	}
 
-	public int getRating() {
+	public int getRating()
+	{
 		return rating;
 	}
 
-	public void setAuthor(Author author) {
+	public void setAuthor(Author author)
+	{
 		this.author = author;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(int rating)
+	{
 		this.rating = rating;
 	}
-	
-	public String getComment() {
+
+	public String getComment()
+	{
 		return comment;
 	}
-	public void setComment(String comment) {
+
+	public void setComment(String comment)
+	{
 		this.comment = comment;
 	}
 }

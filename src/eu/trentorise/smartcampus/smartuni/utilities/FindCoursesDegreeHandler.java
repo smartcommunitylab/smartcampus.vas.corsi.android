@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import smartcampus.android.template.standalone.FindHomeActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,31 +21,35 @@ import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
 public class FindCoursesDegreeHandler extends
-		AsyncTask<Void, Void, List<CorsoLaurea>> {
+		AsyncTask<Void, Void, List<CorsoLaurea>>
+{
 
-	private ProtocolCarrier mProtocolCarrier;
-	public Context context;
-	String body = null;
-	Spinner spinnerCorsiLaurea;
-	Dipartimento departSelected = null;
-	List<CorsoLaurea> listCourseDegree = null;
-	ProgressDialog pd;
+	private ProtocolCarrier	mProtocolCarrier;
+	public Context			context;
+	String					body				= null;
+	Spinner					spinnerCorsiLaurea;
+	Dipartimento			departSelected		= null;
+	List<CorsoLaurea>		listCourseDegree	= null;
+	ProgressDialog			pd;
 
 	public FindCoursesDegreeHandler(Context applicationContext,
-			Spinner spinnerCorsiLaurea, Dipartimento departSelected) {
+			Spinner spinnerCorsiLaurea, Dipartimento departSelected)
+	{
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelected = departSelected;
 	}
-	
+
 	@Override
-	protected void onPreExecute() {
+	protected void onPreExecute()
+	{
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 	}
 
 	@Override
-	protected List<CorsoLaurea> doInBackground(Void... params) {
+	protected List<CorsoLaurea> doInBackground(Void... params)
+	{
 		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -60,24 +63,34 @@ public class FindCoursesDegreeHandler extends
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try {
+		try
+		{
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200) {
+			if (response.getHttpStatus() == 200)
+			{
 
 				body = response.getBody();
 
-			} else {
+			}
+			else
+			{
 				return null;
 			}
-		} catch (ConnectionException e) {
+		}
+		catch (ConnectionException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ProtocolException e) {
+		}
+		catch (ProtocolException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SecurityException e) {
+		}
+		catch (SecurityException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -94,13 +107,15 @@ public class FindCoursesDegreeHandler extends
 	}
 
 	@Override
-	protected void onPostExecute(List<CorsoLaurea> result) {
+	protected void onPostExecute(List<CorsoLaurea> result)
+	{
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		ArrayList<String> listStringDegree = new ArrayList<String>();
 
-		for (CorsoLaurea d : result) {
+		for (CorsoLaurea d : result)
+		{
 			listStringDegree.add(d.getNome());
 		}
 
@@ -110,7 +125,7 @@ public class FindCoursesDegreeHandler extends
 				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
 				listStringDegree);
 		spinnerCorsiLaurea.setAdapter(adapter);
-		
+
 		FindHomeActivity.pd.dismiss();
 
 	}

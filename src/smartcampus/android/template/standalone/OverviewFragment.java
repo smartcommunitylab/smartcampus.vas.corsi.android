@@ -1,12 +1,9 @@
 package smartcampus.android.template.standalone;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,16 +19,18 @@ import com.actionbarsherlock.app.SherlockFragment;
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 import eu.trentorise.smartcampus.smartuni.utilities.EventsHandler;
 
-public class OverviewFragment extends SherlockFragment {
+public class OverviewFragment extends SherlockFragment
+{
 
-	public static ProgressDialog pd;
-	public ListView listViewEventi;
-	public List<Evento> listaEventi;
-	public EventsHandler eventsHandler;
+	public static ProgressDialog	pd;
+	public ListView					listViewEventi;
+	public List<Evento>				listaEventi;
+	public EventsHandler			eventsHandler;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
 				container, false);
@@ -39,33 +38,38 @@ public class OverviewFragment extends SherlockFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle arg0) {
+	public void onCreate(Bundle arg0)
+	{
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 
 		new ProgressDialog(getActivity());
-		OverviewFragment.pd = ProgressDialog.show(getActivity(), "Lista degli eventi personali",
-				"Caricamento...");
+		OverviewFragment.pd = ProgressDialog.show(getActivity(),
+				"Lista degli eventi personali", "Caricamento...");
 
 		eventsHandler = new EventsHandler(getActivity().getApplicationContext());
 		eventsHandler.execute();
 
-		
 	}
 
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		getActivity().invalidateOptionsMenu();
 
-		
-		try {
+		try
+		{
 			listaEventi = eventsHandler.get();
-		} catch (InterruptedException e1) {
+		}
+		catch (InterruptedException e1)
+		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (ExecutionException e1) {
+		}
+		catch (ExecutionException e1)
+		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -86,7 +90,8 @@ public class OverviewFragment extends SherlockFragment {
 		EventItem[] listEvItem = new EventItem[listaEventi.size()];
 		int i = 0;
 
-		for (Evento ev : listaEventi) {
+		for (Evento ev : listaEventi)
+		{
 			AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
 					ev.getTitolo(), ev.getDescrizione(), ev.getStart()
 							.toString(), ev.getRoom());
@@ -99,21 +104,23 @@ public class OverviewFragment extends SherlockFragment {
 				R.id.listViewEventi);
 		listView.setAdapter(adapter);
 
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+		listView.setOnItemClickListener(new ListView.OnItemClickListener()
+		{
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+					long arg3)
+			{
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
 				getActivity().invalidateOptionsMenu();
-				
+
 				Evento evento = listaEventi.get(arg2);
-				
-				//Pass Data to other Fragment 
-			    Bundle arguments = new Bundle();
-			    arguments.putSerializable("eventSelected", evento);
-				
+
+				// Pass Data to other Fragment
+				Bundle arguments = new Bundle();
+				arguments.putSerializable("eventSelected", evento);
+
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new DettailOfEventFragment();

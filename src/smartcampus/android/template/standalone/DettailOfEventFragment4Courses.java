@@ -8,17 +8,21 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class DettailOfEventFragment4Courses extends SherlockFragment {
+public class DettailOfEventFragment4Courses extends SherlockFragment
+{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_detail_of_event_4_course,
-				container, false);
+		View view = inflater.inflate(
+				R.layout.fragment_detail_of_event_4_course, container, false);
 		return view;
 	}
+
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 		getActivity().invalidateOptionsMenu();

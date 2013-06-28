@@ -24,23 +24,25 @@ import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 import eu.trentorise.smartcampus.smartuni.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.smartuni.utilities.FindDepartmentsHandler;
 
-public class FindHomeActivity extends Activity implements TextWatcher {
-	private Spinner spinner1;
-	private Spinner spinner2;
-	public String departSelectedName  = null;
-	public String courseSelected = null;
-	public MultiAutoCompleteTextView searchTV;
-	public ArrayAdapter<String> adapter;
-	public static ProgressDialog pd;
-	public List<Dipartimento> listDep;
-	public List<CorsoLaurea> listCorLaurea;
-	Dipartimento departSelected;
-	CorsoLaurea corsoLaureaSelected;
-	FindDepartmentsHandler findDepHandler;
-	FindCoursesDegreeHandler findDegHandler;
+public class FindHomeActivity extends Activity implements TextWatcher
+{
+	private Spinner						spinner1;
+	private Spinner						spinner2;
+	public String						departSelectedName	= null;
+	public String						courseSelected		= null;
+	public MultiAutoCompleteTextView	searchTV;
+	public ArrayAdapter<String>			adapter;
+	public static ProgressDialog		pd;
+	public List<Dipartimento>			listDep;
+	public List<CorsoLaurea>			listCorLaurea;
+	Dipartimento						departSelected;
+	CorsoLaurea							corsoLaureaSelected;
+	FindDepartmentsHandler				findDepHandler;
+	FindCoursesDegreeHandler			findDegHandler;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_home);
 		ActionBar ab = getActionBar();
@@ -65,16 +67,17 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialList);
 
-		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(getApplicationContext(),
-				spinner1).execute();
+		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(
+				getApplicationContext(), spinner1).execute();
 
-		//pd.dismiss();
+		// pd.dismiss();
 
-		spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+		{
 			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
+					int pos, long id)
+			{
 
-				
 				new ProgressDialog(FindHomeActivity.this);
 				pd = ProgressDialog.show(FindHomeActivity.this,
 						"Lista dei corsi di laurea", "Caricamento...");
@@ -83,17 +86,22 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 
 				departSelected = new Dipartimento();
 				listDep = new ArrayList<Dipartimento>();
-				
-				try {
+
+				try
+				{
 					listDep = findDepHandler.get();
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExecutionException e1) {
+				}
+				catch (InterruptedException e1)
+				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+				catch (ExecutionException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				departSelected = listDep.get(pos);
 
 				// Create an ArrayAdapter using the string array and a default
@@ -106,30 +114,38 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 						getApplicationContext(), spinner2, departSelected)
 						.execute();
 
-				//pd.dismiss();
+				// pd.dismiss();
 
 			}
 
-			public void onNothingSelected(AdapterView<?> parent) {
+			public void onNothingSelected(AdapterView<?> parent)
+			{
 			}
 		});
 
 		// listener spinner corso laurea
-		spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+		{
 			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
+					int pos, long id)
+			{
 
 				courseSelected = parent.getItemAtPosition(pos).toString();
 
 				corsoLaureaSelected = new CorsoLaurea();
 				listCorLaurea = new ArrayList<CorsoLaurea>();
-				
-				try {
+
+				try
+				{
 					listCorLaurea = findDegHandler.get();
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (ExecutionException e) {
+				}
+				catch (ExecutionException e)
+				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -138,7 +154,8 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+			public void onNothingSelected(AdapterView<?> arg0)
+			{
 				// TODO Auto-generated method stub
 
 			}
@@ -146,63 +163,74 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 
 		searchTV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 		searchTV.addTextChangedListener(FindHomeActivity.this);
-		/*adapter = new ArrayAdapter<String>(FindHomeActivity.this,
-				android.R.layout.simple_dropdown_item_1line,
-				R.array.drop_down_spinner_singlecourses_IT);
-
-		searchTV.setAdapter(adapter);*/
+		/*
+		 * adapter = new ArrayAdapter<String>(FindHomeActivity.this,
+		 * android.R.layout.simple_dropdown_item_1line,
+		 * R.array.drop_down_spinner_singlecourses_IT);
+		 * 
+		 * searchTV.setAdapter(adapter);
+		 */
 
 		pd.dismiss();
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.search_home, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent intentHome = new Intent(FindHomeActivity.this,
-					MyUniActivity.class);
-			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentHome);
-			return true;
-		case R.id.itemSearchCourses:
-			Intent intentSearch = new Intent(FindHomeActivity.this,
-					ResultSearchedActivity.class);
-			intentSearch.putExtra("department", /* departSelectedName.toString() */
-					departSelected);
-			intentSearch.putExtra("courseDegree", /* courseSelected.toString() */
-					corsoLaureaSelected);
-			MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
-			intentSearch.putExtra("course", textV.getText().toString());
-			startActivity(intentSearch);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+			case android.R.id.home:
+				Intent intentHome = new Intent(FindHomeActivity.this,
+						MyUniActivity.class);
+				intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intentHome);
+				return true;
+			case R.id.itemSearchCourses:
+				Intent intentSearch = new Intent(FindHomeActivity.this,
+						ResultSearchedActivity.class);
+				intentSearch.putExtra("department", /*
+													 * departSelectedName.toString
+													 * ()
+													 */
+						departSelected);
+				intentSearch.putExtra("courseDegree", /* courseSelected.toString() */
+						corsoLaureaSelected);
+				MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
+				intentSearch.putExtra("course", textV.getText().toString());
+				startActivity(intentSearch);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 
 		}
 	}
 
 	@Override
-	public void afterTextChanged(Editable arg0) {
+	public void afterTextChanged(Editable arg0)
+	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
-			int after) {
+			int after)
+	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
+	public void onTextChanged(CharSequence s, int start, int before, int count)
+	{
 		// TODO Auto-generated method stub
 		TextView textSearch = (TextView) findViewById(R.id.textViewLabelCerca);
 		TextView textSearching = (TextView) findViewById(R.id.textViewLabelCercando);

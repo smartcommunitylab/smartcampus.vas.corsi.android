@@ -12,10 +12,12 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class CorsiFragment extends SherlockFragment {
+public class CorsiFragment extends SherlockFragment
+{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_corsi,
 				container, false);
@@ -23,7 +25,8 @@ public class CorsiFragment extends SherlockFragment {
 		return view;
 	}
 
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
@@ -35,10 +38,12 @@ public class CorsiFragment extends SherlockFragment {
 		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
 
 		int i = 0;
-		for (String s : corsi) {
+		for (String s : corsi)
+		{
 			items[i++] = new TitledItem("Corsi da libretto", s);
 		}
-		for (String s : corsiInt) {
+		for (String s : corsiInt)
+		{
 			items[i++] = new TitledItem("Corsi di interesse", s);
 		}
 
@@ -47,11 +52,13 @@ public class CorsiFragment extends SherlockFragment {
 				R.id.listViewCorsi);
 		listView.setAdapter(adapter);
 
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+		listView.setOnItemClickListener(new ListView.OnItemClickListener()
+		{
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+					long arg3)
+			{
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
 				getActivity().invalidateOptionsMenu();

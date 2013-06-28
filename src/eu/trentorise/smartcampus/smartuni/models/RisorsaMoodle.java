@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-public class RisorsaMoodle extends Risorsa {
+public class RisorsaMoodle extends Risorsa
+{
 
-	
 }

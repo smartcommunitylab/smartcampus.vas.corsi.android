@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import smartcampus.android.template.standalone.FindHomeActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -21,31 +20,35 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
 public class FindDepartmentsHandler extends
-		AsyncTask<Void, Void, List<Dipartimento>> {
+		AsyncTask<Void, Void, List<Dipartimento>>
+{
 
-	private ProtocolCarrier mProtocolCarrier;
-	public Context context;
-	String body;
-	Spinner spinnerDepartments;
-	List<Dipartimento> listDepartments = new ArrayList<Dipartimento>();
-	ProgressDialog pd;
+	private ProtocolCarrier	mProtocolCarrier;
+	public Context			context;
+	String					body;
+	Spinner					spinnerDepartments;
+	List<Dipartimento>		listDepartments	= new ArrayList<Dipartimento>();
+	ProgressDialog			pd;
 
 	@Override
-	protected void onPreExecute() {
+	protected void onPreExecute()
+	{
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	public FindDepartmentsHandler(Context applicationContext,
-			Spinner spinnerDepartments) {
+			Spinner spinnerDepartments)
+	{
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.spinnerDepartments = spinnerDepartments;
 	}
 
 	@Override
-	protected List<Dipartimento> doInBackground(Void... params) {
+	protected List<Dipartimento> doInBackground(Void... params)
+	{
 		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -57,24 +60,34 @@ public class FindDepartmentsHandler extends
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try {
+		try
+		{
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200) {
+			if (response.getHttpStatus() == 200)
+			{
 
 				body = response.getBody();
 
-			} else {
+			}
+			else
+			{
 				return null;
 			}
-		} catch (ConnectionException e) {
+		}
+		catch (ConnectionException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ProtocolException e) {
+		}
+		catch (ProtocolException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SecurityException e) {
+		}
+		catch (SecurityException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -91,13 +104,15 @@ public class FindDepartmentsHandler extends
 	}
 
 	@Override
-	protected void onPostExecute(List<Dipartimento> result) {
+	protected void onPostExecute(List<Dipartimento> result)
+	{
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		ArrayList<String> listStringDepartments = new ArrayList<String>();
 
-		for (Dipartimento d : result) {
+		for (Dipartimento d : result)
+		{
 			listStringDepartments.add(d.getNome());
 		}
 

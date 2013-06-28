@@ -3,7 +3,6 @@ package smartcampus.android.template.standalone;
 import java.util.Date;
 
 import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,17 +14,20 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class OverviewFilterFragment extends SherlockFragment {
+public class OverviewFilterFragment extends SherlockFragment
+{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
 				container, false);
 		return view;
 	}
 
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
@@ -33,7 +35,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 		EventItem[] items = new EventItem[events.length];
 
 		int i = 0;
-		for (String s : events) {
+		for (String s : events)
+		{
 			String[] itms = s.split(",");
 			@SuppressWarnings("deprecation")
 			Date d = new Date(Date.parse(itms[0]));
@@ -46,11 +49,13 @@ public class OverviewFilterFragment extends SherlockFragment {
 		ListView listView = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewEventi);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+		listView.setOnItemClickListener(new ListView.OnItemClickListener()
+		{
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+					long arg3)
+			{
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 				getActivity().invalidateOptionsMenu();

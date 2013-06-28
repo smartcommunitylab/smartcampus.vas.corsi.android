@@ -3,27 +3,27 @@ package smartcampus.android.template.standalone;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.database.MatrixCursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 
-public class AddRateActivity extends FragmentActivity {
+public class AddRateActivity extends FragmentActivity
+{
 
-	ExpandableListView list;
-	AdapterFeedbackList mAdapter;
-	ArrayList<RatingRowGroup> ratings;
+	ExpandableListView			list;
+	AdapterFeedbackList			mAdapter;
+	ArrayList<RatingRowGroup>	ratings;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		// View view = findViewById(R.layout.activity_add_rating);
@@ -52,18 +52,23 @@ public class AddRateActivity extends FragmentActivity {
 		list.setAdapter(mAdapter);
 		list.setGroupIndicator(null);
 		list.expandGroup(0);
-		list.setOnGroupClickListener(new OnGroupClickListener() {
+		list.setOnGroupClickListener(new OnGroupClickListener()
+		{
 
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
+					int groupPosition, long id)
+			{
 				int count = mAdapter.getGroupCount();
 
-				if (parent.isGroupExpanded(groupPosition)) {
+				if (parent.isGroupExpanded(groupPosition))
+				{
 
-					for (int i = 0; i < count; i++) {
+					for (int i = 0; i < count; i++)
+					{
 						View elem = parent.getChildAt(i);
-						if (elem != null) {
+						if (elem != null)
+						{
 							elem.setBackgroundColor(getResources().getColor(
 									R.color.white_smartn_theme));
 						}
@@ -71,14 +76,19 @@ public class AddRateActivity extends FragmentActivity {
 
 					parent.collapseGroup(groupPosition);
 
-				} else {
+				}
+				else
+				{
 
-					for (int i = 0; i < count; i++) {
+					for (int i = 0; i < count; i++)
+					{
 						parent.collapseGroup(i);
 
-						if (i != groupPosition) {
+						if (i != groupPosition)
+						{
 							View elem = parent.getChildAt(i);
-							if (elem != null) {
+							if (elem != null)
+							{
 								elem.setBackgroundColor(getResources()
 										.getColor(R.color.white_smartn_theme));
 							}
@@ -87,7 +97,8 @@ public class AddRateActivity extends FragmentActivity {
 
 					parent.expandGroup(groupPosition, true);
 					View elem = parent.getChildAt(groupPosition);
-					if (elem != null) {
+					if (elem != null)
+					{
 						elem.setBackgroundColor(getResources().getColor(
 								R.color.pressed_smartn_theme));
 					}
@@ -98,11 +109,13 @@ public class AddRateActivity extends FragmentActivity {
 
 		});
 
-		list.setOnChildClickListener(new OnChildClickListener() {
+		list.setOnChildClickListener(new OnChildClickListener()
+		{
 
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
-					int groupPosition, int childPosition, long id) {
+					int groupPosition, int childPosition, long id)
+			{
 				// TODO Auto-generated method stub
 
 				return true;
@@ -110,9 +123,11 @@ public class AddRateActivity extends FragmentActivity {
 		});
 
 		findViewById(R.id.button_ok_rate).setOnClickListener(
-				new OnClickListener() {
+				new OnClickListener()
+				{
 					@Override
-					public void onClick(View v) {
+					public void onClick(View v)
+					{
 						Intent intent = new Intent();
 						intent.putExtra("Rating", ratings);
 						Toast.makeText(getApplicationContext(),
@@ -120,17 +135,20 @@ public class AddRateActivity extends FragmentActivity {
 						finish();
 					}
 				});
-		
+
 		findViewById(R.id.button_annulla_rate).setOnClickListener(
-				new OnClickListener() {
+				new OnClickListener()
+				{
 					@Override
-					public void onClick(View v) {
+					public void onClick(View v)
+					{
 						finish();
-						}
+					}
 				});
 	}
 
-	private void setRatingContexts() {
+	private void setRatingContexts()
+	{
 
 		// CONTENUTI
 		RatingRowGroup rrg = new RatingRowGroup();
@@ -167,7 +185,6 @@ public class AddRateActivity extends FragmentActivity {
 		rrg.setExplainContext(getResources().getString(
 				R.string.rating_contextExplain_materiali));
 		ratings.add(rrg);
-
 
 		// Esame
 		rrg = new RatingRowGroup();

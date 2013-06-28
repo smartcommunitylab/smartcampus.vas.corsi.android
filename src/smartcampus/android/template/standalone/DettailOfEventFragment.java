@@ -13,14 +13,16 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 
-public class DettailOfEventFragment extends SherlockFragment {
+public class DettailOfEventFragment extends SherlockFragment
+{
 
-	public Evento eventSelected = null;
-	public View view = null;
+	public Evento	eventSelected	= null;
+	public View		view			= null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
 		view = inflater.inflate(R.layout.fragment_detail_of_event, container,
 				false);
@@ -32,7 +34,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 	}
 
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
@@ -62,21 +65,18 @@ public class DettailOfEventFragment extends SherlockFragment {
 										0,
 										eventSelected.getStart().toString()
 												.length() - 3));
-		
-		
-		
-		TextView tvDescEvent = (TextView) view.findViewById(R.id.textDescriptionEvent);
+
+		TextView tvDescEvent = (TextView) view
+				.findViewById(R.id.textDescriptionEvent);
 		tvDescEvent.setText(eventSelected.getDescrizione());
-		
-		
+
 		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAulaEvent);
 		tvAulaEvent.setText(eventSelected.getRoom());
 
-		
-		TextView tvLocationEvent = (TextView) view.findViewById(R.id.textLocation);
+		TextView tvLocationEvent = (TextView) view
+				.findViewById(R.id.textLocation);
 		tvLocationEvent.setText(eventSelected.getEvent_location());
-		
-		
+
 		super.onStart();
 
 	}

@@ -8,24 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 // in EventsListingFragment
-public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
+public class EventAdapter extends ArrayAdapter<EventItem4Adapter>
+{
 
-	private Context context;
-	private int layoutResourceId;
+	private Context	context;
+	private int		layoutResourceId;
 
-	public EventAdapter(Context context, EventItem4Adapter[] arr) {
+	public EventAdapter(Context context, EventItem4Adapter[] arr)
+	{
 		super(context, R.layout.event_row, arr);
 		this.context = context;
 		this.layoutResourceId = R.layout.event_row;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent)
+	{
 
 		View row = convertView;
 		EventItem4Adapter item = getItem(position);
 
-		if (row == null) {
+		if (row == null)
+		{
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(layoutResourceId, parent, false);
@@ -36,12 +40,12 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		TextView description = (TextView) row
 				.findViewById(R.id.description_ev_text);
 		TextView ora = (TextView) row.findViewById(R.id.time_ev_edit);
-		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);/////////////////////
+		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);// ///////////////////
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
-		ora.setText(item.getOra()); 
-		room.setText("Aula: "+item.getRoom());///////////////////////////
+		ora.setText(item.getOra());
+		room.setText("Aula: " + item.getRoom());// /////////////////////////
 		content.setPadding(
 				10,
 				8,
@@ -50,16 +54,23 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 
 		description.setPadding(20, 0, 0, (int) context.getResources()
 				.getDimension(R.dimen.adpt_activity_vertical_margin));
-		room.setPadding(20, 0, 0, (int) context.getResources()
-				.getDimension(R.dimen.adpt_activity_vertical_margin));
+		room.setPadding(
+				20,
+				0,
+				0,
+				(int) context.getResources().getDimension(
+						R.dimen.adpt_activity_vertical_margin));
 		ora.setPadding(0, 0, 10, 0);
 		EventItem4Adapter prev = null;
 		if (position > 0)
 			prev = getItem(position - 1);
 
-		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
+		if (prev == null || !(prev.getTitle().equals(item.getTitle())))
+		{
 			title.setVisibility(View.VISIBLE);
-		} else {
+		}
+		else
+		{
 			title.setVisibility(View.GONE);
 		}
 		return row;

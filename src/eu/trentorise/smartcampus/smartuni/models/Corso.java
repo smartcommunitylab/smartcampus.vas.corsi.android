@@ -2,79 +2,89 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 import java.util.Date;
 
-
-public class Corso extends CorsoLite {
-
-
+public class Corso extends CorsoLite
+{
 
 	// data di inizio del corso
-	private Date data_inizio;
+	private Date	data_inizio;
 
 	// data di inizio del corso
-	private long id_dipartimento;
+	private long	id_dipartimento;
 
 	// data di fine del corso
-	private Date data_fine;
+	private Date	data_fine;
 
 	// descrizione del corso
-	private String descrizione;
+	private String	descrizione;
 
 	// valutazione media di tutti gli UtenteCorsi
-	private float valutazione_media;
+	private float	valutazione_media;
 
 	// seguo o non seguo il corso
-	private boolean seguito;
+	private boolean	seguito;
 
-
-	public Corso() {
+	public Corso()
+	{
 
 	}
 
-	public Date getData_inizio() {
+	public Date getData_inizio()
+	{
 		return data_inizio;
 	}
 
-	public void setData_inizio(Date data_inizio) {
+	public void setData_inizio(Date data_inizio)
+	{
 		this.data_inizio = data_inizio;
 	}
 
-	public Date getData_fine() {
+	public Date getData_fine()
+	{
 		return data_fine;
 	}
 
-	public void setData_fine(Date data_fine) {
+	public void setData_fine(Date data_fine)
+	{
 		this.data_fine = data_fine;
 	}
 
-	public String getDescrizione() {
+	public String getDescrizione()
+	{
 		return descrizione;
 	}
 
-	public void setDescrizione(String descrizione) {
+	public void setDescrizione(String descrizione)
+	{
 		this.descrizione = descrizione;
 	}
 
-	public float getValutazione_media() {
+	public float getValutazione_media()
+	{
 		return valutazione_media;
 	}
 
-	public void setValutazione_media(float valutazione_media) {
+	public void setValutazione_media(float valutazione_media)
+	{
 		this.valutazione_media = valutazione_media;
 	}
 
-	public boolean isSeguito() {
+	public boolean isSeguito()
+	{
 		return seguito;
 	}
 
-	public void setSeguito(boolean seguito) {
+	public void setSeguito(boolean seguito)
+	{
 		this.seguito = seguito;
 	}
 
-	public long getId_dipartimento() {
+	public long getId_dipartimento()
+	{
 		return id_dipartimento;
 	}
 
-	public void setId_dipartimento(long id_dipartimento) {
+	public void setId_dipartimento(long id_dipartimento)
+	{
 		this.id_dipartimento = id_dipartimento;
 	}
 

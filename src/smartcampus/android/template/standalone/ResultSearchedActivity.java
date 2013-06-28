@@ -21,20 +21,22 @@ import eu.trentorise.smartcampus.smartuni.models.CourseLite;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
 
-public class ResultSearchedActivity extends Activity {
+public class ResultSearchedActivity extends Activity
+{
 
-	public List<CourseLite> courses;
-	public ArrayList<String> coursesFiltered;
-	String department;
-	String degree;
-	String course;
-	public static ProgressDialog pd;
-	public Dipartimento depSelected;
-	public CorsoLaurea courseDegreeSelected;
-	List<CorsoLite> listCourses;
+	public List<CourseLite>			courses;
+	public ArrayList<String>		coursesFiltered;
+	String							department;
+	String							degree;
+	String							course;
+	public static ProgressDialog	pd;
+	public Dipartimento				depSelected;
+	public CorsoLaurea				courseDegreeSelected;
+	List<CorsoLite>					listCourses;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result_searched);
 		ActionBar ab = getActionBar();
@@ -43,48 +45,57 @@ public class ResultSearchedActivity extends Activity {
 
 		Intent i = getIntent();
 		depSelected = (Dipartimento) i.getSerializableExtra("department");
-		courseDegreeSelected = (CorsoLaurea) i.getSerializableExtra("courseDegree");
+		courseDegreeSelected = (CorsoLaurea) i
+				.getSerializableExtra("courseDegree");
 		department = i.getStringExtra("department");
 		degree = i.getStringExtra("courseDegree");
 		course = i.getStringExtra("course").toLowerCase();
 
 		new ProgressDialog(ResultSearchedActivity.this);
-		pd = ProgressDialog.show(
-				ResultSearchedActivity.this, "Risultati della ricerca",
-				"Caricamento dei corsi...");
+		pd = ProgressDialog.show(ResultSearchedActivity.this,
+				"Risultati della ricerca", "Caricamento dei corsi...");
 
 		TextView tv = (TextView) findViewById(R.id.textViewDatetimeRow);
 		ListView listView = (ListView) findViewById(R.id.listView1);
 
 		// get data from web service
-		try {
-			listCourses = new CoursesHandlerLite(getApplicationContext(), depSelected, courseDegreeSelected,
-					course, listView, tv).execute().get();
-		} catch (InterruptedException e) {
+		try
+		{
+			listCourses = new CoursesHandlerLite(getApplicationContext(),
+					depSelected, courseDegreeSelected, course, listView, tv)
+					.execute().get();
+		}
+		catch (InterruptedException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ExecutionException e) {
+		}
+		catch (ExecutionException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+		listView.setOnItemClickListener(new ListView.OnItemClickListener()
+		{
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) { // TODO Auto-generated method stub String
+					long arg3)
+			{ // TODO Auto-generated method stub String
 				String courseSelectedName = (String) arg0
 						.getItemAtPosition(arg2);
 				Intent i = new Intent(ResultSearchedActivity.this,
 						FindHomeCourseActivity.class);
 
 				CorsoLite corsoSelezionato = new CorsoLite();
-				
+
 				corsoSelezionato = listCourses.get(arg2);
-				
+
 				i.putExtra("courseSelected", corsoSelezionato);
 				i.putExtra("courseSelectedName", courseSelectedName);
-				i.putExtra("courseSelectedId", CoursesHandlerLite.getIDCourseSelected(arg2));
+				i.putExtra("courseSelectedId",
+						CoursesHandlerLite.getIDCourseSelected(arg2));
 				startActivity(i);
 			}
 
@@ -92,23 +103,26 @@ public class ResultSearchedActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.result_searched, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent intentHome = new Intent(ResultSearchedActivity.this,
-					FindHomeActivity.class);
-			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentHome);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+			case android.R.id.home:
+				Intent intentHome = new Intent(ResultSearchedActivity.this,
+						FindHomeActivity.class);
+				intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intentHome);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 
 		}
 	}

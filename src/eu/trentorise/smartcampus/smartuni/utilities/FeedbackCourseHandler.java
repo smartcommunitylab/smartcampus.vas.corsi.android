@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
-
 import java.util.List;
 
 import smartcampus.android.template.standalone.FindHomeCourseActivity;
@@ -18,32 +17,32 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Commento;
-import eu.trentorise.smartcampus.smartuni.models.Corso;
-import eu.trentorise.smartcampus.smartuni.models.Course;
 
-public class FeedbackCourseHandler extends AsyncTask<Void, Void, List<Commento>> {
+public class FeedbackCourseHandler extends
+		AsyncTask<Void, Void, List<Commento>>
+{
 
-	private ProtocolCarrier mProtocolCarrier;
-	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
-	String body;
-	long idCourse;
-	TextView tvCourseName;
-	RatingBar ratingAverage;
-	TextView descriptionCourse;
-	ExpandableListView listComments;
+	private ProtocolCarrier	mProtocolCarrier;
+	public Context			context;
+	public String			appToken	= "test smartcampus";
+	public String			authToken	= "aee58a92-d42d-42e8-b55e-12e4289586fc";
+	String					body;
+	long					idCourse;
+	TextView				tvCourseName;
+	RatingBar				ratingAverage;
+	TextView				descriptionCourse;
+	ExpandableListView		listComments;
 
-	public FeedbackCourseHandler(Context applicationContext, long idCourse) {
+	public FeedbackCourseHandler(Context applicationContext, long idCourse)
+	{
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 	}
 
+	private List<Commento> getFullFeedbackById()
+	{
 
-	private List<Commento> getFullFeedbackById() {
-
-		mProtocolCarrier = new ProtocolCarrier(context,
-				SmartUniDataWS.TOKEN_NAME);
+		mProtocolCarrier = new ProtocolCarrier(context, SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
@@ -51,24 +50,34 @@ public class FeedbackCourseHandler extends AsyncTask<Void, Void, List<Commento>>
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try {
+		try
+		{
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200) {
+			if (response.getHttpStatus() == 200)
+			{
 
 				body = response.getBody();
 
-			} else {
+			}
+			else
+			{
 				return null;
 			}
-		} catch (ConnectionException e) {
+		}
+		catch (ConnectionException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ProtocolException e) {
+		}
+		catch (ProtocolException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SecurityException e) {
+		}
+		catch (SecurityException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -77,31 +86,33 @@ public class FeedbackCourseHandler extends AsyncTask<Void, Void, List<Commento>>
 	}
 
 	@Override
-	protected void onPreExecute() {
+	protected void onPreExecute()
+	{
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
-	protected void onPostExecute(List<Commento> commenti) {
+	protected void onPostExecute(List<Commento> commenti)
+	{
 		// TODO Auto-generated method stub
 		super.onPostExecute(commenti);
 
 		FindHomeCourseActivity.pd.dismiss();
 
-		//loadDataLayout(course);
+		// loadDataLayout(course);
 
 	}
 
-
-
-	private void setDataCourse(Commento course) {
+	private void setDataCourse(Commento course)
+	{
 
 	}
 
 	@Override
-	protected List<Commento> doInBackground(Void... params) {
+	protected List<Commento> doInBackground(Void... params)
+	{
 		// TODO Auto-generated method stub
 		return getFullFeedbackById();
 	}

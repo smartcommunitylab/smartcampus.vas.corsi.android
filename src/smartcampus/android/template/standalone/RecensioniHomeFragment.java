@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class RecensioniHomeFragment extends SherlockFragment {
+public class RecensioniHomeFragment extends SherlockFragment
+{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_find_recensioni, container, false);
+		View view = inflater.inflate(R.layout.fragment_find_recensioni,
+				container, false);
 		// do your view initialization here
 
-		
 		return view;
 	}
 }

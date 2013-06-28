@@ -9,24 +9,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 // in EventsListingFragment
-public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
+public class MaterialAdapter extends ArrayAdapter<MaterialItem>
+{
 
-	private Context context;
-	private int layoutResourceId;
+	private Context	context;
+	private int		layoutResourceId;
 
-	public MaterialAdapter(Context context, MaterialItem[] arr) {
+	public MaterialAdapter(Context context, MaterialItem[] arr)
+	{
 		super(context, R.layout.material_row, arr);
 		this.context = context;
 		this.layoutResourceId = R.layout.material_row;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent)
+	{
 
 		View row = convertView;
 		MaterialItem item = getItem(position);
 
-		if (row == null) {
+		if (row == null)
+		{
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(layoutResourceId, parent, false);
@@ -35,11 +39,11 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		TextView title = (TextView) row.findViewById(R.id.title_text);
 		TextView content = (TextView) row.findViewById(R.id.item_text);
 		ImageView icon = (ImageView) row.findViewById(R.id.item_view);
-		
+
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		icon.setImageResource(item.getIcon());
-		
+
 		content.setPadding(
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin),
@@ -53,9 +57,12 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		if (position > 0)
 			prev = getItem(position - 1);
 
-		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
+		if (prev == null || !(prev.getTitle().equals(item.getTitle())))
+		{
 			title.setVisibility(View.VISIBLE);
-		} else {
+		}
+		else
+		{
 			title.setVisibility(View.GONE);
 		}
 		// row.setPadding(

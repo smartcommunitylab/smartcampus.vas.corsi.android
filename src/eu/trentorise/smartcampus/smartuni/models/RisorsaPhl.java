@@ -2,25 +2,24 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
-public class RisorsaPhl extends Risorsa 
+public class RisorsaPhl extends Risorsa
 {
-	private String name;
-	private boolean isDirectory;
-	private String url;
-		
+	private String	name;
+	private boolean	isDirectory;
+	private String	url;
+
 	@JsonProperty("name")
 	public String getName()
 	{
 		return name;
 	}
-	
+
 	@JsonProperty("name")
 	public void setName(String name)
 	{
-		this.name = name; 
+		this.name = name;
 	}
-	
+
 	@JsonProperty("url")
 	public String getUrl()
 	{
