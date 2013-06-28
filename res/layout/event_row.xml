@@ -49,12 +49,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:cursorVisible="false"
+                android:textAppearance="@android:style/TextAppearance.Medium"
                 android:focusableInTouchMode="false"
                 android:gravity="center" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/description_ev_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="@color/sc_dark_gray" />
+
+        <!-- prova -->
+
+        <TextView
+            android:id="@+id/room_ev_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

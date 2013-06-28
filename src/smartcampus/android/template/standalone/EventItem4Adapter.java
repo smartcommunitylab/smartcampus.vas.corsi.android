@@ -5,14 +5,25 @@ public class EventItem4Adapter {
 	private String content;
 	private String description;
 	private String ora;
+	private String room;///prova
 
 	public EventItem4Adapter() {
 		this.title = null;
 		this.content = null;
 		this.description = null;
 		this.ora = null;
+		this.room = null; /////prova
 	}
 
+	public EventItem4Adapter(String title, String content, String description, String ora, String room) {
+		super();
+		this.title = title;
+		this.content = content;;
+		this.description = description;
+		this.ora = ora;
+		this.room = room; ///// prova
+	}
+	
 	public EventItem4Adapter(String title, String content, String description, String ora) {
 		super();
 		this.title = title;
@@ -51,6 +62,14 @@ public class EventItem4Adapter {
 
 	public void setOra(String ora) {
 		this.ora = ora;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
 	}
 	
 	

@@ -8,7 +8,17 @@ public class AdptDetailedEvent {
 	private String name;
 	private String description;
 	private String ora;
+	private String room;///prova
 	
+	public AdptDetailedEvent(Date date, String name, String description, String ora, String room) {
+	super();
+		this.date = date;
+		this.name = name;
+		this.description = description;
+		this.ora = ora;
+		this.room = room; ///// prova
+	}
+
 	public AdptDetailedEvent(Date date, String name, String description, String ora) {
 	super();
 		this.date = date;
@@ -17,6 +27,7 @@ public class AdptDetailedEvent {
 		this.ora = ora;
 	}
 
+	
 	public Date getDate() {
 		return date;
 	}
@@ -46,5 +57,12 @@ public class AdptDetailedEvent {
 		this.ora = ora;
 	}
 	
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
 	
 }

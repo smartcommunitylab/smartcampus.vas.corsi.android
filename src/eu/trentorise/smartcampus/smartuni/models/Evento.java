@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
 import java.sql.Time;
+import java.util.Date;
 
 
 public class Evento {
@@ -23,6 +24,8 @@ public class Evento {
 
 	// the room where the place takes places
 	private String room;
+	
+	private Date data;
 
 	// the description of the event
 	private String descrizione;
@@ -134,6 +137,14 @@ public class Evento {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+	
+	public Date getData() {
+		return data;
+	}
+	
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 }

@@ -5,7 +5,7 @@ public final class SmartUniDataWS {
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
 	// public static final String URL_WS_SMARTUNI =
 	// "http://unicorsi.app.smartcampuslab.it";
-	public static final String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc";
+	public static String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	public static final String TOKEN_NAME = "test smartcampus";
 
 	// Notices

@@ -31,6 +31,12 @@ public class EventItem extends EventItem4Adapter {
 	
 	@Override
 	public String getOra() {
-		return object.getOra();
+		return object.getOra().substring(0, object.getOra().length()-3);
+	}
+	
+	@Override
+	public String getRoom() {
+		// TODO Auto-generated method stub
+		return object.getRoom();
 	}
 }

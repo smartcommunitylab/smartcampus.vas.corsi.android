@@ -1,6 +1,8 @@
 package smartcampus.android.template.standalone;
 
+import smartcampus.android.template.standalone.MyUniActivity.LoadUserDataFromProfileServiceTask;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,14 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import eu.trentorise.smartcampus.ac.SCAccessProvider;
+import eu.trentorise.smartcampus.ac.UserRegistration;
+import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
+import eu.trentorise.smartcampus.ac.model.UserData;
+import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.storage.model.UserAccount;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
 	
@@ -31,6 +41,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	
 	private MenuKind agendaState;
 	private ChildActivity mystate;
+	private AMSCAccessProvider mAccessProvider;
+
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +77,12 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 						new TabListener<CorsiFragment>(this, "tab2",
 								CorsiFragment.class));
 		ab.addTab(tab2);
+		
+		
+		
+		
+		
+		
 	}
 	
 	@Override

@@ -42,6 +42,7 @@ import eu.trentorise.smartcampus.ac.model.UserData;
 import eu.trentorise.smartcampus.profileservice.ProfileService;
 import eu.trentorise.smartcampus.profileservice.ProfileServiceException;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
 /**
  * Sample Android activity. Demonstrates also the use of authentication mechanism

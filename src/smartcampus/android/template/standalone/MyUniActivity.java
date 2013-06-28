@@ -25,6 +25,7 @@ import eu.trentorise.smartcampus.ac.model.UserData;
 import eu.trentorise.smartcampus.profileservice.ProfileService;
 import eu.trentorise.smartcampus.profileservice.ProfileServiceException;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
 public class MyUniActivity extends Activity {
 
@@ -63,6 +64,7 @@ public class MyUniActivity extends Activity {
 
 		if (mToken != null) {
 			// access the user data from the AC service remotely
+			SmartUniDataWS.TOKEN = mToken;
 			new LoadUserDataFromACServiceTask().execute(mToken);
 			// access the basic user profile data remotely
 			new LoadUserDataFromProfileServiceTask().execute(mToken);

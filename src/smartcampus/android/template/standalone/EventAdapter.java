@@ -36,10 +36,12 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		TextView description = (TextView) row
 				.findViewById(R.id.description_ev_text);
 		TextView ora = (TextView) row.findViewById(R.id.time_ev_edit);
+		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);/////////////////////
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
-		ora.setText(item.getOra());
+		ora.setText(item.getOra()); 
+		room.setText("Aula: "+item.getRoom());///////////////////////////
 		content.setPadding(
 				10,
 				8,
@@ -47,6 +49,8 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 						R.dimen.activity_horizontal_margin), 0);
 
 		description.setPadding(20, 0, 0, (int) context.getResources()
+				.getDimension(R.dimen.adpt_activity_vertical_margin));
+		room.setPadding(20, 0, 0, (int) context.getResources()
 				.getDimension(R.dimen.adpt_activity_vertical_margin));
 		ora.setPadding(0, 0, 10, 0);
 		EventItem4Adapter prev = null;
