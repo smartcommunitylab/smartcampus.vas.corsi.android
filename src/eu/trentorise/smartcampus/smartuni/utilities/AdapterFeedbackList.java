@@ -25,7 +25,7 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter{
 	@Override
 	 public Object getChild(int groupPosition, int childPosition) {
 	  //ArrayList<DetailInfo> productList = deptList.get(groupPosition).getProductList();
-		return ratings.get(groupPosition).getComment();
+		return ratings.get(groupPosition);
 	 }
 	 
 	 @Override
@@ -39,7 +39,7 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter{
 	   
 	  //DetailInfo detailInfo = (DetailInfo) getChild(groupPosition, childPosition);
 		FeedbackRowGroup inf = new FeedbackRowGroup(); 
-	    inf.setComment((String) getChild(groupPosition, childPosition));
+	    inf = (FeedbackRowGroup) getChild(groupPosition, childPosition);
 	  if (view == null) {
 	   LayoutInflater infalInflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	   view = infalInflater.inflate(R.layout.feedback_list_row_child, null);
