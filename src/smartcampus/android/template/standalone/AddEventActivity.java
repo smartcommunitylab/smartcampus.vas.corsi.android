@@ -4,6 +4,25 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.custom.RequestParam;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
+import eu.trentorise.smartcampus.smartuni.models.Evento;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
+import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.PostEvent;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.storage.model.UserAccount;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,45 +35,35 @@ import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
-import eu.trentorise.smartcampus.smartuni.models.Evento;
-import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
-public class AddEventActivity extends FragmentActivity
-{
-	private int						mYear;
-	private int						mMonth;
-	private int						mDay;
+public class AddEventActivity extends FragmentActivity {
+	private int mYear;
+	private int mMonth;
+	private int mDay;
 
-	private int						hour;
-	private int						minute;
+	private int hour;
+	private int minute;
 
 	// private TextView mDateDisplay;
-	private EditText				mPickDate;
-	private EditText				mPickTime;
-	static final int				DATE_DIALOG_ID	= 0;
-
-	public static ProgressDialog	pd;
-	private Evento					evento			= null;
-	Spinner							coursesSpinner;
-
+	private EditText mPickDate;
+	private EditText mPickTime;
+	static final int DATE_DIALOG_ID = 0;
+	
+	public static ProgressDialog pd;
+	private Evento evento = null;
+	Spinner coursesSpinner;
+	
+	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
 		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
@@ -66,33 +75,49 @@ public class AddEventActivity extends FragmentActivity
 		mMonth = c.get(Calendar.MONTH);
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 		// get the current Time
-		hour = c.get(Calendar.HOUR_OF_DAY);
+		hour = c.get(Calendar.HOUR_OF_DAY);	
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();
-
-		EditText title = (EditText) findViewById(R.id.editTextTitle);
-		EditText description = (EditText) findViewById(R.id.editTextDescription);
-		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
-
+		
+		EditText title = (EditText)findViewById(R.id.editTextTitle);
+		EditText description = (EditText)findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner)findViewById(R.id.spinnerCorsi);
+		
+		
 		new CoursesLoader().execute();
-
-		// new PostEvent(getApplicationContext(), evento).execute();
+		
+		
+	}
+	
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		Button button_ok = (Button)findViewById(R.id.button_ok);
+		
+		button_ok.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new PostEvent(getApplicationContext(), evento).execute();
+			}
+		});
+		
+		
 	}
 
-	public void updateDisplay()
-	{
+	public void updateDisplay() {
 		this.mPickDate.setText(new StringBuilder()
 				// Month is 0 based so add 1
 				.append(mDay).append("-").append(mMonth + 1).append("-")
 				.append(mYear).append(" "));
-		if (minute < 10)
-		{
+		if (minute < 10) {
 			this.mPickTime.setText(new StringBuilder().append(hour)
 					.append(":0").append(minute));
-		}
-		else
-		{
+		} else {
 			this.mPickTime.setText(new StringBuilder().append(hour).append(":")
 					.append(minute));
 
@@ -100,31 +125,26 @@ public class AddEventActivity extends FragmentActivity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.test, menu);
 		return true;
 	}
 
-	public void showDatePickerDialog(View v)
-	{
+	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 
-	public void showTimePickerDialog(View v)
-	{
+	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
-			DatePickerDialog.OnDateSetListener
-	{
+			DatePickerDialog.OnDateSetListener {
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState)
-		{
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
@@ -136,8 +156,7 @@ public class AddEventActivity extends FragmentActivity
 					mDay);
 		}
 
-		public void onDateSet(DatePicker view, int year, int month, int day)
-		{
+		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
 			((EditText) findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
@@ -148,12 +167,10 @@ public class AddEventActivity extends FragmentActivity
 	}
 
 	public class TimePickerFragment extends DialogFragment implements
-			TimePickerDialog.OnTimeSetListener
-	{
+			TimePickerDialog.OnTimeSetListener {
 
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState)
-		{
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			// Use the current time as the default values for the picker
 			final Calendar c = Calendar.getInstance();
 			int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -164,39 +181,34 @@ public class AddEventActivity extends FragmentActivity
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-		{
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
-			if (minute < 10)
-			{
+			if (minute < 10) {
 				((EditText) findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":0" + minute);
-			}
-			else
-			{
+			} else {
 				((EditText) findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":" + minute);
 
 			}
 		}
 	}
+	
+	
+	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>> {
 
-	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>>
-	{
-
-		private ProtocolCarrier	mProtocolCarrier;
-		public Context			context;
-		String					body;
-
+		
+		private ProtocolCarrier mProtocolCarrier;
+		public Context context;
+		String body;
+		
 		@Override
-		protected List<CorsoLite> doInBackground(Void... params)
-		{
+		protected List<CorsoLite> doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			return getFollowingCourses();
 		}
-
-		private List<CorsoLite> getFollowingCourses()
-		{
+		
+		private List<CorsoLite> getFollowingCourses() {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -206,73 +218,62 @@ public class AddEventActivity extends FragmentActivity
 			request.setMethod(Method.GET);
 			BasicProfile bp = new BasicProfile();
 			MessageResponse response;
-			try
-			{
+			try {
 				response = mProtocolCarrier.invokeSync(request,
 						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-				if (response.getHttpStatus() == 200)
-				{
+				if (response.getHttpStatus() == 200) {
 
 					body = response.getBody();
 
-				}
-				else
-				{
+				} else {
 					return null;
 				}
-			}
-			catch (ConnectionException e)
-			{
+			} catch (ConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			catch (ProtocolException e)
-			{
+			} catch (ProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{
+			} catch (SecurityException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			return Utils.convertJSONToObjects(body, CorsoLite.class);
 		}
-
+		
 		@Override
-		protected void onPostExecute(List<CorsoLite> result)
-		{
+		protected void onPostExecute(List<CorsoLite> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-
+			
 			List<String> resultStrings = new ArrayList<String>();
-
-			for (CorsoLite cl : result)
-			{
+			
+			for(CorsoLite cl : result){
 				resultStrings.add(cl.getNome());
 			}
-
+			
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-					AddEventActivity.this,
-					R.layout.list_studymate_row_list_simple, resultStrings);
-
+					AddEventActivity.this, R.layout.list_studymate_row_list_simple,
+					resultStrings);
+			
 			coursesSpinner.setAdapter(adapterInitialList);
 		}
-
+		
 		@Override
-		protected void onPreExecute()
-		{
+		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			new ProgressDialog(AddEventActivity.this);
-			pd = ProgressDialog.show(AddEventActivity.this,
-					"Salvataggio di un nuovo evento", "Caricamento...");
+			pd = ProgressDialog.show(AddEventActivity.this, "Salvataggio di un nuovo evento",
+					"Caricamento...");
 		}
-
+		
+		
+		
 	}
 
 }
