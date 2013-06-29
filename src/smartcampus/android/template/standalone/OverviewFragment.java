@@ -1,5 +1,10 @@
 package smartcampus.android.template.standalone;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -86,8 +91,12 @@ public class OverviewFragment extends SherlockFragment
 		// itms[3]);
 		// items[i++] = new EventItem(e);
 		// }
+		
+		// ordino per data
+		Collections.sort(listaEventi, new CustomComparator());
 
 		EventItem[] listEvItem = new EventItem[listaEventi.size()];
+		
 		int i = 0;
 
 		for (Evento ev : listaEventi)
@@ -96,8 +105,13 @@ public class OverviewFragment extends SherlockFragment
 					ev.getTitolo(), ev.getDescrizione(), ev.getStart()
 							.toString(), ev.getRoom());
 			listEvItem[i++] = new EventItem(e);
+			
 		}
 
+		
+
+		
+		
 		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
 				listEvItem);
 		ListView listView = (ListView) getSherlockActivity().findViewById(
@@ -135,4 +149,35 @@ public class OverviewFragment extends SherlockFragment
 		pd.dismiss();
 
 	}
+	
+	
+	
+//	public static Evento[] EventsSortByDate(List<Evento> arrayEventi) {
+//		
+//		Evento temp = null;
+//		Evento[] ev = new Evento[arrayEventi.size()];
+//	    for (int a=1; a<ev.length; a++) {
+//	        for(int b=0; b<ev.length - a; b++) {
+//	        	
+//	            if (((ev[b].getData()).compareTo((ev[b].getData()))) > 0){
+//	                //swap movies[b] with movies[b+1]
+//	                temp = ev[b];
+//	            }
+//	            ev[b] = ev[b+1];
+//	            ev[b+1] = temp;
+//	        }
+//	    }
+//	    
+//	    return ev;
+//	}
+	
+	
+	
+	public class CustomComparator implements Comparator<Evento>{
+	    public int compare(Evento object1, Evento object2) {
+	        return object1.getData().compareTo(object2.getData());
+	    }
+	}
 }
+	
+
