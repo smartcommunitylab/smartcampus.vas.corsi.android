@@ -43,7 +43,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity
 		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+		setTitle(getResources().getString(R.string.title_activity_my_agenda));
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 

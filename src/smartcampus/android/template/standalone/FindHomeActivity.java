@@ -50,6 +50,8 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
+		setTitle(getResources().getString(R.string.title_activity_find_courses));
+		
 		spinner1 = (Spinner) findViewById(R.id.spinner1);
 		spinner2 = (Spinner) findViewById(R.id.spinner2);
 

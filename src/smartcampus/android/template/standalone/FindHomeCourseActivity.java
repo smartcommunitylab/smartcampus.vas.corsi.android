@@ -44,6 +44,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+		
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -70,6 +71,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 		Intent intent = getIntent();
 		TextView tvCourseName = (TextView) findViewById(R.id.textViewNameCourseHome);
 		courseName = intent.getStringExtra("courseSelectedName");
+		setTitle(courseName);
 		// tvCourseName.setText(courseName);
 		// TextView descriptionCourse = (TextView)
 		// findViewById(R.id.textViewDescriptioonCourse);
