@@ -12,6 +12,9 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.EventsHandler;
+
 public class CorsiFragment extends SherlockFragment
 {
 	@Override
@@ -31,46 +34,18 @@ public class CorsiFragment extends SherlockFragment
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
 
-		getActivity().invalidateOptionsMenu();
-		String[] corsi = getResources().getStringArray(R.array.Corsi);
-		String[] corsiInt = getResources().getStringArray(
-				R.array.CorsiInteresse);
-		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
-
-		int i = 0;
-		for (String s : corsi)
-		{
-			items[i++] = new TitledItem("Corsi da libretto", s);
-		}
-		for (String s : corsiInt)
-		{
-			items[i++] = new TitledItem("Corsi di interesse", s);
-		}
-
-		TitledAdapter adapter = new TitledAdapter(getSherlockActivity(), items);
-		ListView listView = (ListView) getSherlockActivity().findViewById(
+		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
-		listView.setAdapter(adapter);
+		getActivity().invalidateOptionsMenu();
+//		String[] corsi = getResources().getStringArray(R.array.Corsi);
+//		String[] corsiInt = getResources().getStringArray(
+//				R.array.CorsiInteresse);
+//		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
 
-		listView.setOnItemClickListener(new ListView.OnItemClickListener()
-		{
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3)
-			{
-				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
-				getActivity().invalidateOptionsMenu();
-				FragmentTransaction ft = getSherlockActivity()
-						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new OverviewFilterFragment();
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.tabCorsi, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
-			}
-		});
-
+		
+		CoursesHandler handlerPersonalCourses = new CoursesHandler(getActivity().getApplicationContext(), listViewCorsi, getActivity(), getSherlockActivity());
+		handlerPersonalCourses.execute();
+		
+		
 	}
 }
