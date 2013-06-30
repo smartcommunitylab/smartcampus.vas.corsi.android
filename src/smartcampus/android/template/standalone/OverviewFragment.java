@@ -52,7 +52,7 @@ public class OverviewFragment extends SherlockFragment
 		OverviewFragment.pd = ProgressDialog.show(getActivity(),
 				"Lista degli eventi personali", "Caricamento...");
 
-		eventsHandler = new EventsHandler(getActivity().getApplicationContext());
+		eventsHandler = new EventsHandler(getActivity().getApplicationContext(), getActivity());
 		eventsHandler.execute();
 
 	}
@@ -64,20 +64,8 @@ public class OverviewFragment extends SherlockFragment
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		getActivity().invalidateOptionsMenu();
 
-		try
-		{
-			listaEventi = eventsHandler.get();
-		}
-		catch (InterruptedException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		catch (ExecutionException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		
 		// String[] events =
 		// getResources().getStringArray(R.array.NewEventiFuffa);
 		// EventItem[] items = new EventItem[events.length];
@@ -92,57 +80,7 @@ public class OverviewFragment extends SherlockFragment
 		// items[i++] = new EventItem(e);
 		// }
 		
-		// ordino per data
-		Collections.sort(listaEventi, new CustomComparator());
-
-		EventItem[] listEvItem = new EventItem[listaEventi.size()];
 		
-		int i = 0;
-
-		for (Evento ev : listaEventi)
-		{
-			AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
-					ev.getTitolo(), ev.getDescrizione(), ev.getStart()
-							.toString(), ev.getRoom());
-			listEvItem[i++] = new EventItem(e);
-			
-		}
-
-				
-		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
-				listEvItem);
-		ListView listView = (ListView) getSherlockActivity().findViewById(
-				R.id.listViewEventi);
-		listView.setAdapter(adapter);
-
-		listView.setOnItemClickListener(new ListView.OnItemClickListener()
-		{
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3)
-			{
-				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
-				getActivity().invalidateOptionsMenu();
-
-				Evento evento = listaEventi.get(arg2);
-
-				// Pass Data to other Fragment
-				Bundle arguments = new Bundle();
-				arguments.putSerializable("eventSelected", evento);
-				FragmentTransaction ft = getSherlockActivity()
-						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new DettailOfEventFragment();
-				fragment.setArguments(arguments);
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.tabOverview, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
-			}
-		});
-
-		pd.dismiss();
 
 	}
 	
@@ -169,11 +107,7 @@ public class OverviewFragment extends SherlockFragment
 	
 	
 	
-	public class CustomComparator implements Comparator<Evento>{
-	    public int compare(Evento object1, Evento object2) {
-	        return object1.getData().compareTo(object2.getData());
-	    }
-	}
+	
 }
 	
 

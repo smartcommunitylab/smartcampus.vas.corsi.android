@@ -1,12 +1,30 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragment;
+
+import smartcampus.android.template.standalone.AdptDetailedEvent;
+import smartcampus.android.template.standalone.DettailOfEventFragment;
+import smartcampus.android.template.standalone.EventAdapter;
+import smartcampus.android.template.standalone.EventItem;
+import smartcampus.android.template.standalone.MyAgendaActivity;
 import smartcampus.android.template.standalone.OverviewFragment;
+import smartcampus.android.template.standalone.R;
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
 import eu.trentorise.smartcampus.ac.model.UserData;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -28,11 +46,13 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>>{
 	String body;
 	String id_course = null;
 	private AMSCAccessProvider mAccessProvider;
+	FragmentActivity fragment;
+	public static List<Evento> listaEventi;
 	
 	
-	public EventsHandler(Context applicationContext, String id_course) {
+	public EventsHandler(Context applicationContext, FragmentActivity fragment) {
 		this.context = applicationContext;
-		this.id_course = id_course; 
+		this.fragment = fragment;
 	}
 	
 	public EventsHandler(Context applicationContext) {
@@ -127,9 +147,71 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>>{
 
 	}
 	@Override
-	protected void onPostExecute(List<Evento> result) {
+	protected void onPostExecute(final List<Evento> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		
+		
+		// ordino per data
+				Collections.sort(result, new CustomComparator());
+				
+				listaEventi = result;
+
+				EventItem[] listEvItem = new EventItem[result.size()];
+				
+				int i = 0;
+
+				for (Evento ev : result)
+				{
+					AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
+							ev.getTitolo(), ev.getDescrizione(), ev.getStart()
+									.toString(), ev.getRoom());
+					listEvItem[i++] = new EventItem(e);
+					
+				}
+
+						
+				EventAdapter adapter = new EventAdapter(fragment,
+						listEvItem);
+				ListView listView = (ListView) fragment.findViewById(
+						R.id.listViewEventi);
+				listView.setAdapter(adapter);
+
+				listView.setOnItemClickListener(new ListView.OnItemClickListener()
+				{
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+							long arg3)
+					{
+						MyAgendaActivity parent = (MyAgendaActivity) fragment;
+						parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
+						fragment.invalidateOptionsMenu();
+
+						Evento evento = result.get(arg2);
+
+						// Pass Data to other Fragment
+						Bundle arguments = new Bundle();
+						arguments.putSerializable("eventSelected", evento);
+						FragmentTransaction ft = fragment
+								.getSupportFragmentManager().beginTransaction();
+						Fragment fragment = new DettailOfEventFragment();
+						fragment.setArguments(arguments);
+						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+						ft.replace(R.id.tabOverview, fragment);
+						ft.addToBackStack(null);
+						ft.commit();
+					}
+				});
+
+				OverviewFragment.pd.dismiss();
+		
+	}
+	
+	
+	public class CustomComparator implements Comparator<Evento>{
+	    public int compare(Evento object1, Evento object2) {
+	        return object1.getData().compareTo(object2.getData());
+	    }
 	}
 }

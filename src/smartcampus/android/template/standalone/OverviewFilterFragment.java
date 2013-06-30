@@ -19,6 +19,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.EventsHandler;
 
 public class OverviewFilterFragment extends SherlockFragment
 {
@@ -100,7 +101,7 @@ public class OverviewFilterFragment extends SherlockFragment
 		
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 		
-		for(Evento evento : OverviewFragment.listaEventi){
+		for(Evento evento : EventsHandler.listaEventi){
 			if(evento.getCorso().getId().equals(courseSelected.getId())){
 				eventiFiltrati.add(evento);
 			}
