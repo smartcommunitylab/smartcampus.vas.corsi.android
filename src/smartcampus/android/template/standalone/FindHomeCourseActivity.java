@@ -29,11 +29,11 @@ import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 public class FindHomeCourseActivity extends SherlockFragmentActivity
 {
 
-	public static ProgressDialog	pd;
-	public static Corso				courseInfo;
-	public static List<Commento>	feedbackInfoList;
 
-	public CorsoLite				corsoAttuale;
+	public static Corso				courseInfo;
+	public static String courseName;
+
+	public static CorsoLite				corsoAttuale;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -69,7 +69,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 
 		Intent intent = getIntent();
 		TextView tvCourseName = (TextView) findViewById(R.id.textViewNameCourseHome);
-		String courseName = intent.getStringExtra("courseSelectedName");
+		courseName = intent.getStringExtra("courseSelectedName");
 		// tvCourseName.setText(courseName);
 		// TextView descriptionCourse = (TextView)
 		// findViewById(R.id.textViewDescriptioonCourse);
@@ -77,35 +77,19 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 		// (RatingBar)findViewById(R.id.ratingBarCourse);
 		ExpandableListView listComments = (ExpandableListView) findViewById(R.id.expandableListViewFeedback);
 
-		new ProgressDialog(FindHomeCourseActivity.this);
-		pd = ProgressDialog.show(FindHomeCourseActivity.this,
-				"Informazioni del corso di " + courseName, "Caricamento...");
 
 		corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
 		String idCourse = intent.getStringExtra("courseSelectedId");
-		try
-		{
+		
 			/*
 			 * courseInfo = new CourseCompleteDataHandler(
 			 * FindHomeCourseActivity.this,
 			 * corsoAttuale.getId()).execute().get();
 			 */
-			feedbackInfoList = new FeedbackCourseHandler(
-					FindHomeCourseActivity.this, corsoAttuale.getId())
-					.execute().get();
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (ExecutionException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+
 
 	}
 

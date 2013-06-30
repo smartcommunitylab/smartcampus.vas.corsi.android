@@ -3,10 +3,15 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import smartcampus.android.template.standalone.FindHomeCourseActivity;
 import smartcampus.android.template.standalone.R;
 import smartcampus.android.template.standalone.ResultSearchedActivity;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,10 +41,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>>
 	public static ArrayList<CorsoLite>	coursesFiltered;
 	ListView							listView;
 	TextView							tvTitleNotices;
+	Activity currentAct;
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
-			ListView listView, TextView tvTitleNotices)
+			ListView listView, TextView tvTitleNotices, Activity currentAct)
 	{
 		this.context = applicationContext;
 		this.department = department;
@@ -47,6 +53,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>>
 		this.course = course;
 		this.listView = listView;
 		this.tvTitleNotices = tvTitleNotices;
+		this.currentAct = currentAct;
 	}
 
 	// return list of all courses of all departments
@@ -329,13 +336,14 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>>
 	}
 
 	// setto la lista dei corsi e la filtro
-	private void setListCourses(List<CorsoLite> courses)
+	private void setListCourses(final List<CorsoLite> courses)
 	{
 
 		FilterSearched filter = new FilterSearched();
 		coursesFiltered = filter.filterListWithCourseSearched(course, courses);
 
 		ArrayList<String> coursesFiltered_onlyName = new ArrayList<String>();
+		
 		for (int i = 0; i < coursesFiltered.size(); i++)
 		{
 			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).getNome());
@@ -346,6 +354,32 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>>
 				coursesFiltered_onlyName);
 
 		listView.setAdapter(adapterCursesList);
+		
+		
+		
+		listView.setOnItemClickListener(new ListView.OnItemClickListener()
+		{
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3)
+			{ // TODO Auto-generated method stub String
+				String courseSelectedName = (String) arg0
+						.getItemAtPosition(arg2);
+				Intent i = new Intent(context,
+						FindHomeCourseActivity.class);
+
+				CorsoLite corsoSelezionato = new CorsoLite();
+
+				corsoSelezionato = courses.get(arg2);
+
+				i.putExtra("courseSelected", corsoSelezionato);
+				i.putExtra("courseSelectedName", courseSelectedName);
+				i.putExtra("courseSelectedId",getIDCourseSelected(arg2));
+				currentAct.startActivity(i);
+			}
+
+		});
 
 	}
 

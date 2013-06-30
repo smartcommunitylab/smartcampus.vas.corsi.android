@@ -100,13 +100,8 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		case R.id.itemSearchCourses:
 			Intent intentSearch = new Intent(FindHomeActivity.this,
 					ResultSearchedActivity.class);
-			intentSearch.putExtra("department", /*
-												 * departSelectedName.toString
-												 * ()
-												 */
-					departSelected);
-			intentSearch.putExtra("courseDegree", /* courseSelected.toString() */
-					corsoLaureaSelected);
+			intentSearch.putExtra("department", findDepHandler.getDepartSelected());
+			intentSearch.putExtra("courseDegree", FindCoursesDegreeHandler.corsoLaureaSelected);
 			MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 			intentSearch.putExtra("course", textV.getText().toString());
 			startActivity(intentSearch);

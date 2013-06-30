@@ -40,7 +40,7 @@ public class FindDepartmentsHandler extends
 	public static List<Dipartimento> listaDip = null;
 	public String departSelectedName = null;
 	public String courseSelected = null;
-	Dipartimento departSelected;
+	Dipartimento departSelected = null;
 	CorsoLaurea corsoLaureaSelected;
 	public List<Dipartimento> listDep;
 	public List<CorsoLaurea> listCorLaurea;
@@ -127,7 +127,7 @@ public class FindDepartmentsHandler extends
 	}
 
 	@Override
-	protected void onPostExecute(List<Dipartimento> result)
+	protected void onPostExecute(final List<Dipartimento> result)
 	{
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
@@ -160,11 +160,15 @@ public class FindDepartmentsHandler extends
 
 				// do the background process or any work that takes
 				// time to see progreaa dialog
+				
+				
 
 				findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
 						context, spinnerDegree,
 						departSelectedName, parent, pos, currentActivity,
 						FindDepartmentsHandler.this).execute();
+				
+				departSelected = result.get(pos);
 
 				// pd.dismiss();
 
@@ -180,6 +184,10 @@ public class FindDepartmentsHandler extends
 		
 
 		
+	}
+	
+	public Dipartimento getDepartSelected(){
+		return departSelected;
 	}
 	
 

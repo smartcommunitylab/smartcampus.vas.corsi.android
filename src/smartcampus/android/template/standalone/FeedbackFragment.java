@@ -54,9 +54,9 @@ public class FeedbackFragment extends SherlockFragment {
 
 
 		TextView titleCourseFeedback = (TextView)view.findViewById(R.id.textViewTitleFeedbackCourse);
-		titleCourseFeedback.setText(FindHomeCourseActivity.feedbackInfoList.get(0).getCorso().getNome());
+		titleCourseFeedback.setText(FeedbackCourseHandler.feedbackInfoList.get(0).getCorso().getNome());
 
-		List<Commento> comments = FindHomeCourseActivity.feedbackInfoList;
+		List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
 
 		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 

@@ -103,7 +103,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 		// TODO Auto-generated method stub
 		super.onPostExecute(course);
 
-		FindHomeCourseActivity.pd.dismiss();
+		//FindHomeCourseActivity.pd.dismiss();
 
 		// loadDataLayout(course);
 

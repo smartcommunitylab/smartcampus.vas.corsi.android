@@ -42,7 +42,7 @@ public class FindCoursesDegreeHandler extends
 	FindDepartmentsHandler findDepHandler;
 	AdapterView<?> parent;
 	int pos;
-	CorsoLaurea corsoLaureaSelected;
+	public static CorsoLaurea  corsoLaureaSelected = null;
 	public String courseSelected = null;
 	public List<CorsoLaurea> listCorLaurea;
 	FindCoursesDegreeHandler findDegHandler;
@@ -151,14 +151,17 @@ public class FindCoursesDegreeHandler extends
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							View view, int pos, long id) {
-
-						courseSelected = parent.getItemAtPosition(pos)
-								.toString();
+						
 
 						corsoLaureaSelected = new CorsoLaurea();
 
 						corsoLaureaSelected = result.get(pos);
 
+						
+						courseSelected = parent.getItemAtPosition(pos)
+								.toString();
+
+				
 					}
 
 					@Override
@@ -170,6 +173,12 @@ public class FindCoursesDegreeHandler extends
 
 		pd.dismiss();
 
+	}
+	
+	
+	
+	public CorsoLaurea getCorsoLaureaSelected(){
+		return corsoLaureaSelected;
 	}
 
 }

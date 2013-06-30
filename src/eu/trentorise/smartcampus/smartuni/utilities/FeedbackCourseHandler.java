@@ -3,8 +3,12 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 import java.util.List;
 
 import smartcampus.android.template.standalone.FindHomeCourseActivity;
+import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
+import smartcampus.android.template.standalone.R;
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -30,13 +34,18 @@ public class FeedbackCourseHandler extends
 	long					idCourse;
 	TextView				tvCourseName;
 	RatingBar				ratingAverage;
-	TextView				descriptionCourse;
 	ExpandableListView		listComments;
-
-	public FeedbackCourseHandler(Context applicationContext, long idCourse)
+	public static List<Commento>	feedbackInfoList;
+	public Activity act;
+	TextView descriptionCourse;
+	
+	public FeedbackCourseHandler(Context applicationContext, long idCourse, Activity act,RatingBar ratingAverage,TextView descriptionCourse)
 	{
 		this.context = applicationContext;
 		this.idCourse = idCourse;
+		this.act = act;
+		this.ratingAverage = ratingAverage;
+		this.descriptionCourse = descriptionCourse;
 	}
 
 	private List<Commento> getFullFeedbackById()
@@ -99,7 +108,18 @@ public class FeedbackCourseHandler extends
 		// TODO Auto-generated method stub
 		super.onPostExecute(commenti);
 
-		FindHomeCourseActivity.pd.dismiss();
+		feedbackInfoList = commenti;
+
+		
+		act.getActionBar().setTitle(
+				feedbackInfoList.get(0).getCorso()
+						.getNome());
+		ratingAverage.setRating((float) feedbackInfoList
+				.get(0).getCorso().getValutazione_media());
+		descriptionCourse.setText(feedbackInfoList
+				.get(0).getCorso().getDescrizione());
+		
+		HomeCourseDescriptionFragment.pd.dismiss();
 
 		// loadDataLayout(course);
 

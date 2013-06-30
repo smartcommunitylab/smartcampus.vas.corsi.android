@@ -1,5 +1,7 @@
 package smartcampus.android.template.standalone;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,9 +20,16 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
+import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
+
 public class HomeCourseDescriptionFragment extends SherlockFragment
 {
 
+	public static ProgressDialog	pd;
+	public FeedbackCourseHandler feedbackHandler;
+	public Activity act;
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -50,18 +59,22 @@ public class HomeCourseDescriptionFragment extends SherlockFragment
 		// String idCourse = intent.getStringExtra("courseSelectedId");
 		// new CourseCompleteDataHandler(getActivity(), idCourse, tvCourseName,
 		// descriptionCourse,ratingAverage, listComments).execute();
+		new ProgressDialog(getActivity());
+		pd = ProgressDialog.show(getActivity(),
+				"Informazioni del corso di " + FindHomeCourseActivity.courseName, "Caricamento...");
+		
 		TextView descriptionCourse = (TextView) view
 				.findViewById(R.id.textViewDescriptioonCourseHome);
 		final RatingBar ratingAverage = (RatingBar) view
 				.findViewById(R.id.ratingBarCourseAverage);
+		
+		feedbackHandler = (FeedbackCourseHandler) new FeedbackCourseHandler(
+				getActivity(), FindHomeCourseActivity.corsoAttuale.getId(),act, ratingAverage, descriptionCourse)
+				.execute();
+		
 
-		getActivity().getActionBar().setTitle(
-				FindHomeCourseActivity.feedbackInfoList.get(0).getCorso()
-						.getNome());
-		ratingAverage.setRating((float) FindHomeCourseActivity.feedbackInfoList
-				.get(0).getCorso().getValutazione_media());
-		descriptionCourse.setText(FindHomeCourseActivity.feedbackInfoList
-				.get(0).getCorso().getDescrizione());
+
+
 
 		final ListView list = (ListView) view
 				.findViewById(R.id.list_view_expanded);
@@ -164,4 +177,11 @@ public class HomeCourseDescriptionFragment extends SherlockFragment
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		act = activity;
+	}
 }
