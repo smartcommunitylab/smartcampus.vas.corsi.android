@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
+import android.support.v4.os.ParcelableCompat;
+
 public class Evento implements Serializable
 {
 

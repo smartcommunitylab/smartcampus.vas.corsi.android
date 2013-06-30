@@ -6,7 +6,7 @@ public class CorsoLite implements Serializable
 {
 
 	// id del corso
-	private long	id;
+	private Long	id;
 
 	// nome del corso
 	private String	nome;
@@ -38,12 +38,12 @@ public class CorsoLite implements Serializable
 		this.dipartimento = dipartimento;
 	}
 
-	public long getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(long id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

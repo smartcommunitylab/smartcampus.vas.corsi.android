@@ -1,8 +1,9 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Corso extends CorsoLite
+public class Corso extends CorsoLite implements Serializable
 {
 
 	// data di inizio del corso

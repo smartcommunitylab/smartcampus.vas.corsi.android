@@ -29,7 +29,7 @@ public class OverviewFragment extends SherlockFragment
 
 	public static ProgressDialog	pd;
 	public ListView					listViewEventi;
-	public List<Evento>				listaEventi;
+	public static List<Evento>		listaEventi;
 	public EventsHandler			eventsHandler;
 
 	@Override
@@ -108,10 +108,7 @@ public class OverviewFragment extends SherlockFragment
 			
 		}
 
-		
-
-		
-		
+				
 		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
 				listEvItem);
 		ListView listView = (ListView) getSherlockActivity().findViewById(
@@ -134,7 +131,6 @@ public class OverviewFragment extends SherlockFragment
 				// Pass Data to other Fragment
 				Bundle arguments = new Bundle();
 				arguments.putSerializable("eventSelected", evento);
-
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new DettailOfEventFragment();

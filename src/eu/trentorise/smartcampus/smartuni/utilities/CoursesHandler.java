@@ -27,11 +27,13 @@ import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
+import eu.trentorise.smartcampus.smartuni.models.Evento;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -39,7 +41,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
+public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>>
 {
 	
 	
@@ -51,7 +53,9 @@ public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
 	public static ProgressDialog pd;
 	public Activity currentActivity;
 	public SherlockFragmentActivity currentSherlock;
-
+	public Bundle bundleParam;
+	public static Corso corsoSelezionato;
+	
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi, Activity currentActivity, SherlockFragmentActivity currentSherlock) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
@@ -60,10 +64,6 @@ public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
 		this.currentSherlock = currentSherlock;
 	}
 
-	@Override
-	protected List<Corso> doInBackground(Void... params) {
-		return getAllPersonalCourses();
-	}
 	
 	
 	// return list of all courses of all departments
@@ -125,7 +125,7 @@ public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
 	}
 	
 	@Override
-	protected void onPostExecute(List<Corso> result) {
+	protected void onPostExecute(final List<Corso> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		
@@ -150,9 +150,13 @@ public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3)
 			{
-				MyAgendaActivity parent = (MyAgendaActivity) context;
+				MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
 				parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
 				currentActivity.invalidateOptionsMenu();
+				
+				// Pass Data to other Fragment
+				corsoSelezionato = new Corso();
+				corsoSelezionato = result.get(arg2);
 				FragmentTransaction ft = currentSherlock
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new OverviewFilterFragment();
@@ -165,6 +169,14 @@ public class CoursesHandler extends AsyncTask<Void, Void, List<Corso>>
 		
 		pd.dismiss();
 
+	}
+
+	@Override
+	protected List<Corso> doInBackground(Bundle... params) {
+		// TODO Auto-generated method stub
+		bundleParam = params[0];
+		
+		return getAllPersonalCourses();
 	}
 
 }

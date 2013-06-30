@@ -42,9 +42,9 @@ public class CorsiFragment extends SherlockFragment
 //				R.array.CorsiInteresse);
 //		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
 
-		
+		Bundle arguments = new Bundle();
 		CoursesHandler handlerPersonalCourses = new CoursesHandler(getActivity().getApplicationContext(), listViewCorsi, getActivity(), getSherlockActivity());
-		handlerPersonalCourses.execute();
+		handlerPersonalCourses.execute(arguments);
 		
 		
 	}
