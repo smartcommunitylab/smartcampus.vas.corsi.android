@@ -2,12 +2,18 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import smartcampus.android.template.standalone.FindHomeActivity;
+import smartcampus.android.template.standalone.R;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -17,6 +23,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
 public class FindDepartmentsHandler extends
@@ -27,23 +34,39 @@ public class FindDepartmentsHandler extends
 	public Context			context;
 	String					body;
 	Spinner					spinnerDepartments;
+	Spinner					spinnerDegree;
+	public static ProgressDialog pd;
 	List<Dipartimento>		listDepartments	= new ArrayList<Dipartimento>();
-	ProgressDialog			pd;
+	public static List<Dipartimento> listaDip = null;
+	public String departSelectedName = null;
+	public String courseSelected = null;
+	Dipartimento departSelected;
+	CorsoLaurea corsoLaureaSelected;
+	public List<Dipartimento> listDep;
+	public List<CorsoLaurea> listCorLaurea;
+	FindCoursesDegreeHandler findDegHandler;
+	Activity currentActivity;
 
 	@Override
 	protected void onPreExecute()
 	{
 		// TODO Auto-generated method stub
 		super.onPreExecute();
+		
+		new ProgressDialog(currentActivity);
+		pd = ProgressDialog.show(currentActivity,
+				"Lista dei dipartimenti", "Caricamento...");
 
 	}
 
 	public FindDepartmentsHandler(Context applicationContext,
-			Spinner spinnerDepartments)
+			Spinner spinnerDepartments, Spinner spinnerDegree, Activity currentActivity)
 	{
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.spinnerDepartments = spinnerDepartments;
+		this.spinnerDegree = spinnerDegree;
+		this.currentActivity = currentActivity;
 	}
 
 	@Override
@@ -109,6 +132,8 @@ public class FindDepartmentsHandler extends
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
+		listaDip = result;
+		
 		ArrayList<String> listStringDepartments = new ArrayList<String>();
 
 		for (Dipartimento d : result)
@@ -122,8 +147,40 @@ public class FindDepartmentsHandler extends
 				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
 				listStringDepartments);
 		spinnerDepartments.setAdapter(adapter);
+		
+		pd.dismiss();
+		
+		
+		spinnerDepartments.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int pos, long id) {
 
-		FindHomeActivity.pd.dismiss();
+				// Create an ArrayAdapter using the string array and a default
+				// spinner layout
+
+				// do the background process or any work that takes
+				// time to see progreaa dialog
+
+				findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
+						context, spinnerDegree,
+						departSelectedName, parent, pos, currentActivity,
+						FindDepartmentsHandler.this).execute();
+
+				// pd.dismiss();
+
+			}
+
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
+		
+		
+		
+		
+
+		
 	}
+	
 
 }
