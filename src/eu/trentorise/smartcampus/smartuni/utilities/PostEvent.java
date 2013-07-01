@@ -55,10 +55,7 @@ public class PostEvent extends AsyncTask<Void, Void, Evento>
 				return evento;
 
 			}
-			else
-			{
-				return null;
-			}
+			
 		}
 		catch (ConnectionException e)
 		{

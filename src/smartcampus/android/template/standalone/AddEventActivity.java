@@ -268,7 +268,7 @@ public class AddEventActivity extends FragmentActivity {
 			super.onPreExecute();
 
 			new ProgressDialog(AddEventActivity.this);
-			pd = ProgressDialog.show(AddEventActivity.this, "Salvataggio di un nuovo evento",
+			pd = ProgressDialog.show(AddEventActivity.this, "Caricamento della lista dei corsi ",
 					"Caricamento...");
 		}
 		

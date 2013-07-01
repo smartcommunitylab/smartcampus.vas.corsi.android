@@ -18,27 +18,27 @@ public class PHLCorsiFragment extends SherlockListFragment
 	{
 		super.onStart();
 
-		PHLengine phl = new PHLengine();
-		List<Corso> frequentati = phl.getFrequentedCourses();
+		//PHLengine phl = new PHLengine();
+		//List<Corso> frequentati = phl.getFrequentedCourses();
 
-		// String[] corsi = getResources().getStringArray(R.array.Corsi);
+		 String[] corsi = getResources().getStringArray(R.array.Corsi);
 		String[] corsiInt = getResources().getStringArray(
 				R.array.CorsiInteresse);
 
-		// TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
-		TitledItem[] items = new TitledItem[frequentati.size()
-				+ corsiInt.length];
+		 TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
+		/*TitledItem[] items = new TitledItem[frequentati.size()
+				+ corsiInt.length];*/
 
 		int i = 0;
-		for (Corso c : frequentati)
-		{
-			items[i++] = new TitledItem("Corsi da libretto", c.getNome());
-		}
+//		for (Corso c : frequentati)
+//		{
+//			items[i++] = new TitledItem("Corsi da libretto", c.getNome());
+//		}
 
-		/*
-		 * for (String s : corsi) { items[i++] = new
-		 * TitledItem("Corsi da libretto", s); }
-		 */
+		
+		 for (String s : corsi) { items[i++] = new
+		 TitledItem("Corsi da libretto", s); }
+		 
 
 		for (String s : corsiInt)
 		{
