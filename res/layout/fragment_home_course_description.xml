@@ -56,18 +56,19 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="@string/rating" />
 
-    <RatingBar
+ <RatingBar
         android:id="@+id/ratingBarCourseAverage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:isIndicator="true" />
+        android:isIndicator="true" 
+        android:visibility="gone"/> 
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/list_view_expanded"
-        android:visibility="gone"
+        
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>
+    </ExpandableListView>
 
     <View
         android:layout_width="fill_parent"

@@ -1,5 +1,7 @@
 package smartcampus.android.template.standalone;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -8,10 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,6 +21,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
+import eu.trentorise.smartcampus.smartuni.models.Author;
+import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
+import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment
@@ -76,35 +80,54 @@ public class HomeCourseDescriptionFragment extends SherlockFragment
 
 
 
-		final ListView list = (ListView) view
+		final ExpandableListView list = (ExpandableListView) view
 				.findViewById(R.id.list_view_expanded);
 
-		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, new String[] { "A", "B",
-						"C" });
-		list.setAdapter(ad);
+		//ArrayList<FeedbackRowGroup> ratings = null;
+		//AdapterFeedbackList adpt = new AdapterFeedbackList(getActivity(), ratings);
+		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
+		//List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
+		//for (int i = 0; i < comments.size(); i++) {
+			FeedbackRowGroup feedb = new FeedbackRowGroup();
+			Author auth = new Author();
+			auth.setName("");
+			feedb.setAuthor(auth);
+			
+			feedb.setRating_cfu(1);
+			feedb.setRating_contenuti(1);
+			feedb.setRating_esame(1);
+			feedb.setRating_lezioni(1);
+			feedb.setRating_materiale(1);
+			feedb.setComment("");
+			ratings.add(feedb);
+		//}
+//		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(),
+//				android.R.layout.simple_list_item_1, new String[] { "A", "B",
+//						"C" });
+		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
+		list.setAdapter(mAdapter);
 
-		ratingAverage.setOnTouchListener(new OnTouchListener()
-		{
-			@Override
-			public boolean onTouch(View v, MotionEvent event)
-			{
-				if (event.getAction() == MotionEvent.ACTION_DOWN)
-				{
-					int vis = list.getVisibility();
-					if (vis != View.VISIBLE)
-					{
-						list.setVisibility(View.VISIBLE);
-					}
-					else
-					{
-						list.setVisibility(View.GONE);
-					}
-					view.invalidate();
-				}
-				return true;
-			}
-		});
+//		ratingAverage.setOnTouchListener(new OnTouchListener()
+//		{
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event)
+//			{
+//				if (event.getAction() == MotionEvent.ACTION_DOWN)
+//				{
+//					int vis = list.getVisibility();
+//					if (vis != View.VISIBLE)
+//					{
+//						list.setVisibility(View.VISIBLE);
+//					}
+//					else
+//					{
+//						list.setVisibility(View.GONE);
+//					}
+//					view.invalidate();
+//				}
+//				return true;
+//			}
+//		});
 
 		Switch switchFollow = (Switch) view.findViewById(R.id.switchFollow);
 		final TextView txtMonitor = (TextView) view

@@ -80,6 +80,9 @@ public class OverviewFragment extends SherlockFragment
 		// items[i++] = new EventItem(e);
 		// }
 		
+//		//forzo l'overview ad essere ricaricata
+//		eventsHandler = new EventsHandler(getActivity().getApplicationContext(), getActivity());
+//		eventsHandler.execute();
 		
 
 	}
