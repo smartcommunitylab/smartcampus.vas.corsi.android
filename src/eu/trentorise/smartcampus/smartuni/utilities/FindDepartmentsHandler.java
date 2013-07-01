@@ -127,63 +127,45 @@ public class FindDepartmentsHandler extends
 	}
 
 	@Override
-	protected void onPostExecute(final List<Dipartimento> result)
-	{
+	protected void onPostExecute(final List<Dipartimento> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		listaDip = result;
-		
+
 		ArrayList<String> listStringDepartments = new ArrayList<String>();
 
-		for (Dipartimento d : result)
-		{
+		for (Dipartimento d : result) {
 			listStringDepartments.add(d.getNome());
 		}
 
 		// setto i dipartimenti nello spinner
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ArrayAdapter adapter = new ArrayAdapter(
 				context,
 				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
 				listStringDepartments);
 		spinnerDepartments.setAdapter(adapter);
-		
 		pd.dismiss();
-		
-		
-		spinnerDepartments.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
+		spinnerDepartments
+				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int pos, long id) {
 
-				// Create an ArrayAdapter using the string array and a default
-				// spinner layout
+						// chiamo l'handler per il caricamento dei corsi di laurea
+						findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
+								context, spinnerDegree, departSelectedName,
+								parent, pos, currentActivity,
+								FindDepartmentsHandler.this).execute();
 
-				// do the background process or any work that takes
-				// time to see progreaa dialog
-				
-				
+						departSelected = result.get(pos);
 
-				findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-						context, spinnerDegree,
-						departSelectedName, parent, pos, currentActivity,
-						FindDepartmentsHandler.this).execute();
-				
-				departSelected = result.get(pos);
+					}
 
-				// pd.dismiss();
+					public void onNothingSelected(AdapterView<?> parent) {
+					}
+				});
 
-			}
-
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-
-		
-		
-		
-		
-
-		
 	}
 	
 	public Dipartimento getDepartSelected(){
