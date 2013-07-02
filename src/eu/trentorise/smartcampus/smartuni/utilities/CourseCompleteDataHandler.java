@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
-import smartcampus.android.template.standalone.FindHomeCourseActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ExpandableListView;
@@ -153,10 +152,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 
 	}
 
-	private void setDataCourse(Corso course)
-	{
 
-	}
 
 	@Override
 	protected Corso doInBackground(Void... params)

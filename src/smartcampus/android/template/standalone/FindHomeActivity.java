@@ -2,7 +2,6 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -13,8 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
@@ -65,6 +62,7 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialList);
 
+		@SuppressWarnings("unused")
 		final Activity currentAct = this;
 
 		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(

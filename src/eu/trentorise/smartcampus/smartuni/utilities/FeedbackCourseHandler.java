@@ -2,13 +2,10 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.List;
 
-import smartcampus.android.template.standalone.FindHomeCourseActivity;
 import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -125,10 +122,6 @@ public class FeedbackCourseHandler extends
 
 	}
 
-	private void setDataCourse(Commento course)
-	{
-
-	}
 
 	@Override
 	protected List<Commento> doInBackground(Void... params)

@@ -1,22 +1,13 @@
 package smartcampus.android.template.standalone;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -40,27 +31,18 @@ public class OverviewFragment extends SherlockFragment {
 		return view;
 	}
 
-	// @Override
-	// public void onCreate(Bundle arg0)
-	// {
-	// // TODO Auto-generated method stub
-	// super.onCreate(arg0);
-	//
-	// new ProgressDialog(getActivity());
-	// OverviewFragment.pd = ProgressDialog.show(getActivity(),
-	// "Lista degli eventi personali", "Caricamento...");
-	//
-	// eventsHandler = new EventsHandler(getActivity().getApplicationContext(),
-	// getActivity());
-	// eventsHandler.execute();
-	//
-	// }
-
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		getActivity().invalidateOptionsMenu();
+		new ProgressDialog(getActivity());
+		OverviewFragment.pd = ProgressDialog.show(getActivity(),
+				"Lista degli eventi personali", "Caricamento...");
+
+		eventsHandler = new EventsHandler(
+				getActivity().getApplicationContext(), getActivity());
+		eventsHandler.execute();
 
 		// String[] events =
 		// getResources().getStringArray(R.array.NewEventiFuffa);
@@ -75,13 +57,6 @@ public class OverviewFragment extends SherlockFragment {
 		// itms[3]);
 		// items[i++] = new EventItem(e);
 		// }
-		new ProgressDialog(getActivity());
-		OverviewFragment.pd = ProgressDialog.show(getActivity(),
-				"Lista degli eventi personali", "Caricamento...");
-
-		eventsHandler = new EventsHandler(
-				getActivity().getApplicationContext(), getActivity());
-		eventsHandler.execute();
 
 	}
 

@@ -1,15 +1,11 @@
 package smartcampus.android.template.standalone;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
-
-import eu.trentorise.smartcampus.smartuni.models.Corso;
 
 public class PHLCorsiFragment extends SherlockListFragment
 {

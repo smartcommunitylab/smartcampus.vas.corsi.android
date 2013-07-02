@@ -2,10 +2,7 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import smartcampus.android.template.standalone.FindHomeActivity;
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,7 +10,6 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

@@ -5,10 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FindHomeCourseActivity" >
 
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +31,8 @@
             android:textColor="@color/white_smartn_theme"
             android:textOff="@string/switch_off"
             android:textOn="@string/switch_on"
-            android:thumb="@color/smartn_theme_color" />
+            android:thumb="@color/smartn_theme_color" 
+            android:paddingTop="10dp"/>
 
         <TextView
             android:id="@+id/txt_monitor"
@@ -46,15 +54,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
     -->
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
        
 
     <TextView
@@ -95,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Contenuti" />
 
@@ -123,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Carico di studio/Cfu" />
 
@@ -151,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Lezioni" />
 
@@ -179,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Materiali" />
 
@@ -199,7 +198,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/textViewEsame"
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="Esame" />
 
@@ -237,7 +237,8 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@color/smartn_theme_color" />
+        android:background="@color/smartn_theme_color"
+        android:paddingTop="20dp" />
 
     <TextView
         android:id="@+id/textViewDescriptioonCourseHome"
@@ -246,6 +247,7 @@
         android:layout_weight="0.70"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="10dp"
         android:text="Description" />
  </LinearLayout>
     </ScrollView>

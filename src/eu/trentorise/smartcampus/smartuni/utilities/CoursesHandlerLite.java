@@ -151,6 +151,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>>
 		return Utils.convertJSONToObjects(body, CorsoLite.class);
 	}
 
+	@SuppressWarnings("unused")
 	private List<CorsoLite> getFrequentedCourses()
 	{
 

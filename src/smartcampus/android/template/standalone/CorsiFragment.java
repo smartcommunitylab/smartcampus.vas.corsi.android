@@ -2,18 +2,14 @@ package smartcampus.android.template.standalone;
 
 import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
-import eu.trentorise.smartcampus.smartuni.utilities.EventsHandler;
 
 public class CorsiFragment extends SherlockFragment
 {

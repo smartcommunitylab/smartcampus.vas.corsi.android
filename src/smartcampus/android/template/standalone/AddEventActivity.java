@@ -4,25 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.custom.RequestParam;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
-import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
-import eu.trentorise.smartcampus.smartuni.models.Evento;
-import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandlerLite;
-import eu.trentorise.smartcampus.smartuni.utilities.NotificationHandler;
-import eu.trentorise.smartcampus.smartuni.utilities.PostEvent;
-import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.storage.model.UserAccount;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -42,6 +23,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
+import eu.trentorise.smartcampus.smartuni.models.Evento;
+import eu.trentorise.smartcampus.smartuni.utilities.PostEvent;
+import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
 public class AddEventActivity extends FragmentActivity {
 	private int mYear;
@@ -80,7 +74,9 @@ public class AddEventActivity extends FragmentActivity {
 		// display the current date
 		updateDisplay();
 		
+		@SuppressWarnings("unused")
 		EditText title = (EditText)findViewById(R.id.editTextTitle);
+		@SuppressWarnings("unused")
 		EditText description = (EditText)findViewById(R.id.editTextDescription);
 		coursesSpinner = (Spinner)findViewById(R.id.spinnerCorsi);
 		
@@ -216,6 +212,7 @@ public class AddEventActivity extends FragmentActivity {
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
 			request.setMethod(Method.GET);
+			@SuppressWarnings("unused")
 			BasicProfile bp = new BasicProfile();
 			MessageResponse response;
 			try {

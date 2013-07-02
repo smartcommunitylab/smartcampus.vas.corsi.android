@@ -1,34 +1,13 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CyclicBarrier;
-
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import smartcampus.android.template.standalone.MyAgendaActivity;
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.OverviewFilterFragment;
-import smartcampus.android.template.standalone.OverviewFragment;
 import smartcampus.android.template.standalone.R;
 import smartcampus.android.template.standalone.TitledAdapter;
 import smartcampus.android.template.standalone.TitledItem;
-import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
-
-import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.Corso;
-import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
-import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
-import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
-import eu.trentorise.smartcampus.smartuni.models.Evento;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,7 +18,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.Corso;
 
 public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>>
 {

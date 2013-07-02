@@ -2,7 +2,6 @@ package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,12 +16,10 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Author;
-import eu.trentorise.smartcampus.smartuni.models.Comment;
 import eu.trentorise.smartcampus.smartuni.models.Commento;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
-import eu.trentorise.smartcampus.smartuni.utilities.CourseCompleteDataHandler;
 import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
 public class FeedbackFragment extends SherlockFragment {
@@ -47,8 +44,10 @@ public class FeedbackFragment extends SherlockFragment {
 				container, false);
 
 		Intent intent = this.getActivity().getIntent();
+		@SuppressWarnings("unused")
 		CorsoLite corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");
+		@SuppressWarnings("unused")
 		String idCourse = intent.getStringExtra("courseSelectedId");
 		
 

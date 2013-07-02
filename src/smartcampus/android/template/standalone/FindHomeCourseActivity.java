@@ -1,19 +1,13 @@
 package smartcampus.android.template.standalone;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -21,30 +15,23 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.smartuni.models.Commento;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
-import eu.trentorise.smartcampus.smartuni.utilities.FeedbackCourseHandler;
 
-public class FindHomeCourseActivity extends SherlockFragmentActivity
-{
+public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
-
-	public static Corso				courseInfo;
+	public static Corso courseInfo;
 	public static String courseName;
-
-	public static CorsoLite				corsoAttuale;
+	public static CorsoLite corsoAttuale;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_find_home_course);
 
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -69,7 +56,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 		ab.addTab(tab2);
 
 		Intent intent = getIntent();
-		TextView tvCourseName = (TextView) findViewById(R.id.textViewNameCourseHome);
+		// TextView tvCourseName = (TextView)
+		// findViewById(R.id.textViewNameCourseHome);
 		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(courseName);
 		// tvCourseName.setText(courseName);
@@ -77,27 +65,23 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 		// findViewById(R.id.textViewDescriptioonCourse);
 		// RatingBar ratingAverage =
 		// (RatingBar)findViewById(R.id.ratingBarCourse);
-		ExpandableListView listComments = (ExpandableListView) findViewById(R.id.expandableListViewFeedback);
-
+		// ExpandableListView listComments = (ExpandableListView)
+		// findViewById(R.id.expandableListViewFeedback);
 
 		corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
-		String idCourse = intent.getStringExtra("courseSelectedId");
-		
-			/*
-			 * courseInfo = new CourseCompleteDataHandler(
-			 * FindHomeCourseActivity.this,
-			 * corsoAttuale.getId()).execute().get();
-			 */
+		// String idCourse = intent.getStringExtra("courseSelectedId");
 
-
+		/*
+		 * courseInfo = new CourseCompleteDataHandler(
+		 * FindHomeCourseActivity.this, corsoAttuale.getId()).execute().get();
+		 */
 
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
-	{
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.find_home_course, menu);
@@ -105,23 +89,20 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState)
-	{
+	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
 	}
 
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState)
-	{
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		int tab = savedInstanceState.getInt("tab");
 		getActionBar().setSelectedNavigationItem(tab);
 		super.onRestoreInstanceState(savedInstanceState);
 	}
 
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
+	public boolean onOptionsItemSelected(MenuItem item) {
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(
 				FindHomeCourseActivity.this);
@@ -131,10 +112,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 
 		alert.setView(dialoglayout);
 		alert.setTitle("Esprimi un giudizio");
-		alert.setPositiveButton("OK", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
+		alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
 				// Editable value = input.getText();
 				Toast.makeText(getApplicationContext(), "rating",
 						Toast.LENGTH_SHORT).show();
@@ -148,18 +127,15 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 
 	}
 
-	public void getDescription()
-	{
+	public void getDescription() {
 
 	}
 
-	public void getRating()
-	{
+	public void getRating() {
 
 	}
 
-	public void ShowDialog()
-	{
+	public void ShowDialog() {
 		final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
 		final RatingBar rating = new RatingBar(this);
@@ -174,10 +150,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 
 		// Button OK
 		popDialog.setPositiveButton(android.R.string.ok,
-				new DialogInterface.OnClickListener()
-				{
-					public void onClick(DialogInterface dialog, int which)
-					{
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 
@@ -185,10 +159,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 
 		// Button Cancel
 				.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener()
-						{
-							public void onClick(DialogInterface dialog, int id)
-							{
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
 								dialog.cancel();
 							}
 						});
@@ -199,29 +171,27 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity
 	}
 
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-			case android.R.id.home:
-				/*
-				 * Intent intentHome = new Intent(FindHomeCourseActivity.this,
-				 * ResultSearchedActivity.class);
-				 * intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				 * startActivity(intentHome);
-				 */
-				finish();
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			/*
+			 * Intent intentHome = new Intent(FindHomeCourseActivity.this,
+			 * ResultSearchedActivity.class);
+			 * intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			 * startActivity(intentHome);
+			 */
+			finish();
 
-				return true;
-			case R.id.itemAddRating:
+			return true;
+		case R.id.itemAddRating:
 
-				Intent intentAddRating = new Intent(
-						FindHomeCourseActivity.this, AddRateActivity.class);
-				intentAddRating.putExtra("Corso", corsoAttuale);
-				startActivity(intentAddRating);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+			Intent intentAddRating = new Intent(FindHomeCourseActivity.this,
+					AddRateActivity.class);
+			intentAddRating.putExtra("Corso", corsoAttuale);
+			startActivity(intentAddRating);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 
 		}
 	}

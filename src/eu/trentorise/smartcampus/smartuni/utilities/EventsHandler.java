@@ -4,18 +4,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
 import smartcampus.android.template.standalone.AdptDetailedEvent;
 import smartcampus.android.template.standalone.DettailOfEventFragment;
 import smartcampus.android.template.standalone.EventAdapter;
 import smartcampus.android.template.standalone.EventItem;
 import smartcampus.android.template.standalone.MyAgendaActivity;
+import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.OverviewFragment;
 import smartcampus.android.template.standalone.R;
-import smartcampus.android.template.standalone.MyAgendaActivity.MenuKind;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,7 +31,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.smartuni.models.Event;
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 
 public class EventsHandler extends AsyncTask<Void, Void, List<Evento>>{
@@ -59,6 +54,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>>{
 		this.context = applicationContext;
 	}
 
+	@SuppressWarnings("unused")
 	private List<Evento> getAllEventsOfCourse(String id_course) {
 		
 		mProtocolCarrier = new ProtocolCarrier(context, SmartUniDataWS.TOKEN_NAME);
