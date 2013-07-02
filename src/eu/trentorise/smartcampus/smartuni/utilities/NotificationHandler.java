@@ -24,36 +24,33 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Notice;
 
-public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
-{
+public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 
-	private ProtocolCarrier		mProtocolCarrier;
-	public Context				context;
-	public String				appToken	= "test smartcampus";
-	public String				authToken	= "aee58a92-d42d-42e8-b55e-12e4289586fc";
-	String						body;
-	TextView					textViewTitleNotices;
-	private ListView			lvAllNotices;
-	private String				dateString;
+	private ProtocolCarrier mProtocolCarrier;
+	public Context context;
+	public String appToken = "test smartcampus";
+	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
+	String body;
+	TextView textViewTitleNotices;
+	private ListView lvAllNotices;
+	private String dateString;
 	// private ArrayList<Notice> notificationsList;
-	private ArrayList<String>	descriptionsList;
+	private ArrayList<String> descriptionsList;
 	@SuppressWarnings("unused")
-	private ArrayList<String>	datetimeList;
+	private ArrayList<String> datetimeList;
 	@SuppressWarnings("unused")
-	private ArrayList<String>	usersList;
+	private ArrayList<String> usersList;
 
 	// private static ProgressDialog pd;
 
 	public NotificationHandler(Context applicationContext,
-			TextView textViewTitleNotices, ListView lvAllNotices)
-	{
+			TextView textViewTitleNotices, ListView lvAllNotices) {
 		this.context = applicationContext;
 		this.textViewTitleNotices = textViewTitleNotices;
 		this.lvAllNotices = lvAllNotices;
 	}
 
-	private List<Notice> getNotification()
-	{
+	private List<Notice> getNotification() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -64,34 +61,24 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try
-		{
+		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200)
-			{
+			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
 
-			}
-			else
-			{
+			} else {
 				return null;
 			}
-		}
-		catch (ConnectionException e)
-		{
+		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (ProtocolException e)
-		{
+		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -100,31 +87,26 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
 	}
 
 	@Override
-	protected void onPreExecute()
-	{
+	protected void onPreExecute() {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
-	protected void onPostExecute(List<Notice> notifies)
-	{
+	protected void onPostExecute(List<Notice> notifies) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(notifies);
 
 		NoticesActivity.pd.dismiss();
 
-		if (notifies == null)
-		{
+		if (notifies == null) {
 			setVoidNotify();
-		}
-		else
+		} else
 			setListNotifications(notifies);
 	}
 
-	private void setListNotifications(List<Notice> notifies)
-	{
+	private void setListNotifications(List<Notice> notifies) {
 
 		textViewTitleNotices.setText(R.string.notices_string_titlelist);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
@@ -142,8 +124,7 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
 		usersList = new ArrayList<String>();
 		descriptionsList = new ArrayList<String>();
 
-		while (i.hasNext())
-		{
+		while (i.hasNext()) {
 			Notice t = new Notice();
 			t = (Notice) i.next();
 
@@ -159,8 +140,7 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
 
 	}
 
-	private void setVoidNotify()
-	{
+	private void setVoidNotify() {
 		textViewTitleNotices.setText(R.string.notices_string_titlelist);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
 				Locale.ITALY);
@@ -173,8 +153,7 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>>
 	}
 
 	@Override
-	protected List<Notice> doInBackground(Void... params)
-	{
+	protected List<Notice> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		return getNotification();
 	}

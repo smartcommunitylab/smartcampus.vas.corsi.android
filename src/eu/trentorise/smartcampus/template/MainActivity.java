@@ -50,62 +50,54 @@ import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
  * @author raman
  * 
  */
-public class MainActivity extends Activity
-{
+public class MainActivity extends Activity {
 
 	/** Logging tag */
-	private static final String	TAG						= "Main";
+	private static final String TAG = "Main";
 
-	private static final String	AUTH_URL				= "https://vas-dev.smartcampuslab.it/accesstoken-provider/ac";
+	private static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/accesstoken-provider/ac";
 
-	private static final String	AC_SERVICE_ADDR			= "https://vas-dev.smartcampuslab.it/acService";
-	private static final String	PROFILE_SERVICE_ADDR	= "https://vas-dev.smartcampuslab.it";
+	private static final String AC_SERVICE_ADDR = "https://vas-dev.smartcampuslab.it/acService";
+	private static final String PROFILE_SERVICE_ADDR = "https://vas-dev.smartcampuslab.it";
 
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
 	 * token
 	 */
-	private SCAccessProvider	mAccessProvider			= null;
+	private SCAccessProvider mAccessProvider = null;
 	/** Access token for the application user */
-	private String				mToken					= null;
+	private String mToken = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		try
-		{
+		try {
 			Constants.setAuthUrl(getApplicationContext(), AUTH_URL);
-		}
-		catch (NameNotFoundException e1)
-		{
+		} catch (NameNotFoundException e1) {
 			Log.e(TAG, "problems with configuration.");
 			finish();
 		}
 
-		findViewById(R.id.file_button).setOnClickListener(new OnClickListener()
-		{
+		findViewById(R.id.file_button).setOnClickListener(
+				new OnClickListener() {
 
-			@Override
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(MainActivity.this,
-						MyUniActivity.class);
-				MainActivity.this.startActivity(intent);
-			}
-		});
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MainActivity.this,
+								MyUniActivity.class);
+						MainActivity.this.startActivity(intent);
+					}
+				});
 
 		// Initialize the access provider
 		mAccessProvider = new AMSCAccessProvider();
 		// if the authentication is necessary, use the provided operations to
 		// retrieve the token: no restriction on the preferred account type
-		try
-		{
+		try {
 			mToken = mAccessProvider.getAuthToken(this, null);
-			if (mToken != null)
-			{
+			if (mToken != null) {
 				// read user data
 				UserData data = mAccessProvider.readUserData(this, null);
 				showUserIdFromAccountData(data);
@@ -114,46 +106,33 @@ public class MainActivity extends Activity
 				// access the basic user profile data remotely
 				new LoadUserDataFromProfileServiceTask().execute(mToken);
 			}
-		}
-		catch (OperationCanceledException e)
-		{
+		} catch (OperationCanceledException e) {
 			Log.e(TAG, "Login cancelled.");
 			finish();
-		}
-		catch (AuthenticatorException e)
-		{
+		} catch (AuthenticatorException e) {
 			Log.e(TAG, "Login failed: " + e.getMessage());
 			finish();
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			Log.e(TAG, "Login ended with error: " + e.getMessage());
 			finish();
 		}
 	}
 
-	private void showUserIdFromAccountData(UserData data)
-	{
+	private void showUserIdFromAccountData(UserData data) {
 		TextView tv = (TextView) findViewById(R.id.user_id);
-		if (data != null)
-		{
+		if (data != null) {
 			tv.setText(data.getUserId());
-		}
-		else
-		{
+		} else {
 			tv.setText("UNDEFINED!");
 		}
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// check the result of the authentication
-		if (requestCode == SCAccessProvider.SC_AUTH_ACTIVITY_REQUEST_CODE)
-		{
+		if (requestCode == SCAccessProvider.SC_AUTH_ACTIVITY_REQUEST_CODE) {
 			// authentication successful
-			if (resultCode == RESULT_OK)
-			{
+			if (resultCode == RESULT_OK) {
 				mToken = data.getExtras().getString(
 						AccountManager.KEY_AUTHTOKEN);
 				Log.i(TAG, "Authentication successfull");
@@ -162,15 +141,11 @@ public class MainActivity extends Activity
 				new LoadUserDataFromACServiceTask().execute(mToken);
 				new LoadUserDataFromProfileServiceTask().execute(mToken);
 				// authentication cancelled by user
-			}
-			else if (resultCode == RESULT_CANCELED)
-			{
+			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
 				Log.i(TAG, "Authentication cancelled");
 				// authentication failed
-			}
-			else
-			{
+			} else {
 				String error = data.getExtras().getString(
 						AccountManager.KEY_AUTH_FAILED_MESSAGE);
 				Toast.makeText(this, error, Toast.LENGTH_LONG).show();
@@ -181,38 +156,27 @@ public class MainActivity extends Activity
 	}
 
 	protected class LoadUserDataFromACServiceTask extends
-			AsyncTask<String, Void, UserData>
-	{
+			AsyncTask<String, Void, UserData> {
 
 		@Override
-		protected UserData doInBackground(String... params)
-		{
-			try
-			{
+		protected UserData doInBackground(String... params) {
+			try {
 				return new ACService(AC_SERVICE_ADDR).getUserByToken(params[0]);
-			}
-			catch (SecurityException e)
-			{
+			} catch (SecurityException e) {
 				Log.e(TAG, "Security Exception: " + e.getMessage());
-			}
-			catch (AcServiceException e)
-			{
+			} catch (AcServiceException e) {
 				Log.e(TAG, "Service Exception: " + e.getMessage());
 			}
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(UserData data)
-		{
+		protected void onPostExecute(UserData data) {
 			TextView attrs = (TextView) findViewById(R.id.attributes);
-			if (data != null)
-			{
+			if (data != null) {
 				StringBuilder builder = new StringBuilder();
-				if (data.getAttributes() != null)
-				{
-					for (int i = 0; i < data.getAttributes().size(); i++)
-					{
+				if (data.getAttributes() != null) {
+					for (int i = 0; i < data.getAttributes().size(); i++) {
 						Attribute a = data.getAttributes().get(i);
 						builder.append(a.getKey());
 						builder.append('=');
@@ -220,14 +184,10 @@ public class MainActivity extends Activity
 						builder.append('\n');
 					}
 					attrs.setText(builder.toString());
-				}
-				else
-				{
+				} else {
 					attrs.setText("-");
 				}
-			}
-			else
-			{
+			} else {
 				attrs.setText("UNDEFINED!");
 			}
 			showUserIdFromAccountData(data);
@@ -235,38 +195,27 @@ public class MainActivity extends Activity
 	}
 
 	protected class LoadUserDataFromProfileServiceTask extends
-			AsyncTask<String, Void, BasicProfile>
-	{
+			AsyncTask<String, Void, BasicProfile> {
 
 		@Override
-		protected BasicProfile doInBackground(String... params)
-		{
-			try
-			{
+		protected BasicProfile doInBackground(String... params) {
+			try {
 				return new ProfileService(PROFILE_SERVICE_ADDR)
 						.getBasicProfile(params[0]);
-			}
-			catch (SecurityException e)
-			{
+			} catch (SecurityException e) {
 				Log.e(TAG, "Security Exception: " + e.getMessage());
-			}
-			catch (ProfileServiceException e)
-			{
+			} catch (ProfileServiceException e) {
 				Log.e(TAG, "Profile Service Exception: " + e.getMessage());
 			}
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(BasicProfile data)
-		{
+		protected void onPostExecute(BasicProfile data) {
 			TextView name = (TextView) findViewById(R.id.name);
-			if (data != null)
-			{
+			if (data != null) {
 				name.setText(data.getName() + " " + data.getSurname());
-			}
-			else
-			{
+			} else {
 				name.setText("UNDEFINED!");
 			}
 		}

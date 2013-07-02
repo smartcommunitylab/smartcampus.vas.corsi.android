@@ -2,46 +2,39 @@ package smartcampus.android.template.standalone;
 
 import java.text.SimpleDateFormat;
 
-public class EventItem extends EventItem4Adapter
-{
+public class EventItem extends EventItem4Adapter {
 
-	private AdptDetailedEvent	object;
+	private AdptDetailedEvent object;
 
-	public EventItem(AdptDetailedEvent obj)
-	{
+	public EventItem(AdptDetailedEvent obj) {
 		super();
 
 		this.object = obj;
 	}
 
 	@Override
-	public String getTitle()
-	{
+	public String getTitle() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return dateFormat.format(object.getDate());
 	}
 
 	@Override
-	public String getContent()
-	{
+	public String getContent() {
 		return object.getName();
 	}
 
 	@Override
-	public String getDescription()
-	{
+	public String getDescription() {
 		return object.getDescription();
 	}
 
 	@Override
-	public String getOra()
-	{
+	public String getOra() {
 		return object.getOra().substring(0, object.getOra().length() - 3);
 	}
 
 	@Override
-	public String getRoom()
-	{
+	public String getRoom() {
 		// TODO Auto-generated method stub
 		return object.getRoom();
 	}

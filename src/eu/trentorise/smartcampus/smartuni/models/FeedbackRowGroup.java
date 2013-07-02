@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-
 public class FeedbackRowGroup {
 
 	public Author author;
@@ -11,7 +10,7 @@ public class FeedbackRowGroup {
 	public long rating_lezioni;
 	public long rating_materiale;
 	public long rating_esame;
-	
+
 	public FeedbackRowGroup() {
 		// TODO Auto-generated constructor stub
 	}
@@ -31,10 +30,11 @@ public class FeedbackRowGroup {
 	public void setRating(long rating) {
 		this.rating = rating;
 	}
-	
+
 	public String getComment() {
 		return comment;
 	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
@@ -78,8 +78,5 @@ public class FeedbackRowGroup {
 	public void setRating_esame(long rating_esame) {
 		this.rating_esame = rating_esame;
 	}
-	
-	
-	
-	
+
 }

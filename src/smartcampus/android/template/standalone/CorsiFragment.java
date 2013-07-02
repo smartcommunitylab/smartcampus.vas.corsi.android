@@ -11,12 +11,10 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
 
-public class CorsiFragment extends SherlockFragment
-{
+public class CorsiFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
+			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_corsi,
 				container, false);
@@ -24,8 +22,7 @@ public class CorsiFragment extends SherlockFragment
 		return view;
 	}
 
-	public void onStart()
-	{
+	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
@@ -33,15 +30,16 @@ public class CorsiFragment extends SherlockFragment
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
 		getActivity().invalidateOptionsMenu();
-//		String[] corsi = getResources().getStringArray(R.array.Corsi);
-//		String[] corsiInt = getResources().getStringArray(
-//				R.array.CorsiInteresse);
-//		TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
+		// String[] corsi = getResources().getStringArray(R.array.Corsi);
+		// String[] corsiInt = getResources().getStringArray(
+		// R.array.CorsiInteresse);
+		// TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
 
 		Bundle arguments = new Bundle();
-		CoursesHandler handlerPersonalCourses = new CoursesHandler(getActivity().getApplicationContext(), listViewCorsi, getActivity(), getSherlockActivity());
+		CoursesHandler handlerPersonalCourses = new CoursesHandler(
+				getActivity().getApplicationContext(), listViewCorsi,
+				getActivity(), getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
-		
-		
+
 	}
 }

@@ -15,22 +15,20 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 
-public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
-{
+public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 
-	private ProtocolCarrier	mProtocolCarrier;
-	public Context			context;
-	public String			appToken	= "test smartcampus";
-	public String			authToken	= "aee58a92-d42d-42e8-b55e-12e4289586fc";
-	String					body;
-	long					idCourse;
-	TextView				tvCourseName;
-	RatingBar				ratingAverage;
-	TextView				descriptionCourse;
-	ExpandableListView		listComments;
+	private ProtocolCarrier mProtocolCarrier;
+	public Context context;
+	public String appToken = "test smartcampus";
+	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
+	String body;
+	long idCourse;
+	TextView tvCourseName;
+	RatingBar ratingAverage;
+	TextView descriptionCourse;
+	ExpandableListView listComments;
 
-	public CourseCompleteDataHandler(Context applicationContext, long idCourse)
-	{
+	public CourseCompleteDataHandler(Context applicationContext, long idCourse) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 		/*
@@ -40,8 +38,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 		 */
 	}
 
-	private Corso getFullCourseById()
-	{
+	private Corso getFullCourseById() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -53,34 +50,24 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try
-		{
+		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200)
-			{
+			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
 
-			}
-			else
-			{
+			} else {
 				return null;
 			}
-		}
-		catch (ConnectionException e)
-		{
+		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (ProtocolException e)
-		{
+		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -89,27 +76,24 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 	}
 
 	@Override
-	protected void onPreExecute()
-	{
+	protected void onPreExecute() {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
-	protected void onPostExecute(Corso course)
-	{
+	protected void onPostExecute(Corso course) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(course);
 
-		//FindHomeCourseActivity.pd.dismiss();
+		// FindHomeCourseActivity.pd.dismiss();
 
 		// loadDataLayout(course);
 
 	}
 
-	protected void loadDataLayout(Corso course)
-	{
+	protected void loadDataLayout(Corso course) {
 		// tvCourseName.setText(course.getNome());
 		// ratingAverage.setRating((float)course.getValutazione_media());
 		// descriptionCourse.setText(course.getDescrizione());
@@ -152,11 +136,8 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso>
 
 	}
 
-
-
 	@Override
-	protected Corso doInBackground(Void... params)
-	{
+	protected Corso doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		return getFullCourseById();
 	}

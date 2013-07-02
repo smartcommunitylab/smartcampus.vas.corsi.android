@@ -49,13 +49,11 @@ public class AddEventActivity extends FragmentActivity {
 	private EditText mPickDate;
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
-	
+
 	public static ProgressDialog pd;
 	private Evento evento = null;
 	Spinner coursesSpinner;
-	
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,40 +67,36 @@ public class AddEventActivity extends FragmentActivity {
 		mMonth = c.get(Calendar.MONTH);
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 		// get the current Time
-		hour = c.get(Calendar.HOUR_OF_DAY);	
+		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();
-		
+
 		@SuppressWarnings("unused")
-		EditText title = (EditText)findViewById(R.id.editTextTitle);
+		EditText title = (EditText) findViewById(R.id.editTextTitle);
 		@SuppressWarnings("unused")
-		EditText description = (EditText)findViewById(R.id.editTextDescription);
-		coursesSpinner = (Spinner)findViewById(R.id.spinnerCorsi);
-		
-		
+		EditText description = (EditText) findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
+
 		new CoursesLoader().execute();
-		
-		
+
 	}
-	
-	
+
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Button button_ok = (Button)findViewById(R.id.button_ok);
-		
+		Button button_ok = (Button) findViewById(R.id.button_ok);
+
 		button_ok.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
-		
-		
+
 	}
 
 	public void updateDisplay() {
@@ -189,21 +183,19 @@ public class AddEventActivity extends FragmentActivity {
 			}
 		}
 	}
-	
-	
+
 	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>> {
 
-		
 		private ProtocolCarrier mProtocolCarrier;
 		public Context context;
 		String body;
-		
+
 		@Override
 		protected List<CorsoLite> doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			return getFollowingCourses();
 		}
-		
+
 		private List<CorsoLite> getFollowingCourses() {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
@@ -239,38 +231,36 @@ public class AddEventActivity extends FragmentActivity {
 
 			return Utils.convertJSONToObjects(body, CorsoLite.class);
 		}
-		
+
 		@Override
 		protected void onPostExecute(List<CorsoLite> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			
+
 			List<String> resultStrings = new ArrayList<String>();
-			
-			for(CorsoLite cl : result){
+
+			for (CorsoLite cl : result) {
 				resultStrings.add(cl.getNome());
 			}
-			
+
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-					AddEventActivity.this, R.layout.list_studymate_row_list_simple,
-					resultStrings);
-			
+					AddEventActivity.this,
+					R.layout.list_studymate_row_list_simple, resultStrings);
+
 			coursesSpinner.setAdapter(adapterInitialList);
 		}
-		
+
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			new ProgressDialog(AddEventActivity.this);
-			pd = ProgressDialog.show(AddEventActivity.this, "Caricamento della lista dei corsi ",
-					"Caricamento...");
+			pd = ProgressDialog.show(AddEventActivity.this,
+					"Caricamento della lista dei corsi ", "Caricamento...");
 		}
-		
-		
-		
+
 	}
 
 }

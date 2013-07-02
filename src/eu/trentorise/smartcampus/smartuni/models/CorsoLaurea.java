@@ -2,49 +2,41 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 import java.io.Serializable;
 
-public class CorsoLaurea implements Serializable
-{
+public class CorsoLaurea implements Serializable {
 
-	private static final long	serialVersionUID	= 8681730600984301605L;
+	private static final long serialVersionUID = 8681730600984301605L;
 
-	private long				id;
+	private long id;
 
-	private String				nome;
+	private String nome;
 
-	private Dipartimento		dipartimento;
+	private Dipartimento dipartimento;
 
-	public long getId()
-	{
+	public long getId() {
 		return id;
 	}
 
-	public void setId(long id)
-	{
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getNome()
-	{
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Dipartimento getDipartimento()
-	{
+	public Dipartimento getDipartimento() {
 		return dipartimento;
 	}
 
-	public void setDipartimento(Dipartimento dipartimento)
-	{
+	public void setDipartimento(Dipartimento dipartimento) {
 		this.dipartimento = dipartimento;
 	}
 
-	public static long getSerialversionuid()
-	{
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 

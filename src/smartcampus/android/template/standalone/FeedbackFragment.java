@@ -28,8 +28,7 @@ public class FeedbackFragment extends SherlockFragment {
 	AdapterFeedbackList mAdapter;
 	public static ProgressDialog pd;
 	List<Commento> commenti;
-	
-	
+
 	@Override
 	public void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -46,14 +45,15 @@ public class FeedbackFragment extends SherlockFragment {
 		Intent intent = this.getActivity().getIntent();
 		@SuppressWarnings("unused")
 		CorsoLite corsoAttuale = new CorsoLite();
-		corsoAttuale = (CorsoLite) intent.getSerializableExtra("courseSelected");
+		corsoAttuale = (CorsoLite) intent
+				.getSerializableExtra("courseSelected");
 		@SuppressWarnings("unused")
 		String idCourse = intent.getStringExtra("courseSelectedId");
-		
 
-
-		TextView titleCourseFeedback = (TextView)view.findViewById(R.id.textViewTitleFeedbackCourse);
-		titleCourseFeedback.setText(FeedbackCourseHandler.feedbackInfoList.get(0).getCorso().getNome());
+		TextView titleCourseFeedback = (TextView) view
+				.findViewById(R.id.textViewTitleFeedbackCourse);
+		titleCourseFeedback.setText(FeedbackCourseHandler.feedbackInfoList
+				.get(0).getCorso().getNome());
 
 		List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
 
@@ -64,8 +64,12 @@ public class FeedbackFragment extends SherlockFragment {
 			Author auth = new Author();
 			auth.setName(comments.get(i).getId_studente().getNome());
 			feedb.setAuthor(auth);
-			
-			feedb.setRating((comments.get(i).getRating_carico_studio()+comments.get(i).getRating_contenuto()+comments.get(i).getRating_esame()+comments.get(i).getRating_lezioni()+comments.get(i).getRating_materiali())/5);
+
+			feedb.setRating((comments.get(i).getRating_carico_studio()
+					+ comments.get(i).getRating_contenuto()
+					+ comments.get(i).getRating_esame()
+					+ comments.get(i).getRating_lezioni() + comments.get(i)
+					.getRating_materiali()) / 5);
 			feedb.setRating_cfu(comments.get(i).getRating_carico_studio());
 			feedb.setRating_contenuti(comments.get(i).getRating_contenuto());
 			feedb.setRating_esame(comments.get(i).getRating_esame());
@@ -75,10 +79,10 @@ public class FeedbackFragment extends SherlockFragment {
 			ratings.add(feedb);
 		}
 
-		ExpandableListView listComments = (ExpandableListView)view.findViewById(R.id.expandableListViewFeedback);
-		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
-
-
+		ExpandableListView listComments = (ExpandableListView) view
+				.findViewById(R.id.expandableListViewFeedback);
+		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(),
+				ratings);
 
 		listComments.setAdapter(mAdapter);
 		listComments.setGroupIndicator(null);
@@ -88,7 +92,7 @@ public class FeedbackFragment extends SherlockFragment {
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
 				// TODO Auto-generated method stub
-				if(parent.isGroupExpanded(groupPosition))
+				if (parent.isGroupExpanded(groupPosition))
 					parent.collapseGroup(groupPosition);
 				else
 					parent.expandGroup(groupPosition, true);
@@ -96,9 +100,7 @@ public class FeedbackFragment extends SherlockFragment {
 			}
 		});
 
-
 		return view;
 	}
-
 
 }

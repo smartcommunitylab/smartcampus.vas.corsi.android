@@ -1,41 +1,34 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-public class Frequenze
-{
+public class Frequenze {
 
-	private long		id;
+	private long id;
 
-	private Studente	studente;
+	private Studente studente;
 
-	private Corso		corso;
+	private Corso corso;
 
-	public long getId()
-	{
+	public long getId() {
 		return id;
 	}
 
-	public void setId(long id)
-	{
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Studente getStudente()
-	{
+	public Studente getStudente() {
 		return studente;
 	}
 
-	public void setStudente(Studente studente)
-	{
+	public void setStudente(Studente studente) {
 		this.studente = studente;
 	}
 
-	public Corso getCorso()
-	{
+	public Corso getCorso() {
 		return corso;
 	}
 
-	public void setCorso(Corso corso)
-	{
+	public void setCorso(Corso corso) {
 		this.corso = corso;
 	}
 

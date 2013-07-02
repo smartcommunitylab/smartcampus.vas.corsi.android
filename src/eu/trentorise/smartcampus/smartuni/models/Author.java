@@ -1,33 +1,27 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-public class Author
-{
+public class Author {
 
-	public String	name;
-	public String	social_id;
+	public String name;
+	public String social_id;
 
-	public Author()
-	{
+	public Author() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
-	public String getSocial_id()
-	{
+	public String getSocial_id() {
 		return social_id;
 	}
 
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setSocial_id(String social_id)
-	{
+	public void setSocial_id(String social_id) {
 		this.social_id = social_id;
 	}
 }

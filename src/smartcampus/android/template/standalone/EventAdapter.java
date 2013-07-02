@@ -8,28 +8,24 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 // in EventsListingFragment
-public class EventAdapter extends ArrayAdapter<EventItem4Adapter>
-{
+public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 
-	private Context	context;
-	private int		layoutResourceId;
+	private Context context;
+	private int layoutResourceId;
 
-	public EventAdapter(Context context, EventItem4Adapter[] arr)
-	{
+	public EventAdapter(Context context, EventItem4Adapter[] arr) {
 		super(context, R.layout.event_row, arr);
 		this.context = context;
 		this.layoutResourceId = R.layout.event_row;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
+	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View row = convertView;
 		EventItem4Adapter item = getItem(position);
 
-		if (row == null)
-		{
+		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(layoutResourceId, parent, false);
@@ -65,12 +61,9 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter>
 		if (position > 0)
 			prev = getItem(position - 1);
 
-		if (prev == null || !(prev.getTitle().equals(item.getTitle())))
-		{
+		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
 			title.setVisibility(View.VISIBLE);
-		}
-		else
-		{
+		} else {
 			title.setVisibility(View.GONE);
 		}
 		return row;

@@ -7,20 +7,16 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class FindCoursesActivity extends Activity
-{
+public class FindCoursesActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_courses);
 
-		findViewById(R.id.recensioni).setOnClickListener(new OnClickListener()
-		{
+		findViewById(R.id.recensioni).setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				Intent intent = new Intent(FindCoursesActivity.this,
 						FindRecensioniActivity.class);
 				FindCoursesActivity.this.startActivity(intent);
@@ -29,8 +25,7 @@ public class FindCoursesActivity extends Activity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.find_courses, menu);
 		return true;

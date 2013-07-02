@@ -66,7 +66,7 @@ public class Course {
 	}
 
 	public void setValutazione_media(int valutazione_media) {
-		valutazione_media = (valutazione_media*5)/10;
+		valutazione_media = (valutazione_media * 5) / 10;
 		this.valutazione_media = valutazione_media;
 	}
 

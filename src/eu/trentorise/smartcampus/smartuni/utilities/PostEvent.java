@@ -12,24 +12,21 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 
-public class PostEvent extends AsyncTask<Void, Void, Evento>
-{
+public class PostEvent extends AsyncTask<Void, Void, Evento> {
 
-	private ProtocolCarrier	mProtocolCarrier;
-	public Context			context;
-	String					body;
-	Evento					evento;
+	private ProtocolCarrier mProtocolCarrier;
+	public Context context;
+	String body;
+	Evento evento;
 
-	public PostEvent(Context applicationContext, Evento evento)
-	{
+	public PostEvent(Context applicationContext, Evento evento) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.evento = evento;
 	}
 
 	@Override
-	protected Evento doInBackground(Void... arg0)
-	{
+	protected Evento doInBackground(Void... arg0) {
 		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -40,8 +37,7 @@ public class PostEvent extends AsyncTask<Void, Void, Evento>
 		request.setMethod(Method.POST);
 
 		MessageResponse response;
-		try
-		{
+		try {
 
 			String eventoJSON = Utils.convertToJSON(evento);
 
@@ -49,26 +45,19 @@ public class PostEvent extends AsyncTask<Void, Void, Evento>
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200)
-			{
+			if (response.getHttpStatus() == 200) {
 
 				return evento;
 
 			}
-			
-		}
-		catch (ConnectionException e)
-		{
+
+		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (ProtocolException e)
-		{
+		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

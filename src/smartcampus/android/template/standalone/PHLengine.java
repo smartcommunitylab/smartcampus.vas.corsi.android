@@ -14,11 +14,9 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
-public class PHLengine
-{
+public class PHLengine {
 
-	public List<Corso> getFrequentedCourses()
-	{
+	public List<Corso> getFrequentedCourses() {
 
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
@@ -31,32 +29,22 @@ public class PHLengine
 
 		MessageResponse response;
 		String body = null;
-		try
-		{
+		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200)
-			{
+			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
-			}
-			else
-			{
+			} else {
 				return null;
 			}
-		}
-		catch (ConnectionException e)
-		{
+		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (ProtocolException e)
-		{
+		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

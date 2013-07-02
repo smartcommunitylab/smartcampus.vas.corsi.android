@@ -15,23 +15,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-public class AddEvent4coursesActivity extends FragmentActivity
-{
-	private int			mYear;
-	private int			mMonth;
-	private int			mDay;
+public class AddEvent4coursesActivity extends FragmentActivity {
+	private int mYear;
+	private int mMonth;
+	private int mDay;
 
-	private int			hour;
-	private int			minute;
+	private int hour;
+	private int minute;
 
 	// private TextView mDateDisplay;
-	private EditText	mPickDate;
-	private EditText	mPickTime;
-	static final int	DATE_DIALOG_ID	= 0;
+	private EditText mPickDate;
+	private EditText mPickTime;
+	static final int DATE_DIALOG_ID = 0;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
 		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
@@ -49,19 +47,15 @@ public class AddEvent4coursesActivity extends FragmentActivity
 		updateDisplay();
 	}
 
-	public void updateDisplay()
-	{
+	public void updateDisplay() {
 		this.mPickDate.setText(new StringBuilder()
 				// Month is 0 based so add 1
 				.append(mDay).append("-").append(mMonth + 1).append("-")
 				.append(mYear).append(" "));
-		if (minute < 10)
-		{
+		if (minute < 10) {
 			this.mPickTime.setText(new StringBuilder().append(hour)
 					.append(":0").append(minute));
-		}
-		else
-		{
+		} else {
 			this.mPickTime.setText(new StringBuilder().append(hour).append(":")
 					.append(minute));
 
@@ -69,31 +63,26 @@ public class AddEvent4coursesActivity extends FragmentActivity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.test, menu);
 		return true;
 	}
 
-	public void showDatePickerDialog(View v)
-	{
+	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 
-	public void showTimePickerDialog(View v)
-	{
+	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
-			DatePickerDialog.OnDateSetListener
-	{
+			DatePickerDialog.OnDateSetListener {
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState)
-		{
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
@@ -105,8 +94,7 @@ public class AddEvent4coursesActivity extends FragmentActivity
 					mDay);
 		}
 
-		public void onDateSet(DatePicker view, int year, int month, int day)
-		{
+		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
 			((EditText) findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
@@ -117,12 +105,10 @@ public class AddEvent4coursesActivity extends FragmentActivity
 	}
 
 	public class TimePickerFragment extends DialogFragment implements
-			TimePickerDialog.OnTimeSetListener
-	{
+			TimePickerDialog.OnTimeSetListener {
 
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState)
-		{
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			// Use the current time as the default values for the picker
 			final Calendar c = Calendar.getInstance();
 			int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -133,16 +119,12 @@ public class AddEvent4coursesActivity extends FragmentActivity
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-		{
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
-			if (minute < 10)
-			{
+			if (minute < 10) {
 				((EditText) findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":0" + minute);
-			}
-			else
-			{
+			} else {
 				((EditText) findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":" + minute);
 

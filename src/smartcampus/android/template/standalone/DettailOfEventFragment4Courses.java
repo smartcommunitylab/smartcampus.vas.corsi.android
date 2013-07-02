@@ -16,11 +16,11 @@ import eu.trentorise.smartcampus.smartuni.models.Evento;
 public class DettailOfEventFragment4Courses extends SherlockFragment
 
 {
-	public Evento	eventSelected	= null;
+	public Evento eventSelected = null;
 	public View view = null;
 
 	public DettailOfEventFragment4Courses(Evento evento) {
-		this.eventSelected = evento; 
+		this.eventSelected = evento;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 		// Inflate the layout for this fragment
 		view = inflater.inflate(R.layout.fragment_detail_of_event, container,
 				false);
-		
+
 		return view;
 	}
 

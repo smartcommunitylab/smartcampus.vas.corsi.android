@@ -13,16 +13,14 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Evento;
 
-public class DettailOfEventFragment extends SherlockFragment
-{
+public class DettailOfEventFragment extends SherlockFragment {
 
-	public Evento	eventSelected	= null;
-	public View		view			= null;
+	public Evento eventSelected = null;
+	public View view = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
+			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		view = inflater.inflate(R.layout.fragment_detail_of_event, container,
 				false);
@@ -34,8 +32,7 @@ public class DettailOfEventFragment extends SherlockFragment
 	}
 
 	@Override
-	public void onStart()
-	{
+	public void onStart() {
 
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);

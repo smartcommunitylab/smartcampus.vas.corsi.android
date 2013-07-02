@@ -2,23 +2,19 @@ package eu.trentorise.smartcampus.smartuni.models;
 
 import java.util.ArrayList;
 
-public class Notifications
-{
+public class Notifications {
 
-	private ArrayList<Notice>	listNotifications;
+	private ArrayList<Notice> listNotifications;
 
-	public Notifications()
-	{
+	public Notifications() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setListNotifications(ArrayList<Notice> listNotifications)
-	{
+	public void setListNotifications(ArrayList<Notice> listNotifications) {
 		this.listNotifications = listNotifications;
 	}
 
-	public ArrayList<Notice> getListNotifications()
-	{
+	public ArrayList<Notice> getListNotifications() {
 		if (listNotifications.size() != 0)
 			return listNotifications;
 		else

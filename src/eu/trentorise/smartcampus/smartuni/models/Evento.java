@@ -4,49 +4,48 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Evento implements Serializable
-{
+public class Evento implements Serializable {
 
 	// id dell'evento
-	private long	id;
+	private long id;
 
 	// corso di riferimento
-	private Corso	corso;
+	private Corso corso;
 
 	// // mail of the owner
 	// @Column(name = "ORGANIZER")
 	// private String organizer;
 
 	// title of the event
-	private String	titolo;
+	private String titolo;
 
 	// where the place takes places
-	private String	event_location;
+	private String event_location;
 
 	// the room where the place takes places
-	private String	room;
+	private String room;
 
-	private Date	data;
+	private Date data;
 
 	// the description of the event
-	private String	descrizione;
+	private String descrizione;
 
 	// the description of the event
 	/*
 	 * @Column(name = "NOTE") private ArrayList<Nota> note;
 	 */
 	// ora inizio
-	private Time	start;
+	private Time start;
 
 	// ora fine
-	private Time	stop;
+	private Time stop;
 
 	// true if occupies the entire day
-	private boolean	all_day;
+	private boolean all_day;
 
 	// If this event counts as busy time or is free time that can be scheduled
 	// over.
-	private boolean	availability;
+	private boolean availability;
 
 	// // Whether guests can modify the event.
 	// @Column(name = "CANMODIFY")
@@ -60,113 +59,91 @@ public class Evento implements Serializable
 	// @Column(name = "CANSEE")
 	// private boolean guests_can_see;
 
-	public long getId()
-	{
+	public long getId() {
 		return id;
 	}
 
-	public void setId(long id)
-	{
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Corso getCorso()
-	{
+	public Corso getCorso() {
 		return corso;
 	}
 
-	public void setCorso(Corso corso)
-	{
+	public void setCorso(Corso corso) {
 		this.corso = corso;
 	}
 
-	public String getTitolo()
-	{
+	public String getTitolo() {
 		return titolo;
 	}
 
-	public void setTitolo(String titolo)
-	{
+	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
 
-	public String getEvent_location()
-	{
+	public String getEvent_location() {
 		return event_location;
 	}
 
-	public void setEvent_location(String event_location)
-	{
+	public void setEvent_location(String event_location) {
 		this.event_location = event_location;
 	}
 
-	public String getRoom()
-	{
+	public String getRoom() {
 		return room;
 	}
 
-	public void setRoom(String room)
-	{
+	public void setRoom(String room) {
 		this.room = room;
 	}
 
-	public String getDescrizione()
-	{
+	public String getDescrizione() {
 		return descrizione;
 	}
 
-	public void setDescrizione(String descrizione)
-	{
+	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 
-	public Time getStart()
-	{
+	public Time getStart() {
 		return start;
 	}
 
-	public void setStart(Time start)
-	{
+	public void setStart(Time start) {
 		this.start = start;
 	}
 
-	public Time getStop()
-	{
+	public Time getStop() {
 		return stop;
 	}
 
-	public void setStop(Time stop)
-	{
+	public void setStop(Time stop) {
 		this.stop = stop;
 	}
 
-	public boolean isAll_day()
-	{
+	public boolean isAll_day() {
 		return all_day;
 	}
 
-	public void setAll_day(boolean all_day)
-	{
+	public void setAll_day(boolean all_day) {
 		this.all_day = all_day;
 	}
 
-	public boolean isAvailability()
-	{
+	public boolean isAvailability() {
 		return availability;
 	}
 
-	public void setAvailability(boolean availability)
-	{
+	public void setAvailability(boolean availability) {
 		this.availability = availability;
 	}
 
-	public Date getData()
-	{
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Date data)
-	{
+	public void setData(Date data) {
 		this.data = data;
 	}
 

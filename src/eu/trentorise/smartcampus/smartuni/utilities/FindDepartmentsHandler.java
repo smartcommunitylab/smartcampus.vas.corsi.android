@@ -23,16 +23,15 @@ import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 
 public class FindDepartmentsHandler extends
-		AsyncTask<Void, Void, List<Dipartimento>>
-{
+		AsyncTask<Void, Void, List<Dipartimento>> {
 
-	private ProtocolCarrier	mProtocolCarrier;
-	public Context			context;
-	String					body;
-	Spinner					spinnerDepartments;
-	Spinner					spinnerDegree;
+	private ProtocolCarrier mProtocolCarrier;
+	public Context context;
+	String body;
+	Spinner spinnerDepartments;
+	Spinner spinnerDegree;
 	public static ProgressDialog pd;
-	List<Dipartimento>		listDepartments	= new ArrayList<Dipartimento>();
+	List<Dipartimento> listDepartments = new ArrayList<Dipartimento>();
 	public static List<Dipartimento> listaDip = null;
 	public String departSelectedName = null;
 	public String courseSelected = null;
@@ -44,20 +43,19 @@ public class FindDepartmentsHandler extends
 	Activity currentActivity;
 
 	@Override
-	protected void onPreExecute()
-	{
+	protected void onPreExecute() {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
-		
+
 		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity,
-				"Lista dei dipartimenti", "Caricamento...");
+		pd = ProgressDialog.show(currentActivity, "Lista dei dipartimenti",
+				"Caricamento...");
 
 	}
 
 	public FindDepartmentsHandler(Context applicationContext,
-			Spinner spinnerDepartments, Spinner spinnerDegree, Activity currentActivity)
-	{
+			Spinner spinnerDepartments, Spinner spinnerDegree,
+			Activity currentActivity) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.spinnerDepartments = spinnerDepartments;
@@ -66,8 +64,7 @@ public class FindDepartmentsHandler extends
 	}
 
 	@Override
-	protected List<Dipartimento> doInBackground(Void... params)
-	{
+	protected List<Dipartimento> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -79,34 +76,24 @@ public class FindDepartmentsHandler extends
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
-		try
-		{
+		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200)
-			{
+			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
 
-			}
-			else
-			{
+			} else {
 				return null;
 			}
-		}
-		catch (ConnectionException e)
-		{
+		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (ProtocolException e)
-		{
+		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -148,7 +135,8 @@ public class FindDepartmentsHandler extends
 					public void onItemSelected(AdapterView<?> parent,
 							View view, int pos, long id) {
 
-						// chiamo l'handler per il caricamento dei corsi di laurea
+						// chiamo l'handler per il caricamento dei corsi di
+						// laurea
 						findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
 								context, spinnerDegree, departSelectedName,
 								parent, pos, currentActivity,
@@ -163,10 +151,9 @@ public class FindDepartmentsHandler extends
 				});
 
 	}
-	
-	public Dipartimento getDepartSelected(){
+
+	public Dipartimento getDepartSelected() {
 		return departSelected;
 	}
-	
 
 }

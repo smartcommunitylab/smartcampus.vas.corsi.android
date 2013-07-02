@@ -37,7 +37,7 @@ public class FindCoursesDegreeHandler extends
 	FindDepartmentsHandler findDepHandler;
 	AdapterView<?> parent;
 	int pos;
-	public static CorsoLaurea  corsoLaureaSelected = null;
+	public static CorsoLaurea corsoLaureaSelected = null;
 	public String courseSelected = null;
 	public List<CorsoLaurea> listCorLaurea;
 	FindCoursesDegreeHandler findDegHandler;
@@ -45,9 +45,9 @@ public class FindCoursesDegreeHandler extends
 	FindDepartmentsHandler findDepartHandler;
 
 	public FindCoursesDegreeHandler(Context applicationContext,
-			Spinner spinnerCorsiLaurea,
-			String departSelectedName, AdapterView<?> parent, int pos,
-			Activity currentActivity, FindDepartmentsHandler findDepartHandler) {
+			Spinner spinnerCorsiLaurea, String departSelectedName,
+			AdapterView<?> parent, int pos, Activity currentActivity,
+			FindDepartmentsHandler findDepartHandler) {
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelectedName = departSelectedName;
@@ -66,20 +66,19 @@ public class FindCoursesDegreeHandler extends
 		pd = ProgressDialog.show(currentActivity, "Lista dei corsi di laurea",
 				"Caricamento...");
 
-		
 	}
 
 	@SuppressWarnings("static-access")
 	@Override
 	protected List<CorsoLaurea> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
-		
+
 		departSelectedName = parent.getItemAtPosition(pos).toString();
 
 		departSelected = new Dipartimento();
-		
+
 		departSelected = findDepartHandler.listaDip.get(pos);
-		
+
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -148,17 +147,14 @@ public class FindCoursesDegreeHandler extends
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent,
 							View view, int pos, long id) {
-						
 
 						corsoLaureaSelected = new CorsoLaurea();
 
 						corsoLaureaSelected = result.get(pos);
 
-						
 						courseSelected = parent.getItemAtPosition(pos)
 								.toString();
 
-				
 					}
 
 					@Override
@@ -171,10 +167,8 @@ public class FindCoursesDegreeHandler extends
 		pd.dismiss();
 
 	}
-	
-	
-	
-	public CorsoLaurea getCorsoLaureaSelected(){
+
+	public CorsoLaurea getCorsoLaureaSelected() {
 		return corsoLaureaSelected;
 	}
 

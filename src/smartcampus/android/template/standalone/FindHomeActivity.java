@@ -48,7 +48,7 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		setTitle(getResources().getString(R.string.title_activity_find_courses));
-		
+
 		spinner1 = (Spinner) findViewById(R.id.spinner1);
 		spinner2 = (Spinner) findViewById(R.id.spinner2);
 
@@ -70,7 +70,7 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 
 		searchTV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 		searchTV.addTextChangedListener(FindHomeActivity.this);
-		
+
 		/*
 		 * adapter = new ArrayAdapter<String>(FindHomeActivity.this,
 		 * android.R.layout.simple_dropdown_item_1line,
@@ -100,8 +100,10 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 		case R.id.itemSearchCourses:
 			Intent intentSearch = new Intent(FindHomeActivity.this,
 					ResultSearchedActivity.class);
-			intentSearch.putExtra("department", findDepHandler.getDepartSelected());
-			intentSearch.putExtra("courseDegree", FindCoursesDegreeHandler.corsoLaureaSelected);
+			intentSearch.putExtra("department",
+					findDepHandler.getDepartSelected());
+			intentSearch.putExtra("courseDegree",
+					FindCoursesDegreeHandler.corsoLaureaSelected);
 			MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 			intentSearch.putExtra("course", textV.getText().toString());
 			startActivity(intentSearch);

@@ -129,7 +129,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub

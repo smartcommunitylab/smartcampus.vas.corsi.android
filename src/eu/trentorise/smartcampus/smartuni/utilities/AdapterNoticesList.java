@@ -14,22 +14,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.smartuni.models.Notice;
 
-public class AdapterNoticesList extends ArrayAdapter<Notice>
-{
+public class AdapterNoticesList extends ArrayAdapter<Notice> {
 	@SuppressWarnings("unused")
-	private List<Notice>	notices;
-	private Context			context	= null;
+	private List<Notice> notices;
+	private Context context = null;
 
-	public AdapterNoticesList(Context mcontext, int layoutId, List<Notice> n)
-	{
+	public AdapterNoticesList(Context mcontext, int layoutId, List<Notice> n) {
 		super(mcontext, layoutId, n);
 		notices = n;
 		context = mcontext;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
+	public View getView(int position, View convertView, ViewGroup parent) {
 		/*
 		 * LayoutInflater vi = (LayoutInflater) context
 		 * .getSystemService(Context.LAYOUT_INFLATER_SERVICE); convertView =
@@ -39,8 +36,7 @@ public class AdapterNoticesList extends ArrayAdapter<Notice>
 		View row = convertView;
 		Notice item = getItem(position);
 
-		if (row == null)
-		{
+		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(R.layout.notices_detail_row_list, parent,
@@ -74,12 +70,9 @@ public class AdapterNoticesList extends ArrayAdapter<Notice>
 		if (position > 0)
 			prev = getItem(position - 1);
 
-		if (prev == null || !(prev.getTitle().equals(item.getTitle())))
-		{
+		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
 			date.setVisibility(View.VISIBLE);
-		}
-		else
-		{
+		} else {
 			date.setVisibility(View.GONE);
 		}
 
