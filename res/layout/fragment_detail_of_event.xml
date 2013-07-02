@@ -47,6 +47,12 @@
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:text="Descrizione" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
     <TextView
         android:id="@+id/textAulaEvent"
         android:layout_width="wrap_content"
@@ -59,14 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
-        android:text="Materia" />
+        android:text="Location" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/smartn_theme_color"
-        android:paddingBottom="20dp"
-        android:paddingTop="10dp" />
 
     <ListView
         android:id="@+id/listView1"

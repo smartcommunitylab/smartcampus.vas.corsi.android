@@ -80,32 +80,32 @@ public class HomeCourseDescriptionFragment extends SherlockFragment
 
 
 
-		final ExpandableListView list = (ExpandableListView) view
-				.findViewById(R.id.list_view_expanded);
-
-		//ArrayList<FeedbackRowGroup> ratings = null;
-		//AdapterFeedbackList adpt = new AdapterFeedbackList(getActivity(), ratings);
-		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
-		//List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
-		//for (int i = 0; i < comments.size(); i++) {
-			FeedbackRowGroup feedb = new FeedbackRowGroup();
-			Author auth = new Author();
-			auth.setName("");
-			feedb.setAuthor(auth);
-			
-			feedb.setRating_cfu(1);
-			feedb.setRating_contenuti(1);
-			feedb.setRating_esame(1);
-			feedb.setRating_lezioni(1);
-			feedb.setRating_materiale(1);
-			feedb.setComment("");
-			ratings.add(feedb);
-		//}
-//		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(),
-//				android.R.layout.simple_list_item_1, new String[] { "A", "B",
-//						"C" });
-		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
-		list.setAdapter(mAdapter);
+//		final ExpandableListView list = (ExpandableListView) view
+//				.findViewById(R.id.list_view_expanded);
+//
+//		//ArrayList<FeedbackRowGroup> ratings = null;
+//		//AdapterFeedbackList adpt = new AdapterFeedbackList(getActivity(), ratings);
+//		ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
+//		//List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
+//		//for (int i = 0; i < comments.size(); i++) {
+//			FeedbackRowGroup feedb = new FeedbackRowGroup();
+//			Author auth = new Author();
+//			auth.setName("");
+//			feedb.setAuthor(auth);
+//			
+//			feedb.setRating_cfu(1);
+//			feedb.setRating_contenuti(1);
+//			feedb.setRating_esame(1);
+//			feedb.setRating_lezioni(1);
+//			feedb.setRating_materiale(1);
+//			feedb.setComment("");
+//			ratings.add(feedb);
+//		//}
+////		ArrayAdapter<String> ad = new ArrayAdapter<String>(getActivity(),
+////				android.R.layout.simple_list_item_1, new String[] { "A", "B",
+////						"C" });
+//		AdapterFeedbackList mAdapter = new AdapterFeedbackList(getActivity(), ratings);
+//		list.setAdapter(mAdapter);
 
 //		ratingAverage.setOnTouchListener(new OnTouchListener()
 //		{
