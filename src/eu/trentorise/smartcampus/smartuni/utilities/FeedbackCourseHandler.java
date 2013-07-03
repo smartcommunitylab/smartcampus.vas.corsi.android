@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.smartuni.utilities;
 
+import java.util.Collections;
 import java.util.List;
 
 import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
@@ -93,6 +94,9 @@ public class FeedbackCourseHandler extends
 		// TODO Auto-generated method stub
 		super.onPostExecute(commenti);
 
+		Collections.reverse(commenti);
+		
+		
 		feedbackInfoList = commenti;
 		if (commenti == null) {
 
