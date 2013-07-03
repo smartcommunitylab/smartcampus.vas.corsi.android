@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -115,7 +116,12 @@ public class FindDepartmentsHandler extends
 		super.onPostExecute(result);
 
 		listaDip = result;
+		if (result == null) {
 
+			Toast.makeText(context, "Ops! C'è stato un errore...",
+					Toast.LENGTH_SHORT).show();
+			currentActivity.finish();
+		} else {
 		ArrayList<String> listStringDepartments = new ArrayList<String>();
 
 		for (Dipartimento d : result) {
@@ -151,6 +157,7 @@ public class FindDepartmentsHandler extends
 				});
 
 	}
+		}
 
 	public Dipartimento getDepartSelected() {
 		return departSelected;

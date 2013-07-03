@@ -1,25 +1,52 @@
 package smartcampus.android.template.standalone;
 
-import com.actionbarsherlock.app.SherlockListFragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
-public class MaterialiPhlFragment extends SherlockListFragment {
+import com.actionbarsherlock.app.SherlockFragment;
+
+public class MaterialiPhlFragment extends SherlockFragment {
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		View view = inflater.inflate(R.layout.fragment_phl_materiali,
+				container, false);
+		// // do your view initialization here
+		return view;
+	}
+	
 	public void onStart() {
 		super.onStart();
-		String[] events = getResources().getStringArray(R.array.EventiFuffa);
-		MaterialItem[] items = new MaterialItem[events.length];
+		
+		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
+				R.id.listViewPhlMateriali);
 
-		int i = 0;
-		for (String s : events) {
-			String[] itms = s.split(",");
-			items[i++] = new MaterialItem(itms[0], itms[1],
-					R.drawable.smartuni_logo);
-		}
-
-		MaterialAdapter adapter = new MaterialAdapter(getSherlockActivity(),
-				items);
-		// ListView listView = (ListView)
-		// getSherlockActivity().findViewById(R.id.listViewEventi);
-		setListAdapter(adapter);
+		Bundle arguments = new Bundle();
+		PHLengine4Course handlerCoursesMaterial = new PHLengine4Course(
+				getActivity().getApplicationContext(), 
+				getActivity(), listViewCorsi, getSherlockActivity());
+		handlerCoursesMaterial.execute(arguments);
+		
+//		String[] events = getResources().getStringArray(R.array.EventiFuffa);
+//		MaterialItem[] items = new MaterialItem[events.length];
+//
+//		int i = 0;
+//		for (String s : events) {
+//			String[] itms = s.split(",");
+//			items[i++] = new MaterialItem(itms[0], itms[1],
+//					R.drawable.smartuni_logo);
+//		}
+//
+//		MaterialAdapter adapter = new MaterialAdapter(getSherlockActivity(),
+//				items);
+//		// ListView listView = (ListView)
+//		getSherlockActivity().findViewById(R.id.listViewEventi);
+//		setListAdapter(adapter);
 
 	}
 }

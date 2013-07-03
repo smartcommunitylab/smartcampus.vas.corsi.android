@@ -20,9 +20,11 @@ public class PHL4Courses extends SherlockFragmentActivity {
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		/** TabHost will have Tabs */
-		String tab1_txt = getResources().getString(R.string.tab_moodle);
-		String tab2_txt = getResources().getString(R.string.tab_PHL);
-
+		String tab1_txt = getResources().getString(R.string.tab_PHL);
+		String tab2_txt = getResources().getString(R.string.tab_moodle);
+		
+		setTitle(getIntent().getStringExtra("NomeCorso"));
+		
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)

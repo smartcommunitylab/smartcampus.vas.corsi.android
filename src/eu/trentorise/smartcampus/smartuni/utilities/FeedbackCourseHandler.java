@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -93,7 +94,12 @@ public class FeedbackCourseHandler extends
 		super.onPostExecute(commenti);
 
 		feedbackInfoList = commenti;
+		if (commenti == null) {
 
+			Toast.makeText(context, "Ops! C'è stato un errore...",
+					Toast.LENGTH_SHORT).show();
+			act.finish();
+		} else {
 		act.getActionBar().setTitle(
 				feedbackInfoList.get(0).getCorso().getNome());
 		ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
@@ -104,7 +110,7 @@ public class FeedbackCourseHandler extends
 		HomeCourseDescriptionFragment.pd.dismiss();
 
 		// loadDataLayout(course);
-
+		}
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
@@ -102,7 +103,12 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 	protected void onPostExecute(final List<Corso> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		if (result == null) {
 
+			Toast.makeText(context, "Ops! C'è stato un errore...",
+					Toast.LENGTH_SHORT).show();
+			currentActivity.finish();
+		} else {
 		TitledItem[] items = new TitledItem[result.size()];
 
 		int i = 0;
@@ -140,6 +146,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 		pd.dismiss();
 
 	}
+		}
 
 	@Override
 	protected List<Corso> doInBackground(Bundle... params) {

@@ -5,11 +5,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,9 +21,10 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.smartuni.models.Corso;
+import eu.trentorise.smartcampus.smartuni.models.RisorsaPhl;
 import eu.trentorise.smartcampus.smartuni.utilities.SmartUniDataWS;
 
-public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
+public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> {
 
 	private Context context;
 	private Activity currentActivity;
@@ -37,23 +35,25 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 	public static Corso corsoSelezionato;
 	public static ProgressDialog pd;
 
-	public PHLengine(Context applicationContext, Activity currentActivity,
-			ListView listViewCorsi, SherlockFragmentActivity currentSherlock) {
+	public PHLengine4Course(Context applicationContext,
+			Activity currentActivity, ListView listViewCorsi,
+			SherlockFragmentActivity currentSherlock) {
 		this.context = applicationContext;
 		this.currentActivity = currentActivity;
 		this.listViewCorsiPersonali = listViewCorsi;
 		this.currentSherlock = currentSherlock;
 	}
 
-	public List<Corso> getFrequentedCourses() {
+	public List<RisorsaPhl> getMaterial4Course() {
 
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-
+		final long idCorso = currentActivity.getIntent().getLongExtra(
+				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -78,7 +78,7 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, Corso.class);
+		return Utils.convertJSONToObjects(body, RisorsaPhl.class);
 	}
 
 	@Override
@@ -86,13 +86,12 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity,
-				"Lista dei corsi da libretto", "Caricamento...");
+		pd = ProgressDialog.show(currentActivity, "Carico i materiali",
+				"Caricamento...");
 	}
 
 	@Override
-	protected void onPostExecute(final List<Corso> result) {
-		// TODO Auto-generated method stub
+	protected void onPostExecute(final List<RisorsaPhl> result) {
 		super.onPostExecute(result);
 		if (result == null) {
 
@@ -100,48 +99,48 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-			TitledItem[] items = new TitledItem[result.size()];
+			MaterialItem[] items = new MaterialItem[result.size()];
 
 			int i = 0;
-			for (Corso s : result) {
-				items[i++] = new TitledItem("Corsi da libretto", s.getNome());
+			for (RisorsaPhl s : result) {
+				items[i++] = new MaterialItem(s.getData().toString(),
+						s.getName(), R.drawable.smartuni_logo);
 			}
 
-			TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
+			MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
+					items);
 
 			listViewCorsiPersonali.setAdapter(adapter);
 
-			listViewCorsiPersonali
-					.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-						@Override
-						public void onItemClick(AdapterView<?> arg0, View arg1,
-								int arg2, long arg3) {
-
-							// Pass Data to
-							corsoSelezionato = new Corso();
-							corsoSelezionato = result.get(arg2);
-							Intent intent = new Intent();
-							intent.setClass(currentActivity, PHL4Courses.class);
-							intent.putExtra("NomeCorso",
-									corsoSelezionato.getNome());
-							intent.putExtra("IdCorso", corsoSelezionato.getId());
-							currentActivity.startActivity(intent);
-
-						}
-					});
+			// listViewCorsiPersonali
+			// .setOnItemClickListener(new ListView.OnItemClickListener() {
+			//
+			// @Override
+			// public void onItemClick(AdapterView<?> arg0, View arg1,
+			// int arg2, long arg3) {
+			//
+			// // Pass Data to
+			// corsoSelezionato = new Corso();
+			// corsoSelezionato = result.get(arg2);
+			// Intent intent = new Intent();
+			// intent.setClass(currentActivity, PHL4Courses.class);
+			// intent.putExtra("NomeCorso", corsoSelezionato.getNome());
+			// intent.putExtra("IdCorso", corsoSelezionato.getId());
+			// currentActivity.startActivity(intent);
+			//
+			// }
+			// });
 
 			pd.dismiss();
-
 		}
 	}
 
 	@Override
-	protected List<Corso> doInBackground(Bundle... params) {
+	protected List<RisorsaPhl> doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
 		bundleParam = params[0];
 
-		return getFrequentedCourses();
+		return getMaterial4Course();
 	}
 
 }

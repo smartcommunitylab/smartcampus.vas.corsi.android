@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
 import eu.trentorise.smartcampus.ac.model.UserData;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -151,7 +152,12 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		Collections.sort(result, new CustomComparator());
 
 		listaEventi = result;
+		if (result == null) {
 
+			Toast.makeText(context, "Ops! C'è stato un errore...",
+					Toast.LENGTH_SHORT).show();
+			fragment.finish();
+		} else {
 		EventItem[] listEvItem = new EventItem[result.size()];
 
 		int i = 0;
@@ -195,7 +201,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		});
 
 		OverviewFragment.pd.dismiss();
-
+		}
 	}
 
 	public class CustomComparator implements Comparator<Evento> {

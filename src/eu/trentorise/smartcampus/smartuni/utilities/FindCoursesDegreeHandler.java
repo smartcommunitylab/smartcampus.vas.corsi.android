@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -127,7 +128,12 @@ public class FindCoursesDegreeHandler extends
 	protected void onPostExecute(final List<CorsoLaurea> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		if (result == null) {
 
+			Toast.makeText(context, "Ops! C'è stato un errore...",
+					Toast.LENGTH_SHORT).show();
+			currentActivity.finish();
+		} else {
 		ArrayList<String> listStringDegree = new ArrayList<String>();
 
 		for (CorsoLaurea d : result) {
@@ -165,7 +171,7 @@ public class FindCoursesDegreeHandler extends
 				});
 
 		pd.dismiss();
-
+		}
 	}
 
 	public CorsoLaurea getCorsoLaureaSelected() {
