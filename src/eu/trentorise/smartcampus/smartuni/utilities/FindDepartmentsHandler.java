@@ -100,14 +100,16 @@ public class FindDepartmentsHandler extends
 		}
 
 		listDepartments = Utils.convertJSONToObjects(body, Dipartimento.class);
-
-		// aggiungo l'item "tutto" alla lista
-		Dipartimento depTutto = new Dipartimento();
-		depTutto.setNome("Tutto");
-		listDepartments.add(0, depTutto);
-
-		return listDepartments;
-
+		if (listDepartments == null) {
+			currentActivity.finish();
+		} else {
+			// aggiungo l'item "tutto" alla lista
+			Dipartimento depTutto = new Dipartimento();
+			depTutto.setNome("Tutto");
+			listDepartments.add(0, depTutto);
+		}
+			return listDepartments;
+		
 	}
 
 	@Override
@@ -122,42 +124,42 @@ public class FindDepartmentsHandler extends
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-		ArrayList<String> listStringDepartments = new ArrayList<String>();
+			ArrayList<String> listStringDepartments = new ArrayList<String>();
 
-		for (Dipartimento d : result) {
-			listStringDepartments.add(d.getNome());
+			for (Dipartimento d : result) {
+				listStringDepartments.add(d.getNome());
+			}
+
+			// setto i dipartimenti nello spinner
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			ArrayAdapter adapter = new ArrayAdapter(
+					context,
+					smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
+					listStringDepartments);
+			spinnerDepartments.setAdapter(adapter);
+			pd.dismiss();
+			spinnerDepartments
+					.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+						public void onItemSelected(AdapterView<?> parent,
+								View view, int pos, long id) {
+
+							// chiamo l'handler per il caricamento dei corsi di
+							// laurea
+							findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
+									context, spinnerDegree, departSelectedName,
+									parent, pos, currentActivity,
+									FindDepartmentsHandler.this).execute();
+
+							departSelected = result.get(pos);
+
+						}
+
+						public void onNothingSelected(AdapterView<?> parent) {
+						}
+					});
+
 		}
-
-		// setto i dipartimenti nello spinner
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ArrayAdapter adapter = new ArrayAdapter(
-				context,
-				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
-				listStringDepartments);
-		spinnerDepartments.setAdapter(adapter);
-		pd.dismiss();
-		spinnerDepartments
-				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-					public void onItemSelected(AdapterView<?> parent,
-							View view, int pos, long id) {
-
-						// chiamo l'handler per il caricamento dei corsi di
-						// laurea
-						findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-								context, spinnerDegree, departSelectedName,
-								parent, pos, currentActivity,
-								FindDepartmentsHandler.this).execute();
-
-						departSelected = result.get(pos);
-
-					}
-
-					public void onNothingSelected(AdapterView<?> parent) {
-					}
-				});
-
 	}
-		}
 
 	public Dipartimento getDepartSelected() {
 		return departSelected;

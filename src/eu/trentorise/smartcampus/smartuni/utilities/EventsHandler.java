@@ -148,9 +148,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
-		// ordino per data
-		Collections.sort(result, new CustomComparator());
-
 		listaEventi = result;
 		if (result == null) {
 
@@ -158,49 +155,52 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
 		} else {
-		EventItem[] listEvItem = new EventItem[result.size()];
+			// ordino per data
+			Collections.sort(result, new CustomComparator());
 
-		int i = 0;
+			EventItem[] listEvItem = new EventItem[result.size()];
 
-		for (Evento ev : result) {
-			AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
-					ev.getTitolo(), ev.getDescrizione(), ev.getStart()
-							.toString(), ev.getRoom());
-			listEvItem[i++] = new EventItem(e);
+			int i = 0;
 
-		}
+			for (Evento ev : result) {
+				AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
+						ev.getTitolo(), ev.getDescrizione(), ev.getStart()
+								.toString(), ev.getRoom());
+				listEvItem[i++] = new EventItem(e);
 
-		EventAdapter adapter = new EventAdapter(fragment, listEvItem);
-		ListView listView = (ListView) fragment
-				.findViewById(R.id.listViewEventi);
-		listView.setAdapter(adapter);
-
-		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				MyAgendaActivity parent = (MyAgendaActivity) fragment;
-				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
-				fragment.invalidateOptionsMenu();
-
-				Evento evento = result.get(arg2);
-
-				// Pass Data to other Fragment
-				Bundle arguments = new Bundle();
-				arguments.putSerializable("eventSelected", evento);
-				FragmentTransaction ft = fragment.getSupportFragmentManager()
-						.beginTransaction();
-				Fragment fragment = new DettailOfEventFragment();
-				fragment.setArguments(arguments);
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.tabOverview, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
 			}
-		});
 
-		OverviewFragment.pd.dismiss();
+			EventAdapter adapter = new EventAdapter(fragment, listEvItem);
+			ListView listView = (ListView) fragment
+					.findViewById(R.id.listViewEventi);
+			listView.setAdapter(adapter);
+
+			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					MyAgendaActivity parent = (MyAgendaActivity) fragment;
+					parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
+					fragment.invalidateOptionsMenu();
+
+					Evento evento = result.get(arg2);
+
+					// Pass Data to other Fragment
+					Bundle arguments = new Bundle();
+					arguments.putSerializable("eventSelected", evento);
+					FragmentTransaction ft = fragment
+							.getSupportFragmentManager().beginTransaction();
+					Fragment fragment = new DettailOfEventFragment();
+					fragment.setArguments(arguments);
+					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+					ft.replace(R.id.tabOverview, fragment);
+					ft.addToBackStack(null);
+					ft.commit();
+				}
+			});
+
+			OverviewFragment.pd.dismiss();
 		}
 	}
 
