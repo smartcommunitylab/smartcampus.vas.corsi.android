@@ -17,19 +17,19 @@ public class Commento {
 	private String data_inserimento;
 
 	// valutazione contenuto
-	private Integer rating_contenuto;
+	private float rating_contenuto;
 
 	// valutazione carico studio
-	private Integer rating_carico_studio;
+	private float rating_carico_studio;
 
 	// valutazione lezioni
-	private Integer rating_lezioni;
+	private float rating_lezioni;
 
 	// valutazione materiali
-	private Integer rating_materiali;
+	private float rating_materiali;
 
 	// valutazione esame
-	private Integer rating_esame;
+	private float rating_esame;
 
 	public Commento() {
 	}
@@ -74,43 +74,43 @@ public class Commento {
 		this.data_inserimento = data_inserimento;
 	}
 
-	public Integer getRating_contenuto() {
+	public float getRating_contenuto() {
 		return rating_contenuto;
 	}
 
-	public void setRating_contenuto(Integer rating_contenuto) {
-		this.rating_contenuto = rating_contenuto;
+	public void setRating_contenuto(float f) {
+		this.rating_contenuto = f;
 	}
 
-	public Integer getRating_carico_studio() {
+	public float getRating_carico_studio() {
 		return rating_carico_studio;
 	}
 
-	public void setRating_carico_studio(int rating_carico_studio) {
+	public void setRating_carico_studio(float rating_carico_studio) {
 		this.rating_carico_studio = rating_carico_studio;
 	}
 
-	public Integer getRating_lezioni() {
+	public float getRating_lezioni() {
 		return rating_lezioni;
 	}
 
-	public void setRating_lezioni(Integer rating_lezioni) {
+	public void setRating_lezioni(float rating_lezioni) {
 		this.rating_lezioni = rating_lezioni;
 	}
 
-	public Integer getRating_materiali() {
+	public float getRating_materiali() {
 		return rating_materiali;
 	}
 
-	public void setRating_materiali(int rating_materiali) {
+	public void setRating_materiali(float rating_materiali) {
 		this.rating_materiali = rating_materiali;
 	}
 
-	public Integer getRating_esame() {
+	public float getRating_esame() {
 		return rating_esame;
 	}
 
-	public void setRating_esame(Integer rating_esame) {
+	public void setRating_esame(float rating_esame) {
 		this.rating_esame = rating_esame;
 	}
 

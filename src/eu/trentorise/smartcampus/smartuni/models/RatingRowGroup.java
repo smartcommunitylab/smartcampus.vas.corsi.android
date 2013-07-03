@@ -3,7 +3,7 @@ package eu.trentorise.smartcampus.smartuni.models;
 public class RatingRowGroup {
 
 	public String context;
-	public Integer rating;
+	public float rating;
 	public String explainContext;
 
 	public RatingRowGroup() {
@@ -18,12 +18,12 @@ public class RatingRowGroup {
 		this.context = context;
 	}
 
-	public Integer getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
-		this.rating = rating;
+	public void setRating(float rating2) {
+		this.rating = rating2;
 	}
 
 	public String getExplainContext() {

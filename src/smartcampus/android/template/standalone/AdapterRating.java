@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
 
@@ -74,6 +75,55 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				.findViewById(R.id.ratingBarContextMateriali);
 		RatingBar rbExam = (RatingBar) view
 				.findViewById(R.id.ratingBarContextEsame);
+
+		rbCont.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				ratings.get(0).setRating(rating);
+			}
+		});
+
+		rbCfu.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				ratings.get(1).setRating(rating);
+			}
+		});
+
+		rbLez.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				ratings.get(2).setRating(rating);
+			}
+		});
+		
+		rbMat.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				ratings.get(3).setRating(rating);
+			}
+		});
+		rbExam.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				ratings.get(4).setRating(rating);
+			}
+		});
 		switch (groupPosition) {
 		case 0:
 			rbCont.setVisibility(View.VISIBLE);
@@ -118,6 +168,8 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			return view;
 
 			// rbExam.setRating(inf.getRating());
+
+			// inizializzo la lista dei
 		}
 		//
 		return view;

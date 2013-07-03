@@ -1,24 +1,37 @@
 package smartcampus.android.template.standalone;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.RatingBar;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
+import eu.trentorise.smartcampus.ac.model.UserData;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
+import eu.trentorise.smartcampus.smartuni.models.Commento;
 import eu.trentorise.smartcampus.smartuni.models.RatingRowGroup;
+import eu.trentorise.smartcampus.smartuni.models.Studente;
 import eu.trentorise.smartcampus.smartuni.utilities.AdapterFeedbackList;
+import eu.trentorise.smartcampus.smartuni.utilities.AddFeedbackHandler;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
 
 public class AddRateActivity extends FragmentActivity {
 
 	ExpandableListView list;
 	AdapterFeedbackList mAdapter;
 	ArrayList<RatingRowGroup> ratings;
+	List<Float> values;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +63,7 @@ public class AddRateActivity extends FragmentActivity {
 		list.setAdapter(mAdapter);
 		list.setGroupIndicator(null);
 		list.expandGroup(0);
+		list.setItemsCanFocus(true);
 		list.setOnGroupClickListener(new OnGroupClickListener() {
 
 			@Override
@@ -95,6 +109,14 @@ public class AddRateActivity extends FragmentActivity {
 			}
 
 		});
+		
+		
+		final RatingBar rbCont = (RatingBar) findViewById(R.id.ratingBarContextContenuti);
+		final RatingBar rbCfu = (RatingBar) findViewById(R.id.ratingBarContextCfu);
+		final RatingBar rbLez = (RatingBar) findViewById(R.id.ratingBarContextLezioni);
+		final RatingBar rbMat = (RatingBar) findViewById(R.id.ratingBarContextMateriali);
+		final RatingBar rbExam = (RatingBar) findViewById(R.id.ratingBarContextEsame);
+		final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 		list.setOnChildClickListener(new OnChildClickListener() {
 
@@ -113,8 +135,29 @@ public class AddRateActivity extends FragmentActivity {
 					public void onClick(View v) {
 						Intent intent = new Intent();
 						intent.putExtra("Rating", ratings);
+						Commento commento = new Commento();
+						commento.setCorso(CoursesHandler.corsoSelezionato);
+						commento.setRating_contenuto(ratings.get(0).getRating());
+						commento.setRating_carico_studio(ratings.get(1).getRating());
+						commento.setRating_lezioni(ratings.get(0).getRating());
+						commento.setRating_materiali(ratings.get(0).getRating());
+						commento.setRating_esame(ratings.get(0).getRating());
+						
+						if(commentCourse.getText().toString()!=null)
+							commento.setTesto(commentCourse.getText().toString());
+						else
+							commento.setTesto(new String(""));
+						Calendar c = Calendar.getInstance(); 
+						commento.setData_inserimento(c.getTime().toString());
+						
+						AMSCAccessProvider mAccessProvider = new AMSCAccessProvider();
+						UserData profile = mAccessProvider.readUserData(AddRateActivity.this, null);
+						Studente stud = new Studente();
+						stud.setId(Long.parseLong(profile.getUserId()));
+						commento.setId_studente(stud);
+						new AddFeedbackHandler().execute(commento);
 						Toast.makeText(getApplicationContext(),
-								"Voto Aggiunto!", Toast.LENGTH_SHORT).show();
+								"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 						finish();
 					}
 				});
@@ -126,6 +169,11 @@ public class AddRateActivity extends FragmentActivity {
 						finish();
 					}
 				});
+
+
+
+		
+
 	}
 
 	private void setRatingContexts() {
