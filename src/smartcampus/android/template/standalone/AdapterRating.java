@@ -30,7 +30,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 		// } else if (childPosition == 1){
 		// return ratings.get(groupPosition).getRating();
 		// }
-
+		
 		return ratings.get(groupPosition);
 	}
 
@@ -75,7 +75,21 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				.findViewById(R.id.ratingBarContextMateriali);
 		RatingBar rbExam = (RatingBar) view
 				.findViewById(R.id.ratingBarContextEsame);
+		
+		switch (childPosition) {
+        case 0: 
+        	rbCont.setRating(inf.getRating());
+        case 1: 
+        	rbCfu.setRating(inf.getRating());
+        case 2: 
+        	rbLez.setRating(inf.getRating());
+        case 3: 
+        	rbMat.setRating(inf.getRating());
+        case 4: 
+        	rbCfu.setRating(inf.getRating());
 
+		}
+		
 		rbCont.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
@@ -213,7 +227,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 		TextView heading = (TextView) view
 				.findViewById(R.id.textViewContextRating);
 		heading.setText(headerInfo.getContext().trim());
-		// rb.setRating(headerInfo.getRating());
 
 		return view;
 	}
