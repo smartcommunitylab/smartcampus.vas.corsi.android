@@ -2,6 +2,8 @@ package eu.trentorise.smartcampus.smartuni.utilities;
 
 import java.util.List;
 
+import smartcampus.android.template.standalone.AddRateActivity;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -62,6 +64,13 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 		}
 
 		return null;
+	}
+	
+	@Override
+	protected void onPostExecute(Commento result) {
+		// TODO Auto-generated method stub
+		super.onPostExecute(result);
+		
 	}
 
 
