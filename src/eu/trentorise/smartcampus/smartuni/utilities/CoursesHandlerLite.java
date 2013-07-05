@@ -23,6 +23,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.smartuni.models.Corso;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLaurea;
 import eu.trentorise.smartcampus.smartuni.models.CorsoLite;
 import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
@@ -41,6 +42,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	ListView listView;
 	TextView tvTitleNotices;
 	Activity currentAct;
+	public static Corso corsoSelezionato;
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
@@ -300,9 +302,12 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 						.getItemAtPosition(arg2);
 				Intent i = new Intent(context, FindHomeCourseActivity.class);
 
-				CorsoLite corsoSelezionato = new CorsoLite();
+				Corso corsoSelezionato = new Corso();
 
-				corsoSelezionato = courses.get(arg2);
+				corsoSelezionato.setId(courses.get(arg2).getId());
+				corsoSelezionato.setNome(courses.get(arg2).getNome());
+				
+				CoursesHandler.corsoSelezionato = (Corso) corsoSelezionato;
 
 				i.putExtra("courseSelected", corsoSelezionato);
 				i.putExtra("courseSelectedName", courseSelectedName);

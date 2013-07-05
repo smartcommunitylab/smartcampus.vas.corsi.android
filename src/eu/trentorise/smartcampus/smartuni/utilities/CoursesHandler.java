@@ -133,6 +133,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 						// Pass Data to other Fragment
 						corsoSelezionato = new Corso();
 						corsoSelezionato = result.get(arg2);
+						CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
 						FragmentTransaction ft = currentSherlock
 								.getSupportFragmentManager().beginTransaction();
 						Fragment fragment = new OverviewFilterFragment();

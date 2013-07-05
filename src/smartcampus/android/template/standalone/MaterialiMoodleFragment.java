@@ -1,5 +1,7 @@
 package smartcampus.android.template.standalone;
 
+import android.widget.ListView;
+
 import com.actionbarsherlock.app.SherlockListFragment;
 
 public class MaterialiMoodleFragment extends SherlockListFragment {
@@ -18,9 +20,9 @@ public class MaterialiMoodleFragment extends SherlockListFragment {
 
 		MaterialAdapter adapter = new MaterialAdapter(getSherlockActivity(),
 				items);
-		// ListView listView = (ListView)
-		// getSherlockActivity().findViewById(R.id.listViewEventi);
-		setListAdapter(adapter);
+		 ListView listView = (ListView)
+		 getSherlockActivity().findViewById(R.id.listViewEventi);
+		 listView.setAdapter(adapter);
 
 	}
 }

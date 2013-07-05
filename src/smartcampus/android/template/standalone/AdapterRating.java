@@ -3,6 +3,7 @@ package smartcampus.android.template.standalone;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-
-		// if (childPosition == 0) {
-		// return ratings.get(groupPosition).getExplainContext();
-		// } else if (childPosition == 1){
-		// return ratings.get(groupPosition).getRating();
-		// }
-
 		return ratings.get(groupPosition);
 	}
 
@@ -61,10 +55,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 		// childPosition));
 		inf = (RatingRowGroup) getChild(groupPosition, childPosition);
 
-		TextView textExplain = (TextView) view
-				.findViewById(R.id.textViewExplainRate);
-		textExplain.setText(inf.getExplainContext());
-
 		RatingBar rbCont = (RatingBar) view
 				.findViewById(R.id.ratingBarContextContenuti);
 		RatingBar rbCfu = (RatingBar) view
@@ -75,7 +65,31 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				.findViewById(R.id.ratingBarContextMateriali);
 		RatingBar rbExam = (RatingBar) view
 				.findViewById(R.id.ratingBarContextEsame);
+		
+		switch (groupPosition) {
+        case 0: 
+        	rbCont.setRating(inf.getRating());
+        	break;
+        case 1: 
+        	rbCfu.setRating(inf.getRating());
+        	break;
+        case 2: 
+        	rbLez.setRating(inf.getRating());
+        	break;
+        case 3: 
+        	rbMat.setRating(inf.getRating());
+        	break;
+        case 4: 
+        	rbCfu.setRating(inf.getRating());
+        	break;
+		}
+		
+		TextView textExplain = (TextView) view
+				.findViewById(R.id.textViewExplainRate);
+		textExplain.setText(inf.getExplainContext());
 
+
+		
 		rbCont.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
@@ -83,6 +97,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				ratings.get(0).setRating(rating);
+				Log.i("ratings", ratings.toString());
 			}
 		});
 
@@ -93,6 +108,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				ratings.get(1).setRating(rating);
+				Log.i("ratings", ratings.toString());
 			}
 		});
 
@@ -103,6 +119,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				ratings.get(2).setRating(rating);
+				Log.i("ratings", ratings.toString());
 			}
 		});
 		
@@ -113,6 +130,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				ratings.get(3).setRating(rating);
+				Log.i("ratings", ratings.toString());
 			}
 		});
 		rbExam.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
@@ -122,12 +140,15 @@ public class AdapterRating extends BaseExpandableListAdapter {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				ratings.get(4).setRating(rating);
+				Log.i("ratings", ratings.toString());
 			}
 		});
+		
+
+		
 		switch (groupPosition) {
 		case 0:
 			rbCont.setVisibility(View.VISIBLE);
-
 			rbCfu.setVisibility(View.GONE);
 			rbLez.setVisibility(View.GONE);
 			rbMat.setVisibility(View.GONE);
@@ -166,11 +187,12 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setVisibility(View.GONE);
 			rbExam.setVisibility(View.VISIBLE);
 			return view;
+		}
 
 			// rbExam.setRating(inf.getRating());
 
 			// inizializzo la lista dei
-		}
+		
 		//
 		return view;
 	}

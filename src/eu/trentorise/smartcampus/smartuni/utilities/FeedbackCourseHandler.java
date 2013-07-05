@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import smartcampus.android.template.standalone.HomeCourseDescriptionFragment;
+import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -100,7 +101,7 @@ public class FeedbackCourseHandler extends
 		feedbackInfoList = commenti;
 		if (commenti == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, "Ops! C'e' stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			act.finish();
 		} else {
@@ -108,6 +109,7 @@ public class FeedbackCourseHandler extends
 				feedbackInfoList.get(0).getCorso().getNome());
 		ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
 				.getValutazione_media());
+		final RatingBar ratingCont = (RatingBar) act.findViewById(R.id.ratingBarRowContenuti);
 		descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
 				.getDescrizione());
 

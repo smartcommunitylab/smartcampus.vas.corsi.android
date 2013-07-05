@@ -44,9 +44,9 @@ public class MaterialiPhlFragment extends SherlockFragment {
 //
 //		MaterialAdapter adapter = new MaterialAdapter(getSherlockActivity(),
 //				items);
-//		// ListView listView = (ListView)
+//		 ListView listView = (ListView)
 //		getSherlockActivity().findViewById(R.id.listViewEventi);
-//		setListAdapter(adapter);
+//		 listView.setAdapter(adapter);
 
 	}
 }

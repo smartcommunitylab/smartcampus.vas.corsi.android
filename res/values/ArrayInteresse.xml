@@ -2,18 +2,14 @@
 <resources>
 
     <string-array name="CorsiInteresse">
-        <item>Tablet</item>
-        <item>Interfacce</item>
+        <item>Programmazione per sistemi mobili e tablet</item>
+        <item>Basi di dati</item>
         <item>Sistemi Operativi</item>
     </string-array>
     <string-array name="EventiFuffa">
-        <item >12/12/2012,Quasi Maya</item>
-        <item >12/21/2012,Fine del Mondo</item>
-        <item >12/21/2012,Brindisi di fine mondo</item>
+        <item >12/06/2013,Appunti di programmazione 1</item>
+        <item >12/06/2013,Soluzioni appello giugno 2013</item>
+        <item >13/07/2013,Appunti di teoria</item>
     </string-array>
-    <string-array name="NewEventiFuffa">
-        <item >12/12/2012,Quasi Maya, ci siamo!, 20.00</item>
-        <item >12/21/2012,Fine del Mondo, vediamo!, 00.00</item>
-        <item >12/21/2012,Brindisi di fine mondo, SALUTE!, 00.01</item>
-    </string-array>
+
 </resources>

@@ -35,7 +35,6 @@
     <uses-permission android:name="android.permission.READ_SYNC_STATS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/smartuni_logo"
@@ -116,7 +115,7 @@
             android:label="@string/title_activity_notices" >
         </activity>
         <activity
-            android:name="MyAgendaActivity"
+            android:name="smartcampus.android.template.standalone.MyAgendaActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/myagenda_white"
             android:label="@string/title_activity_my_agenda" >
@@ -176,6 +175,10 @@
             android:name="smartcampus.android.template.standalone.AddRateActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_rate" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.template.standalone.WorkInProgress"
+            android:label="@string/title_activity_work_in_progress" >
         </activity>
     </application>
 

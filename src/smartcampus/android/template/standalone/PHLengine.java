@@ -122,7 +122,7 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 							corsoSelezionato = new Corso();
 							corsoSelezionato = result.get(arg2);
 							Intent intent = new Intent();
-							intent.setClass(currentActivity, PHL4Courses.class);
+							intent.setClass(currentActivity, WorkInProgress.class);
 							intent.putExtra("NomeCorso",
 									corsoSelezionato.getNome());
 							intent.putExtra("IdCorso", corsoSelezionato.getId());
