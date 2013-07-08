@@ -51,8 +51,10 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 		final long idCorso = currentActivity.getIntent().getLongExtra(
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
+//				SmartUniDataWS.URL_WS_SMARTUNI,
+//				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
+				"http://qrv.povoshardlife.eu/","getFiles/1");
+					
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
