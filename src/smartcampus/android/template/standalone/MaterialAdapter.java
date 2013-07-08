@@ -1,5 +1,6 @@
 package smartcampus.android.template.standalone;
 
+import eu.trentorise.smartcampus.smartuni.models.RisorsaPhl;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 
 	private Context context;
 	private int layoutResourceId;
+
 
 	public MaterialAdapter(Context context, MaterialItem[] arr) {
 		super(context, R.layout.material_row, arr);
@@ -39,7 +41,7 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		icon.setImageResource(item.getIcon());
-
+	
 		content.setPadding(
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin),

@@ -138,7 +138,7 @@ public class MyUniActivity extends Activity {
 				mToken = mAccessProvider.getAuthToken(this, null);
 
 				Toast.makeText(getApplicationContext(),
-						"Avviso: l'applicazione contiene dati fittizzi.", Toast.LENGTH_LONG).show();
+						"Avviso: l'applicazione contiene dati fittizi.", Toast.LENGTH_LONG).show();
 			}
 
 			catch (OperationCanceledException e) {

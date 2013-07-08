@@ -30,7 +30,6 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 	private Activity currentActivity;
 	private SherlockFragmentActivity currentSherlock;
 	private ListView listViewCorsiPersonali;
-
 	public Bundle bundleParam;
 	public static Corso corsoSelezionato;
 	public static ProgressDialog pd;
@@ -100,33 +99,43 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 			currentActivity.finish();
 		} else {
 			MaterialItem[] items = new MaterialItem[result.size()];
-
 			int i = 0;
 			for (RisorsaPhl s : result) {
-				items[i++] = new MaterialItem(s.getData().toString(),
-						s.getName(), R.drawable.smartuni_logo);
+				if (s.getLevel() == 1) {
+					if (s.getMime() == null) {
+						items[i++] = new MaterialItem(s.getUrl(), s.getName(),
+								R.drawable.cartella);
+
+					} else {
+
+						items[i++] = new MaterialItem(s.getUrl(), s.getName(),
+								R.drawable.pdf);
+						// }
+					}
+				}
 			}
 
 			MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
 					items);
-
 			listViewCorsiPersonali.setAdapter(adapter);
 
 			// listViewCorsiPersonali
-			// .setOnItemClickListener(new ListView.OnItemClickListener() {
+			// .setOnItemClickListener(new
+			// ListView.OnItemClickListener() {
 			//
 			// @Override
 			// public void onItemClick(AdapterView<?> arg0, View arg1,
 			// int arg2, long arg3) {
 			//
 			// // Pass Data to
-			// corsoSelezionato = new Corso();
-			// corsoSelezionato = result.get(arg2);
-			// Intent intent = new Intent();
-			// intent.setClass(currentActivity, PHL4Courses.class);
-			// intent.putExtra("NomeCorso", corsoSelezionato.getNome());
-			// intent.putExtra("IdCorso", corsoSelezionato.getId());
-			// currentActivity.startActivity(intent);
+			// FragmentTransaction ft = currentSherlock
+			// .getSupportFragmentManager()
+			// .beginTransaction();
+			// Fragment fragment = new MaterialiPhlFragment();
+			// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			// ft.replace(R.id.phl_tab_materiali, fragment);
+			// ft.addToBackStack(null);
+			// ft.commit();
 			//
 			// }
 			// });
