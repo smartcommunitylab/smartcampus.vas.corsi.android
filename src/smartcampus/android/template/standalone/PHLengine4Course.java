@@ -7,6 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,9 +55,9 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 		final long idCorso = currentActivity.getIntent().getLongExtra(
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
-//				SmartUniDataWS.URL_WS_SMARTUNI,
-//				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
-				"http://qrv.povoshardlife.eu/","getFiles/1");
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
+
 					
 		request.setMethod(Method.GET);
 
@@ -115,32 +119,39 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 						// }
 					}
 				}
+				else{
+					items[i++] = new MaterialItem(s.getUrl(), s.getName(),
+						R.drawable.smartuni_logo);
+					}
 			}
 
 			MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
 					items);
 			listViewCorsiPersonali.setAdapter(adapter);
 
-			// listViewCorsiPersonali
-			// .setOnItemClickListener(new
-			// ListView.OnItemClickListener() {
-			//
-			// @Override
-			// public void onItemClick(AdapterView<?> arg0, View arg1,
-			// int arg2, long arg3) {
-			//
-			// // Pass Data to
-			// FragmentTransaction ft = currentSherlock
-			// .getSupportFragmentManager()
-			// .beginTransaction();
-			// Fragment fragment = new MaterialiPhlFragment();
-			// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			// ft.replace(R.id.phl_tab_materiali, fragment);
-			// ft.addToBackStack(null);
-			// ft.commit();
-			//
-			// }
-			// });
+//			 listViewCorsiPersonali
+//			 .setOnItemClickListener(new
+//			 ListView.OnItemClickListener() {
+//			
+//			 @Override
+//			 public void onItemClick(AdapterView<?> arg0, View arg1,
+//			 int arg2, long arg3) {
+//			
+//			 // Pass Data to
+//				 
+//			 FragmentTransaction ft = currentSherlock
+//			 .getSupportFragmentManager()
+//			 .beginTransaction();
+//			 Bundle b = new Bundle();
+//			 b.putSerializable("materiale", result.get(arg2));
+//			 Fragment fragment = new MaterialiPhlFragment();
+//			 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//			 ft.replace(R.id.phl_tab_materiali, fragment);
+//			 ft.addToBackStack(null);
+//			 ft.commit();
+//			
+//			 }
+//			 });
 
 			pd.dismiss();
 		}

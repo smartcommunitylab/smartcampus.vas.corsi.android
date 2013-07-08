@@ -1,14 +1,15 @@
 package eu.trentorise.smartcampus.smartuni.models;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class RisorsaPhl {
+
+public class RisorsaPhl implements Serializable {
 	private String name;
 	private String parent;
 	private int level;
 	private String url;
 	private String mime;
-	private Date modified;
+	private String modified;
 
 	// private Date data;
 	public String getName() {
@@ -51,12 +52,14 @@ public class RisorsaPhl {
 		this.mime = mime;
 	}
 
-	public Date getModified() {
+	public String getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	public void setModified(String modified) {
 		this.modified = modified;
 	}
+
+	
 
 }
