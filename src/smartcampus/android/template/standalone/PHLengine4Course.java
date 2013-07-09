@@ -37,6 +37,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 	public Bundle bundleParam;
 	public static Corso corsoSelezionato;
 	public static ProgressDialog pd;
+	public static RisorsaPhl risorsa;
 
 	public PHLengine4Course(Context applicationContext,
 			Activity currentActivity, ListView listViewCorsi,
@@ -58,7 +59,6 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 				SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 
-					
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -98,60 +98,65 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 	@Override
 	protected void onPostExecute(final List<RisorsaPhl> result) {
 		super.onPostExecute(result);
+		final int lv = 1;
 		if (result == null) {
 
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-			MaterialItem[] items = new MaterialItem[result.size()];
+			int size = 0;
+			// MaterialItem[] items = new MaterialItem[result.size()];
 			int i = 0;
+			for (RisorsaPhl n : result) {
+				if (n.getLevel() == lv) {
+					size++;
+				}
+			}
+			final MaterialItem[] items = new MaterialItem[size];
 			for (RisorsaPhl s : result) {
-				if (s.getLevel() == 1) {
+				if (s.getLevel() == lv) {
 					if (s.getMime() == null) {
-						items[i++] = new MaterialItem(s.getUrl(), s.getName(),
-								R.drawable.cartella);
+						items[i++] = new MaterialItem(s.getModified(),
+								s.getName(), R.drawable.cartella, s.getLevel());
 
 					} else {
 
-						items[i++] = new MaterialItem(s.getUrl(), s.getName(),
-								R.drawable.pdf);
-						// }
+						items[i++] = new MaterialItem(s.getModified(),
+								s.getName(), R.drawable.pdf, s.getLevel());
+
 					}
 				}
-				else{
-					items[i++] = new MaterialItem(s.getUrl(), s.getName(),
-						R.drawable.smartuni_logo);
-					}
+				// else{
+				// items[i++] = new MaterialItem(s.getModified(), s.getName(),
+				// R.drawable.smartuni_logo);
+				//
+				// }
 			}
 
 			MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
 					items);
 			listViewCorsiPersonali.setAdapter(adapter);
 
-//			 listViewCorsiPersonali
-//			 .setOnItemClickListener(new
-//			 ListView.OnItemClickListener() {
-//			
-//			 @Override
-//			 public void onItemClick(AdapterView<?> arg0, View arg1,
-//			 int arg2, long arg3) {
-//			
-//			 // Pass Data to
-//				 
-//			 FragmentTransaction ft = currentSherlock
-//			 .getSupportFragmentManager()
-//			 .beginTransaction();
-//			 Bundle b = new Bundle();
-//			 b.putSerializable("materiale", result.get(arg2));
-//			 Fragment fragment = new MaterialiPhlFragment();
-//			 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//			 ft.replace(R.id.phl_tab_materiali, fragment);
-//			 ft.addToBackStack(null);
-//			 ft.commit();
-//			
-//			 }
-//			 });
+			listViewCorsiPersonali
+					.setOnItemClickListener(new ListView.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,								
+								int arg2, long arg3) {
+							Bundle b = new Bundle();
+							//b.putSerializable("Materiale", risorsa);
+							b.putSerializable("cartella", items[arg2]);
+							FragmentTransaction ft = currentSherlock
+									.getSupportFragmentManager()
+									.beginTransaction();
+							Fragment fragment = new MaterialiPhlFragment();
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(R.id.tabMateriali, fragment);
+							ft.addToBackStack(null);
+							ft.commit();
+
+						}
+					});
 
 			pd.dismiss();
 		}

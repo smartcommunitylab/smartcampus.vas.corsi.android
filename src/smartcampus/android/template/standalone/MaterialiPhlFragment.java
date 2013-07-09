@@ -27,10 +27,30 @@ public class MaterialiPhlFragment extends SherlockFragment {
 				R.id.listViewPhlMateriali);
 
 		Bundle arguments = new Bundle();
+		//arguments.getSerializable("cartella");
 		PHLengine4Course handlerCoursesMaterial = new PHLengine4Course(
 				getActivity().getApplicationContext(), 
 				getActivity(), listViewCorsi, getSherlockActivity());
 		handlerCoursesMaterial.execute(arguments);
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 //		String[] events = getResources().getStringArray(R.array.EventiFuffa);
 //		MaterialItem[] items = new MaterialItem[events.length];

@@ -1,15 +1,19 @@
 package smartcampus.android.template.standalone;
 
-public class MaterialItem {
+import java.io.Serializable;
+
+public class MaterialItem implements Serializable{
 	private String title;
 	private String content;
 	private int icon;
+	private int level;
 
-	public MaterialItem(String title, String content, int icon) {
+	public MaterialItem(String title, String content, int icon, int level) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.icon = icon;
+		this.level=level;
 	}
 
 	public String getTitle() {
@@ -34,6 +38,14 @@ public class MaterialItem {
 
 	public void setIcon(int icon) {
 		this.icon = icon;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }

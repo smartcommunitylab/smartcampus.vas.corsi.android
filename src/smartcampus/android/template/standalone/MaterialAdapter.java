@@ -33,7 +33,7 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(layoutResourceId, parent, false);
 		}
-
+		
 		TextView title = (TextView) row.findViewById(R.id.title_text);
 		TextView content = (TextView) row.findViewById(R.id.item_text);
 		ImageView icon = (ImageView) row.findViewById(R.id.item_view);
@@ -41,7 +41,6 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		icon.setImageResource(item.getIcon());
-	
 		content.setPadding(
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin),
