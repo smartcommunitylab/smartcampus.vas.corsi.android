@@ -104,10 +104,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-//			Intent intentHome = new Intent(MyAgendaActivity.this,
-//					MyUniActivity.class);
-//			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentHome);
 			onBackPressed();
 			return true;
 		case R.id.add_event:

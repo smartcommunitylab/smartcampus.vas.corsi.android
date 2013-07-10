@@ -356,7 +356,7 @@ public class AddRateActivity extends FragmentActivity {
 						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
 				if (response.getHttpStatus() == 200) {
-
+					
 					body = response.getBody();
 
 				} else {
