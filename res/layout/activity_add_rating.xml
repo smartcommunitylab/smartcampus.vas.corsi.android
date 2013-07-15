@@ -20,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:text="Dai il tuo voto al corso!"
+        android:text="Valuta il corso!"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/smartn_theme_color" />
 

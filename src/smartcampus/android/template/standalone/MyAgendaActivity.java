@@ -15,6 +15,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
 
@@ -173,6 +174,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			mystate = ChildActivity.ADD_RATING;
 			Intent intentAddRating = new Intent(MyAgendaActivity.this,
 					AddRateActivity.class);
+			CoursesHandler.corsoSelezionato.getNome();
+			intentAddRating.putExtra("corso", CoursesHandler.corsoSelezionato.getNome());
 			intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentAddRating);
 			return true;

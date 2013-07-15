@@ -67,7 +67,8 @@ public class AddRateActivity extends FragmentActivity {
 		// TextView titleCourseRating = (TextView)
 		// findViewById(R.id.textViewTitleRatingCourse);
 		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
-
+		
+		setTitle(CoursesHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRateActivity.this);
 		pd = ProgressDialog.show(AddRateActivity.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
