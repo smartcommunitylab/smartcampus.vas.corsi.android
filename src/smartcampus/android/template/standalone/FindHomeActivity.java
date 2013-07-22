@@ -3,6 +3,9 @@ package smartcampus.android.template.standalone;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuInflater;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,7 +24,7 @@ import eu.trentorise.smartcampus.smartuni.models.Dipartimento;
 import eu.trentorise.smartcampus.smartuni.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.smartuni.utilities.FindDepartmentsHandler;
 
-public class FindHomeActivity extends Activity implements TextWatcher {
+public class FindHomeActivity extends SherlockActivity implements TextWatcher {
 	private Spinner spinner1;
 	private Spinner spinner2;
 
@@ -43,7 +46,8 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_home);
-		ActionBar ab = getActionBar();
+		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
+		//ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -82,14 +86,15 @@ public class FindHomeActivity extends Activity implements TextWatcher {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.search_home, menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.search_home, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(FindHomeActivity.this,

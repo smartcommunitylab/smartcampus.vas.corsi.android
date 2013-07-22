@@ -29,7 +29,7 @@ public class CorsiFragment extends SherlockFragment {
 
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
-		getActivity().invalidateOptionsMenu();
+		getSherlockActivity().invalidateOptionsMenu();
 		// String[] corsi = getResources().getStringArray(R.array.Corsi);
 		// String[] corsiInt = getResources().getStringArray(
 		// R.array.CorsiInteresse);

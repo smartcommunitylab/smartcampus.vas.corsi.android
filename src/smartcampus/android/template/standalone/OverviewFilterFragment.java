@@ -71,7 +71,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 
-				getActivity().invalidateOptionsMenu();
+				getSherlockActivity().invalidateOptionsMenu();
 				// Pass Data to other Fragment
 				Evento evento = listaEventiFiltrati.get(arg2);
 

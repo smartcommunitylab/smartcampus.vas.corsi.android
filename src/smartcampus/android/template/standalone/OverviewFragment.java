@@ -35,7 +35,8 @@ public class OverviewFragment extends SherlockFragment {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-		getActivity().invalidateOptionsMenu();
+		getSherlockActivity().invalidateOptionsMenu();
+		//getActivity().invalidateOptionsMenu();
 		new ProgressDialog(getActivity());
 		OverviewFragment.pd = ProgressDialog.show(getActivity(),
 				"Lista degli eventi personali", "Caricamento...");

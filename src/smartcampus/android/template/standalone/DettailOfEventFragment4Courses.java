@@ -37,7 +37,7 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 	public void onStart() {
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
-		getActivity().invalidateOptionsMenu();
+		getSherlockActivity().invalidateOptionsMenu();
 
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
