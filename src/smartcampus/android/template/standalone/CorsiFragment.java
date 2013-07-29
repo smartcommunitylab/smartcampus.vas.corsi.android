@@ -26,7 +26,6 @@ public class CorsiFragment extends SherlockFragment {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
 		getSherlockActivity().invalidateOptionsMenu();

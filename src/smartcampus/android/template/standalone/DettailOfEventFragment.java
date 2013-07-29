@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.smartuni.models.Evento;
+import eu.trentorise.smartcampus.smartuni.utilities.CoursesHandler;
 
 public class DettailOfEventFragment extends SherlockFragment {
 

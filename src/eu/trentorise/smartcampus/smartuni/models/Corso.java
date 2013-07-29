@@ -22,6 +22,8 @@ public class Corso extends CorsoLite implements Serializable {
 
 	// seguo o non seguo il corso
 	private boolean seguito;
+	
+	private boolean is_libretto;
 
 	public Corso() {
 
@@ -73,6 +75,14 @@ public class Corso extends CorsoLite implements Serializable {
 
 	public void setId_dipartimento(long id_dipartimento) {
 		this.id_dipartimento = id_dipartimento;
+	}
+
+	public boolean isIs_libretto() {
+		return is_libretto;
+	}
+
+	public void setIs_libretto(boolean is_libretto) {
+		this.is_libretto = is_libretto;
 	}
 
 }

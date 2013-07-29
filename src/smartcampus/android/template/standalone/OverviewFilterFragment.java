@@ -37,6 +37,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	public void onStart() {
 		super.onStart();
+
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		// String[] events =
@@ -45,7 +46,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 		courseSelected = new Corso();
 		courseSelected = (Corso) CoursesHandler.corsoSelezionato;
-
+		parent.setTitle(courseSelected.getNome());
 		listaEventiFiltrati = filterEventsbyCourse();
 
 		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
@@ -102,4 +103,5 @@ public class OverviewFilterFragment extends SherlockFragment {
 		return eventiFiltrati;
 
 	}
+	
 }

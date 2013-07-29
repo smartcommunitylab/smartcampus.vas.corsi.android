@@ -44,11 +44,13 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		setTitle(getResources().getString(R.string.title_activity_my_agenda));
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
+		
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_home);
 		String tab2_txt = getResources().getString(R.string.tab_courses);
 
+
+		
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)
@@ -69,9 +71,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		if (agendaState == MenuKind.BASE_MENU) {
+			setTitle("Agenda");
 			if (mystate == ChildActivity.ADD_EVENT_FOR_COURSES) {
 				inflater.inflate(R.menu.add_event, menu);
 			} else if (mystate == ChildActivity.ADD_RATING) {
@@ -97,6 +99,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		}
 		if (agendaState == MenuKind.DETAIL_OF_EVENT) {
 			agendaState = MenuKind.BASE_MENU;
+
 		}
 		invalidateOptionsMenu();
 		super.onBackPressed();
@@ -156,10 +159,13 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		case R.id.menu_share:
 			return true;
 		case R.id.menu_modify_event:
-			Intent intentEvent2 = new Intent(MyAgendaActivity.this,
-					AddEventActivity.class);
-			intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEvent2);
+			Toast.makeText(getApplicationContext(),
+					"Coming soon!", Toast.LENGTH_SHORT).show();
+//			Intent intentEvent2 = new Intent(MyAgendaActivity.this,
+//					AddEventActivity.class);
+//			intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intentEvent2);
+			
 			return true;
 		case R.id.menu_delete_event:
 			return true;
