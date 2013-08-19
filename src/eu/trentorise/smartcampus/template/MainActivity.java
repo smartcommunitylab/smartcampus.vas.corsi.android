@@ -17,7 +17,7 @@ package eu.trentorise.smartcampus.template;
 
 import java.io.IOException;
 
-import smartcampus.android.template.standalone.MyUniActivity;
+import smartcampus.android.studyMate.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
