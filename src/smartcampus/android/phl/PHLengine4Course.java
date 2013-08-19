@@ -2,7 +2,6 @@ package smartcampus.android.phl;
 
 import java.util.List;
 
-import smartcampus.android.finder.MaterialiPhlFragment;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;

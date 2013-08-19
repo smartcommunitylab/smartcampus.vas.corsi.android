@@ -1,4 +1,4 @@
-package smartcampus.android.finder;
+package smartcampus.android.phl;
 
 import smartcampus.android.template.standalone.R;
 import android.os.Bundle;

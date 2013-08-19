@@ -1,7 +1,5 @@
 package smartcampus.android.phl;
 
-import smartcampus.android.finder.MaterialiMoodleFragment;
-import smartcampus.android.finder.MaterialiPhlFragment;
 import smartcampus.android.studyMate.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;

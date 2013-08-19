@@ -1,6 +1,5 @@
-package smartcampus.android.finder;
+package smartcampus.android.phl;
 
-import smartcampus.android.phl.PHLengine4Course;
 import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
