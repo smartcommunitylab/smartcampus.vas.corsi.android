@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="smartcampus.android.template.standalone"
@@ -60,7 +60,7 @@
             android:value="SmartCampus Android Template" />
         <meta-data
             android:name="SERVER_URL"
-            android:value="https://vas-dev.smartcampuslab.eu/core.communicator" />
+            android:value="https://vas-dev.smartcampuslab.it/core.communicator" />
         <meta-data
             android:name="APP_ID"
             android:value="studymate" />
@@ -74,10 +74,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="eu.trentorise.smartcampus.template.FileActivity"
-            android:label="@string/title_activity_file" >
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.storage.dropbox.DropboxAuth"
@@ -113,14 +109,6 @@
         <activity
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
-
-        <!--
-             <activity
-            android:name="smartcampus.android.template.standalone.MyUniActivity"
-            android:label="@string/title_activity_my_uni" >
-        </activity>
-        -->
-
         <activity
             android:name="smartcampus.android.notices.NoticesActivity"
             android:configChanges="orientation|keyboard"
@@ -177,7 +165,7 @@
         </activity>
         <activity
             android:name="smartcampus.android.myAgenda.AddEvent4coursesActivity"
-             android:configChanges="orientation|keyboard"
+            android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
