@@ -1,4 +1,4 @@
-package smartcampus.android.finder;
+package smartcampus.android.studyMate.finder;
 
 import java.util.ArrayList;
 import java.util.List;

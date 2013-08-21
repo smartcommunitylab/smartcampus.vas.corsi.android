@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import smartcampus.android.myAgenda.DettailOfEventFragment;
-import smartcampus.android.myAgenda.MyAgendaActivity;
-import smartcampus.android.myAgenda.MyAgendaActivity.MenuKind;
-import smartcampus.android.myAgenda.OverviewFragment;
+import smartcampus.android.studyMate.myAgenda.DettailOfEventFragment;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
+import smartcampus.android.studyMate.myAgenda.OverviewFragment;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;

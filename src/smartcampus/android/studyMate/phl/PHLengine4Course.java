@@ -1,4 +1,4 @@
-package smartcampus.android.phl;
+package smartcampus.android.studyMate.phl;
 
 import java.util.List;
 
@@ -59,8 +59,11 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 		final long idCorso = currentActivity.getIntent().getLongExtra(
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
+				"http://api.povoshardlife.eu/api/documenti/getDirByIDSC/",
+				"http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
+						+ idCorso);
+		// SmartUniDataWS.URL_WS_SMARTUNI,
+		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 
 		request.setMethod(Method.GET);
 
@@ -68,7 +71,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 		String body = null;
 		try {
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME, "2d2abbe190e0d7ad0ae71425059f00cc");//SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
@@ -109,27 +112,29 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 			currentActivity.finish();
 		} else {
 			int size = 0;
-			// MaterialItem[] items = new MaterialItem[result.size()];
+			MaterialItem[] items = new MaterialItem[result.size()];
 			int i = 0;
 			for (RisorsaPhl n : result) {
-				if (n.getLevel() == lv) {
-					size++;
-				}
-			}
-			final MaterialItem[] items = new MaterialItem[size];
-			for (RisorsaPhl s : result) {
-				if (s.getLevel() == lv) {
-					if (s.getMime() == null) {
-						items[i++] = new MaterialItem(s.getModified(),
-								s.getName(), R.drawable.cartella, s.getLevel());
-
-					} else {
-
-						items[i++] = new MaterialItem(s.getModified(),
-								s.getName(), R.drawable.pdf, s.getLevel());
-
-					}
-				}
+				items[i++] = new MaterialItem(n.getDate(),
+						n.getName(), R.drawable.cartella, 1);
+//				if (n.getLevel() == lv) {
+//					size++;
+//				}
+//			}
+//			final MaterialItem[] items = new MaterialItem[size];
+//			for (RisorsaPhl s : result) {
+//				if (s.getLevel() == lv) {
+//					if (s.getMime() == null) {
+//						items[i++] = new MaterialItem(s.getModified(),
+//								s.getName(), R.drawable.cartella, s.getLevel());
+//
+//					} else {
+//
+//						items[i++] = new MaterialItem(s.getModified(),
+//								s.getName(), R.drawable.pdf, s.getLevel());
+//
+//					}
+//				}
 				// else{
 				// items[i++] = new MaterialItem(s.getModified(), s.getName(),
 				// R.drawable.smartuni_logo);
@@ -146,52 +151,54 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-//							int i = 0;
-//							int size = 0;
-//							int level = items[arg2].getLevel() + 1;
-//							String padre = items[arg2].getContent();
-//							for (RisorsaPhl n : result) {
-//								if ((n.getLevel() == items[arg2].getLevel() + 1) && (n.getParent() == items[arg2].getContent())) {
-//									size++;
-//								}
-//							}
-//							MaterialItem[] item = new MaterialItem[size];
-//							for (RisorsaPhl r : result) {
-//								if ((r.getLevel() == level) && (r.getParent() == padre)) {
-//									System.out.println("sono nell if");
-//									if (r.getMime() == null) {
-//										item[i++] = new MaterialItem(r
-//												.getModified(), r.getName(),
-//												R.drawable.cartella, r
-//														.getLevel());
-//										System.out.println(item[i].getContent());
-//
-//									} else {
-//
-//										item[i++] = new MaterialItem(r
-//												.getModified(), r.getName(),
-//												R.drawable.pdf, r.getLevel());
-//										System.out.println(item[i].getContent());
-//
-//									}
-//								}
-//							}
-//							MaterialAdapter adapter = new MaterialAdapter(
-//									currentSherlock, item);
-//							listViewCorsiPersonali.setAdapter(adapter);
-							
-							 Bundle b = new Bundle();
-							 //b.putSerializable("Materiale", risorsa);
-							 b.putSerializable("cartella", items[arg2]);
-							 FragmentTransaction ft = currentSherlock
-							 .getSupportFragmentManager()
-							 .beginTransaction();
-							 Fragment fragment = new MaterialiPhlFragment();
-							 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-							 ft.replace(R.id.tabMateriali, fragment);
-							 ft.addToBackStack(null);
-							 ft.commit();
-							 //System.out.println(item[0].getContent());
+							// int i = 0;
+							// int size = 0;
+							// int level = items[arg2].getLevel() + 1;
+							// String padre = items[arg2].getContent();
+							// for (RisorsaPhl n : result) {
+							// if ((n.getLevel() == items[arg2].getLevel() + 1)
+							// && (n.getParent() == items[arg2].getContent())) {
+							// size++;
+							// }
+							// }
+							// MaterialItem[] item = new MaterialItem[size];
+							// for (RisorsaPhl r : result) {
+							// if ((r.getLevel() == level) && (r.getParent() ==
+							// padre)) {
+							// System.out.println("sono nell if");
+							// if (r.getMime() == null) {
+							// item[i++] = new MaterialItem(r
+							// .getModified(), r.getName(),
+							// R.drawable.cartella, r
+							// .getLevel());
+							// System.out.println(item[i].getContent());
+							//
+							// } else {
+							//
+							// item[i++] = new MaterialItem(r
+							// .getModified(), r.getName(),
+							// R.drawable.pdf, r.getLevel());
+							// System.out.println(item[i].getContent());
+							//
+							// }
+							// }
+							// }
+							// MaterialAdapter adapter = new MaterialAdapter(
+							// currentSherlock, item);
+							// listViewCorsiPersonali.setAdapter(adapter);
+
+							Bundle b = new Bundle();
+							// b.putSerializable("Materiale", risorsa);
+							//b.putSerializable("cartella", items[arg2]);
+							FragmentTransaction ft = currentSherlock
+									.getSupportFragmentManager()
+									.beginTransaction();
+							Fragment fragment = new MaterialiPhlFragment();
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(R.id.tabMateriali, fragment);
+							ft.addToBackStack(null);
+							ft.commit();
+							// System.out.println(item[0].getContent());
 						}
 
 					});

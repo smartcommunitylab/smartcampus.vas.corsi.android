@@ -1,11 +1,11 @@
-package smartcampus.android.studyMate;
+package smartcampus.android.studyMate.start;
 
 import java.io.IOException;
 
-import smartcampus.android.finder.FindHomeActivity;
-import smartcampus.android.myAgenda.MyAgendaActivity;
-import smartcampus.android.notices.NoticesActivity;
-import smartcampus.android.phl.PHLActivity;
+import smartcampus.android.studyMate.finder.FindHomeActivity;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
+import smartcampus.android.studyMate.notices.NoticesActivity;
+import smartcampus.android.studyMate.phl.PHLActivity;
 import smartcampus.android.template.standalone.R;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;

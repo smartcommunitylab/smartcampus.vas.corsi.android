@@ -1,4 +1,4 @@
-package smartcampus.android.phl;
+package smartcampus.android.studyMate.phl;
 
 import java.util.List;
 

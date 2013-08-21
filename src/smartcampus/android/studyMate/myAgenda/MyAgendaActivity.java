@@ -1,4 +1,4 @@
-package smartcampus.android.myAgenda;
+package smartcampus.android.studyMate.myAgenda;
 
 import smartcampus.android.template.standalone.R;
 import android.app.AlertDialog;

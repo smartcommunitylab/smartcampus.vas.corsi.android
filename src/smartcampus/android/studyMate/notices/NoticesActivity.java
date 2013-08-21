@@ -1,6 +1,6 @@
-package smartcampus.android.notices;
+package smartcampus.android.studyMate.notices;
 
-import smartcampus.android.studyMate.MyUniActivity;
+import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.ProgressDialog;
 import android.content.Intent;

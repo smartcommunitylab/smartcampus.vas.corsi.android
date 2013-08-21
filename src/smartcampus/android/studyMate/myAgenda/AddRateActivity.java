@@ -1,4 +1,4 @@
-package smartcampus.android.myAgenda;
+package smartcampus.android.studyMate.myAgenda;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -3,8 +3,8 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartcampus.android.finder.FindHomeCourseActivity;
-import smartcampus.android.finder.ResultSearchedActivity;
+import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
+import smartcampus.android.studyMate.finder.ResultSearchedActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.content.Context;

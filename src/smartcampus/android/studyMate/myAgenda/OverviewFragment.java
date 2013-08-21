@@ -1,8 +1,8 @@
-package smartcampus.android.myAgenda;
+package smartcampus.android.studyMate.myAgenda;
 
 import java.util.List;
 
-import smartcampus.android.myAgenda.MyAgendaActivity.MenuKind;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.R;
 import android.app.ProgressDialog;
 import android.os.Bundle;

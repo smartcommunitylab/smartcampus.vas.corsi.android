@@ -1,6 +1,6 @@
-package smartcampus.android.finder;
+package smartcampus.android.studyMate.finder;
 
-import smartcampus.android.myAgenda.AddRateActivity;
+import smartcampus.android.studyMate.myAgenda.AddRateActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

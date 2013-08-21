@@ -1,6 +1,6 @@
-package smartcampus.android.myAgenda;
+package smartcampus.android.studyMate.myAgenda;
 
-import smartcampus.android.myAgenda.MyAgendaActivity.MenuKind;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;

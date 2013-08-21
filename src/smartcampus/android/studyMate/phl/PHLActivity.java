@@ -1,6 +1,6 @@
-package smartcampus.android.phl;
+package smartcampus.android.studyMate.phl;
 
-import smartcampus.android.studyMate.MyUniActivity;
+import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;

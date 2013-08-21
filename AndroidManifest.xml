@@ -12,8 +12,9 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="smartcampus.android.template.standalone"
     android:versionCode="1"
@@ -66,7 +67,7 @@
             android:value="studymate" />
 
         <activity
-            android:name="smartcampus.android.studyMate.MyUniActivity"
+            android:name="smartcampus.android.studyMate.start.MyUniActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/app_name" >
             <intent-filter>
@@ -110,76 +111,76 @@
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="smartcampus.android.notices.NoticesActivity"
+            android:name="smartcampus.android.studyMate.notices.NoticesActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/notices_white"
             android:label="@string/title_activity_notices" >
         </activity>
         <activity
-            android:name="smartcampus.android.myAgenda.MyAgendaActivity"
+            android:name="smartcampus.android.studyMate.myAgenda.MyAgendaActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/myagenda_white"
             android:label="@string/title_activity_my_agenda" >
         </activity>
         <activity
-            android:name="smartcampus.android.phl.PHLActivity"
+            android:name="smartcampus.android.studyMate.phl.PHLActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
-            android:name="smartcampus.android.phl.PHL4Courses"
+            android:name="smartcampus.android.studyMate.phl.PHL4Courses"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
-            android:name="smartcampus.android.finder.FindHomeActivity"
+            android:name="smartcampus.android.studyMate.finder.FindHomeActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_courses"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
-            android:name="smartcampus.android.finder.ResultSearchedActivity"
+            android:name="smartcampus.android.studyMate.finder.ResultSearchedActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_result_searched" >
         </activity>
         <activity
-            android:name="smartcampus.android.finder.FindRecensioniActivity"
+            android:name="smartcampus.android.studyMate.finder.FindRecensioniActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_recensioni" >
         </activity>
         <activity
-            android:name="smartcampus.android.finder.FindHomeCourseActivity"
+            android:name="smartcampus.android.studyMate.finder.FindHomeCourseActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_home_course" >
         </activity>
         <activity
-            android:name="smartcampus.android.myAgenda.AddEventActivity"
+            android:name="smartcampus.android.studyMate.myAgenda.AddEventActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
-            android:name="smartcampus.android.myAgenda.AddEvent4coursesActivity"
+            android:name="smartcampus.android.studyMate.myAgenda.AddEvent4coursesActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
-            android:name="smartcampus.android.myAgenda.AddRateActivity"
+            android:name="smartcampus.android.studyMate.myAgenda.AddRateActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_rate" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.WorkInProgress"
+            android:name="smartcampus.android.studyMate.start.WorkInProgress"
             android:label="@string/title_activity_work_in_progress" >
         </activity>
 
         <receiver
-            android:name="smartcampus.android.studyMate.NotificationReceiver"
+            android:name="smartcampus.android.studyMate.start.NotificationReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -188,7 +189,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="smartcampus.android.studyMate.NotificationService" />
+        <service android:name="smartcampus.android.studyMate.start.NotificationService" />
     </application>
 
 </manifest>

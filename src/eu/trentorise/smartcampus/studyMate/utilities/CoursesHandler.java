@@ -2,9 +2,9 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.util.List;
 
-import smartcampus.android.myAgenda.MyAgendaActivity;
-import smartcampus.android.myAgenda.MyAgendaActivity.MenuKind;
-import smartcampus.android.myAgenda.OverviewFilterFragment;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
+import smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;

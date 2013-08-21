@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import smartcampus.android.notices.NoticesActivity;
+import smartcampus.android.studyMate.notices.NoticesActivity;
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
