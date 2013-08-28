@@ -71,7 +71,8 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 		String body = null;
 		try {
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, "2d2abbe190e0d7ad0ae71425059f00cc");//SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME,
+					"2d2abbe190e0d7ad0ae71425059f00cc");// SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
@@ -115,26 +116,26 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 			MaterialItem[] items = new MaterialItem[result.size()];
 			int i = 0;
 			for (RisorsaPhl n : result) {
-				items[i++] = new MaterialItem(n.getDate(),
-						n.getName(), R.drawable.cartella, 1);
-//				if (n.getLevel() == lv) {
-//					size++;
-//				}
-//			}
-//			final MaterialItem[] items = new MaterialItem[size];
-//			for (RisorsaPhl s : result) {
-//				if (s.getLevel() == lv) {
-//					if (s.getMime() == null) {
-//						items[i++] = new MaterialItem(s.getModified(),
-//								s.getName(), R.drawable.cartella, s.getLevel());
-//
-//					} else {
-//
-//						items[i++] = new MaterialItem(s.getModified(),
-//								s.getName(), R.drawable.pdf, s.getLevel());
-//
-//					}
-//				}
+				items[i++] = new MaterialItem(n.getDate(), n.getName(),
+						R.drawable.cartella, 1);
+				// if (n.getLevel() == lv) {
+				// size++;
+				// }
+				// }
+				// final MaterialItem[] items = new MaterialItem[size];
+				// for (RisorsaPhl s : result) {
+				// if (s.getLevel() == lv) {
+				// if (s.getMime() == null) {
+				// items[i++] = new MaterialItem(s.getModified(),
+				// s.getName(), R.drawable.cartella, s.getLevel());
+				//
+				// } else {
+				//
+				// items[i++] = new MaterialItem(s.getModified(),
+				// s.getName(), R.drawable.pdf, s.getLevel());
+				//
+				// }
+				// }
 				// else{
 				// items[i++] = new MaterialItem(s.getModified(), s.getName(),
 				// R.drawable.smartuni_logo);
@@ -189,7 +190,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, List<RisorsaPhl>> 
 
 							Bundle b = new Bundle();
 							// b.putSerializable("Materiale", risorsa);
-							//b.putSerializable("cartella", items[arg2]);
+							// b.putSerializable("cartella", items[arg2]);
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();

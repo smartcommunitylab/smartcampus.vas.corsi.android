@@ -30,22 +30,23 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		final View view = inflater.inflate(
 				R.layout.fragment_home_course_description, container, false);
 
-
 		return view;
 	}
 
 	@Override
 	public void onStart() {
-		
+
 		TextView descriptionCourse = (TextView) getSherlockActivity()
 				.findViewById(R.id.textViewDescriptioonCourseHome);
 		final RatingBar ratingAverage = (RatingBar) getSherlockActivity()
 				.findViewById(R.id.ratingBarCourseAverage);
 		feedbackHandler = (FeedbackCourseHandler) new FeedbackCourseHandler(
-				getSherlockActivity(), FindHomeCourseActivity.corsoAttuale.getId(),
-				act, ratingAverage, descriptionCourse).execute();
-		
-		Switch switchFollow = (Switch) getSherlockActivity().findViewById(R.id.switchFollow);
+				getSherlockActivity(),
+				FindHomeCourseActivity.corsoAttuale.getId(), act,
+				ratingAverage, descriptionCourse).execute();
+
+		Switch switchFollow = (Switch) getSherlockActivity().findViewById(
+				R.id.switchFollow);
 		final TextView txtMonitor = (TextView) getSherlockActivity()
 				.findViewById(R.id.txt_monitor);
 		if (txtMonitor.isPressed())
@@ -54,9 +55,9 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		else
 			txtMonitor.setText(getResources().getText(
 					R.string.label_txtMonitor_off));
-		
+
 		switchFollow.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {

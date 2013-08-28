@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.io.Serializable;
 
-public class MaterialItem implements Serializable{
+public class MaterialItem implements Serializable {
 	private String title;
 	private String content;
 	private int icon;
@@ -13,7 +13,7 @@ public class MaterialItem implements Serializable{
 		this.title = title;
 		this.content = content;
 		this.icon = icon;
-		this.level=level;
+		this.level = level;
 	}
 
 	public String getTitle() {

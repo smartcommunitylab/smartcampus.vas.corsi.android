@@ -108,8 +108,8 @@ public class FindDepartmentsHandler extends
 			depTutto.setNome("Tutto");
 			listDepartments.add(0, depTutto);
 		}
-			return listDepartments;
-		
+		return listDepartments;
+
 	}
 
 	@Override
@@ -145,12 +145,11 @@ public class FindDepartmentsHandler extends
 
 							// chiamo l'handler per il caricamento dei corsi di
 							// laurea
+							departSelected = result.get(pos);
 							findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
 									context, spinnerDegree, departSelectedName,
 									parent, pos, currentActivity,
 									FindDepartmentsHandler.this).execute();
-
-							departSelected = result.get(pos);
 
 						}
 

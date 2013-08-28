@@ -99,12 +99,13 @@ public class FeedbackCourseHandler extends
 	@Override
 	protected void onPostExecute(List<Commento> commenti) {
 		// TODO Auto-generated method stub
-		super.onPostExecute(commenti);
+		// super.onPostExecute(commenti);
 
 		if (commenti == null) {
 
 			Toast.makeText(context, "Ops! C'e' stato un errore...",
 					Toast.LENGTH_SHORT).show();
+
 			pd.dismiss();
 			// act.finish();
 		} else {
@@ -115,12 +116,32 @@ public class FeedbackCourseHandler extends
 					feedbackInfoList.get(0).getCorso().getNome());
 			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
 					.getValutazione_media());
+
 			RatingBar ratingCont = (RatingBar) act
 					.findViewById(R.id.ratingBarRowContenuti);
+			ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
+
+			RatingBar ratingCaricoStudio = (RatingBar) act
+					.findViewById(R.id.ratingBarRowCfu);
+			ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+					.getRating_carico_studio());
+
+			RatingBar ratingLezioni = (RatingBar) act
+					.findViewById(R.id.ratingBarRowLezioni);
+			ratingLezioni
+					.setRating(feedbackInfoList.get(0).getRating_lezioni());
+
+			RatingBar ratingMateriali = (RatingBar) act
+					.findViewById(R.id.ratingBarRowMateriali);
+			ratingMateriali.setRating(feedbackInfoList.get(0)
+					.getRating_materiali());
+
+			RatingBar ratingEsame = (RatingBar) act
+					.findViewById(R.id.ratingBarRowEsame);
+			ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
+
 			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
 					.getDescrizione());
-			ratingCont.setRating(feedbackInfoList.get(0)
-					.getRating_carico_studio());
 
 			// HomeCourseDescriptionFragment.pd.dismiss();
 			pd.dismiss();

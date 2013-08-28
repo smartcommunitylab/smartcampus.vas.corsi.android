@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,6 +51,21 @@
         <uses-library android:name="com.google.android.maps" />
 
         <meta-data
+            android:name="SERVER_URL"
+            android:value="https://vas-dev.smartcampuslab.it/core.communicator" />
+        <meta-data
+            android:name="APP_ID"
+            android:value="studymate" />
+        <meta-data
+            android:name="USER_AUTH_TOKEN"
+            android:value="" />
+        <!-- {token sul portale smartcampus} -->
+        <meta-data
+            android:name="CLIENT_AUTH_TOKEN"
+            android:value="043b44c9-7277-4888-8b81-890a9607c678" />
+        <!-- {{token sul portale smartcampus} -->
+
+        <meta-data
             android:name="SHARED_PACKAGE"
             android:value="smartcampus.android.template.standalone" />
         <meta-data
@@ -59,12 +74,6 @@
         <meta-data
             android:name="ACCOUNT_NAME"
             android:value="SmartCampus Android Template" />
-        <meta-data
-            android:name="SERVER_URL"
-            android:value="https://vas-dev.smartcampuslab.it/core.communicator" />
-        <meta-data
-            android:name="APP_ID"
-            android:value="studymate" />
 
         <activity
             android:name="smartcampus.android.studyMate.start.MyUniActivity"
@@ -80,6 +89,13 @@
             android:name="eu.trentorise.smartcampus.storage.dropbox.DropboxAuth"
             android:configChanges="orientation|keyboard" >
         </activity>
+        
+        <activity
+            android:name="eu.trentorise.smartcampus.ac.embedded.EmbeddedAuthActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask" >
+        </activity>
+        
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
@@ -180,16 +196,17 @@
         </activity>
 
         <receiver
-            android:name="smartcampus.android.studyMate.start.NotificationReceiver"
+            android:name=".NotificationReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="smartcampus.android.template.standalone" />
+                <category android:name="eu.trentorise.smartcampus.pushservice" />
             </intent-filter>
         </receiver>
 
-        <service android:name="smartcampus.android.studyMate.start.NotificationService" />
+        <service android:name=".NotificationService" />
+
     </application>
 
 </manifest>

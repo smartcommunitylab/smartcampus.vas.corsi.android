@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ import eu.trentorise.smartcampus.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.studyMate.utilities.FeedbackCourseHandler;
-import eu.trentorise.smartcampus.studyMate.utilities.FeedbackRatingHandler;
 
 public class FeedbackFragment extends SherlockFragment {
 
@@ -49,15 +49,20 @@ public class FeedbackFragment extends SherlockFragment {
 		CorsoLite corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
-		@SuppressWarnings("unused")
-		String idCourse = intent.getStringExtra("courseSelectedId");
+
+		// String idCourse = intent.getStringExtra("courseSelectedId");
 
 		TextView titleRatingFeedback = (TextView) view
 				.findViewById(R.id.textViewTitleFeedbackCourse);
-		if (FeedbackRatingHandler.feedbackInfoList == null) {
-			titleRatingFeedback.setText("Non ci sono commenti...");
+		if (FeedbackCourseHandler.feedbackInfoList == null) {
+			Toast.makeText(getSherlockActivity(),
+					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
+			getSherlockActivity().finish();
+		}
 
-		} else {
+		// titleRatingFeedback.setText("Non ci sono commenti...");
+		//
+		else {
 			titleRatingFeedback.setText(FeedbackCourseHandler.feedbackInfoList
 					.get(0).getCorso().getNome());
 

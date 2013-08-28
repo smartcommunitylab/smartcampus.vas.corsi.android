@@ -15,7 +15,6 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 	private Context context;
 	private int layoutResourceId;
 
-
 	public MaterialAdapter(Context context, MaterialItem[] arr) {
 		super(context, R.layout.material_row, arr);
 		this.context = context;
@@ -33,7 +32,7 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			row = inflater.inflate(layoutResourceId, parent, false);
 		}
-		
+
 		TextView title = (TextView) row.findViewById(R.id.title_text);
 		TextView content = (TextView) row.findViewById(R.id.item_text);
 		ImageView icon = (ImageView) row.findViewById(R.id.item_view);

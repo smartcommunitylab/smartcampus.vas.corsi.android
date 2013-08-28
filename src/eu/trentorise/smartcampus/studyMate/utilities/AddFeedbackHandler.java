@@ -18,13 +18,12 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 	public Context context;
 	String body;
 	Commento commento;
-	
-	
+
 	@Override
 	protected Commento doInBackground(Commento... params) {
 		// TODO Auto-generated method stub
 		commento = params[0];
-		
+
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -61,13 +60,12 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(Commento result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		
-	}
 
+	}
 
 }

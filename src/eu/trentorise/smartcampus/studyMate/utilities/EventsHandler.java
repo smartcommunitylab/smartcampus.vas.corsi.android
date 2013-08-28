@@ -6,8 +6,8 @@ import java.util.List;
 
 import smartcampus.android.studyMate.myAgenda.DettailOfEventFragment;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
-import smartcampus.android.studyMate.myAgenda.OverviewFragment;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
+import smartcampus.android.studyMate.myAgenda.OverviewFragment;
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -19,8 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
-import eu.trentorise.smartcampus.ac.model.UserData;
+import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -37,7 +36,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 	public Context context;
 	String body;
 	String id_course = null;
-	private AMSCAccessProvider mAccessProvider;
+	private SCAccessProvider mAccessProvider;
 	FragmentActivity fragment;
 	public static List<Evento> listaEventi;
 
@@ -89,9 +88,9 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
 	private List<Evento> getAllPersonalEvents() {
 
-		mAccessProvider = new AMSCAccessProvider();
-		UserData data = mAccessProvider.readUserData(context, null);
-		data.getUserId();
+		// mAccessProvider = new SCAccessProvider();
+		// UserData data = mAccessProvider.readUserData(context, null);
+		// data.getUserId();
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);

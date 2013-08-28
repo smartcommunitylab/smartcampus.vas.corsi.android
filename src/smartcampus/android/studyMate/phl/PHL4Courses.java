@@ -26,9 +26,9 @@ public class PHL4Courses extends SherlockFragmentActivity {
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_PHL);
 		String tab2_txt = getResources().getString(R.string.tab_moodle);
-		
+
 		setTitle(PHLengine.corsoSelezionato.getNome());
-		
+
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)

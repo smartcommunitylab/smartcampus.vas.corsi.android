@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.utilities.NotificationHandler;
 
-public class NoticesActivity extends SherlockActivity{
+public class NoticesActivity extends SherlockActivity {
 
 	// private List<Notice> notifies;
 	// private ArrayList<Notice> notificationsList;
@@ -43,6 +44,10 @@ public class NoticesActivity extends SherlockActivity{
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
 				lvAllNotices).execute();
 
+		// Toast.makeText(this, "ciao " + MyUniActivity.bp.getName() + " " +
+		// MyUniActivity.bp.getSurname(),
+		// Toast.LENGTH_SHORT).show();
+
 	}
 
 	@Override
@@ -52,44 +57,45 @@ public class NoticesActivity extends SherlockActivity{
 		inflater.inflate(R.menu.notices, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.notices, menu);
-//		return true;
-//	}
+
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// // Inflate the menu; this adds items to the action bar if it is present.
+	// getMenuInflater().inflate(R.menu.notices, menu);
+	// return true;
+	// }
 
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-			case android.R.id.home:
-				Intent intentHome = new Intent(NoticesActivity.this,
-						MyUniActivity.class);
-				intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intentHome);
-				return true;
+		case android.R.id.home:
+			Intent intentHome = new Intent(NoticesActivity.this,
+					MyUniActivity.class);
+			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentHome);
+			return true;
 
-			default:
-				return super.onOptionsItemSelected(item);
+		default:
+			return super.onOptionsItemSelected(item);
 
-			}
+		}
 	}
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case android.R.id.home:
-//			Intent intentHome = new Intent(NoticesActivity.this,
-//					MyUniActivity.class);
-//			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentHome);
-//			return true;
-//
-//		default:
-//			return super.onOptionsItemSelected(item);
-//
-//		}
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// switch (item.getItemId()) {
+	// case android.R.id.home:
+	// Intent intentHome = new Intent(NoticesActivity.this,
+	// MyUniActivity.class);
+	// intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	// startActivity(intentHome);
+	// return true;
+	//
+	// default:
+	// return super.onOptionsItemSelected(item);
+	//
+	// }
+	// }
 
 }

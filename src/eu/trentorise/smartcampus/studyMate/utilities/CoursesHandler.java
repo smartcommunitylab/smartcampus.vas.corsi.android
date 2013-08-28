@@ -107,45 +107,46 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-		TitledItem[] items = new TitledItem[result.size()];
+			TitledItem[] items = new TitledItem[result.size()];
 
-		int i = 0;
-		for (Corso s : result) {
-			items[i++] = new TitledItem("Corsi da libretto", s.getNome());
+			int i = 0;
+			for (Corso s : result) {
+				items[i++] = new TitledItem("Corsi da libretto", s.getNome());
+			}
+
+			TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
+
+			listViewCorsiPersonali.setAdapter(adapter);
+
+			listViewCorsiPersonali
+					.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int arg2, long arg3) {
+							MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
+							parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
+							currentActivity.invalidateOptionsMenu();
+
+							// Pass Data to other Fragment
+							corsoSelezionato = new Corso();
+							corsoSelezionato = result.get(arg2);
+							CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
+							FragmentTransaction ft = currentSherlock
+									.getSupportFragmentManager()
+									.beginTransaction();
+							Fragment fragment = new OverviewFilterFragment();
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(R.id.tabCorsi, fragment);
+							ft.addToBackStack(null);
+							ft.commit();
+						}
+					});
+
+			pd.dismiss();
+
 		}
-
-		TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
-
-		listViewCorsiPersonali.setAdapter(adapter);
-
-		listViewCorsiPersonali
-				.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int arg2, long arg3) {
-						MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
-						parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
-						currentActivity.invalidateOptionsMenu();
-
-						// Pass Data to other Fragment
-						corsoSelezionato = new Corso();
-						corsoSelezionato = result.get(arg2);
-						CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
-						FragmentTransaction ft = currentSherlock
-								.getSupportFragmentManager().beginTransaction();
-						Fragment fragment = new OverviewFilterFragment();
-						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-						ft.replace(R.id.tabCorsi, fragment);
-						ft.addToBackStack(null);
-						ft.commit();
-					}
-				});
-
-		pd.dismiss();
-
 	}
-		}
 
 	@Override
 	protected List<Corso> doInBackground(Bundle... params) {

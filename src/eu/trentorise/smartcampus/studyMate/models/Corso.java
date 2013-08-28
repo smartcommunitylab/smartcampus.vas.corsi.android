@@ -22,7 +22,7 @@ public class Corso extends CorsoLite implements Serializable {
 
 	// seguo o non seguo il corso
 	private boolean seguito;
-	
+
 	private boolean is_libretto;
 
 	public Corso() {
