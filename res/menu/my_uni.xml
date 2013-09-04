@@ -1,2 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+ <item
+        android:id="@+id/three_dots_item2"
+        android:icon="@drawable/options"
+        android:showAsAction="always"
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:showAsAction="always"
+                android:title="Logout"/>
+        </menu>
+    </item>
 </menu>

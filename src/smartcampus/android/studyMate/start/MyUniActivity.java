@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import eu.trentorise.smartcampus.ac.AACException;
@@ -140,6 +141,25 @@ public class MyUniActivity extends Activity {
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.logout:
+			try {
+				accessProvider.logout(MyUniActivity.this);
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		}
+		return false;	
+
+		//return super.onOptionsItemSelected(item);
+	}
+	
+
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// check the result of the authentication
 
@@ -176,8 +196,7 @@ public class MyUniActivity extends Activity {
 				// //init connector
 				try {
 					System.out.println("token: " + userAuthToken);
-					connector.init(getApplicationContext(), userAuthToken,
-							bp);
+					connector.init(getApplicationContext(), userAuthToken, bp);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

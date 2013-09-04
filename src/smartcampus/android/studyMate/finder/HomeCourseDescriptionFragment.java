@@ -44,7 +44,6 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				getSherlockActivity(),
 				FindHomeCourseActivity.corsoAttuale.getId(), act,
 				ratingAverage, descriptionCourse).execute();
-
 		Switch switchFollow = (Switch) getSherlockActivity().findViewById(
 				R.id.switchFollow);
 		final TextView txtMonitor = (TextView) getSherlockActivity()

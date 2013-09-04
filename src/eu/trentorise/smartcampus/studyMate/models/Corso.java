@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class Corso extends CorsoLite implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// data di inizio del corso
 	private Date data_inizio;
 
