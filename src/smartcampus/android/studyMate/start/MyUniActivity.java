@@ -49,7 +49,7 @@ public class MyUniActivity extends Activity {
 	 * token
 	 */
 	private SCAccessProvider accessProvider = null;
-	private String userAuthToken;
+	public static String userAuthToken;
 	public static ProgressDialog pd;
 	public static BasicProfile bp;
 
@@ -153,6 +153,7 @@ public class MyUniActivity extends Activity {
 		case R.id.logout:
 			try {
 				accessProvider.logout(MyUniActivity.this);
+				System.out.println(userAuthToken);
 			} catch (AACException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
