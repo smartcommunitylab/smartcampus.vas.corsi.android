@@ -20,35 +20,17 @@ public class MaterialiPhlFragment extends SherlockFragment {
 		// // do your view initialization here
 		return view;
 	}
-
+@Override
 	public void onStart() {
 		super.onStart();
-
+System.out.println("MATERIALI PHL FRAGMENT");
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewPhlMateriali);
 
 		Bundle arguments = new Bundle();
-		// arguments.getSerializable("cartella");
 		PHLengine4Course handlerCoursesMaterial = new PHLengine4Course(
 				getActivity().getApplicationContext(), getActivity(),
 				listViewCorsi, getSherlockActivity());
 		handlerCoursesMaterial.execute(arguments);
-
-		// String[] events = getResources().getStringArray(R.array.EventiFuffa);
-		// MaterialItem[] items = new MaterialItem[events.length];
-		//
-		// int i = 0;
-		// for (String s : events) {
-		// String[] itms = s.split(",");
-		// items[i++] = new MaterialItem(itms[0], itms[1],
-		// R.drawable.smartuni_logo);
-		// }
-		//
-		// MaterialAdapter adapter = new MaterialAdapter(getSherlockActivity(),
-		// items);
-		// ListView listView = (ListView)
-		// getSherlockActivity().findViewById(R.id.listViewEventi);
-		// listView.setAdapter(adapter);
-
 	}
 }

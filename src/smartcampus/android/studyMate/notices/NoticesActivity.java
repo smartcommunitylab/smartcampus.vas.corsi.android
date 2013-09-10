@@ -57,13 +57,6 @@ public class NoticesActivity extends SherlockActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getMenuInflater().inflate(R.menu.notices, menu);
-	// return true;
-	// }
-
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
@@ -81,20 +74,5 @@ public class NoticesActivity extends SherlockActivity {
 
 		}
 	}
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case android.R.id.home:
-	// Intent intentHome = new Intent(NoticesActivity.this,
-	// MyUniActivity.class);
-	// intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	// startActivity(intentHome);
-	// return true;
-	//
-	// default:
-	// return super.onOptionsItemSelected(item);
-	//
-	// }
-	// }
 
 }

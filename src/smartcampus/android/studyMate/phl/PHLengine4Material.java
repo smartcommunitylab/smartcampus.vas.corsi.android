@@ -1,6 +1,5 @@
 package smartcampus.android.studyMate.phl;
 
-import smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -27,13 +26,11 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Corso;
 import eu.trentorise.smartcampus.studyMate.models.CwdPHL;
 import eu.trentorise.smartcampus.studyMate.models.RisorsaPhl;
-import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
-import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandlerLite;
 import eu.trentorise.smartcampus.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.studyMate.utilities.MaterialItem;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
+public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 
 	private Context context;
 	private Activity currentActivity;
@@ -61,8 +58,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-		final long idCorso = currentActivity.getIntent().getLongExtra(
-				"IdCorso", 0);
+		
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
@@ -94,8 +90,6 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			e.printStackTrace();
 		}
 
-		System.out.println(body);
-
 		return Utils.convertJSONToObject(body, RisorsaPhl.class);
 	}
 
@@ -109,9 +103,8 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	}
 
 	@Override
-	protected void onPostExecute(RisorsaPhl result) {
+	protected void onPostExecute(final RisorsaPhl result) {
 		super.onPostExecute(result);
-
 		r = result;
 		if (result == null) {
 			Toast.makeText(context, "Ops! C'è stato un errore...",
@@ -135,7 +128,6 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 						items);
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
-
 		}
 
 		listViewCorsiPersonali
@@ -145,38 +137,38 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							int arg2, long arg3) {
 						if (r.getCdc().get(arg2).getMime().equals("directory")) {
 							
-//							// Pass Data to other Fragment
-//							corsoSelezionato = new Corso();
-//							corsoSelezionato = result.get(arg2);
-//							CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
-//							FragmentTransaction ft = currentSherlock
-//									.getSupportFragmentManager()
-//									.beginTransaction();
-//							Fragment fragment = new MaterialiPhlFragment();
-//							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//							ft.replace(R.id.tabMateriali, fragment);
-//							ft.addToBackStack(null);
-//							ft.commit();
+						FragmentTransaction ft = currentSherlock
+								.getSupportFragmentManager()
+								.beginTransaction();
+						Fragment fragment = new MaterialiPhlFragmentTEST();
+						Bundle b = new Bundle();
+						b.putString("res", result
+								.getCdc().get(arg2).getHash());
+						fragment.setArguments(b);
+						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+						ft.replace(R.id.tabMateriali, fragment);
+						ft.addToBackStack(null);
+						ft.commit();
 //							
+//							new PHLengine4Material(context, currentActivity,
+//									listViewCorsiPersonali, currentSherlock, r
+//									.getCdc().get(arg2).getHash())
+//							.execute();
 							
-							new PHLengine4Material(context, currentActivity,
-									listViewCorsiPersonali, currentSherlock, r
-											.getCdc().get(arg2).getHash())
-									.execute();
+							
 						} else {
 							Toast.makeText(context, "Coming Soon!",
 									Toast.LENGTH_SHORT).show();
 						}
 					}
 				});
-
 		pd.dismiss();
 	}
 
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
-
+		bundleParam = params[0];
 		return getMaterial4Dir();
 	}
 

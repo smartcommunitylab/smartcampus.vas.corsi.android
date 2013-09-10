@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -85,9 +87,6 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println(body);
-
 		return Utils.convertJSONToObject(body, RisorsaPhl.class);
 	}
 
@@ -133,10 +132,27 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-						new PHLengine4Material(context, currentActivity,
-								listViewCorsiPersonali, currentSherlock, result
-										.getCdc().get(arg2).getHash())
-								.execute();
+						if (result.getCdc().get(arg2).getMime().equals("directory")) {
+						FragmentTransaction ft = currentSherlock
+								.getSupportFragmentManager()
+								.beginTransaction();
+						Fragment fragment = new MaterialiPhlFragmentTEST();
+						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+						Bundle b = new Bundle();
+						b.putString("res", result
+										.getCdc().get(arg2).getHash());
+						fragment.setArguments(b);
+						ft.replace(R.id.tabMateriali, fragment);
+						ft.addToBackStack(null);
+						ft.commit();
+						} else {
+							Toast.makeText(context, "Coming Soon!",
+									Toast.LENGTH_SHORT).show();
+						}
+//						new PHLengine4Material(context, currentActivity,
+//								listViewCorsiPersonali, currentSherlock, result
+//										.getCdc().get(arg2).getHash())
+//								.execute();
 					}
 				});
 

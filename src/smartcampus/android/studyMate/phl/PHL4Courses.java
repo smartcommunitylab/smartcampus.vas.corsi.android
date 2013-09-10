@@ -19,7 +19,6 @@ public class PHL4Courses extends SherlockFragmentActivity {
 		// setContentView(R.layout.activity_phl);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -69,6 +68,11 @@ public class PHL4Courses extends SherlockFragmentActivity {
 			return super.onOptionsItemSelected(item);
 
 		}
+	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
 	}
 
 }

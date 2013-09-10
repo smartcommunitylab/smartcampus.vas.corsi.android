@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.Locale;
 
 import smartcampus.android.studyMate.notices.NoticesActivity;
+import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.communicator.CommunicatorConnector;
+import eu.trentorise.smartcampus.communicator.model.Notification;
+import eu.trentorise.smartcampus.communicator.model.Notifications;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -24,9 +28,9 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Notice;
 
-public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
+public class NotificationHandler extends AsyncTask<Void, Void, List<Notification>> {
 
-	private ProtocolCarrier mProtocolCarrier;
+	
 	public Context context;
 	public String appToken = "test smartcampus";
 	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
@@ -50,40 +54,16 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 		this.lvAllNotices = lvAllNotices;
 	}
 
-	private List<Notice> getNotification() {
+	private List<Notification> getNotification() throws Exception {
 
-		mProtocolCarrier = new ProtocolCarrier(context,
-				SmartUniDataWS.TOKEN_NAME);
-
-		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_NOTIFICATIONS);
-		request.setMethod(Method.GET);
-
-		MessageResponse response;
-		try {
-			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
-
-			if (response.getHttpStatus() == 200) {
-
-				body = response.getBody();
-
-			} else {
-				return null;
-			}
-		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return Utils.convertJSONToObjects(body, Notice.class);
+		CommunicatorConnector cc = new CommunicatorConnector(
+				MyUniActivity.SERVER_URL, MyUniActivity.APP_ID);
+		Notifications list = cc.getNotificationsByApp(0L, 0, -1,
+				MyUniActivity.userAuthToken);
+		list.getNotifications();
+		List<Notification> not = list.getNotifications();
+		
+		return not;
 	}
 
 	@Override
@@ -94,7 +74,7 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<Notice> notifies) {
+	protected void onPostExecute(List<Notification> notifies) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(notifies);
 
@@ -106,9 +86,14 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 			setListNotifications(notifies);
 	}
 
-	private void setListNotifications(List<Notice> notifies) {
+	private void setListNotifications(List<Notification> notifies) {
 
-		textViewTitleNotices.setText(R.string.notices_string_titlelist);
+		for (Notification n : notifies) {
+			textViewTitleNotices.setText(n.getTitle());
+			
+			
+		}
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
 				Locale.ITALY);
 		Date date = new Date();
@@ -118,15 +103,15 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 		textViewTitleNotices.setText(textViewTitleNotices.getText() + " "
 				+ dateString);
 
-		Iterator<Notice> i = notifies.iterator();
+		Iterator<Notification> i = notifies.iterator();
 
 		datetimeList = new ArrayList<String>();
 		usersList = new ArrayList<String>();
 		descriptionsList = new ArrayList<String>();
 
 		while (i.hasNext()) {
-			Notice t = new Notice();
-			t = (Notice) i.next();
+			Notification t = new Notification();
+			t = (Notification) i.next();
 
 			descriptionsList.add(t.getDescription());
 			/*
@@ -153,8 +138,14 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notice>> {
 	}
 
 	@Override
-	protected List<Notice> doInBackground(Void... params) {
+	protected List<Notification> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
-		return getNotification();
+		try {
+			return getNotification();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
