@@ -22,6 +22,7 @@ import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
+
 //import eu.trentorise.smartcampus.puschservice.PushServiceConnector;
 
 public class MyUniActivity extends Activity {
@@ -38,11 +39,10 @@ public class MyUniActivity extends Activity {
 	public static final String CLIENT_ID = "b8fcb94d-b4cf-438f-802a-c0a560734c88";
 
 	public static final String CLIENT_SECRET = "536560ac-cb74-4e1b-86a1-ef2c06c3313a";
-	
+
 	public static final String APP_ID = "studymate";
-	
+
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
-	
 
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
@@ -160,11 +160,10 @@ public class MyUniActivity extends Activity {
 			}
 			return true;
 		}
-		return false;	
+		return false;
 
-		//return super.onOptionsItemSelected(item);
+		// return super.onOptionsItemSelected(item);
 	}
-	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -203,14 +202,15 @@ public class MyUniActivity extends Activity {
 				// //init connector
 				try {
 					System.out.println("token: " + userAuthToken);
-					connector.init(getApplicationContext(), userAuthToken, APP_ID, SERVER_URL, bp);
+					connector.init(getApplicationContext(), userAuthToken,
+							APP_ID, SERVER_URL, bp);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					new PushServiceConnector().init(getApplicationContext(),
-							userAuthToken,APP_ID, SERVER_URL, bp);
+							userAuthToken, APP_ID, SERVER_URL, bp);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

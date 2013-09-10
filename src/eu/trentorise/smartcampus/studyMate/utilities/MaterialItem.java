@@ -48,6 +48,4 @@ public class MaterialItem implements Serializable {
 		this.hash = hash;
 	}
 
-	
-
 }

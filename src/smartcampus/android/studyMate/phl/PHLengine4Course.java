@@ -1,15 +1,11 @@
 package smartcampus.android.studyMate.phl;
 
-import java.util.List;
-
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -115,14 +111,14 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			int i = 0;
 			MaterialItem[] items = new MaterialItem[result.getCdc().size()];
 			for (CwdPHL c : result.getCdc()) {
-				if (c.getMime() == "directory") {
-					items[i++] = new MaterialItem(result.getCwd().getName(), c.getName(),
-							R.drawable.cartella, c.getHash());
+				if (c.getMime().equals("directory")) {
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.cartella, c.getHash());
 				}
 				// if(n.getCwd().getMime() == "application/pdf"){
 				else {
-					items[i++] = new MaterialItem(result.getCwd().getName(), c.getName(),
-							R.drawable.pdf, c.getHash());
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.ic_pdffile, c.getHash());
 				}
 
 				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
@@ -130,42 +126,19 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
 
-			// }
-			// for (RisorsaPhl n : result) {
-			// if (n.getLevel() == lv) {
-			// size++;
-			// }
-			// }
-			// final MaterialItem[] items = new MaterialItem[size];
-			// for (RisorsaPhl s : result) {
-			// if (s.getLevel() == lv) {
-			// if (s.getMime() == null) {
-			// items[i++] = new MaterialItem(s.getModified(),
-			// s.getName(), R.drawable.cartella, s.getLevel());
-			//
-			// } else {
-			//
-			// items[i++] = new MaterialItem(s.getModified(),
-			// s.getName(), R.drawable.pdf, s.getLevel());
-			//
-			// }
-			// }
-			// else{
-			// items[i++] = new MaterialItem(s.getModified(), s.getName(),
-			// R.drawable.smartuni_logo);
-			//
-			// }
 		}
 
-		
-		 listViewCorsiPersonali
-		 .setOnItemClickListener(new ListView.OnItemClickListener() {
-		 @Override
-		 public void onItemClick(AdapterView<?> arg0, View arg1,
-		 int arg2, long arg3) {
-		new PHLengine4Material(context, currentActivity, listViewCorsiPersonali, currentSherlock, result.getCdc().get(arg2).getHash()).execute();	
-		}
-		 });
+		listViewCorsiPersonali
+				.setOnItemClickListener(new ListView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						new PHLengine4Material(context, currentActivity,
+								listViewCorsiPersonali, currentSherlock, result
+										.getCdc().get(arg2).getHash())
+								.execute();
+					}
+				});
 
 		pd.dismiss();
 	}

@@ -44,7 +44,8 @@ public class AddRateActivity extends FragmentActivity {
 	Commento commento;
 	public static ProgressDialog pd;
 	ExpandableListView list = null;
-	//private SCAccessProvider accessProvider = null;
+
+	// private SCAccessProvider accessProvider = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

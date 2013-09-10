@@ -145,5 +145,4 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 
 		return getFrequentedCourses();
 	}
-
 }

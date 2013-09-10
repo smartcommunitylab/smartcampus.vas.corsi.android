@@ -57,14 +57,14 @@ public class FeedbackFragment extends SherlockFragment {
 		if (FeedbackHandler.feedbackInfoList == null) {
 			Toast.makeText(getSherlockActivity(),
 					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
-			//getSherlockActivity().finish();
+			// getSherlockActivity().finish();
 			titleRatingFeedback.setVisibility(View.GONE);
-			}
+		}
 
 		//
 		else {
-			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList
-					.get(0).getCorso().getNome());
+			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList.get(0)
+					.getCorso().getNome());
 
 		}
 
