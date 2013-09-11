@@ -40,6 +40,15 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		icon.setImageResource(item.getIcon());
+		icon.setPadding(
+				(int) context.getResources().getDimension(
+						R.dimen.activity_horizontal_margin),
+				(int) context.getResources().getDimension(
+						R.dimen.adpt_activity_vertical_margin),
+				(int) context.getResources().getDimension(
+						R.dimen.activity_horizontal_margin),
+				(int) context.getResources().getDimension(
+						R.dimen.adpt_activity_vertical_margin));
 		content.setPadding(
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin),

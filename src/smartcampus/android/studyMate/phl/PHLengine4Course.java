@@ -112,12 +112,28 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			for (CwdPHL c : result.getCdc()) {
 				if (c.getMime().equals("directory")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.cartella, c.getHash());
-				}
-				// if(n.getCwd().getMime() == "application/pdf"){
-				else {
+							c.getName(), R.drawable.ic_folder, c.getHash());
+				}else
+				if(c.getMime().equals ("application/pdf")){
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_pdffile, c.getHash());
+				}else
+				if(c.getMime().equals ("image/jpeg")){
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.ic_imgfile, c.getHash());
+				}else
+				if((c.getMime().equals ("application/x-tar"))||(c.getMime().equals("application/x-rar-compressed"))||(c.getMime().equals("application/zip"))){
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.ic_archivefile, c.getHash());
+				}else
+				if((c.getMime().equals ("application/msword"))||(c.getMime().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))||(c.getMime().equals("text/plain"))){
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.ic_textfile, c.getHash());
+				}
+				else {
+					items[i++] = new MaterialItem(result.getCwd().getName(),
+							c.getName(), R.drawable.ic_genericfile, c.getHash());
+					
 				}
 
 				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
@@ -136,19 +152,21 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 						FragmentTransaction ft = currentSherlock
 								.getSupportFragmentManager()
 								.beginTransaction();
-						Fragment fragment = new MaterialiPhlFragmentTEST();
+						Fragment fragment = new Materiali4LevelPhlFragment();
 						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 						Bundle b = new Bundle();
 						b.putString("res", result
 										.getCdc().get(arg2).getHash());
 						fragment.setArguments(b);
-						ft.replace(R.id.tabMateriali, fragment);
-						ft.addToBackStack(null);
+						//ft.replace(R.id.tabMateriali, fragment);
+						ft.add(R.id.tabMateriali, fragment);
+						//ft.addToBackStack(null);
 						ft.commit();
-						} else {
-							Toast.makeText(context, "Coming Soon!",
-									Toast.LENGTH_SHORT).show();
-						}
+						} 
+//						else {
+//							Toast.makeText(context, "Coming Soon!",
+//									Toast.LENGTH_SHORT).show();
+//						}
 //						new PHLengine4Material(context, currentActivity,
 //								listViewCorsiPersonali, currentSherlock, result
 //										.getCdc().get(arg2).getHash())
@@ -164,7 +182,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
-		bundleParam = params[0];
+		//bundleParam = params[0];
 
 		return getMaterial4Course();
 	}

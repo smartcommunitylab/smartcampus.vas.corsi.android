@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
         <ListView
-            android:id="@+id/listViewPhlMaterialiTEST"
+            android:id="@+id/listViewPhlMateriali_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </ListView>

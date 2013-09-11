@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
@@ -151,13 +152,25 @@ public class MyUniActivity extends Activity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.logout:
-			try {
-				accessProvider.logout(MyUniActivity.this);
-				System.out.println(userAuthToken);
-			} catch (AACException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+
+						
+						accessProvider.logout(MyUniActivity.this);
+						System.out.println(userAuthToken);
+					} catch (AACException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}).start();
+			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
+					Toast.LENGTH_SHORT).show();
+			finish();
 			return true;
 		}
 		return false;
