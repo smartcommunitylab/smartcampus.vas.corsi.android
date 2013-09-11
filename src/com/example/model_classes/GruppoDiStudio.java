@@ -28,6 +28,8 @@ public class GruppoDiStudio {
 	/** The anno. */
 	int anno;
 
+	ArrayList<ChatObject> forum;
+	
 	Drawable logo;
 
 	/**
@@ -84,6 +86,14 @@ public class GruppoDiStudio {
 	 */
 	public void setAnno(int anno) {
 		this.anno = anno;
+	}
+
+	public ArrayList<ChatObject> getForum() {
+		return forum;
+	}
+
+	public void setForum(ArrayList<ChatObject> forum) {
+		this.forum = forum;
 	}
 
 	/**

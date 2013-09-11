@@ -50,12 +50,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				"Renato <3", membri_gds, servizi_monitorati_gds,
 				attivita_studio_gds, 2, getResources().getDrawable(
 						R.drawable.reti_calcolatori_logo));
+		GruppoDiStudio gds4 = new GruppoDiStudio("Algoritmi e strutture dati",
+				"Djikstra4President", membri_gds, servizi_monitorati_gds,
+				attivita_studio_gds, 2, getResources().getDrawable(
+						R.drawable.algoritmi_logo));
+
 		user_gds_list.add(gds1);
 		user_gds_list.add(gds2);
 		user_gds_list.add(gds3);
-		user_gds_list.add(gds1);
-		user_gds_list.add(gds2);
-		user_gds_list.add(gds3);
+		user_gds_list.add(gds4);
 
 		// ####################################
 
@@ -81,13 +84,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_ricerca_avanzata:
-			// da implementare
-			return true;
 
-		case R.id.action_ricerca_gruppi_personali:
-			// da implementare
-			return true;
 		case R.id.action_cambia_layout:
 
 			Drawable actualicon = item.getIcon();
@@ -122,9 +119,12 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.commit();
 
 			}
+			return super.onOptionsItemSelected(item);
 		case R.id.action_iscriviti_nuovo_gruppo:
-			// da implementare
-			return true;
+			Intent intent = new Intent(getApplicationContext(),
+					RicercaGruppiGenerale_activity.class);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
 
 		default:
 			return super.onOptionsItemSelected(item);

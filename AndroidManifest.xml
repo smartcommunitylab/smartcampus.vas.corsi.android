@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -208,6 +208,14 @@
         <activity
             android:name="smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity"
             android:label="@string/title_activity_lista__gds_activity" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.studyMate.gruppi_studio.Overview_GDS"
+            android:label="@string/title_activity_overview__gds" >
+        </activity>
+        <activity
+            android:name="smartcampus.android.studyMate.gruppi_studio.RicercaGruppiGenerale_activity"
+            android:label="@string/title_gicercagruppigenerale_activity" >
         </activity>
     </application>
 

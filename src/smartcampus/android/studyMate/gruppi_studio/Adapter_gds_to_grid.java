@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.example.model_classes.GruppoDiStudio;
 
-public class GridGDSelemAdapter extends ArrayAdapter<GruppoDiStudio> {
+public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 	private Context context;
 	private ArrayList<GruppoDiStudio> entries;
 
-	public GridGDSelemAdapter(Context context, int textViewResourceId,
+	public Adapter_gds_to_grid(Context context, int textViewResourceId,
 			ArrayList<GruppoDiStudio> objects) {
 		super(context, textViewResourceId, objects);
 		// TODO Auto-generated constructor stub
@@ -43,12 +43,13 @@ public class GridGDSelemAdapter extends ArrayAdapter<GruppoDiStudio> {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			littleSquare = inflater.inflate(R.layout.gds_square, null);
-			littleSquare.findViewById(R.id.little_square_for_gds)
-					.setLayoutParams(new GridView.LayoutParams(85, 85));
+			//littleSquare.findViewById(R.id.little_square_for_gds)
+					//.setLayoutParams(new GridView.LayoutParams(85, 85));
 			((ImageView) littleSquare.findViewById(R.id.gds_square_logo))
 					.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			littleSquare.findViewById(R.id.little_square_for_gds).setPadding(4,
-					4, 4, 4);
+			littleSquare.findViewById(R.id.little_square_for_gds).setPadding(8,
+					8, 8, 8);
+		
 		}
 
 		ImageView logo_gds = (ImageView) littleSquare
