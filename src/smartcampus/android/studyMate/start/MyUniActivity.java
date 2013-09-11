@@ -1,6 +1,7 @@
 package smartcampus.android.studyMate.start;
 
 import smartcampus.android.studyMate.finder.FindHomeActivity;
+import smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import smartcampus.android.studyMate.notices.NoticesActivity;
 import smartcampus.android.studyMate.phl.PHLActivity;
@@ -126,6 +127,17 @@ public class MyUniActivity extends Activity {
 					public void onClick(View v) {
 						Intent intent = new Intent(MyUniActivity.this,
 								NoticesActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+
+		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								Lista_GDS_activity.class);
 						MyUniActivity.this.startActivity(intent);
 					}
 				});
