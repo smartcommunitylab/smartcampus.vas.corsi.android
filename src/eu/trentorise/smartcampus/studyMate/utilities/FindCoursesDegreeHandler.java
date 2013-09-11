@@ -134,43 +134,43 @@ public class FindCoursesDegreeHandler extends
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-		ArrayList<String> listStringDegree = new ArrayList<String>();
+			ArrayList<String> listStringDegree = new ArrayList<String>();
 
-		for (CorsoLaurea d : result) {
-			listStringDegree.add(d.getNome());
-		}
+			for (CorsoLaurea d : result) {
+				listStringDegree.add(d.getNome());
+			}
 
-		// setto i corsi di laurea nello spinner
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		ArrayAdapter adapter = new ArrayAdapter(
-				context,
-				smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
-				listStringDegree);
-		spinnerCorsiLaurea.setAdapter(adapter);
+			// setto i corsi di laurea nello spinner
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			ArrayAdapter adapter = new ArrayAdapter(
+					context,
+					smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
+					listStringDegree);
+			spinnerCorsiLaurea.setAdapter(adapter);
 
-		// listener spinner corso laurea
-		spinnerCorsiLaurea
-				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-					public void onItemSelected(AdapterView<?> parent,
-							View view, int pos, long id) {
+			// listener spinner corso laurea
+			spinnerCorsiLaurea
+					.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+						public void onItemSelected(AdapterView<?> parent,
+								View view, int pos, long id) {
 
-						corsoLaureaSelected = new CorsoLaurea();
+							corsoLaureaSelected = new CorsoLaurea();
 
-						corsoLaureaSelected = result.get(pos);
+							corsoLaureaSelected = result.get(pos);
 
-						courseSelected = parent.getItemAtPosition(pos)
-								.toString();
+							courseSelected = parent.getItemAtPosition(pos)
+									.toString();
 
-					}
+						}
 
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-						// TODO Auto-generated method stub
+						@Override
+						public void onNothingSelected(AdapterView<?> arg0) {
+							// TODO Auto-generated method stub
 
-					}
-				});
+						}
+					});
 
-		pd.dismiss();
+			pd.dismiss();
 		}
 	}
 

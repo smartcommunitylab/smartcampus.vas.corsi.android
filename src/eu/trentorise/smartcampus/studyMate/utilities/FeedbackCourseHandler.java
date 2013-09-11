@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
-import smartcampus.android.studyMate.finder.HomeCourseDescriptionFragment;
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,10 +20,9 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studyMate.models.Commento;
+import eu.trentorise.smartcampus.studyMate.models.Corso;
 
-public class FeedbackCourseHandler extends
-		AsyncTask<Void, Void, List<Commento>> {
+public class FeedbackCourseHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -36,7 +33,7 @@ public class FeedbackCourseHandler extends
 	TextView tvCourseName;
 	RatingBar ratingAverage;
 	ExpandableListView listComments;
-	public static List<Commento> feedbackInfoList;
+	public static List<Corso> feedbackInfoList;
 	public Activity act;
 	TextView descriptionCourse;
 	public static ProgressDialog pd;
@@ -50,8 +47,9 @@ public class FeedbackCourseHandler extends
 		this.descriptionCourse = descriptionCourse;
 	}
 
-	private List<Commento> getFullFeedbackById() {
+	private List<Corso> getFullFeedbackById() {
 
+		Context context = null;
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -61,14 +59,13 @@ public class FeedbackCourseHandler extends
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
+		String body = null;
 		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
-
 				body = response.getBody();
-
 			} else {
 				return null;
 			}
@@ -83,54 +80,74 @@ public class FeedbackCourseHandler extends
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, Commento.class);
+		System.out.println(body);
+		System.out.println(Utils.convertJSONToObjects(body, Corso.class));
+		return Utils.convertJSONToObjects(body, Corso.class);
 	}
 
 	@Override
 	protected void onPreExecute() {
+		super.onPreExecute();
 		new ProgressDialog(act);
 		pd = ProgressDialog.show(act, "Informazioni del corso di "
 				+ FindHomeCourseActivity.courseName, "Caricamento...");
 
-		super.onPreExecute();
-
 	}
 
 	@Override
-	protected void onPostExecute(List<Commento> commenti) {
-		// TODO Auto-generated method stub
-		super.onPostExecute(commenti);
-
-		if (commenti == null) {
+	protected void onPostExecute(List<Corso> result) {
+		super.onPostExecute(result);
+		System.out.println("result: " + result);
+		if (result.get(0) == null) {
 
 			Toast.makeText(context, "Ops! C'e' stato un errore...",
 					Toast.LENGTH_SHORT).show();
+
 			pd.dismiss();
 			// act.finish();
 		} else {
+			Corso c = result.get(0);
+			System.out.println("CORSO: " + result.get(0).getNome());
+			Collections.reverse(result);
+			// feedbackInfoList = corso;
+			// act.getActionBar().setTitle("Test");
+			// corso.get(0).getNome());
+			ratingAverage.setRating((float) c.getValutazione_media());
 
-			Collections.reverse(commenti);
-			feedbackInfoList = commenti;
-			act.getActionBar().setTitle(
-					feedbackInfoList.get(0).getCorso().getNome());
-			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
-					.getValutazione_media());
-			RatingBar ratingCont = (RatingBar) act
-					.findViewById(R.id.ratingBarRowContenuti);
-			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
-					.getDescrizione());
-			ratingCont.setRating(feedbackInfoList.get(0)
-					.getRating_carico_studio());
+			// RatingBar ratingCont = (RatingBar) act
+			// .findViewById(R.id.ratingBarRowContenuti);
+			// ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
+			//
+			// RatingBar ratingCaricoStudio = (RatingBar) act
+			// .findViewById(R.id.ratingBarRowCfu);
+			// ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+			// .getRating_carico_studio());
+			//
+			// RatingBar ratingLezioni = (RatingBar) act
+			// .findViewById(R.id.ratingBarRowLezioni);
+			// ratingLezioni
+			// .setRating(feedbackInfoList.get(0).getRating_lezioni());
+			//
+			// RatingBar ratingMateriali = (RatingBar) act
+			// .findViewById(R.id.ratingBarRowMateriali);
+			// ratingMateriali.setRating(feedbackInfoList.get(0)
+			// .getRating_materiali());
+			//
+			// RatingBar ratingEsame = (RatingBar) act
+			// .findViewById(R.id.ratingBarRowEsame);
+			// ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
 
-			// HomeCourseDescriptionFragment.pd.dismiss();
-			pd.dismiss();
-			// loadDataLayout(course);
-
+			descriptionCourse.setText(c.getDescrizione());
+			// System.out.println(feedbackInfoList.get(0).getDescrizione());
 		}
+
+		pd.dismiss();
+		// loadDataLayout(course);
+
 	}
 
 	@Override
-	protected List<Commento> doInBackground(Void... params) {
+	protected List<Corso> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		return getFullFeedbackById();
 	}

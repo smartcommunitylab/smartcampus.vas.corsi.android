@@ -47,20 +47,25 @@ public final class SmartUniDataWS {
 		return "/corsolaurea/" + String.valueOf(idDepartment);
 	}
 
-	// Material for Courses //////////////////////////////////////////////////////
-		public static final String GET_MATERIAL_FOR_COURSE(long idCourse) {
-			return "/risorsa/" + idCourse;
-		}
+	// Material for Courses
+	// //////////////////////////////////////////////////////
+	public static final String GET_MATERIAL_FOR_COURSE(long idCourse) {
+		return "/risorsa/" + idCourse;
+	}
+
 	// Feedback //////////////////////////////////////////////////////////
 	public static String GET_WS_FEEDBACK_OF_COURSE(long idCourse) {
+		//return "/corso/" + String.valueOf(idCourse) + "/commento/all";
 		return "/commento/" + String.valueOf(idCourse);
 	}
-	
+
 	// Feedback //////////////////////////////////////////////////////////
-		public static String GET_WS_FEEDBACK_OF_STUDENT (long idStudent, long idCourse) {
-			return "/commento/"+String.valueOf(idCourse)+"/" + String.valueOf(idStudent);
-		}
-	
+	public static String GET_WS_FEEDBACK_OF_STUDENT(long idStudent,
+			long idCourse) {
+		return "/commento/" + String.valueOf(idCourse) + "/"
+				+ String.valueOf(idStudent);
+	}
+
 	public static final String POST_WS_MY_FEEDBACK = "/commento";
 
 }

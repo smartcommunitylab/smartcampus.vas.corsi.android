@@ -43,8 +43,6 @@ public class ResultSearchedActivity extends Activity {
 		depSelected = (Dipartimento) i.getSerializableExtra("department");
 		courseDegreeSelected = (CorsoLaurea) i
 				.getSerializableExtra("courseDegree");
-		department = i.getStringExtra("department");
-		degree = i.getStringExtra("courseDegree");
 		course = i.getStringExtra("course").toLowerCase();
 
 		new ProgressDialog(ResultSearchedActivity.this);

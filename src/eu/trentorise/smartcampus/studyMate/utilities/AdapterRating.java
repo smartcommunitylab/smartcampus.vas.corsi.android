@@ -66,31 +66,29 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				.findViewById(R.id.ratingBarContextMateriali);
 		RatingBar rbExam = (RatingBar) view
 				.findViewById(R.id.ratingBarContextEsame);
-		
+
 		switch (groupPosition) {
-        case 0: 
-        	rbCont.setRating(inf.getRating());
-        	break;
-        case 1: 
-        	rbCfu.setRating(inf.getRating());
-        	break;
-        case 2: 
-        	rbLez.setRating(inf.getRating());
-        	break;
-        case 3: 
-        	rbMat.setRating(inf.getRating());
-        	break;
-        case 4: 
-        	rbCfu.setRating(inf.getRating());
-        	break;
+		case 0:
+			rbCont.setRating(inf.getRating());
+			break;
+		case 1:
+			rbCfu.setRating(inf.getRating());
+			break;
+		case 2:
+			rbLez.setRating(inf.getRating());
+			break;
+		case 3:
+			rbMat.setRating(inf.getRating());
+			break;
+		case 4:
+			rbCfu.setRating(inf.getRating());
+			break;
 		}
-		
+
 		TextView textExplain = (TextView) view
 				.findViewById(R.id.textViewExplainRate);
 		textExplain.setText(inf.getExplainContext());
 
-
-		
 		rbCont.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
@@ -123,7 +121,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				Log.i("ratings", ratings.toString());
 			}
 		});
-		
+
 		rbMat.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
@@ -144,9 +142,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 				Log.i("ratings", ratings.toString());
 			}
 		});
-		
 
-		
 		switch (groupPosition) {
 		case 0:
 			rbCont.setVisibility(View.VISIBLE);
@@ -190,10 +186,10 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			return view;
 		}
 
-			// rbExam.setRating(inf.getRating());
+		// rbExam.setRating(inf.getRating());
 
-			// inizializzo la lista dei
-		
+		// inizializzo la lista dei
+
 		//
 		return view;
 	}

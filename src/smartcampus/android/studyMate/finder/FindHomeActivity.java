@@ -47,7 +47,7 @@ public class FindHomeActivity extends SherlockActivity implements TextWatcher {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_home);
 		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
-		//ActionBar ab = getActionBar();
+		// ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -94,7 +94,8 @@ public class FindHomeActivity extends SherlockActivity implements TextWatcher {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(FindHomeActivity.this,

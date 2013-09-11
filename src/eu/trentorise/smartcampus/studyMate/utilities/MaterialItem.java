@@ -2,18 +2,18 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.io.Serializable;
 
-public class MaterialItem implements Serializable{
+public class MaterialItem implements Serializable {
 	private String title;
 	private String content;
 	private int icon;
-	private int level;
+	private String hash;
 
-	public MaterialItem(String title, String content, int icon, int level) {
+	public MaterialItem(String title, String content, int icon, String hash) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.icon = icon;
-		this.level=level;
+		this.setHash(hash);
 	}
 
 	public String getTitle() {
@@ -40,12 +40,12 @@ public class MaterialItem implements Serializable{
 		this.icon = icon;
 	}
 
-	public int getLevel() {
-		return level;
+	public String getHash() {
+		return hash;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 }

@@ -242,16 +242,14 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 			pd.dismiss();
 
 			List<String> resultStrings = new ArrayList<String>();
-			
+
 			courseSelected = new Corso();
 			courseSelected = (Corso) CoursesHandler.corsoSelezionato;
-			
-			
-			
+
 			resultStrings.add(courseSelected.getNome());
-//			for (CorsoLite cl : result) {
-//				resultStrings.add(cl.getNome());
-//			}
+			// for (CorsoLite cl : result) {
+			// resultStrings.add(cl.getNome());
+			// }
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 					AddEvent4coursesActivity.this,
@@ -260,7 +258,7 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 			coursesSpinner.setAdapter(adapterInitialList);
 			coursesSpinner.setEnabled(false);
 			coursesSpinner.setActivated(false);
-			
+
 		}
 
 		@Override

@@ -30,7 +30,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.studyMate.utilities.MaterialItem;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
+public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 
 	private Context context;
 	private Activity currentActivity;
@@ -40,27 +40,29 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	public static Corso corsoSelezionato;
 	public static ProgressDialog pd;
 	public static RisorsaPhl risorsa;
+	private String idPHL;
+	private RisorsaPhl r;
 
-	public PHLengine4Course(Context applicationContext,
+	public PHLengine4Material(Context applicationContext,
 			Activity currentActivity, ListView listViewCorsi,
-			SherlockFragmentActivity currentSherlock) {
+			SherlockFragmentActivity currentSherlock, String pHLid) {
 		this.context = applicationContext;
 		this.currentActivity = currentActivity;
 		this.listViewCorsiPersonali = listViewCorsi;
 		this.currentSherlock = currentSherlock;
+		this.idPHL = pHLid;
 	}
 
-	public RisorsaPhl getMaterial4Course() {
+	public RisorsaPhl getMaterial4Dir() {
 
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-		final long idCorso = currentActivity.getIntent().getLongExtra(
-				"IdCorso", 0);
+		
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
-				"/api/documenti/getDirByIDSC/" + idCorso);
+				"/api/documenti/getDirByIDPHL/" + idPHL);
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 
@@ -87,6 +89,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return Utils.convertJSONToObject(body, RisorsaPhl.class);
 	}
 
@@ -102,6 +105,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected void onPostExecute(final RisorsaPhl result) {
 		super.onPostExecute(result);
+		r = result;
 		if (result == null) {
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
@@ -135,12 +139,10 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							c.getName(), R.drawable.ic_genericfile, c.getHash());
 					
 				}
-
 				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
 						items);
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
-
 		}
 
 		listViewCorsiPersonali
@@ -148,43 +150,42 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-						if (result.getCdc().get(arg2).getMime().equals("directory")) {
+						if (r.getCdc().get(arg2).getMime().equals("directory")) {
+							
 						FragmentTransaction ft = currentSherlock
 								.getSupportFragmentManager()
 								.beginTransaction();
 						Fragment fragment = new Materiali4LevelPhlFragment();
-						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 						Bundle b = new Bundle();
 						b.putString("res", result
-										.getCdc().get(arg2).getHash());
+								.getCdc().get(arg2).getHash());
 						fragment.setArguments(b);
-						//ft.replace(R.id.tabMateriali, fragment);
-						ft.add(R.id.tabMateriali, fragment);
-						//ft.addToBackStack(null);
+						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+						ft.replace(R.id.tabMateriali, fragment);
+						
+						ft.addToBackStack(null);
 						ft.commit();
-						} 
-//						else {
-//							Toast.makeText(context, "Coming Soon!",
-//									Toast.LENGTH_SHORT).show();
-//						}
-//						new PHLengine4Material(context, currentActivity,
-//								listViewCorsiPersonali, currentSherlock, result
-//										.getCdc().get(arg2).getHash())
-//								.execute();
+							
+							
+						} else {
+							Toast.makeText(context, "Coming Soon!",
+									Toast.LENGTH_SHORT).show();
+//							
+//							new PHLengine4Material(context, currentActivity,
+//									listViewCorsiPersonali, currentSherlock, r
+//									.getCdc().get(arg2).getHash())
+//							.execute();
+						}
 					}
 				});
-
 		pd.dismiss();
 	}
-
-	// }
 
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
 		//bundleParam = params[0];
-
-		return getMaterial4Course();
+		return getMaterial4Dir();
 	}
 
 }

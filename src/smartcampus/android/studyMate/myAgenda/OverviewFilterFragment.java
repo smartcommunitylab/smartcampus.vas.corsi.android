@@ -107,5 +107,5 @@ public class OverviewFilterFragment extends SherlockFragment {
 		return eventiFiltrati;
 
 	}
-	
+
 }

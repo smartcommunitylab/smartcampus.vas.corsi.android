@@ -12,14 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.communicator.model.Notification;
 import eu.trentorise.smartcampus.studyMate.models.Notice;
 
-public class AdapterNoticesList extends ArrayAdapter<Notice> {
+public class AdapterNoticesList extends ArrayAdapter<Notification> {
 	@SuppressWarnings("unused")
-	private List<Notice> notices;
+	private List<Notification> notices;
 	private Context context = null;
 
-	public AdapterNoticesList(Context mcontext, int layoutId, List<Notice> n) {
+	public AdapterNoticesList(Context mcontext, int layoutId, List<Notification> n) {
 		super(mcontext, layoutId, n);
 		notices = n;
 		context = mcontext;
@@ -34,7 +35,7 @@ public class AdapterNoticesList extends ArrayAdapter<Notice> {
 		 */
 
 		View row = convertView;
-		Notice item = getItem(position);
+		Notification item = getItem(position);
 
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -51,13 +52,13 @@ public class AdapterNoticesList extends ArrayAdapter<Notice> {
 
 		title.setText(item.getTitle());
 
-		String dateTS = item.getTimestamp();
+		long dateTS = item.getTimestamp();
 
-		Date d = new Date(Long.parseLong(dateTS));
+		//Date d = new Date(Long.parseLong(dateTS));
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy/MM/dd HH:mm:ss", Locale.ITALY);
 
-		String dateString = dateFormat.format(d);
+		String dateString = dateFormat.format(dateTS);
 		date.setText(dateString);
 		content.setText(item.getDescription());
 		content.setPadding(
@@ -66,7 +67,7 @@ public class AdapterNoticesList extends ArrayAdapter<Notice> {
 				0,
 				(int) context.getResources().getDimension(
 						R.dimen.activity_horizontal_margin), 0);
-		Notice prev = null;
+		Notification prev = null;
 		if (position > 0)
 			prev = getItem(position - 1);
 
@@ -76,46 +77,10 @@ public class AdapterNoticesList extends ArrayAdapter<Notice> {
 			date.setVisibility(View.GONE);
 		}
 
-		// row.setPadding(
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin),
-		// 0,
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin), 0);
-
 		author.setText(item.getUser());
 
 		return row;
 
-		/*
-		 * Notice notice = notices.get(position);
-		 * 
-		 * Notice noticePrec = notices.get(position-1);
-		 * 
-		 * SimpleDateFormat dateFormat = new
-		 * SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); Date date = new Date();
-		 * String dateToday = dateFormat.format(date);
-		 * 
-		 * 
-		 * if(noticePrec.getTimestamp() == notice.getTimestamp()){
-		 * 
-		 * } TextView noticeUser = (TextView) view
-		 * .findViewById(smartcampus.android
-		 * .template.standalone.R.id.textViewUserRow);
-		 * noticeUser.setText(notice.getAuthor().getName());
-		 * 
-		 * TextView noticeDatetime = (TextView) view
-		 * .findViewById(smartcampus.android
-		 * .template.standalone.R.id.textViewDatetimeRow);
-		 * noticeDatetime.setText(notice.getUpdateTime());
-		 * 
-		 * TextView noticeDescription = (TextView) view
-		 * .findViewById(smartcampus
-		 * .android.template.standalone.R.id.textViewDescriptionRow);
-		 * noticeDescription.setText(notice.getDescription());
-		 * 
-		 * return view;
-		 */
 	}
 
 }

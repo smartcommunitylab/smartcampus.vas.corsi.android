@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,8 +19,6 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.Toast;
-import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
-import eu.trentorise.smartcampus.ac.model.UserData;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -46,6 +45,8 @@ public class AddRateActivity extends FragmentActivity {
 	public static ProgressDialog pd;
 	ExpandableListView list = null;
 
+	// private SCAccessProvider accessProvider = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,7 +65,7 @@ public class AddRateActivity extends FragmentActivity {
 		// TextView titleCourseRating = (TextView)
 		// findViewById(R.id.textViewTitleRatingCourse);
 		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
-		
+
 		setTitle(CoursesHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRateActivity.this);
 		pd = ProgressDialog.show(AddRateActivity.this,
@@ -258,14 +259,18 @@ public class AddRateActivity extends FragmentActivity {
 
 			});
 
-//			final RatingBar rbCont = (RatingBar) findViewById(R.id.ratingBarContextContenuti);
-//			final RatingBar rbCfu = (RatingBar) findViewById(R.id.ratingBarContextCfu);
-//			final RatingBar rbLez = (RatingBar) findViewById(R.id.ratingBarContextLezioni);
-//			final RatingBar rbMat = (RatingBar) findViewById(R.id.ratingBarContextMateriali);
-//			final RatingBar rbExam = (RatingBar) findViewById(R.id.ratingBarContextEsame);
+			// final RatingBar rbCont = (RatingBar)
+			// findViewById(R.id.ratingBarContextContenuti);
+			// final RatingBar rbCfu = (RatingBar)
+			// findViewById(R.id.ratingBarContextCfu);
+			// final RatingBar rbLez = (RatingBar)
+			// findViewById(R.id.ratingBarContextLezioni);
+			// final RatingBar rbMat = (RatingBar)
+			// findViewById(R.id.ratingBarContextMateriali);
+			// final RatingBar rbExam = (RatingBar)
+			// findViewById(R.id.ratingBarContextEsame);
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
-			
-			
+
 			pd.dismiss();
 
 			list.setOnChildClickListener(new OnChildClickListener() {
@@ -286,7 +291,7 @@ public class AddRateActivity extends FragmentActivity {
 							Intent intent = new Intent();
 							intent.putExtra("Rating", ratings);
 							Commento commento = new Commento();
-							
+
 							if (commentCourse.getText().toString() != null)
 								commento.setTesto(commentCourse.getText()
 										.toString());
@@ -294,7 +299,7 @@ public class AddRateActivity extends FragmentActivity {
 								commento.setTesto(new String(""));
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
-							
+
 							commento.setCorso(CoursesHandler.corsoSelezionato);
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
@@ -306,13 +311,9 @@ public class AddRateActivity extends FragmentActivity {
 									.getRating());
 							commento.setRating_esame(ratings.get(4).getRating());
 
-							
-
-							AMSCAccessProvider mAccessProvider = new AMSCAccessProvider();
-							UserData profile = mAccessProvider.readUserData(
-									AddRateActivity.this, null);
 							Studente stud = new Studente();
-							stud.setId(Long.parseLong(profile.getUserId()));
+							stud.setId(Long.parseLong(MyUniActivity.bp
+									.getUserId()));
 							commento.setId_studente(stud);
 
 							new AddFeedbackHandler().execute(commento);
@@ -337,14 +338,10 @@ public class AddRateActivity extends FragmentActivity {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
 
-			// prendo i dati dell'utente
-			AMSCAccessProvider mAccessProvider = new AMSCAccessProvider();
-			UserData profile = mAccessProvider.readUserData(context, null);
-
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(
-							Long.parseLong(profile.getUserId()),
+							Long.parseLong(MyUniActivity.bp.getUserId()),
 							CoursesHandler.corsoSelezionato.getId()));
 			request.setMethod(Method.GET);
 
@@ -354,7 +351,7 @@ public class AddRateActivity extends FragmentActivity {
 						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
 				if (response.getHttpStatus() == 200) {
-					
+
 					body = response.getBody();
 
 				} else {

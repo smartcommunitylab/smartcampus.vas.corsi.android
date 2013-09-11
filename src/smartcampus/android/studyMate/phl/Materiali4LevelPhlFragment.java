@@ -9,32 +9,32 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class PHLCorsiFragment extends SherlockFragment {
+public class Materiali4LevelPhlFragment extends SherlockFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_phl_corsi, container,
-				false);
+		View view = inflater.inflate(R.layout.fragment_phl_materiali_lv,
+				container, false);
 		// // do your view initialization here
 		return view;
 	}
 
-@Override
-public void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
+		System.out.println("PHL TEST");
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
-				R.id.listViewCorsiPHL);
-
+				R.id.listViewPhlMateriali_lv);
 		Bundle arguments = new Bundle();
-		PHLengine handlerPersonalCoursesPHL = new PHLengine(getActivity()
-				.getApplicationContext(), getActivity(), listViewCorsi,
-				getSherlockActivity());
-		handlerPersonalCoursesPHL.execute(arguments);
+		PHLengine4Material handlerCoursesMaterial = new PHLengine4Material(
+				getActivity().getApplicationContext(), getActivity(),
+				listViewCorsi, getSherlockActivity(), this.getArguments()
+						.getString("res"));
+
+		handlerCoursesMaterial.execute(arguments);
 
 	}
-}
-	
 
+}

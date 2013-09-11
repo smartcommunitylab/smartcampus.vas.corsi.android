@@ -306,7 +306,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 
 				corsoSelezionato.setId(courses.get(arg2).getId());
 				corsoSelezionato.setNome(courses.get(arg2).getNome());
-				
+
 				CoursesHandler.corsoSelezionato = (Corso) corsoSelezionato;
 
 				i.putExtra("courseSelected", corsoSelezionato);

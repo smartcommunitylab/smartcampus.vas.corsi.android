@@ -15,7 +15,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.ac.authenticator.AMSCAccessProvider;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.TabListener;
 
@@ -31,8 +30,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 	private MenuKind agendaState;
 	private ChildActivity mystate;
-	@SuppressWarnings("unused")
-	private AMSCAccessProvider mAccessProvider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +43,11 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		setTitle(getResources().getString(R.string.title_activity_my_agenda));
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		
+
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_home);
 		String tab2_txt = getResources().getString(R.string.tab_courses);
 
-
-		
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)
@@ -161,13 +156,13 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		case R.id.menu_share:
 			return true;
 		case R.id.menu_modify_event:
-			Toast.makeText(getApplicationContext(),
-					"Coming soon!", Toast.LENGTH_SHORT).show();
-//			Intent intentEvent2 = new Intent(MyAgendaActivity.this,
-//					AddEventActivity.class);
-//			intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentEvent2);
-			
+			Toast.makeText(getApplicationContext(), "Coming soon!",
+					Toast.LENGTH_SHORT).show();
+			// Intent intentEvent2 = new Intent(MyAgendaActivity.this,
+			// AddEventActivity.class);
+			// intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intentEvent2);
+
 			return true;
 		case R.id.menu_delete_event:
 			return true;
@@ -183,7 +178,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			Intent intentAddRating = new Intent(MyAgendaActivity.this,
 					AddRateActivity.class);
 			CoursesHandler.corsoSelezionato.getNome();
-			intentAddRating.putExtra("corso", CoursesHandler.corsoSelezionato.getNome());
+			intentAddRating.putExtra("corso",
+					CoursesHandler.corsoSelezionato.getNome());
 			intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentAddRating);
 			return true;

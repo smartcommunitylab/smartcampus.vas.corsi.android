@@ -19,16 +19,15 @@ public class PHL4Courses extends SherlockFragmentActivity {
 		// setContentView(R.layout.activity_phl);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_PHL);
 		String tab2_txt = getResources().getString(R.string.tab_moodle);
-		
+
 		setTitle(PHLengine.corsoSelezionato.getNome());
-		
+
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)
@@ -69,6 +68,11 @@ public class PHL4Courses extends SherlockFragmentActivity {
 			return super.onOptionsItemSelected(item);
 
 		}
+	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
 	}
 
 }

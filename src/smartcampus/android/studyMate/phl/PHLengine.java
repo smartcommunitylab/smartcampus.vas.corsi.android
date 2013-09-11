@@ -2,6 +2,7 @@ package smartcampus.android.studyMate.phl;
 
 import java.util.List;
 
+import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +25,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Corso;
+import eu.trentorise.smartcampus.studyMate.utilities.MaterialAdapter;
+import eu.trentorise.smartcampus.studyMate.utilities.MaterialItem;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.studyMate.utilities.TitledAdapter;
 import eu.trentorise.smartcampus.studyMate.utilities.TitledItem;
@@ -102,15 +105,18 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-			TitledItem[] items = new TitledItem[result.size()];
-
+			//TitledItem[] items = new TitledItem[result.size()];
+			MaterialItem[] items = new MaterialItem[result.size()];
 			int i = 0;
 			for (Corso s : result) {
-				items[i++] = new TitledItem("Corsi da libretto", s.getNome());
+				items[i++] = new MaterialItem("",
+						s.getNome(), R.drawable.ic_folder, "");
+				//items[i++] = new TitledItem("Corsi da libretto", s.getNome());
 			}
 
-			TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
-
+			//TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
+			MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
+					items);
 			listViewCorsiPersonali.setAdapter(adapter);
 
 			listViewCorsiPersonali
@@ -145,5 +151,4 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 
 		return getFrequentedCourses();
 	}
-
 }

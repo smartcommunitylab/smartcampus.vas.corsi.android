@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -21,8 +22,7 @@ import eu.trentorise.smartcampus.studyMate.models.Commento;
 import eu.trentorise.smartcampus.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterFeedbackList;
-import eu.trentorise.smartcampus.studyMate.utilities.FeedbackCourseHandler;
-import eu.trentorise.smartcampus.studyMate.utilities.FeedbackRatingHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.FeedbackHandler;
 
 public class FeedbackFragment extends SherlockFragment {
 
@@ -49,21 +49,26 @@ public class FeedbackFragment extends SherlockFragment {
 		CorsoLite corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
-		@SuppressWarnings("unused")
-		String idCourse = intent.getStringExtra("courseSelectedId");
+
+		// String idCourse = intent.getStringExtra("courseSelectedId");
 
 		TextView titleRatingFeedback = (TextView) view
 				.findViewById(R.id.textViewTitleFeedbackCourse);
-		if (FeedbackRatingHandler.feedbackInfoList == null) {
-			titleRatingFeedback.setText("Non ci sono commenti...");
+		if (FeedbackHandler.feedbackInfoList == null) {
+			Toast.makeText(getSherlockActivity(),
+					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
+			// getSherlockActivity().finish();
+			titleRatingFeedback.setVisibility(View.GONE);
+		}
 
-		} else {
-			titleRatingFeedback.setText(FeedbackCourseHandler.feedbackInfoList
-					.get(0).getCorso().getNome());
+		//
+		else {
+			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList.get(0)
+					.getCorso().getNome());
 
 		}
 
-		List<Commento> comments = FeedbackCourseHandler.feedbackInfoList;
+		List<Commento> comments = FeedbackHandler.feedbackInfoList;
 		if (comments != null) {
 			ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 

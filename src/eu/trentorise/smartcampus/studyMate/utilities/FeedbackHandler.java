@@ -3,15 +3,14 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 import java.util.Collections;
 import java.util.List;
 
-import smartcampus.android.studyMate.finder.HomeCourseDescriptionFragment;
-import smartcampus.android.template.standalone.R;
+import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -22,8 +21,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Commento;
 
-public class FeedbackRatingHandler extends
-		AsyncTask<Void, Void, List<Commento>> {
+public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -37,8 +35,9 @@ public class FeedbackRatingHandler extends
 	public static List<Commento> feedbackInfoList;
 	public Activity act;
 	TextView descriptionCourse;
+	public static ProgressDialog pd;
 
-	public FeedbackRatingHandler(Context applicationContext, long idCourse,
+	public FeedbackHandler(Context applicationContext, long idCourse,
 			Activity act, RatingBar ratingAverage, TextView descriptionCourse) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
@@ -79,44 +78,70 @@ public class FeedbackRatingHandler extends
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println(body);
 		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
+		new ProgressDialog(act);
+		pd = ProgressDialog.show(act, "Informazioni del corso di "
+				+ FindHomeCourseActivity.courseName, "Caricamento...");
+
 		super.onPreExecute();
 
 	}
 
 	@Override
 	protected void onPostExecute(List<Commento> commenti) {
-		// TODO Auto-generated method stub
-		super.onPostExecute(commenti);
+		// super.onPostExecute(commenti);
 
-		if (commenti == null) {
+		// if (commenti == null) {
+		//
+		// Toast.makeText(context, "Ops! C'e' stato un errore...",
+		// Toast.LENGTH_SHORT).show();
+		//
+		// pd.dismiss();
+		// // act.finish();
+		// } else {
 
-			Toast.makeText(context, "Ops! C'e' stato un errore...",
-					Toast.LENGTH_SHORT).show();
-			// act.finish();
-		} else {
-			Collections.reverse(commenti);
+		Collections.reverse(commenti);
+		feedbackInfoList = commenti;
+		act.getActionBar().setTitle(
+				feedbackInfoList.get(0).getCorso().getNome());
+		ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
+				.getValutazione_media());
 
-			feedbackInfoList = commenti;
-			act.getActionBar().setTitle(
-					feedbackInfoList.get(0).getCorso().getNome());
-			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
-					.getValutazione_media());
-			final RatingBar ratingCont = (RatingBar) act
-					.findViewById(R.id.ratingBarRowContenuti);
-			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
-					.getDescrizione());
+		// RatingBar ratingCont = (RatingBar) act
+		// .findViewById(R.id.ratingBarRowContenuti);
+		// ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
+		//
+		// RatingBar ratingCaricoStudio = (RatingBar) act
+		// .findViewById(R.id.ratingBarRowCfu);
+		// ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+		// .getRating_carico_studio());
+		//
+		// RatingBar ratingLezioni = (RatingBar) act
+		// .findViewById(R.id.ratingBarRowLezioni);
+		// ratingLezioni
+		// .setRating(feedbackInfoList.get(0).getRating_lezioni());
+		//
+		// RatingBar ratingMateriali = (RatingBar) act
+		// .findViewById(R.id.ratingBarRowMateriali);
+		// ratingMateriali.setRating(feedbackInfoList.get(0)
+		// .getRating_materiali());
+		//
+		// RatingBar ratingEsame = (RatingBar) act
+		// .findViewById(R.id.ratingBarRowEsame);
+		// ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
 
-			// HomeCourseDescriptionFragment.pd.dismiss();
+		descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
+				.getDescrizione());
 
-			// loadDataLayout(course);
-		}
+		pd.dismiss();
+		// loadDataLayout(course);
+
+		// }
 	}
 
 	@Override
