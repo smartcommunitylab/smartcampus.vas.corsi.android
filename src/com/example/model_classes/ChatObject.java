@@ -20,4 +20,12 @@ public abstract class ChatObject {
 		this.publicationTime = publicationTime;
 	}
 
+	public boolean isMine(int param) {
+		return param == 1;
+		/*
+		 * questo metodo quando saprò come usare il campo autore della classe
+		 * chatobject mi dirà se il chatobject corrente è mio oppure no
+		 */
+	}
+
 }

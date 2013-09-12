@@ -19,5 +19,11 @@ public class ChatAttachment extends ChatObject {
 	public void setAllegato(Allegato allegato) {
 		this.allegato = allegato;
 	}
+	
+	/*@Override
+	public boolean isMine(int param) {
+		// TODO Auto-generated method stub
+		return super.isMine(param);
+	}*/
 
 }

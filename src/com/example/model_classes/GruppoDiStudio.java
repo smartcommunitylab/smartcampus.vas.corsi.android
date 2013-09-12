@@ -3,6 +3,8 @@ package com.example.model_classes;
 import java.util.ArrayList;
 
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,7 +31,7 @@ public class GruppoDiStudio {
 	int anno;
 
 	ArrayList<ChatObject> forum;
-	
+
 	Drawable logo;
 
 	/**
@@ -48,9 +50,16 @@ public class GruppoDiStudio {
 	 * @param anno
 	 *            the anno
 	 */
+	
+
+	public Drawable getLogo() {
+		return logo;
+	}
+
 	public GruppoDiStudio(String materia, String nome,
 			ArrayList<Studente> membri, ArrayList<Servizio> servizi_monitorati,
-			ArrayList<AttivitaStudio> attivita_studio, int anno, Drawable logo) {
+			ArrayList<AttivitaStudio> attivita_studio, int anno,
+			ArrayList<ChatObject> forum, Drawable logo) {
 		super();
 		this.materia = materia;
 		this.nome = nome;
@@ -58,11 +67,8 @@ public class GruppoDiStudio {
 		this.servizi_monitorati = servizi_monitorati;
 		this.attivita_studio = attivita_studio;
 		this.anno = anno;
+		this.forum = forum;
 		this.logo = logo;
-	}
-
-	public Drawable getLogo() {
-		return logo;
 	}
 
 	public void setLogo(Drawable logo) {

@@ -14,6 +14,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.example.model_classes.AttivitaStudio;
+import com.example.model_classes.ChatObject;
 import com.example.model_classes.GruppoDiStudio;
 import com.example.model_classes.Servizio;
 import com.example.model_classes.Studente;
@@ -37,22 +38,23 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ArrayList<Studente> membri_gds = new ArrayList<Studente>();
 		ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
 		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
+		ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
 
 		GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
 				"LoveRSEBA", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, getResources().getDrawable(
+				attivita_studio_gds, 1, forum, getResources().getDrawable(
 						R.drawable.prouno_logo));
 		GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
 				"Ghiloni docet", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, getResources().getDrawable(
+				attivita_studio_gds, 1, forum, getResources().getDrawable(
 						R.drawable.discreta_logo));
 		GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
 				"Renato <3", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, getResources().getDrawable(
+				attivita_studio_gds, 2, forum, getResources().getDrawable(
 						R.drawable.reti_calcolatori_logo));
 		GruppoDiStudio gds4 = new GruppoDiStudio("Algoritmi e strutture dati",
 				"Djikstra4President", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, getResources().getDrawable(
+				attivita_studio_gds, 2, forum, getResources().getDrawable(
 						R.drawable.algoritmi_logo));
 
 		user_gds_list.add(gds1);

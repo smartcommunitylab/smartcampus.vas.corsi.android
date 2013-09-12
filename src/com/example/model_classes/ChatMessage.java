@@ -18,5 +18,11 @@ public class ChatMessage extends ChatObject {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	/*@Override
+	public boolean isMine(int param) {
+		// TODO Auto-generated method stub
+		return super.isMine(param);
+	}*/
 
 }
