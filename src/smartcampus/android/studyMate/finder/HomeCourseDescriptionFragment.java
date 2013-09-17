@@ -71,6 +71,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				}
 			}
 		});
+		
 		// TODO Auto-generated method stub
 		super.onStart();
 	}
