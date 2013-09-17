@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.model_classes.GruppoDiStudio;
@@ -43,13 +44,23 @@ public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			littleSquare = inflater.inflate(R.layout.gds_square, null);
-			//littleSquare.findViewById(R.id.little_square_for_gds)
-					//.setLayoutParams(new GridView.LayoutParams(85, 85));
-			((ImageView) littleSquare.findViewById(R.id.gds_square_logo))
-					.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			littleSquare.findViewById(R.id.little_square_for_gds).setPadding(8,
-					8, 8, 8);
-		
+			// littleSquare.findViewById(R.id.little_square_for_gds)
+			// .setLayoutParams(new GridView.LayoutParams(85, 85));
+			/*
+			 * ((ImageView) littleSquare.findViewById(R.id.gds_square_logo))
+			 * .setScaleType(ImageView.ScaleType.CENTER_CROP);
+			 * littleSquare.findViewById
+			 * (R.id.little_square_for_gds).setPadding(8, 8, 8, 8);
+			 */
+
+		}
+
+		LinearLayout container = (LinearLayout) littleSquare
+				.findViewById(R.id.little_square_for_gds);
+		if (position % 2 == 0) {
+			container.setBackgroundResource(R.color.WhiteSmoke);
+		} else {
+			container.setBackgroundResource(R.color.abs__background_holo_light);
 		}
 
 		ImageView logo_gds = (ImageView) littleSquare

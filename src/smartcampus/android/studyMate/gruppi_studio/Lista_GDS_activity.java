@@ -4,20 +4,26 @@ import java.util.ArrayList;
 
 import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
-import com.example.model_classes.AttivitaStudio;
-import com.example.model_classes.ChatObject;
+import com.actionbarsherlock.view.Window;
 import com.example.model_classes.GruppoDiStudio;
-import com.example.model_classes.Servizio;
-import com.example.model_classes.Studente;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
@@ -28,41 +34,25 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista_gds_activity);
 
-		// ####################################
 		// retrieve gruppi
 		user_gds_list = /*
 						 * getUtente().getFrequentedGDS ()
 						 */new ArrayList<GruppoDiStudio>();
 
-		// creazione gruppi fake per popolare grafica
-		ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-		ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
-		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
-		ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
+		if (!MyApplication.getContextualCollection().isEmpty()) {
+			// Lista_GDS_activity può essere lanciata dalla home o al termine di
+			// una iscrizione ad un corso
 
-		GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-				"LoveRSEBA", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, forum, getResources().getDrawable(
-						R.drawable.prouno_logo));
-		GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-				"Ghiloni docet", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, forum, getResources().getDrawable(
-						R.drawable.discreta_logo));
-		GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-				"Renato <3", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, forum, getResources().getDrawable(
-						R.drawable.reti_calcolatori_logo));
-		GruppoDiStudio gds4 = new GruppoDiStudio("Algoritmi e strutture dati",
-				"Djikstra4President", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, forum, getResources().getDrawable(
-						R.drawable.algoritmi_logo));
+			// questo codice gestisce il caso in cui al termine di una ricerca
+			// sia stata effettuata l'iscrzione ad un corso appena selezionato
+			for (Object gds : MyApplication.getContextualCollection()) {
+				user_gds_list.add((GruppoDiStudio) gds);
+				//save this info onserver
+			}
 
-		user_gds_list.add(gds1);
-		user_gds_list.add(gds2);
-		user_gds_list.add(gds3);
-		user_gds_list.add(gds4);
+			MyApplication.getContextualCollection().clear();
 
-		// ####################################
+		}
 
 		// Lista_GDS_activity ha la grafica inizializzata a listviewfragment
 		FragmentTransaction ft = this.getSupportFragmentManager()
@@ -72,6 +62,69 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ft.replace(R.id.list_container, fragment);
 		ft.addToBackStack(null);
 		ft.commit();
+
+		if (user_gds_list.isEmpty()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					Lista_GDS_activity.this);
+			builder.setTitle("Avvio guidato");
+			builder.setMessage("Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?");
+			builder.setPositiveButton("Si",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+							final Dialog shadowdialog = new Dialog(
+									Lista_GDS_activity.this);
+
+							shadowdialog.getWindow().requestFeature(
+									(int) Window.FEATURE_NO_TITLE);
+
+							shadowdialog.getWindow().setFlags(
+									WindowManager.LayoutParams.FLAG_FULLSCREEN,
+									WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+							// layout to display
+							shadowdialog
+									.setContentView(R.layout.tutorial_dialog_layout);
+
+							// set color transpartent
+							shadowdialog.getWindow().setBackgroundDrawable(
+									new ColorDrawable(Color.TRANSPARENT));
+
+							shadowdialog.show();
+							Button ok = (Button) shadowdialog
+									.findViewById(R.id.ok_button);
+							ok.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									shadowdialog.dismiss();
+								}
+							});
+
+						}
+					});
+			builder.setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+							Intent i = new Intent(Lista_GDS_activity.this,
+									MyUniActivity.class);
+							startActivity(i);
+
+							// poi faremo qlcs di logico
+						}
+					});
+
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
 
 	}
 

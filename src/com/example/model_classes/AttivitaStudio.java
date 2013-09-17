@@ -1,21 +1,26 @@
 package com.example.model_classes;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class AttivitaStudio {
+import eu.trentorise.smartcampus.studyMate.models.Corso;
+import eu.trentorise.smartcampus.studyMate.models.Evento;
+
+public class AttivitaStudio extends Evento {
 
 	String oggetto;
-	String data;
-	String descrizione;
 	ArrayList<Allegato> allegati;
 	ArrayList<Servizio> servizi_attivita;
-	
-	public AttivitaStudio(String oggetto, String data, String descrizione,
-			ArrayList<Allegato> allegati, ArrayList<Servizio> servizi_attivita) {
-		super();
+
+	public AttivitaStudio(long id, Corso corso, String titolo,
+			String event_location, String room, Date data, String descrizione,
+			Time start, Time stop, boolean all_day, boolean availability,
+			String oggetto, ArrayList<Allegato> allegati,
+			ArrayList<Servizio> servizi_attivita) {
+		super(id, corso, titolo, event_location, room, data, descrizione,
+				start, stop, all_day, availability);
 		this.oggetto = oggetto;
-		this.data = data;
-		this.descrizione = descrizione;
 		this.allegati = allegati;
 		this.servizi_attivita = servizi_attivita;
 	}
@@ -26,22 +31,6 @@ public class AttivitaStudio {
 
 	public void setOggetto(String oggetto) {
 		this.oggetto = oggetto;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
 	}
 
 	public ArrayList<Allegato> getAllegati() {
@@ -59,8 +48,5 @@ public class AttivitaStudio {
 	public void setServizi_attivita(ArrayList<Servizio> servizi_attivita) {
 		this.servizi_attivita = servizi_attivita;
 	}
-	
-	
 
-	
 }

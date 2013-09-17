@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.model_classes.Allegato;
 import com.example.model_classes.ChatAttachment;
 import com.example.model_classes.ChatMessage;
@@ -20,6 +26,7 @@ import com.example.model_classes.ChatObject;
 public class Forum_fragment extends SherlockFragment {
 
 	ArrayList<ChatObject> forum;
+	TextView chateText;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +35,6 @@ public class Forum_fragment extends SherlockFragment {
 		return view;
 	}
 
-	
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -38,8 +44,14 @@ public class Forum_fragment extends SherlockFragment {
 		ListView chat = (ListView) getSherlockActivity().findViewById(
 				R.id.forum_listview);
 
-		TextView chateText = (TextView) getSherlockActivity().findViewById(
+		chateText = (TextView) getSherlockActivity().findViewById(
 				R.id.forum_edittext);
+
+		ImageButton smile_btn = (ImageButton) getSherlockActivity()
+				.findViewById(R.id.smile_button);
+
+		ImageButton send_btn = (ImageButton) getSherlockActivity()
+				.findViewById(R.id.send_button);
 
 		/*
 		 * per prova visto che tutti i gruppi fake che ho finora non hanno il
@@ -65,6 +77,39 @@ public class Forum_fragment extends SherlockFragment {
 
 		// ChatAdapter adapter=new ChatAdapter()
 		// chat.setadapter(adapter)
+
+		send_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String text = chateText.getText().toString();
+				Time nunc = new Time();
+				nunc.setToNow();
+				ChatMessage newmessage = new ChatMessage(nunc, text);
+				forum.add(newmessage);
+				chateText.setText("");
+
+			}
+		});
+
+	}
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSherlockActivity().getSupportMenuInflater();
+		inflater.inflate(R.menu.forum_gds_menu, menu);
+		super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.aggiungi_allegato:
+			Toast.makeText(MyApplication.getAppContext(),
+					"aggiungi allegato wizard...", Toast.LENGTH_SHORT).show();
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 
 	}
 

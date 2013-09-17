@@ -26,6 +26,12 @@ public class Studente  {
 
 	private Collection<Corso> corsi;
 
+	public Studente(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}

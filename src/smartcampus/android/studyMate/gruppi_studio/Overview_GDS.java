@@ -2,11 +2,13 @@ package smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
+import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuInflater;
 import com.example.model_classes.AttivitaStudio;
 import com.example.model_classes.ChatObject;
 import com.example.model_classes.GruppoDiStudio;
@@ -69,6 +71,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 
