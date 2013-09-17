@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
-
-import eu.trentorise.smartcampus.studyMate.utilities.FeedbackCourseHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.FeedbackHandler;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
