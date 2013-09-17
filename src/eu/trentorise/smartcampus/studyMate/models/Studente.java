@@ -14,7 +14,7 @@ public class Studente {
 
 	private String corso_laurea;
 
-	private String dipartimento;
+	private Dipartimento dipartimento;
 
 	private String anno_corso;
 
@@ -72,11 +72,11 @@ public class Studente {
 		this.corso_laurea = corso_laurea;
 	}
 
-	public String getDipartimento() {
+	public Dipartimento getDipartimento() {
 		return dipartimento;
 	}
 
-	public void setDipartimento(String dipartimento) {
+	public void setDipartimento(Dipartimento dipartimento) {
 		this.dipartimento = dipartimento;
 	}
 

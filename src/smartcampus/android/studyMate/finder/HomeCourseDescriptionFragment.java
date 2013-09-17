@@ -17,10 +17,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.utilities.FeedbackCourseHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.FeedbackHandler;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 
-	public FeedbackCourseHandler feedbackHandler;
+	public FeedbackHandler feedbackHandler;
 	public Activity act;
 
 	@Override
@@ -40,7 +41,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				.findViewById(R.id.textViewDescriptioonCourseHome);
 		final RatingBar ratingAverage = (RatingBar) getSherlockActivity()
 				.findViewById(R.id.ratingBarCourseAverage);
-		feedbackHandler = (FeedbackCourseHandler) new FeedbackCourseHandler(
+		feedbackHandler = (FeedbackHandler) new FeedbackHandler(
 				getSherlockActivity(),
 				FindHomeCourseActivity.corsoAttuale.getId(), act,
 				ratingAverage, descriptionCourse).execute();
