@@ -7,9 +7,9 @@ public final class SmartUniDataWS {
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
 	// public static final String URL_WS_SMARTUNI =
 	// "http://unicorsi.app.smartcampuslab.it";
-	public static String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc"; 
-	//public static String TOKEN = MyUniActivity.userAuthToken; 
-	public static final String TOKEN_NAME = "test smartcampus";
+	//public static String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc"; 
+	public static String TOKEN = MyUniActivity.userAuthToken; 
+	public static final String TOKEN_NAME = "studymate";
 
 	// Notices
 	public static final String GET_WS_NOTIFICATIONS = "/notification/all";
@@ -58,8 +58,8 @@ public final class SmartUniDataWS {
 
 	// Feedback //////////////////////////////////////////////////////////
 	public static String GET_WS_FEEDBACK_OF_COURSE(long idCourse) {
-		//return "/corso/" + String.valueOf(idCourse) + "/commento/all";
-		return "/commento/" + String.valueOf(idCourse);
+		return "/corso/" + String.valueOf(idCourse) + "/commento/all";
+		//return "/commento/" + String.valueOf(idCourse);
 	}
 
 	// Feedback //////////////////////////////////////////////////////////

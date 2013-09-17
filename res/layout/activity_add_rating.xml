@@ -52,7 +52,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Inserisci il tuo commento..."
-        android:inputType="text" >
+        
+        android:focusable="true" 
+        android:focusableInTouchMode="true"
+        >
     </EditText>
 
     <LinearLayout
