@@ -9,7 +9,7 @@ public final class SmartUniDataWS {
 	// "http://unicorsi.app.smartcampuslab.it";
 	//public static String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc"; 
 	public static String TOKEN = MyUniActivity.userAuthToken; 
-	public static final String TOKEN_NAME = "studymate";
+	public static final String TOKEN_NAME = "test smartcampus";
 
 	// Notices
 	public static final String GET_WS_NOTIFICATIONS = "/notification/all";

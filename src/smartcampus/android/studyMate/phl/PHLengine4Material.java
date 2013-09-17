@@ -60,7 +60,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 				SmartUniDataWS.TOKEN_NAME);
 		
 		MessageRequest request = new MessageRequest(
-				"http://api.povoshardlife.eu",
+				"https://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
 				"/api/documenti/getDirByIDPHL/" + idPHL);
 		// SmartUniDataWS.URL_WS_SMARTUNI,
