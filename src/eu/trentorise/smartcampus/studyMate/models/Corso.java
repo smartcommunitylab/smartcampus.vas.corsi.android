@@ -15,6 +15,8 @@ public class Corso extends CorsoLite implements Serializable {
 
 	// data di inizio del corso
 	private long id_dipartimento;
+	
+	private long id_corsoLaurea;
 
 	// data di fine del corso
 	private Date data_fine;
@@ -28,7 +30,7 @@ public class Corso extends CorsoLite implements Serializable {
 	// seguo o non seguo il corso
 	private boolean seguito;
 
-	private boolean is_libretto;
+	//private boolean is_libretto;
 
 	public Corso() {
 
@@ -82,12 +84,12 @@ public class Corso extends CorsoLite implements Serializable {
 		this.id_dipartimento = id_dipartimento;
 	}
 
-	public boolean isIs_libretto() {
-		return is_libretto;
-	}
-
-	public void setIs_libretto(boolean is_libretto) {
-		this.is_libretto = is_libretto;
-	}
+//	public boolean isIs_libretto() {
+//		return is_libretto;
+//	}
+//
+//	public void setIs_libretto(boolean is_libretto) {
+//		this.is_libretto = is_libretto;
+//	}
 
 }
