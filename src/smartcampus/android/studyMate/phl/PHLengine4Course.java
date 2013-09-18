@@ -63,7 +63,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				"https://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
 				"/api/documenti/getDirByIDSC/" + idCorso);
-		request.setCustomHeaders(Collections.singletonMap("Authorization", "Token token = 2d2abbe190e0d7ad0ae71425059f00cc"));
+		request.setCustomHeaders(Collections.singletonMap("Authorization", "Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 

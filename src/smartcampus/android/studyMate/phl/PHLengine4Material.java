@@ -1,5 +1,7 @@
 package smartcampus.android.studyMate.phl;
 
+import java.util.Collections;
+
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -65,7 +67,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 				"/api/documenti/getDirByIDPHL/" + idPHL);
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
-
+		request.setCustomHeaders(Collections.singletonMap("Authorization", "Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
