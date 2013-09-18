@@ -2,6 +2,7 @@ package smartcampus.android.studyMate.rate;
 
 import smartcampus.android.studyMate.finder.FindHomeActivity;
 import smartcampus.android.studyMate.finder.ResultSearchedActivity;
+import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import eu.trentorise.smartcampus.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.studyMate.models.Dipartimento;
@@ -23,24 +24,16 @@ public class CoursesPassedActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_result_searched);
+		setContentView(R.layout.activity_courses_passed);
 		ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
-
-		ListView listView = (ListView) findViewById(R.id.listView1);
-
-		// get data from web service
-
-		
 
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.result_searched, menu);
 		return true;
 	}
 
@@ -49,7 +42,7 @@ public class CoursesPassedActivity extends Activity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(CoursesPassedActivity.this,
-					FindHomeActivity.class);
+					MyUniActivity.class);
 			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentHome);
 			return true;

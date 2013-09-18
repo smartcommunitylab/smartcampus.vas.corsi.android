@@ -194,6 +194,12 @@
             android:name="smartcampus.android.studyMate.start.WorkInProgress"
             android:label="@string/title_activity_work_in_progress" >
         </activity>
+        
+        <activity
+            android:name="smartcampus.android.studyMate.rate.CoursesPassedActivity"
+            android:configChanges="orientation|keyboard"
+            android:label="@string/title_activity_rate" >
+        </activity>
 
         <receiver
             android:name=".NotificationReceiver"
