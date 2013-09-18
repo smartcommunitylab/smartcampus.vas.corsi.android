@@ -60,7 +60,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		final long idCorso = currentActivity.getIntent().getLongExtra(
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
-				"https://api.povoshardlife.eu",
+				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
 				"/api/documenti/getDirByIDSC/" + idCorso);
 		request.setCustomHeaders(Collections.singletonMap("Authorization", "Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
