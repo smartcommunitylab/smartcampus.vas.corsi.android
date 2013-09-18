@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -42,6 +43,12 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ricerca_gruppi_generale);
+
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
+		actionbar.setHomeButtonEnabled(true);
+		actionbar.setDisplayHomeAsUpEnabled(true);
+
 		materieset = new TreeSet<String>();
 		nomi_gruppi = new ArrayList<String>();
 		nomi_membriset = new TreeSet<String>();
@@ -158,6 +165,10 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case android.R.id.home: {
+			RicercaGruppiGenerale_activity.this.finish();
+		}
+
 		case R.id.action_ricerca_GO:
 			/*
 			 * String materia = ((Spinner) RicercaGruppiGenerale_activity.this

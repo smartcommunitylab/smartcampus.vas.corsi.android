@@ -3,6 +3,7 @@ package smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -33,6 +34,12 @@ public class Forum_fragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.forum_fragment, container, false);
 		return view;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
@@ -95,18 +102,22 @@ public class Forum_fragment extends SherlockFragment {
 	}
 
 	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSherlockActivity().getSupportMenuInflater();
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater = getSherlockActivity().getSupportMenuInflater();
 		inflater.inflate(R.menu.forum_gds_menu, menu);
-		super.onPrepareOptionsMenu(menu);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.aggiungi_allegato:
-			Toast.makeText(MyApplication.getAppContext(),
-					"aggiungi allegato wizard...", Toast.LENGTH_SHORT).show();
+		case R.id.aggiungi_allegato: {
+			Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+			intent.setType("file/*");
+			// startActivity(Intent.createChooser(intent, "File Browser"));
+			startActivityForResult(intent,
+					MyApplication.PICK_FILE_FROM_PHONE_MEMORY);
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}

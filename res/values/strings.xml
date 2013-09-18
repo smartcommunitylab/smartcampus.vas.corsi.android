@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 <resources>
 
@@ -103,5 +103,7 @@
     <string name="title_activity_work_in_progress">WorkInProgress</string>
     <string name="title_activity_lista__gds_activity">Lista_GDS_activity</string>
     <string name="title_activity_overview__gds">Overview_GDS</string>
+    <string name="title_activity_add_attivita_studio_activity">Add_attivita_studio_activity</string>
+    <string name="title_activity_crea__gds_activity">Crea_GDS_activity</string>
 
 </resources>

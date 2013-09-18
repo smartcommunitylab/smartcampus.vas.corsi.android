@@ -3,12 +3,14 @@ package smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.model_classes.AttivitaStudio;
 import com.example.model_classes.ChatObject;
 import com.example.model_classes.GruppoDiStudio;
@@ -40,8 +42,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ab.setTitle(contextualGDS.getNome());
-		// ab.setHomeButtonEnabled(true);
-		// ab.setDisplayHomeAsUpEnabled(true);
+		ab.setLogo(R.drawable.gruppistudio_icon_white);
+		ab.setHomeButtonEnabled(true);
+		ab.setDisplayHomeAsUpEnabled(true);
 
 		/** TabHost will have Tabs */
 		String tab1_txt = "Impegni";
@@ -69,10 +72,54 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	}
 
 	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		// Bundle args = arg2.getExtras();
+		Toast.makeText(
+				Overview_GDS.this,
+				"resultcode= " + arg1 + " # requestCode= " + arg0
+						+ "\n mi hanno ritornato" + " elem", Toast.LENGTH_SHORT)
+				.show();
+		super.onActivityResult(arg0, arg1, arg2);
+	}
+
+	// @Override
+	// protected void onActivityResult(int requestCode, int resultCode, Intent
+	// data) {
+	// // TODO Auto-generated method stub
+	// if (requestCode == MyApplication.PICK_FILE_FROM_PHONE_MEMORY) {
+	// Bundle args = data.getExtras();
+	// Toast.makeText(
+	// Overview_GDS.this,
+	// "resultcode=# " + resultCode + " #" + " mi hanno ritornato"
+	// + args.size() + " elem", Toast.LENGTH_SHORT).show();
+	// }
+	// Bundle args = data.getExtras();
+	// Toast.makeText(
+	// Overview_GDS.this,
+	// "resultcode= " + resultCode + " # requestCode= " + resultCode
+	// + "\n mi hanno ritornato" + args.size() + " elem",
+	// Toast.LENGTH_SHORT).show();
+	// super.onActivityResult(requestCode, resultCode, data);
+	// }
+
+	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
-		
+
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home: {
+			Overview_GDS.this.finish();
+		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
 
 	public GruppoDiStudio getContextualGDS() {
