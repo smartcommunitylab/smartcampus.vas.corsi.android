@@ -73,8 +73,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 		MessageResponse response;
 		String body = null;
 		try {
-			response = mProtocolCarrier.invokeSync(request, "token",
-					"2d2abbe190e0d7ad0ae71425059f00cc");// SmartUniDataWS.TOKEN);
+			response = mProtocolCarrier.invokeSync(request, "token", null);// SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
@@ -165,7 +164,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 						ft.replace(R.id.tabMateriali, fragment);
 						
-						ft.addToBackStack(null);
+						//ft.addToBackStack(null);
 						ft.commit();
 							
 							

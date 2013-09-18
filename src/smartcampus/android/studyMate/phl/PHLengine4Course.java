@@ -72,8 +72,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		MessageResponse response;
 		String body = null;
 		try {
-			response = mProtocolCarrier.invokeSync(request, "token",
-					"2d2abbe190e0d7ad0ae71425059f00cc");// SmartUniDataWS.TOKEN);
+			response = mProtocolCarrier.invokeSync(request, "token", null);// SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
