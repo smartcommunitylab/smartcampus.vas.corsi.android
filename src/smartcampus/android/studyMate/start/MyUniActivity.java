@@ -4,6 +4,7 @@ import smartcampus.android.studyMate.finder.FindHomeActivity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import smartcampus.android.studyMate.notices.NoticesActivity;
 import smartcampus.android.studyMate.phl.PHLActivity;
+import smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -127,6 +128,16 @@ public class MyUniActivity extends Activity {
 					public void onClick(View v) {
 						Intent intent = new Intent(MyUniActivity.this,
 								NoticesActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+		
+		findViewById(R.id.rate_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								CoursesPassedActivity.class);
 						MyUniActivity.this.startActivity(intent);
 					}
 				});

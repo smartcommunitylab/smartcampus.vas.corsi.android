@@ -99,5 +99,6 @@
     <string name="rating_context_esame">Esame</string>
     <string name="rating_contextExplain_esame">L\'esame è coerente agli argomenti trattati?</string>
     <string name="title_activity_work_in_progress">WorkInProgress</string>
+    <string name="rating_text_icon">Vota</string>
 
 </resources>
