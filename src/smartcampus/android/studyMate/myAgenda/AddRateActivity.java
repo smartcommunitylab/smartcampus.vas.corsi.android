@@ -44,6 +44,7 @@ public class AddRateActivity extends FragmentActivity {
 	Commento commento;
 	public static ProgressDialog pd;
 	ExpandableListView list = null;
+	private RatingRowGroup rrg;
 
 	// private SCAccessProvider accessProvider = null;
 
@@ -83,7 +84,7 @@ public class AddRateActivity extends FragmentActivity {
 			commentCourse.setText(new String(""));
 
 			// CONTENUTI
-			RatingRowGroup rrg = new RatingRowGroup();
+			rrg = new RatingRowGroup();
 			rrg.setRating(0);
 			rrg.setContext(getResources().getString(
 					R.string.rating_context_contenuti));
@@ -132,7 +133,7 @@ public class AddRateActivity extends FragmentActivity {
 			commentCourse.setText(commento.getTesto());
 
 			// CONTENUTI
-			RatingRowGroup rrg = new RatingRowGroup();
+			rrg = new RatingRowGroup();
 			rrg.setRating(commento.getRating_contenuto());
 			rrg.setContext(getResources().getString(
 					R.string.rating_context_contenuti));
@@ -249,8 +250,7 @@ public class AddRateActivity extends FragmentActivity {
 						parent.expandGroup(groupPosition, true);
 						View elem = parent.getChildAt(groupPosition);
 						if (elem != null) {
-							elem.setBackgroundColor(getResources().getColor(
-									R.color.pressed_smartn_theme));
+							// do Nothing
 						}
 					}
 
@@ -272,7 +272,6 @@ public class AddRateActivity extends FragmentActivity {
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 			pd.dismiss();
-
 			list.setOnChildClickListener(new OnChildClickListener() {
 
 				@Override
@@ -301,14 +300,11 @@ public class AddRateActivity extends FragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesHandler.corsoSelezionato);
-							commento.setRating_contenuto(ratings.get(0)
-									.getRating());
-							commento.setRating_carico_studio(ratings.get(1)
-									.getRating());
-							commento.setRating_lezioni(ratings.get(2)
-									.getRating());
-							commento.setRating_materiali(ratings.get(3)
-									.getRating());
+							
+							commento.setRating_contenuto(ratings.get(0).getRating());
+							commento.setRating_carico_studio(ratings.get(1).getRating());
+							commento.setRating_lezioni(ratings.get(2).getRating());
+							commento.setRating_materiali(ratings.get(3).getRating());
 							commento.setRating_esame(ratings.get(4).getRating());
 
 							Studente stud = new Studente();

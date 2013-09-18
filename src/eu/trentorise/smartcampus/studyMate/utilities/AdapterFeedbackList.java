@@ -64,7 +64,7 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter {
 
 		RatingBar ratingBarRowMateriali = (RatingBar) view
 				.findViewById(R.id.ratingBarRowMateriali);
-		ratingBarRowMateriali.setRating(inf.getRating_cfu());
+		ratingBarRowMateriali.setRating(inf.getRating_materiale());
 
 		RatingBar ratingBarRowEsame = (RatingBar) view
 				.findViewById(R.id.ratingBarRowEsame);

@@ -25,9 +25,7 @@ import smartcampus.android.template.standalone.R;
 public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
-	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
+	public Context context;	
 	String body;
 	long idCourse;
 	TextView tvCourseName;
