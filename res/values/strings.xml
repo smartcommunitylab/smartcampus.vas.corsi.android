@@ -12,10 +12,12 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 <resources>
 
+    <string name="title_gicercagruppigenerale_activity">Ricerca gruppi di studio</string>
+    <string name="gruppi_studio_label">Gruppi di studio</string>
     <string name="app_uid_label">SmartCampus</string>
     <string name="app_name">StudyMate</string>
     <string name="hello_world">Hello world!</string>
@@ -99,6 +101,11 @@
     <string name="rating_context_esame">Esame</string>
     <string name="rating_contextExplain_esame">L\'esame è coerente agli argomenti trattati?</string>
     <string name="title_activity_work_in_progress">WorkInProgress</string>
+
     <string name="rating_text_icon">Vota</string>
+
+    <string name="title_activity_lista__gds_activity">Lista_GDS_activity</string>
+    <string name="title_activity_overview__gds">Overview_GDS</string>
+
 
 </resources>
