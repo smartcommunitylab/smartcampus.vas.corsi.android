@@ -8,9 +8,13 @@ import java.util.TreeSet;
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -21,9 +25,6 @@ import com.example.model_classes.ChatObject;
 import com.example.model_classes.GruppoDiStudio;
 import com.example.model_classes.Servizio;
 import com.example.model_classes.Studente;
-import com.google.android.gms.maps.model.Tile;
-
-import eu.trentorise.smartcampus.studyMate.models.Corso;
 
 public class RicercaGruppiGenerale_activity extends SherlockActivity {
 
@@ -58,6 +59,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
 		autocomplete_ricercaXmembro = (AutoCompleteTextView) findViewById(R.id.autocomplete_ricerca_per_membro);
+
 		// ####################################
 		// creazione gruppi fake per popolare grafica, dovrei in realtà
 		// recuperare tutto dal web
@@ -133,22 +135,35 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			nomi_membri.add(string);
 		}
 
+		materie.add("Tutte");
 		ArrayAdapter<String> adapter_spinner_materia = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, materie);
 		adapter_spinner_materia
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_materia.setAdapter(adapter_spinner_materia);
+		int spinnerPosition0 = adapter_spinner_materia.getPosition("Tutte");
+		spinner_nome_gruppo.setSelection(spinnerPosition0);
 
+		nomi_gruppi.add("Tutti");
 		ArrayAdapter<String> adapter_spinner_nomigruppo = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, nomi_gruppi);
 		adapter_spinner_materia
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_nome_gruppo.setAdapter(adapter_spinner_nomigruppo);
+		int spinnerPosition1 = adapter_spinner_nomigruppo.getPosition("Tutti");
+		spinner_nome_gruppo.setSelection(spinnerPosition1);
 
 		ArrayAdapter<String> autotext_nomiMembri_adapter = new ArrayAdapter<String>(
 				RicercaGruppiGenerale_activity.this,
 				android.R.layout.simple_dropdown_item_1line, nomi_membri);
 		autocomplete_ricercaXmembro.setAdapter(autotext_nomiMembri_adapter);
+
+		// listener sugli spinner
+		SpinnerChangeListenerUpdater listener = new SpinnerChangeListenerUpdater(
+				spinner_materia, spinner_nome_gruppo, allChoosable_gds,
+				materie, nomi_gruppi, null);
+		spinner_materia.setOnItemSelectedListener(listener);
+		spinner_nome_gruppo.setOnItemSelectedListener(listener);
 
 	}
 
@@ -208,6 +223,65 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			return true;
 
 		}
+
+	}
+
+}
+
+final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
+
+	Spinner materie;
+	Spinner nomi_gds;
+	ArrayList<GruppoDiStudio> all_choosable;
+	ArrayList<String> materie_values;
+	ArrayList<String> nomi_gds_values;
+	ArrayList<String> nomi_componenti_values;
+
+	public SpinnerChangeListenerUpdater(Spinner materie, Spinner nomi_gds,
+			ArrayList<GruppoDiStudio> all_choosable,
+			ArrayList<String> materie_values,
+			ArrayList<String> nomi_gds_values,
+			ArrayList<String> nomi_componenti_values) {
+		super();
+		this.materie = materie;
+		this.nomi_gds = nomi_gds;
+		this.all_choosable = all_choosable;
+		this.materie_values = materie_values;
+		this.nomi_gds_values = nomi_gds_values;
+		this.nomi_componenti_values = nomi_componenti_values;
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int pos,
+			long id) {
+		// TODO Auto-generated method stub
+
+		if (parent.getId() == materie.getId()) {// se viene selezionata una
+												// materia
+			String selected_value = (String) parent.getItemAtPosition(pos);
+			if (selected_value == "Tutte") {
+				return;
+			}
+			nomi_gds_values.clear();
+			for (GruppoDiStudio gds : all_choosable) {
+				if (gds.getMateria() == selected_value) {
+					nomi_gds_values.add(gds.getNome());
+				}
+			}
+
+			((ArrayAdapter<String>) nomi_gds.getAdapter())
+					.notifyDataSetChanged();
+
+		} else if (parent.getId() == nomi_gds.getId()) {// se viene selezionato
+														// il nome di un gds
+
+		}
+
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
 
 	}
 
