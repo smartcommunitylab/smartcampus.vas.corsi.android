@@ -52,6 +52,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.listViewCorsiPassati = listViewCorsi;
+		this.currentActivity = currentActivity;
 	}
 
 	// return list of all courses of all departments

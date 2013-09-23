@@ -30,9 +30,10 @@ public class CoursesPassedActivity extends Activity {
 		ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
 		
-		new CoursesPassedHandler(getApplicationContext(), listViewCorsi, this.getParent()).execute();
+		listViewCorsi = (ListView)findViewById(R.id.listViewCoursesPassed);
+		
+		new CoursesPassedHandler(getApplicationContext(), listViewCorsi, this).execute();
 		
 	}
 
