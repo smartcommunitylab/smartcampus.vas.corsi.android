@@ -4,25 +4,16 @@ import java.util.ArrayList;
 
 import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.Button;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.Window;
 import com.example.model_classes.GruppoDiStudio;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
@@ -33,6 +24,11 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista_gds_activity);
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setTitle("I miei gruppi");
+		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
+		actionbar.setHomeButtonEnabled(true);
+		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieve gruppi
 		user_gds_list = /*
@@ -47,7 +43,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// sia stata effettuata l'iscrzione ad un corso appena selezionato
 			for (Object gds : MyApplication.getContextualCollection()) {
 				user_gds_list.add((GruppoDiStudio) gds);
-				//save this info onserver
+				// save this info onserver
 			}
 
 			MyApplication.getContextualCollection().clear();
@@ -63,68 +59,52 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ft.addToBackStack(null);
 		ft.commit();
 
-		if (user_gds_list.isEmpty()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					Lista_GDS_activity.this);
-			builder.setTitle("Avvio guidato");
-			builder.setMessage("Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?");
-			builder.setPositiveButton("Si",
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							final Dialog shadowdialog = new Dialog(
-									Lista_GDS_activity.this);
-
-							shadowdialog.getWindow().requestFeature(
-									(int) Window.FEATURE_NO_TITLE);
-
-							shadowdialog.getWindow().setFlags(
-									WindowManager.LayoutParams.FLAG_FULLSCREEN,
-									WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-							// layout to display
-							shadowdialog
-									.setContentView(R.layout.tutorial_dialog_layout);
-
-							// set color transpartent
-							shadowdialog.getWindow().setBackgroundDrawable(
-									new ColorDrawable(Color.TRANSPARENT));
-
-							shadowdialog.show();
-							Button ok = (Button) shadowdialog
-									.findViewById(R.id.ok_button);
-							ok.setOnClickListener(new OnClickListener() {
-
-								@Override
-								public void onClick(View v) {
-									// TODO Auto-generated method stub
-									shadowdialog.dismiss();
-								}
-							});
-
-						}
-					});
-			builder.setNegativeButton("No",
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							Intent i = new Intent(Lista_GDS_activity.this,
-									MyUniActivity.class);
-							startActivity(i);
-
-							// poi faremo qlcs di logico
-						}
-					});
-
-			AlertDialog alert = builder.create();
-			alert.show();
-		}
+		/*
+		 * sto commentone sarebbe il tour guidato che ho tolto per ora if
+		 * (user_gds_list.isEmpty()) { AlertDialog.Builder builder = new
+		 * AlertDialog.Builder( Lista_GDS_activity.this);
+		 * builder.setTitle("Avvio guidato"); builder.setMessage(
+		 * "Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
+		 * ); builder.setPositiveButton("Si", new
+		 * DialogInterface.OnClickListener() {
+		 * 
+		 * @Override public void onClick(DialogInterface dialog, int which) { //
+		 * TODO Auto-generated method stub dialog.dismiss(); final Dialog
+		 * shadowdialog = new Dialog( Lista_GDS_activity.this);
+		 * 
+		 * shadowdialog.getWindow().requestFeature( (int)
+		 * Window.FEATURE_NO_TITLE);
+		 * 
+		 * shadowdialog.getWindow().setFlags(
+		 * WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		 * WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		 * 
+		 * // layout to display shadowdialog
+		 * .setContentView(R.layout.tutorial_dialog_layout);
+		 * 
+		 * // set color transpartent
+		 * shadowdialog.getWindow().setBackgroundDrawable( new
+		 * ColorDrawable(Color.TRANSPARENT));
+		 * 
+		 * shadowdialog.show(); Button ok = (Button) shadowdialog
+		 * .findViewById(R.id.ok_button); ok.setOnClickListener(new
+		 * OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { // TODO Auto-generated method
+		 * stub shadowdialog.dismiss(); } });
+		 * 
+		 * } }); builder.setNegativeButton("No", new
+		 * DialogInterface.OnClickListener() {
+		 * 
+		 * @Override public void onClick(DialogInterface dialog, int which) { //
+		 * TODO Auto-generated method stub dialog.dismiss(); Intent i = new
+		 * Intent(Lista_GDS_activity.this, MyUniActivity.class);
+		 * startActivity(i);
+		 * 
+		 * // poi faremo qlcs di logico } });
+		 * 
+		 * AlertDialog alert = builder.create(); alert.show(); }
+		 */
 
 	}
 
@@ -139,6 +119,14 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
+		case android.R.id.home: {
+			Intent intent = new Intent(Lista_GDS_activity.this,
+					MyUniActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
+		}
+			
 
 		case R.id.action_cambia_layout:
 
@@ -175,11 +163,19 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 			}
 			return super.onOptionsItemSelected(item);
-		case R.id.action_iscriviti_nuovo_gruppo:
+		case R.id.action_iscriviti_nuovo_gruppo: {
 			Intent intent = new Intent(getApplicationContext(),
 					RicercaGruppiGenerale_activity.class);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
+		}
+
+		case R.id.action_crea_gruppo: {
+			Intent intent = new Intent(getApplicationContext(),
+					Crea_GDS_activity.class);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
+		}
 
 		default:
 			return super.onOptionsItemSelected(item);

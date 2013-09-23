@@ -29,6 +29,12 @@ public class Impegni_Fragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
 	public void onStart() {
 		super.onStart();
 		lista_impegni = ((Overview_GDS) getActivity())
@@ -53,24 +59,24 @@ public class Impegni_Fragment extends SherlockFragment {
 	}
 
 	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSherlockActivity().getSupportMenuInflater();
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater = getSherlockActivity().getSupportMenuInflater();
 		inflater.inflate(R.menu.impegni_gds_menu, menu);
-
-		super.onPrepareOptionsMenu(menu);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.aggiungi_impegno:
-			Toast.makeText(MyApplication.getAppContext(),
-					"wizard aggiungi impegno da fare..", Toast.LENGTH_SHORT)
-					.show();
+		case R.id.aggiungi_impegno: {
+			Intent intent = new Intent(MyApplication.getAppContext(),
+					Add_attivita_studio_activity.class);
+			startActivity(intent);
+		}
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 
 	}
-
 }

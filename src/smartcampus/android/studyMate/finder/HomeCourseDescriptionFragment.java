@@ -1,3 +1,4 @@
+
 package smartcampus.android.studyMate.finder;
 
 import smartcampus.android.template.standalone.R;

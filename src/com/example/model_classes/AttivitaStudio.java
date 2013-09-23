@@ -13,7 +13,7 @@ public class AttivitaStudio extends Evento {
 	ArrayList<Allegato> allegati;
 	ArrayList<Servizio> servizi_attivita;
 
-	/*public AttivitaStudio(long id, Corso corso, String titolo,
+	public AttivitaStudio(long id, Corso corso, String titolo,
 			String event_location, String room, Date data, String descrizione,
 			Time start, Time stop, boolean all_day, boolean availability,
 			String oggetto, ArrayList<Allegato> allegati,
@@ -23,7 +23,7 @@ public class AttivitaStudio extends Evento {
 		this.oggetto = oggetto;
 		this.allegati = allegati;
 		this.servizi_attivita = servizi_attivita;
-	}*/
+	}
 
 	public String getOggetto() {
 		return oggetto;

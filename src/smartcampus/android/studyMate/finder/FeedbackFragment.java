@@ -83,11 +83,11 @@ public class FeedbackFragment extends SherlockFragment {
 						+ comments.get(i).getRating_esame()
 						+ comments.get(i).getRating_lezioni() + comments.get(i)
 						.getRating_materiali()) / 5);
-				feedb.setRating_contenuti(comments.get(i).getRating_contenuto());
 				feedb.setRating_cfu(comments.get(i).getRating_carico_studio());
+				feedb.setRating_contenuti(comments.get(i).getRating_contenuto());
+				feedb.setRating_esame(comments.get(i).getRating_esame());
 				feedb.setRating_lezioni(comments.get(i).getRating_lezioni());
 				feedb.setRating_materiale(comments.get(i).getRating_materiali());
-				feedb.setRating_esame(comments.get(i).getRating_esame());
 				feedb.setComment(comments.get(i).getTesto());
 				ratings.add(feedb);
 			}
@@ -116,4 +116,5 @@ public class FeedbackFragment extends SherlockFragment {
 		return view;
 	}
 
+>>>>>>> refs/remotes/origin/gruppi_studio
 }

@@ -8,6 +8,7 @@ import android.content.Context;
 public class MyApplication extends Application {
 	private static Context context;
 	private static ArrayList<Object> contextualCollection = new ArrayList<Object>();
+	public static int PICK_FILE_FROM_PHONE_MEMORY = 98;
 
 	public void onCreate() {
 		super.onCreate();

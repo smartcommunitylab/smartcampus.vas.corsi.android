@@ -6,6 +6,7 @@ import smartcampus.android.studyMate.myAgenda.AddRateActivity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
+import smartcampus.android.studyMate.phl.PHL4Courses;
 import smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import smartcampus.android.template.standalone.R;
 
@@ -17,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -73,7 +75,6 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
-
 			} else {
 				return null;
 			}
@@ -127,17 +128,21 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-							MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
-							parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
-							currentActivity.invalidateOptionsMenu();
 
 							// Pass Data to other Fragment
 							corsoSelezionato = new Corso();
 							corsoSelezionato = result.get(arg2);
 							
-							Intent intent = new Intent(context, AddRatingFromCoursesPassed.class);
+							Intent intent = new Intent();
+							intent.setClass(currentActivity, AddRatingFromCoursesPassed.class);
+							intent.putExtra("NomeCorso",
+									corsoSelezionato.getNome());
+							intent.putExtra("IdCorso", corsoSelezionato.getId());
+							currentActivity.startActivity(intent);
 							
-							currentActivity.getIntent().putExtra("CoursePassedSelected", corsoSelezionato);
+							//Intent intent = new Intent(context, AddRatingFromCoursesPassed.class);
+							
+							//currentActivity.getIntent().putExtra("CoursePassedSelected", corsoSelezionato);
 			
 						}
 					});

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/aggiungi_allegato"
-        android:icon="@drawable/placeholder"
+        android:icon="@drawable/ic_attachment"
         android:showAsAction="ifRoom"
         android:title=""/>
 
