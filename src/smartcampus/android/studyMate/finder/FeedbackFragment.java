@@ -115,6 +115,4 @@ public class FeedbackFragment extends SherlockFragment {
 		}
 		return view;
 	}
-
->>>>>>> refs/remotes/origin/gruppi_studio
 }

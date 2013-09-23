@@ -18,8 +18,8 @@ public class AttivitaStudio extends Evento {
 			Time start, Time stop, boolean all_day, boolean availability,
 			String oggetto, ArrayList<Allegato> allegati,
 			ArrayList<Servizio> servizi_attivita) {
-		super(id, corso, titolo, event_location, room, data, descrizione,
-				start, stop, all_day, availability);
+//		super(id, corso, titolo, event_location, room, data, descrizione,
+//				start, stop, all_day, availability);
 		this.oggetto = oggetto;
 		this.allegati = allegati;
 		this.servizi_attivita = servizi_attivita;

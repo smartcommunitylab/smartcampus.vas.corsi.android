@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.util.ArrayList;

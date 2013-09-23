@@ -97,4 +97,3 @@ public class Studente {
 	}
 
 }
->>>>>>> refs/remotes/origin/gruppi_studio
