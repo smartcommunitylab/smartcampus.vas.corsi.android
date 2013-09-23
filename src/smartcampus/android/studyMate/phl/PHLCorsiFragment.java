@@ -22,6 +22,12 @@ public class PHLCorsiFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();

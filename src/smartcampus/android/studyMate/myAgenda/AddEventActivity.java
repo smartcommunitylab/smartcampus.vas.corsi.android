@@ -84,6 +84,12 @@ public class AddEventActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();

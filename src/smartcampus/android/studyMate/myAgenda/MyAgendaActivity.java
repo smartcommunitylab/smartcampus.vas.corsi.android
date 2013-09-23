@@ -67,6 +67,12 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		if (agendaState == MenuKind.BASE_MENU) {

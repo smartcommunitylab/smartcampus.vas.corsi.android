@@ -76,6 +76,12 @@ public class AddRateActivity extends FragmentActivity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
 	private void setRatingContexts(Commento commento) {
 
 		if (commento == null) {

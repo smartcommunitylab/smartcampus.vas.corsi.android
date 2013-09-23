@@ -25,7 +25,7 @@ public class Studente {
 	private Collection<Corso> corsi;
 
 	private String idsCorsiSuperati;
-	
+
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}
@@ -73,7 +73,6 @@ public class Studente {
 	public void setCorso_laurea(String corso_laurea) {
 		this.corso_laurea = corso_laurea;
 	}
-
 
 	public Dipartimento getDipartimento() {
 		return dipartimento;

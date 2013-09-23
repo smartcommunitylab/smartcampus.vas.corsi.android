@@ -22,6 +22,12 @@ public class MaterialiPhlFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	public void onStart() {
 		super.onStart();
 		System.out.println("MATERIALI PHL FRAGMENT");

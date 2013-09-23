@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.graphics.drawable.Drawable;
 
-
 /**
  * The Class GruppoDiStudio.
  */

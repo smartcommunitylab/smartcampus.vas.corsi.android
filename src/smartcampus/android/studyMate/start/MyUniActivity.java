@@ -158,10 +158,14 @@ public class MyUniActivity extends Activity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		new LoadUserDataFromACServiceTask().execute();
+		//new LoadUserDataFromACServiceTask().execute();
 		super.onResume();
 	}
-
+@Override
+protected void onStart() {
+	new LoadUserDataFromACServiceTask().execute();
+	super.onStart();
+}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
