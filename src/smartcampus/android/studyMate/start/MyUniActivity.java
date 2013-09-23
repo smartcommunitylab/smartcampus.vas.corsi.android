@@ -26,18 +26,10 @@ import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
-//import eu.trentorise.smartcampus.puschservice.PushServiceConnector;
-
 public class MyUniActivity extends Activity {
 
 	/** Logging tag */
 	private static final String TAG = "Main";
-	// private static final String AUTH_URL =
-	// "https://vas-dev.smartcampuslab.it/accesstoken-provider/ac";
-	// private static final String AC_SERVICE_ADDR =
-	// "https://vas-dev.smartcampuslab.it/acService";
-	// private static final String PROFILE_SERVICE_ADDR =
-	// "https://vas-dev.smartcampuslab.it";
 
 	public static final String CLIENT_ID = "b8fcb94d-b4cf-438f-802a-c0a560734c88";
 
@@ -77,22 +69,6 @@ public class MyUniActivity extends Activity {
 			Log.e(TAG, "Failed to login: " + e.getMessage());
 			// handle the failure, e.g., notify the user and close the app.
 		}
-
-		// PushServiceConnector connector = new PushServiceConnector();
-		// // //init connector
-		// try {
-		// System.out.println("token: " + token);
-		// connector.init(getApplicationContext(), token);
-		// } catch (CommunicatorConnectorException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// try {
-		// new PushServiceConnector().init(getApplicationContext(), token);
-		// } catch (CommunicatorConnectorException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 
 		findViewById(R.id.my_agenda_btn).setOnClickListener(
 				new OnClickListener() {
@@ -158,14 +134,16 @@ public class MyUniActivity extends Activity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		//new LoadUserDataFromACServiceTask().execute();
+		new LoadUserDataFromACServiceTask().execute();
 		super.onResume();
 	}
-@Override
-protected void onStart() {
-	new LoadUserDataFromACServiceTask().execute();
-	super.onStart();
-}
+
+	@Override
+	protected void onStart() {
+		// new LoadUserDataFromACServiceTask().execute();
+		super.onStart();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -44,8 +44,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-		// String[] events =
-		// getResources().getStringArray(R.array.NewEventiFuffa);
 		listaEventiFiltrati = new ArrayList<Evento>();
 
 		courseSelected = new Corso();

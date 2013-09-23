@@ -62,7 +62,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event_4_course);
-		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the current date
@@ -87,13 +86,13 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+
 		super.onResume();
 	}
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
+
 		super.onStart();
 		Button button_ok = (Button) findViewById(R.id.button_ok4Course);
 
@@ -110,9 +109,9 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 	public void updateDisplay() {
 		this.mPickDate.setText(new StringBuilder()
-				// Month is 0 based so add 1
-				.append(mDay).append("-").append(mMonth + 1).append("-")
-				.append(mYear).append(" "));
+
+		.append(mDay).append("-").append(mMonth + 1).append("-").append(mYear)
+				.append(" "));
 		if (minute < 10) {
 			this.mPickTime.setText(new StringBuilder().append(hour)
 					.append(":0").append(minute));
@@ -201,7 +200,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 		@Override
 		protected List<CorsoLite> doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			return getFollowingCourses();
 		}
 
@@ -253,9 +251,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 			courseSelected = (Corso) CoursesHandler.corsoSelezionato;
 
 			resultStrings.add(courseSelected.getNome());
-			// for (CorsoLite cl : result) {
-			// resultStrings.add(cl.getNome());
-			// }
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 					AddEvent4coursesActivity.this,

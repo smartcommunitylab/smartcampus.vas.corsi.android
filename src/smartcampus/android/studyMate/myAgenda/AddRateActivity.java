@@ -52,21 +52,7 @@ public class AddRateActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// View view = findViewById(R.layout.activity_add_rating);
 		setContentView(R.layout.activity_add_rating);
-		// }
-		//
-		// @Override
-		// public View onCreateView(LayoutInflater inflater, ViewGroup
-		// container,
-		// Bundle savedInstanceState) {
-		// // TODO Auto-generated method stub
-		// View view = inflater.inflate(R.layout.activity_add_rating,
-		// container, false);
-		// TextView titleCourseRating = (TextView)
-		// findViewById(R.id.textViewTitleRatingCourse);
-		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
-
 		setTitle(CoursesHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRateActivity.this);
 		pd = ProgressDialog.show(AddRateActivity.this,
@@ -264,17 +250,6 @@ public class AddRateActivity extends FragmentActivity {
 				}
 
 			});
-
-			// final RatingBar rbCont = (RatingBar)
-			// findViewById(R.id.ratingBarContextContenuti);
-			// final RatingBar rbCfu = (RatingBar)
-			// findViewById(R.id.ratingBarContextCfu);
-			// final RatingBar rbLez = (RatingBar)
-			// findViewById(R.id.ratingBarContextLezioni);
-			// final RatingBar rbMat = (RatingBar)
-			// findViewById(R.id.ratingBarContextMateriali);
-			// final RatingBar rbExam = (RatingBar)
-			// findViewById(R.id.ratingBarContextEsame);
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 			pd.dismiss();

@@ -59,7 +59,6 @@ public class AddEventActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
-		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
 		// get the current date
@@ -99,7 +98,6 @@ public class AddEventActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
@@ -260,7 +258,6 @@ public class AddEventActivity extends FragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			new ProgressDialog(AddEventActivity.this);

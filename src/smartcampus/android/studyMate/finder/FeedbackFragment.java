@@ -40,7 +40,7 @@ public class FeedbackFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		View view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
 
@@ -50,19 +50,13 @@ public class FeedbackFragment extends SherlockFragment {
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
 
-		// String idCourse = intent.getStringExtra("courseSelectedId");
-
 		TextView titleRatingFeedback = (TextView) view
 				.findViewById(R.id.textViewTitleFeedbackCourse);
 		if (FeedbackHandler.feedbackInfoList == null) {
 			Toast.makeText(getSherlockActivity(),
 					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
-			// getSherlockActivity().finish();
 			titleRatingFeedback.setVisibility(View.GONE);
-		}
-
-		//
-		else {
+		} else {
 			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList.get(0)
 					.getCorso().getNome());
 
@@ -104,7 +98,6 @@ public class FeedbackFragment extends SherlockFragment {
 				@Override
 				public boolean onGroupClick(ExpandableListView parent, View v,
 						int groupPosition, long id) {
-					// TODO Auto-generated method stub
 					if (parent.isGroupExpanded(groupPosition))
 						parent.collapseGroup(groupPosition);
 					else

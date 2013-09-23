@@ -59,28 +59,12 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		ab.addTab(tab2);
 
 		Intent intent = getIntent();
-		// TextView tvCourseName = (TextView)
-		// findViewById(R.id.textViewNameCourseHome);
+
 		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(courseName);
-		// tvCourseName.setText(courseName);
-		// TextView descriptionCourse = (TextView)
-		// findViewById(R.id.textViewDescriptioonCourse);
-		// RatingBar ratingAverage =
-		// (RatingBar)findViewById(R.id.ratingBarCourse);
-		// ExpandableListView listComments = (ExpandableListView)
-		// findViewById(R.id.expandableListViewFeedback);
-
 		corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
-		// String idCourse = intent.getStringExtra("courseSelectedId");
-
-		/*
-		 * courseInfo = new CourseCompleteDataHandler(
-		 * FindHomeCourseActivity.this, corsoAttuale.getId()).execute().get();
-		 */
-
 	}
 
 	@Override
@@ -142,10 +126,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
 		final RatingBar rating = new RatingBar(this);
-		// final EditText edTxt = new EditText(this);
-		// rating.setNumStars(5);
-		// rating.setMax(5);
-
 		popDialog.setIcon(android.R.drawable.btn_star_big_on);
 		popDialog.setTitle("Vote!! ");
 		popDialog.setView(rating);

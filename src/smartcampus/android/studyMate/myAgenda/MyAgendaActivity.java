@@ -37,7 +37,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 		agendaState = MenuKind.BASE_MENU;
 		mystate = ChildActivity.NONE;
-		// setContentView(R.layout.activity_my_agenda);
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		setTitle(getResources().getString(R.string.title_activity_my_agenda));
@@ -130,10 +129,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			alertNote.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							// Editable value = input.getText();
 							Toast.makeText(getApplicationContext(), "Nota...",
 									Toast.LENGTH_SHORT).show();
-							// e.printStackTrace();
+
 						}
 					});
 			alertNote.show();
