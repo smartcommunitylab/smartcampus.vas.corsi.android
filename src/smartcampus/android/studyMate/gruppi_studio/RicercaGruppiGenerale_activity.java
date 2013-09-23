@@ -20,8 +20,6 @@ import com.example.model_classes.ChatObject;
 import com.example.model_classes.GruppoDiStudio;
 import com.example.model_classes.Servizio;
 import com.example.model_classes.Studente;
-import com.google.android.gms.maps.model.Tile;
-
 import eu.trentorise.smartcampus.studyMate.models.Corso;
 
 public class RicercaGruppiGenerale_activity extends SherlockActivity {
@@ -64,7 +62,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		Time time = new Time(45);
 
 		ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
-		AttivitaStudio impegno1 = new AttivitaStudio(12, null,
+		/*AttivitaStudio impegno1 = new AttivitaStudio(12, null,
 				"titolo evento1", "luogo evento", "a123", data1,
 				"descrizione attività", time, time, false, false, "oggetto",
 				null, null);
@@ -142,7 +140,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 				RicercaGruppiGenerale_activity.this,
 				android.R.layout.simple_dropdown_item_1line, nomi_membri);
 		autocomplete_ricercaXmembro.setAdapter(autotext_nomiMembri_adapter);
-
+*/
 	}
 
 	@Override

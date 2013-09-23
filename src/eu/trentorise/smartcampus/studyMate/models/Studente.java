@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.studyMate.models;
 
 import java.util.Collection;
+import java.util.List;
 
 public class Studente {
 
@@ -23,6 +24,10 @@ public class Studente {
 	private long userSCId;
 
 	private Collection<Corso> corsi;
+	
+	private String idsCorsiSuperati;
+	
+	private List<CorsoLite> corsiSuperati;
 
 	public Collection<Corso> getCorsi() {
 		return corsi;
@@ -95,5 +100,25 @@ public class Studente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getIdsCorsiSuperati() {
+		return idsCorsiSuperati;
+	}
+
+	public void setIdsCorsiSuperati(String idsCorsiSuperati) {
+		this.idsCorsiSuperati = idsCorsiSuperati;
+	}
+
+	public List<CorsoLite> getCorsiSuperati() {
+		return corsiSuperati;
+	}
+
+	public void setCorsiSuperati(List<CorsoLite> corsiSuperati) {
+		this.corsiSuperati = corsiSuperati;
+	}
+	
+	
+	
+	
 
 }

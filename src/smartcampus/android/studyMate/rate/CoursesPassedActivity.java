@@ -7,6 +7,7 @@ import smartcampus.android.template.standalone.R;
 import eu.trentorise.smartcampus.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandlerLite;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 public class CoursesPassedActivity extends Activity {
 	
 	public static ProgressDialog pd;
+	private ListView listViewCorsi;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class CoursesPassedActivity extends Activity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
+		
+		new CoursesPassedHandler(getApplicationContext(), listViewCorsi, this.getParent()).execute();
+		
 	}
 
 	@Override

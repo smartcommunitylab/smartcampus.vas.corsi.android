@@ -300,7 +300,7 @@ public class AddRateActivity extends FragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesHandler.corsoSelezionato);
-							
+
 							commento.setRating_contenuto(ratings.get(0).getRating());
 							commento.setRating_carico_studio(ratings.get(1).getRating());
 							commento.setRating_lezioni(ratings.get(2).getRating());

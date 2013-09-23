@@ -4,14 +4,17 @@ import java.io.Serializable;
 
 public class CorsoLite implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1619282265752237328L;
+
 	// id del corso
 	private Long id;
 
 	// nome del corso
 	private String nome;
 
-	// nome del dipartimento
-	private long dipartimento;
 
 	public CorsoLite() {
 	}
@@ -24,13 +27,6 @@ public class CorsoLite implements Serializable {
 		this.nome = nome;
 	}
 
-	public long getDipartimento() {
-		return dipartimento;
-	}
-
-	public void setDipartimento(long dipartimento) {
-		this.dipartimento = dipartimento;
-	}
 
 	public Long getId() {
 		return id;
