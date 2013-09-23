@@ -14,7 +14,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -73,14 +72,13 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		Time time = new Time(45);
 
 		ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
-		AttivitaStudio impegno1 = new AttivitaStudio(12, null,
-				"titolo evento1", "luogo evento", "a123", data1,
-				"descrizione attività", time, time, false, false, "oggetto",
-				null, null);
-		AttivitaStudio impegno2 = new AttivitaStudio(12, null,
-				"titolo evento2", "luogo evento", "a123", data1,
-				"descrizione attività", time, time, false, false, "oggetto",
-				null, null);
+		AttivitaStudio impegno1 = new AttivitaStudio("oggetto AS1", null,
+				servizi_monitorati_gds, 12, null, "titolo as1", "Povo", "a201",
+				data1, "descrizione as1", time, time, false, false);
+		AttivitaStudio impegno2 = new AttivitaStudio("oggetto AS2", null,
+				servizi_monitorati_gds, 13, null, "titolo as2", "Povo", "a201",
+				data1, "descrizione as2", time, time, false, false);
+
 		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
 		attivita_studio_gds.add(impegno1);
 		attivita_studio_gds.add(impegno2);
@@ -257,7 +255,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 		// TODO Auto-generated method stub
 
 		if (parent.getId() == materie.getId()) {// se viene selezionata una
-		// materia
+			// materia
 			String selected_value = (String) parent.getItemAtPosition(pos);
 			if (selected_value == "Tutte") {
 				return;
@@ -273,7 +271,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 					.notifyDataSetChanged();
 
 		} else if (parent.getId() == nomi_gds.getId()) {// se viene selezionato
-		// il nome di un gds
+			// il nome di un gds
 
 		}
 

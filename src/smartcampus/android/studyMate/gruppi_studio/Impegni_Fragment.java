@@ -52,9 +52,7 @@ public class Impegni_Fragment extends SherlockFragment {
 
 		impegni_listview.setAdapter(adapter);
 
-		// ChatObjectAdapter adapter = new ChatObjectAdapter(
-		// getSherlockActivity(), R.id.forum_listview, forum);
-		// chat.setAdapter(adapter);
+		
 
 	}
 
