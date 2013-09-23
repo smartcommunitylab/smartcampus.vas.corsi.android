@@ -1,7 +1,7 @@
 package eu.trentorise.smartcampus.studyMate.models;
 
 public class CourseLite {
-	
+
 	public String id;
 	public String nome;
 	private long dipartimento;

@@ -5,6 +5,7 @@ import android.text.format.Time;
 public class ChatAttachment extends ChatObject {
 
 	Allegato allegato;
+
 	// tipo
 
 	public ChatAttachment(Time publicationTime, Allegato allegato) {
@@ -19,11 +20,10 @@ public class ChatAttachment extends ChatObject {
 	public void setAllegato(Allegato allegato) {
 		this.allegato = allegato;
 	}
-	
-	/*@Override
-	public boolean isMine(int param) {
-		// TODO Auto-generated method stub
-		return super.isMine(param);
-	}*/
+
+	/*
+	 * @Override public boolean isMine(int param) { // TODO Auto-generated
+	 * method stub return super.isMine(param); }
+	 */
 
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import smartcampus.android.studyMate.myAgenda.AddRateActivity;
-import smartcampus.android.studyMate.myAgenda.AddRateActivity.LoaderFeedbackData;
 import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.ProgressDialog;
@@ -18,9 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -35,7 +33,6 @@ import eu.trentorise.smartcampus.studyMate.models.Studente;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.studyMate.utilities.AddFeedbackHandler;
-import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
@@ -69,7 +66,6 @@ public class AddRatingFromCoursesPassed extends FragmentActivity {
 		// findViewById(R.id.textViewTitleRatingCourse);
 		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
 
-		
 		setTitle(CoursesPassedHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
@@ -303,11 +299,15 @@ public class AddRatingFromCoursesPassed extends FragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesPassedHandler.corsoSelezionato);
-							
-							commento.setRating_contenuto(ratings.get(0).getRating());
-							commento.setRating_carico_studio(ratings.get(1).getRating());
-							commento.setRating_lezioni(ratings.get(2).getRating());
-							commento.setRating_materiali(ratings.get(3).getRating());
+
+							commento.setRating_contenuto(ratings.get(0)
+									.getRating());
+							commento.setRating_carico_studio(ratings.get(1)
+									.getRating());
+							commento.setRating_lezioni(ratings.get(2)
+									.getRating());
+							commento.setRating_materiali(ratings.get(3)
+									.getRating());
 							commento.setRating_esame(ratings.get(4).getRating());
 
 							Studente stud = new Studente();

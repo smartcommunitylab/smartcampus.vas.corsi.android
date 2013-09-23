@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -70,8 +69,8 @@ public class Forum_fragment extends SherlockFragment {
 		Allegato allegato = new Allegato(null);
 		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
 		ChatAttachment attach1 = new ChatAttachment(now, allegato);
-		forum.add(msg1);// occio qua quando si farà sul serio col forum
-		forum.add(attach1);// occio qua quando si farà sul serio col forum
+		forum.add(msg1);// occio qua quando si farï¿½ sul serio col forum
+		forum.add(attach1);// occio qua quando si farï¿½ sul serio col forum
 
 		/*
 		 * ora bisogna fare un arrayadapter per arraylist<chatobject> (dinamico

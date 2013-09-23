@@ -15,7 +15,6 @@ public class CorsoLite implements Serializable {
 	// nome del corso
 	private String nome;
 
-
 	public CorsoLite() {
 	}
 
@@ -26,7 +25,6 @@ public class CorsoLite implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public Long getId() {
 		return id;

@@ -2,9 +2,6 @@ package smartcampus.android.studyMate.gruppi_studio;
 
 import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -20,7 +17,7 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("Nuova attività di studio");
+		actionbar.setTitle("Nuova attivitï¿½ di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -38,7 +35,7 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
-			Toast.makeText(getApplicationContext(), "attività studio creata",
+			Toast.makeText(getApplicationContext(), "attivitï¿½ studio creata",
 					Toast.LENGTH_SHORT).show();
 			Add_attivita_studio_activity.this.finish();
 		}

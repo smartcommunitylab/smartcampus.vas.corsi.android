@@ -301,10 +301,14 @@ public class AddRateActivity extends FragmentActivity {
 
 							commento.setCorso(CoursesHandler.corsoSelezionato);
 
-							commento.setRating_contenuto(ratings.get(0).getRating());
-							commento.setRating_carico_studio(ratings.get(1).getRating());
-							commento.setRating_lezioni(ratings.get(2).getRating());
-							commento.setRating_materiali(ratings.get(3).getRating());
+							commento.setRating_contenuto(ratings.get(0)
+									.getRating());
+							commento.setRating_carico_studio(ratings.get(1)
+									.getRating());
+							commento.setRating_lezioni(ratings.get(2)
+									.getRating());
+							commento.setRating_materiali(ratings.get(3)
+									.getRating());
 							commento.setRating_esame(ratings.get(4).getRating());
 
 							Studente stud = new Studente();

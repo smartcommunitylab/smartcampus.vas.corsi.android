@@ -28,7 +28,7 @@ import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
 //import eu.trentorise.smartcampus.puschservice.PushServiceConnector;
 
-public class MyUniActivity extends Activity{
+public class MyUniActivity extends Activity {
 
 	/** Logging tag */
 	private static final String TAG = "Main";
@@ -132,16 +132,15 @@ public class MyUniActivity extends Activity{
 						MyUniActivity.this.startActivity(intent);
 					}
 				});
-		
-		findViewById(R.id.rate_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								CoursesPassedActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+
+		findViewById(R.id.rate_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MyUniActivity.this,
+						CoursesPassedActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
+		});
 
 		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
 				new OnClickListener() {
@@ -181,7 +180,6 @@ public class MyUniActivity extends Activity{
 				public void run() {
 					try {
 
-						
 						accessProvider.logout(MyUniActivity.this);
 						System.out.println(userAuthToken);
 					} catch (AACException e) {
@@ -271,4 +269,3 @@ public class MyUniActivity extends Activity{
 	}
 
 }
-

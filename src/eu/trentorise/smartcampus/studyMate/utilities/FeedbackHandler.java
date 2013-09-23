@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
+import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,12 +21,11 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Commento;
-import smartcampus.android.template.standalone.R;
 
 public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
-	public Context context;	
+	public Context context;
 	String body;
 	long idCourse;
 	TextView tvCourseName;
@@ -111,28 +111,27 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
 				.getValutazione_media());
 
-		 RatingBar ratingCont = (RatingBar) act
-		 .findViewById(R.id.ratingBarRowContenuti);
-		 ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
-		
-		 RatingBar ratingCaricoStudio = (RatingBar) act
-		 .findViewById(R.id.ratingBarRowCfu);
-		 ratingCaricoStudio.setRating(feedbackInfoList.get(0)
-		 .getRating_carico_studio());
-		
-		 RatingBar ratingLezioni = (RatingBar) act
-		 .findViewById(R.id.ratingBarRowLezioni);
-		 ratingLezioni
-		 .setRating(feedbackInfoList.get(0).getRating_lezioni());
-		
-		 RatingBar ratingMateriali = (RatingBar) act
-		 .findViewById(R.id.ratingBarRowMateriali);
-		 ratingMateriali.setRating(feedbackInfoList.get(0)
-		 .getRating_materiali());
-		
-		 RatingBar ratingEsame = (RatingBar) act
-		 .findViewById(R.id.ratingBarRowEsame);
-		 ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
+		RatingBar ratingCont = (RatingBar) act
+				.findViewById(R.id.ratingBarRowContenuti);
+		ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
+
+		RatingBar ratingCaricoStudio = (RatingBar) act
+				.findViewById(R.id.ratingBarRowCfu);
+		ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+				.getRating_carico_studio());
+
+		RatingBar ratingLezioni = (RatingBar) act
+				.findViewById(R.id.ratingBarRowLezioni);
+		ratingLezioni.setRating(feedbackInfoList.get(0).getRating_lezioni());
+
+		RatingBar ratingMateriali = (RatingBar) act
+				.findViewById(R.id.ratingBarRowMateriali);
+		ratingMateriali
+				.setRating(feedbackInfoList.get(0).getRating_materiali());
+
+		RatingBar ratingEsame = (RatingBar) act
+				.findViewById(R.id.ratingBarRowEsame);
+		ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
 
 		descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
 				.getDescrizione());

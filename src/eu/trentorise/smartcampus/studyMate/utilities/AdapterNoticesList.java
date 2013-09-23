@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -13,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.communicator.model.Notification;
-import eu.trentorise.smartcampus.studyMate.models.Notice;
 
 public class AdapterNoticesList extends ArrayAdapter<Notification> {
 	@SuppressWarnings("unused")
 	private List<Notification> notices;
 	private Context context = null;
 
-	public AdapterNoticesList(Context mcontext, int layoutId, List<Notification> n) {
+	public AdapterNoticesList(Context mcontext, int layoutId,
+			List<Notification> n) {
 		super(mcontext, layoutId, n);
 		notices = n;
 		context = mcontext;
@@ -54,7 +53,7 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 
 		long dateTS = item.getTimestamp();
 
-		//Date d = new Date(Long.parseLong(dateTS));
+		// Date d = new Date(Long.parseLong(dateTS));
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy/MM/dd HH:mm:ss", Locale.ITALY);
 

@@ -3,13 +3,12 @@ package com.example.model_classes;
 import java.util.ArrayList;
 
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class GruppoDiStudio.
  */
+
 public class GruppoDiStudio {
 
 	/** The materia. */
@@ -50,7 +49,6 @@ public class GruppoDiStudio {
 	 * @param anno
 	 *            the anno
 	 */
-	
 
 	public Drawable getLogo() {
 		return logo;

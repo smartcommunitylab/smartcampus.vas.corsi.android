@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -41,7 +40,7 @@ public class Impegni_Fragment extends SherlockFragment {
 				.getContextualListaImpegni();
 		/*
 		 * ergo recuperare varie view e piazzare gli adapater per visualizzare
-		 * le varie attivitàstudio
+		 * le varie attivitï¿½studio
 		 */
 
 		ListView impegni_listview = (ListView) getSherlockActivity()
@@ -51,8 +50,6 @@ public class Impegni_Fragment extends SherlockFragment {
 				getSherlockActivity(), R.id.lista_impegni, lista_impegni);
 
 		impegni_listview.setAdapter(adapter);
-
-		
 
 	}
 

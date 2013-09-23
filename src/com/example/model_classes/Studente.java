@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import eu.trentorise.smartcampus.studyMate.models.Corso;
 
-public class Studente  {
+public class Studente {
 
 	// private static final long serialVersionUID = 8681710690984309605L;
 

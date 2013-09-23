@@ -32,7 +32,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.studyMate.utilities.MaterialItem;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
+public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 
 	private Context context;
 	private Activity currentActivity;
@@ -60,14 +60,15 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-		
+
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
 				"/api/documenti/getDirByIDPHL/" + idPHL);
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
-		request.setCustomHeaders(Collections.singletonMap("Authorization", "Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
+		request.setCustomHeaders(Collections.singletonMap("Authorization",
+				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -118,27 +119,27 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 				if (c.getMime().equals("directory")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_folder, c.getHash());
-				}else
-				if(c.getMime().equals ("application/pdf")){
+				} else if (c.getMime().equals("application/pdf")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_pdffile, c.getHash());
-				}else
-				if(c.getMime().equals ("image/jpeg")){
+				} else if (c.getMime().equals("image/jpeg")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_imgfile, c.getHash());
-				}else
-				if((c.getMime().equals ("application/x-tar"))||(c.getMime().equals("application/x-rar-compressed"))||(c.getMime().equals("application/zip"))){
+				} else if ((c.getMime().equals("application/x-tar"))
+						|| (c.getMime().equals("application/x-rar-compressed"))
+						|| (c.getMime().equals("application/zip"))) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_archivefile, c.getHash());
-				}else
-				if((c.getMime().equals ("application/msword"))||(c.getMime().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))||(c.getMime().equals("text/plain"))){
+				} else if ((c.getMime().equals("application/msword"))
+						|| (c.getMime()
+								.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+						|| (c.getMime().equals("text/plain"))) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_textfile, c.getHash());
-				}
-				else {
+				} else {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_genericfile, c.getHash());
-					
+
 				}
 				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
 						items);
@@ -152,30 +153,29 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						if (r.getCdc().get(arg2).getMime().equals("directory")) {
-							
-						FragmentTransaction ft = currentSherlock
-								.getSupportFragmentManager()
-								.beginTransaction();
-						Fragment fragment = new Materiali4LevelPhlFragment();
-						Bundle b = new Bundle();
-						b.putString("res", result
-								.getCdc().get(arg2).getHash());
-						fragment.setArguments(b);
-						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-						ft.replace(R.id.tabMateriali, fragment);
-						
-						//ft.addToBackStack(null);
-						ft.commit();
-							
-							
+
+							FragmentTransaction ft = currentSherlock
+									.getSupportFragmentManager()
+									.beginTransaction();
+							Fragment fragment = new Materiali4LevelPhlFragment();
+							Bundle b = new Bundle();
+							b.putString("res", result.getCdc().get(arg2)
+									.getHash());
+							fragment.setArguments(b);
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(R.id.tabMateriali, fragment);
+
+							// ft.addToBackStack(null);
+							ft.commit();
+
 						} else {
 							Toast.makeText(context, "Coming Soon!",
 									Toast.LENGTH_SHORT).show();
-//							
-//							new PHLengine4Material(context, currentActivity,
-//									listViewCorsiPersonali, currentSherlock, r
-//									.getCdc().get(arg2).getHash())
-//							.execute();
+							//
+							// new PHLengine4Material(context, currentActivity,
+							// listViewCorsiPersonali, currentSherlock, r
+							// .getCdc().get(arg2).getHash())
+							// .execute();
 						}
 					}
 				});
@@ -185,7 +185,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl>{
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
-		//bundleParam = params[0];
+		// bundleParam = params[0];
 		return getMaterial4Dir();
 	}
 

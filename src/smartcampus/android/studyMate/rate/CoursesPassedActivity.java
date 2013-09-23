@@ -1,13 +1,7 @@
 package smartcampus.android.studyMate.rate;
 
-import smartcampus.android.studyMate.finder.FindHomeActivity;
-import smartcampus.android.studyMate.finder.ResultSearchedActivity;
 import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
-import eu.trentorise.smartcampus.studyMate.models.CorsoLaurea;
-import eu.trentorise.smartcampus.studyMate.models.Dipartimento;
-import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandlerLite;
-import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,13 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 
 public class CoursesPassedActivity extends Activity {
-	
+
 	public static ProgressDialog pd;
 	private ListView listViewCorsi;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,11 +24,12 @@ public class CoursesPassedActivity extends Activity {
 		ActionBar ab = getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		
-		listViewCorsi = (ListView)findViewById(R.id.listViewCoursesPassed);
-		
-		new CoursesPassedHandler(getApplicationContext(), listViewCorsi, this).execute();
-		
+
+		listViewCorsi = (ListView) findViewById(R.id.listViewCoursesPassed);
+
+		new CoursesPassedHandler(getApplicationContext(), listViewCorsi, this)
+				.execute();
+
 	}
 
 	@Override

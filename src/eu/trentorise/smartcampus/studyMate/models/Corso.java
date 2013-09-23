@@ -10,7 +10,6 @@ public class Corso extends CorsoLite implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * 
 	 */
@@ -20,7 +19,7 @@ public class Corso extends CorsoLite implements Serializable {
 
 	// data di inizio del corso
 	private Long id_dipartimento;
-	
+
 	private Long id_corsoLaurea;
 
 	// data di fine del corso
@@ -52,9 +51,8 @@ public class Corso extends CorsoLite implements Serializable {
 	// valutazione esame
 
 	private Float rating_esame;
-	
-	
-	//private boolean is_libretto;
+
+	// private boolean is_libretto;
 
 	public Float getRating_contenuto() {
 		return rating_contenuto;
@@ -156,12 +154,12 @@ public class Corso extends CorsoLite implements Serializable {
 		this.id_corsoLaurea = id_corsoLaurea;
 	}
 
-//	public boolean isIs_libretto() {
-//		return is_libretto;
-//	}
-//
-//	public void setIs_libretto(boolean is_libretto) {
-//		this.is_libretto = is_libretto;
-//	}
+	// public boolean isIs_libretto() {
+	// return is_libretto;
+	// }
+	//
+	// public void setIs_libretto(boolean is_libretto) {
+	// this.is_libretto = is_libretto;
+	// }
 
 }

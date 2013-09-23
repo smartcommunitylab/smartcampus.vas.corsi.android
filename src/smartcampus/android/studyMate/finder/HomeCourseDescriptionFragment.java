@@ -1,4 +1,3 @@
-
 package smartcampus.android.studyMate.finder;
 
 import smartcampus.android.template.standalone.R;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+
 import eu.trentorise.smartcampus.studyMate.utilities.FeedbackHandler;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
@@ -70,7 +70,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				}
 			}
 		});
-		
+
 		// TODO Auto-generated method stub
 		super.onStart();
 	}

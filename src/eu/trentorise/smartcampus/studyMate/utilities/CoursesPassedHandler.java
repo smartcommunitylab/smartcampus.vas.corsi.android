@@ -2,25 +2,13 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.util.List;
 
-import smartcampus.android.studyMate.myAgenda.AddRateActivity;
-import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
-import smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
-import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
-import smartcampus.android.studyMate.phl.PHL4Courses;
 import smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
-import smartcampus.android.template.standalone.R;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.sax.StartElementListener;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,11 +34,9 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 	public static Corso corsoSelezionato;
 	public static ProgressDialog pd;
 	public Bundle bundleParam;
-	
-	
-	
-	public CoursesPassedHandler(Context applicationContext, ListView listViewCorsi,
-			Activity currentActivity) {
+
+	public CoursesPassedHandler(Context applicationContext,
+			ListView listViewCorsi, Activity currentActivity) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.listViewCorsiPassati = listViewCorsi;
@@ -115,7 +101,8 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 			int i = 0;
 			for (CorsoLite s : result) {
-				items[i++] = new TitledItem("Corsi che posso votare", s.getNome());
+				items[i++] = new TitledItem("Corsi che posso votare",
+						s.getNome());
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);
@@ -132,18 +119,21 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 							// Pass Data to other Fragment
 							corsoSelezionato = new Corso();
 							corsoSelezionato = result.get(arg2);
-							
+
 							Intent intent = new Intent();
-							intent.setClass(currentActivity, AddRatingFromCoursesPassed.class);
+							intent.setClass(currentActivity,
+									AddRatingFromCoursesPassed.class);
 							intent.putExtra("NomeCorso",
 									corsoSelezionato.getNome());
 							intent.putExtra("IdCorso", corsoSelezionato.getId());
 							currentActivity.startActivity(intent);
-							
-							//Intent intent = new Intent(context, AddRatingFromCoursesPassed.class);
-							
-							//currentActivity.getIntent().putExtra("CoursePassedSelected", corsoSelezionato);
-			
+
+							// Intent intent = new Intent(context,
+							// AddRatingFromCoursesPassed.class);
+
+							// currentActivity.getIntent().putExtra("CoursePassedSelected",
+							// corsoSelezionato);
+
 						}
 					});
 
@@ -158,6 +148,5 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 		return getAllCoursesPassed();
 	}
-
 
 }

@@ -36,7 +36,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 						 */new ArrayList<GruppoDiStudio>();
 
 		if (!MyApplication.getContextualCollection().isEmpty()) {
-			// Lista_GDS_activity può essere lanciata dalla home o al termine di
+			// Lista_GDS_activity puï¿½ essere lanciata dalla home o al termine di
 			// una iscrizione ad un corso
 
 			// questo codice gestisce il caso in cui al termine di una ricerca
@@ -64,7 +64,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		 * (user_gds_list.isEmpty()) { AlertDialog.Builder builder = new
 		 * AlertDialog.Builder( Lista_GDS_activity.this);
 		 * builder.setTitle("Avvio guidato"); builder.setMessage(
-		 * "Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
+		 * "Scopri le funzionalitï¿½ dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
 		 * ); builder.setPositiveButton("Si", new
 		 * DialogInterface.OnClickListener() {
 		 * 
@@ -126,7 +126,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}
-			
 
 		case R.id.action_cambia_layout:
 
