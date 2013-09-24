@@ -126,7 +126,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 								int arg2, long arg3) {
 							MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
 							parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
-							currentActivity.invalidateOptionsMenu();
+							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment
 							corsoSelezionato = new Corso();

@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.utilities.NotificationHandler;
 
-public class NoticesActivity extends SherlockActivity {
+public class NoticesActivity extends SherlockFragmentActivity{
 
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;

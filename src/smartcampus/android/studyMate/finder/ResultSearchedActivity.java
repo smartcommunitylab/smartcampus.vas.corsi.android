@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import smartcampus.android.template.standalone.R;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.studyMate.models.CourseLite;
 import eu.trentorise.smartcampus.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandlerLite;
 
-public class ResultSearchedActivity extends Activity {
+public class ResultSearchedActivity extends SherlockFragmentActivity {
 
 	public List<CourseLite> courses;
 	public ArrayList<String> coursesFiltered;
@@ -35,7 +35,7 @@ public class ResultSearchedActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result_searched);
-		ActionBar ab = getActionBar();
+		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -60,14 +60,17 @@ public class ResultSearchedActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.result_searched, menu);
-		return true;
+		getSupportMenuInflater().inflate(R.menu.result_searched, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
+		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(ResultSearchedActivity.this,
@@ -79,6 +82,6 @@ public class ResultSearchedActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 
 		}
-	}
 
+	}
 }

@@ -178,7 +178,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 						int arg2, long arg3) {
 					MyAgendaActivity parent = (MyAgendaActivity) fragment;
 					parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
-					fragment.invalidateOptionsMenu();
+					fragment.supportInvalidateOptionsMenu();
 
 					Evento evento = result.get(arg2);
 

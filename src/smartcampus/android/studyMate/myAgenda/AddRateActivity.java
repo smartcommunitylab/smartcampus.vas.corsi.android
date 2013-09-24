@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -19,6 +18,9 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -36,7 +38,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.AddFeedbackHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddRateActivity extends FragmentActivity {
+public class AddRateActivity extends SherlockFragmentActivity{
 
 	AdapterFeedbackList mAdapter;
 	ArrayList<RatingRowGroup> ratings;

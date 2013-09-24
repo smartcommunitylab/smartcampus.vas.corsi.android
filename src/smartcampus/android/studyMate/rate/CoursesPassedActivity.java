@@ -2,17 +2,17 @@ package smartcampus.android.studyMate.rate;
 
 import smartcampus.android.studyMate.start.MyUniActivity;
 import smartcampus.android.template.standalone.R;
-import android.app.ActionBar;
-import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 
-public class CoursesPassedActivity extends Activity {
+public class CoursesPassedActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
 	private ListView listViewCorsi;
@@ -21,7 +21,8 @@ public class CoursesPassedActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_courses_passed);
-		ActionBar ab = getActionBar();
+		ActionBar ab = getSupportActionBar();
+
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -39,13 +40,14 @@ public class CoursesPassedActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		return true;
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(CoursesPassedActivity.this,

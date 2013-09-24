@@ -28,7 +28,7 @@ public class CorsiFragment extends SherlockFragment {
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
-		getSherlockActivity().invalidateOptionsMenu();
+		getSherlockActivity().supportInvalidateOptionsMenu();
 		Bundle arguments = new Bundle();
 		CoursesHandler handlerPersonalCourses = new CoursesHandler(
 				getActivity().getApplicationContext(), listViewCorsi,

@@ -32,11 +32,17 @@ public class OverviewFragment extends SherlockFragment {
 		return view;
 	}
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
+	
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-		getSherlockActivity().invalidateOptionsMenu();
+		getSherlockActivity().supportInvalidateOptionsMenu();
 
 		new ProgressDialog(getActivity());
 		OverviewFragment.pd = ProgressDialog.show(getActivity(),

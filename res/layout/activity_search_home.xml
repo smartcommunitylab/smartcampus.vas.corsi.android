@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_home"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -36,29 +38,31 @@
         android:paddingRight="@dimen/activity_vertical_margin" />
 
     <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-    <TextView
-        android:id="@+id/textViewLabelCerca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-         android:paddingTop="@dimen/adpt_activity_vertical_margin"
-        android:text="@string/find_label_searching"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/textViewLabelCercando"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-	</LinearLayout>
+        <TextView
+            android:id="@+id/textViewLabelCerca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/adpt_activity_vertical_margin"
+            android:text="@string/find_label_searching"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textViewLabelCercando"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <MultiAutoCompleteTextView
         android:id="@+id/multiAutoCompleteTextView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search_hint_course"
         android:completionThreshold="1"
+        android:hint="@string/search_hint_course"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin" >
 

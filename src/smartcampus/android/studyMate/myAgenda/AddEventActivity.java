@@ -13,7 +13,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +23,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -38,7 +40,7 @@ import eu.trentorise.smartcampus.studyMate.models.Evento;
 import eu.trentorise.smartcampus.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddEventActivity extends FragmentActivity {
+public class AddEventActivity extends SherlockFragmentActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -118,13 +120,14 @@ public class AddEventActivity extends FragmentActivity {
 
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test, menu);
-		return true;
-	}
+@Override
+public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	// TODO Auto-generated method stub
+// Inflate the menu; this adds items to the action bar if it is present.
+	getSupportMenuInflater().inflate(R.menu.test, menu);
+	return super.onCreateOptionsMenu(menu);
+}
+	
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();

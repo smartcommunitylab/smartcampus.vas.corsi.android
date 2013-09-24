@@ -103,7 +103,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			agendaState = MenuKind.BASE_MENU;
 
 		}
-		invalidateOptionsMenu();
+		supportInvalidateOptionsMenu();
 		super.onBackPressed();
 	}
 

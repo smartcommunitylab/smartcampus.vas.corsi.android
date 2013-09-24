@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import smartcampus.android.template.standalone.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -40,7 +42,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddEvent4coursesActivity extends FragmentActivity {
+public class AddEvent4coursesActivity extends SherlockFragmentActivity{
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -121,13 +123,13 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test, menu);
-		return true;
-	}
+@Override
+public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+	getSupportMenuInflater().inflate(R.menu.test, menu);
+	return super.onCreateOptionsMenu(menu);
+}
+	
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();

@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
@@ -26,7 +29,7 @@ import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
-public class MyUniActivity extends Activity {
+public class MyUniActivity extends SherlockActivity {
 
 	/** Logging tag */
 	private static final String TAG = "Main";
@@ -145,30 +148,30 @@ public class MyUniActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_uni, menu);
-		return true;
-	}
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 
+		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.logout:
 			new Thread(new Runnable() {
-
+				
 				@Override
 				public void run() {
 					try {
-
+						
 						accessProvider.logout(MyUniActivity.this);
 						System.out.println(userAuthToken);
 					} catch (AACException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
+					
 				}
 			}).start();
 			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
@@ -177,9 +180,10 @@ public class MyUniActivity extends Activity {
 			return true;
 		}
 		return false;
-
-		// return super.onOptionsItemSelected(item);
+		
+		//return super.onOptionsItemSelected(item);
 	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
