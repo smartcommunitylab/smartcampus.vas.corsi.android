@@ -241,7 +241,7 @@ public class AddRateActivity extends SherlockFragmentActivity{
 							}
 						}
 
-						parent.expandGroup(groupPosition, true);
+						parent.expandGroup(groupPosition);
 						View elem = parent.getChildAt(groupPosition);
 						if (elem != null) {
 							// do Nothing

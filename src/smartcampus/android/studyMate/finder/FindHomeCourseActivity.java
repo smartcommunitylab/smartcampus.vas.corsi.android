@@ -78,7 +78,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
+		outState.putInt("tab", getSupportActionBar().getSelectedNavigationIndex());
 	}
 
 	@Override

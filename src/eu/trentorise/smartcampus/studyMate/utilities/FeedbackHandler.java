@@ -9,10 +9,17 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -33,17 +40,19 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	RatingBar ratingAverage;
 	ExpandableListView listComments;
 	public static List<Commento> feedbackInfoList;
-	public Activity act;
+	public SherlockFragmentActivity act;
 	TextView descriptionCourse;
+	Button swichFollow;
 	public static ProgressDialog pd;
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
-			Activity act, RatingBar ratingAverage, TextView descriptionCourse) {
+			SherlockFragmentActivity act, RatingBar ratingAverage, TextView descriptionCourse, Button sFollow) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 		this.act = act;
 		this.ratingAverage = ratingAverage;
 		this.descriptionCourse = descriptionCourse;
+		this.swichFollow = sFollow;
 	}
 
 	private List<Commento> getFullFeedbackById() {
@@ -93,7 +102,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<Commento> commenti) {
+	protected void onPostExecute(final List<Commento> commenti) {
 		super.onPostExecute(commenti);
 
 		if (commenti == null) {
@@ -105,9 +114,36 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			act.finish();
 		} else {
 
+			if (commenti.get(0).getCorso().isSeguito() == false){
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+			}
+			else{
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+			}
+			
+			swichFollow.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if (commenti.get(0).getCorso().isSeguito() == false){
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+						//TODO: set true for user
+						commenti.get(0).getCorso().setSeguito(true);
+						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
+						
+					}
+					else{
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+						commenti.get(0).getCorso().setSeguito(false);
+						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
+					}
+					
+				}
+			});
+			
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
-			act.getActionBar().setTitle(
+			act.getSupportActionBar().setTitle(
 					feedbackInfoList.get(0).getCorso().getNome());
 			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
 					.getValutazione_media());
