@@ -25,6 +25,8 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
+import eu.trentorise.smartcampus.network.RemoteConnector;
+import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
@@ -210,6 +212,7 @@ public class MyUniActivity extends SherlockActivity {
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
+				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				userAuthToken = accessProvider.readToken(MyUniActivity.this,
 						CLIENT_ID, CLIENT_SECRET);
 				System.out.println(userAuthToken);
@@ -223,14 +226,14 @@ public class MyUniActivity extends SherlockActivity {
 				try {
 					System.out.println("token: " + userAuthToken);
 					connector.init(getApplicationContext(), userAuthToken,
-							APP_ID, SERVER_URL, bp);
+							APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					new PushServiceConnector().init(getApplicationContext(),
-							userAuthToken, APP_ID, SERVER_URL, bp);
+							userAuthToken, APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
