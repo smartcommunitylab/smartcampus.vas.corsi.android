@@ -18,6 +18,11 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 	public Context context;
 	String body;
 	Commento commento;
+	
+	public AddFeedbackHandler(Context context) {
+		// TODO Auto-generated constructor stub
+		this.context = context;
+	}
 
 	@Override
 	protected Commento doInBackground(Commento... params) {

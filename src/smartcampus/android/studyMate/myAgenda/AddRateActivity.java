@@ -297,7 +297,7 @@ public class AddRateActivity extends SherlockFragmentActivity{
 									.getUserId()));
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler().execute(commento);
+							new AddFeedbackHandler(AddRateActivity.this).execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 							finish();
