@@ -36,6 +36,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.studyMate.utilities.AddFeedbackHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
 public class AddRateActivity extends SherlockFragmentActivity{
@@ -48,11 +49,8 @@ public class AddRateActivity extends SherlockFragmentActivity{
 	ExpandableListView list = null;
 	private RatingRowGroup rrg;
 
-	// private SCAccessProvider accessProvider = null;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
 		setTitle(CoursesHandler.corsoSelezionato.getNome());

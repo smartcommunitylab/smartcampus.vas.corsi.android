@@ -24,7 +24,6 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		final View view = inflater.inflate(
 				R.layout.fragment_home_course_description, container, false);
 
@@ -53,33 +52,12 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 			txtMonitor.setText(getResources().getText(
 					R.string.label_txtMonitor_off));
 
-		// @Override
-		// public void onCheckedChanged(CompoundButton buttonView,
-		// boolean isChecked) {
-		// // TODO Auto-generated method stub
-		// if (isChecked) {
-		// txtMonitor.setText(getResources().getText(
-		// R.string.label_txtMonitor_on));
-		// } else {
-		// txtMonitor.setText(getResources().getText(
-		// R.string.label_txtMonitor_off));
-		// }
-		// }
-		// });
 
 		super.onStart();
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
 	}
-
-	// @Override
-	// public void onAttach(Activity activity) {
-	// // TODO Auto-generated method stub
-	// super.onAttach(activity);
-	// act = activity;
-	// }
 }

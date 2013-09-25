@@ -188,11 +188,13 @@
         <activity
             android:name="smartcampus.android.studyMate.myAgenda.AddRateActivity"
             android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
         <activity
             android:name="smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed"
             android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
         
@@ -204,6 +206,7 @@
         <activity
             android:name="smartcampus.android.studyMate.rate.CoursesPassedActivity"
             android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
 

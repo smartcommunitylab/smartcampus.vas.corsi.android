@@ -5,7 +5,6 @@ import java.util.List;
 
 import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import smartcampus.android.template.standalone.R;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -17,7 +16,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -175,9 +173,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 					.getDescrizione());
 
 			pd.dismiss();
-			// loadDataLayout(course);
+
 		}
-		// }
+
 	}
 
 	@Override

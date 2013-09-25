@@ -106,7 +106,7 @@
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
-            android:drawableTop="@drawable/notices"
+            android:drawableTop="@drawable/ic_ratecourses"
             android:paddingRight="10dp"
             android:text="@string/rating_text_icon" />
 

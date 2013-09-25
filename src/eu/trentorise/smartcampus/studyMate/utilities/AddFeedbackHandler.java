@@ -21,7 +21,6 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 	@Override
 	protected Commento doInBackground(Commento... params) {
-		// TODO Auto-generated method stub
 		commento = params[0];
 
 		mProtocolCarrier = new ProtocolCarrier(context,

@@ -47,27 +47,10 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	ExpandableListView list = null;
 	private RatingRowGroup rrg;
 
-	// private SCAccessProvider accessProvider = null;
-
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		// View view = findViewById(R.layout.activity_add_rating);
 		setContentView(R.layout.activity_add_rating);
-		// }
-		//
-		// @Override
-		// public View onCreateView(LayoutInflater inflater, ViewGroup
-		// container,
-		// Bundle savedInstanceState) {
-		// // TODO Auto-generated method stub
-		// View view = inflater.inflate(R.layout.activity_add_rating,
-		// container, false);
-		// TextView titleCourseRating = (TextView)
-		// findViewById(R.id.textViewTitleRatingCourse);
-		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
-
 		setTitle(CoursesPassedHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
