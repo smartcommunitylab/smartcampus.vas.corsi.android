@@ -4,6 +4,7 @@ import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -15,6 +16,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.utilities.FeedbackHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.SetCourseAsFollowHandler;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 
@@ -45,12 +47,19 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				ratingAverage, descriptionCourse, switchFollow).execute();
 		final TextView txtMonitor = (TextView) getSherlockActivity()
 				.findViewById(R.id.txt_monitor);
-		if (txtMonitor.isPressed())
-			txtMonitor.setText(getResources().getText(
-					R.string.label_txtMonitor_on));
-		else
-			txtMonitor.setText(getResources().getText(
-					R.string.label_txtMonitor_off));
+		txtMonitor.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (txtMonitor.getText() == getResources().getText(R.string.label_txtMonitor_off)){
+					new SetCourseAsFollowHandler(getActivity().getParent(), txtMonitor).execute(FindHomeCourseActivity.corsoAttuale);
+				}
+				else
+					txtMonitor.setText(getResources().getText(
+							R.string.label_txtMonitor_off));
+			}
+		});
 
 
 		super.onStart();

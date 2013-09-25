@@ -52,7 +52,9 @@ public class Corso extends CorsoLite implements Serializable {
 
 	private Float rating_esame;
 
-	// private boolean is_libretto;
+	private boolean is_interesse;
+	
+	private boolean is_libretto;
 
 	public Float getRating_contenuto() {
 		return rating_contenuto;
@@ -152,6 +154,22 @@ public class Corso extends CorsoLite implements Serializable {
 
 	public void setId_corsoLaurea(long id_corsoLaurea) {
 		this.id_corsoLaurea = id_corsoLaurea;
+	}
+
+	public boolean isIs_libretto() {
+		return is_libretto;
+	}
+
+	public void setIs_libretto(boolean is_libretto) {
+		this.is_libretto = is_libretto;
+	}
+
+	public boolean isIs_interesse() {
+		return is_interesse;
+	}
+
+	public void setIs_interesse(boolean is_interesse) {
+		this.is_interesse = is_interesse;
 	}
 
 	// public boolean isIs_libretto() {
