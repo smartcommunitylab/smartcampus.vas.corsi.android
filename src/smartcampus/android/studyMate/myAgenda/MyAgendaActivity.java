@@ -1,9 +1,11 @@
 package smartcampus.android.studyMate.myAgenda;
 
+import smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import smartcampus.android.template.standalone.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,7 +17,17 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.studyMate.utilities.TabListener;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
@@ -179,13 +191,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_add_rating:
 			mystate = ChildActivity.ADD_RATING;
-			Intent intentAddRating = new Intent(MyAgendaActivity.this,
-					AddRateActivity.class);
-			CoursesHandler.corsoSelezionato.getNome();
-			intentAddRating.putExtra("corso",
-					CoursesHandler.corsoSelezionato.getNome());
-			intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentAddRating);
+			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato.getId());
+			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -200,4 +207,85 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	public void setAgendaState(MenuKind agendaState) {
 		this.agendaState = agendaState;
 	}
+	
+	
+	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean>{
+
+		private ProtocolCarrier mProtocolCarrier;
+		public String body;
+
+		private Long corsoId; 
+		
+		@Override
+		protected Boolean doInBackground(Long... params) {
+			// TODO Auto-generated method stub
+			
+			corsoId = params[0];
+			
+			mProtocolCarrier = new ProtocolCarrier(MyAgendaActivity.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String.valueOf(corsoId)));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			try {
+				response = mProtocolCarrier.invokeSync(request,
+						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, Boolean.class);
+			
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean isPassed) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(isPassed);
+			
+			if(isPassed == null){
+				Toast toast = Toast.makeText(MyAgendaActivity.this, "Ops. C'è stato un errore", Toast.LENGTH_LONG);
+				toast.show();
+				return;
+			}
+			
+			if(isPassed){	
+				
+				Intent intentAddRating = new Intent(MyAgendaActivity.this,
+						AddRateActivity.class);
+				CoursesHandler.corsoSelezionato.getNome();
+				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
+				intentAddRating.putExtra("corso",
+						CoursesHandler.corsoSelezionato.getNome());
+				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intentAddRating);
+				
+			}else{
+				Toast toast = Toast.makeText(MyAgendaActivity.this, MyAgendaActivity.this.getResources().getText(R.string.toast_rate_access_denied), Toast.LENGTH_LONG);
+				toast.show();
+			}
+		}
+		
+	}
+	
+	
 }

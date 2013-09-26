@@ -40,8 +40,9 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 		try {
 
 			String eventoJSON = Utils.convertToJSON(commento);
-
+			
 			request.setBody(eventoJSON);
+			
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 

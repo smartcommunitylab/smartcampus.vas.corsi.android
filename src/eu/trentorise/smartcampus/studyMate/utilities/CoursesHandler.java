@@ -2,13 +2,16 @@ package eu.trentorise.smartcampus.studyMate.utilities;
 
 import java.util.List;
 
+import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
+import smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -103,7 +106,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'Ã¨ stato un errore...",
+			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -131,6 +134,9 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 							// Pass Data to other Fragment
 							corsoSelezionato = new Corso();
 							corsoSelezionato = result.get(arg2);
+							
+							
+							
 							//CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
@@ -155,5 +161,9 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 
 		return getAllPersonalCourses();
 	}
+
+	
+	
+	
 
 }

@@ -93,7 +93,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'Ã¨ stato un errore...",
+			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {

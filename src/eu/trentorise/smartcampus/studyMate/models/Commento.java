@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.studyMate.models;
 
+import java.io.Serializable;
+
 public class Commento {
 
 	private int id;
