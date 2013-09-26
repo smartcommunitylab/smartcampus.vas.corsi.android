@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -19,6 +18,9 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -34,9 +36,10 @@ import eu.trentorise.smartcampus.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.studyMate.utilities.AddFeedbackHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddRateActivity extends FragmentActivity {
+public class AddRateActivity extends SherlockFragmentActivity{
 
 	AdapterFeedbackList mAdapter;
 	ArrayList<RatingRowGroup> ratings;
@@ -44,28 +47,12 @@ public class AddRateActivity extends FragmentActivity {
 	Commento commento;
 	public static ProgressDialog pd;
 	ExpandableListView list = null;
-
-	// private SCAccessProvider accessProvider = null;
+	private RatingRowGroup rrg;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// View view = findViewById(R.layout.activity_add_rating);
 		setContentView(R.layout.activity_add_rating);
-		// }
-		//
-		// @Override
-		// public View onCreateView(LayoutInflater inflater, ViewGroup
-		// container,
-		// Bundle savedInstanceState) {
-		// // TODO Auto-generated method stub
-		// View view = inflater.inflate(R.layout.activity_add_rating,
-		// container, false);
-		// TextView titleCourseRating = (TextView)
-		// findViewById(R.id.textViewTitleRatingCourse);
-		// titleCourseRating.setText(FindHomeCourseActivity.courseInfo.getNome());
-
 		setTitle(CoursesHandler.corsoSelezionato.getNome());
 		new ProgressDialog(AddRateActivity.this);
 		pd = ProgressDialog.show(AddRateActivity.this,
@@ -73,6 +60,12 @@ public class AddRateActivity extends FragmentActivity {
 
 		new LoaderFeedbackData(AddRateActivity.this).execute();
 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 
 	private void setRatingContexts(Commento commento) {
@@ -83,7 +76,7 @@ public class AddRateActivity extends FragmentActivity {
 			commentCourse.setText(new String(""));
 
 			// CONTENUTI
-			RatingRowGroup rrg = new RatingRowGroup();
+			rrg = new RatingRowGroup();
 			rrg.setRating(0);
 			rrg.setContext(getResources().getString(
 					R.string.rating_context_contenuti));
@@ -132,7 +125,7 @@ public class AddRateActivity extends FragmentActivity {
 			commentCourse.setText(commento.getTesto());
 
 			// CONTENUTI
-			RatingRowGroup rrg = new RatingRowGroup();
+			rrg = new RatingRowGroup();
 			rrg.setRating(commento.getRating_contenuto());
 			rrg.setContext(getResources().getString(
 					R.string.rating_context_contenuti));
@@ -246,11 +239,10 @@ public class AddRateActivity extends FragmentActivity {
 							}
 						}
 
-						parent.expandGroup(groupPosition, true);
+						parent.expandGroup(groupPosition);
 						View elem = parent.getChildAt(groupPosition);
 						if (elem != null) {
-							elem.setBackgroundColor(getResources().getColor(
-									R.color.pressed_smartn_theme));
+							// do Nothing
 						}
 					}
 
@@ -258,21 +250,9 @@ public class AddRateActivity extends FragmentActivity {
 				}
 
 			});
-
-			// final RatingBar rbCont = (RatingBar)
-			// findViewById(R.id.ratingBarContextContenuti);
-			// final RatingBar rbCfu = (RatingBar)
-			// findViewById(R.id.ratingBarContextCfu);
-			// final RatingBar rbLez = (RatingBar)
-			// findViewById(R.id.ratingBarContextLezioni);
-			// final RatingBar rbMat = (RatingBar)
-			// findViewById(R.id.ratingBarContextMateriali);
-			// final RatingBar rbExam = (RatingBar)
-			// findViewById(R.id.ratingBarContextEsame);
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 			pd.dismiss();
-
 			list.setOnChildClickListener(new OnChildClickListener() {
 
 				@Override
@@ -301,6 +281,7 @@ public class AddRateActivity extends FragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesHandler.corsoSelezionato);
+
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -316,7 +297,7 @@ public class AddRateActivity extends FragmentActivity {
 									.getUserId()));
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler().execute(commento);
+							new AddFeedbackHandler(AddRateActivity.this).execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 							finish();

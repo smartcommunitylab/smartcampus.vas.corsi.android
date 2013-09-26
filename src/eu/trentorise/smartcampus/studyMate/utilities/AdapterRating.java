@@ -81,7 +81,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setRating(inf.getRating());
 			break;
 		case 4:
-			rbCfu.setRating(inf.getRating());
+			rbExam.setRating(inf.getRating());
 			break;
 		}
 
@@ -246,5 +246,4 @@ public class AdapterRating extends BaseExpandableListAdapter {
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		return true;
 	}
-
 }

@@ -1,9 +1,11 @@
 package smartcampus.android.studyMate.start;
 
 import smartcampus.android.studyMate.finder.FindHomeActivity;
+import smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import smartcampus.android.studyMate.notices.NoticesActivity;
 import smartcampus.android.studyMate.phl.PHLActivity;
+import smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,26 +18,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
+import eu.trentorise.smartcampus.network.RemoteConnector;
+import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
-//import eu.trentorise.smartcampus.puschservice.PushServiceConnector;
-
-public class MyUniActivity extends Activity {
+public class MyUniActivity extends SherlockActivity {
 
 	/** Logging tag */
 	private static final String TAG = "Main";
-	// private static final String AUTH_URL =
-	// "https://vas-dev.smartcampuslab.it/accesstoken-provider/ac";
-	// private static final String AC_SERVICE_ADDR =
-	// "https://vas-dev.smartcampuslab.it/acService";
-	// private static final String PROFILE_SERVICE_ADDR =
-	// "https://vas-dev.smartcampuslab.it";
 
 	public static final String CLIENT_ID = "b8fcb94d-b4cf-438f-802a-c0a560734c88";
 
@@ -57,14 +56,10 @@ public class MyUniActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_uni);
-		// your code here
+		new LoadUserDataFromACServiceTask().execute();
 		new ProgressDialog(MyUniActivity.this);
 		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
 				"Accesso in corso...");
-
-		new LoadUserDataFromACServiceTask().execute();
-
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
 			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
@@ -75,61 +70,7 @@ public class MyUniActivity extends Activity {
 			Log.e(TAG, "Failed to login: " + e.getMessage());
 			// handle the failure, e.g., notify the user and close the app.
 		}
-
-		// PushServiceConnector connector = new PushServiceConnector();
-		// // //init connector
-		// try {
-		// System.out.println("token: " + token);
-		// connector.init(getApplicationContext(), token);
-		// } catch (CommunicatorConnectorException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// try {
-		// new PushServiceConnector().init(getApplicationContext(), token);
-		// } catch (CommunicatorConnectorException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
-		findViewById(R.id.my_agenda_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								MyAgendaActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-
-		findViewById(R.id.find_courses_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								FindHomeActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
-
-		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MyUniActivity.this,
-						PHLActivity.class);
-				MyUniActivity.this.startActivity(intent);
-			}
-		});
-
-		findViewById(R.id.notices_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								NoticesActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+		
 
 	}
 
@@ -141,15 +82,83 @@ public class MyUniActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_uni, menu);
-		return true;
+	protected void onStart() {
+		super.onStart();
+		setContentView(R.layout.activity_my_uni);
+		// your code here
+		
+//		new LoadUserDataFromACServiceTask().execute();
+		
+		findViewById(R.id.my_agenda_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								MyAgendaActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+		
+		findViewById(R.id.find_courses_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								FindHomeActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+		
+		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MyUniActivity.this,
+						PHLActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
+		});
+		
+		findViewById(R.id.notices_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								NoticesActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+		
+		findViewById(R.id.rate_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MyUniActivity.this,
+						CoursesPassedActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
+		});
+		
+		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								Lista_GDS_activity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+
+		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.logout:
 			new Thread(new Runnable() {
@@ -158,7 +167,6 @@ public class MyUniActivity extends Activity {
 				public void run() {
 					try {
 
-						
 						accessProvider.logout(MyUniActivity.this);
 						System.out.println(userAuthToken);
 					} catch (AACException e) {
@@ -203,6 +211,7 @@ public class MyUniActivity extends Activity {
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
+				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				userAuthToken = accessProvider.readToken(MyUniActivity.this,
 						CLIENT_ID, CLIENT_SECRET);
 				System.out.println(userAuthToken);
@@ -216,14 +225,14 @@ public class MyUniActivity extends Activity {
 				try {
 					System.out.println("token: " + userAuthToken);
 					connector.init(getApplicationContext(), userAuthToken,
-							APP_ID, SERVER_URL, bp);
+							APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					new PushServiceConnector().init(getApplicationContext(),
-							userAuthToken, APP_ID, SERVER_URL, bp);
+							userAuthToken, APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

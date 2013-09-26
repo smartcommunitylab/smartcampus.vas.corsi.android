@@ -32,12 +32,18 @@ public class OverviewFragment extends SherlockFragment {
 		return view;
 	}
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
+	
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-		getSherlockActivity().invalidateOptionsMenu();
-		// getActivity().invalidateOptionsMenu();
+		getSherlockActivity().supportInvalidateOptionsMenu();
+
 		new ProgressDialog(getActivity());
 		OverviewFragment.pd = ProgressDialog.show(getActivity(),
 				"Lista degli eventi personali", "Caricamento...");
@@ -46,39 +52,6 @@ public class OverviewFragment extends SherlockFragment {
 				getActivity().getApplicationContext(), getActivity());
 		eventsHandler.execute();
 
-		// String[] events =
-		// getResources().getStringArray(R.array.NewEventiFuffa);
-		// EventItem[] items = new EventItem[events.length];
-		//
-		// int i = 0;
-		// for (String s : events) {
-		// String[] itms = s.split(",");
-		// @SuppressWarnings("deprecation")
-		// Date d = new Date(Date.parse(itms[0]));
-		// AdptDetailedEvent e = new AdptDetailedEvent(d, itms[1], itms[2],
-		// itms[3]);
-		// items[i++] = new EventItem(e);
-		// }
-
 	}
-
-	// public static Evento[] EventsSortByDate(List<Evento> arrayEventi) {
-	//
-	// Evento temp = null;
-	// Evento[] ev = new Evento[arrayEventi.size()];
-	// for (int a=1; a<ev.length; a++) {
-	// for(int b=0; b<ev.length - a; b++) {
-	//
-	// if (((ev[b].getData()).compareTo((ev[b].getData()))) > 0){
-	// //swap movies[b] with movies[b+1]
-	// temp = ev[b];
-	// }
-	// ev[b] = ev[b+1];
-	// ev[b+1] = temp;
-	// }
-	// }
-	//
-	// return ev;
-	// }
-
+	
 }

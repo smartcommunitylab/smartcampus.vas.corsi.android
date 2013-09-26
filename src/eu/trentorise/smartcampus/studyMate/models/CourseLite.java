@@ -2,8 +2,9 @@ package eu.trentorise.smartcampus.studyMate.models;
 
 public class CourseLite {
 
-	public String nome;
 	public String id;
+	public String nome;
+	private long dipartimento;
 
 	public CourseLite() {
 		// TODO Auto-generated constructor stub
@@ -23,6 +24,14 @@ public class CourseLite {
 
 	public void setName(String name) {
 		this.nome = name;
+	}
+
+	public long getDipartimento() {
+		return dipartimento;
+	}
+
+	public void setDipartimento(long dipartimento) {
+		this.dipartimento = dipartimento;
 	}
 
 }

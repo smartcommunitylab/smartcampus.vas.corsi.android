@@ -6,6 +6,28 @@ import java.util.Date;
 
 public class Evento implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4216708970101566299L;
+
+	// public Evento(long id, Corso corso, String titolo, String event_location,
+	// String room, Date data, String descrizione, Time start, Time stop,
+	// boolean all_day, boolean availability) {
+	// super();
+	// this.id = id;
+	// this.corso = corso;
+	// this.titolo = titolo;
+	// this.event_location = event_location;
+	// this.room = room;
+	// this.data = data;
+	// this.descrizione = descrizione;
+	// this.start = start;
+	// this.stop = stop;
+	// this.all_day = all_day;
+	// this.availability = availability;
+	// }
+
 	// id dell'evento
 	private long id;
 

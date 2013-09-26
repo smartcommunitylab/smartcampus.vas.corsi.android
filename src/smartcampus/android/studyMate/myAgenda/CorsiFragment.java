@@ -19,7 +19,6 @@ public class CorsiFragment extends SherlockFragment {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_corsi,
 				container, false);
-		// // do your view initialization here
 		return view;
 	}
 
@@ -29,12 +28,7 @@ public class CorsiFragment extends SherlockFragment {
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
-		getSherlockActivity().invalidateOptionsMenu();
-		// String[] corsi = getResources().getStringArray(R.array.Corsi);
-		// String[] corsiInt = getResources().getStringArray(
-		// R.array.CorsiInteresse);
-		// TitledItem[] items = new TitledItem[corsi.length + corsiInt.length];
-
+		getSherlockActivity().supportInvalidateOptionsMenu();
 		Bundle arguments = new Bundle();
 		CoursesHandler handlerPersonalCourses = new CoursesHandler(
 				getActivity().getApplicationContext(), listViewCorsi,

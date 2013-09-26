@@ -1,5 +1,7 @@
 package smartcampus.android.studyMate.phl;
 
+import java.util.Collections;
+
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -61,6 +63,8 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
 				"/api/documenti/getDirByIDSC/" + idCorso);
+		request.setCustomHeaders(Collections.singletonMap("Authorization",
+				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 
@@ -69,8 +73,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		MessageResponse response;
 		String body = null;
 		try {
-			response = mProtocolCarrier.invokeSync(request, "token",
-					"2d2abbe190e0d7ad0ae71425059f00cc");// SmartUniDataWS.TOKEN);
+			response = mProtocolCarrier.invokeSync(request, "token", null);// SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
@@ -113,27 +116,27 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				if (c.getMime().equals("directory")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_folder, c.getHash());
-				}else
-				if(c.getMime().equals ("application/pdf")){
+				} else if (c.getMime().equals("application/pdf")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_pdffile, c.getHash());
-				}else
-				if(c.getMime().equals ("image/jpeg")){
+				} else if (c.getMime().equals("image/jpeg")) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_imgfile, c.getHash());
-				}else
-				if((c.getMime().equals ("application/x-tar"))||(c.getMime().equals("application/x-rar-compressed"))||(c.getMime().equals("application/zip"))){
+				} else if ((c.getMime().equals("application/x-tar"))
+						|| (c.getMime().equals("application/x-rar-compressed"))
+						|| (c.getMime().equals("application/zip"))) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_archivefile, c.getHash());
-				}else
-				if((c.getMime().equals ("application/msword"))||(c.getMime().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))||(c.getMime().equals("text/plain"))){
+				} else if ((c.getMime().equals("application/msword"))
+						|| (c.getMime()
+								.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+						|| (c.getMime().equals("text/plain"))) {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_textfile, c.getHash());
-				}
-				else {
+				} else {
 					items[i++] = new MaterialItem(result.getCwd().getName(),
 							c.getName(), R.drawable.ic_genericfile, c.getHash());
-					
+
 				}
 
 				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
@@ -148,29 +151,30 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-						if (result.getCdc().get(arg2).getMime().equals("directory")) {
-						FragmentTransaction ft = currentSherlock
-								.getSupportFragmentManager()
-								.beginTransaction();
-						Fragment fragment = new Materiali4LevelPhlFragment();
-						ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-						Bundle b = new Bundle();
-						b.putString("res", result
-										.getCdc().get(arg2).getHash());
-						fragment.setArguments(b);
-						//ft.replace(R.id.tabMateriali, fragment);
-						ft.add(R.id.tabMateriali, fragment);
-						//ft.addToBackStack(null);
-						ft.commit();
-						} 
-//						else {
-//							Toast.makeText(context, "Coming Soon!",
-//									Toast.LENGTH_SHORT).show();
-//						}
-//						new PHLengine4Material(context, currentActivity,
-//								listViewCorsiPersonali, currentSherlock, result
-//										.getCdc().get(arg2).getHash())
-//								.execute();
+						if (result.getCdc().get(arg2).getMime()
+								.equals("directory")) {
+							FragmentTransaction ft = currentSherlock
+									.getSupportFragmentManager()
+									.beginTransaction();
+							Fragment fragment = new Materiali4LevelPhlFragment();
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							Bundle b = new Bundle();
+							b.putString("res", result.getCdc().get(arg2)
+									.getHash());
+							fragment.setArguments(b);
+							// ft.replace(R.id.tabMateriali, fragment);
+							ft.add(R.id.tabMateriali, fragment);
+							// ft.addToBackStack(null);
+							ft.commit();
+						}
+						// else {
+						// Toast.makeText(context, "Coming Soon!",
+						// Toast.LENGTH_SHORT).show();
+						// }
+						// new PHLengine4Material(context, currentActivity,
+						// listViewCorsiPersonali, currentSherlock, result
+						// .getCdc().get(arg2).getHash())
+						// .execute();
 					}
 				});
 
@@ -182,7 +186,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// TODO Auto-generated method stub
-		//bundleParam = params[0];
+		// bundleParam = params[0];
 
 		return getMaterial4Course();
 	}

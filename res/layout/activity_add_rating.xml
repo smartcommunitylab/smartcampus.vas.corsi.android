@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFFFF"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <!--
          <View
@@ -51,8 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Inserisci il tuo commento..."
-        android:inputType="textMultiLine" >
+        android:hint="Inserisci il tuo commento...">
     </EditText>
 
     <LinearLayout

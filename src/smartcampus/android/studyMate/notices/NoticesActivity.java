@@ -8,19 +8,13 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.utilities.NotificationHandler;
 
-public class NoticesActivity extends SherlockActivity {
+public class NoticesActivity extends SherlockFragmentActivity{
 
-	// private List<Notice> notifies;
-	// private ArrayList<Notice> notificationsList;
-	// private ArrayList<String> descriptionsList;
-	// private ArrayList<String> datetimeList;
-	// private ArrayList<String> usersList;
-	// private String dateString;
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;
 	public static ProgressDialog pd;
@@ -43,10 +37,12 @@ public class NoticesActivity extends SherlockActivity {
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
 				lvAllNotices).execute();
 
-		// Toast.makeText(this, "ciao " + MyUniActivity.bp.getName() + " " +
-		// MyUniActivity.bp.getSurname(),
-		// Toast.LENGTH_SHORT).show();
+	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 
 	@Override
@@ -60,7 +56,6 @@ public class NoticesActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(NoticesActivity.this,

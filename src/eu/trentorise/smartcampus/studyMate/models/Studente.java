@@ -14,7 +14,7 @@ public class Studente {
 
 	private String corso_laurea;
 
-	private String dipartimento;
+	private Dipartimento dipartimento;
 
 	private String anno_corso;
 
@@ -23,6 +23,8 @@ public class Studente {
 	private long userSCId;
 
 	private Collection<Corso> corsi;
+
+	private String idsCorsiSuperati;
 
 	public Collection<Corso> getCorsi() {
 		return corsi;
@@ -72,11 +74,11 @@ public class Studente {
 		this.corso_laurea = corso_laurea;
 	}
 
-	public String getDipartimento() {
+	public Dipartimento getDipartimento() {
 		return dipartimento;
 	}
 
-	public void setDipartimento(String dipartimento) {
+	public void setDipartimento(Dipartimento dipartimento) {
 		this.dipartimento = dipartimento;
 	}
 
@@ -94,6 +96,14 @@ public class Studente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getIdsCorsiSuperati() {
+		return idsCorsiSuperati;
+	}
+
+	public void setIdsCorsiSuperati(String idsCorsiSuperati) {
+		this.idsCorsiSuperati = idsCorsiSuperati;
 	}
 
 }

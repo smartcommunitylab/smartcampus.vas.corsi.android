@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import smartcampus.android.template.standalone.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -40,7 +42,7 @@ import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddEvent4coursesActivity extends FragmentActivity {
+public class AddEvent4coursesActivity extends SherlockFragmentActivity{
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -62,7 +64,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event_4_course);
-		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the current date
@@ -86,8 +87,14 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+
+		super.onResume();
+	}
+
+	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
+
 		super.onStart();
 		Button button_ok = (Button) findViewById(R.id.button_ok4Course);
 
@@ -99,14 +106,23 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
+		Button button_cancel = (Button) findViewById(R.id.button_annulla4Course);
+		button_cancel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 
 	}
 
 	public void updateDisplay() {
 		this.mPickDate.setText(new StringBuilder()
-				// Month is 0 based so add 1
-				.append(mDay).append("-").append(mMonth + 1).append("-")
-				.append(mYear).append(" "));
+
+		.append(mDay).append("-").append(mMonth + 1).append("-").append(mYear)
+				.append(" "));
 		if (minute < 10) {
 			this.mPickTime.setText(new StringBuilder().append(hour)
 					.append(":0").append(minute));
@@ -116,13 +132,13 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test, menu);
-		return true;
-	}
+@Override
+public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+	getSupportMenuInflater().inflate(R.menu.test, menu);
+	return super.onCreateOptionsMenu(menu);
+}
+	
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
@@ -195,7 +211,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 
 		@Override
 		protected List<CorsoLite> doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			return getFollowingCourses();
 		}
 
@@ -247,9 +262,6 @@ public class AddEvent4coursesActivity extends FragmentActivity {
 			courseSelected = (Corso) CoursesHandler.corsoSelezionato;
 
 			resultStrings.add(courseSelected.getNome());
-			// for (CorsoLite cl : result) {
-			// resultStrings.add(cl.getNome());
-			// }
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 					AddEvent4coursesActivity.this,

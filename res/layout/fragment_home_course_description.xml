@@ -15,14 +15,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingTop="10dp" >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:orientation="horizontal" >
 
-        <Switch
+        <!-- <Switch
             android:id="@+id/switchFollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +33,16 @@
             android:textOff="@string/switch_off"
             android:textOn="@string/switch_on"
             android:thumb="@color/smartn_theme_color" 
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"/> -->
+
+        <Button
+            android:id="@+id/switchFollow"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_gravity="left"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="30dp" />
 
         <TextView
             android:id="@+id/txt_monitor"

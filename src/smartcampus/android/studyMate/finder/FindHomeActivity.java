@@ -16,7 +16,8 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.studyMate.models.CorsoLaurea;
@@ -24,7 +25,7 @@ import eu.trentorise.smartcampus.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.studyMate.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.studyMate.utilities.FindDepartmentsHandler;
 
-public class FindHomeActivity extends SherlockActivity implements TextWatcher {
+public class FindHomeActivity extends SherlockFragmentActivity implements TextWatcher {
 	private Spinner spinner1;
 	private Spinner spinner2;
 
@@ -46,8 +47,7 @@ public class FindHomeActivity extends SherlockActivity implements TextWatcher {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_home);
-		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
-		// ActionBar ab = getActionBar();
+		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -122,20 +122,17 @@ public class FindHomeActivity extends SherlockActivity implements TextWatcher {
 
 	@Override
 	public void afterTextChanged(Editable arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		// TODO Auto-generated method stub
 		TextView textSearch = (TextView) findViewById(R.id.textViewLabelCerca);
 		TextView textSearching = (TextView) findViewById(R.id.textViewLabelCercando);
 		textSearching.setText(" " + searchTV.getText().toString());

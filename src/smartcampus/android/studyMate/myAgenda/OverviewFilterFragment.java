@@ -44,8 +44,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.BASE_MENU);
-		// String[] events =
-		// getResources().getStringArray(R.array.NewEventiFuffa);
 		listaEventiFiltrati = new ArrayList<Evento>();
 
 		courseSelected = new Corso();
@@ -76,7 +74,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 				MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 				parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 
-				getSherlockActivity().invalidateOptionsMenu();
+				getSherlockActivity().supportInvalidateOptionsMenu();
 				// Pass Data to other Fragment
 				Evento evento = listaEventiFiltrati.get(arg2);
 

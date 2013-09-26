@@ -15,25 +15,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.TextView;
-import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnector;
 import eu.trentorise.smartcampus.communicator.model.Notification;
 import eu.trentorise.smartcampus.communicator.model.Notifications;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studyMate.models.Notice;
 
-public class NotificationHandler extends AsyncTask<Void, Void, List<Notification>> {
+public class NotificationHandler extends
+		AsyncTask<Void, Void, List<Notification>> {
 
-	
 	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	String body;
 	TextView textViewTitleNotices;
 	private ListView lvAllNotices;
@@ -62,7 +51,7 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notification
 				MyUniActivity.userAuthToken);
 		list.getNotifications();
 		List<Notification> not = list.getNotifications();
-		
+
 		return not;
 	}
 
@@ -90,10 +79,9 @@ public class NotificationHandler extends AsyncTask<Void, Void, List<Notification
 
 		for (Notification n : notifies) {
 			textViewTitleNotices.setText(n.getTitle());
-			
-			
+
 		}
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
 				Locale.ITALY);
 		Date date = new Date();

@@ -13,7 +13,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +23,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -38,7 +40,7 @@ import eu.trentorise.smartcampus.studyMate.models.Evento;
 import eu.trentorise.smartcampus.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 
-public class AddEventActivity extends FragmentActivity {
+public class AddEventActivity extends SherlockFragmentActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -59,7 +61,6 @@ public class AddEventActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
-		// mDateDisplay = (TextView) findViewById(R.id.showMyDate);
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
 		// get the current date
@@ -84,6 +85,12 @@ public class AddEventActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
@@ -93,11 +100,18 @@ public class AddEventActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
+		Button button_cancel = (Button) findViewById(R.id.button_annulla);
+		button_cancel.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 	}
 
 	public void updateDisplay() {
@@ -114,13 +128,14 @@ public class AddEventActivity extends FragmentActivity {
 
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test, menu);
-		return true;
-	}
+@Override
+public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	// TODO Auto-generated method stub
+// Inflate the menu; this adds items to the action bar if it is present.
+	getSupportMenuInflater().inflate(R.menu.test, menu);
+	return super.onCreateOptionsMenu(menu);
+}
+	
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
@@ -254,7 +269,6 @@ public class AddEventActivity extends FragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			new ProgressDialog(AddEventActivity.this);

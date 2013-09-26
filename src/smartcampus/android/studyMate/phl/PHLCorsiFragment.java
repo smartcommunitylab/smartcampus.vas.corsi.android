@@ -21,10 +21,16 @@ public class PHLCorsiFragment extends SherlockFragment {
 		return view;
 	}
 
-@Override
-public void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsiPHL);
 
@@ -36,5 +42,3 @@ public void onStart() {
 
 	}
 }
-	
-

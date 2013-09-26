@@ -4,13 +4,20 @@ import java.util.Collections;
 import java.util.List;
 
 import smartcampus.android.studyMate.finder.FindHomeCourseActivity;
-import android.app.Activity;
+import smartcampus.android.template.standalone.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -25,25 +32,26 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	String body;
 	long idCourse;
 	TextView tvCourseName;
 	RatingBar ratingAverage;
 	ExpandableListView listComments;
 	public static List<Commento> feedbackInfoList;
-	public Activity act;
+	public SherlockFragmentActivity act;
 	TextView descriptionCourse;
+	Button swichFollow;
 	public static ProgressDialog pd;
-
+TextView txtMonitor;
 	public FeedbackHandler(Context applicationContext, long idCourse,
-			Activity act, RatingBar ratingAverage, TextView descriptionCourse) {
+			SherlockFragmentActivity act, RatingBar ratingAverage, TextView descriptionCourse, Button sFollow, TextView txtMonitor) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 		this.act = act;
 		this.ratingAverage = ratingAverage;
 		this.descriptionCourse = descriptionCourse;
+		this.swichFollow = sFollow;
+		this.txtMonitor = txtMonitor;
 	}
 
 	private List<Commento> getFullFeedbackById() {
@@ -64,7 +72,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
-
+				System.out.println(body);
 			} else {
 				return null;
 			}
@@ -93,55 +101,86 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<Commento> commenti) {
-		// super.onPostExecute(commenti);
+	protected void onPostExecute(final List<Commento> commenti) {
+		super.onPostExecute(commenti);
 
-		// if (commenti == null) {
-		//
-		// Toast.makeText(context, "Ops! C'e' stato un errore...",
-		// Toast.LENGTH_SHORT).show();
-		//
-		// pd.dismiss();
-		// // act.finish();
-		// } else {
+		if (commenti == null) {
 
-		Collections.reverse(commenti);
-		feedbackInfoList = commenti;
-		act.getActionBar().setTitle(
-				feedbackInfoList.get(0).getCorso().getNome());
-		ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
-				.getValutazione_media());
+			Toast.makeText(context, "Ops! C'e' stato un errore...",
+					Toast.LENGTH_SHORT).show();
 
-		// RatingBar ratingCont = (RatingBar) act
-		// .findViewById(R.id.ratingBarRowContenuti);
-		// ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
-		//
-		// RatingBar ratingCaricoStudio = (RatingBar) act
-		// .findViewById(R.id.ratingBarRowCfu);
-		// ratingCaricoStudio.setRating(feedbackInfoList.get(0)
-		// .getRating_carico_studio());
-		//
-		// RatingBar ratingLezioni = (RatingBar) act
-		// .findViewById(R.id.ratingBarRowLezioni);
-		// ratingLezioni
-		// .setRating(feedbackInfoList.get(0).getRating_lezioni());
-		//
-		// RatingBar ratingMateriali = (RatingBar) act
-		// .findViewById(R.id.ratingBarRowMateriali);
-		// ratingMateriali.setRating(feedbackInfoList.get(0)
-		// .getRating_materiali());
-		//
-		// RatingBar ratingEsame = (RatingBar) act
-		// .findViewById(R.id.ratingBarRowEsame);
-		// ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
+			pd.dismiss();
+			act.finish();
+		} else {
 
-		descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
-				.getDescrizione());
+			if (commenti.get(0).getCorso().isSeguito() == false){
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+				txtMonitor.setText(R.string.label_txtMonitor_off);
+			}
+			else{
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+				txtMonitor.setText(R.string.label_txtMonitor_on);
+			}
+			
+			swichFollow.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if (commenti.get(0).getCorso().isSeguito() == false){
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+						//TODO: set true for user
+						txtMonitor.setText(R.string.label_txtMonitor_on);
+						commenti.get(0).getCorso().setSeguito(true);
+						//new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
+						
+					}
+					else{
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+						commenti.get(0).getCorso().setSeguito(false);
+						txtMonitor.setText(R.string.label_txtMonitor_off);
+						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow, txtMonitor).execute();
+					}
+					
+				}
+			});
+			
+			Collections.reverse(commenti);
+			feedbackInfoList = commenti;
+			act.getSupportActionBar().setTitle(
+					feedbackInfoList.get(0).getCorso().getNome());
+			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
+					.getValutazione_media());
 
-		pd.dismiss();
-		// loadDataLayout(course);
+			RatingBar ratingCont = (RatingBar) act
+					.findViewById(R.id.ratingBarRowContenuti);
+			ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
 
-		// }
+			RatingBar ratingCaricoStudio = (RatingBar) act
+					.findViewById(R.id.ratingBarRowCfu);
+			ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+					.getRating_carico_studio());
+
+			RatingBar ratingLezioni = (RatingBar) act
+					.findViewById(R.id.ratingBarRowLezioni);
+			ratingLezioni
+					.setRating(feedbackInfoList.get(0).getRating_lezioni());
+
+			RatingBar ratingMateriali = (RatingBar) act
+					.findViewById(R.id.ratingBarRowMateriali);
+			ratingMateriali.setRating(feedbackInfoList.get(0)
+					.getRating_materiali());
+
+			RatingBar ratingEsame = (RatingBar) act
+					.findViewById(R.id.ratingBarRowEsame);
+			ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
+
+			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
+					.getDescrizione());
+
+			pd.dismiss();
+
+		}
+
 	}
 
 	@Override

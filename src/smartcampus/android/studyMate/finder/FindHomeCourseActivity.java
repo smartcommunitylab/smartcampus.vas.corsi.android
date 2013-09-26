@@ -1,14 +1,23 @@
 package smartcampus.android.studyMate.finder;
 
+import java.util.List;
+
 import smartcampus.android.studyMate.myAgenda.AddRateActivity;
+import smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
+import smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import smartcampus.android.template.standalone.R;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -17,8 +26,19 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studyMate.models.Corso;
 import eu.trentorise.smartcampus.studyMate.models.CorsoLite;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.CoursesPassedHandler;
+import eu.trentorise.smartcampus.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.studyMate.utilities.TabListener;
 
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
@@ -30,8 +50,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_find_home_course);
-
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -59,28 +77,12 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		ab.addTab(tab2);
 
 		Intent intent = getIntent();
-		// TextView tvCourseName = (TextView)
-		// findViewById(R.id.textViewNameCourseHome);
+
 		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(courseName);
-		// tvCourseName.setText(courseName);
-		// TextView descriptionCourse = (TextView)
-		// findViewById(R.id.textViewDescriptioonCourse);
-		// RatingBar ratingAverage =
-		// (RatingBar)findViewById(R.id.ratingBarCourse);
-		// ExpandableListView listComments = (ExpandableListView)
-		// findViewById(R.id.expandableListViewFeedback);
-
 		corsoAttuale = new CorsoLite();
 		corsoAttuale = (CorsoLite) intent
 				.getSerializableExtra("courseSelected");
-		// String idCourse = intent.getStringExtra("courseSelectedId");
-
-		/*
-		 * courseInfo = new CourseCompleteDataHandler(
-		 * FindHomeCourseActivity.this, corsoAttuale.getId()).execute().get();
-		 */
-
 	}
 
 	@Override
@@ -91,61 +93,32 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		int tab = savedInstanceState.getInt("tab");
-		getActionBar().setSelectedNavigationItem(tab);
-		super.onRestoreInstanceState(savedInstanceState);
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		AlertDialog.Builder alert = new AlertDialog.Builder(
-				FindHomeCourseActivity.this);
-		LayoutInflater inflater = getLayoutInflater();
-		View dialoglayout = inflater.inflate(R.layout.dialog_layout,
-				(ViewGroup) getCurrentFocus());
-
-		alert.setView(dialoglayout);
-		alert.setTitle("Esprimi un giudizio");
-		alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				// Editable value = input.getText();
-				Toast.makeText(getApplicationContext(), "rating",
-						Toast.LENGTH_SHORT).show();
-				// e.printStackTrace();
-			}
-		});
-		alert.show();
-
-		// ShowDialog();
-		return super.onOptionsItemSelected(item);
-
-	}
-
-	public void getDescription() {
-
-	}
-
-	public void getRating() {
-
-	}
+//	@Override
+//	protected void onSaveInstanceState(Bundle outState) {
+//		super.onSaveInstanceState(outState);
+//		outState.putInt("tab", getSupportActionBar().getSelectedNavigationIndex());
+//	}
+//
+//	@Override
+//	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		int tab = savedInstanceState.getInt("tab");
+//		getActionBar().setSelectedNavigationItem(tab);
+//		super.onRestoreInstanceState(savedInstanceState);
+//	}
+//
+//	public void getDescription() {
+//
+//	}
+//
+//	public void getRating() {
+//
+//	}
 
 	public void ShowDialog() {
 		final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
 		final RatingBar rating = new RatingBar(this);
-		// final EditText edTxt = new EditText(this);
-		// rating.setNumStars(5);
-		// rating.setMax(5);
-
 		popDialog.setIcon(android.R.drawable.btn_star_big_on);
 		popDialog.setTitle("Vote!! ");
 		popDialog.setView(rating);
@@ -177,25 +150,97 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			/*
-			 * Intent intentHome = new Intent(FindHomeCourseActivity.this,
-			 * ResultSearchedActivity.class);
-			 * intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			 * startActivity(intentHome);
-			 */
 			finish();
 
 			return true;
 		case R.id.itemAddRating:
-
-			Intent intentAddRating = new Intent(FindHomeCourseActivity.this,
-					AddRateActivity.class);
-			intentAddRating.putExtra("Corso", corsoAttuale);
-			startActivity(intentAddRating);
+			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato.getId());
+			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 
 		}
 	}
+	
+	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean>{
+
+		private ProtocolCarrier mProtocolCarrier;
+		public String body;
+
+		private Long corsoId; 
+		
+		@Override
+		protected Boolean doInBackground(Long... params) {
+			// TODO Auto-generated method stub
+			
+			corsoId = params[0];
+			
+			mProtocolCarrier = new ProtocolCarrier(FindHomeCourseActivity.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String.valueOf(corsoId)));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			try {
+				response = mProtocolCarrier.invokeSync(request,
+						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, Boolean.class);
+			
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean isPassed) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(isPassed);
+			
+			if(isPassed == null){
+				Toast toast = Toast.makeText(FindHomeCourseActivity.this, "Ops. C'è stato un errore", Toast.LENGTH_LONG);
+				toast.show();
+				return;
+			}
+			
+			if(isPassed){
+				Intent intentAddRating = new Intent(FindHomeCourseActivity.this,
+						AddRatingFromCoursesPassed.class);
+//				intentAddRating.putExtra("corso",
+//						CoursesHandler.corsoSelezionato.getNome());
+				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
+				intentAddRating.putExtra("NomeCorso",
+						CoursesHandler.corsoSelezionato.getNome());
+				intentAddRating.putExtra("IdCorso", CoursesHandler.corsoSelezionato.getId());
+				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intentAddRating);
+				
+			}else{
+				Toast toast = Toast.makeText(FindHomeCourseActivity.this, getResources().getText(R.string.toast_rate_access_denied), Toast.LENGTH_LONG);
+				toast.show();
+			}
+		}
+		
+	}
+	
+	
 }

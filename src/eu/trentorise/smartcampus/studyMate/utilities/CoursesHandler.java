@@ -114,7 +114,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 				items[i++] = new TitledItem("Corsi da libretto", s.getNome());
 			}
 
-			TitledAdapter adapter = new TitledAdapter(currentSherlock, items);
+			TitledAdapter adapter = new TitledAdapter(context, items);
 
 			listViewCorsiPersonali.setAdapter(adapter);
 
@@ -126,12 +126,12 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 								int arg2, long arg3) {
 							MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
 							parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
-							currentActivity.invalidateOptionsMenu();
+							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment
 							corsoSelezionato = new Corso();
 							corsoSelezionato = result.get(arg2);
-							CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
+							//CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
