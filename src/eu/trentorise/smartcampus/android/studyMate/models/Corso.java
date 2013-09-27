@@ -53,7 +53,7 @@ public class Corso extends CorsoLite implements Serializable {
 	private Float rating_esame;
 
 	private boolean is_interesse;
-	
+
 	private boolean is_libretto;
 
 	public Float getRating_contenuto() {

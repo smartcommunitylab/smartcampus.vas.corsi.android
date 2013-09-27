@@ -24,8 +24,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
 
-
-
 public class FeedbackFragment extends SherlockFragment {
 
 	ExpandableListView list;
@@ -103,7 +101,7 @@ public class FeedbackFragment extends SherlockFragment {
 					if (parent.isGroupExpanded(groupPosition))
 						parent.collapseGroup(groupPosition);
 					else
-						parent.expandGroup(groupPosition);//, true);
+						parent.expandGroup(groupPosition);// , true);
 					return true;
 				}
 			});

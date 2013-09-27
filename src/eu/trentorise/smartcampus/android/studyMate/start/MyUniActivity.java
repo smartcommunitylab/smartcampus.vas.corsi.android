@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
-
-
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -155,25 +153,25 @@ public class MyUniActivity extends SherlockActivity {
 		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.logout:
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					try {
-						
+
 						accessProvider.logout(MyUniActivity.this);
 						System.out.println(userAuthToken);
 					} catch (AACException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 			}).start();
 			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
@@ -182,10 +180,9 @@ public class MyUniActivity extends SherlockActivity {
 			return true;
 		}
 		return false;
-		
-		//return super.onOptionsItemSelected(item);
-	}
 
+		// return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

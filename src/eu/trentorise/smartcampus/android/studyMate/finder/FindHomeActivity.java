@@ -25,7 +25,8 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindDepartmentsHandler;
 
-public class FindHomeActivity extends SherlockFragmentActivity implements TextWatcher {
+public class FindHomeActivity extends SherlockFragmentActivity implements
+		TextWatcher {
 	private Spinner spinner1;
 	private Spinner spinner2;
 

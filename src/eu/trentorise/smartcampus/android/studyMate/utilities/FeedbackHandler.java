@@ -44,7 +44,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	public static ProgressDialog pd;
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
-			SherlockFragmentActivity act, RatingBar ratingAverage, TextView descriptionCourse, Button sFollow) {
+			SherlockFragmentActivity act, RatingBar ratingAverage,
+			TextView descriptionCourse, Button sFollow) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 		this.act = act;
@@ -112,33 +113,37 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			act.finish();
 		} else {
 
-			if (commenti.get(0).getCorso().isSeguito() == false){
+			if (commenti.get(0).getCorso().isSeguito() == false) {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-			}
-			else{
+			} else {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 			}
-			
+
 			swichFollow.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					if (commenti.get(0).getCorso().isSeguito() == false){
-						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-						//TODO: set true for user
+					if (commenti.get(0).getCorso().isSeguito() == false) {
+						swichFollow
+								.setBackgroundResource(R.drawable.ic_monitor_on);
+						// TODO: set true for user
 						commenti.get(0).getCorso().setSeguito(true);
-						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
-						
-					}
-					else{
-						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+						new FeedbackHandler(context, idCourse, act,
+								ratingAverage, descriptionCourse, swichFollow)
+								.execute();
+
+					} else {
+						swichFollow
+								.setBackgroundResource(R.drawable.ic_monitor_off);
 						commenti.get(0).getCorso().setSeguito(false);
-						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
+						new FeedbackHandler(context, idCourse, act,
+								ratingAverage, descriptionCourse, swichFollow)
+								.execute();
 					}
-					
+
 				}
 			});
-			
+
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
 			act.getSupportActionBar().setTitle(

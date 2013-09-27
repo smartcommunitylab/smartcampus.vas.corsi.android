@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-
-
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;

@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.rate;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -49,7 +48,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	private RatingRowGroup rrg;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {		
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
 		setTitle(CoursesPassedHandler.corsoSelezionato.getNome());
@@ -299,11 +298,12 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Studente stud = new Studente();
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
-							stud.setNome(MyUniActivity.bp
-									.getName());
+							stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler(AddRatingFromCoursesPassed.this).execute(commento);
+							new AddFeedbackHandler(
+									AddRatingFromCoursesPassed.this)
+									.execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 							finish();

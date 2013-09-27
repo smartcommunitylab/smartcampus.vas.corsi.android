@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.phl;
 
-
-
 import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;

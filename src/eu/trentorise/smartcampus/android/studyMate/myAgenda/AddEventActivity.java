@@ -119,14 +119,14 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 		}
 	}
-@Override
-public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-	// TODO Auto-generated method stub
-// Inflate the menu; this adds items to the action bar if it is present.
-	getSupportMenuInflater().inflate(R.menu.test, menu);
-	return super.onCreateOptionsMenu(menu);
-}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getSupportMenuInflater().inflate(R.menu.test, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();

@@ -37,7 +37,7 @@ public class OverviewFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
@@ -53,5 +53,5 @@ public class OverviewFragment extends SherlockFragment {
 		eventsHandler.execute();
 
 	}
-	
+
 }

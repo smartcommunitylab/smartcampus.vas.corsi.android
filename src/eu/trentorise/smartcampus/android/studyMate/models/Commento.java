@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-
 public class Commento {
 
 	private int id;

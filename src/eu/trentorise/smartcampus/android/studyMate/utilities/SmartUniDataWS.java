@@ -17,7 +17,7 @@ public final class SmartUniDataWS {
 	// Courses ///////////////////////////////////////////////////////////
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corso/me";
 	public static final String GET_WS_ALLCOURSES = "/corso/all";
-	
+
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
 
 	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(long id_department) {
@@ -35,7 +35,7 @@ public final class SmartUniDataWS {
 
 	// My courses passed
 	public static final String GET_WS_MY_COURSES_PASSED = "/corso/superati/me";
-	
+
 	public static final String GET_WS_COURSE_IS_PASSED(String idCourse) {
 		return "/corso/superati/" + idCourse;
 	}

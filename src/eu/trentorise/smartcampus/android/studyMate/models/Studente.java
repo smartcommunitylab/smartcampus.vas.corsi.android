@@ -26,8 +26,6 @@ public class Studente {
 
 	private String idsCorsiSuperati;
 
-	
-
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}

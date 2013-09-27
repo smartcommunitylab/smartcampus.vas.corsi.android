@@ -38,7 +38,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class AddRateActivity extends SherlockFragmentActivity{
+public class AddRateActivity extends SherlockFragmentActivity {
 
 	AdapterFeedbackList mAdapter;
 	ArrayList<RatingRowGroup> ratings;
@@ -296,7 +296,8 @@ public class AddRateActivity extends SherlockFragmentActivity{
 									.getUserId()));
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler(AddRateActivity.this).execute(commento);
+							new AddFeedbackHandler(AddRateActivity.this)
+									.execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 							finish();

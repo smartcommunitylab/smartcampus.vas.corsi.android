@@ -48,19 +48,20 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		final TextView txtMonitor = (TextView) getSherlockActivity()
 				.findViewById(R.id.txt_monitor);
 		txtMonitor.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (txtMonitor.getText() == getResources().getText(R.string.label_txtMonitor_off)){
-					new SetCourseAsFollowHandler(getActivity().getParent(), txtMonitor).execute(FindHomeCourseActivity.corsoAttuale);
-				}
-				else
+				if (txtMonitor.getText() == getResources().getText(
+						R.string.label_txtMonitor_off)) {
+					new SetCourseAsFollowHandler(getActivity().getParent(),
+							txtMonitor)
+							.execute(FindHomeCourseActivity.corsoAttuale);
+				} else
 					txtMonitor.setText(getResources().getText(
 							R.string.label_txtMonitor_off));
 			}
 		});
-
 
 		super.onStart();
 	}

@@ -190,8 +190,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_add_rating:
 			mystate = ChildActivity.ADD_RATING;
-			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato.getId());
-			
+			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato
+					.getId());
+
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -206,27 +207,27 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	public void setAgendaState(MenuKind agendaState) {
 		this.agendaState = agendaState;
 	}
-	
-	
-	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean>{
+
+	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public String body;
 
-		private Long corsoId; 
-		
+		private Long corsoId;
+
 		@Override
 		protected Boolean doInBackground(Long... params) {
 			// TODO Auto-generated method stub
-			
+
 			corsoId = params[0];
-			
+
 			mProtocolCarrier = new ProtocolCarrier(MyAgendaActivity.this,
 					SmartUniDataWS.TOKEN_NAME);
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String.valueOf(corsoId)));
+					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String
+							.valueOf(corsoId)));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
@@ -253,22 +254,23 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			}
 
 			return Utils.convertJSONToObject(body, Boolean.class);
-			
+
 		}
-		
+
 		@Override
 		protected void onPostExecute(Boolean isPassed) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(isPassed);
-			
-			if(isPassed == null){
-				Toast toast = Toast.makeText(MyAgendaActivity.this, "Ops. C'� stato un errore", Toast.LENGTH_LONG);
+
+			if (isPassed == null) {
+				Toast toast = Toast.makeText(MyAgendaActivity.this,
+						"Ops. C'� stato un errore", Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}
-			
-			if(isPassed){	
-				
+
+			if (isPassed) {
+
 				Intent intentAddRating = new Intent(MyAgendaActivity.this,
 						AddRateActivity.class);
 				CoursesHandler.corsoSelezionato.getNome();
@@ -277,14 +279,17 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 						CoursesHandler.corsoSelezionato.getNome());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
-				
-			}else{
-				Toast toast = Toast.makeText(MyAgendaActivity.this, MyAgendaActivity.this.getResources().getText(R.string.toast_rate_access_denied), Toast.LENGTH_LONG);
+
+			} else {
+				Toast toast = Toast.makeText(
+						MyAgendaActivity.this,
+						MyAgendaActivity.this.getResources().getText(
+								R.string.toast_rate_access_denied),
+						Toast.LENGTH_LONG);
 				toast.show();
 			}
 		}
-		
+
 	}
-	
-	
+
 }
