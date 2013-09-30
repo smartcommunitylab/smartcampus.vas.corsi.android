@@ -42,16 +42,16 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	TextView descriptionCourse;
 	Button swichFollow;
 	public static ProgressDialog pd;
-
+TextView txtMonitor;
 	public FeedbackHandler(Context applicationContext, long idCourse,
-			SherlockFragmentActivity act, RatingBar ratingAverage,
-			TextView descriptionCourse, Button sFollow) {
+			SherlockFragmentActivity act, RatingBar ratingAverage, TextView descriptionCourse, Button sFollow, TextView txtMonitor) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
 		this.act = act;
 		this.ratingAverage = ratingAverage;
 		this.descriptionCourse = descriptionCourse;
 		this.swichFollow = sFollow;
+		this.txtMonitor = txtMonitor;
 	}
 
 	private List<Commento> getFullFeedbackById() {
@@ -113,32 +113,32 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			act.finish();
 		} else {
 
-			if (commenti.get(0).getCorso().isSeguito() == false) {
+			if (commenti.get(0).getCorso().isSeguito() == false){
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-			} else {
+				txtMonitor.setText(R.string.label_txtMonitor_off);
+			}
+			else{
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+				txtMonitor.setText(R.string.label_txtMonitor_on);
 			}
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					if (commenti.get(0).getCorso().isSeguito() == false) {
-						swichFollow
-								.setBackgroundResource(R.drawable.ic_monitor_on);
-						// TODO: set true for user
+					if (commenti.get(0).getCorso().isSeguito() == false){
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+						//TODO: set true for user
+						txtMonitor.setText(R.string.label_txtMonitor_on);
 						commenti.get(0).getCorso().setSeguito(true);
-						new FeedbackHandler(context, idCourse, act,
-								ratingAverage, descriptionCourse, swichFollow)
-								.execute();
+						//new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
 
-					} else {
-						swichFollow
-								.setBackgroundResource(R.drawable.ic_monitor_off);
+					}
+					else{
+						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
 						commenti.get(0).getCorso().setSeguito(false);
-						new FeedbackHandler(context, idCourse, act,
-								ratingAverage, descriptionCourse, swichFollow)
-								.execute();
+						txtMonitor.setText(R.string.label_txtMonitor_off);
+						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow, txtMonitor).execute();
 					}
 
 				}

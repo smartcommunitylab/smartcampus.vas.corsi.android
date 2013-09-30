@@ -21,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:paddingLeft="10dp">
 
         <!-- <Switch
             android:id="@+id/switchFollow"
@@ -40,8 +41,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_gravity="left"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingLeft="10dp"
             android:paddingTop="30dp" />
 
         <TextView
