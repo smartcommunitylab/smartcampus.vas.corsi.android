@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class RisorsaPhl {
 
+	private String error;
 	private CwdPHL cwd;
 	private ArrayList<CwdPHL> cdc;
 
@@ -22,4 +23,13 @@ public class RisorsaPhl {
 	public void setCdc(ArrayList<CwdPHL> cdc) {
 		this.cdc = cdc;
 	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+	
 }

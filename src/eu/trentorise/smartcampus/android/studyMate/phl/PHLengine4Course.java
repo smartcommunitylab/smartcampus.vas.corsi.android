@@ -109,7 +109,10 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
-		} else {
+		}
+
+		else {
+			if (result.getError()== null){
 			int i = 0;
 			MaterialItem[] items = new MaterialItem[result.getCdc().size()];
 			for (CwdPHL c : result.getCdc()) {
@@ -143,7 +146,12 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 						items);
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
-
+			}
+			else{
+				Toast.makeText(context, "La directory è vuota",
+						Toast.LENGTH_SHORT).show();
+				currentActivity.finish();
+			}
 		}
 
 		listViewCorsiPersonali
