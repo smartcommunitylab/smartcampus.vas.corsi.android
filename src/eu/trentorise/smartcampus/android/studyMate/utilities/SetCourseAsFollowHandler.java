@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -22,13 +23,15 @@ public class SetCourseAsFollowHandler extends
 	public Context context;
 	private String body;
 	private CorsoLite corso;
-	private TextView txtMonitorFollow;
-
+	private Button monitorFollow;
+	private TextView txtFollow;
+	
 	public SetCourseAsFollowHandler(Context applicationContext,
-			TextView txtMonitor) {
+			Button monitor, TextView txtFollow) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
-		this.txtMonitorFollow = txtMonitor;
+		this.monitorFollow = monitor;
+		this.txtFollow = txtFollow;
 	}
 
 	@Override
@@ -87,8 +90,9 @@ public class SetCourseAsFollowHandler extends
 		super.onPostExecute(result);
 
 		if (result) {
-			txtMonitorFollow.setText(context.getResources().getText(
+			monitorFollow.setText(context.getResources().getText(
 					R.string.label_txtMonitor_on));
+			txtFollow.setText(R.string.label_txtMonitor_on);
 			Toast toast = Toast.makeText(context, context.getResources()
 					.getText(R.string.toast_switchfollow_success),
 					Toast.LENGTH_LONG);
@@ -97,6 +101,7 @@ public class SetCourseAsFollowHandler extends
 			Toast toast = Toast.makeText(context, context.getResources()
 					.getText(R.string.toast_switchfollow_error),
 					Toast.LENGTH_SHORT);
+			txtFollow.setText(R.string.label_txtMonitor_off);
 			toast.show();
 
 		}

@@ -131,7 +131,13 @@ TextView txtMonitor;
 						//TODO: set true for user
 						txtMonitor.setText(R.string.label_txtMonitor_on);
 						commenti.get(0).getCorso().setSeguito(true);
-						//new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow).execute();
+						//new SetCourseAsFollowHandler(context, swichFollow ,txtMonitor).execute(commenti.get(0).getCorso());
+						
+						//l'oggetto corso dentro il commento no è ok in find ma è corretto in vota.All'ogeto corso mancano dei pezzi
+						//corso laurea e dipartimento
+						//prova a fare un findbyid del corso quando si vota,così lo hai aggiornao dal db
+						//il problema cmqè l'ogeto corso mi sembra di capire 
+						
 
 					}
 					else{
