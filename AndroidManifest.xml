@@ -128,7 +128,7 @@
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="smartcampus.android.studyMate.notices.NoticesActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/notices_white"
             android:label="@string/title_activity_notices" >
@@ -179,11 +179,13 @@
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEventActivity"
             android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_action_add"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEvent4coursesActivity"
             android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_action_add"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity

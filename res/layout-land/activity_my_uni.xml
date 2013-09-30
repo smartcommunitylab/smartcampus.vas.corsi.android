@@ -42,7 +42,6 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/myagenda"
-            android:paddingRight="10dp"
             android:text="@string/my_agenda_btn_label" />
 
         <Button
@@ -52,20 +51,7 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/findcourses"
-            android:paddingLeft="10dp"
             android:text="@string/find_courses_btn_label" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
 
         <Button
             android:id="@+id/phl_btn"
@@ -74,8 +60,19 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/phl"
-            android:paddingRight="10dp"
             android:text="@string/phl_btn_label" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
         <Button
             android:id="@+id/notices_btn"
@@ -84,21 +81,7 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/notices"
-            android:paddingLeft="10dp"
             android:text="@string/notices_btn_label" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
-    </LinearLayout>
-    
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
 
         <Button
             android:id="@+id/rate_btn"
@@ -107,19 +90,22 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/ic_ratecourses"
-            android:paddingRight="10dp"
             android:text="@string/rating_text_icon" />
 
         <Button
             android:id="@+id/gruppi_studio_btn"
-             android:layout_width="130dp"
+            android:layout_width="130dp"
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
-            android:paddingLeft="10dp"
             android:drawableTop="@drawable/ic_studygroups"
-            android:text="@string/gruppi_studio_label" >
-        </Button>
+            android:text="@string/gruppi_studio_label" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
     </LinearLayout>
 
 </LinearLayout>

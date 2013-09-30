@@ -54,14 +54,10 @@ public class MyUniActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_uni);
-		// your code here
+		new LoadUserDataFromACServiceTask().execute();
 		new ProgressDialog(MyUniActivity.this);
 		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
 				"Accesso in corso...");
-
-		new LoadUserDataFromACServiceTask().execute();
-
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
 			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
@@ -72,6 +68,24 @@ public class MyUniActivity extends SherlockActivity {
 			Log.e(TAG, "Failed to login: " + e.getMessage());
 			// handle the failure, e.g., notify the user and close the app.
 		}
+
+
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		new LoadUserDataFromACServiceTask().execute();
+		super.onResume();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setContentView(R.layout.activity_my_uni);
+		// your code here
+
+//		new LoadUserDataFromACServiceTask().execute();
 
 		findViewById(R.id.my_agenda_btn).setOnClickListener(
 				new OnClickListener() {
@@ -131,20 +145,6 @@ public class MyUniActivity extends SherlockActivity {
 						MyUniActivity.this.startActivity(intent);
 					}
 				});
-
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		new LoadUserDataFromACServiceTask().execute();
-		super.onResume();
-	}
-
-	@Override
-	protected void onStart() {
-		// new LoadUserDataFromACServiceTask().execute();
-		super.onStart();
 	}
 
 	@Override
