@@ -31,9 +31,6 @@ public class Corso extends CorsoLite implements Serializable {
 	// valutazione media di tutti gli UtenteCorsi
 	private Float valutazione_media;
 
-	// seguo o non seguo il corso
-	private boolean seguito;
-
 	private Float rating_contenuto;
 
 	// valutazione carico studio
@@ -130,14 +127,6 @@ public class Corso extends CorsoLite implements Serializable {
 
 	public void setValutazione_media(float valutazione_media) {
 		this.valutazione_media = valutazione_media;
-	}
-
-	public boolean isSeguito() {
-		return seguito;
-	}
-
-	public void setSeguito(boolean seguito) {
-		this.seguito = seguito;
 	}
 
 	public long getId_dipartimento() {

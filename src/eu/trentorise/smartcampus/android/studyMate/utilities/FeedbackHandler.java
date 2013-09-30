@@ -113,39 +113,39 @@ TextView txtMonitor;
 			act.finish();
 		} else {
 
-			if (commenti.get(0).getCorso().isSeguito() == false){
-				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-				txtMonitor.setText(R.string.label_txtMonitor_off);
-			}
-			else{
-				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-				txtMonitor.setText(R.string.label_txtMonitor_on);
-			}
+//			if (commenti.get(0).getCorso().isSeguito() == false){
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+//				txtMonitor.setText(R.string.label_txtMonitor_off);
+//			}
+//			else{
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+//				txtMonitor.setText(R.string.label_txtMonitor_on);
+//			}
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					if (commenti.get(0).getCorso().isSeguito() == false){
-						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-						//TODO: set true for user
-						txtMonitor.setText(R.string.label_txtMonitor_on);
-						commenti.get(0).getCorso().setSeguito(true);
-						//new SetCourseAsFollowHandler(context, swichFollow ,txtMonitor).execute(commenti.get(0).getCorso());
-						
-						//l'oggetto corso dentro il commento no è ok in find ma è corretto in vota.All'ogeto corso mancano dei pezzi
-						//corso laurea e dipartimento
-						//prova a fare un findbyid del corso quando si vota,così lo hai aggiornao dal db
-						//il problema cmqè l'ogeto corso mi sembra di capire 
-						
-
-					}
-					else{
-						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-						commenti.get(0).getCorso().setSeguito(false);
-						txtMonitor.setText(R.string.label_txtMonitor_off);
-						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow, txtMonitor).execute();
-					}
+//					if (commenti.get(0).getCorso().isSeguito() == false){
+//						swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+//						//TODO: set true for user
+//						txtMonitor.setText(R.string.label_txtMonitor_on);
+//						commenti.get(0).getCorso().setSeguito(true);
+//						//new SetCourseAsFollowHandler(context, swichFollow ,txtMonitor).execute(commenti.get(0).getCorso());
+//						
+//						//l'oggetto corso dentro il commento no è ok in find ma è corretto in vota.All'ogeto corso mancano dei pezzi
+//						//corso laurea e dipartimento
+//						//prova a fare un findbyid del corso quando si vota,così lo hai aggiornao dal db
+//						//il problema cmqè l'ogeto corso mi sembra di capire 
+//						
+//
+//					}
+//					else{
+//						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+//						commenti.get(0).getCorso().setSeguito(false);
+//						txtMonitor.setText(R.string.label_txtMonitor_off);
+//						new FeedbackHandler(context, idCourse, act, ratingAverage, descriptionCourse, swichFollow, txtMonitor).execute();
+//					}
 
 				}
 			});
