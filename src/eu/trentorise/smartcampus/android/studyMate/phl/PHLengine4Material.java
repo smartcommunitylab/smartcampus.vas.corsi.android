@@ -6,6 +6,7 @@ import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 import eu.trentorise.smartcampus.android.studyMate.models.RisorsaPhl;
+import eu.trentorise.smartcampus.android.studyMate.utilities.DownloadTask;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -169,9 +171,12 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							ft.commit();
 
 						} else {
-							Toast.makeText(context, "Coming Soon!",
-									Toast.LENGTH_SHORT).show();
-							//
+//							Toast.makeText(context, "Coming Soon!",
+//									Toast.LENGTH_SHORT).show();
+							//String test = r.getCdc().get(arg2).getURL();
+							//test.replace(" ", "");
+							DownDialog(r.getCdc().get(arg2));
+							
 							// new PHLengine4Material(context, currentActivity,
 							// listViewCorsiPersonali, currentSherlock, r
 							// .getCdc().get(arg2).getHash())
@@ -189,4 +194,28 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		return getMaterial4Dir();
 	}
 
+	public void DownDialog(CwdPHL r){
+		
+    	// instantiate it within the onCreate method
+		ProgressDialog mProgressDialog;
+    	mProgressDialog = new ProgressDialog(currentActivity);
+    	mProgressDialog.setMessage("Download...");
+    	mProgressDialog.setIndeterminate(true);
+    	mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+    	mProgressDialog.setCancelable(true);
+    	
+    	// execute this when the downloader must be fired
+    	final DownloadTask downloadTask = new DownloadTask(currentActivity, mProgressDialog, r);
+    	downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
+    	
+    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+    		@Override
+    		public void onCancel(DialogInterface dialog) {
+    			downloadTask.cancel(true);
+    		}
+    	});
+    	
+    }
+	
+	
 }

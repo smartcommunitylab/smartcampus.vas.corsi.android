@@ -12,6 +12,7 @@ public class CwdPHL {
 	private Boolean write;
 	private Boolean rm;
 	private Boolean hidden;
+	private String URL;
 
 	public CwdPHL() {
 
@@ -97,4 +98,13 @@ public class CwdPHL {
 		this.hidden = hidden;
 	}
 
+	public String getURL() {
+		return URL;
+	}
+
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
+
+	
 }
