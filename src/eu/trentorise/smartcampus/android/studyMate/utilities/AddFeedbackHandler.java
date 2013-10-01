@@ -32,9 +32,9 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-		
-		
-		///////////////prova ///////////////////////////	Ricarico i dati dello studente e del corso
+
+		// /////////////prova /////////////////////////// Ricarico i dati dello
+		// studente e del corso
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.GET_WS_STUDENT_DATA);
@@ -64,14 +64,12 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String.valueOf(commento.getCorso().getId())));
+
+		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String
+						.valueOf(commento.getCorso().getId())));
 		request.setMethod(Method.GET);
 
-	
 		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
@@ -95,12 +93,11 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
-		/////////////////fine prova /////////////////////////////////////////////////
-		
-		request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
+		// ///////////////fine prova
+		// /////////////////////////////////////////////////
+
+		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.POST_WS_MY_FEEDBACK);
 		request.setMethod(Method.POST);
 

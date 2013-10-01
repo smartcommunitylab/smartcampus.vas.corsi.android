@@ -40,7 +40,7 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		TextView nome_gds = (TextView) row.findViewById(R.id.gds_name);
 		ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
 
-		anno_gds.setText(currentGDS.getAnno() + "° anno");
+		anno_gds.setText(currentGDS.getAnno() + "ï¿½ anno");
 		nome_gds.setText(currentGDS.getNome());
 		logo_gds.setImageDrawable(currentGDS.getLogo());
 
@@ -60,7 +60,5 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 	public ArrayList<GruppoDiStudio> getEntries() {
 		return entries;
 	}
-	
-	
 
 }

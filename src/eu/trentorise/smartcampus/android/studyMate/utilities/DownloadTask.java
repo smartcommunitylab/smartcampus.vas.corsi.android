@@ -7,24 +7,27 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 
 public class DownloadTask extends AsyncTask<String, Integer, String> {
-	//private ProgressDialog mProgressDialog;
+	// private ProgressDialog mProgressDialog;
 	private Context context;
 	private ProgressDialog mProgressDialog;
 	private CwdPHL r;
-	public DownloadTask(Context context, ProgressDialog mProgressDialog, CwdPHL r) {
+
+	public DownloadTask(Context context, ProgressDialog mProgressDialog,
+			CwdPHL r) {
 		this.context = context;
 		this.mProgressDialog = mProgressDialog;
 		this.r = r;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	protected String doInBackground(String... sUrl) {
 		// take CPU lock to prevent CPU from going off if the user
@@ -57,7 +60,8 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 
 				// download the file
 				input = connection.getInputStream();
-				output = new FileOutputStream("/sdcard/studyMate/" + r.getName());
+				output = new FileOutputStream("/sdcard/studyMate/"
+						+ r.getName());
 
 				byte data[] = new byte[4096];
 				long total = 0;

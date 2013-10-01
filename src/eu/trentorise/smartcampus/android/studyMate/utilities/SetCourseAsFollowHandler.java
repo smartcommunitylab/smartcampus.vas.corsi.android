@@ -21,13 +21,12 @@ public class SetCourseAsFollowHandler extends
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	private String body;
 	private CorsoLite corso;
 	private Button monitorFollow;
 	private TextView txtFollow;
-	
-	public SetCourseAsFollowHandler(Context applicationContext,
-			Button monitor, TextView txtFollow) {
+
+	public SetCourseAsFollowHandler(Context applicationContext, Button monitor,
+			TextView txtFollow) {
 		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.monitorFollow = monitor;

@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.DettailOfEventFragment;
@@ -36,7 +35,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 	public Context context;
 	String body;
 	String id_course = null;
-	private SCAccessProvider mAccessProvider;
 	FragmentActivity fragment;
 	public static List<Evento> listaEventi;
 

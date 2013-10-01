@@ -106,5 +106,4 @@ public class CwdPHL {
 		URL = uRL;
 	}
 
-	
 }

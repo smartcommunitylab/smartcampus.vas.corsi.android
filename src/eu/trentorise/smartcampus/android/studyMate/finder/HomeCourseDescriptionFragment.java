@@ -39,14 +39,13 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				.findViewById(R.id.ratingBarCourseAverage);
 		Button switchFollow = (Button) getSherlockActivity().findViewById(
 				R.id.switchFollow);
-		TextView txtMonitor = (TextView) getSherlockActivity()
-				.findViewById(R.id.txt_monitor);
+		TextView txtMonitor = (TextView) getSherlockActivity().findViewById(
+				R.id.txt_monitor);
 		feedbackHandler = (FeedbackHandler) new FeedbackHandler(
 				getSherlockActivity(),
 				FindHomeCourseActivity.corsoAttuale.getId(), act,
-				ratingAverage, descriptionCourse, switchFollow, txtMonitor).execute();
-
-
+				ratingAverage, descriptionCourse, switchFollow, txtMonitor)
+				.execute();
 
 		super.onStart();
 	}

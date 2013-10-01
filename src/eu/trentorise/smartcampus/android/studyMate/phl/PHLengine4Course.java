@@ -115,42 +115,48 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		}
 
 		else {
-			if (result.getError()== null){
-			int i = 0;
-			MaterialItem[] items = new MaterialItem[result.getCdc().size()];
-			for (CwdPHL c : result.getCdc()) {
-				if (c.getMime().equals("directory")) {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_folder, c.getHash());
-				} else if (c.getMime().equals("application/pdf")) {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_pdffile, c.getHash());
-				} else if (c.getMime().equals("image/jpeg")) {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_imgfile, c.getHash());
-				} else if ((c.getMime().equals("application/x-tar"))
-						|| (c.getMime().equals("application/x-rar-compressed"))
-						|| (c.getMime().equals("application/zip"))) {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_archivefile, c.getHash());
-				} else if ((c.getMime().equals("application/msword"))
-						|| (c.getMime()
-								.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
-						|| (c.getMime().equals("text/plain"))) {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_textfile, c.getHash());
-				} else {
-					items[i++] = new MaterialItem(result.getCwd().getName(),
-							c.getName(), R.drawable.ic_genericfile, c.getHash());
+			if (result.getError() == null) {
+				int i = 0;
+				MaterialItem[] items = new MaterialItem[result.getCdc().size()];
+				for (CwdPHL c : result.getCdc()) {
+					if (c.getMime().equals("directory")) {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_folder, c.getHash());
+					} else if (c.getMime().equals("application/pdf")) {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_pdffile, c.getHash());
+					} else if (c.getMime().equals("image/jpeg")) {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_imgfile, c.getHash());
+					} else if ((c.getMime().equals("application/x-tar"))
+							|| (c.getMime()
+									.equals("application/x-rar-compressed"))
+							|| (c.getMime().equals("application/zip"))) {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_archivefile, c.getHash());
+					} else if ((c.getMime().equals("application/msword"))
+							|| (c.getMime()
+									.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+							|| (c.getMime().equals("text/plain"))) {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_textfile, c.getHash());
+					} else {
+						items[i++] = new MaterialItem(
+								result.getCwd().getName(), c.getName(),
+								R.drawable.ic_genericfile, c.getHash());
 
+					}
+
+					MaterialAdapter adapter = new MaterialAdapter(
+							currentSherlock, items);
+					listViewCorsiPersonali.setAdapter(adapter);
 				}
-
-				MaterialAdapter adapter = new MaterialAdapter(currentSherlock,
-						items);
-				listViewCorsiPersonali.setAdapter(adapter);
-			}
-			}
-			else{
+			} else {
 				Toast.makeText(context, "La directory è vuota",
 						Toast.LENGTH_SHORT).show();
 				currentActivity.finish();
@@ -164,8 +170,9 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							int arg2, long arg3) {
 						if (result.getCdc().get(arg2).getMime()
 								.equals("directory")) {
-							//currentActivity.getFragmentManager().popBackStack();
-							currentSherlock.getSupportFragmentManager().popBackStack();
+							// currentActivity.getFragmentManager().popBackStack();
+							currentSherlock.getSupportFragmentManager()
+									.popBackStack();
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
@@ -179,8 +186,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							ft.add(R.id.tabMateriali, fragment);
 							ft.addToBackStack(null);
 							ft.commit();
-						}
-						else {
+						} else {
 							DownDialog(result.getCdc().get(arg2));
 						}
 						// Toast.makeText(context, "Coming Soon!",
@@ -206,26 +212,28 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		return getMaterial4Course();
 	}
 
-	public void DownDialog(CwdPHL r){
-		
-    	// instantiate it within the onCreate method
+	public void DownDialog(CwdPHL r) {
+
+		// instantiate it within the onCreate method
 		ProgressDialog mProgressDialog;
-    	mProgressDialog = new ProgressDialog(currentActivity);
-    	mProgressDialog.setMessage("Download...");
-    	mProgressDialog.setIndeterminate(true);
-    	mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-    	mProgressDialog.setCancelable(true);
-    	
-    	// execute this when the downloader must be fired
-    	final DownloadTask downloadTask = new DownloadTask(currentActivity, mProgressDialog, r);
-    	downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
-    	
-    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-    		@Override
-    		public void onCancel(DialogInterface dialog) {
-    			downloadTask.cancel(true);
-    		}
-    	});
-    	
-    }
+		mProgressDialog = new ProgressDialog(currentActivity);
+		mProgressDialog.setMessage("Download...");
+		mProgressDialog.setIndeterminate(true);
+		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		mProgressDialog.setCancelable(true);
+
+		// execute this when the downloader must be fired
+		final DownloadTask downloadTask = new DownloadTask(currentActivity,
+				mProgressDialog, r);
+		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
+
+		mProgressDialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						downloadTask.cancel(true);
+					}
+				});
+
+	}
 }

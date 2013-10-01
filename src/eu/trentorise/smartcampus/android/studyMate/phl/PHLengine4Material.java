@@ -155,8 +155,9 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						if (r.getCdc().get(arg2).getMime().equals("directory")) {
-							
-							currentSherlock.getSupportFragmentManager().popBackStack();
+
+							currentSherlock.getSupportFragmentManager()
+									.popBackStack();
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
@@ -171,12 +172,11 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							ft.commit();
 
 						} else {
-//							Toast.makeText(context, "Coming Soon!",
-//									Toast.LENGTH_SHORT).show();
-							
+							// Toast.makeText(context, "Coming Soon!",
+							// Toast.LENGTH_SHORT).show();
+
 							DownDialog(r.getCdc().get(arg2));
-							
-							
+
 						}
 					}
 				});
@@ -190,28 +190,29 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		return getMaterial4Dir();
 	}
 
-	public void DownDialog(CwdPHL r){
-		
-    	// instantiate it within the onCreate method
+	public void DownDialog(CwdPHL r) {
+
+		// instantiate it within the onCreate method
 		ProgressDialog mProgressDialog;
-    	mProgressDialog = new ProgressDialog(currentActivity);
-    	mProgressDialog.setMessage("Download...");
-    	mProgressDialog.setIndeterminate(true);
-    	mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-    	mProgressDialog.setCancelable(true);
-    	
-    	// execute this when the downloader must be fired
-    	final DownloadTask downloadTask = new DownloadTask(currentActivity, mProgressDialog, r);
-    	downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
-    	
-    	mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-    		@Override
-    		public void onCancel(DialogInterface dialog) {
-    			downloadTask.cancel(true);
-    		}
-    	});
-    	
-    }
-	
-	
+		mProgressDialog = new ProgressDialog(currentActivity);
+		mProgressDialog.setMessage("Download...");
+		mProgressDialog.setIndeterminate(true);
+		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		mProgressDialog.setCancelable(true);
+
+		// execute this when the downloader must be fired
+		final DownloadTask downloadTask = new DownloadTask(currentActivity,
+				mProgressDialog, r);
+		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
+
+		mProgressDialog
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						downloadTask.cancel(true);
+					}
+				});
+
+	}
+
 }

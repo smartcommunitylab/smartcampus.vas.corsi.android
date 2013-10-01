@@ -69,7 +69,6 @@ public class MyUniActivity extends SherlockActivity {
 			// handle the failure, e.g., notify the user and close the app.
 		}
 
-
 	}
 
 	@Override
@@ -85,7 +84,7 @@ public class MyUniActivity extends SherlockActivity {
 		setContentView(R.layout.activity_my_uni);
 		// your code here
 
-//		new LoadUserDataFromACServiceTask().execute();
+		// new LoadUserDataFromACServiceTask().execute();
 
 		findViewById(R.id.my_agenda_btn).setOnClickListener(
 				new OnClickListener() {

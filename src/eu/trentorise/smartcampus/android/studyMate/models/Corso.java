@@ -13,7 +13,7 @@ public class Corso extends CorsoLite implements Serializable {
 	/**
 	 * 
 	 */
-	public Corso(){
+	public Corso() {
 		super();
 	}
 
@@ -51,7 +51,6 @@ public class Corso extends CorsoLite implements Serializable {
 	// valutazione esame
 
 	private Float rating_esame;
-
 
 	public Float getRating_contenuto() {
 		return rating_contenuto;
@@ -92,6 +91,7 @@ public class Corso extends CorsoLite implements Serializable {
 	public void setRating_esame(Float rating_esame) {
 		this.rating_esame = rating_esame;
 	}
+
 	public Date getData_inizio() {
 		return data_inizio;
 	}

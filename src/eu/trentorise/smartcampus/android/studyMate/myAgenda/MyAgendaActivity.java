@@ -265,7 +265,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 			if (isPassed == null) {
 				Toast toast = Toast.makeText(MyAgendaActivity.this,
-						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
+						"Ops. C'ï¿½ stato un errore", Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}
@@ -273,7 +273,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			if (isPassed) {
 
 				Intent intentAddRating = new Intent(MyAgendaActivity.this,
-						AddRatingFromCoursesPassed.class);	//AddRatingFromCoursesPassed
+						AddRatingFromCoursesPassed.class); // AddRatingFromCoursesPassed
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("corso",
 						CoursesHandler.corsoSelezionato.getNome());

@@ -29,7 +29,6 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
-import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -299,14 +298,15 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Studente stud = new Studente();
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
-//							stud.setNome(MyUniActivity.bp.getName());
+							// stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler(AddRatingFromCoursesPassed.this)
+							new AddFeedbackHandler(
+									AddRatingFromCoursesPassed.this)
 									.execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
-							
+
 							finish();
 						}
 					});

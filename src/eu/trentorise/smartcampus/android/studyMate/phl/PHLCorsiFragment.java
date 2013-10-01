@@ -39,6 +39,6 @@ public class PHLCorsiFragment extends SherlockFragment {
 				.getApplicationContext(), getActivity(), listViewCorsi,
 				getSherlockActivity());
 		handlerPersonalCoursesPHL.execute(arguments);
-		
+
 	}
 }

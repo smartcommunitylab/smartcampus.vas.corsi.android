@@ -16,7 +16,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
@@ -53,9 +52,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(courseName);
 		corsoAttuale = new Corso();
-		corsoAttuale = (Corso) intent
-				.getSerializableExtra("courseSelected");
-		
+		corsoAttuale = (Corso) intent.getSerializableExtra("courseSelected");
 
 		Tab tab1 = ab
 				.newTab()
@@ -72,8 +69,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 						new TabListener<FeedbackFragment>(this, "tab2",
 								FeedbackFragment.class));
 		ab.addTab(tab2);
-
-
 
 	}
 
@@ -222,8 +217,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				Intent intentAddRating = new Intent(
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
-				 intentAddRating.putExtra("corso",
-				 CoursesHandler.corsoSelezionato.getNome());
+				intentAddRating.putExtra("corso",
+						CoursesHandler.corsoSelezionato.getNome());
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("NomeCorso",
 						CoursesHandler.corsoSelezionato.getNome());

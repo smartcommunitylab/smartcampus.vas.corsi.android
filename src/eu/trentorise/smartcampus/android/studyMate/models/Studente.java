@@ -26,9 +26,9 @@ public class Studente {
 	private Collection<Corso> corsi;
 
 	private String idsCorsiSuperati;
-	
+
 	private List<CorsoLite> corsiSuperati;
-	
+
 	private String idsGruppiDiStudio;
 
 	private List<GruppoDiStudio> gruppiDiStudio;

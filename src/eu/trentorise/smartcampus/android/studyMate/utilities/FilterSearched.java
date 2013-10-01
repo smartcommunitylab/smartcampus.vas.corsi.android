@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 
 public class FilterSearched {
 
