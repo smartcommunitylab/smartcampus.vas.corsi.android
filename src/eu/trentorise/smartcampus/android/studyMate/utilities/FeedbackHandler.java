@@ -133,10 +133,10 @@ TextView txtMonitor;
 //						commenti.get(0).getCorso().setSeguito(true);
 //						//new SetCourseAsFollowHandler(context, swichFollow ,txtMonitor).execute(commenti.get(0).getCorso());
 //						
-//						//l'oggetto corso dentro il commento no è ok in find ma è corretto in vota.All'ogeto corso mancano dei pezzi
+//						//l'oggetto corso dentro il commento no ï¿½ ok in find ma ï¿½ corretto in vota.All'ogeto corso mancano dei pezzi
 //						//corso laurea e dipartimento
-//						//prova a fare un findbyid del corso quando si vota,così lo hai aggiornao dal db
-//						//il problema cmqè l'ogeto corso mi sembra di capire 
+//						//prova a fare un findbyid del corso quando si vota,cosï¿½ lo hai aggiornao dal db
+//						//il problema cmqï¿½ l'ogeto corso mi sembra di capire 
 //						
 //
 //					}
@@ -149,7 +149,7 @@ TextView txtMonitor;
 
 				}
 			});
-
+			
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
 			act.getSupportActionBar().setTitle(

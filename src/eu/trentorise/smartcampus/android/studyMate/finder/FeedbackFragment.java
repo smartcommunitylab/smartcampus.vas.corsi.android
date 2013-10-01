@@ -52,10 +52,11 @@ public class FeedbackFragment extends SherlockFragment {
 
 		TextView titleRatingFeedback = (TextView) view
 				.findViewById(R.id.textViewTitleFeedbackCourse);
-		if (FeedbackHandler.feedbackInfoList == null) {
+		if (FeedbackHandler.feedbackInfoList.get(0).getRating_contenuto() == -1) {
 			Toast.makeText(getSherlockActivity(),
 					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
 			titleRatingFeedback.setVisibility(View.GONE);
+			return view;
 		} else {
 			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList.get(0)
 					.getCorso().getNome());
