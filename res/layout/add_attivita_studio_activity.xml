@@ -31,27 +31,63 @@
                     android:id="@+id/editText_oggetto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:gravity="center_horizontal"
                     android:hint="Oggetto" >
-
-                    <requestFocus />
                 </EditText>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp" >
 
-                <DatePicker
-                    android:id="@+id/datePicker1"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingRight="20dp" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data" />
+
+                    <Button
+                        android:id="@+id/data_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/WhiteSmoke"
+                        android:onClick="showDatePickerDialog"
+                        android:text="Button" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ora" />
+
+                    <Button
+                        android:id="@+id/ora_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/WhiteSmoke"
+                        android:onClick="showTimePickerDialog"
+                        android:text="Button" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -92,28 +128,51 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" >
 
-                    <Button
-                        android:id="@+id/button1"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="left"
-                        android:background="@android:color/transparent"
-                        android:drawableTop="@drawable/phl"
-                        android:gravity="left"
-                        android:text="PHL" />
+                        android:orientation="vertical"
+                        android:paddingRight="20dp" >
 
-                    <Button
-                        android:id="@+id/button2"
+                        <ImageButton
+                            android:id="@+id/imageButton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/WhiteSmoke"
+                            android:src="@drawable/phl" />
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="from phl" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="right"
-                        android:background="@android:color/transparent"
-                        android:drawableTop="@drawable/placeholder"
-                        android:gravity="right"
-                        android:text="File Browser" />
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp" >
+
+                        <ImageButton
+                            android:id="@+id/imageButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/WhiteSmoke" />
+                        <!-- android:src="@drawable/filebrowser" /> -->
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="from filebrowser" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,26 +204,26 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:rowCount="2" >
 
-                <RadioButton
-                    android:id="@+id/radioButton1"
+                <CheckBox
+                    android:id="@+id/CheckBox1"
                     android:layout_gravity="left"
                     android:text="Prenotazione aule"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
+                <CheckBox
+                    android:id="@+id/CheckBox2"
                     android:layout_gravity="left"
                     android:text="Mensa"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <RadioButton
-                    android:id="@+id/radioButton3"
+                <CheckBox
+                    android:id="@+id/CheckBox3"
                     android:layout_gravity="left"
                     android:text="Tutoring"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <RadioButton
-                    android:id="@+id/radioButton4"
+                <CheckBox
+                    android:id="@+id/CheckBox4"
                     android:layout_gravity="left"
                     android:text="Biblioteca"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
