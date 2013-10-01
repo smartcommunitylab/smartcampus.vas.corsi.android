@@ -19,7 +19,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
-	public ArrayList<GruppoDiStudio> user_gds_list = null;
+	public static ArrayList<GruppoDiStudio> user_gds_list = new ArrayList<GruppoDiStudio>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieve gruppi
-		user_gds_list = /*
-						 * getUtente().getFrequentedGDS ()
-						 */new ArrayList<GruppoDiStudio>();
+		/*
+		 * user_gds_list = getUtente().getFrequentedGDS ()
+		 */
 
 		if (!MyApplication.getContextualCollection().isEmpty()) {
-			// Lista_GDS_activity puï¿½ essere lanciata dalla home o al termine di
+			// Lista_GDS_activity può essere lanciata dalla home o al termine di
 			// una iscrizione ad un corso
 
 			// questo codice gestisce il caso in cui al termine di una ricerca

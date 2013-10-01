@@ -39,8 +39,6 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 	AutoCompleteTextView autocomplete_ricercaXmembro;
 	ArrayList<GruppoDiStudio> allChoosable_gds;
 
-	static int fakecount = 0;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,9 +92,14 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
 					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
 					.toString();
-			ArrayList<String> nomi_studenti = new ArrayList<String>();// attenzione
-																		// è
-																		// vuota!!!
+			// generazione nomi_studenti da passare
+			ArrayList<String> nomi_studenti = new ArrayList<String>();
+			Studente s1 = new Studente();
+			s1.setNome("Albert");
+			s1.setCognome("Einstein");
+			Studente s2 = new Studente();
+			s2.setNome("Enrico");
+			s2.setCognome("Fermi");
 			// nomi_studenti.add(/* vari eventuali */null);
 			// String nome_studente = ((AutoCompleteTextView)
 			// RicercaGruppiGenerale_activity.this
