@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.util.TreeSet;
 
 import smartcampus.android.template.standalone.R;
@@ -45,79 +46,82 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ricerca_gruppi_generale);
 
+		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
+		// creazione istanze strutture dati di supporto
 		materieset = new TreeSet<String>();
 		nomi_gruppi = new ArrayList<String>();
 		nomi_membriset = new TreeSet<String>();
 		materie = new ArrayList<String>();
 		nomi_membri = new ArrayList<String>();
-
+		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
 		autocomplete_ricercaXmembro = (AutoCompleteTextView) findViewById(R.id.autocomplete_ricerca_per_membro);
+		// generazione di gruppi di studio fake
+		placeholder_gruppidistudio fake = new placeholder_gruppidistudio();
+		fake.initialize_some_gds();
+		allChoosable_gds = fake.getChoosable_gds();
+		// disegno delle risorse in grafica
+		inizializzaRisorseSpinner_TextView();
 
-		// ####################################
-		// creazione gruppi fake per popolare grafica, dovrei in realtà
-		// recuperare tutto dal web
-		Studente s1 = new Studente();
-		Studente s2 = new Studente();
-		ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-		membri_gds.add(s1);
-		membri_gds.add(s2);
-		Date data1 = new Date();
-		data1.setTime(5000);
-		Time time = new Time(45);
+	}
 
-		ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
-		AttivitaStudio impegno1 = new AttivitaStudio("oggetto AS1", null,
-				servizi_monitorati_gds, 12, null, "titolo as1", "Povo", "a201",
-				data1, "descrizione as1", time, time, false, false);
-		AttivitaStudio impegno2 = new AttivitaStudio("oggetto AS2", null,
-				servizi_monitorati_gds, 13, null, "titolo as2", "Povo", "a201",
-				data1, "descrizione as2", time, time, false, false);
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.ricerca_generale_menu, menu);
+		return true;
+	}
 
-		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
-		attivita_studio_gds.add(impegno1);
-		attivita_studio_gds.add(impegno2);
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home: {
+			RicercaGruppiGenerale_activity.this.finish();
+		}
 
-		ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
+		case R.id.action_ricerca_GO:
 
-		GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-				"LoveRSEBA", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, forum, getResources().getDrawable(
-						R.drawable.prouno_logo));
-		GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-				"Ghiloni docet", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 1, forum, getResources().getDrawable(
-						R.drawable.discreta_logo));
-		GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-				"Renato <3", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, forum, getResources().getDrawable(
-						R.drawable.reti_calcolatori_logo));
-		GruppoDiStudio gds4 = new GruppoDiStudio("Algoritmi e strutture dati",
-				"Djikstra4President", membri_gds, servizi_monitorati_gds,
-				attivita_studio_gds, 2, forum, getResources().getDrawable(
-						R.drawable.algoritmi_logo));
+			String materia = ((Spinner) RicercaGruppiGenerale_activity.this
+					.findViewById(R.id.spinner_materie)).getSelectedItem()
+					.toString();
+			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
+					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
+					.toString();
+			ArrayList<String> nomi_studenti = new ArrayList<String>();// attenzione
+																		// �
+																		// vuota!!!
+			// nomi_studenti.add(/* vari eventuali */null);
+			// String nome_studente = ((AutoCompleteTextView)
+			// RicercaGruppiGenerale_activity.this
+			// .findViewById(R.id.autocomplete_ricerca_per_membro))
+			// .getText().toString();
 
-		allChoosable_gds = new ArrayList<GruppoDiStudio>();// qui
-		// fare
-		// un
-		// recupero
-		// info
-		// dal
-		// web
-		allChoosable_gds.add(gds1);
-		allChoosable_gds.add(gds2);
-		allChoosable_gds.add(gds3);
-		allChoosable_gds.add(gds4);
+			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
+					Display_GDS_research_results.class);
+			intent.putExtra("Selected_materia", materia);
+			intent.putExtra("Selected_nome_gruppo", nome_gruppo);
+			MyApplication.getContextualCollection().add(nomi_studenti);
+			MyApplication.getContextualCollection().add(allChoosable_gds);
 
-		// ####################################
+			startActivity(intent);
+			return true;
+		default:
+			return true;
 
+		}
+
+	}
+
+	void inizializzaRisorseSpinner_TextView() {
 		// inizializzaGrafiche();
+		nomi_gruppi.add("Tutti");
 		for (GruppoDiStudio gds : allChoosable_gds) {
 			materieset.add(gds.getMateria());
 			nomi_gruppi.add(gds.getNome());
@@ -127,6 +131,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			}
 
 		}
+		materie.add("Tutte");
 		for (String string : materieset) {
 			materie.add(string);
 		}
@@ -134,23 +139,17 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			nomi_membri.add(string);
 		}
 
-		materie.add("Tutte");
 		ArrayAdapter<String> adapter_spinner_materia = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, materie);
 		adapter_spinner_materia
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_materia.setAdapter(adapter_spinner_materia);
-		int spinnerPosition0 = adapter_spinner_materia.getPosition("Tutte");
-		spinner_nome_gruppo.setSelection(spinnerPosition0);
 
-		nomi_gruppi.add("Tutti");
 		ArrayAdapter<String> adapter_spinner_nomigruppo = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, nomi_gruppi);
 		adapter_spinner_materia
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_nome_gruppo.setAdapter(adapter_spinner_nomigruppo);
-		int spinnerPosition1 = adapter_spinner_nomigruppo.getPosition("Tutti");
-		spinner_nome_gruppo.setSelection(spinnerPosition1);
 
 		ArrayAdapter<String> autotext_nomiMembri_adapter = new ArrayAdapter<String>(
 				RicercaGruppiGenerale_activity.this,
@@ -163,64 +162,90 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 				materie, nomi_gruppi, null);
 		spinner_materia.setOnItemSelectedListener(listener);
 		spinner_nome_gruppo.setOnItemSelectedListener(listener);
-
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
+	final class placeholder_gruppidistudio {
+		ArrayList<GruppoDiStudio> Choosable_gds;
 
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.ricerca_generale_menu, menu);
-
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home: {
-			RicercaGruppiGenerale_activity.this.finish();
+		public placeholder_gruppidistudio() {
+			// TODO Auto-generated constructor stub
 		}
 
-		case R.id.action_ricerca_GO:
-			/*
-			 * String materia = ((Spinner) RicercaGruppiGenerale_activity.this
-			 * .findViewById(R.id.spinner_materie)).getSelectedItem()
-			 * .toString(); String nome_gruppo = ((Spinner)
-			 * RicercaGruppiGenerale_activity.this
-			 * .findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
-			 * .toString(); String nome_studente = ((AutoCompleteTextView)
-			 * RicercaGruppiGenerale_activity.this
-			 * .findViewById(R.id.autocomplete_ricerca_per_membro))
-			 * .getText().toString();
-			 * 
-			 * Toast.makeText(RicercaGruppiGenerale_activity.this, materia + " "
-			 * + nome_gruppo + ", " + nome_studente, Toast.LENGTH_SHORT).show();
-			 * 
-			 * Toast.makeText(RicercaGruppiGenerale_activity.this,
-			 * "gruppo selezionato..", Toast.LENGTH_SHORT).show();
-			 */
-			GruppoDiStudio gds_selezionato = allChoosable_gds.get(fakecount);
-			++fakecount;
-			if (fakecount < 4) {
-				// save on server
-				MyApplication.getContextualCollection().add(gds_selezionato);
-			} else {
-				for (GruppoDiStudio gds : allChoosable_gds) {
-					// gds.getMembri().add(myself);
-					// save on server...
-					MyApplication.getContextualCollection().add(gds);
-				}
-			}
+		public void initialize_some_gds() {
+			Choosable_gds = new ArrayList<GruppoDiStudio>();
+			ArrayList<Studente> membri_gds = new ArrayList<Studente>();
+			ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
+			ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
+			ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
 
-			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
-					Lista_GDS_activity.class);
-			startActivity(intent);
-			return true;
-		default:
-			return true;
+			// ####################################
+			// creazione gruppi fake per popolare grafica, dovrei in realtà
+			// recuperare tutto dal web
+			Studente s1 = new Studente();
+			s1.setNome("Albert");
+			s1.setCognome("Einstein");
+			Studente s2 = new Studente();
+			s2.setNome("Enrico");
+			s2.setCognome("Fermi");
 
+			membri_gds.add(s1);
+			membri_gds.add(s2);
+			Date data1 = new Date();
+			data1.setTime(5000);
+			Time time = new Time(45);
+
+			AttivitaStudio impegno1 = new AttivitaStudio("oggetto AS1", null,
+					servizi_monitorati_gds, 12, null, "titolo as1", "Povo",
+					"a201", data1, "descrizione as1", time, time, false, false);
+			AttivitaStudio impegno2 = new AttivitaStudio("oggetto AS2", null,
+					servizi_monitorati_gds, 13, null, "titolo as2", "Povo",
+					"a201", data1, "descrizione as2", time, time, false, false);
+
+			attivita_studio_gds.add(impegno1);
+			attivita_studio_gds.add(impegno2);
+
+			GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
+					"LoveRSEBA", membri_gds, servizi_monitorati_gds,
+					attivita_studio_gds, 1, forum, MyApplication
+							.getAppContext().getResources()
+							.getDrawable(R.drawable.prouno_logo));
+			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
+					"Ghiloni docet", membri_gds, servizi_monitorati_gds,
+					attivita_studio_gds, 1, forum, MyApplication
+							.getAppContext().getResources()
+							.getDrawable(R.drawable.discreta_logo));
+			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
+					"Renato <3", membri_gds, servizi_monitorati_gds,
+					attivita_studio_gds, 2, forum, MyApplication
+							.getAppContext().getResources()
+							.getDrawable(R.drawable.reti_calcolatori_logo));
+			GruppoDiStudio gds4 = new GruppoDiStudio(
+					"Algoritmi e strutture dati", "Djikstra4President",
+					membri_gds, servizi_monitorati_gds, attivita_studio_gds, 2,
+					forum, MyApplication.getAppContext().getResources()
+							.getDrawable(R.drawable.algoritmi_logo));
+
+			// fine placeholder
+			// ############################
+			// qui
+			// fare
+			// un
+			// recupero
+			// info
+			// dal
+			// web
+			Choosable_gds.add(gds1);
+			Choosable_gds.add(gds2);
+			Choosable_gds.add(gds3);
+			Choosable_gds.add(gds4);
+
+			// ####################################
+
+		}
+
+		public ArrayList<GruppoDiStudio> getChoosable_gds() {
+			initialize_some_gds();
+			return Choosable_gds;
 		}
 
 	}
@@ -258,22 +283,50 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 		if (parent.getId() == materie.getId()) {// se viene selezionata una
 			// materia
 			String selected_value = (String) parent.getItemAtPosition(pos);
-			if (selected_value == "Tutte") {
-				return;
-			}
 			nomi_gds_values.clear();
-			for (GruppoDiStudio gds : all_choosable) {
-				if (gds.getMateria() == selected_value) {
+
+			if (selected_value == "Tutte") {
+				nomi_gds_values.add("Tutti");
+				for (GruppoDiStudio gds : all_choosable) {
 					nomi_gds_values.add(gds.getNome());
 				}
-			}
 
+			} else {
+				for (GruppoDiStudio gds : all_choosable) {
+					if (gds.getMateria() == selected_value) {
+						nomi_gds_values.add(gds.getNome());
+					}
+				}
+				nomi_gds_values.add("Tutti");
+			}
 			((ArrayAdapter<String>) nomi_gds.getAdapter())
 					.notifyDataSetChanged();
-
+			return;
 		} else if (parent.getId() == nomi_gds.getId()) {// se viene selezionato
 			// il nome di un gds
+			String selected_value = (String) parent.getItemAtPosition(pos);
+			materie_values.clear();
 
+			if (selected_value == "Tutti") {
+				Set<String> set = new TreeSet<String>();
+				for (GruppoDiStudio gds : all_choosable) {
+					set.add(gds.getMateria());
+				}
+				materie_values.add("Tutte");
+				for (String string : set) {
+					materie_values.add(string);
+				}
+			} else {
+				for (GruppoDiStudio gds : all_choosable) {
+					if (gds.getNome() == selected_value)
+						materie_values.add(gds.getMateria());
+				}
+				materie_values.add("Tutte");
+			}
+
+			((ArrayAdapter<String>) materie.getAdapter())
+					.notifyDataSetChanged();
+			return;
 		}
 
 	}
@@ -281,7 +334,10 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
+	}
 
+	public ArrayList<GruppoDiStudio> getAll_choosable() {
+		return all_choosable;
 	}
 
 }

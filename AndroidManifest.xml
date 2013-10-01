@@ -13,7 +13,6 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -80,8 +79,8 @@
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity"
             android:configChanges="orientation|keyboard"
-            android:logo="@drawable/smartuni_logo"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:logo="@drawable/smartuni_logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -200,12 +199,10 @@
             android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
-        
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.start.WorkInProgress"
             android:label="@string/title_activity_work_in_progress" >
         </activity>
-        
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity"
             android:configChanges="orientation|keyboard"
@@ -251,6 +248,8 @@
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_crea__gds_activity"
             android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results" >
         </activity>
     </application>
 

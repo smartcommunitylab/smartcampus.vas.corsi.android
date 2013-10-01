@@ -53,6 +53,10 @@ public class GruppoDiStudio {
 		return logo;
 	}
 
+	public GruppoDiStudio() {
+
+	}
+
 	public GruppoDiStudio(String materia, String nome,
 			ArrayList<Studente> membri, ArrayList<Servizio> servizi_monitorati,
 			ArrayList<AttivitaStudio> attivita_studio, int anno,
