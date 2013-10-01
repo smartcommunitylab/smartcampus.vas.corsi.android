@@ -22,9 +22,14 @@ public class Materiali4LevelPhlFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
 	public void onStart() {
 		super.onStart();
-		System.out.println("PHL TEST");
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewPhlMateriali_lv);
 		Bundle arguments = new Bundle();
@@ -34,7 +39,7 @@ public class Materiali4LevelPhlFragment extends SherlockFragment {
 						.getString("res"));
 
 		handlerCoursesMaterial.execute(arguments);
-
+		// PHLengine4Material.pd.dismiss();
 	}
 
 }

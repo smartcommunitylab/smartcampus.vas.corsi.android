@@ -107,6 +107,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected void onPostExecute(final RisorsaPhl result) {
 		super.onPostExecute(result);
+		pd.dismiss();
 		if (result == null) {
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
@@ -163,6 +164,8 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							int arg2, long arg3) {
 						if (result.getCdc().get(arg2).getMime()
 								.equals("directory")) {
+							//currentActivity.getFragmentManager().popBackStack();
+							currentSherlock.getSupportFragmentManager().popBackStack();
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
@@ -174,7 +177,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							fragment.setArguments(b);
 							// ft.replace(R.id.tabMateriali, fragment);
 							ft.add(R.id.tabMateriali, fragment);
-							// ft.addToBackStack(null);
+							ft.addToBackStack(null);
 							ft.commit();
 						}
 						else {

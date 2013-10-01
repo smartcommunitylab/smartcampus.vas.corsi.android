@@ -155,7 +155,8 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						if (r.getCdc().get(arg2).getMime().equals("directory")) {
-
+							
+							currentSherlock.getSupportFragmentManager().popBackStack();
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
@@ -166,21 +167,16 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							fragment.setArguments(b);
 							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 							ft.replace(R.id.tabMateriali, fragment);
-
-							// ft.addToBackStack(null);
+							ft.addToBackStack(null);
 							ft.commit();
 
 						} else {
 //							Toast.makeText(context, "Coming Soon!",
 //									Toast.LENGTH_SHORT).show();
-							//String test = r.getCdc().get(arg2).getURL();
-							//test.replace(" ", "");
+							
 							DownDialog(r.getCdc().get(arg2));
 							
-							// new PHLengine4Material(context, currentActivity,
-							// listViewCorsiPersonali, currentSherlock, r
-							// .getCdc().get(arg2).getHash())
-							// .execute();
+							
 						}
 					}
 				});
