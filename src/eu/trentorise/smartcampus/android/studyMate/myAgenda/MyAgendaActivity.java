@@ -17,6 +17,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -264,7 +265,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 			if (isPassed == null) {
 				Toast toast = Toast.makeText(MyAgendaActivity.this,
-						"Ops. C'ï¿½ stato un errore", Toast.LENGTH_LONG);
+						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}
@@ -272,8 +273,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			if (isPassed) {
 
 				Intent intentAddRating = new Intent(MyAgendaActivity.this,
-						AddRateActivity.class);
-				CoursesHandler.corsoSelezionato.getNome();
+						AddRatingFromCoursesPassed.class);	//AddRatingFromCoursesPassed
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("corso",
 						CoursesHandler.corsoSelezionato.getNome());

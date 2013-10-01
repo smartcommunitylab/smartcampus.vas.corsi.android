@@ -13,14 +13,17 @@ public class Corso extends CorsoLite implements Serializable {
 	/**
 	 * 
 	 */
+	public Corso(){
+		super();
+	}
 
 	// data di inizio del corso
 	private Date data_inizio;
 
 	// data di inizio del corso
-	private Long id_dipartimento;
+	private long id_dipartimento;
 
-	private Long id_corsoLaurea;
+	private long id_corsoLaurea;
 
 	// data di fine del corso
 	private Date data_fine;
@@ -49,9 +52,6 @@ public class Corso extends CorsoLite implements Serializable {
 
 	private Float rating_esame;
 
-	private boolean is_interesse;
-
-	private boolean is_libretto;
 
 	public Float getRating_contenuto() {
 		return rating_contenuto;
@@ -92,11 +92,6 @@ public class Corso extends CorsoLite implements Serializable {
 	public void setRating_esame(Float rating_esame) {
 		this.rating_esame = rating_esame;
 	}
-
-	public Corso() {
-
-	}
-
 	public Date getData_inizio() {
 		return data_inizio;
 	}
@@ -143,22 +138,6 @@ public class Corso extends CorsoLite implements Serializable {
 
 	public void setId_corsoLaurea(long id_corsoLaurea) {
 		this.id_corsoLaurea = id_corsoLaurea;
-	}
-
-	public boolean isIs_libretto() {
-		return is_libretto;
-	}
-
-	public void setIs_libretto(boolean is_libretto) {
-		this.is_libretto = is_libretto;
-	}
-
-	public boolean isIs_interesse() {
-		return is_interesse;
-	}
-
-	public void setIs_interesse(boolean is_interesse) {
-		this.is_interesse = is_interesse;
 	}
 
 	// public boolean isIs_libretto() {

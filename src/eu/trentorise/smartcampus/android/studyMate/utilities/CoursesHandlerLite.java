@@ -28,7 +28,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
+public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -38,7 +38,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	private CorsoLaurea degree;
 	private String course;
 	private String body;
-	public static ArrayList<CorsoLite> coursesFiltered;
+	public static ArrayList<Corso> coursesFiltered;
 	ListView listView;
 	TextView tvTitleNotices;
 	Activity currentAct;
@@ -57,7 +57,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	}
 
 	// return list of all courses of all departments
-	private List<CorsoLite> getAllCourses() {
+	private List<Corso> getAllCourses() {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -89,11 +89,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CorsoLite.class);
+		return Utils.convertJSONToObjects(body, Corso.class);
 	}
 
 	// return all courses of a department
-	private List<CorsoLite> getAllCoursesOfDepartment(Dipartimento dep) {
+	private List<Corso> getAllCoursesOfDepartment(Dipartimento dep) {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -126,7 +126,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CorsoLite.class);
+		return Utils.convertJSONToObjects(body, Corso.class);
 	}
 
 	@SuppressWarnings("unused")
@@ -167,7 +167,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	}
 
 	@Override
-	protected List<CorsoLite> doInBackground(Void... params) {
+	protected List<Corso> doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 
 		if (department.getNome().equals("Tutto")) {
@@ -184,7 +184,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	}
 
 	// return all courses of a degree
-	private List<CorsoLite> getAllCoursesOfFaculty(CorsoLaurea deg) {
+	private List<Corso> getAllCoursesOfFaculty(CorsoLaurea deg) {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -216,7 +216,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, CorsoLite.class);
+		return Utils.convertJSONToObjects(body, Corso.class);
 	}
 
 	@Override
@@ -262,7 +262,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<CorsoLite> courses) {
+	protected void onPostExecute(List<Corso> courses) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(courses);
 
@@ -276,7 +276,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 	}
 
 	// setto la lista dei corsi e la filtro
-	private void setListCourses(final List<CorsoLite> courses) {
+	private void setListCourses(final List<Corso> courses) {
 
 		FilterSearched filter = new FilterSearched();
 		coursesFiltered = filter.filterListWithCourseSearched(course, courses);
@@ -306,6 +306,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<CorsoLite>> {
 
 				corsoSelezionato.setId(courses.get(arg2).getId());
 				corsoSelezionato.setNome(courses.get(arg2).getNome());
+				corsoSelezionato.setId_dipartimento(courses.get(arg2).getId_dipartimento());
 
 				CoursesHandler.corsoSelezionato = (Corso) corsoSelezionato;
 

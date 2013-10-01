@@ -298,11 +298,10 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Studente stud = new Studente();
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
-							stud.setNome(MyUniActivity.bp.getName());
+//							stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler(
-									AddRatingFromCoursesPassed.this)
+							new AddFeedbackHandler(AddRatingFromCoursesPassed.this)
 									.execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();

@@ -34,7 +34,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 	public static Corso courseInfo;
 	public static String courseName;
-	public static CorsoLite corsoAttuale;
+	public static Corso corsoAttuale;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,14 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_home_course);
 		String tab2_txt = getResources().getString(R.string.tab_feedback);
+
+		Intent intent = getIntent();
+		courseName = intent.getStringExtra("courseSelectedName");
+		setTitle(courseName);
+		corsoAttuale = new Corso();
+		corsoAttuale = (Corso) intent
+				.getSerializableExtra("courseSelected");
+		
 
 		Tab tab1 = ab
 				.newTab()
@@ -65,13 +73,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 								FeedbackFragment.class));
 		ab.addTab(tab2);
 
-		Intent intent = getIntent();
 
-		courseName = intent.getStringExtra("courseSelectedName");
-		setTitle(courseName);
-		corsoAttuale = new CorsoLite();
-		corsoAttuale = (CorsoLite) intent
-				.getSerializableExtra("courseSelected");
+
 	}
 
 	@Override
@@ -219,8 +222,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				Intent intentAddRating = new Intent(
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
-				// intentAddRating.putExtra("corso",
-				// CoursesHandler.corsoSelezionato.getNome());
+				 intentAddRating.putExtra("corso",
+				 CoursesHandler.corsoSelezionato.getNome());
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("NomeCorso",
 						CoursesHandler.corsoSelezionato.getNome());

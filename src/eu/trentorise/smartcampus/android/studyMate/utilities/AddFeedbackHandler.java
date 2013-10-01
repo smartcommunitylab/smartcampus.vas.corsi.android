@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
+import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -30,13 +32,78 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
-
+		
+		
+		///////////////prova ///////////////////////////	Ricarico i dati dello studente e del corso
 		MessageRequest request = new MessageRequest(
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_STUDENT_DATA);
+		request.setMethod(Method.GET);
+
+		MessageResponse response;
+		try {
+			response = mProtocolCarrier.invokeSync(request,
+					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+			if (response.getHttpStatus() == 200) {
+
+				body = response.getBody();
+				Studente stud = Utils.convertJSONToObject(body, Studente.class);
+				commento.setId_studente(stud);
+
+			} else {
+				return null;
+			}
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		request = new MessageRequest(
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String.valueOf(commento.getCorso().getId())));
+		request.setMethod(Method.GET);
+
+	
+		try {
+			response = mProtocolCarrier.invokeSync(request,
+					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+			if (response.getHttpStatus() == 200) {
+
+				body = response.getBody();
+				Corso corso = Utils.convertJSONToObject(body, Corso.class);
+				commento.setCorso(corso);
+
+			} else {
+				return null;
+			}
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		/////////////////fine prova /////////////////////////////////////////////////
+		
+		request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.POST_WS_MY_FEEDBACK);
 		request.setMethod(Method.POST);
 
-		MessageResponse response;
 		try {
 
 			String eventoJSON = Utils.convertToJSON(commento);

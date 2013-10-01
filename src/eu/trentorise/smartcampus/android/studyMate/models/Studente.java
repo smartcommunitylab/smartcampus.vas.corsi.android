@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.util.Collection;
+import java.util.List;
 
 public class Studente {
 
@@ -25,6 +26,12 @@ public class Studente {
 	private Collection<Corso> corsi;
 
 	private String idsCorsiSuperati;
+	
+	private List<CorsoLite> corsiSuperati;
+	
+	private String idsGruppiDiStudio;
+
+	private List<GruppoDiStudio> gruppiDiStudio;
 
 	public Collection<Corso> getCorsi() {
 		return corsi;
@@ -104,6 +111,30 @@ public class Studente {
 
 	public void setIdsCorsiSuperati(String idsCorsiSuperati) {
 		this.idsCorsiSuperati = idsCorsiSuperati;
+	}
+
+	public List<CorsoLite> getCorsiSuperati() {
+		return corsiSuperati;
+	}
+
+	public void setCorsiSuperati(List<CorsoLite> corsiSuperati) {
+		this.corsiSuperati = corsiSuperati;
+	}
+
+	public String getIdsGruppiDiStudio() {
+		return idsGruppiDiStudio;
+	}
+
+	public void setIdsGruppiDiStudio(String idsGruppiDiStudio) {
+		this.idsGruppiDiStudio = idsGruppiDiStudio;
+	}
+
+	public List<GruppoDiStudio> getGruppiDiStudio() {
+		return gruppiDiStudio;
+	}
+
+	public void setGruppiDiStudio(List<GruppoDiStudio> gruppiDiStudio) {
+		this.gruppiDiStudio = gruppiDiStudio;
 	}
 
 }

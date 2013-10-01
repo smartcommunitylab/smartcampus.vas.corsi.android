@@ -271,11 +271,15 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							intent.putExtra("Rating", ratings);
 							Commento commento = new Commento();
 
+							// controllo se il commento è presente
 							if (commentCourse.getText().toString() != null)
 								commento.setTesto(commentCourse.getText()
 										.toString());
 							else
 								commento.setTesto(new String(""));
+							
+							
+							// Aggiorno l'oggetto commento ottenuto dal server e lo aggiorno con i valori appena inseriti dall'utente
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
@@ -296,7 +300,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 									.getUserId()));
 							commento.setId_studente(stud);
 
-							new AddFeedbackHandler(AddRateActivity.this)
+							new AddFeedbackHandler(getParent().getApplicationContext())
 									.execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
