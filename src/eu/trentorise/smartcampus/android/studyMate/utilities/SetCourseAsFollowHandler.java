@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -17,11 +18,11 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class SetCourseAsFollowHandler extends
-		AsyncTask<CorsoLite, Void, Boolean> {
+		AsyncTask<Corso, Void, Boolean> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	private CorsoLite corso;
+	private Corso corso;
 	private Button monitorFollow;
 	private TextView txtFollow;
 
@@ -34,7 +35,7 @@ public class SetCourseAsFollowHandler extends
 	}
 
 	@Override
-	protected Boolean doInBackground(CorsoLite... params) {
+	protected Boolean doInBackground(Corso... params) {
 		// TODO Auto-generated method stub
 
 		// corso a cui mi riferisco

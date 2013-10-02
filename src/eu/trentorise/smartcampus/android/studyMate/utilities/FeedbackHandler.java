@@ -133,23 +133,20 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				@Override
 				public void onClick(View v) {
 
-					if (isContainsInCorsiInteresse(commenti.get(0)
-							.getId_studente(), commenti.get(0).getCorso())) {
-						new SetCourseAsFollowHandler(context, swichFollow,
-								txtMonitor).execute(commenti.get(0).getCorso());
-						swichFollow
-								.setBackgroundResource(R.drawable.ic_monitor_off);
+				
+//						new SetCourseAsFollowHandler(context, swichFollow,
+//								txtMonitor).execute(commenti.get(0).getCorso());
+//						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
 						// txtMonitor.setText(R.string.label_txtMonitor_off);
 						// fare post
-					} else {
+			
 						// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 
 						// txtMonitor.setText(R.string.label_txtMonitor_on);
 						// fare post
 
-					}
-
 				}
+
 			});
 
 			Collections.reverse(commenti);
@@ -161,26 +158,26 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 			RatingBar ratingCont = (RatingBar) act
 					.findViewById(R.id.ratingBarRowContenuti);
-			ratingCont.setRating(feedbackInfoList.get(0).getRating_contenuto());
+			ratingCont.setRating(feedbackInfoList.get(0).getCorso().getRating_contenuto());
 
 			RatingBar ratingCaricoStudio = (RatingBar) act
 					.findViewById(R.id.ratingBarRowCfu);
-			ratingCaricoStudio.setRating(feedbackInfoList.get(0)
+			ratingCaricoStudio.setRating(feedbackInfoList.get(0).getCorso()
 					.getRating_carico_studio());
 
 			RatingBar ratingLezioni = (RatingBar) act
 					.findViewById(R.id.ratingBarRowLezioni);
 			ratingLezioni
-					.setRating(feedbackInfoList.get(0).getRating_lezioni());
+					.setRating(feedbackInfoList.get(0).getCorso().getRating_lezioni());
 
 			RatingBar ratingMateriali = (RatingBar) act
 					.findViewById(R.id.ratingBarRowMateriali);
-			ratingMateriali.setRating(feedbackInfoList.get(0)
+			ratingMateriali.setRating(feedbackInfoList.get(0).getCorso()
 					.getRating_materiali());
 
 			RatingBar ratingEsame = (RatingBar) act
 					.findViewById(R.id.ratingBarRowEsame);
-			ratingEsame.setRating(feedbackInfoList.get(0).getRating_esame());
+			ratingEsame.setRating(feedbackInfoList.get(0).getCorso().getRating_esame());
 
 			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
 					.getDescrizione());
