@@ -88,7 +88,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(body);
 		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
@@ -115,14 +114,13 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			act.finish();
 		} else {
 
-			// if (commenti.get(0).getCorso().isSeguito() == false){
-			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-			// txtMonitor.setText(R.string.label_txtMonitor_off);
-			// }
-			// else{
-			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-			// txtMonitor.setText(R.string.label_txtMonitor_on);
-			// }
+//			if (commenti.get(0).getId_studente().getIdsCorsiInteresse().contains(commenti.get(0).getCorso().getId()) != null) {
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+//				txtMonitor.setText(R.string.label_txtMonitor_off);
+//			} else {
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+//				txtMonitor.setText(R.string.label_txtMonitor_on);
+//			}
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 

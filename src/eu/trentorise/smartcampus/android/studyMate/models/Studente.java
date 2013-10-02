@@ -33,6 +33,10 @@ public class Studente {
 
 	private List<GruppoDiStudio> gruppiDiStudio;
 
+	private String idsCorsiInteresse;
+	
+	private List<CorsoLite> corsiInteresse;
+	
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}
@@ -41,6 +45,7 @@ public class Studente {
 		this.corsi = corsi;
 	}
 
+	
 	public long getUserSCId() {
 		return userSCId;
 	}
@@ -135,6 +140,22 @@ public class Studente {
 
 	public void setGruppiDiStudio(List<GruppoDiStudio> gruppiDiStudio) {
 		this.gruppiDiStudio = gruppiDiStudio;
+	}
+
+	public String getIdsCorsiInteresse() {
+		return idsCorsiInteresse;
+	}
+
+	public void setIdsCorsiInteresse(String idsCorsiInteresse) {
+		this.idsCorsiInteresse = idsCorsiInteresse;
+	}
+
+	public List<CorsoLite> getCorsiInteresse() {
+		return corsiInteresse;
+	}
+
+	public void setCorsiInteresse(List<CorsoLite> corsiInteresse) {
+		this.corsiInteresse = corsiInteresse;
 	}
 
 }
