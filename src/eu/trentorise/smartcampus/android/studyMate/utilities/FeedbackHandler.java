@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
+import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -113,19 +117,28 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			pd.dismiss();
 			act.finish();
 		} else {
+			
+			// se il corso corrente fa parte dei corsi che seguo lo setto on
+			if(isContainsInCorsiInteresse(commenti.get(0).getId_studente(), commenti.get(0).getCorso())){
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+				txtMonitor.setText(R.string.label_txtMonitor_on);
+			}else{
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+				txtMonitor.setText(R.string.label_txtMonitor_off);
+			}
 
-//			if (commenti.get(0).getId_studente().getIdsCorsiInteresse().contains(commenti.get(0).getCorso().getId()) != null) {
-//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-//				txtMonitor.setText(R.string.label_txtMonitor_off);
-//			} else {
-//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-//				txtMonitor.setText(R.string.label_txtMonitor_on);
-//			}
+
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
+					
+					if(isContainsInCorsiInteresse(commenti.get(0).getId_studente(), commenti.get(0).getCorso())){
+						new SetCourseAsFollowHandler(context, swichFollow, txtMonitor).execute(commenti.get(0).getCorso());
+					}
+					
+					
 					// if (commenti.get(0).getCorso().isSeguito() == false){
 					// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 					// //TODO: set true for user
@@ -199,4 +212,28 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		// TODO Auto-generated method stub
 		return getFullFeedbackById();
 	}
+	
+	
+	// metodo che dato lo studente setta la lista dei corsi di interesse dalla stringa degli ids
+	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
+		// TODO Auto-generated method stub
+
+		if(stud.getIdsCorsiInteresse() == null){
+			return false;
+		}else{			
+			String[] listS = stud.getIdsCorsiInteresse().split(",");
+			boolean contenuto = false;
+			
+			for (String s : listS) {
+				if(s == corso.getId().toString()){
+					contenuto = true;
+					break;
+				}
+			}
+			return contenuto;
+		}
+		
+	}
+
+	
 }

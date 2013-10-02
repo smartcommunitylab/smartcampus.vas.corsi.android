@@ -88,14 +88,25 @@ public class SetCourseAsFollowHandler extends
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
+		// true se l'operazione è andata a buon fine
 		if (result) {
-			monitorFollow.setText(context.getResources().getText(
-					R.string.label_txtMonitor_on));
-			txtFollow.setText(R.string.label_txtMonitor_on);
+			
+			// faccio lo switch del bottone
+			if(monitorFollow.getText()==context.getResources().getText(
+					R.string.label_txtMonitor_off)){
+				monitorFollow.setText(context.getResources().getText(
+						R.string.label_txtMonitor_on));
+				txtFollow.setText(R.string.label_txtMonitor_on);
+			}else{
+				monitorFollow.setText(context.getResources().getText(
+						R.string.label_txtMonitor_off));
+				txtFollow.setText(R.string.label_txtMonitor_off);
+			}
 			Toast toast = Toast.makeText(context, context.getResources()
 					.getText(R.string.toast_switchfollow_success),
 					Toast.LENGTH_LONG);
 			toast.show();
+		// se l'operazione non è andata a buon fine
 		} else {
 			Toast toast = Toast.makeText(context, context.getResources()
 					.getText(R.string.toast_switchfollow_error),
