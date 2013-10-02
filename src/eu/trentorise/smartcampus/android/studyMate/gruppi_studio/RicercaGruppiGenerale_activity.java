@@ -177,7 +177,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		public void initialize_some_gds() {
 			Choosable_gds = new ArrayList<GruppoDiStudio>();
 			ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-			ArrayList<Servizio> servizi_monitorati_gds = new ArrayList<Servizio>();
+
 			ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
 			ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
 
@@ -197,35 +197,34 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			data1.setTime(5000);
 			Time time = new Time(45);
 
-			AttivitaStudio impegno1 = new AttivitaStudio("oggetto AS1", null,
-					servizi_monitorati_gds, 12, null, "titolo as1", "Povo",
-					"a201", data1, "descrizione as1", time, time, false, false);
-			AttivitaStudio impegno2 = new AttivitaStudio("oggetto AS2", null,
-					servizi_monitorati_gds, 13, null, "titolo as2", "Povo",
-					"a201", data1, "descrizione as2", time, time, false, false);
+			AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
+					null, "titolo as1", "Povo", "a203", "02/10/2013",
+					"descrizione as", "09:00", false, false, false, false,
+					false, false);
+			AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
+					null, "titolo as2", "Povo", "a203", "02/10/2013",
+					"descrizione as", "09:00", false, false, false, false,
+					false, false);
 
 			attivita_studio_gds.add(impegno1);
 			attivita_studio_gds.add(impegno2);
 
 			GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-					"LoveRSEBA", membri_gds, servizi_monitorati_gds,
-					attivita_studio_gds, 1, forum, MyApplication
-							.getAppContext().getResources()
+					"LoveRSEBA", membri_gds, null, attivita_studio_gds, 1,
+					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.prouno_logo));
 			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-					"Ghiloni docet", membri_gds, servizi_monitorati_gds,
-					attivita_studio_gds, 1, forum, MyApplication
-							.getAppContext().getResources()
+					"Ghiloni docet", membri_gds, null, attivita_studio_gds, 1,
+					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.discreta_logo));
 			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-					"Renato <3", membri_gds, servizi_monitorati_gds,
-					attivita_studio_gds, 2, forum, MyApplication
-							.getAppContext().getResources()
+					"Renato <3", membri_gds, null, attivita_studio_gds, 2,
+					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.reti_calcolatori_logo));
 			GruppoDiStudio gds4 = new GruppoDiStudio(
 					"Algoritmi e strutture dati", "Djikstra4President",
-					membri_gds, servizi_monitorati_gds, attivita_studio_gds, 2,
-					forum, MyApplication.getAppContext().getResources()
+					membri_gds, null, attivita_studio_gds, 2, forum,
+					MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.algoritmi_logo));
 
 			// fine placeholder

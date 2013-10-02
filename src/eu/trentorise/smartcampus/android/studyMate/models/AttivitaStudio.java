@@ -8,28 +8,36 @@ public class AttivitaStudio {
 
 	String oggetto;
 	ArrayList<Allegato> allegati;
-	ArrayList<Servizio> servizi_attivita;
+	// ArrayList<Servizio> servizi_attivita;
 	long id;
 	Corso corso;
 	String titolo;
 	String event_location;
 	String room;
-	Date data;
+	String data;
 	String descrizione;
-	Time start;
-	Time stop;
+	String start;
+
 	boolean all_day;
 	boolean availability;
 
+	boolean prenotazione_aule;
+	boolean mensa;
+	boolean tutoring;
+	boolean biblioteca;
+
+	public AttivitaStudio() {
+
+	}
+
 	public AttivitaStudio(String oggetto, ArrayList<Allegato> allegati,
-			ArrayList<Servizio> servizi_attivita, long id, Corso corso,
-			String titolo, String event_location, String room, Date data,
-			String descrizione, Time start, Time stop, boolean all_day,
-			boolean availability) {
+			long id, Corso corso, String titolo, String event_location,
+			String room, String data, String descrizione, String start,
+			boolean all_day, boolean availability, boolean prenotazione_aule,
+			boolean mensa, boolean tutoring, boolean biblioteca) {
 		super();
 		this.oggetto = oggetto;
 		this.allegati = allegati;
-		this.servizi_attivita = servizi_attivita;
 		this.id = id;
 		this.corso = corso;
 		this.titolo = titolo;
@@ -38,23 +46,13 @@ public class AttivitaStudio {
 		this.data = data;
 		this.descrizione = descrizione;
 		this.start = start;
-		this.stop = stop;
 		this.all_day = all_day;
 		this.availability = availability;
+		this.prenotazione_aule = prenotazione_aule;
+		this.mensa = mensa;
+		this.tutoring = tutoring;
+		this.biblioteca = biblioteca;
 	}
-
-	// public AttivitaStudio(long id, Corso corso, String titolo,
-	// String event_location, String room, Date data, String descrizione,
-	// Time start, Time stop, boolean all_day, boolean availability,
-	// String oggetto, ArrayList<Allegato> allegati,
-	// ArrayList<Servizio> servizi_attivita) {
-	// // super(id, corso, titolo, event_location, room, data, descrizione,
-	// // start, stop, all_day, availability);
-	//
-	// this.oggetto = oggetto;
-	// this.allegati = allegati;
-	// this.servizi_attivita = servizi_attivita;
-	// }
 
 	public String getOggetto() {
 		return oggetto;
@@ -70,14 +68,6 @@ public class AttivitaStudio {
 
 	public void setAllegati(ArrayList<Allegato> allegati) {
 		this.allegati = allegati;
-	}
-
-	public ArrayList<Servizio> getServizi_attivita() {
-		return servizi_attivita;
-	}
-
-	public void setServizi_attivita(ArrayList<Servizio> servizi_attivita) {
-		this.servizi_attivita = servizi_attivita;
 	}
 
 	public long getId() {
@@ -120,11 +110,11 @@ public class AttivitaStudio {
 		this.room = room;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
@@ -136,20 +126,12 @@ public class AttivitaStudio {
 		this.descrizione = descrizione;
 	}
 
-	public Time getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Time start) {
+	public void setStart(String start) {
 		this.start = start;
-	}
-
-	public Time getStop() {
-		return stop;
-	}
-
-	public void setStop(Time stop) {
-		this.stop = stop;
 	}
 
 	public boolean isAll_day() {
@@ -166,6 +148,38 @@ public class AttivitaStudio {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+
+	public boolean isPrenotazione_aule() {
+		return prenotazione_aule;
+	}
+
+	public void setPrenotazione_aule(boolean prenotazione_aule) {
+		this.prenotazione_aule = prenotazione_aule;
+	}
+
+	public boolean isMensa() {
+		return mensa;
+	}
+
+	public void setMensa(boolean mensa) {
+		this.mensa = mensa;
+	}
+
+	public boolean isTutoring() {
+		return tutoring;
+	}
+
+	public void setTutoring(boolean tutoring) {
+		this.tutoring = tutoring;
+	}
+
+	public boolean isBiblioteca() {
+		return biblioteca;
+	}
+
+	public void setBiblioteca(boolean biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 }

@@ -48,13 +48,10 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 		TextView orario_view = (TextView) impegno_view
 				.findViewById(R.id.orario_attivitastudio);
 
-		data_view.setText(currentImpegno.getData().getDay() + "/"
-				+ currentImpegno.getData().getMonth() + "/"
-				+ currentImpegno.getData().getYear());
+		data_view.setText(currentImpegno.getData());
 		oggetto_view.setText(currentImpegno.getOggetto());
 		aula_view.setText("Aula " + currentImpegno.getRoom());
-		orario_view.setText(currentImpegno.getStart().toString() + "-"
-				+ currentImpegno.getStop().toString());
+		orario_view.setText(currentImpegno.getStart());
 
 		AttivitaStudio prev = null;
 		if (position > 0)
@@ -73,5 +70,5 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 	public ArrayList<AttivitaStudio> getEntries() {
 		return entries;
 	}
-	
+
 }

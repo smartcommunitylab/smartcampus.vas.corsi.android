@@ -101,7 +101,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin" >
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/editText_descrizione_impegno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -205,25 +205,25 @@
                 android:rowCount="2" >
 
                 <CheckBox
-                    android:id="@+id/CheckBox1"
+                    android:id="@+id/CheckBox1_prenotazione_aule"
                     android:layout_gravity="left"
                     android:text="Prenotazione aule"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
-                    android:id="@+id/CheckBox2"
+                    android:id="@+id/CheckBox2_mensa"
                     android:layout_gravity="left"
                     android:text="Mensa"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
-                    android:id="@+id/CheckBox3"
+                    android:id="@+id/CheckBox3_tutoring"
                     android:layout_gravity="left"
                     android:text="Tutoring"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
-                    android:id="@+id/CheckBox4"
+                    android:id="@+id/CheckBox4_biblioteca"
                     android:layout_gravity="left"
                     android:text="Biblioteca"
                     android:textAppearance="?android:attr/textAppearanceSmall" />

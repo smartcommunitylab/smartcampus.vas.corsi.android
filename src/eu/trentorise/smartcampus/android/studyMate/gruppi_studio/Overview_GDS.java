@@ -31,13 +31,25 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		 * Come da politica di utilizzo del contextualcollection ogni volta che
 		 * recupero un oggetto mi aspetto di trovarlo in posizione 0, appena
 		 * recupreato il tale oggetto mi preoccupo di pulire il
-		 * contextualcollection
+		 * contextualcollection (a overview ecc ci posso arrivare partendo da:
+		 * lista dei gruppi di studio, oppure terminando l'aggiunta di un
+		 * impegno
 		 */
-		contextualGDS = (GruppoDiStudio) MyApplication
-				.getContextualCollection().get(0);
-		MyApplication.getContextualCollection().clear();
-		contextualForum = contextualGDS.getForum();
-		contextualListaImpegni = contextualGDS.getAttivita_studio();
+		if (!MyApplication.getContextualCollection().isEmpty()) {
+			Object obj = MyApplication.getContextualCollection().get(0);
+			if (obj instanceof GruppoDiStudio) {
+				contextualGDS = (GruppoDiStudio) obj;
+				contextualForum = contextualGDS.getForum();
+				contextualListaImpegni = contextualGDS.getAttivita_studio();
+			} else if (obj instanceof AttivitaStudio) {
+				/*
+				 * todo here
+				 */
+			}
+
+			MyApplication.getContextualCollection().clear();
+
+		}
 
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

@@ -16,9 +16,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
 
@@ -65,6 +69,49 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
+			/*
+			 * crea e aggiugni agli impegni l'attività di studio appena creata
+			 */
+			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
+			String oggetto = ((TextView) this
+					.findViewById(R.id.editText_oggetto)).getText().toString();
+
+			String data = ((Button) this.findViewById(R.id.data_button))
+					.getText().toString();
+			String ora = ((Button) this.findViewById(R.id.ora_button))
+					.getText().toString();
+
+			String descrizione = ((TextView) this
+					.findViewById(R.id.editText_descrizione_impegno)).getText()
+					.toString();
+			boolean prenotazione_aule = ((CheckBox) this
+					.findViewById(R.id.CheckBox1_prenotazione_aule))
+					.isChecked();
+			boolean mensa = ((CheckBox) this.findViewById(R.id.CheckBox2_mensa))
+					.isChecked();
+			boolean tutoring = ((CheckBox) this
+					.findViewById(R.id.CheckBox3_tutoring)).isChecked();
+			boolean biblioteca = ((CheckBox) this
+					.findViewById(R.id.CheckBox4_biblioteca)).isChecked();
+
+			nuova_attivitaStudio.setOggetto(oggetto);
+			nuova_attivitaStudio.setData(data);
+			nuova_attivitaStudio.setStart(ora);
+			nuova_attivitaStudio.setDescrizione(descrizione);
+			nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
+			nuova_attivitaStudio.setMensa(mensa);
+			nuova_attivitaStudio.setTutoring(tutoring);
+			nuova_attivitaStudio.setBiblioteca(biblioteca);
+
+			ListView impegni_listview = (ListView) findViewById(R.id.lista_impegni);
+			/*
+			 * BACO QUI!!
+			 */
+			((AttivitaStudioAdapter) impegni_listview.getAdapter())
+					.getEntries().add(nuova_attivitaStudio);
+			((AttivitaStudioAdapter) impegni_listview.getAdapter())
+					.notifyDataSetChanged();
+
 			Toast.makeText(getApplicationContext(), "attività studio creata",
 					Toast.LENGTH_SHORT).show();
 			Add_attivita_studio_activity.this.finish();

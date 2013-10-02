@@ -3,11 +3,8 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +18,9 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Impegni_Fragment extends SherlockFragment {
-	ArrayList<AttivitaStudio> lista_impegni;
+	public ArrayList<AttivitaStudio> lista_impegni;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,4 +93,9 @@ public class Impegni_Fragment extends SherlockFragment {
 		}
 
 	}
+
+	public ArrayList<AttivitaStudio> getLista_impegni() {
+		return lista_impegni;
+	}
+	
 }
