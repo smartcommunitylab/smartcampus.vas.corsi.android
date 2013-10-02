@@ -251,6 +251,8 @@
         </activity>
         <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results" >
         </activity>
+        <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS" >
+        </activity>
     </application>
 
 </manifest>

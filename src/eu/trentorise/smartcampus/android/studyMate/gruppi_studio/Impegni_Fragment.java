@@ -3,11 +3,16 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -16,6 +21,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Impegni_Fragment extends SherlockFragment {
 	ArrayList<AttivitaStudio> lista_impegni;
@@ -52,11 +58,27 @@ public class Impegni_Fragment extends SherlockFragment {
 
 		impegni_listview.setAdapter(adapter);
 
+		impegni_listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				AttivitaStudioAdapter adpt = (AttivitaStudioAdapter) parent
+						.getAdapter();
+				ArrayList<AttivitaStudio> entries = adpt.getEntries();
+				final AttivitaStudio selected_impegno = entries.get(position);
+				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
+				MyApplication.getContextualCollection().add(selected_impegno);
+				startActivity(intent);
+
+			}
+		});
+
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater = getSherlockActivity().getSupportMenuInflater();
 		inflater.inflate(R.menu.impegni_gds_menu, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}

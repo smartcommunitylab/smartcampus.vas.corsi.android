@@ -69,4 +69,9 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 
 		return impegno_view;
 	}
+
+	public ArrayList<AttivitaStudio> getEntries() {
+		return entries;
+	}
+	
 }

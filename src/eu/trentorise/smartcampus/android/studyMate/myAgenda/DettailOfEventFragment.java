@@ -40,14 +40,14 @@ public class DettailOfEventFragment extends SherlockFragment {
 		getSherlockActivity().supportInvalidateOptionsMenu();
 
 		TextView tvTitleEvent = (TextView) view
-				.findViewById(R.id.textTitleEvent);
+				.findViewById(R.id.oggetto_impegno_gds);
 		tvTitleEvent.setText(eventSelected.getTitolo());
 
-		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
+		TextView tvDateEvent = (TextView) view.findViewById(R.id.text_data_impegno_gds);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		tvDateEvent.setText(dateFormat.format(eventSelected.getData()));
 
-		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
+		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOra_impegno_gds);
 		tvOraEvent
 				.setText(eventSelected
 						.getStart()
@@ -65,14 +65,14 @@ public class DettailOfEventFragment extends SherlockFragment {
 												.length() - 3));
 
 		TextView tvDescEvent = (TextView) view
-				.findViewById(R.id.textDescriptionEvent);
+				.findViewById(R.id.textDescription_impegno_gds);
 		tvDescEvent.setText(eventSelected.getDescrizione());
 
-		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAulaEvent);
+		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAula_impegno_gds);
 		tvAulaEvent.setText(eventSelected.getRoom());
 
 		TextView tvLocationEvent = (TextView) view
-				.findViewById(R.id.textLocation);
+				.findViewById(R.id.textLocation_impegno_gds);
 		tvLocationEvent.setText(eventSelected.getEvent_location());
 
 		super.onStart();
