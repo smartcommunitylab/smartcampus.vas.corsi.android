@@ -117,53 +117,37 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			pd.dismiss();
 			act.finish();
 		} else {
-			
+
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			if(isContainsInCorsiInteresse(commenti.get(0).getId_studente(), commenti.get(0).getCorso())){
+			if (isContainsInCorsiInteresse(commenti.get(0).getId_studente(),
+					commenti.get(0).getCorso())) {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 				txtMonitor.setText(R.string.label_txtMonitor_on);
-			}else{
+			} else {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
 				txtMonitor.setText(R.string.label_txtMonitor_off);
 			}
-
-
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					
-					if(isContainsInCorsiInteresse(commenti.get(0).getId_studente(), commenti.get(0).getCorso())){
-						new SetCourseAsFollowHandler(context, swichFollow, txtMonitor).execute(commenti.get(0).getCorso());
+
+					if (isContainsInCorsiInteresse(commenti.get(0)
+							.getId_studente(), commenti.get(0).getCorso())) {
+						new SetCourseAsFollowHandler(context, swichFollow,
+								txtMonitor).execute(commenti.get(0).getCorso());
+						swichFollow
+								.setBackgroundResource(R.drawable.ic_monitor_off);
+						// txtMonitor.setText(R.string.label_txtMonitor_off);
+						// fare post
+					} else {
+						// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+
+						// txtMonitor.setText(R.string.label_txtMonitor_on);
+						// fare post
+
 					}
-					
-					
-					// if (commenti.get(0).getCorso().isSeguito() == false){
-					// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-					// //TODO: set true for user
-					// txtMonitor.setText(R.string.label_txtMonitor_on);
-					// commenti.get(0).getCorso().setSeguito(true);
-					// //new SetCourseAsFollowHandler(context, swichFollow
-					// ,txtMonitor).execute(commenti.get(0).getCorso());
-					//
-					// //l'oggetto corso dentro il commento no � ok in find ma �
-					// corretto in vota.All'ogeto corso mancano dei pezzi
-					// //corso laurea e dipartimento
-					// //prova a fare un findbyid del corso quando si vota,cos�
-					// lo hai aggiornao dal db
-					// //il problema cmq� l'ogeto corso mi sembra di capire
-					//
-					//
-					// }
-					// else{
-					// swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-					// commenti.get(0).getCorso().setSeguito(false);
-					// txtMonitor.setText(R.string.label_txtMonitor_off);
-					// new FeedbackHandler(context, idCourse, act,
-					// ratingAverage, descriptionCourse, swichFollow,
-					// txtMonitor).execute();
-					// }
 
 				}
 			});
@@ -212,28 +196,27 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		// TODO Auto-generated method stub
 		return getFullFeedbackById();
 	}
-	
-	
-	// metodo che dato lo studente setta la lista dei corsi di interesse dalla stringa degli ids
+
+	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
+	// stringa degli ids
 	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
 		// TODO Auto-generated method stub
 
-		if(stud.getIdsCorsiInteresse() == null){
+		if (stud.getIdsCorsiInteresse() == null) {
 			return false;
-		}else{			
+		} else {
 			String[] listS = stud.getIdsCorsiInteresse().split(",");
 			boolean contenuto = false;
-			
+
 			for (String s : listS) {
-				if(s == corso.getId().toString()){
+				if (s == corso.getId().toString()) {
 					contenuto = true;
 					break;
 				}
 			}
 			return contenuto;
 		}
-		
+
 	}
 
-	
 }
