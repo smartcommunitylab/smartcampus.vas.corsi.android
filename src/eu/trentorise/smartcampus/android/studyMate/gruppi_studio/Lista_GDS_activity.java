@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
@@ -8,6 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -31,6 +35,19 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
+		// codice per sistemare l'actionoverflow
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception ex) {
+			// Ignore
+		}
+
 		// retrieve gruppi
 		/*
 		 * user_gds_list = getUtente().getFrequentedGDS ()
@@ -46,9 +63,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				user_gds_list.add((GruppoDiStudio) gds);
 				// save this info onserver
 			}
-
 			MyApplication.getContextualCollection().clear();
+		}
 
+		// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
+		TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
+		if (user_gds_list.isEmpty()) {
+			tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
+		} else {
+			tv.setVisibility(View.GONE);
 		}
 
 		// Lista_GDS_activity ha la grafica inizializzata a listviewfragment

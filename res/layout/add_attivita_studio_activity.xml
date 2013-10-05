@@ -20,7 +20,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/WhiteSmoke"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -29,10 +28,8 @@
 
                 <EditText
                     android:id="@+id/editText_oggetto"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
                     android:hint="Oggetto" >
                 </EditText>
             </LinearLayout>
@@ -52,18 +49,13 @@
                     android:orientation="vertical"
                     android:paddingRight="20dp" >
 
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Data" />
-
                     <Button
-                        android:id="@+id/data_button"
+                        android:id="@+id/data_button_gds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/WhiteSmoke"
+                        android:background="@drawable/mybutton"
                         android:onClick="showDatePickerDialog"
+                        android:padding="8dp"
                         android:text="Button" />
                 </LinearLayout>
 
@@ -74,18 +66,13 @@
                     android:orientation="vertical"
                     android:paddingLeft="20dp" >
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ora" />
-
                     <Button
-                        android:id="@+id/ora_button"
+                        android:id="@+id/ora_button_gds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/WhiteSmoke"
+                        android:background="@drawable/mybutton"
                         android:onClick="showTimePickerDialog"
+                        android:padding="3dp"
                         android:text="Button" />
                 </LinearLayout>
             </LinearLayout>
@@ -93,7 +80,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/WhiteSmoke"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -102,10 +88,8 @@
 
                 <EditText
                     android:id="@+id/editText_descrizione_impegno"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
                     android:hint="descrizione" />
             </LinearLayout>
 
@@ -141,9 +125,10 @@
 
                         <ImageButton
                             android:id="@+id/imageButton1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/WhiteSmoke"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/mybutton"
+                            android:padding="3dp"
                             android:src="@drawable/phl" />
 
                         <TextView
@@ -162,10 +147,11 @@
 
                         <ImageButton
                             android:id="@+id/imageButton2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/WhiteSmoke" />
-                        <!-- android:src="@drawable/filebrowser" /> -->
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/mybutton"
+                            android:padding="3dp"
+                            android:src="@drawable/filebrowser" />
 
                         <TextView
                             android:id="@+id/textView2"
@@ -179,7 +165,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/WhiteSmoke"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -191,43 +176,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Servizi da monitorare" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:columnCount="2"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:rowCount="2" >
+
+                    <CheckBox
+                        android:id="@+id/CheckBox1_prenotazione_aule"
+                        android:layout_gravity="left"
+                        android:text="Prenotazione aule"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <CheckBox
+                        android:id="@+id/CheckBox2_mensa"
+                        android:layout_gravity="left"
+                        android:text="Mensa"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <CheckBox
+                        android:id="@+id/CheckBox3_tutoring"
+                        android:layout_gravity="left"
+                        android:text="Tutoring"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <CheckBox
+                        android:id="@+id/CheckBox4_biblioteca"
+                        android:layout_gravity="left"
+                        android:text="Biblioteca"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </GridLayout>
             </LinearLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/WhiteSmoke"
-                android:columnCount="2"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:rowCount="2" >
-
-                <CheckBox
-                    android:id="@+id/CheckBox1_prenotazione_aule"
-                    android:layout_gravity="left"
-                    android:text="Prenotazione aule"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/CheckBox2_mensa"
-                    android:layout_gravity="left"
-                    android:text="Mensa"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/CheckBox3_tutoring"
-                    android:layout_gravity="left"
-                    android:text="Tutoring"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/CheckBox4_biblioteca"
-                    android:layout_gravity="left"
-                    android:text="Biblioteca"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </GridLayout>
         </LinearLayout>
     </ScrollView>
 

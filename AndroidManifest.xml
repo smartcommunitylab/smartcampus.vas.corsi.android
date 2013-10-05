@@ -241,7 +241,8 @@
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Add_attivita_studio_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_attivita_studio_activity"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Crea_GDS_activity"

@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/DarkBlue"
+        android:background="@color/smartn_theme_color"
         android:orientation="vertical" >
 
         <TextView

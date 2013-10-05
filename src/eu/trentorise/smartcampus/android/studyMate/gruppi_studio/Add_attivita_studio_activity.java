@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,14 +46,24 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		final int mHour = c.get(Calendar.HOUR_OF_DAY);
 
 		// retrieving & initializing some button
-		Button btn_data = (Button) findViewById(R.id.data_button);
-		Button btn_time = (Button) findViewById(R.id.ora_button);
+		Button btn_data = (Button) findViewById(R.id.data_button_gds);
+		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
+
+		if (mMinute < 10) {
+			if (mHour < 10) {// minute and hour<10
+				btn_time.setText("0" + mHour + ":0" + mMinute);
+			} else
+				// onlyminute<10
+				btn_time.setText(mHour + ":0" + mMinute);
+		} else {
+			if (mHour < 10) {// only hour<10
+				btn_time.setText("0" + mHour + ":" + mMinute);
+			} else
+				// minute and hour>10
+				btn_time.setText(mHour + ":" + mMinute);
+		}
 
 		btn_data.setText(mDay + "/" + mMonth + "/" + mYear);
-		if (mMinute < 10) {
-			btn_time.setText(mHour + ":0" + mMinute);
-		}
-		btn_time.setText(mHour + ":" + mMinute);
 
 	}
 
@@ -76,9 +86,9 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			String oggetto = ((TextView) this
 					.findViewById(R.id.editText_oggetto)).getText().toString();
 
-			String data = ((Button) this.findViewById(R.id.data_button))
+			String data = ((Button) this.findViewById(R.id.data_button_gds))
 					.getText().toString();
-			String ora = ((Button) this.findViewById(R.id.ora_button))
+			String ora = ((Button) this.findViewById(R.id.ora_button_gds))
 					.getText().toString();
 
 			String descrizione = ((TextView) this
@@ -103,18 +113,14 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setTutoring(tutoring);
 			nuova_attivitaStudio.setBiblioteca(biblioteca);
 
-			ListView impegni_listview = (ListView) findViewById(R.id.lista_impegni);
-			/*
-			 * BACO QUI!!
-			 */
-			((AttivitaStudioAdapter) impegni_listview.getAdapter())
-					.getEntries().add(nuova_attivitaStudio);
-			((AttivitaStudioAdapter) impegni_listview.getAdapter())
-					.notifyDataSetChanged();
+			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
 			Toast.makeText(getApplicationContext(), "attività studio creata",
 					Toast.LENGTH_SHORT).show();
-			Add_attivita_studio_activity.this.finish();
+			Intent intent = new Intent(Add_attivita_studio_activity.this,
+					Overview_GDS.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 		case android.R.id.home: {
 			Add_attivita_studio_activity.this.finish();
@@ -153,7 +159,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			Button b = (Button) Add_attivita_studio_activity.this
-					.findViewById(R.id.data_button);
+					.findViewById(R.id.data_button_gds);
 			b.setText(day + "/" + month + "/" + year);
 			// b.refreshDrawableState();
 
@@ -179,11 +185,18 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			Button b = (Button) Add_attivita_studio_activity.this
-					.findViewById(R.id.ora_button);
+					.findViewById(R.id.ora_button_gds);
 			if (minute < 10) {
-				b.setText(hourOfDay + ":0" + minute);
+				if (hourOfDay < 10) {
+					b.setText("0" + hourOfDay + ":0" + minute);
+				} else
+					b.setText(hourOfDay + ":0" + minute);
+			} else {
+				if (hourOfDay < 10) {
+					b.setText("0" + hourOfDay + ":" + minute);
+				} else
+					b.setText(hourOfDay + ":" + minute);
 			}
-			b.setText(hourOfDay + ":" + minute);
 			// b.refreshDrawableState();
 
 		}

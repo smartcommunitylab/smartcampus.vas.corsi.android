@@ -19,9 +19,9 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	private GruppoDiStudio contextualGDS;
-	private ArrayList<ChatObject> contextualForum;
-	private ArrayList<AttivitaStudio> contextualListaImpegni;
+	private GruppoDiStudio contextualGDS = new GruppoDiStudio();
+	private ArrayList<ChatObject> contextualForum = new ArrayList<ChatObject>();
+	private ArrayList<AttivitaStudio> contextualListaImpegni = new ArrayList<AttivitaStudio>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				/*
 				 * todo here
 				 */
+
+				contextualListaImpegni.add((AttivitaStudio) obj);
 			}
 
 			MyApplication.getContextualCollection().clear();

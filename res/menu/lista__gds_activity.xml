@@ -7,12 +7,12 @@
         android:title="mostra in griglia"/>
     <item
         android:id="@+id/action_iscriviti_nuovo_gruppo"
-        android:icon="@drawable/ic_action_add"
+        android:icon="@drawable/ic_social_add_group"
         android:showAsAction="ifRoom"
         android:title="iscriviti ad un gruppo"/>
     <item
         android:id="@+id/action_crea_gruppo"
-        android:icon="@drawable/ic_social_add_group"
+        android:icon="@drawable/ic_action_add"
         android:showAsAction="ifRoom"
         android:title="crea gruppo"/>
 

@@ -23,9 +23,7 @@
     <ListView
         android:id="@+id/searchresults_gds_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:textColor="@color/white_smartn_theme" >
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>
