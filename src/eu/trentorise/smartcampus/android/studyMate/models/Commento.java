@@ -15,6 +15,17 @@ public class Commento {
 
 	// data in cui e' stato scritto commento
 	private String data_inserimento;
+	
+	// se il commento è stato approvato
+	private boolean  approved;
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
 
 	// valutazione contenuto
 	private float rating_contenuto;
