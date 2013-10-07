@@ -47,6 +47,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	Button swichFollow;
 	public static ProgressDialog pd;
 	TextView txtMonitor;
+	private Studente studenteUser;
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
 			SherlockFragmentActivity act, RatingBar ratingAverage,
@@ -92,6 +93,38 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
+		// prendo i dati aggiornati dello studente
+		request = new MessageRequest(
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_STUDENT_DATA);
+		request.setMethod(Method.GET);
+		
+		try {
+			response = mProtocolCarrier.invokeSync(request,
+					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+			if (response.getHttpStatus() == 200) {
+
+				String bodyStudente = response.getBody();
+				studenteUser = Utils.convertJSONToObject(bodyStudente, Studente.class);
+				
+			} else {
+				return null;
+			}
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
@@ -117,9 +150,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			pd.dismiss();
 			act.finish();
 		} else {
-
+// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			if (isContainsInCorsiInteresse(commenti.get(0).getId_studente(),
+			if (isContainsInCorsiInteresse(studenteUser,
 					commenti.get(0).getCorso())) {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 				txtMonitor.setText(R.string.label_txtMonitor_on);
@@ -185,6 +218,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		return getFullFeedbackById();
 	}
 
+	
 	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
 	// stringa degli ids
 	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
@@ -197,9 +231,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			boolean contenuto = false;
 
 			for (String s : listS) {
-				if (s == corso.getId().toString()) {
+				if (s.equals(corso.getId().toString())) {
 					contenuto = true;
-					break;
 				}
 			}
 			return contenuto;
