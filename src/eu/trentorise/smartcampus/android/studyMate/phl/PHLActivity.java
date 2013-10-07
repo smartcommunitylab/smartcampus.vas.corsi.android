@@ -3,40 +3,36 @@ package eu.trentorise.smartcampus.android.studyMate.phl;
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 
 public class PHLActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_phl);
-		final ActionBar ab = getSupportActionBar();
-		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		ab.setHomeButtonEnabled(true);
-		ab.setDisplayHomeAsUpEnabled(true);
-
-		/** TabHost will have Tabs */
-		String tab2_txt = getResources().getString(R.string.my_courses);
-
-		Tab tab2 = ab
-				.newTab()
-				.setText(tab2_txt)
-				.setTabListener(
-						new TabListener<PHLCorsiFragment>(this, "tab2",
-								PHLCorsiFragment.class));
-		ab.addTab(tab2);
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.fragment_phl_corsi);
 	}
 
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		ListView listViewCorsi = (ListView) findViewById(
+				R.id.listViewCorsiPHL);
+
+		Bundle arguments = new Bundle();
+		PHLengine handlerPersonalCoursesPHL = new PHLengine(this
+				.getApplicationContext(), this, listViewCorsi,
+				this);
+		handlerPersonalCoursesPHL.execute(arguments);
+		
+	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();

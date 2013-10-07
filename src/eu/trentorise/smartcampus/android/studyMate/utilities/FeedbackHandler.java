@@ -134,8 +134,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				public void onClick(View v) {
 
 				
-//						new SetCourseAsFollowHandler(context, swichFollow,
-//								txtMonitor).execute(commenti.get(0).getCorso());
+						new SetCourseAsFollowHandler(context, swichFollow,
+								txtMonitor).execute(commenti.get(0).getCorso());
 //						swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
 						// txtMonitor.setText(R.string.label_txtMonitor_off);
 						// fare post

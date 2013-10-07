@@ -40,7 +40,7 @@
     <string name="notices_btn_label">Notifiche</string>
     <string name="title_activity_notices">Notifiche</string>
     <string name="title_activity_my_agenda">Agenda</string>
-    <string name="title_activity_phl">Materiali</string>
+    <string name="title_activity_phl">PHL</string>
     <string name="title_activity_find_courses">Ricerca corsi</string>
     <string name="tab_overview">Overview</string>
     <string name="tab_courses">Corsi</string>

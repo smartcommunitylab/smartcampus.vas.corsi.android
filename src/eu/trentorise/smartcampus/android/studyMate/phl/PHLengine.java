@@ -107,7 +107,7 @@ public class PHLengine extends AsyncTask<Bundle, Void, List<Corso>> {
 			MaterialItem[] items = new MaterialItem[result.size()];
 			int i = 0;
 			for (Corso s : result) {
-				items[i++] = new MaterialItem("", s.getNome(),
+				items[i++] = new MaterialItem("Corsi che seguo:", s.getNome(),
 						R.drawable.ic_folder, "");
 				// items[i++] = new TitledItem("Corsi da libretto",
 				// s.getNome());
