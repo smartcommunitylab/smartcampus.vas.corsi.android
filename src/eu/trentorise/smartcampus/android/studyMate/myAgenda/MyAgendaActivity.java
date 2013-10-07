@@ -277,6 +277,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("corso",
 						CoursesHandler.corsoSelezionato.getNome());
+				intentAddRating.putExtra("IdCorso",
+						CoursesHandler.corsoSelezionato.getId());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 

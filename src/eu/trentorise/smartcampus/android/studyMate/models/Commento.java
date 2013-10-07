@@ -17,15 +17,7 @@ public class Commento {
 	private String data_inserimento;
 	
 	// se il commento è stato approvato
-	private boolean  approved;
-
-	public boolean isApproved() {
-		return approved;
-	}
-
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
+	private boolean approved;
 
 	// valutazione contenuto
 	private float rating_contenuto;
@@ -123,6 +115,14 @@ public class Commento {
 
 	public void setRating_esame(float rating_esame) {
 		this.rating_esame = rating_esame;
+	}
+	
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 }

@@ -283,8 +283,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesPassedHandler.corsoSelezionato);
-
+							commento.setCorso(CoursesPassedHandler.corsoSelezionato);							
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -300,7 +299,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 									.getUserId()));
 							// stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
-
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this)
 									.execute(commento);
