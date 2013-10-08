@@ -16,27 +16,17 @@ import com.actionbarsherlock.app.SherlockActivity;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
-import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.phl.PHLActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
 public class MyUniActivity extends SherlockActivity {
@@ -95,65 +85,68 @@ public class MyUniActivity extends SherlockActivity {
 		// your code here
 
 		// new LoadUserDataFromACServiceTask().execute();
+		
+			findViewById(R.id.my_agenda_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									MyAgendaActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.my_agenda_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								MyAgendaActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.find_courses_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									FindHomeActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.find_courses_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								FindHomeActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.phl_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									PHLActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MyUniActivity.this,
-						PHLActivity.class);
-				MyUniActivity.this.startActivity(intent);
-			}
-		});
+			findViewById(R.id.notices_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									NoticesActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.notices_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								NoticesActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.rate_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									CoursesPassedActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.rate_btn).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MyUniActivity.this,
-						CoursesPassedActivity.class);
-				MyUniActivity.this.startActivity(intent);
-			}
-		});
+			findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+					new OnClickListener() {
 
-		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								Lista_GDS_activity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									Lista_GDS_activity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+		
 	}
 
 	@Override
@@ -204,8 +197,13 @@ public class MyUniActivity extends SherlockActivity {
 
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				// Cancelled by user
+//				Toast.makeText(MyUniActivity.this, "Per usare StudyMate devi essere loggato!",
+//				Toast.LENGTH_SHORT).show();
+//				MyUniActivity.this.finish();
 			} else {
 				// Operation failed for some reason
+				Toast.makeText(MyUniActivity.this, "Ops! c'è stato un errore!",
+						Toast.LENGTH_SHORT).show();
 			}
 		}
 		// other code here
@@ -250,7 +248,6 @@ public class MyUniActivity extends SherlockActivity {
 				e.printStackTrace();
 				return null;
 			}
-			
 
 		}
 
