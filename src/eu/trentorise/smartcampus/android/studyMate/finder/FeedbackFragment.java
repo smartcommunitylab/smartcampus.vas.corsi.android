@@ -1,6 +1,4 @@
-
 package eu.trentorise.smartcampus.android.studyMate.finder;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +17,12 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-
 import eu.trentorise.smartcampus.android.studyMate.models.Author;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
-
 
 public class FeedbackFragment extends SherlockFragment {
 

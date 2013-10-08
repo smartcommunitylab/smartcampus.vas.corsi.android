@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
-
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

@@ -13,7 +13,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
 
-
 public class NoticesActivity extends SherlockFragmentActivity {
 
 	private TextView textViewTitleNotices;

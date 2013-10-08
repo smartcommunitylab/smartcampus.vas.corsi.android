@@ -2,8 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.phl;
 
 import java.util.Collections;
 
-import java.util.Collections;
-
 import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;

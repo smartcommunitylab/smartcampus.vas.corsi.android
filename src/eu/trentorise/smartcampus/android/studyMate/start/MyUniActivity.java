@@ -1,4 +1,3 @@
-
 package eu.trentorise.smartcampus.android.studyMate.start;
 
 import smartcampus.android.template.standalone.R;
@@ -17,6 +16,12 @@ import com.actionbarsherlock.app.SherlockActivity;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
+import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
+import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
+import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
+import eu.trentorise.smartcampus.android.studyMate.phl.PHLActivity;
+import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 import smartcampus.android.template.standalone.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -43,9 +41,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-
 public class AddEvent4coursesActivity extends SherlockFragmentActivity {
-
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -107,15 +103,6 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				new PostEvent(getApplicationContext(), evento).execute();
-			}
-		});
-		Button button_cancel = (Button) findViewById(R.id.button_annulla4Course);
-		button_cancel.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
 			}
 		});
 

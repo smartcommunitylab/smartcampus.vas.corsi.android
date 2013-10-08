@@ -19,7 +19,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.CourseLite;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
 
-
 public class ResultSearchedActivity extends SherlockFragmentActivity {
 
 	public List<CourseLite> courses;

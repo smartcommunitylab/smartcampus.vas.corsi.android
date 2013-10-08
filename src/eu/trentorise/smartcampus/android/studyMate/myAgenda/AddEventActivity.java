@@ -102,15 +102,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
-		Button button_cancel = (Button) findViewById(R.id.button_annulla);
-		button_cancel.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
 	}
 
 	public void updateDisplay() {
@@ -127,7 +119,6 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 		}
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {

@@ -1,6 +1,4 @@
-
 package eu.trentorise.smartcampus.android.studyMate.models;
-
 
 import java.io.Serializable;
 import java.sql.Time;

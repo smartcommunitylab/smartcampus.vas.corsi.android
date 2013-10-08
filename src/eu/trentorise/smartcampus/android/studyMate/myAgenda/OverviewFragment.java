@@ -38,7 +38,6 @@ public class OverviewFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 	}
 
-
 	public void onStart() {
 		super.onStart();
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
@@ -54,4 +53,5 @@ public class OverviewFragment extends SherlockFragment {
 		eventsHandler.execute();
 
 	}
+
 }

@@ -1,4 +1,3 @@
-
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import java.util.ArrayList;

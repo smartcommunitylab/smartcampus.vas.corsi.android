@@ -2,8 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
-import smartcampus.android.studyMate.start.MyUniActivity;
-
 public final class SmartUniDataWS {
 
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
@@ -19,8 +17,6 @@ public final class SmartUniDataWS {
 	// Courses ///////////////////////////////////////////////////////////
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corso/me";
 	public static final String GET_WS_ALLCOURSES = "/corso/all";
-	
-	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
 
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
 

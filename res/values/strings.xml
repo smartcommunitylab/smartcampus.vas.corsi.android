@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 <resources>
 
@@ -100,7 +100,6 @@
     <string name="rating_contextExplain_materiali">I materiali forniti sono adatti ai fini dell\'esame?</string>
     <string name="rating_context_esame">Esame</string>
     <string name="rating_contextExplain_esame">L\'esame è coerente agli argomenti trattati?</string>
-
     <string name="title_activity_work_in_progress">WorkInProgress</string>
     <string name="rating_text_icon">Vota</string>
     <string name="title_activity_lista__gds_activity">Lista_GDS_activity</string>
@@ -111,6 +110,5 @@
     <string name="toast_switchfollow_success"> Successo! Ora potrai accedere ai materiali e agli eventi di questo corso. </string>
     <string name="toast_rate_access_denied"> Non puoi votare questo corso, prima devi passare l esame. </string>
     <string name="toast_switchfollow_off"> Non segui più questo corso </string>
-
 
 </resources>

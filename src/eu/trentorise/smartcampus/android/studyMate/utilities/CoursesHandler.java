@@ -103,7 +103,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 		super.onPostExecute(result);
 		if (result == null) {
 
-
 			Toast.makeText(context, "Ops! C'� stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
@@ -134,6 +133,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 							corsoSelezionato = result.get(arg2);
 
 							CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
+
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();

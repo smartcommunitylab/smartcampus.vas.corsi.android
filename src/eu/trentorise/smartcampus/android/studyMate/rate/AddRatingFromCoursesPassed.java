@@ -60,12 +60,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 	}
 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-	}
-
 	private void setRatingContexts(Commento commento) {
 
 		if (commento == null) {
@@ -248,6 +242,17 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 				}
 
 			});
+
+			// final RatingBar rbCont = (RatingBar)
+			// findViewById(R.id.ratingBarContextContenuti);
+			// final RatingBar rbCfu = (RatingBar)
+			// findViewById(R.id.ratingBarContextCfu);
+			// final RatingBar rbLez = (RatingBar)
+			// findViewById(R.id.ratingBarContextLezioni);
+			// final RatingBar rbMat = (RatingBar)
+			// findViewById(R.id.ratingBarContextMateriali);
+			// final RatingBar rbExam = (RatingBar)
+			// findViewById(R.id.ratingBarContextEsame);
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 			pd.dismiss();
@@ -278,7 +283,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-
 							commento.setCorso(CoursesPassedHandler.corsoSelezionato);							
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
@@ -295,7 +299,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 									.getUserId()));
 							// stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
-
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this)
 									.execute(commento);
