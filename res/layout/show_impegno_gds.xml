@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabDetEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/oggetto_impegno_gds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Oggetto"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/smartn_theme_color"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/text_data_impegno_gds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="01/01/01"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textOra_impegno_gds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:text="14:30"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textLocation_impegno_gds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Location" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:id="@+id/textAula_impegno_gds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:text="Materia" />
+
+    <TextView
+        android:id="@+id/textDescription_impegno_gds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:text="Descrizione" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:drawableTop="@drawable/ic_pdffile"
+        android:text="file to download.ext"
+        android:textAppearance="@style/TextAppearance.Sherlock.Small" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="2"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:rowCount="2" >
+
+        <CheckBox
+            android:id="@+id/CheckBox1_prenotazione_aule"
+            android:layout_gravity="left"
+            android:editable="false"
+            android:text="Prenotazione aule"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <CheckBox
+            android:id="@+id/CheckBox2_mensa"
+            android:layout_gravity="left"
+            android:editable="false"
+            android:text="Mensa"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <CheckBox
+            android:id="@+id/CheckBox3_tutoring"
+            android:layout_gravity="left"
+            android:editable="false"
+            android:text="Tutoring"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <CheckBox
+            android:id="@+id/CheckBox4_biblioteca"
+            android:layout_gravity="left"
+            android:editable="false"
+            android:text="Biblioteca"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </GridLayout>
+
+</LinearLayout>

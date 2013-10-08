@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -44,7 +44,7 @@
         android:protectionLevel="signature" />
 
     <application
-        android:name="smartcampus.android.studyMate.gruppi_studio.MyApplication"
+        android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/smartuni_logo_base"
         android:label="@string/app_name"
@@ -77,7 +77,7 @@
             android:value="SmartCampus Android Template" />
 
         <activity
-            android:name="smartcampus.android.studyMate.start.MyUniActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/app_name"
             android:logo="@drawable/smartuni_logo" >
@@ -127,91 +127,91 @@
             android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="smartcampus.android.studyMate.notices.NoticesActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/notices_white"
             android:label="@string/title_activity_notices" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.myAgenda.MyAgendaActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/myagenda_white"
             android:label="@string/title_activity_my_agenda" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.phl.PHLActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.phl.PHLActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.phl.PHL4Courses"
+            android:name="eu.trentorise.smartcampus.android.studyMate.phl.PHL4Courses"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/phl_white"
             android:label="@string/title_activity_phl" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.finder.FindHomeActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_courses"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.finder.ResultSearchedActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.finder.ResultSearchedActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_result_searched" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.finder.FindRecensioniActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.finder.FindRecensioniActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_recensioni" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.finder.FindHomeCourseActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity"
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_home_course" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.myAgenda.AddEventActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEventActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_action_add"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.myAgenda.AddEvent4coursesActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEvent4coursesActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_action_add"
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.myAgenda.AddRateActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddRateActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed"
+            android:name="eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.start.WorkInProgress"
+            android:name="eu.trentorise.smartcampus.android.studyMate.start.WorkInProgress"
             android:label="@string/title_activity_work_in_progress" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.rate.CoursesPassedActivity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
         </activity>
 
         <receiver
-            android:name="smartcampus.android.template.standalone.NotificationReceiver"
+            android:name="eu.trentorise.smartcampus.android.template.standalone.NotificationReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -223,35 +223,36 @@
         <service android:name="smartcampus.android.template.standalone.NotificationService" />
 
         <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_lista__gds_activity" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.Overview_GDS"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Overview_GDS"
             android:label="@string/title_activity_overview__gds" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.RicercaGruppiGenerale_activity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.RicercaGruppiGenerale_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_gicercagruppigenerale_activity"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.Add_attivita_studio_activity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Add_attivita_studio_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_add_attivita_studio_activity"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.Crea_GDS_activity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Crea_GDS_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_crea__gds_activity"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
-        <activity
-            android:name="smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results"
-            android:configChanges="orientation|keyboard" >
+        <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results" >
+        </activity>
+        <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS" >
         </activity>
     </application>
 

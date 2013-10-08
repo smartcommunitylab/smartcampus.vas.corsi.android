@@ -117,7 +117,7 @@
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:paddingLeft="10dp"
-            android:drawableTop="@drawable/gruppistudio"
+            android:drawableTop="@drawable/ic_studygroups"
             android:text="@string/gruppi_studio_label" >
         </Button>
     </LinearLayout>
