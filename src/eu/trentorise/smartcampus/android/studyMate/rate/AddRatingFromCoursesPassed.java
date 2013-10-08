@@ -46,6 +46,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	public static ProgressDialog pd;
 	ExpandableListView list = null;
 	private RatingRowGroup rrg;
+	public SherlockFragmentActivity act;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
 
+//		act = this.getApplication();
 		new LoaderFeedbackData(AddRatingFromCoursesPassed.this).execute();
 
 	}
@@ -299,11 +301,13 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 									.getUserId()));
 							// stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud);
+							
+							new ProgressDialog(AddRatingFromCoursesPassed.this);
+							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del commento di "+CoursesPassedHandler.corsoSelezionato+" in corso ", "Caricamento...");
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this)
 									.execute(commento);
-							Toast.makeText(getApplicationContext(),
-									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
+							
 
 							finish();
 						}

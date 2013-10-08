@@ -1,11 +1,18 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -20,7 +27,17 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 	public Context context;
 	String body;
 	Commento commento;
+	public SherlockFragmentActivity act;
+	public static ProgressDialog pd;
 
+	@Override
+	protected void onPreExecute() {
+		// TODO Auto-generated method stub
+		super.onPreExecute();
+//		new ProgressDialog(context);
+//		pd = ProgressDialog.show(act, "Informazioni del corso di ", "Caricamento...");
+	}
+	
 	public AddFeedbackHandler(Context context) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
@@ -133,6 +150,10 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 	protected void onPostExecute(Commento result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		
+		Toast.makeText(context,
+				"Voto Aggiunto!", Toast.LENGTH_LONG).show();
+		AddRatingFromCoursesPassed.pd.dismiss();
 
 	}
 
