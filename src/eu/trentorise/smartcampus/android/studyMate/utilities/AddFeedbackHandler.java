@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -38,9 +39,10 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 //		pd = ProgressDialog.show(act, "Informazioni del corso di ", "Caricamento...");
 	}
 	
-	public AddFeedbackHandler(Context context) {
+	public AddFeedbackHandler(Context context, SherlockFragmentActivity act) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
+		this.act = act;
 	}
 
 	@Override
@@ -154,6 +156,8 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 		Toast.makeText(context,
 				"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 		AddRatingFromCoursesPassed.pd.dismiss();
+		act.finish();
+		
 
 	}
 

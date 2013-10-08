@@ -28,6 +28,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -47,7 +48,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	ExpandableListView list = null;
 	private RatingRowGroup rrg;
 	public SherlockFragmentActivity act;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,9 +57,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
 
-//		act = this.getApplication();
 		new LoaderFeedbackData(AddRatingFromCoursesPassed.this).execute();
-
 	}
 
 	private void setRatingContexts(Commento commento) {
@@ -303,13 +301,13 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							commento.setId_studente(stud);
 							
 							new ProgressDialog(AddRatingFromCoursesPassed.this);
-							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del commento di "+CoursesPassedHandler.corsoSelezionato+" in corso ", "Caricamento...");
+							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del tuo commento per "+commento.getCorso().getNome().toString()+" in corso ", "Caricamento...");
 							new AddFeedbackHandler(
-									AddRatingFromCoursesPassed.this)
+									AddRatingFromCoursesPassed.this, AddRatingFromCoursesPassed.this)
 									.execute(commento);
 							
 
-							finish();
+							
 						}
 					});
 
