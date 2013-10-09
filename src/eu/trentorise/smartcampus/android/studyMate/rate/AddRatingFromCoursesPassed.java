@@ -283,7 +283,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesPassedHandler.corsoSelezionato);							
+							commento.setCorso(CoursesPassedHandler.corsoSelezionato.getId());							
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -297,11 +297,12 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Studente stud = new Studente();
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
-							// stud.setNome(MyUniActivity.bp.getName());
-							commento.setId_studente(stud);
+							stud.setNome(MyUniActivity.bp.getName());
+							commento.setId_studente(stud.getId());
+							commento.setNome_studente(stud.getNome());
 							
 							new ProgressDialog(AddRatingFromCoursesPassed.this);
-							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del tuo commento per "+commento.getCorso().getNome().toString()+" in corso ", "Caricamento...");
+							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del tuo commento per "+CoursesPassedHandler.corsoSelezionato.getNome().toString()+" in corso ", "Caricamento...");
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this, AddRatingFromCoursesPassed.this)
 									.execute(commento);
@@ -329,7 +330,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(
-							Long.parseLong(MyUniActivity.bp.getUserId()),
 							CoursesPassedHandler.corsoSelezionato.getId()));
 			request.setMethod(Method.GET);
 

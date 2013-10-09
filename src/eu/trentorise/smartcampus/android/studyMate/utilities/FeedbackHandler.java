@@ -41,13 +41,17 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	TextView tvCourseName;
 	RatingBar ratingAverage;
 	ExpandableListView listComments;
-	public static List<Commento> feedbackInfoList;
 	public SherlockFragmentActivity act;
 	TextView descriptionCourse;
 	Button swichFollow;
 	public static ProgressDialog pd;
 	TextView txtMonitor;
 	private Studente studenteUser;
+	private List<Commento> commenti;
+	
+	public static List<Commento> feedbackInfoList;
+	public static Corso corsoInfo;
+	
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
 			SherlockFragmentActivity act, RatingBar ratingAverage,
@@ -63,6 +67,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private List<Commento> getFullFeedbackById() {
 
+		
+		// Richiedo la lista dei commenti
+		
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -95,22 +102,21 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		}
 		
 		
-		
-		// prendo i dati aggiornati dello studente
-		request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_STUDENT_DATA);
+		// prendo i dati aggiornati del corso
+		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String.valueOf(idCourse)));
 		request.setMethod(Method.GET);
-		
+
 		try {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
 			if (response.getHttpStatus() == 200) {
 
-				String bodyStudente = response.getBody();
-				studenteUser = Utils.convertJSONToObject(bodyStudente, Studente.class);
-				
+				String bodyCorso = response.getBody();
+				corsoInfo = Utils.convertJSONToObject(bodyCorso,
+						Corso.class);
+
 			} else {
 				return null;
 			}
@@ -125,6 +131,38 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			e.printStackTrace();
 		}
 		
+		
+		
+
+		// prendo i dati aggiornati dello studente
+		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.GET_WS_STUDENT_DATA);
+		request.setMethod(Method.GET);
+
+		try {
+			response = mProtocolCarrier.invokeSync(request,
+					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+
+			if (response.getHttpStatus() == 200) {
+
+				String bodyStudente = response.getBody();
+				studenteUser = Utils.convertJSONToObject(bodyStudente,
+						Studente.class);
+
+			} else {
+				return null;
+			}
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
@@ -150,10 +188,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			pd.dismiss();
 			act.finish();
 		} else {
-// prendo studente/me e lo assegno a stud
+			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			if (isContainsInCorsiInteresse(studenteUser,
-					commenti.get(0).getCorso())) {
+			if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 				txtMonitor.setText(R.string.label_txtMonitor_on);
 			} else {
@@ -166,44 +203,44 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				@Override
 				public void onClick(View v) {
 
-				
-						new SetCourseAsFollowHandler(context, swichFollow,
-								txtMonitor).execute(commenti.get(0).getCorso());
+					new SetCourseAsFollowHandler(context, swichFollow,
+							txtMonitor).execute(corsoInfo);
 				}
 
 			});
 
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
-			act.getSupportActionBar().setTitle(
-					feedbackInfoList.get(0).getCorso().getNome());
-			ratingAverage.setRating((float) feedbackInfoList.get(0).getCorso()
+			act.getSupportActionBar().setTitle(corsoInfo.getNome());
+			ratingAverage.setRating((float) corsoInfo
 					.getValutazione_media());
 
 			RatingBar ratingCont = (RatingBar) act
 					.findViewById(R.id.ratingBarRowContenuti);
-			ratingCont.setRating(feedbackInfoList.get(0).getCorso().getRating_contenuto());
+			ratingCont.setRating(corsoInfo
+					.getRating_contenuto());
 
 			RatingBar ratingCaricoStudio = (RatingBar) act
 					.findViewById(R.id.ratingBarRowCfu);
-			ratingCaricoStudio.setRating(feedbackInfoList.get(0).getCorso()
+			ratingCaricoStudio.setRating(corsoInfo
 					.getRating_carico_studio());
 
 			RatingBar ratingLezioni = (RatingBar) act
 					.findViewById(R.id.ratingBarRowLezioni);
-			ratingLezioni
-					.setRating(feedbackInfoList.get(0).getCorso().getRating_lezioni());
+			ratingLezioni.setRating(corsoInfo
+					.getRating_lezioni());
 
 			RatingBar ratingMateriali = (RatingBar) act
 					.findViewById(R.id.ratingBarRowMateriali);
-			ratingMateriali.setRating(feedbackInfoList.get(0).getCorso()
+			ratingMateriali.setRating(corsoInfo
 					.getRating_materiali());
 
 			RatingBar ratingEsame = (RatingBar) act
 					.findViewById(R.id.ratingBarRowEsame);
-			ratingEsame.setRating(feedbackInfoList.get(0).getCorso().getRating_esame());
+			ratingEsame.setRating(corsoInfo
+					.getRating_esame());
 
-			descriptionCourse.setText(feedbackInfoList.get(0).getCorso()
+			descriptionCourse.setText(corsoInfo
 					.getDescrizione());
 
 			pd.dismiss();
@@ -218,7 +255,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		return getFullFeedbackById();
 	}
 
-	
 	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
 	// stringa degli ids
 	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {

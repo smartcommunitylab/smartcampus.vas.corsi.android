@@ -5,10 +5,12 @@ public class Commento {
 	private int id;
 
 	// corso di riferimento
-	private Corso corso;
+	private long corso;
 
 	// utente che ha scritto commento
-	private Studente id_studente;
+	private long id_studente;
+	
+	private String nome_studente;
 
 	// testo del commento
 	private String testo;
@@ -45,19 +47,19 @@ public class Commento {
 		this.id = id;
 	}
 
-	public Corso getCorso() {
+	public long getCorso() {
 		return corso;
 	}
 
-	public void setCorso(Corso corso) {
+	public void setCorso(long corso) {
 		this.corso = corso;
 	}
 
-	public Studente getId_studente() {
+	public long getId_studente() {
 		return id_studente;
 	}
 
-	public void setId_studente(Studente id_studente) {
+	public void setId_studente(long id_studente) {
 		this.id_studente = id_studente;
 	}
 
@@ -124,5 +126,15 @@ public class Commento {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+
+	public String getNome_studente() {
+		return nome_studente;
+	}
+
+	public void setNome_studente(String nome_studente) {
+		this.nome_studente = nome_studente;
+	}
+	
+	
 
 }

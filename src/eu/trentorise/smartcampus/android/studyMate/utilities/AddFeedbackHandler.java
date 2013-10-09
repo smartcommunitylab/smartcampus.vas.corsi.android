@@ -68,7 +68,8 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 				body = response.getBody();
 				Studente stud = Utils.convertJSONToObject(body, Studente.class);
-				commento.setId_studente(stud);
+				commento.setId_studente(stud.getId());
+				commento.setNome_studente(stud.getNome());
 
 			} else {
 				return null;
@@ -86,7 +87,7 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String
-						.valueOf(commento.getCorso().getId())));
+						.valueOf(commento.getCorso())));
 		request.setMethod(Method.GET);
 
 		try {
@@ -97,7 +98,7 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 
 				body = response.getBody();
 				Corso corso = Utils.convertJSONToObject(body, Corso.class);
-				commento.setCorso(corso);
+				commento.setCorso(corso.getId());
 
 			} else {
 				return null;

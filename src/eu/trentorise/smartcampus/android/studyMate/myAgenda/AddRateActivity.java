@@ -284,7 +284,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesHandler.corsoSelezionato);
+							commento.setCorso(CoursesHandler.corsoSelezionato.getId());
 
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
@@ -299,7 +299,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							Studente stud = new Studente();
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
-							commento.setId_studente(stud);
+							commento.setId_studente(stud.getId());
 
 //							new AddFeedbackHandler(getParent()
 //									.getApplicationContext(),getParent()).execute(commento);
@@ -327,7 +327,6 @@ public class AddRateActivity extends SherlockFragmentActivity {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(
-							Long.parseLong(MyUniActivity.bp.getUserId()),
 							CoursesHandler.corsoSelezionato.getId()));
 			request.setMethod(Method.GET);
 

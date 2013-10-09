@@ -58,8 +58,7 @@ public class FeedbackFragment extends SherlockFragment {
 			titleRatingFeedback.setVisibility(View.GONE);
 			return view;
 		} else {
-			titleRatingFeedback.setText(FeedbackHandler.feedbackInfoList.get(0)
-					.getCorso().getNome());
+			titleRatingFeedback.setText(FeedbackHandler.corsoInfo.getNome());
 
 		}
 
@@ -70,7 +69,7 @@ public class FeedbackFragment extends SherlockFragment {
 			for (int i = 0; i < comments.size(); i++) {
 				FeedbackRowGroup feedb = new FeedbackRowGroup();
 				Author auth = new Author();
-				auth.setName(comments.get(i).getId_studente().getNome());
+				auth.setName(comments.get(i).getNome_studente());
 				feedb.setAuthor(auth);
 
 				feedb.setRating((comments.get(i).getRating_carico_studio()

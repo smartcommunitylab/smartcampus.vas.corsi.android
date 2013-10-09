@@ -27,6 +27,8 @@ public final class SmartUniDataWS {
 	public static String GET_WS_ALLCOURSES_OF_DEGREE(long id_degree) {
 		return "/corso/corsolaurea/" + String.valueOf(id_degree);
 	}
+	
+	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
 	// Courses complete
 	public static final String GET_WS_COURSE_COMPLETE_DATA(String idCourse) {
@@ -37,7 +39,7 @@ public final class SmartUniDataWS {
 	public static final String GET_WS_MY_COURSES_PASSED = "/corso/superati/me";
 
 	public static final String GET_WS_COURSE_IS_PASSED(String idCourse) {
-		return "/corso/superati/" + idCourse;
+		return "/corso/superato/" + idCourse;
 	}
 
 	// Events /////////////////////////////////////////////////////////////
@@ -68,14 +70,11 @@ public final class SmartUniDataWS {
 	// Feedback //////////////////////////////////////////////////////////
 	public static String GET_WS_FEEDBACK_OF_COURSE(long idCourse) {
 		return "/corso/" + String.valueOf(idCourse) + "/commento/all";
-		// return "/commento/" + String.valueOf(idCourse);
 	}
 
 	// Feedback //////////////////////////////////////////////////////////
-	public static String GET_WS_FEEDBACK_OF_STUDENT(long idStudent,
-			long idCourse) {
-		return "/commento/" + String.valueOf(idCourse) + "/"
-				+ String.valueOf(idStudent);
+	public static String GET_WS_FEEDBACK_OF_STUDENT(long idCourse) {
+		return "/commento/" + String.valueOf(idCourse) + "/me";
 	}
 
 	public static final String POST_WS_MY_FEEDBACK = "/commento";
