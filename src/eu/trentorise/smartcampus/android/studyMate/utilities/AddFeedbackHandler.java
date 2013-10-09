@@ -22,7 +22,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
+public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -46,80 +46,19 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 	}
 
 	@Override
-	protected Commento doInBackground(Commento... params) {
+	protected Boolean doInBackground(Commento... params) {
 		commento = params[0];
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
-		// /////////////prova /////////////////////////// Ricarico i dati dello
-		// studente e del corso
-		MessageRequest request = new MessageRequest(
-				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_STUDENT_DATA);
-		request.setMethod(Method.GET);
-
 		MessageResponse response;
-		try {
-			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			if (response.getHttpStatus() == 200) {
-
-				body = response.getBody();
-				Studente stud = Utils.convertJSONToObject(body, Studente.class);
-				commento.setId_studente(stud.getId());
-				commento.setNome_studente(stud.getNome());
-
-			} else {
-				return null;
-			}
-		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String
-						.valueOf(commento.getCorso())));
-		request.setMethod(Method.GET);
-
-		try {
-			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
-
-			if (response.getHttpStatus() == 200) {
-
-				body = response.getBody();
-				Corso corso = Utils.convertJSONToObject(body, Corso.class);
-				commento.setCorso(corso.getId());
-
-			} else {
-				return null;
-			}
-		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// ///////////////fine prova
-		// /////////////////////////////////////////////////
-
-		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
+		MessageRequest request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.POST_WS_MY_FEEDBACK);
 		request.setMethod(Method.POST);
+		
+		Boolean resultPost = false;
 
 		try {
 
@@ -129,9 +68,12 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
+			
+			
 			if (response.getHttpStatus() == 200) {
 
-				return commento;
+				body = response.getBody();
+				resultPost = Utils.convertJSONToObject(body, Boolean.class);
 
 			}
 
@@ -146,16 +88,21 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Commento> {
 			e.printStackTrace();
 		}
 
-		return null;
+		return resultPost;
 	}
 
 	@Override
-	protected void onPostExecute(Commento result) {
+	protected void onPostExecute(Boolean result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		
-		Toast.makeText(context,
+		if(result.equals(true)){
+			Toast.makeText(context,
 				"Voto Aggiunto!", Toast.LENGTH_LONG).show();
+		}else{
+			Toast.makeText(context,
+					"Ops! c'è stato un errore. La tua valutazione non è stata salvata", Toast.LENGTH_LONG).show();
+		}
 		AddRatingFromCoursesPassed.pd.dismiss();
 		act.finish();
 		
