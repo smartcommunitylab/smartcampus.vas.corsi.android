@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Servizio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
@@ -97,9 +98,11 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			Studente s1 = new Studente();
 			s1.setNome("Albert");
 			s1.setCognome("Einstein");
+			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 			Studente s2 = new Studente();
 			s2.setNome("Enrico");
 			s2.setCognome("Fermi");
+			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
 			// nomi_studenti.add(/* vari eventuali */null);
 			// String nome_studente = ((AutoCompleteTextView)
 			// RicercaGruppiGenerale_activity.this
@@ -184,12 +187,20 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			// ####################################
 			// creazione gruppi fake per popolare grafica, dovrei in realtà
 			// recuperare tutto dal web
+			Dipartimento dipartimento=new Dipartimento();
+			dipartimento.setNome("Scienze dell'Informazione");
 			Studente s1 = new Studente();
 			s1.setNome("Albert");
 			s1.setCognome("Einstein");
+			s1.setDipartimento(dipartimento);
+			s1.setAnno_corso("2");
+			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 			Studente s2 = new Studente();
 			s2.setNome("Enrico");
 			s2.setCognome("Fermi");
+			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+			s2.setDipartimento(dipartimento);
+			s2.setAnno_corso("2");
 
 			membri_gds.add(s1);
 			membri_gds.add(s2);

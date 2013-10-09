@@ -50,7 +50,7 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 				"Risultati della ricerca", "Caricamento dei corsi...");
 
 		TextView tv = (TextView) findViewById(R.id.textViewDatetimeRow);
-		ListView listView = (ListView) findViewById(R.id.listView1);
+		ListView listView = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
 		// get data from web service
 

@@ -2,10 +2,13 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.util.Collection;
 import java.util.List;
+import android.graphics.drawable.Drawable;
 
 public class Studente {
 
 	// private static final long serialVersionUID = 8681710690984309605L;
+
+	private Drawable foto_studente;
 
 	private long id;
 
@@ -34,9 +37,21 @@ public class Studente {
 	private List<GruppoDiStudio> gruppiDiStudio;
 
 	private String idsCorsiInteresse;
-	
+
 	private List<CorsoLite> corsiInteresse;
-	
+
+	public Studente() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Drawable getFoto_studente() {
+		return foto_studente;
+	}
+
+	public void setFoto_studente(Drawable foto_studente) {
+		this.foto_studente = foto_studente;
+	}
+
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}
@@ -45,7 +60,6 @@ public class Studente {
 		this.corsi = corsi;
 	}
 
-	
 	public long getUserSCId() {
 		return userSCId;
 	}

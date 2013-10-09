@@ -3,8 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import smartcampus.android.template.standalone.R;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -71,46 +69,11 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				Adapter_gds_to_list adpt = (Adapter_gds_to_list) parent
 						.getAdapter();
 				ArrayList<GruppoDiStudio> entries = adpt.getEntries();
-				final GruppoDiStudio selected_gds = entries.get(position);
-				AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
-						Display_GDS_research_results.this);
-				alertdialogbuilder
-						.setTitle("Conferma iscrizione")
-						.setMessage(
-								"Vuoi iscriverti al gruppo \""
-										+ selected_gds.getNome() + "\"?")
-						.setPositiveButton("Si",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// TODO Auto-generated method stub
-										dialog.dismiss();
-										// occio magheggio deprecato
-										MyApplication.getContextualCollection()
-												.add(selected_gds);
-										Intent intent = new Intent(
-												Display_GDS_research_results.this,
-												Lista_GDS_activity.class);
-										intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-										startActivity(intent);
-									}
-								})
-
-						.setNegativeButton("No",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// TODO Auto-generated method stub
-										dialog.dismiss();
-									}
-								});
-				AlertDialog alertdialog = alertdialogbuilder.create();
-				alertdialog.show();
-
+				GruppoDiStudio selected_gds = entries.get(position);
+				Intent intent = new Intent(Display_GDS_research_results.this,
+						GDS_details.class);
+				MyApplication.getContextualCollection().add(selected_gds);
+				startActivity(intent);
 			}
 		});
 	}
