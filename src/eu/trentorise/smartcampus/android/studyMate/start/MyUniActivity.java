@@ -48,19 +48,19 @@ public class MyUniActivity extends SherlockActivity {
 	 */
 	private SCAccessProvider accessProvider = null;
 	public static String userAuthToken;
-	public static ProgressDialog pd;
+//	public static ProgressDialog pd;
 	public static BasicProfile bp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		new LoadUserDataFromACServiceTask().execute();
-		new ProgressDialog(MyUniActivity.this);
-		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
-				"Accesso in corso...");
+//		new ProgressDialog(MyUniActivity.this);
+//		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
+//				"Accesso in corso...");
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
 			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
+				new LoadUserDataFromACServiceTask().execute();
 				// user is already registered. Proceed requesting the token
 				// and the related steps if needed
 			}
@@ -74,7 +74,6 @@ public class MyUniActivity extends SherlockActivity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		new LoadUserDataFromACServiceTask().execute();
 		super.onResume();
 	}
 
@@ -192,6 +191,8 @@ public class MyUniActivity extends SherlockActivity {
 
 		if (requestCode == SCAccessProvider.SC_AUTH_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
+				new LoadUserDataFromACServiceTask().execute();
+
 				// A&A successful. Proceed requesting the token
 				// and the related steps if needed
 
@@ -256,7 +257,7 @@ public class MyUniActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 
-			pd.dismiss();
+//			pd.dismiss();
 		}
 
 	}
