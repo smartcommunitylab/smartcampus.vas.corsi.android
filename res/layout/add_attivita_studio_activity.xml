@@ -172,7 +172,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin" >
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_filter_materia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Servizi da monitorare" />

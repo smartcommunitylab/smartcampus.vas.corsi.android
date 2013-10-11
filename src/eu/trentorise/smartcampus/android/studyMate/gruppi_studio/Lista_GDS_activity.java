@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -73,6 +75,9 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		} else {
 			tv.setVisibility(View.GONE);
 		}
+
+		// ordinamento dei gruppi di studio
+		Collections.sort(user_gds_list);
 
 		// Lista_GDS_activity ha la grafica inizializzata a listviewfragment
 		FragmentTransaction ft = this.getSupportFragmentManager()
@@ -137,6 +142,17 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.lista__gds_activity, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		if (user_gds_list.isEmpty()) {
+			MenuItem item = menu.findItem(R.id.action_cambia_layout);
+			item.setEnabled(false);
+			item.setVisible(false);
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override

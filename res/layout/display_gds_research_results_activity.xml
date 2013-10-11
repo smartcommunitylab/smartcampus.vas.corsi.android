@@ -8,17 +8,57 @@
         android:id="@+id/textView_gdsSearchFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="@string/search_label_searchedList" />
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/search_label_searchedList"
+        android:textStyle="bold" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/smartn_theme_color"
-        android:paddingBottom="20dp"
-        android:paddingTop="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="materia: " />
+
+        <TextView
+            android:id="@+id/tv_filter_materia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nome gruppo: " />
+
+        <TextView
+            android:id="@+id/tv_filter_nomegruppo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Seleziona il gruppo di studio a cui vuoi iscriverti"
+        android:textColor="@color/smartn_theme_color"
+        android:textStyle="italic" />
 
     <ListView
         android:id="@+id/searchresults_gds_list"

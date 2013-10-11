@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
@@ -25,7 +24,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.Servizio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 
 public class RicercaGruppiGenerale_activity extends SherlockActivity {
@@ -61,68 +59,14 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
 		autocomplete_ricercaXmembro = (AutoCompleteTextView) findViewById(R.id.autocomplete_ricerca_per_membro);
-		// generazione di gruppi di studio fake
+		// generazione di gruppi di studio fake e setting della ricerca tra
+		// gruppi
 		placeholder_gruppidistudio fake = new placeholder_gruppidistudio();
 		fake.initialize_some_gds();
 		allChoosable_gds = fake.getChoosable_gds();
+
 		// disegno delle risorse in grafica
 		inizializzaRisorseSpinner_TextView();
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.ricerca_generale_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home: {
-			RicercaGruppiGenerale_activity.this.finish();
-		}
-
-		case R.id.action_ricerca_GO:
-
-			String materia = ((Spinner) RicercaGruppiGenerale_activity.this
-					.findViewById(R.id.spinner_materie)).getSelectedItem()
-					.toString();
-			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
-					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
-					.toString();
-			// generazione nomi_studenti da passare
-			ArrayList<String> nomi_studenti = new ArrayList<String>();
-			Studente s1 = new Studente();
-			s1.setNome("Albert");
-			s1.setCognome("Einstein");
-			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
-			Studente s2 = new Studente();
-			s2.setNome("Enrico");
-			s2.setCognome("Fermi");
-			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-			// nomi_studenti.add(/* vari eventuali */null);
-			// String nome_studente = ((AutoCompleteTextView)
-			// RicercaGruppiGenerale_activity.this
-			// .findViewById(R.id.autocomplete_ricerca_per_membro))
-			// .getText().toString();
-
-			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
-					Display_GDS_research_results.class);
-			intent.putExtra("Selected_materia", materia);
-			intent.putExtra("Selected_nome_gruppo", nome_gruppo);
-			MyApplication.getContextualCollection().add(nomi_studenti);
-			MyApplication.getContextualCollection().add(allChoosable_gds);
-
-			startActivity(intent);
-			return true;
-		default:
-			return true;
-
-		}
-
 	}
 
 	void inizializzaRisorseSpinner_TextView() {
@@ -170,6 +114,63 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		spinner_nome_gruppo.setOnItemSelectedListener(listener);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.ricerca_generale_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home: {
+			RicercaGruppiGenerale_activity.this.finish();
+			return true;
+		}
+
+		case R.id.action_ricerca_GO: {
+			String materia = ((Spinner) RicercaGruppiGenerale_activity.this
+					.findViewById(R.id.spinner_materie)).getSelectedItem()
+					.toString();
+			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
+					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
+					.toString();
+			// generazione nomi_studenti da passare
+			ArrayList<String> nomi_studenti = new ArrayList<String>();
+			Studente s1 = new Studente();
+			s1.setNome("Albert");
+			s1.setCognome("Einstein");
+			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+			Studente s2 = new Studente();
+			s2.setNome("Enrico");
+			s2.setCognome("Fermi");
+			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+			// nomi_studenti.add(/* vari eventuali */null);
+			// String nome_studente = ((AutoCompleteTextView)
+			// RicercaGruppiGenerale_activity.this
+			// .findViewById(R.id.autocomplete_ricerca_per_membro))
+			// .getText().toString();
+
+			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
+					Display_GDS_research_results.class);
+			intent.putExtra("Selected_materia", materia);
+			intent.putExtra("Selected_nome_gruppo", nome_gruppo);
+			MyApplication.getContextualCollection().add(nomi_studenti);
+			MyApplication.getContextualCollection().add(allChoosable_gds);
+
+			startActivity(intent);
+			return true;
+		}
+
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
+
+	}
+
 	final class placeholder_gruppidistudio {
 		ArrayList<GruppoDiStudio> Choosable_gds;
 
@@ -187,7 +188,7 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			// ####################################
 			// creazione gruppi fake per popolare grafica, dovrei in realtà
 			// recuperare tutto dal web
-			Dipartimento dipartimento=new Dipartimento();
+			Dipartimento dipartimento = new Dipartimento();
 			dipartimento.setNome("Scienze dell'Informazione");
 			Studente s1 = new Studente();
 			s1.setNome("Albert");
@@ -206,7 +207,6 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			membri_gds.add(s2);
 			Date data1 = new Date();
 			data1.setTime(5000);
-			Time time = new Time(45);
 
 			AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
 					null, "titolo as1", "Povo", "a203", "02/10/2013",
@@ -253,7 +253,20 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			Choosable_gds.add(gds4);
 
 			// ####################################
-
+			/*
+			 * bug nel codice commentato sotto il codice intenderebbe non
+			 * mostrare in grafica i gruppi di studio che non possono essere
+			 * ricercati, rimuovendoli dall'inisieme di tutti i possibili gruppi
+			 * di studio
+			 */
+			// ArrayList<GruppoDiStudio> alreadyOfTheUser =
+			// Lista_GDS_activity.user_gds_list;
+			// for (GruppoDiStudio gds_already : alreadyOfTheUser) {
+			// for (GruppoDiStudio gds_possible : Choosable_gds) {
+			// if (gds_already.compareTo(gds_possible) == 0)
+			// Choosable_gds.remove(gds_possible);
+			// }
+			// }
 		}
 
 		public ArrayList<GruppoDiStudio> getChoosable_gds() {
@@ -288,6 +301,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 		this.nomi_componenti_values = nomi_componenti_values;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {

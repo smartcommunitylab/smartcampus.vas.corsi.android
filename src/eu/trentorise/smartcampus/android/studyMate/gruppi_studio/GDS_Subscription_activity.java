@@ -14,10 +14,11 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
-public class GDS_details extends SherlockActivity {
+public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
 
 	@Override
@@ -36,7 +37,7 @@ public class GDS_details extends SherlockActivity {
 		// customize layout
 		setContentView(R.layout.gds_detail_activity);
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle(contextualGDS.getNome());
+		actionbar.setTitle("Iscrizione gruppo di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -44,7 +45,7 @@ public class GDS_details extends SherlockActivity {
 		// retrieving graphics from activity_layout
 		ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
-		TextView materia_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
+		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 		Button btn_subscribe_gds = (Button) findViewById(R.id.btn_subscribe_gds);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
@@ -52,7 +53,7 @@ public class GDS_details extends SherlockActivity {
 		nome_gds.setText(contextualGDS.getNome());
 		materia_gds.setText(contextualGDS.getMateria());
 		Students_to_listview_adapter adapter = new Students_to_listview_adapter(
-				GDS_details.this, R.id.lv_partecipanti_gds,
+				GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
 				contextualGDS.getMembri());
 		participants_gds.setAdapter(adapter);
 		btn_subscribe_gds.setOnClickListener(new OnClickListener() {
@@ -61,7 +62,7 @@ public class GDS_details extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
-						GDS_details.this);
+						GDS_Subscription_activity.this);
 				alertdialogbuilder
 						.setTitle("Conferma iscrizione")
 						.setMessage(
@@ -77,7 +78,7 @@ public class GDS_details extends SherlockActivity {
 										dialog.dismiss();
 										// some logic here
 										Intent intent = new Intent(
-												GDS_details.this,
+												GDS_Subscription_activity.this,
 												Lista_GDS_activity.class);
 										MyApplication.getContextualCollection()
 												.add(contextualGDS);
@@ -101,6 +102,18 @@ public class GDS_details extends SherlockActivity {
 			}
 		});
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			GDS_Subscription_activity.this.finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 }

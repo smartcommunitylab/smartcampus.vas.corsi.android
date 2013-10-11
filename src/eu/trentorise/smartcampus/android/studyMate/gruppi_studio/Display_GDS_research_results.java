@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
@@ -12,16 +13,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Display_GDS_research_results extends SherlockFragmentActivity {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_gds_research_results_activity);
+		// personalizzazione actionabar
+		ActionBar actionbar = getSupportActionBar();
+		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
+		actionbar.setTitle("Iscrizione gruppo di studio");
+		actionbar.setHomeButtonEnabled(true);
+		actionbar.setDisplayHomeAsUpEnabled(true);
+
+		// allocazione strutture dati di supporto
 		ArrayList<String> nomi_studenti_filter = new ArrayList<String>();
 		ArrayList<GruppoDiStudio> universo_gds = new ArrayList<GruppoDiStudio>();
 
@@ -38,16 +50,21 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		String materia_filter = extras.getString("Selected_materia");
 		String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
 
-		TextView showactivefilter = (TextView) findViewById(R.id.textView_gdsSearchFilter);
-		String text = (String) showactivefilter.getText();
-		showactivefilter.setText(text + "\n materia: " + materia_filter
-				+ "\n nome gruppo: " + nome_gruppo_filter);
+		TextView tv_materia = (TextView) findViewById(R.id.tv_filter_materia);
+		tv_materia.setText(materia_filter);
+		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
+		tv_nomeGruppo.setText(nome_gruppo_filter);
 
 		ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
 				universo_gds, materia_filter, nome_gruppo_filter,
 				nomi_studenti_filter);
 
 		ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
+
+		// sorting gds before rendering them on screen
+		// dovrei ordinare gli ammissibili e stamparli a schermo
+		Collections.sort(universo_gds);
+
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,
 				universo_gds);// attenzione! al posto di universo_gds si
@@ -71,11 +88,12 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				ArrayList<GruppoDiStudio> entries = adpt.getEntries();
 				GruppoDiStudio selected_gds = entries.get(position);
 				Intent intent = new Intent(Display_GDS_research_results.this,
-						GDS_details.class);
+						GDS_Subscription_activity.class);
 				MyApplication.getContextualCollection().add(selected_gds);
 				startActivity(intent);
 			}
 		});
+
 	}
 
 	public ArrayList<GruppoDiStudio> find_gds_ammissibili(
@@ -151,5 +169,17 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		}
 		return retval;
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Display_GDS_research_results.this.finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

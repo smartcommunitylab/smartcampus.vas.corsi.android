@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
  * The Class GruppoDiStudio.
  */
 
-public class GruppoDiStudio {
+public class GruppoDiStudio implements Comparable<GruppoDiStudio> {
 
 	/** The materia. */
 	String materia;
@@ -196,6 +196,25 @@ public class GruppoDiStudio {
 	 */
 	public void setAttivita_studio(ArrayList<AttivitaStudio> attivita_studio) {
 		this.attivita_studio = attivita_studio;
+	}
+
+	@Override
+	public int compareTo(GruppoDiStudio another) {
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+
+		if (this == another)
+			return EQUAL;
+		else if (this != another) {
+			if (this.anno < another.anno)
+				return BEFORE;
+			else if (this.anno > another.anno)
+				return AFTER;
+			else if (this.anno == another.anno)
+				return this.nome.compareTo(another.nome);
+		}
+		return 15;// 15 as error code
 	}
 
 }

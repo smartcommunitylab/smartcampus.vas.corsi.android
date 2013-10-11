@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import smartcampus.android.template.standalone.R;
 import android.content.Intent;
@@ -49,6 +50,10 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
 		ListView listview = (ListView) getActivity().findViewById(
 				R.id.listview_gruppi_di_studio);
+		
+		//sorting gds before rendering them on screen
+				Collections.sort(user_gds_list);
+				
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(getActivity(),
 				R.id.listview_gruppi_di_studio, user_gds_list);
 		listview.setAdapter(adapter);
@@ -92,9 +97,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 				mActionMode = ViewGruppiList_Fragment.this
 						.getSherlockActivity().startActionMode(
 								mActionModeCallback);
-				//ste tre righe sotto a cosa servono? (le ho scritte io copiando dal web ma apparentemente non fanno niente)
-				LayoutInflater inflater=getLayoutInflater(null);
-				view = inflater.inflate(R.layout.fake, null);
+
 				view.setSelected(true);
 				return true;
 			}

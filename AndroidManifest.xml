@@ -263,7 +263,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.GDS_details"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.GDS_Subscription_activity"
             android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>
