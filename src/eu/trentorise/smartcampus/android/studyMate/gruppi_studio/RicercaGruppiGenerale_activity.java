@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +20,10 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.Servizio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 
 public class RicercaGruppiGenerale_activity extends SherlockActivity {

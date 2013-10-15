@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.phl;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -9,6 +8,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
 public class PHLActivity extends SherlockFragmentActivity {

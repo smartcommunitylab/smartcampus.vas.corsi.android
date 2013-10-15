@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.communicator.model.Notification;
 
 public class AdapterNoticesList extends ArrayAdapter<Notification> {

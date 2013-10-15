@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatAttachment;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;

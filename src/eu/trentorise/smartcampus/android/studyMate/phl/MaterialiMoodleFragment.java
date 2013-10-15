@@ -1,12 +1,13 @@
 package eu.trentorise.smartcampus.android.studyMate.phl;
 
-import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
+
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 public class MaterialiMoodleFragment extends SherlockFragment {
 

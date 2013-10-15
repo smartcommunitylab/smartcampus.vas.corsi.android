@@ -1,8 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +14,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
@@ -73,6 +72,17 @@ public class MyUniActivity extends SherlockActivity {
 
 	@Override
 	protected void onResume() {
+		try {
+			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
+				new LoadUserDataFromACServiceTask().execute();
+				// user is already registered. Proceed requesting the token
+				// and the related steps if needed
+			}
+		} catch (AACException e) {
+			Log.e(TAG, "Failed to login: " + e.getMessage());
+			// handle the failure, e.g., notify the user and close the app.
+		}
+
 		// TODO Auto-generated method stub
 		super.onResume();
 	}

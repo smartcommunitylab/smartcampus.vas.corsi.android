@@ -144,7 +144,7 @@ public class FindCoursesDegreeHandler extends
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			ArrayAdapter adapter = new ArrayAdapter(
 					context,
-					smartcampus.android.template.standalone.R.layout.list_studymate_row_list_simple,
+					eu.trentorise.smartcampus.android.studyMate.R.layout.list_studymate_row_list_simple,
 					listStringDegree);
 			spinnerCorsiLaurea.setAdapter(adapter);
 

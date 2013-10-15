@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
-import smartcampus.android.template.standalone.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Display_GDS_research_results extends SherlockFragmentActivity {
@@ -53,7 +53,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,
 				universo_gds);// attenzione! al posto di universo_gds si
-								// dovrebbe mettere gds_ammissibili ma finchè
+								// dovrebbe mettere gds_ammissibili ma finchï¿½
 								// non funzia lascio stare
 		results_list.setAdapter(adapter);
 		results_list.setOnItemClickListener(new OnItemClickListener() {
@@ -118,7 +118,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 	public ArrayList<GruppoDiStudio> find_gds_ammissibili(
 			ArrayList<GruppoDiStudio> universo_gds, String materia_filter,
 			String nome_gruppo_filter, ArrayList<String> nomi_studenti_filter) {
-		// andrà fatta questa ricerca nella forma di database con query
+		// andrï¿½ fatta questa ricerca nella forma di database con query
 		// classiche tipo select * from gruppidistudio where
 		// filtro=valore_filtro
 		ArrayList<GruppoDiStudio> retval = new ArrayList<GruppoDiStudio>();
@@ -160,7 +160,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 					}
 					// end(2)
 				}
-			} else {// (3) caso in cui un particolare nome_gruppo è stato
+			} else {// (3) caso in cui un particolare nome_gruppo ï¿½ stato
 					// selezionato
 				GruppoDiStudio selected_gds = null;
 				for (GruppoDiStudio gds : universo_gds) {

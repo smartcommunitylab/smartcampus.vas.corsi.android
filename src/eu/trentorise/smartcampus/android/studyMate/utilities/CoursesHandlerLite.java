@@ -3,7 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
 import eu.trentorise.smartcampus.android.studyMate.finder.ResultSearchedActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;

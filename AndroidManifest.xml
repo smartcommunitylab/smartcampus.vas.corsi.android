@@ -16,7 +16,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smartcampus.android.template.standalone"
+    package="eu.trentorise.smartcampus.android.studyMate"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -37,10 +37,10 @@
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="smartcampus.android.template.standalone.permission.C2D_MESSAGE" />
+    <uses-permission android:name="eu.trentorise.smartcampus.android.studyMate.permission.C2D_MESSAGE" />
 
     <permission
-        android:name="smartcampus.android.template.standalone.permission.C2D_MESSAGE"
+        android:name="eu.trentorise.smartcampus.android.studyMate.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <application
@@ -67,10 +67,10 @@
 
         <meta-data
             android:name="SHARED_PACKAGE"
-            android:value="smartcampus.android.template.standalone" />
+            android:value="eu.trentorise.smartcampus.android.studyMate" />
         <meta-data
             android:name="ACCOUNT_TYPE"
-            android:value="smartcampus.android.template.standalone" />
+            android:value="eu.trentorise.smartcampus.android.studyMate" />
         <meta-data
             android:name="ACCOUNT_NAME"
             android:value="SmartCampus Android Template" />
@@ -88,6 +88,7 @@
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.ac.embedded.EmbeddedAuthActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask" >
         </activity>
@@ -176,7 +177,7 @@
         </activity>
 
         <receiver
-            android:name="eu.trentorise.smartcampus.android.template.standalone.NotificationReceiver"
+            android:name="eu.trentorise.eu.trentorise.smartcampus.android.studyMate.NotificationReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -185,7 +186,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="smartcampus.android.template.standalone.NotificationService" />
+        <service android:name="eu.trentorise.smartcampus.android.studyMate.NotificationService" />
 
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity"

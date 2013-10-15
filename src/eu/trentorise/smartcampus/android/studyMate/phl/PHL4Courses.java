@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.phl;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +7,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 

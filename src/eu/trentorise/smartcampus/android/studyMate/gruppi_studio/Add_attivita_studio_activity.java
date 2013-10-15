@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.Calendar;
 
-import smartcampus.android.template.standalone.R;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
@@ -22,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 
 public class Add_attivita_studio_activity extends FragmentActivity {

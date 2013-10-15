@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.phl;
 
 import java.util.Collections;
 
-import smartcampus.android.template.standalone.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 import eu.trentorise.smartcampus.android.studyMate.models.RisorsaPhl;

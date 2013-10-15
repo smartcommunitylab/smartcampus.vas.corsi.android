@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
@@ -9,6 +8,8 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 public class Crea_GDS_activity extends SherlockActivity {
 	AutoCompleteTextView tv_materia;

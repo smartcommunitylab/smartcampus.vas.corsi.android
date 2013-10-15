@@ -8,11 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnector;

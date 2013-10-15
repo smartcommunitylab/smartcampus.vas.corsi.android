@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import smartcampus.android.template.standalone.R;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -8,6 +7,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
@@ -49,7 +49,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			c1.setChecked(true);
 		}
 		/*
-		 * e così via
+		 * e cosï¿½ via
 		 */
 	}
 

@@ -1,14 +1,13 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import smartcampus.android.template.standalone.R;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
