@@ -49,7 +49,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static String userAuthToken;
 //	public static ProgressDialog pd;
 	public static BasicProfile bp;
-
+							//TODO: swich aac master with last version of branch
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
