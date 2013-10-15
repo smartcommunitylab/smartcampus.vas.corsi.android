@@ -95,11 +95,11 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			// generazione nomi_studenti da passare
 			ArrayList<String> nomi_studenti = new ArrayList<String>();
 			Studente s1 = new Studente();
-			s1.setNome("Albert");
-			s1.setCognome("Einstein");
+			s1.setNome("Federico");
+			s1.setCognome("Rossi");
 			Studente s2 = new Studente();
-			s2.setNome("Enrico");
-			s2.setCognome("Fermi");
+			s2.setNome("Gabriele");
+			s2.setCognome("Bianchi");
 			// nomi_studenti.add(/* vari eventuali */null);
 			// String nome_studente = ((AutoCompleteTextView)
 			// RicercaGruppiGenerale_activity.this
@@ -185,11 +185,11 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			// creazione gruppi fake per popolare grafica, dovrei in realtà
 			// recuperare tutto dal web
 			Studente s1 = new Studente();
-			s1.setNome("Albert");
-			s1.setCognome("Einstein");
+			s1.setNome("Federico");
+			s1.setCognome("Rossi");
 			Studente s2 = new Studente();
-			s2.setNome("Enrico");
-			s2.setCognome("Fermi");
+			s2.setNome("Gabriele");
+			s2.setCognome("Bianchi");
 
 			membri_gds.add(s1);
 			membri_gds.add(s2);
@@ -210,19 +210,19 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			attivita_studio_gds.add(impegno2);
 
 			GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-					"LoveRSEBA", membri_gds, null, attivita_studio_gds, 1,
+					"R. Sebastiani", membri_gds, null, attivita_studio_gds, 1,
 					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.prouno_logo));
 			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-					"Ghiloni docet", membri_gds, null, attivita_studio_gds, 1,
+					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
 					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.discreta_logo));
 			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-					"Renato <3", membri_gds, null, attivita_studio_gds, 2,
+					"Renato++", membri_gds, null, attivita_studio_gds, 2,
 					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.reti_calcolatori_logo));
 			GruppoDiStudio gds4 = new GruppoDiStudio(
-					"Algoritmi e strutture dati", "Djikstra4President",
+					"Algoritmi e strutture dati", "ASD",
 					membri_gds, null, attivita_studio_gds, 2, forum,
 					MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.algoritmi_logo));

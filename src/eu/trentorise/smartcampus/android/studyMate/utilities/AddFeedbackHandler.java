@@ -101,7 +101,7 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 				"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 		}else{
 			Toast.makeText(context,
-					"Ops! c'è stato un errore. La tua valutazione non è stata salvata", Toast.LENGTH_LONG).show();
+					"Ops! c'Ã¨ stato un errore. La tua valutazione non Ã¨ stata salvata", Toast.LENGTH_LONG).show();
 		}
 		AddRatingFromCoursesPassed.pd.dismiss();
 		act.finish();

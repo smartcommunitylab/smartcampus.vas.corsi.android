@@ -63,7 +63,7 @@ public class ChatObjectAdapter extends ArrayAdapter<ChatObject> {
 		} else if (currentBubble instanceof ChatAttachment) {
 			TextView attach_view = (TextView) bubble
 					.findViewById(R.id.text_attachment);
-			attach_view.setText("Questo � un allegato...");
+			attach_view.setText("Questo è un allegato...");
 			return bubble;
 		}
 

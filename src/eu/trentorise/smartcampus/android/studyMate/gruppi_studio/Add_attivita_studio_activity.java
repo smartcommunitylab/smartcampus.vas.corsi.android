@@ -32,7 +32,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		setContentView(R.layout.add_attivita_studio_activity);
 
 		ActionBar actionbar = getActionBar();
-		actionbar.setTitle("Nuova attività di studio");
+		actionbar.setTitle("Nuova attivitÃ  di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -80,7 +80,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attività di studio appena creata
+			 * crea e aggiugni agli impegni l'attivitï¿½ di studio appena creata
 			 */
 			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
 			String oggetto = ((TextView) this
@@ -115,7 +115,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
-			Toast.makeText(getApplicationContext(), "attività studio creata",
+			Toast.makeText(getApplicationContext(), "attivitÃ  studio creata",
 					Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(Add_attivita_studio_activity.this,
 					Overview_GDS.class);

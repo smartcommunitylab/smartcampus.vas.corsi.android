@@ -107,8 +107,8 @@
     <string name="title_activity_add_attivita_studio_activity">Add_attivita_studio_activity</string>
     <string name="title_activity_crea__gds_activity">Crea_GDS_activity</string>
     <string name="toast_switchfollow_error">Errore! La richiesta non è andata a buon fine. </string>
-    <string name="toast_switchfollow_success"> Successo! Ora potrai accedere ai materiali e agli eventi di questo corso. </string>
-    <string name="toast_rate_access_denied"> Non puoi votare questo corso, prima devi passare l esame. </string>
+    <string name="toast_switchfollow_success"> Stai seguendo questo corso. </string>
+    <string name="toast_rate_access_denied"> Non puoi votare questo corso, prima devi passare l\'esame. </string>
     <string name="toast_switchfollow_off"> Non segui più questo corso </string>
 
 </resources>
