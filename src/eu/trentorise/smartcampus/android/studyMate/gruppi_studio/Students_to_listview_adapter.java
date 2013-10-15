@@ -46,7 +46,7 @@ public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 		foto_studente.setImageDrawable(currentStudent.getFoto_studente());
 		nomeEcognome_studente.setText(currentStudent.getNome() + " "
 				+ currentStudent.getCognome());
-		info_studente.setText(currentStudent.getAnno_corso() + "° anno presso "
+		info_studente.setText(currentStudent.getAnno_corso() + "Â° anno presso "
 				+ currentStudent.getDipartimento().getNome());
 
 		return student_view;

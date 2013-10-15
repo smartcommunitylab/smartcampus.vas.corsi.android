@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
 
@@ -32,7 +33,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		setContentView(R.layout.add_attivita_studio_activity);
 
 		ActionBar actionbar = getActionBar();
-		actionbar.setTitle("Nuova attività di studio");
+		actionbar.setTitle("Nuova attivitï¿½ di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -62,8 +63,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				// minute and hour>10
 				btn_time.setText(mHour + ":" + mMinute);
 		}
-
-		btn_data.setText(mDay + "/" + mMonth + "/" + mYear);
+		MyDate date = new MyDate(mYear, mMonth, mDay);
+		btn_data.setText(date.toString());
 
 	}
 
@@ -80,7 +81,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attività di studio appena creata
+			 * crea e aggiugni agli impegni l'attivitï¿½ di studio appena creata
 			 */
 			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
 			String oggetto = ((TextView) this
@@ -115,7 +116,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
-			Toast.makeText(getApplicationContext(), "attività studio creata",
+			Toast.makeText(getApplicationContext(), "attivitÃ  studio creata",
 					Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(Add_attivita_studio_activity.this,
 					Overview_GDS.class);
@@ -147,12 +148,20 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-			// Use the current date as the default date in the picker
-			final Calendar c = Calendar.getInstance();
-			int mYear = c.get(Calendar.YEAR);
-			int mMonth = c.get(Calendar.MONTH);
-			int mDay = c.get(Calendar.DAY_OF_MONTH);
-			// Create a new instance of DatePickerDialog and return it
+			String phrase_date = (String) ((Button) Add_attivita_studio_activity.this
+					.findViewById(R.id.data_button_gds)).getText();
+
+			MyDate data = MyDate.parseFromString(phrase_date);
+			int mDay = data.getDay();
+			int mMonth = data.getMonth();
+			int mYear = data.getYear();
+
+			// // Use the current date as the default date in the picker
+			// final Calendar c = Calendar.getInstance();
+			// int mYear = c.get(Calendar.YEAR);
+			// int mMonth = c.get(Calendar.MONTH);
+			// int mDay = c.get(Calendar.DAY_OF_MONTH);
+			// //Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(getActivity(), this, mYear, mMonth,
 					mDay);
 		}
@@ -160,7 +169,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			Button b = (Button) Add_attivita_studio_activity.this
 					.findViewById(R.id.data_button_gds);
-			b.setText(day + "/" + month + "/" + year);
+			MyDate date = new MyDate(year, month, day);
+			b.setText(date.toString());
 			// b.refreshDrawableState();
 
 		}

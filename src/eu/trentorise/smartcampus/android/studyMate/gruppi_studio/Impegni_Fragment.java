@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -33,6 +34,8 @@ public class Impegni_Fragment extends SherlockFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+		getSherlockActivity().getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		super.onCreate(savedInstanceState);
 	}
 
@@ -97,5 +100,5 @@ public class Impegni_Fragment extends SherlockFragment {
 	public ArrayList<AttivitaStudio> getLista_impegni() {
 		return lista_impegni;
 	}
-	
+
 }

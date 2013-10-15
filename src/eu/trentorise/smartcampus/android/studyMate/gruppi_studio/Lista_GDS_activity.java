@@ -56,7 +56,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		 */
 
 		if (!MyApplication.getContextualCollection().isEmpty()) {
-			// Lista_GDS_activity può essere lanciata dalla home o al termine di
+			// Lista_GDS_activity puï¿½ essere lanciata dalla home o al termine di
 			// una iscrizione ad un corso
 
 			// questo codice gestisce il caso in cui al termine di una ricerca
@@ -68,10 +68,10 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			MyApplication.getContextualCollection().clear();
 		}
 
-		// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
+		// se la user_gds_list ï¿½ vuota proponiamo all'utente di fare qlcs..
 		TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
 		if (user_gds_list.isEmpty()) {
-			tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
+			tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menÃ¹ in alto a destra per iscriverti ad un gruppo di studio");
 		} else {
 			tv.setVisibility(View.GONE);
 		}
