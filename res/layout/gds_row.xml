@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/WhiteSmoke"
+        android:background="@drawable/selectable_background_theme2_studymate"
         android:orientation="horizontal" >
 
         <TextView

@@ -53,10 +53,10 @@
                         android:id="@+id/data_button_gds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/mybutton"
                         android:onClick="showDatePickerDialog"
                         android:padding="8dp"
                         android:text="Button" />
-                        <!-- android:background="@drawable/mybutton" -->
                 </LinearLayout>
 
                 <LinearLayout
@@ -70,10 +70,10 @@
                         android:id="@+id/ora_button_gds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/mybutton"
                         android:onClick="showTimePickerDialog"
                         android:padding="3dp"
                         android:text="Button" />
-                        <!-- android:background="@drawable/mybutton" -->
                 </LinearLayout>
             </LinearLayout>
 
@@ -124,15 +124,15 @@
                         android:paddingRight="20dp" >
 
                         <ImageButton
-                            android:id="@+id/imageButton1"
+                            android:id="@+id/btn_subscribe_gds"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
+                            android:background="@drawable/mybutton"
                             android:padding="3dp"
                             android:src="@drawable/phl" />
-<!--                             android:background="@drawable/mybutton" -->
 
                         <TextView
-                            android:id="@+id/textView1"
+                            android:id="@+id/tv_nome_gds_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="from phl" />
@@ -149,12 +149,12 @@
                             android:id="@+id/imageButton2"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:padding="3dp" />
-                           <!--  android:background="@drawable/mybutton"
-                            android:src="@drawable/filebrowser" /> -->
+                            android:background="@drawable/mybutton"
+                            android:padding="3dp"
+                            android:src="@drawable/filebrowser" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/tv_info_studente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="from filebrowser" />
@@ -172,7 +172,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin" >
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_filter_materia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Servizi da monitorare" />

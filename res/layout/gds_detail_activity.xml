@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:weightSum="5" >
+
+        <ImageView
+            android:id="@+id/iv_logo_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:src="@drawable/placeholder" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                android:id="@+id/tv_nome_gds_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome GDS"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_materia_gds_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="Materia"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_subscribe_gds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_edit_dark"
+            android:text="ISCRIVITI"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp" >
+
+        <TextView
+            android:id="@+id/tv_info_studente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:text="Partecipanti:"
+            android:textColor="@color/smartn_theme_color"
+            android:textStyle="italic" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/smartn_theme_color"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp" />
+
+        <ListView
+            android:id="@+id/lv_partecipanti_gds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -221,5 +221,4 @@
         <activity android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS" >
         </activity>
     </application>
-
 </manifest>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ public class Forum_fragment extends SherlockFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+		getSherlockActivity().getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		super.onCreate(savedInstanceState);
 	}
 
@@ -98,7 +101,6 @@ public class Forum_fragment extends SherlockFragment {
 
 			}
 		});
-
 	}
 
 	@Override

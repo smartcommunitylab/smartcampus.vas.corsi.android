@@ -179,5 +179,7 @@ public class AttivitaStudio {
 	public void setBiblioteca(boolean biblioteca) {
 		this.biblioteca = biblioteca;
 	}
+	
+	
 
 }

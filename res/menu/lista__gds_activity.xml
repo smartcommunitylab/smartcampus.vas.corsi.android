@@ -8,12 +8,12 @@
     <item
         android:id="@+id/action_iscriviti_nuovo_gruppo"
         android:icon="@drawable/ic_social_add_group"
-        android:showAsAction="ifRoom"
+        android:showAsAction="collapseActionView"
         android:title="iscriviti ad un gruppo"/>
     <item
         android:id="@+id/action_crea_gruppo"
         android:icon="@drawable/ic_action_add"
-        android:showAsAction="ifRoom"
+        android:showAsAction="collapseActionView"
         android:title="crea gruppo"/>
 
 </menu>
