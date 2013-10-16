@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import smartcampus.android.template.standalone.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class GDS_Subscription_activity extends SherlockActivity {

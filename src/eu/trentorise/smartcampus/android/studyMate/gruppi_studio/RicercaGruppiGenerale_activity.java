@@ -142,11 +142,13 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			Studente s1 = new Studente();
 			s1.setNome("Albert");
 			s1.setCognome("Einstein");
-			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+			//NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
+			//s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 			Studente s2 = new Studente();
 			s2.setNome("Enrico");
 			s2.setCognome("Fermi");
-			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+			//NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
+			//s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
 			// nomi_studenti.add(/* vari eventuali */null);
 			// String nome_studente = ((AutoCompleteTextView)
 			// RicercaGruppiGenerale_activity.this
@@ -191,27 +193,22 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			Dipartimento dipartimento = new Dipartimento();
 			dipartimento.setNome("Scienze dell'Informazione");
 			Studente s1 = new Studente();
-<<<<<<< HEAD
+
 			s1.setNome("Federico");
 			s1.setCognome("Rossi");
-=======
-			s1.setNome("Albert");
-			s1.setCognome("Einstein");
 			s1.setDipartimento(dipartimento);
 			s1.setAnno_corso("2");
-			s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
->>>>>>> refs/remotes/origin/oauth22
+		//	s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+
 			Studente s2 = new Studente();
-<<<<<<< HEAD
+
 			s2.setNome("Gabriele");
 			s2.setCognome("Bianchi");
-=======
-			s2.setNome("Enrico");
-			s2.setCognome("Fermi");
-			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+
+//			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
 			s2.setDipartimento(dipartimento);
 			s2.setAnno_corso("2");
->>>>>>> refs/remotes/origin/oauth22
+
 
 			membri_gds.add(s1);
 			membri_gds.add(s2);
