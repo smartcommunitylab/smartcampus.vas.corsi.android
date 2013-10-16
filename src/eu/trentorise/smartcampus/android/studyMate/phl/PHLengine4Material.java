@@ -22,6 +22,7 @@ import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 import eu.trentorise.smartcampus.android.studyMate.models.RisorsaPhl;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.DownloadTask;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialItem;
@@ -66,7 +67,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
-				"/api/documenti/getDirByIDPHL/" + idPHL);
+				"/api/documenti/getDirByIDPHL/" + idPHL + "?sc_token=" + MyUniActivity.userAuthToken);
 		// SmartUniDataWS.URL_WS_SMARTUNI,
 		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
@@ -109,13 +110,14 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected void onPostExecute(final RisorsaPhl result) {
 		super.onPostExecute(result);
+		
 		r = result;
+		int i = 0;
 		if (result == null) {
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
-			int i = 0;
 			MaterialItem[] items = new MaterialItem[result.getCdc().size()];
 			for (CwdPHL c : result.getCdc()) {
 				if (c.getMime().equals("directory")) {
@@ -147,6 +149,10 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 						items);
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
+		}
+		if (i == 0){
+			Toast.makeText(context, "La cartella è vuota...",
+					Toast.LENGTH_SHORT).show();
 		}
 
 		listViewCorsiPersonali
@@ -203,7 +209,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		// execute this when the downloader must be fired
 		final DownloadTask downloadTask = new DownloadTask(currentActivity,
 				mProgressDialog, r);
-		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());
+		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());// + "?sc_token=" + MyUniActivity.userAuthToken);
 
 		mProgressDialog
 				.setOnCancelListener(new DialogInterface.OnCancelListener() {

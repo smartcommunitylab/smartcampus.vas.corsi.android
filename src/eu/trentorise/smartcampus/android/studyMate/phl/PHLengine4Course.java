@@ -22,6 +22,7 @@ import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 import eu.trentorise.smartcampus.android.studyMate.models.RisorsaPhl;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.DownloadTask;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.MaterialItem;
@@ -64,7 +65,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu",
 				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
-				"/api/documenti/getDirByIDSC/" + idCorso);
+				"/api/documenti/getDirByIDSC/" + idCorso + "?sc_token=" + MyUniActivity.userAuthToken);
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
 				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		// SmartUniDataWS.URL_WS_SMARTUNI,

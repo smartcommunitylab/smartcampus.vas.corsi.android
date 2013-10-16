@@ -62,7 +62,7 @@
         <!-- {token sul portale smartcampus} -->
         <meta-data
             android:name="CLIENT_AUTH_TOKEN"
-            android:value="043b44c9-7277-4888-8b81-890a9607c678" />
+            android:value="" />
         <!-- {{token sul portale smartcampus} -->
 
         <meta-data
