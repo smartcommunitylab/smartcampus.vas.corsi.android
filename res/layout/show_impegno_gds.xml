@@ -55,18 +55,14 @@
         android:paddingTop="10dp" />
 
     <TextView
-        android:id="@+id/textAula_impegno_gds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:text="Materia" />
-
-    <TextView
         android:id="@+id/textDescription_impegno_gds"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
         android:paddingLeft="@dimen/activity_vertical_margin"
-        android:text="Descrizione" />
+        android:text="Descrizione"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/button1"
@@ -91,28 +87,28 @@
         <CheckBox
             android:id="@+id/CheckBox1_prenotazione_aule"
             android:layout_gravity="left"
-            android:editable="false"
+            android:enabled="false"
             android:text="Prenotazione aule"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckBox
             android:id="@+id/CheckBox2_mensa"
             android:layout_gravity="left"
-            android:editable="false"
+            android:enabled="false"
             android:text="Mensa"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckBox
             android:id="@+id/CheckBox3_tutoring"
             android:layout_gravity="left"
-            android:editable="false"
+            android:enabled="false"
             android:text="Tutoring"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckBox
             android:id="@+id/CheckBox4_biblioteca"
             android:layout_gravity="left"
-            android:editable="false"
+            android:enabled="false"
             android:text="Biblioteca"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </GridLayout>

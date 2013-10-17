@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.annotation.SuppressLint;
@@ -15,9 +16,11 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,6 +49,19 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		final int mDay = c.get(Calendar.DAY_OF_MONTH);
 		final int mMinute = c.get(Calendar.MINUTE);
 		final int mHour = c.get(Calendar.HOUR_OF_DAY);
+
+		ArrayList<String> room_values = new ArrayList<String>();
+		for (int i = 1; i < 15; i++) {
+			room_values.add("a10" + i);
+		}
+		for (int i = 1; i < 15; i++) {
+			room_values.add("a20" + i);
+		}
+
+		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
+		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
+				this, android.R.layout.simple_spinner_item, room_values);
+		spinner_aula.setAdapter(adapter_spinner_aule);
 
 		// retrieving & initializing some button
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);

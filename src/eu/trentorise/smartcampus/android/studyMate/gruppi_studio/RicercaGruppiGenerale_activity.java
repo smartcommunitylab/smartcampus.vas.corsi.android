@@ -232,12 +232,12 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.prouno_logo));
 			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
-					forum, MyApplication.getAppContext().getResources()
+					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
+					MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.discreta_logo));
 			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-					"Renato++", membri_gds, null, attivita_studio_gds, 2,
-					forum, MyApplication.getAppContext().getResources()
+					"Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
+					MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.reti_calcolatori_logo));
 			GruppoDiStudio gds4 = new GruppoDiStudio(
 					"Algoritmi e strutture dati", "ASD",

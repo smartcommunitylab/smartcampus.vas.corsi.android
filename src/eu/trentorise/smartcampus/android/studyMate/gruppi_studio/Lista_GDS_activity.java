@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -20,12 +21,17 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	public static ArrayList<GruppoDiStudio> user_gds_list = new ArrayList<GruppoDiStudio>();
+	private static boolean isShownAsList = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,9 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
+
+		// butto dentro due gruppi per non dover sempre fare l'iscirzione
+		funzcheaggiungeduegruppi();
 
 		// codice per sistemare l'actionoverflow
 		try {
@@ -56,7 +65,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		 */
 
 		if (!MyApplication.getContextualCollection().isEmpty()) {
-			// Lista_GDS_activity pu� essere lanciata dalla home o al termine di
+			// Lista_GDS_activity può essere lanciata dalla home o al termine di
 			// una iscrizione ad un corso
 
 			// questo codice gestisce il caso in cui al termine di una ricerca
@@ -79,14 +88,24 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		// ordinamento dei gruppi di studio
 		Collections.sort(user_gds_list);
 
-		// Lista_GDS_activity ha la grafica inizializzata a listviewfragment
-		FragmentTransaction ft = this.getSupportFragmentManager()
-				.beginTransaction();
-		Fragment fragment = new ViewGruppiList_Fragment();
-		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		ft.replace(R.id.list_container, fragment);
-		ft.addToBackStack(null);
-		ft.commit();
+		// inizializza la grafica in base allo stato booleano di isShownAsList
+		if (isShownAsList) {
+			FragmentTransaction ft = this.getSupportFragmentManager()
+					.beginTransaction();
+			Fragment fragment = new ViewGruppiList_Fragment();
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(R.id.list_container, fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+		} else {
+			FragmentTransaction ft = this.getSupportFragmentManager()
+					.beginTransaction();
+			Fragment fragment = new ViewGruppiGrid_Fragment();
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(R.id.list_container, fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+		}
 
 		/*
 		 * sto commentone sarebbe il tour guidato che ho tolto per ora if
@@ -171,12 +190,10 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 			Drawable actualicon = item.getIcon();
 
-			if (actualicon.getConstantState().equals(
-					getResources().getDrawable(
-							R.drawable.collections_view_as_grid)
-							.getConstantState())) {
-				// azione
+			if (isShownAsList) {
+				// azione se
 				item.setIcon(R.drawable.collections_view_as_list);
+				isShownAsList = false;
 
 				this.getSupportFragmentManager().popBackStack();
 				FragmentTransaction ft = this.getSupportFragmentManager()
@@ -190,6 +207,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			} else {
 				// azione
 				item.setIcon(R.drawable.collections_view_as_grid);
+				isShownAsList = true;
 
 				this.getSupportFragmentManager().popBackStack();
 				FragmentTransaction ft = this.getSupportFragmentManager()
@@ -235,6 +253,67 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	public ArrayList<GruppoDiStudio> getUser_gds_list() {
 		return user_gds_list;
+	}
+
+	private void funzcheaggiungeduegruppi() {
+		// butto dentro due gruppi all'inizio per non dover sempre iscrivermi la
+		// prima volta
+		ArrayList<Studente> membri_gds = new ArrayList<Studente>();
+
+		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
+		ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
+
+		// ####################################
+		// creazione gruppi fake per popolare grafica, dovrei in realtà
+		// recuperare tutto dal web
+		Dipartimento dipartimento = new Dipartimento();
+		dipartimento.setNome("Scienze dell'Informazione");
+		Studente s1 = new Studente();
+
+		s1.setNome("Federico");
+		s1.setCognome("Rossi");
+		s1.setDipartimento(dipartimento);
+		s1.setAnno_corso("2");
+		// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+
+		Studente s2 = new Studente();
+
+		s2.setNome("Gabriele");
+		s2.setCognome("Bianchi");
+
+		// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+		s2.setDipartimento(dipartimento);
+		s2.setAnno_corso("2");
+
+		membri_gds.add(s1);
+		membri_gds.add(s2);
+		Date data1 = new Date();
+		data1.setTime(5000);
+
+		AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
+				null, "titolo as1", "Povo", "a203", "02/10/2013",
+				"descrizione as", "09:00", false, false, false, false, false,
+				false);
+		AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
+				null, "titolo as2", "Povo", "a203", "02/10/2013",
+				"descrizione as", "09:00", false, false, false, false, false,
+				false);
+
+		attivita_studio_gds.add(impegno1);
+		attivita_studio_gds.add(impegno2);
+
+		GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
+				"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
+				MyApplication.getAppContext().getResources()
+						.getDrawable(R.drawable.discreta_logo));
+		GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
+				"Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
+				MyApplication.getAppContext().getResources()
+						.getDrawable(R.drawable.reti_calcolatori_logo));
+
+		user_gds_list.clear();
+		user_gds_list.add(gds2);
+		user_gds_list.add(gds3);
 	}
 
 }

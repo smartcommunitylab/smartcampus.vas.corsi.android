@@ -9,11 +9,11 @@
         android:id="@+id/action_iscriviti_nuovo_gruppo"
         android:icon="@drawable/ic_social_add_group"
         android:showAsAction="collapseActionView"
-        android:title="iscriviti ad un gruppo"/>
+        android:title="Iscriviti ad un gruppo"/>
     <item
         android:id="@+id/action_crea_gruppo"
         android:icon="@drawable/ic_action_add"
         android:showAsAction="collapseActionView"
-        android:title="crea gruppo"/>
+        android:title="Crea gruppo"/>
 
 </menu>
