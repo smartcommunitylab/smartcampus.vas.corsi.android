@@ -80,28 +80,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// @Override
-	// protected void onSaveInstanceState(Bundle outState) {
-	// super.onSaveInstanceState(outState);
-	// outState.putInt("tab",
-	// getSupportActionBar().getSelectedNavigationIndex());
-	// }
-	//
-	// @Override
-	// protected void onRestoreInstanceState(Bundle savedInstanceState) {
-	// // TODO Auto-generated method stub
-	// int tab = savedInstanceState.getInt("tab");
-	// getActionBar().setSelectedNavigationItem(tab);
-	// super.onRestoreInstanceState(savedInstanceState);
-	// }
-	//
-	// public void getDescription() {
-	//
-	// }
-	//
-	// public void getRating() {
-	//
-	// }
 
 	public void ShowDialog() {
 		final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);

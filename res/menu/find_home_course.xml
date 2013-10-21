@@ -4,7 +4,7 @@
         android:id="@+id/itemAddRating"
         android:icon="@drawable/ic_white_ratecourses_small"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/add_rating_feedback_button">
+        android:title="">
     </item>
 
 </menu>
