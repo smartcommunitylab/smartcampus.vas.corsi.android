@@ -33,10 +33,6 @@ public class MyUniActivity extends SherlockActivity {
 	/** Logging tag */
 	private static final String TAG = "Main";
 
-	public static final String CLIENT_ID = "b8fcb94d-b4cf-438f-802a-c0a560734c88";
-
-	public static final String CLIENT_SECRET = "536560ac-cb74-4e1b-86a1-ef2c06c3313a";
-
 	public static final String APP_ID = "studymate";
 
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
@@ -47,18 +43,14 @@ public class MyUniActivity extends SherlockActivity {
 	 */
 	private SCAccessProvider accessProvider = null;
 	public static String userAuthToken;
-//	public static ProgressDialog pd;
 	public static BasicProfile bp;
-							//TODO: swich aac master with last version of branch
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		new ProgressDialog(MyUniActivity.this);
-//		pd = ProgressDialog.show(MyUniActivity.this, "Accesso account",
-//				"Accesso in corso...");
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
-			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
+			if (!accessProvider.login(this, null)){
 				new LoadUserDataFromACServiceTask().execute();
 				// user is already registered. Proceed requesting the token
 				// and the related steps if needed
@@ -73,7 +65,7 @@ public class MyUniActivity extends SherlockActivity {
 	@Override
 	protected void onResume() {
 		try {
-			if (!accessProvider.login(this, CLIENT_ID, CLIENT_SECRET, null)) {
+			if (!accessProvider.login(this, null)){
 				new LoadUserDataFromACServiceTask().execute();
 				// user is already registered. Proceed requesting the token
 				// and the related steps if needed
@@ -91,9 +83,6 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onStart() {
 		super.onStart();
 		setContentView(R.layout.activity_my_uni);
-		// your code here
-
-		// new LoadUserDataFromACServiceTask().execute();
 		
 			findViewById(R.id.my_agenda_btn).setOnClickListener(
 					new OnClickListener() {
@@ -160,7 +149,6 @@ public class MyUniActivity extends SherlockActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-
 		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -175,11 +163,9 @@ public class MyUniActivity extends SherlockActivity {
 				@Override
 				public void run() {
 					try {
-
 						accessProvider.logout(MyUniActivity.this);
-						System.out.println(userAuthToken);
+
 					} catch (AACException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -191,14 +177,12 @@ public class MyUniActivity extends SherlockActivity {
 			return true;
 		}
 		return false;
-
-		// return super.onOptionsItemSelected(item);
 	}
 
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// check the result of the authentication
-
 		if (requestCode == SCAccessProvider.SC_AUTH_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
 				new LoadUserDataFromACServiceTask().execute();
@@ -208,9 +192,6 @@ public class MyUniActivity extends SherlockActivity {
 
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				// Cancelled by user
-//				Toast.makeText(MyUniActivity.this, "Per usare StudyMate devi essere loggato!",
-//				Toast.LENGTH_SHORT).show();
-//				MyUniActivity.this.finish();
 			} else {
 				// Operation failed for some reason
 				Toast.makeText(MyUniActivity.this, "Ops! c'è stato un errore!",
@@ -228,8 +209,8 @@ public class MyUniActivity extends SherlockActivity {
 		protected BasicProfile doInBackground(Void... params) {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
-				userAuthToken = accessProvider.readToken(MyUniActivity.this,
-						CLIENT_ID, CLIENT_SECRET);
+				userAuthToken = accessProvider.readToken(MyUniActivity.this);
+						//,CLIENT_ID, CLIENT_SECRET);
 				System.out.println(userAuthToken);
 				BasicProfileService service = new BasicProfileService(
 						"https://vas-dev.smartcampuslab.it/aac");
@@ -243,14 +224,12 @@ public class MyUniActivity extends SherlockActivity {
 					connector.init(getApplicationContext(), userAuthToken,
 							APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					new PushServiceConnector().init(getApplicationContext(),
 							userAuthToken, APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -264,10 +243,7 @@ public class MyUniActivity extends SherlockActivity {
 
 		@Override
 		protected void onPostExecute(BasicProfile result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-
-//			pd.dismiss();
 		}
 
 	}
