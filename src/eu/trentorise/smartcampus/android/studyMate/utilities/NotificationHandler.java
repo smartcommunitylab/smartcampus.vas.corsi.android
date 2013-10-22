@@ -27,14 +27,11 @@ public class NotificationHandler extends
 	TextView textViewTitleNotices;
 	private ListView lvAllNotices;
 	private String dateString;
-	// private ArrayList<Notice> notificationsList;
 	private ArrayList<String> descriptionsList;
 	@SuppressWarnings("unused")
 	private ArrayList<String> datetimeList;
 	@SuppressWarnings("unused")
 	private ArrayList<String> usersList;
-
-	// private static ProgressDialog pd;
 
 	public NotificationHandler(Context applicationContext,
 			TextView textViewTitleNotices, ListView lvAllNotices) {
@@ -57,14 +54,12 @@ public class NotificationHandler extends
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
 	protected void onPostExecute(List<Notification> notifies) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(notifies);
 
 		NoticesActivity.pd.dismiss();
@@ -102,9 +97,6 @@ public class NotificationHandler extends
 			t = (Notification) i.next();
 
 			descriptionsList.add(t.getDescription());
-			/*
-			 * datetimeList.add(t.getDatetime()); usersList.add(t.getUser());
-			 */
 		}
 
 		AdapterNoticesList adapterNotices = new AdapterNoticesList(context,
@@ -127,11 +119,9 @@ public class NotificationHandler extends
 
 	@Override
 	protected List<Notification> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 		try {
 			return getNotification();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

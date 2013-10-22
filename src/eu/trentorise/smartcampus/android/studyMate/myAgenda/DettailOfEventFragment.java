@@ -43,11 +43,13 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.findViewById(R.id.oggetto_impegno_gds);
 		tvTitleEvent.setText(eventSelected.getTitolo());
 
-		TextView tvDateEvent = (TextView) view.findViewById(R.id.text_data_impegno_gds);
+		TextView tvDateEvent = (TextView) view
+				.findViewById(R.id.text_data_impegno_gds);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		tvDateEvent.setText(dateFormat.format(eventSelected.getData()));
 
-		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOra_impegno_gds);
+		TextView tvOraEvent = (TextView) view
+				.findViewById(R.id.textOra_impegno_gds);
 		tvOraEvent
 				.setText(eventSelected
 						.getStart()
@@ -68,7 +70,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.findViewById(R.id.textDescription_impegno_gds);
 		tvDescEvent.setText(eventSelected.getDescrizione());
 
-		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAula_impegno_gds);
+		TextView tvAulaEvent = (TextView) view
+				.findViewById(R.id.textAula_impegno_gds);
 		tvAulaEvent.setText(eventSelected.getRoom());
 
 		TextView tvLocationEvent = (TextView) view

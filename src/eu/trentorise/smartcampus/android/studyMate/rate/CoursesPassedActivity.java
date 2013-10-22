@@ -35,13 +35,11 @@ public class CoursesPassedActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 		return super.onCreateOptionsMenu(menu);
 	}
 

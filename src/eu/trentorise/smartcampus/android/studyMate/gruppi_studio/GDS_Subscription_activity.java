@@ -23,7 +23,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
 		// retrieving contextualgds from general collector
@@ -60,7 +59,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
 						GDS_Subscription_activity.this);
 				alertdialogbuilder
@@ -74,7 +72,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										// TODO Auto-generated method stub
 										dialog.dismiss();
 										// some logic here
 										Intent intent = new Intent(
@@ -93,7 +90,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										// TODO Auto-generated method stub
 										dialog.dismiss();
 									}
 								});
@@ -106,7 +102,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			GDS_Subscription_activity.this.finish();

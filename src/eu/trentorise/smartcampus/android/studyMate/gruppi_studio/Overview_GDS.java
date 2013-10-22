@@ -87,7 +87,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// TODO Auto-generated method stub
 		// Bundle args = arg2.getExtras();
 		Toast.makeText(
 				Overview_GDS.this,
@@ -100,7 +99,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	// @Override
 	// protected void onActivityResult(int requestCode, int resultCode, Intent
 	// data) {
-	// // TODO Auto-generated method stub
 	// if (requestCode == MyApplication.PICK_FILE_FROM_PHONE_MEMORY) {
 	// Bundle args = data.getExtras();
 	// Toast.makeText(
@@ -119,7 +117,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 
 		return super.onCreateOptionsMenu(menu);
 	}

@@ -27,11 +27,6 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		/*
-		 * LayoutInflater vi = (LayoutInflater) context
-		 * .getSystemService(Context.LAYOUT_INFLATER_SERVICE); convertView =
-		 * vi.inflate(R.layout.notices_detail_row_list, null);
-		 */
 
 		View row = convertView;
 		Notification item = getItem(position);
@@ -53,7 +48,6 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 
 		long dateTS = item.getTimestamp();
 
-		// Date d = new Date(Long.parseLong(dateTS));
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy/MM/dd HH:mm:ss", Locale.ITALY);
 

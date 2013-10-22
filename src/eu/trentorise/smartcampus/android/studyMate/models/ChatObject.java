@@ -23,8 +23,8 @@ public abstract class ChatObject {
 	public boolean isMine(int param) {
 		return param == 1;
 		/*
-		 * questo metodo quando sapr� come usare il campo autore della classe
-		 * chatobject mi dir� se il chatobject corrente � mio oppure no
+		 * questo metodo quando saprà come usare il campo autore della classe
+		 * chatobject mi dirà se il chatobject corrente è mio oppure no
 		 */
 	}
 

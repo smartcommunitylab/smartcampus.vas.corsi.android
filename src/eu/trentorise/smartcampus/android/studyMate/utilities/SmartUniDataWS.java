@@ -5,9 +5,6 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 public final class SmartUniDataWS {
 
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
-	// public static final String URL_WS_SMARTUNI =
-	// "http://unicorsi.app.smartcampuslab.it";
-	// public static String TOKEN = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	public static String TOKEN = MyUniActivity.userAuthToken;
 	public static final String TOKEN_NAME = "studymate";
 
@@ -27,7 +24,7 @@ public final class SmartUniDataWS {
 	public static String GET_WS_ALLCOURSES_OF_DEGREE(long id_degree) {
 		return "/corso/corsolaurea/" + String.valueOf(id_degree);
 	}
-	
+
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
 	// Courses complete

@@ -65,11 +65,8 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				SmartUniDataWS.TOKEN_NAME);
 
 		MessageRequest request = new MessageRequest(
-				"http://api.povoshardlife.eu",
-				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
-				"/api/documenti/getDirByIDPHL/" + idPHL + "?sc_token=" + MyUniActivity.userAuthToken);
-		// SmartUniDataWS.URL_WS_SMARTUNI,
-		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
+				"http://api.povoshardlife.eu", "/api/documenti/getDirByIDPHL/"
+						+ idPHL + "?sc_token=" + MyUniActivity.userAuthToken);
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
 				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		request.setMethod(Method.GET);
@@ -77,7 +74,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		MessageResponse response;
 		String body = null;
 		try {
-			response = mProtocolCarrier.invokeSync(request, "token", null);// SmartUniDataWS.TOKEN);
+			response = mProtocolCarrier.invokeSync(request, "token", null);
 
 			if (response.getHttpStatus() == 200) {
 				body = response.getBody();
@@ -85,13 +82,10 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -100,7 +94,6 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity, "Carico i materiali",
@@ -110,7 +103,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected void onPostExecute(final RisorsaPhl result) {
 		super.onPostExecute(result);
-		
+
 		r = result;
 		int i = 0;
 		if (result == null) {
@@ -150,7 +143,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				listViewCorsiPersonali.setAdapter(adapter);
 			}
 		}
-		if (i == 0){
+		if (i == 0) {
 			Toast.makeText(context, "La cartella è vuota...",
 					Toast.LENGTH_SHORT).show();
 		}
@@ -178,9 +171,6 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							ft.commit();
 
 						} else {
-							// Toast.makeText(context, "Coming Soon!",
-							// Toast.LENGTH_SHORT).show();
-
 							DownDialog(r.getCdc().get(arg2));
 
 						}
@@ -191,7 +181,6 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
-		// TODO Auto-generated method stub
 		// bundleParam = params[0];
 		return getMaterial4Dir();
 	}
@@ -209,7 +198,10 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		// execute this when the downloader must be fired
 		final DownloadTask downloadTask = new DownloadTask(currentActivity,
 				mProgressDialog, r);
-		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());// + "?sc_token=" + MyUniActivity.userAuthToken);
+		downloadTask.execute("http://api.povoshardlife.eu/" + r.getURL());// +
+																			// "?sc_token="
+																			// +
+																			// MyUniActivity.userAuthToken);
 
 		mProgressDialog
 				.setOnCancelListener(new DialogInterface.OnCancelListener() {

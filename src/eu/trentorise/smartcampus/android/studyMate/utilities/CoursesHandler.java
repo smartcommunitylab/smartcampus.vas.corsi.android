@@ -45,7 +45,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi,
 			Activity currentActivity, SherlockFragmentActivity currentSherlock) {
-		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.listViewCorsiPersonali = listViewCorsi;
 		this.currentActivity = currentActivity;
@@ -75,13 +74,10 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -90,7 +86,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity,
@@ -99,11 +94,10 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 
 	@Override
 	protected void onPostExecute(final List<Corso> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'� stato un errore...",
+			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -152,7 +146,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 
 	@Override
 	protected List<Corso> doInBackground(Bundle... params) {
-		// TODO Auto-generated method stub
 		bundleParam = params[0];
 
 		return getAllPersonalCourses();

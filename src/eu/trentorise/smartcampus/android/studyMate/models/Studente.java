@@ -34,9 +34,9 @@ public class Studente {
 	private List<GruppoDiStudio> gruppiDiStudio;
 
 	private String idsCorsiInteresse;
-	
+
 	private List<CorsoLite> corsiInteresse;
-	
+
 	public Collection<Corso> getCorsi() {
 		return corsi;
 	}
@@ -45,7 +45,6 @@ public class Studente {
 		this.corsi = corsi;
 	}
 
-	
 	public long getUserSCId() {
 		return userSCId;
 	}

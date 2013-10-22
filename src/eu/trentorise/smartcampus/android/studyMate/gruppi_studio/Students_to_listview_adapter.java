@@ -22,12 +22,10 @@ public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View student_view = convertView;
 		Studente currentStudent = getItem(position);
 		if (student_view == null) {
@@ -36,6 +34,7 @@ public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 			student_view = inflater.inflate(R.layout.students_view, null);
 		}
 
+		@SuppressWarnings("unused")
 		ImageView foto_studente = (ImageView) student_view
 				.findViewById(R.id.iv_foto_studente);
 		TextView nomeEcognome_studente = (TextView) student_view
@@ -43,7 +42,7 @@ public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 		TextView info_studente = (TextView) student_view
 				.findViewById(R.id.tv_info_studente);
 
-		//foto_studente.setImageDrawable(currentStudent.getFoto_studente());
+		// foto_studente.setImageDrawable(currentStudent.getFoto_studente());
 		nomeEcognome_studente.setText(currentStudent.getNome() + " "
 				+ currentStudent.getCognome());
 		info_studente.setText(currentStudent.getAnno_corso() + "° anno presso "

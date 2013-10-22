@@ -55,6 +55,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
 		tv_nomeGruppo.setText(nome_gruppo_filter);
 
+		@SuppressWarnings("unused")
 		ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
 				universo_gds, materia_filter, nome_gruppo_filter,
 				nomi_studenti_filter);
@@ -68,7 +69,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,
 				universo_gds);// attenzione! al posto di universo_gds si
-								// dovrebbe mettere gds_ammissibili ma finch�
+								// dovrebbe mettere gds_ammissibili ma finchè
 								// non funzia lascio stare
 		results_list.setAdapter(adapter);
 		results_list.setOnItemClickListener(new OnItemClickListener() {
@@ -81,7 +82,6 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 
 				Adapter_gds_to_list adpt = (Adapter_gds_to_list) parent
 						.getAdapter();
@@ -99,7 +99,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 	public ArrayList<GruppoDiStudio> find_gds_ammissibili(
 			ArrayList<GruppoDiStudio> universo_gds, String materia_filter,
 			String nome_gruppo_filter, ArrayList<String> nomi_studenti_filter) {
-		// andr� fatta questa ricerca nella forma di database con query
+		// andrà fatta questa ricerca nella forma di database con query
 		// classiche tipo select * from gruppidistudio where
 		// filtro=valore_filtro
 		ArrayList<GruppoDiStudio> retval = new ArrayList<GruppoDiStudio>();
@@ -141,7 +141,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 					}
 					// end(2)
 				}
-			} else {// (3) caso in cui un particolare nome_gruppo � stato
+			} else {// (3) caso in cui un particolare nome_gruppo è stato
 					// selezionato
 				GruppoDiStudio selected_gds = null;
 				for (GruppoDiStudio gds : universo_gds) {
@@ -173,7 +173,6 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Display_GDS_research_results.this.finish();

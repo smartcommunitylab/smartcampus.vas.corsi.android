@@ -23,7 +23,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notices);
-		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();// getActionBar();
+		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -41,13 +41,11 @@ public class NoticesActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.notices, menu);
 		return super.onCreateOptionsMenu(menu);

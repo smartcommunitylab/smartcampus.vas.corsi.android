@@ -3,7 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -18,7 +17,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.show_impegno_gds);
 
@@ -64,13 +62,12 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		}
 
 		/*
-		 * e cos� via
+		 * e così via
 		 */
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			ShowImpegnoGDS.this.finish();

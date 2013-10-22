@@ -17,6 +17,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
 
 public class ChatObjectAdapter extends ArrayAdapter<ChatObject> {
 
+	@SuppressWarnings("unused")
 	private ArrayList<ChatObject> entries;
 	Context context;
 
@@ -25,7 +26,6 @@ public class ChatObjectAdapter extends ArrayAdapter<ChatObject> {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

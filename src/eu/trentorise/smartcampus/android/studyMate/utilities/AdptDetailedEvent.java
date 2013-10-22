@@ -7,7 +7,7 @@ public class AdptDetailedEvent {
 	private String name;
 	private String description;
 	private String ora;
-	private String room; // /prova
+	private String room; // prova
 
 	public AdptDetailedEvent(Date date, String name, String description,
 			String ora, String room) {
@@ -16,7 +16,7 @@ public class AdptDetailedEvent {
 		this.name = name;
 		this.description = description;
 		this.ora = ora;
-		this.room = room; // /// prova
+		this.room = room; // prova
 	}
 
 	public AdptDetailedEvent(Date date, String name, String description,

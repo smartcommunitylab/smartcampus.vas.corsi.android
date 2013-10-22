@@ -37,7 +37,6 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 	public CoursesPassedHandler(Context applicationContext,
 			ListView listViewCorsi, Activity currentActivity) {
-		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.listViewCorsiPassati = listViewCorsi;
 		this.currentActivity = currentActivity;
@@ -65,13 +64,10 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -80,7 +76,6 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity,
@@ -89,11 +84,10 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected void onPostExecute(final List<Corso> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'� stato un errore...",
+			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -144,7 +138,6 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected List<Corso> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 
 		return getAllCoursesPassed();
 	}

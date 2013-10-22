@@ -60,7 +60,6 @@ public class FindCoursesDegreeHandler extends
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 		new ProgressDialog(currentActivity);
@@ -72,7 +71,6 @@ public class FindCoursesDegreeHandler extends
 	@SuppressWarnings("static-access")
 	@Override
 	protected List<CorsoLaurea> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 
 		departSelectedName = parent.getItemAtPosition(pos).toString();
 
@@ -103,13 +101,10 @@ public class FindCoursesDegreeHandler extends
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -126,7 +121,6 @@ public class FindCoursesDegreeHandler extends
 
 	@Override
 	protected void onPostExecute(final List<CorsoLaurea> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		if (result == null) {
 
@@ -165,7 +159,6 @@ public class FindCoursesDegreeHandler extends
 
 						@Override
 						public void onNothingSelected(AdapterView<?> arg0) {
-							// TODO Auto-generated method stub
 
 						}
 					});

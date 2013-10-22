@@ -16,8 +16,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class SetCourseAsFollowHandler extends
-		AsyncTask<Corso, Void, Boolean> {
+public class SetCourseAsFollowHandler extends AsyncTask<Corso, Void, Boolean> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -27,7 +26,6 @@ public class SetCourseAsFollowHandler extends
 
 	public SetCourseAsFollowHandler(Context applicationContext, Button monitor,
 			TextView txtFollow) {
-		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.monitorFollow = monitor;
 		this.txtFollow = txtFollow;
@@ -35,8 +33,6 @@ public class SetCourseAsFollowHandler extends
 
 	@Override
 	protected Boolean doInBackground(Corso... params) {
-		// TODO Auto-generated method stub
-
 		// corso a cui mi riferisco
 		corso = params[0];
 
@@ -64,13 +60,10 @@ public class SetCourseAsFollowHandler extends
 			}
 
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -79,21 +72,19 @@ public class SetCourseAsFollowHandler extends
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 	}
 
 	@Override
 	protected void onPostExecute(Boolean result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
-		// true se l'operazione � andata a buon fine
+		// true se l'operazione è andata a buon fine
 		if (result) {
-			
+
 			// faccio lo switch del bottone
-			if(txtFollow.getText()==context.getResources().getText(
-					R.string.label_txtMonitor_off)){
+			if (txtFollow.getText() == context.getResources().getText(
+					R.string.label_txtMonitor_off)) {
 				txtFollow.setText(context.getResources().getText(
 						R.string.label_txtMonitor_on));
 				monitorFollow.setBackgroundResource(R.drawable.ic_monitor_on);
@@ -102,7 +93,7 @@ public class SetCourseAsFollowHandler extends
 						.getText(R.string.toast_switchfollow_success),
 						Toast.LENGTH_LONG);
 				toast.show();
-			}else{
+			} else {
 				txtFollow.setText(context.getResources().getText(
 						R.string.label_txtMonitor_off));
 				txtFollow.setText(R.string.label_txtMonitor_off);
@@ -113,7 +104,7 @@ public class SetCourseAsFollowHandler extends
 				toast.show();
 
 			}
-		// se l'operazione non � andata a buon fine
+			// se l'operazione non è andata a buon fine
 		} else {
 			Toast toast = Toast.makeText(context, context.getResources()
 					.getText(R.string.toast_switchfollow_error),

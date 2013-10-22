@@ -37,7 +37,6 @@ public class EventItem extends EventItem4Adapter {
 
 	@Override
 	public String getRoom() {
-		// TODO Auto-generated method stub
 		return object.getRoom();
 	}
 }

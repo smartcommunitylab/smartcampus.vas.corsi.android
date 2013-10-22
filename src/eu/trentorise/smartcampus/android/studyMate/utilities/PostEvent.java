@@ -20,14 +20,12 @@ public class PostEvent extends AsyncTask<Void, Void, Evento> {
 	Evento evento;
 
 	public PostEvent(Context applicationContext, Evento evento) {
-		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.evento = evento;
 	}
 
 	@Override
 	protected Evento doInBackground(Void... arg0) {
-		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -52,13 +50,10 @@ public class PostEvent extends AsyncTask<Void, Void, Evento> {
 			}
 
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

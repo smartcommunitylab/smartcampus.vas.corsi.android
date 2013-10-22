@@ -22,12 +22,10 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View row = convertView;
 		GruppoDiStudio currentGDS = getItem(position);
 		if (row == null) {

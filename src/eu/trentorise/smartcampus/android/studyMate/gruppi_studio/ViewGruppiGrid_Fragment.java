@@ -30,7 +30,6 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
 	}
@@ -46,15 +45,14 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 
 		GridView gridview = (GridView) getActivity().findViewById(
 				R.id.gridview_gruppi_di_studio);
 
-		//sorting gds before rendering them on screen
+		// sorting gds before rendering them on screen
 		Collections.sort(user_gds_list);
-		
+
 		Adapter_gds_to_grid adapter = new Adapter_gds_to_grid(getActivity(),
 				R.id.gridview_gruppi_di_studio, user_gds_list);
 		gridview.setAdapter(adapter);
@@ -66,10 +64,10 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 				/*
 				 * Per passare il contextualGDS alla overview_GDS activity,
 				 * piazzo il contextualgds nel contextualcollection e poi dalla
-				 * overview_gds vado a recuperarlo. Il contextualcollection �
-				 * un Arraylist<Object> della classe MyApplication.
-				 * contextualcollection � statico e poich� la classe
-				 * myapplication � pubblica chiunque pu� accedere al
+				 * overview_gds vado a recuperarlo. Il contextualcollection è un
+				 * Arraylist<Object> della classe MyApplication.
+				 * contextualcollection è statico e poichè la classe
+				 * myapplication è pubblica chiunque può accedere al
 				 * contextualcollection. Il contextualcollection lo uso come
 				 * spazio di memoria condivisa. Come politica di utilizzo mi
 				 * prefiggo di piazzare nel contextualcollection un oggetto
@@ -90,7 +88,6 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				if (mActionMode != null) {
 					return false;
 				}

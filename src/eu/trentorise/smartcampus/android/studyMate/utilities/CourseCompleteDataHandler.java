@@ -31,11 +31,6 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 	public CourseCompleteDataHandler(Context applicationContext, long idCourse) {
 		this.context = applicationContext;
 		this.idCourse = idCourse;
-		/*
-		 * this.tvCourseName = courseName; this.ratingAverage = ratingAverage;
-		 * this.descriptionCourse = descriptionCourse; this.listComments =
-		 * listComments;
-		 */
 	}
 
 	private Corso getFullCourseById() {
@@ -62,13 +57,10 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -77,68 +69,20 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
 	protected void onPostExecute(Corso course) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(course);
-
-		// FindHomeCourseActivity.pd.dismiss();
-
-		// loadDataLayout(course);
-
 	}
 
 	protected void loadDataLayout(Corso course) {
-		// tvCourseName.setText(course.getNome());
-		// ratingAverage.setRating((float)course.getValutazione_media());
-		// descriptionCourse.setText(course.getDescrizione());
-		//
-		// List<Comment> comments = course.getCommenti();
-		//
-		// ArrayList<FeedbackRowGroup> ratings = new
-		// ArrayList<FeedbackRowGroup>();
-		//
-		// for (int i = 0; i < comments.size(); i++) {
-		// FeedbackRowGroup feedb = new FeedbackRowGroup();
-		// Author auth = new Author();
-		// auth.setName(comments.get(i).getAutore().getNome());
-		// feedb.setAuthor(auth);
-		// feedb.setRating(comments.get(i).getValutazione());
-		// feedb.setComment(comments.get(i).getTesto());
-		// ratings.add(feedb);
-		// }
-		//
-		// AdapterFeedbackList mAdapter = new AdapterFeedbackList(context,
-		// ratings);
-		//
-		//
-		//
-		// listComments.setAdapter(mAdapter);
-		// listComments.setGroupIndicator(null);
-		// listComments.setOnGroupClickListener(new OnGroupClickListener() {
-		//
-		// @Override
-		// public boolean onGroupClick(ExpandableListView parent, View v,
-		// int groupPosition, long id) {
-		// // TODO Auto-generated method stub
-		// if(parent.isGroupExpanded(groupPosition))
-		// parent.collapseGroup(groupPosition);
-		// else
-		// parent.expandGroup(groupPosition, true);
-		// return true;
-		// }
-		// });
-
 	}
 
 	@Override
 	protected Corso doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 		return getFullCourseById();
 	}
 }

@@ -38,12 +38,12 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		TextView description = (TextView) row
 				.findViewById(R.id.description_ev_text);
 		TextView ora = (TextView) row.findViewById(R.id.time_ev_edit);
-		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);// ///////////////////
+		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);
 		title.setText(item.getTitle());
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
 		ora.setText(item.getOra());
-		room.setText("Aula: " + item.getRoom());// /////////////////////////
+		room.setText("Aula: " + item.getRoom());
 		content.setPadding(
 				10,
 				8,

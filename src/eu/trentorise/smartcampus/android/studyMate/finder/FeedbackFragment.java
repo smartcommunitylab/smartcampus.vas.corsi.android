@@ -33,7 +33,6 @@ public class FeedbackFragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 	}
 
@@ -101,7 +100,7 @@ public class FeedbackFragment extends SherlockFragment {
 					if (parent.isGroupExpanded(groupPosition))
 						parent.collapseGroup(groupPosition);
 					else
-						parent.expandGroup(groupPosition);// , true);
+						parent.expandGroup(groupPosition);
 					return true;
 				}
 			});

@@ -10,7 +10,6 @@ public class FilterSearched {
 	ArrayList<Corso> coursesList;
 
 	public FilterSearched() {
-		// TODO Auto-generated constructor stub
 	}
 
 	// filtro in base a quello che ho cercato controllando se le parole sono

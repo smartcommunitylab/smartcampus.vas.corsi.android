@@ -67,12 +67,6 @@ public class MaterialAdapter extends ArrayAdapter<MaterialItem> {
 		} else {
 			title.setVisibility(View.GONE);
 		}
-		// row.setPadding(
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin),
-		// 0,
-		// (int)context.getResources().getDimension(
-		// R.dimen.activity_horizontal_margin), 0);
 		return row;
 	}
 

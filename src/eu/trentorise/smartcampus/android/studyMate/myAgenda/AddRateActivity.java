@@ -62,7 +62,6 @@ public class AddRateActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
@@ -176,13 +175,11 @@ public class AddRateActivity extends SherlockFragmentActivity {
 		String body;
 
 		public LoaderFeedbackData(Context applicationContext) {
-			// TODO Auto-generated constructor stub
 			this.context = applicationContext;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			ratings = new ArrayList<RatingRowGroup>();
@@ -191,7 +188,6 @@ public class AddRateActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Commento commento) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(commento);
 
 			// setto i campi della valutazione
@@ -256,8 +252,6 @@ public class AddRateActivity extends SherlockFragmentActivity {
 				@Override
 				public boolean onChildClick(ExpandableListView parent, View v,
 						int groupPosition, int childPosition, long id) {
-					// TODO Auto-generated method stub
-
 					return true;
 				}
 			});
@@ -269,8 +263,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							Intent intent = new Intent();
 							intent.putExtra("Rating", ratings);
 							Commento commento = new Commento();
-
-							// controllo se il commento � presente
+							// controllo se il commento è presente
 							if (commentCourse.getText().toString() != null)
 								commento.setTesto(commentCourse.getText()
 										.toString());
@@ -283,7 +276,8 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesHandler.corsoSelezionato.getId());
+							commento.setCorso(CoursesHandler.corsoSelezionato
+									.getId());
 
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
@@ -299,9 +293,6 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							stud.setId(Long.parseLong(MyUniActivity.bp
 									.getUserId()));
 							commento.setId_studente(stud.getId());
-
-//							new AddFeedbackHandler(getParent()
-//									.getApplicationContext(),getParent()).execute(commento);
 							Toast.makeText(getApplicationContext(),
 									"Voto Aggiunto!", Toast.LENGTH_LONG).show();
 							finish();
@@ -325,8 +316,9 @@ public class AddRateActivity extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(
-							CoursesHandler.corsoSelezionato.getId()));
+					SmartUniDataWS
+							.GET_WS_FEEDBACK_OF_STUDENT(CoursesHandler.corsoSelezionato
+									.getId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
@@ -342,13 +334,10 @@ public class AddRateActivity extends SherlockFragmentActivity {
 					return null;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

@@ -79,7 +79,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
@@ -174,11 +173,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		case R.id.menu_modify_event:
 			Toast.makeText(getApplicationContext(), "Coming soon!",
 					Toast.LENGTH_SHORT).show();
-			// Intent intentEvent2 = new Intent(MyAgendaActivity.this,
-			// AddEventActivity.class);
-			// intentEvent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intentEvent2);
-
 			return true;
 		case R.id.menu_delete_event:
 			return true;
@@ -218,8 +212,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected Boolean doInBackground(Long... params) {
-			// TODO Auto-generated method stub
-
 			corsoId = params[0];
 
 			mProtocolCarrier = new ProtocolCarrier(MyAgendaActivity.this,
@@ -244,13 +236,10 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 					return false;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -260,12 +249,11 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Boolean isPassed) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(isPassed);
 
 			if (isPassed == null) {
 				Toast toast = Toast.makeText(MyAgendaActivity.this,
-						"Ops. C'� stato un errore", Toast.LENGTH_LONG);
+						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}
@@ -273,7 +261,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			if (isPassed) {
 
 				Intent intentAddRating = new Intent(MyAgendaActivity.this,
-						AddRatingFromCoursesPassed.class); // AddRatingFromCoursesPassed
+						AddRatingFromCoursesPassed.class);
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("corso",
 						CoursesHandler.corsoSelezionato.getNome());

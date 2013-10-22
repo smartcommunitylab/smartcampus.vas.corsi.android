@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Date;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -77,7 +76,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			MyApplication.getContextualCollection().clear();
 		}
 
-		// se la user_gds_list � vuota proponiamo all'utente di fare qlcs..
+		// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 		TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
 		if (user_gds_list.isEmpty()) {
 			tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
@@ -112,12 +111,11 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		 * (user_gds_list.isEmpty()) { AlertDialog.Builder builder = new
 		 * AlertDialog.Builder( Lista_GDS_activity.this);
 		 * builder.setTitle("Avvio guidato"); builder.setMessage(
-		 * "Scopri le funzionalit� dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
+		 * "Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
 		 * ); builder.setPositiveButton("Si", new
 		 * DialogInterface.OnClickListener() {
 		 * 
 		 * @Override public void onClick(DialogInterface dialog, int which) { //
-		 * TODO Auto-generated method stub dialog.dismiss(); final Dialog
 		 * shadowdialog = new Dialog( Lista_GDS_activity.this);
 		 * 
 		 * shadowdialog.getWindow().requestFeature( (int)
@@ -138,8 +136,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		 * .findViewById(R.id.ok_button); ok.setOnClickListener(new
 		 * OnClickListener() {
 		 * 
-		 * @Override public void onClick(View v) { // TODO Auto-generated method
-		 * stub shadowdialog.dismiss(); } });
+		 * @Override public void onClick(View v) { stub shadowdialog.dismiss();
+		 * } });
 		 * 
 		 * } }); builder.setNegativeButton("No", new
 		 * DialogInterface.OnClickListener() {
@@ -165,7 +163,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		if (user_gds_list.isEmpty()) {
 			MenuItem item = menu.findItem(R.id.action_cambia_layout);
 			item.setEnabled(false);
@@ -188,7 +185,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		case R.id.action_cambia_layout:
 
-			Drawable actualicon = item.getIcon();
+			// Drawable actualicon = item.getIcon();
 
 			if (isShownAsList) {
 				// azione se
@@ -242,7 +239,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
 		super.onBackPressed();
 		Intent goToMyUniActivity = new Intent(getApplicationContext(),
 				MyUniActivity.class);

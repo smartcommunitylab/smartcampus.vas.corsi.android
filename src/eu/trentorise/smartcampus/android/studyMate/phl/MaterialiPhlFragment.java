@@ -18,13 +18,11 @@ public class MaterialiPhlFragment extends SherlockFragment {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_phl_materiali,
 				container, false);
-		// // do your view initialization here
 		return view;
 	}
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 

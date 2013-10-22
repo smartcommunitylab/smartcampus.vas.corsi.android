@@ -57,6 +57,7 @@ public class Forum_fragment extends SherlockFragment {
 		chateText = (TextView) getSherlockActivity().findViewById(
 				R.id.forum_edittext);
 
+		@SuppressWarnings("unused")
 		ImageButton smile_btn = (ImageButton) getSherlockActivity()
 				.findViewById(R.id.smile_button);
 
@@ -73,8 +74,8 @@ public class Forum_fragment extends SherlockFragment {
 		Allegato allegato = new Allegato(null);
 		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
 		ChatAttachment attach1 = new ChatAttachment(now, allegato);
-		forum.add(msg1);// occio qua quando si far� sul serio col forum
-		forum.add(attach1);// occio qua quando si far� sul serio col forum
+		forum.add(msg1);// occio qua quando si farà sul serio col forum
+		forum.add(attach1);// occio qua quando si farà sul serio col forum
 
 		/*
 		 * ora bisogna fare un arrayadapter per arraylist<chatobject> (dinamico

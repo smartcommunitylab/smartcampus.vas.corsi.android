@@ -24,7 +24,7 @@ public class PHL4Courses extends SherlockFragmentActivity {
 
 		/** TabHost will have Tabs */
 		String tab1_txt = getResources().getString(R.string.tab_PHL);
-		String tab2_txt = getResources().getString(R.string.tab_moodle);
+		// String tab2_txt = getResources().getString(R.string.tab_moodle);
 
 		setTitle(PHLengine.corsoSelezionato.getNome());
 
@@ -36,13 +36,13 @@ public class PHL4Courses extends SherlockFragmentActivity {
 								MaterialiPhlFragment.class));
 		ab.addTab(tab1);
 
-//		Tab tab2 = ab
-//				.newTab()
-//				.setText(tab2_txt)
-//				.setTabListener(
-//						new TabListener<MaterialiMoodleFragment>(this, "tab2",
-//								MaterialiMoodleFragment.class));
-//		ab.addTab(tab2);
+		// Tab tab2 = ab
+		// .newTab()
+		// .setText(tab2_txt)
+		// .setTabListener(
+		// new TabListener<MaterialiMoodleFragment>(this, "tab2",
+		// MaterialiMoodleFragment.class));
+		// ab.addTab(tab2);
 	}
 
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -55,8 +55,6 @@ public class PHL4Courses extends SherlockFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
-		// TODO Auto-generated method stub
-
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(PHL4Courses.this,
@@ -72,7 +70,6 @@ public class PHL4Courses extends SherlockFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
 		super.onBackPressed();
 	}
 

@@ -29,14 +29,10 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
-//		new ProgressDialog(context);
-//		pd = ProgressDialog.show(act, "Informazioni del corso di ", "Caricamento...");
 	}
-	
+
 	public AddFeedbackHandler(Context context, SherlockFragmentActivity act) {
-		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.act = act;
 	}
@@ -50,10 +46,11 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 
 		MessageResponse response;
 
-		MessageRequest request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
+		MessageRequest request = new MessageRequest(
+				SmartUniDataWS.URL_WS_SMARTUNI,
 				SmartUniDataWS.POST_WS_MY_FEEDBACK);
 		request.setMethod(Method.POST);
-		
+
 		Boolean resultPost = false;
 
 		try {
@@ -64,8 +61,6 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 			response = mProtocolCarrier.invokeSync(request,
 					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
 
-			
-			
 			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
@@ -74,13 +69,10 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 			}
 
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -89,19 +81,18 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 
 	@Override
 	protected void onPostExecute(Boolean result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		
-		if(result.equals(true)){
-			Toast.makeText(context,
-				"Voto Aggiunto!", Toast.LENGTH_LONG).show();
-		}else{
-			Toast.makeText(context,
-					"Ops! c'è stato un errore. La tua valutazione non è stata salvata", Toast.LENGTH_LONG).show();
+
+		if (result.equals(true)) {
+			Toast.makeText(context, "Voto Aggiunto!", Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(
+					context,
+					"Ops! c'è stato un errore. La tua valutazione non è stata salvata",
+					Toast.LENGTH_LONG).show();
 		}
 		AddRatingFromCoursesPassed.pd.dismiss();
 		act.finish();
-		
 
 	}
 

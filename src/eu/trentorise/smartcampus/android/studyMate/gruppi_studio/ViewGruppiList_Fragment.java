@@ -30,7 +30,6 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
 	}
@@ -50,10 +49,10 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
 		ListView listview = (ListView) getActivity().findViewById(
 				R.id.listview_gruppi_di_studio);
-		
-		//sorting gds before rendering them on screen
-				Collections.sort(user_gds_list);
-				
+
+		// sorting gds before rendering them on screen
+		Collections.sort(user_gds_list);
+
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(getActivity(),
 				R.id.listview_gruppi_di_studio, user_gds_list);
 		listview.setAdapter(adapter);
@@ -64,10 +63,10 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 				/*
 				 * Per passare il contextualGDS alla overview_GDS activity,
 				 * piazzo il contextualgds nel contextualcollection e poi dalla
-				 * overview_gds vado a recuperarlo. Il contextualcollection �
-				 * un Arraylist<Object> della classe MyApplication.
-				 * contextualcollection � statico e poich� la classe
-				 * myapplication � pubblica chiunque pu� accedere al
+				 * overview_gds vado a recuperarlo. Il contextualcollection è un
+				 * Arraylist<Object> della classe MyApplication.
+				 * contextualcollection è statico e poichè la classe
+				 * myapplication è pubblica chiunque può accedere al
 				 * contextualcollection. Il contextualcollection lo uso come
 				 * spazio di memoria condivisa. Come politica di utilizzo mi
 				 * prefiggo di piazzare nel contextualcollection un oggetto

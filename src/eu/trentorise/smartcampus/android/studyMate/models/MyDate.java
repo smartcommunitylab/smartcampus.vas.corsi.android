@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-//quest classe è stata creata per facilitare l'uso dei datepicker android
+//quest classe Ã¨ stata creata per facilitare l'uso dei datepicker android
 //dove i mesi sono mappati su numeri da 0 a 11. 
 //Utilizzando questa classe per stamapre date viene nascosto 
 //al programmatore il problema di incrementare di uno il mese
@@ -25,7 +25,6 @@ public class MyDate {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return ("" + day + "/" + (month + 1) + "/" + year);
 	}
 
@@ -51,7 +50,5 @@ public class MyDate {
 	public int getDay() {
 		return day;
 	}
-	
-	
 
 }

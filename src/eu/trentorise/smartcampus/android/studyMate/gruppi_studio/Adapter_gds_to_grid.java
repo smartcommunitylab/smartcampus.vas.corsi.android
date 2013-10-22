@@ -15,12 +15,12 @@ import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 	private Context context;
+	@SuppressWarnings("unused")
 	private ArrayList<GruppoDiStudio> entries;
 
 	public Adapter_gds_to_grid(Context context, int textViewResourceId,
 			ArrayList<GruppoDiStudio> objects) {
 		super(context, textViewResourceId, objects);
-		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.entries = objects;
 	}

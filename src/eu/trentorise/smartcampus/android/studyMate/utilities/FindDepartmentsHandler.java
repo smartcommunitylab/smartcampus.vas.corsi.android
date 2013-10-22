@@ -45,7 +45,6 @@ public class FindDepartmentsHandler extends
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 		new ProgressDialog(currentActivity);
@@ -57,7 +56,6 @@ public class FindDepartmentsHandler extends
 	public FindDepartmentsHandler(Context applicationContext,
 			Spinner spinnerDepartments, Spinner spinnerDegree,
 			Activity currentActivity) {
-		// TODO Auto-generated constructor stub
 		this.context = applicationContext;
 		this.spinnerDepartments = spinnerDepartments;
 		this.spinnerDegree = spinnerDegree;
@@ -66,7 +64,6 @@ public class FindDepartmentsHandler extends
 
 	@Override
 	protected List<Dipartimento> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -89,13 +86,10 @@ public class FindDepartmentsHandler extends
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -114,7 +108,6 @@ public class FindDepartmentsHandler extends
 
 	@Override
 	protected void onPostExecute(final List<Dipartimento> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		listaDip = result;

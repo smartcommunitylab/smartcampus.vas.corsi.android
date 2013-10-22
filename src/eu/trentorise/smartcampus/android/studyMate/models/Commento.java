@@ -9,7 +9,7 @@ public class Commento {
 
 	// utente che ha scritto commento
 	private long id_studente;
-	
+
 	private String nome_studente;
 
 	// testo del commento
@@ -17,8 +17,8 @@ public class Commento {
 
 	// data in cui e' stato scritto commento
 	private String data_inserimento;
-	
-	// se il commento è stato approvato
+
+	// se il commento Ã¨ stato approvato
 	private boolean approved;
 
 	// valutazione contenuto
@@ -118,7 +118,7 @@ public class Commento {
 	public void setRating_esame(float rating_esame) {
 		this.rating_esame = rating_esame;
 	}
-	
+
 	public boolean isApproved() {
 		return approved;
 	}
@@ -134,7 +134,5 @@ public class Commento {
 	public void setNome_studente(String nome_studente) {
 		this.nome_studente = nome_studente;
 	}
-	
-	
 
 }

@@ -25,8 +25,6 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-		// ArrayList<DetailInfo> productList =
-		// deptList.get(groupPosition).getProductList();
 		return ratings.get(groupPosition);
 	}
 
@@ -39,8 +37,6 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View view, ViewGroup parent) {
 
-		// DetailInfo detailInfo = (DetailInfo) getChild(groupPosition,
-		// childPosition);
 		FeedbackRowGroup inf = new FeedbackRowGroup();
 		inf = (FeedbackRowGroup) getChild(groupPosition, childPosition);
 		if (view == null) {
@@ -114,7 +110,6 @@ public class AdapterFeedbackList extends BaseExpandableListAdapter {
 		heading.setText(headerInfo.getAuthor().getName().trim());
 
 		RatingBar rb = (RatingBar) view.findViewById(R.id.ratingBarRow);
-		// rb.setNumStars(headerInfo.getRating());
 		rb.setRating(headerInfo.getRating());
 
 		return view;

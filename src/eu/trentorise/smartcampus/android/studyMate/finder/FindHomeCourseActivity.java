@@ -80,7 +80,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-
 	public void ShowDialog() {
 		final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
@@ -139,8 +138,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected Boolean doInBackground(Long... params) {
-			// TODO Auto-generated method stub
-
 			corsoId = params[0];
 
 			mProtocolCarrier = new ProtocolCarrier(FindHomeCourseActivity.this,
@@ -165,13 +162,10 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 					return false;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -181,12 +175,11 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Boolean isPassed) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(isPassed);
 
 			if (isPassed == null) {
 				Toast toast = Toast.makeText(FindHomeCourseActivity.this,
-						"Ops. C'� stato un errore", Toast.LENGTH_LONG);
+						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}

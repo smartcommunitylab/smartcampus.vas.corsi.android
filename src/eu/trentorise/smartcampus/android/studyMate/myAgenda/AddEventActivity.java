@@ -85,13 +85,11 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		Button button_ok = (Button) findViewById(R.id.button_ok);
 
@@ -122,7 +120,6 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.test, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -199,7 +196,6 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected List<CorsoLite> doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			return getFollowingCourses();
 		}
 
@@ -226,13 +222,10 @@ public class AddEventActivity extends SherlockFragmentActivity {
 					return null;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -241,7 +234,6 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(List<CorsoLite> result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 

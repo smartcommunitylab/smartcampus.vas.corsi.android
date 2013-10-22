@@ -21,7 +21,6 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -45,11 +45,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	public static ProgressDialog pd;
 	TextView txtMonitor;
 	private Studente studenteUser;
-	private List<Commento> commenti;
-	
+
 	public static List<Commento> feedbackInfoList;
 	public static Corso corsoInfo;
-	
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
 			SherlockFragmentActivity act, RatingBar ratingAverage,
@@ -65,9 +63,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	private List<Commento> getFullFeedbackById() {
 
-		
 		// Richiedo la lista dei commenti
-		
+
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -89,20 +86,17 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		// prendo i dati aggiornati del corso
 		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String.valueOf(idCourse)));
+				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String
+						.valueOf(idCourse)));
 		request.setMethod(Method.GET);
 
 		try {
@@ -112,25 +106,18 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			if (response.getHttpStatus() == 200) {
 
 				String bodyCorso = response.getBody();
-				corsoInfo = Utils.convertJSONToObject(bodyCorso,
-						Corso.class);
+				corsoInfo = Utils.convertJSONToObject(bodyCorso, Corso.class);
 
 			} else {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 
 		// prendo i dati aggiornati dello studente
 		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
@@ -151,13 +138,10 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -210,36 +194,29 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
 			act.getSupportActionBar().setTitle(corsoInfo.getNome());
-			ratingAverage.setRating((float) corsoInfo
-					.getValutazione_media());
+			ratingAverage.setRating((float) corsoInfo.getValutazione_media());
 
 			RatingBar ratingCont = (RatingBar) act
 					.findViewById(R.id.ratingBarRowContenuti);
-			ratingCont.setRating(corsoInfo
-					.getRating_contenuto());
+			ratingCont.setRating(corsoInfo.getRating_contenuto());
 
 			RatingBar ratingCaricoStudio = (RatingBar) act
 					.findViewById(R.id.ratingBarRowCfu);
-			ratingCaricoStudio.setRating(corsoInfo
-					.getRating_carico_studio());
+			ratingCaricoStudio.setRating(corsoInfo.getRating_carico_studio());
 
 			RatingBar ratingLezioni = (RatingBar) act
 					.findViewById(R.id.ratingBarRowLezioni);
-			ratingLezioni.setRating(corsoInfo
-					.getRating_lezioni());
+			ratingLezioni.setRating(corsoInfo.getRating_lezioni());
 
 			RatingBar ratingMateriali = (RatingBar) act
 					.findViewById(R.id.ratingBarRowMateriali);
-			ratingMateriali.setRating(corsoInfo
-					.getRating_materiali());
+			ratingMateriali.setRating(corsoInfo.getRating_materiali());
 
 			RatingBar ratingEsame = (RatingBar) act
 					.findViewById(R.id.ratingBarRowEsame);
-			ratingEsame.setRating(corsoInfo
-					.getRating_esame());
+			ratingEsame.setRating(corsoInfo.getRating_esame());
 
-			descriptionCourse.setText(corsoInfo
-					.getDescrizione());
+			descriptionCourse.setText(corsoInfo.getDescrizione());
 
 			pd.dismiss();
 
@@ -249,14 +226,12 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 	@Override
 	protected List<Commento> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 		return getFullFeedbackById();
 	}
 
 	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
 	// stringa degli ids
 	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
-		// TODO Auto-generated method stub
 
 		if (stud.getIdsCorsiInteresse() == null) {
 			return false;

@@ -37,10 +37,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View view, ViewGroup parent) {
-
-		// DetailInfo detailInfo = (DetailInfo) getChild(groupPosition,
-		// childPosition);
-
 		if (view == null) {
 			LayoutInflater infalInflater = (LayoutInflater) mcontext
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,12 +44,7 @@ public class AdapterRating extends BaseExpandableListAdapter {
 		}
 
 		RatingRowGroup inf = new RatingRowGroup();
-		// if(childPosition==0)
-		// inf.setExplainContext((String) getChild(groupPosition,
-		// childPosition));
-		// if(childPosition==1)
-		// inf.setRating((Integer) getChild(groupPosition,
-		// childPosition));
+
 		inf = (RatingRowGroup) getChild(groupPosition, childPosition);
 
 		RatingBar rbCont = (RatingBar) view
@@ -94,7 +85,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				// TODO Auto-generated method stub
 				ratings.get(0).setRating(rating);
 				Log.i("ratings", ratings.toString());
 			}
@@ -105,7 +95,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				// TODO Auto-generated method stub
 				ratings.get(1).setRating(rating);
 				Log.i("ratings", ratings.toString());
 			}
@@ -116,7 +105,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				// TODO Auto-generated method stub
 				ratings.get(2).setRating(rating);
 				Log.i("ratings", ratings.toString());
 			}
@@ -127,7 +115,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				// TODO Auto-generated method stub
 				ratings.get(3).setRating(rating);
 				Log.i("ratings", ratings.toString());
 			}
@@ -137,7 +124,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-				// TODO Auto-generated method stub
 				ratings.get(4).setRating(rating);
 				Log.i("ratings", ratings.toString());
 			}
@@ -151,7 +137,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setVisibility(View.GONE);
 			rbExam.setVisibility(View.GONE);
 			return view;
-			// rbCont.setRating(inf.getRating());
 		case 1:
 			rbCont.setVisibility(View.GONE);
 			rbCfu.setVisibility(View.VISIBLE);
@@ -159,7 +144,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setVisibility(View.GONE);
 			rbExam.setVisibility(View.GONE);
 			return view;
-			// rbCfu.setRating(inf.getRating());
 		case 2:
 			rbCont.setVisibility(View.GONE);
 			rbCfu.setVisibility(View.GONE);
@@ -167,7 +151,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setVisibility(View.GONE);
 			rbExam.setVisibility(View.GONE);
 			return view;
-			// rbLez.setRating(inf.getRating());
 		case 3:
 			rbCont.setVisibility(View.GONE);
 			rbCfu.setVisibility(View.GONE);
@@ -175,8 +158,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbMat.setVisibility(View.VISIBLE);
 			rbExam.setVisibility(View.GONE);
 			return view;
-
-			// rbMat.setRating(inf.getRating());
 		case 4:
 			rbCont.setVisibility(View.GONE);
 			rbCfu.setVisibility(View.GONE);
@@ -185,12 +166,6 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			rbExam.setVisibility(View.VISIBLE);
 			return view;
 		}
-
-		// rbExam.setRating(inf.getRating());
-
-		// inizializzo la lista dei
-
-		//
 		return view;
 	}
 
@@ -226,13 +201,9 @@ public class AdapterRating extends BaseExpandableListAdapter {
 			view = inf.inflate(R.layout.rating_list_row_header, null);
 		}
 
-		// TextView heading = (TextView)
-		// view.findViewById(R.id.textViewAuthorRating);
-		// heading.setText(headerInfo.getAuthor().getName().trim());
 		TextView heading = (TextView) view
 				.findViewById(R.id.textViewContextRating);
 		heading.setText(headerInfo.getContext().trim());
-		// rb.setRating(headerInfo.getRating());
 
 		return view;
 	}

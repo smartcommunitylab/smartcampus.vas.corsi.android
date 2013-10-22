@@ -46,7 +46,7 @@ public class Impegni_Fragment extends SherlockFragment {
 				.getContextualListaImpegni();
 		/*
 		 * ergo recuperare varie view e piazzare gli adapater per visualizzare
-		 * le varie attivit�studio
+		 * le varie attivitàstudio
 		 */
 
 		ListView impegni_listview = (ListView) getSherlockActivity()
@@ -62,7 +62,6 @@ public class Impegni_Fragment extends SherlockFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				AttivitaStudioAdapter adpt = (AttivitaStudioAdapter) parent
 						.getAdapter();
 				ArrayList<AttivitaStudio> entries = adpt.getEntries();

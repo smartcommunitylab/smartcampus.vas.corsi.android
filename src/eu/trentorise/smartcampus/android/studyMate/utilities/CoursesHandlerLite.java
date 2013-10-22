@@ -32,8 +32,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	private Dipartimento department;
 	private CorsoLaurea degree;
 	private String course;
@@ -79,13 +77,10 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -116,13 +111,10 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -153,13 +145,10 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -168,7 +157,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected List<Corso> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 
 		if (department.getNome().equals("Tutto")) {
 			return getAllCourses();
@@ -206,13 +194,10 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -221,7 +206,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		if (course.equals("")) {
 			if (department.equals("Tutto"))
@@ -263,7 +247,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 	@Override
 	protected void onPostExecute(List<Corso> courses) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(courses);
 
 		ResultSearchedActivity.pd.dismiss();
@@ -297,7 +280,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) { // TODO Auto-generated method stub String
+					long arg3) {
 				String courseSelectedName = (String) arg0
 						.getItemAtPosition(arg2);
 				Intent i = new Intent(context, FindHomeCourseActivity.class);
@@ -326,7 +309,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<Corso>> {
 	}
 
 	public static long getIDCourseSelected(int position) {
-		// TODO Auto-generated method stub
 		return coursesFiltered.get(position).getId();
 	}
 

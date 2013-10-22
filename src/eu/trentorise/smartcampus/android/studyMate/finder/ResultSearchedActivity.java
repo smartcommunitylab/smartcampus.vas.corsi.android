@@ -61,7 +61,6 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.result_searched, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -70,7 +69,6 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(ResultSearchedActivity.this,

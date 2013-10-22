@@ -75,15 +75,6 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 
 		searchTV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 		searchTV.addTextChangedListener(FindHomeActivity.this);
-
-		/*
-		 * adapter = new ArrayAdapter<String>(FindHomeActivity.this,
-		 * android.R.layout.simple_dropdown_item_1line,
-		 * R.array.drop_down_spinner_singlecourses_IT);
-		 * 
-		 * searchTV.setAdapter(adapter);
-		 */
-
 	}
 
 	@Override

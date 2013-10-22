@@ -63,13 +63,10 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		final long idCorso = currentActivity.getIntent().getLongExtra(
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
-				"http://api.povoshardlife.eu",
-				// "http://api.povoshardlife.eu/api/documenti/getDirByIDSC/"
-				"/api/documenti/getDirByIDSC/" + idCorso + "?sc_token=" + MyUniActivity.userAuthToken);
+				"http://api.povoshardlife.eu", "/api/documenti/getDirByIDSC/"
+						+ idCorso + "?sc_token=" + MyUniActivity.userAuthToken);
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
 				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
-		// SmartUniDataWS.URL_WS_SMARTUNI,
-		// SmartUniDataWS.GET_MATERIAL_FOR_COURSE(idCorso));
 
 		request.setMethod(Method.GET);
 
@@ -84,13 +81,10 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Utils.convertJSONToObject(body, RisorsaPhl.class);
@@ -98,7 +92,6 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity, "Carico i materiali",
@@ -171,7 +164,6 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							int arg2, long arg3) {
 						if (result.getCdc().get(arg2).getMime()
 								.equals("directory")) {
-							// currentActivity.getFragmentManager().popBackStack();
 							currentSherlock.getSupportFragmentManager()
 									.popBackStack();
 							FragmentTransaction ft = currentSherlock
@@ -183,31 +175,20 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 							b.putString("res", result.getCdc().get(arg2)
 									.getHash());
 							fragment.setArguments(b);
-							// ft.replace(R.id.tabMateriali, fragment);
 							ft.add(R.id.tabMateriali, fragment);
 							ft.addToBackStack(null);
 							ft.commit();
 						} else {
 							DownDialog(result.getCdc().get(arg2));
 						}
-						// Toast.makeText(context, "Coming Soon!",
-						// Toast.LENGTH_SHORT).show();
-						// }
-						// new PHLengine4Material(context, currentActivity,
-						// listViewCorsiPersonali, currentSherlock, result
-						// .getCdc().get(arg2).getHash())
-						// .execute();
 					}
 				});
 
 		pd.dismiss();
 	}
 
-	// }
-
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
-		// TODO Auto-generated method stub
 		// bundleParam = params[0];
 
 		return getMaterial4Course();

@@ -50,7 +50,7 @@ public class MyUniActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
-			if (!accessProvider.login(this, null)){
+			if (!accessProvider.login(this, null)) {
 				new LoadUserDataFromACServiceTask().execute();
 				// user is already registered. Proceed requesting the token
 				// and the related steps if needed
@@ -65,7 +65,7 @@ public class MyUniActivity extends SherlockActivity {
 	@Override
 	protected void onResume() {
 		try {
-			if (!accessProvider.login(this, null)){
+			if (!accessProvider.login(this, null)) {
 				new LoadUserDataFromACServiceTask().execute();
 				// user is already registered. Proceed requesting the token
 				// and the related steps if needed
@@ -74,8 +74,6 @@ public class MyUniActivity extends SherlockActivity {
 			Log.e(TAG, "Failed to login: " + e.getMessage());
 			// handle the failure, e.g., notify the user and close the app.
 		}
-
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
@@ -83,68 +81,66 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onStart() {
 		super.onStart();
 		setContentView(R.layout.activity_my_uni);
-		
-			findViewById(R.id.my_agenda_btn).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									MyAgendaActivity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
 
-			findViewById(R.id.find_courses_btn).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									FindHomeActivity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
+		findViewById(R.id.my_agenda_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								MyAgendaActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
 
-			findViewById(R.id.phl_btn).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									PHLActivity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
+		findViewById(R.id.find_courses_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								FindHomeActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
 
-			findViewById(R.id.notices_btn).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									NoticesActivity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
+		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MyUniActivity.this,
+						PHLActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
+		});
 
-			findViewById(R.id.rate_btn).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									CoursesPassedActivity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
+		findViewById(R.id.notices_btn).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								NoticesActivity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
 
-			findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-					new OnClickListener() {
+		findViewById(R.id.rate_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MyUniActivity.this,
+						CoursesPassedActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
+		});
 
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(MyUniActivity.this,
-									Lista_GDS_activity.class);
-							MyUniActivity.this.startActivity(intent);
-						}
-					});
-		
+		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(MyUniActivity.this,
+								Lista_GDS_activity.class);
+						MyUniActivity.this.startActivity(intent);
+					}
+				});
+
 	}
 
 	@Override
@@ -179,7 +175,6 @@ public class MyUniActivity extends SherlockActivity {
 		return false;
 	}
 
-	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// check the result of the authentication
@@ -210,7 +205,7 @@ public class MyUniActivity extends SherlockActivity {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				userAuthToken = accessProvider.readToken(MyUniActivity.this);
-						//,CLIENT_ID, CLIENT_SECRET);
+				// ,CLIENT_ID, CLIENT_SECRET);
 				System.out.println(userAuthToken);
 				BasicProfileService service = new BasicProfileService(
 						"https://vas-dev.smartcampuslab.it/aac");

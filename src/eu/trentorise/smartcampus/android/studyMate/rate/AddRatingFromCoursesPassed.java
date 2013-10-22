@@ -46,6 +46,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	ExpandableListView list = null;
 	private RatingRowGroup rrg;
 	public SherlockFragmentActivity act;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -168,13 +169,11 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		String body;
 
 		public LoaderFeedbackData(Context applicationContext) {
-			// TODO Auto-generated constructor stub
 			this.context = applicationContext;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			ratings = new ArrayList<RatingRowGroup>();
@@ -183,7 +182,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Commento commento) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(commento);
 
 			// setto i campi della valutazione
@@ -241,16 +239,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 			});
 
-			// final RatingBar rbCont = (RatingBar)
-			// findViewById(R.id.ratingBarContextContenuti);
-			// final RatingBar rbCfu = (RatingBar)
-			// findViewById(R.id.ratingBarContextCfu);
-			// final RatingBar rbLez = (RatingBar)
-			// findViewById(R.id.ratingBarContextLezioni);
-			// final RatingBar rbMat = (RatingBar)
-			// findViewById(R.id.ratingBarContextMateriali);
-			// final RatingBar rbExam = (RatingBar)
-			// findViewById(R.id.ratingBarContextEsame);
 			final EditText commentCourse = (EditText) findViewById(R.id.AddCommentRatingCourse);
 
 			pd.dismiss();
@@ -259,8 +247,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 				@Override
 				public boolean onChildClick(ExpandableListView parent, View v,
 						int groupPosition, int childPosition, long id) {
-					// TODO Auto-generated method stub
-
 					return true;
 				}
 			});
@@ -281,7 +267,8 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesPassedHandler.corsoSelezionato.getId());							
+							commento.setCorso(CoursesPassedHandler.corsoSelezionato
+									.getId());
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -298,15 +285,21 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							stud.setNome(MyUniActivity.bp.getName());
 							commento.setId_studente(stud.getId());
 							commento.setNome_studente(stud.getNome());
-							
-							new ProgressDialog(AddRatingFromCoursesPassed.this);
-							pd = ProgressDialog.show(AddRatingFromCoursesPassed.this, "Salvataggio del tuo commento per "+CoursesPassedHandler.corsoSelezionato.getNome().toString()+" in corso ", "Caricamento...");
-							new AddFeedbackHandler(
-									AddRatingFromCoursesPassed.this, AddRatingFromCoursesPassed.this)
-									.execute(commento);
-							
 
-							
+							new ProgressDialog(AddRatingFromCoursesPassed.this);
+							pd = ProgressDialog
+									.show(AddRatingFromCoursesPassed.this,
+											"Salvataggio del tuo commento per "
+													+ CoursesPassedHandler.corsoSelezionato
+															.getNome()
+															.toString()
+													+ " in corso ",
+											"Caricamento...");
+							new AddFeedbackHandler(
+									AddRatingFromCoursesPassed.this,
+									AddRatingFromCoursesPassed.this)
+									.execute(commento);
+
 						}
 					});
 
@@ -327,8 +320,9 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(
-							CoursesPassedHandler.corsoSelezionato.getId()));
+					SmartUniDataWS
+							.GET_WS_FEEDBACK_OF_STUDENT(CoursesPassedHandler.corsoSelezionato
+									.getId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
@@ -344,13 +338,10 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 					return null;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -361,7 +352,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 }

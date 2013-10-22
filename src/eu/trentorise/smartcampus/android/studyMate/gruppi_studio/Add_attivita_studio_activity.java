@@ -87,7 +87,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.add_attivita_studio_activity, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -98,7 +97,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
+			 * crea e aggiugni agli impegni l'attività di studio appena creata
 			 */
 			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
 			String oggetto = ((TextView) this

@@ -101,7 +101,6 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				new PostEvent(getApplicationContext(), evento).execute();
 			}
 		});
@@ -227,13 +226,10 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 					return null;
 				}
 			} catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -242,7 +238,6 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(List<CorsoLite> result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 
@@ -265,9 +260,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
-
 			new ProgressDialog(AddEvent4coursesActivity.this);
 			pd = ProgressDialog.show(AddEvent4coursesActivity.this,
 					"Caricamento della lista dei corsi ", "Caricamento...");

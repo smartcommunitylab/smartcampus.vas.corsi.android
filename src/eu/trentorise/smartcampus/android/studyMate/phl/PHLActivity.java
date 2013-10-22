@@ -15,26 +15,23 @@ public class PHLActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_phl_corsi);
 	}
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
-		ListView listViewCorsi = (ListView) findViewById(
-				R.id.listViewCorsiPHL);
+		ListView listViewCorsi = (ListView) findViewById(R.id.listViewCorsiPHL);
 
 		Bundle arguments = new Bundle();
-		PHLengine handlerPersonalCoursesPHL = new PHLengine(this
-				.getApplicationContext(), this, listViewCorsi,
-				this);
+		PHLengine handlerPersonalCoursesPHL = new PHLengine(
+				this.getApplicationContext(), this, listViewCorsi, this);
 		handlerPersonalCoursesPHL.execute(arguments);
-		
+
 	}
+
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.phl, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -43,8 +40,6 @@ public class PHLActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
-		// TODO Auto-generated method stub
-
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intentHome = new Intent(PHLActivity.this,

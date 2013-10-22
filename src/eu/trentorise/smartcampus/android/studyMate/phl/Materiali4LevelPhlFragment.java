@@ -18,13 +18,11 @@ public class Materiali4LevelPhlFragment extends SherlockFragment {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_phl_materiali_lv,
 				container, false);
-		// // do your view initialization here
 		return view;
 	}
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
@@ -40,7 +38,6 @@ public class Materiali4LevelPhlFragment extends SherlockFragment {
 						.getString("res"));
 
 		handlerCoursesMaterial.execute(arguments);
-		// PHLengine4Material.pd.dismiss();
 	}
 
 }

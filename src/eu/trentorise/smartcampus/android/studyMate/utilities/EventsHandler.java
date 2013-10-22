@@ -71,13 +71,10 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -85,10 +82,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 	}
 
 	private List<Evento> getAllPersonalEvents() {
-
-		// mAccessProvider = new SCAccessProvider();
-		// UserData data = mAccessProvider.readUserData(context, null);
-		// data.getUserId();
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -110,13 +103,10 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 				return null;
 			}
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -125,21 +115,17 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
 	@Override
 	protected List<Evento> doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 		return getAllPersonalEvents();
-		// return getAllEventsOfCourse("1");
 	}
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 	}
 
 	@Override
 	protected void onPostExecute(final List<Evento> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		listaEventi = result;

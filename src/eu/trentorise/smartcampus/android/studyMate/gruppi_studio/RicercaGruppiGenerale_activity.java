@@ -116,7 +116,6 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.ricerca_generale_menu, menu);
 		return true;
@@ -142,13 +141,13 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			Studente s1 = new Studente();
 			s1.setNome("Albert");
 			s1.setCognome("Einstein");
-			//NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
-			//s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+			// NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
+			// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 			Studente s2 = new Studente();
 			s2.setNome("Enrico");
 			s2.setCognome("Fermi");
-			//NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
-			//s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+			// NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
+			// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
 			// nomi_studenti.add(/* vari eventuali */null);
 			// String nome_studente = ((AutoCompleteTextView)
 			// RicercaGruppiGenerale_activity.this
@@ -177,7 +176,6 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		ArrayList<GruppoDiStudio> Choosable_gds;
 
 		public placeholder_gruppidistudio() {
-			// TODO Auto-generated constructor stub
 		}
 
 		public void initialize_some_gds() {
@@ -198,17 +196,16 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 			s1.setCognome("Rossi");
 			s1.setDipartimento(dipartimento);
 			s1.setAnno_corso("2");
-		//	s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
+			// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 
 			Studente s2 = new Studente();
 
 			s2.setNome("Gabriele");
 			s2.setCognome("Bianchi");
 
-//			s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+			// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
 			s2.setDipartimento(dipartimento);
 			s2.setAnno_corso("2");
-
 
 			membri_gds.add(s1);
 			membri_gds.add(s2);
@@ -232,17 +229,17 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.prouno_logo));
 			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
-					MyApplication.getAppContext().getResources()
+					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
+					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.discreta_logo));
 			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-					"Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
-					MyApplication.getAppContext().getResources()
+					"Renato++", membri_gds, null, attivita_studio_gds, 2,
+					forum, MyApplication.getAppContext().getResources()
 							.getDrawable(R.drawable.reti_calcolatori_logo));
 			GruppoDiStudio gds4 = new GruppoDiStudio(
-					"Algoritmi e strutture dati", "ASD",
-					membri_gds, null, attivita_studio_gds, 2, forum,
-					MyApplication.getAppContext().getResources()
+					"Algoritmi e strutture dati", "ASD", membri_gds, null,
+					attivita_studio_gds, 2, forum, MyApplication
+							.getAppContext().getResources()
 							.getDrawable(R.drawable.algoritmi_logo));
 
 			// fine placeholder

@@ -15,7 +15,6 @@ import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.models.CwdPHL;
 
 public class DownloadTask extends AsyncTask<String, Integer, String> {
-	// private ProgressDialog mProgressDialog;
 	private Context context;
 	private ProgressDialog mProgressDialog;
 	private CwdPHL r;
