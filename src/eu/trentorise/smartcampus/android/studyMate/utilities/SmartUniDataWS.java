@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
 public final class SmartUniDataWS {
 
