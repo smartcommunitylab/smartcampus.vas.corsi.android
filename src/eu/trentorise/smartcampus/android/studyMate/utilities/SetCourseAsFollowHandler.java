@@ -5,9 +5,11 @@ import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -51,7 +53,7 @@ public class SetCourseAsFollowHandler extends AsyncTask<Corso, Void, Boolean> {
 
 			request.setBody(eventoJSON);
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 			if (response.getHttpStatus() == 200) {
 				return true;
@@ -64,6 +66,9 @@ public class SetCourseAsFollowHandler extends AsyncTask<Corso, Void, Boolean> {
 		} catch (ProtocolException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

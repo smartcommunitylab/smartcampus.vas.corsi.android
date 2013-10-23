@@ -7,9 +7,11 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -59,7 +61,7 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 			System.out.println(eventoJSON);
 			request.setBody(eventoJSON);
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 			if (response.getHttpStatus() == 200) {
 
@@ -73,6 +75,9 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 		} catch (ProtocolException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

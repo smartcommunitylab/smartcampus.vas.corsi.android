@@ -45,7 +45,7 @@ public class NotificationHandler extends
 		CommunicatorConnector cc = new CommunicatorConnector(
 				MyUniActivity.SERVER_URL, MyUniActivity.APP_ID);
 		Notifications list = cc.getNotificationsByApp(0L, 0, -1,
-				MyUniActivity.userAuthToken);
+				MyUniActivity.getAuthToken());
 		list.getNotifications();
 		List<Notification> not = list.getNotifications();
 

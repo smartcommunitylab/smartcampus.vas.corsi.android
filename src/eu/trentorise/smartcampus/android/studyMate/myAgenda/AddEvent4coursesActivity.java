@@ -24,11 +24,13 @@ import android.widget.TimePicker;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -216,7 +218,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 			MessageResponse response;
 			try {
 				response = mProtocolCarrier.invokeSync(request,
-						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+						SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 
@@ -230,6 +232,9 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 			} catch (ProtocolException e) {
 				e.printStackTrace();
 			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

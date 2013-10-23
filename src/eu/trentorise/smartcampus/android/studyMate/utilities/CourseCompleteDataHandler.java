@@ -5,8 +5,10 @@ import android.os.AsyncTask;
 import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -19,8 +21,6 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	public String appToken = "test smartcampus";
-	public String authToken = "aee58a92-d42d-42e8-b55e-12e4289586fc";
 	String body;
 	long idCourse;
 	TextView tvCourseName;
@@ -47,7 +47,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 		MessageResponse response;
 		try {
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 			if (response.getHttpStatus() == 200) {
 
@@ -61,6 +61,9 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 		} catch (ProtocolException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -13,10 +13,12 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -152,7 +154,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			MessageResponse response;
 			try {
 				response = mProtocolCarrier.invokeSync(request,
-						SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+						SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 
@@ -166,6 +168,9 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			} catch (ProtocolException e) {
 				e.printStackTrace();
 			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

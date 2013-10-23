@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,18 +37,19 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String APP_ID = "studymate";
 
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
-
+	private static Context mContext;
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
 	 * token
 	 */
-	private SCAccessProvider accessProvider = null;
-	public static String userAuthToken;
+	private static SCAccessProvider accessProvider = null;
+	//public static String userAuthToken;
 	public static BasicProfile bp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mContext =  getApplicationContext();
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
 			if (!accessProvider.login(this, null)) {
@@ -197,6 +199,13 @@ public class MyUniActivity extends SherlockActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	public static String getAuthToken() throws AACException{
+		String userAuthToken;
+		userAuthToken = MyUniActivity.accessProvider.readToken(mContext);
+		return userAuthToken;
+	}
+	
+	
 	public class LoadUserDataFromACServiceTask extends
 			AsyncTask<Void, Void, BasicProfile> {
 
@@ -204,7 +213,7 @@ public class MyUniActivity extends SherlockActivity {
 		protected BasicProfile doInBackground(Void... params) {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
-				userAuthToken = accessProvider.readToken(MyUniActivity.this);
+				String userAuthToken = getAuthToken();
 				// ,CLIENT_ID, CLIENT_SECRET);
 				System.out.println(userAuthToken);
 				BasicProfileService service = new BasicProfileService(

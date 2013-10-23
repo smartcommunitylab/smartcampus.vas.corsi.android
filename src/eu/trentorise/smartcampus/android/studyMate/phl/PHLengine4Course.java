@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
@@ -55,7 +56,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		this.currentSherlock = currentSherlock;
 	}
 
-	public RisorsaPhl getMaterial4Course() {
+	public RisorsaPhl getMaterial4Course() throws AACException {
 
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
@@ -64,7 +65,7 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 				"IdCorso", 0);
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu", "/api/documenti/getDirByIDSC/"
-						+ idCorso + "?sc_token=" + MyUniActivity.userAuthToken);
+						+ idCorso + "?sc_token=" + MyUniActivity.getAuthToken());
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
 				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 
@@ -191,7 +192,13 @@ public class PHLengine4Course extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// bundleParam = params[0];
 
-		return getMaterial4Course();
+		try {
+			return getMaterial4Course();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void DownDialog(CwdPHL r) {

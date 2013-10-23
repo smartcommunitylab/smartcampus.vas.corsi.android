@@ -5,7 +5,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 public final class SmartUniDataWS {
 
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
-	public static String TOKEN = MyUniActivity.userAuthToken;
+	//public static String TOKEN = MyUniActivity.getAuthToken();
 	public static final String TOKEN_NAME = "studymate";
 
 	// Notices

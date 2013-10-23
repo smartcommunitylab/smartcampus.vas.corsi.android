@@ -16,12 +16,14 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -64,7 +66,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 		MessageResponse response;
 		try {
 			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, SmartUniDataWS.TOKEN);
+					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 			if (response.getHttpStatus() == 200) {
 
@@ -78,6 +80,9 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 		} catch (ProtocolException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

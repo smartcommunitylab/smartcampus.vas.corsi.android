@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Corso;
@@ -58,7 +59,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 		this.idPHL = pHLid;
 	}
 
-	public RisorsaPhl getMaterial4Dir() {
+	public RisorsaPhl getMaterial4Dir() throws AACException {
 
 		Context context = null;
 		ProtocolCarrier mProtocolCarrier = new ProtocolCarrier(context,
@@ -66,7 +67,7 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 
 		MessageRequest request = new MessageRequest(
 				"http://api.povoshardlife.eu", "/api/documenti/getDirByIDPHL/"
-						+ idPHL + "?sc_token=" + MyUniActivity.userAuthToken);
+						+ idPHL + "?sc_token=" + MyUniActivity.getAuthToken());
 		request.setCustomHeaders(Collections.singletonMap("Authorization",
 				"Token token=2d2abbe190e0d7ad0ae71425059f00cc"));
 		request.setMethod(Method.GET);
@@ -182,7 +183,13 @@ public class PHLengine4Material extends AsyncTask<Bundle, Void, RisorsaPhl> {
 	@Override
 	protected RisorsaPhl doInBackground(Bundle... params) {
 		// bundleParam = params[0];
-		return getMaterial4Dir();
+		try {
+			return getMaterial4Dir();
+		} catch (AACException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void DownDialog(CwdPHL r) {
