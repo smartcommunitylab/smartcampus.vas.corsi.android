@@ -11,7 +11,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/search_label_searchedList"
-        android:textStyle="bold" />
+        android:textColor="@color/smartn_theme_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,10 +55,18 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="Seleziona il gruppo di studio a cui vuoi iscriverti"
-        android:textColor="@color/smartn_theme_color"
-        android:textStyle="italic" />
+        android:paddingBottom="3dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="Risultati:"
+        android:textColor="@color/smartn_theme_color" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/smartn_theme_color"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp" />
 
     <ListView
         android:id="@+id/searchresults_gds_list"

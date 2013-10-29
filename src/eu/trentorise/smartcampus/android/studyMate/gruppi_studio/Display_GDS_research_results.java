@@ -21,7 +21,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Display_GDS_research_results extends SherlockFragmentActivity {
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +40,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		if (!MyApplication.getContextualCollection().isEmpty())
 			nomi_studenti_filter = (ArrayList<String>) MyApplication
 					.getContextualCollection().get(0);
+		//occio qua
 		universo_gds = (ArrayList<GruppoDiStudio>) MyApplication
 				.getContextualCollection().get(1);
 		MyApplication.getContextualCollection().clear();
@@ -55,10 +55,10 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
 		tv_nomeGruppo.setText(nome_gruppo_filter);
 
-		@SuppressWarnings("unused")
-		ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
-				universo_gds, materia_filter, nome_gruppo_filter,
-				nomi_studenti_filter);
+		
+//		ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
+//				universo_gds, materia_filter, nome_gruppo_filter,
+//				nomi_studenti_filter);
 
 		ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
-        android:src="@drawable/placeholder" />
+        android:src="@drawable/student_placeholder" />
 
     <LinearLayout
         android:layout_width="match_parent"

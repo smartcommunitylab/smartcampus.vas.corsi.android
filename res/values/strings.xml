@@ -69,7 +69,7 @@
     <string name="search_button_search"> Ricerca </string>
     <string name="search_hint_course"> Nome del corso </string>
     <string name="title_activity_result_searched">Risultati della ricerca</string>
-    <string name="search_label_searchedList">Ricerca per:</string>
+    <string name="search_label_searchedList">Hai cercato:</string>
     <string name="find_label_searchingnow">"Stai cercando: "</string>
     <string name="find_label_searching">"Cerca un corso: "</string>
     <string name="title_activity_agenda">AgendaActivity</string>

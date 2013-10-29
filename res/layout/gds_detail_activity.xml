@@ -43,17 +43,6 @@
                 android:text="Materia"
                 android:textStyle="italic" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_subscribe_gds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_edit_dark"
-            android:text="ISCRIVITI"
-            android:textSize="10sp" />
     </LinearLayout>
 
     <LinearLayout

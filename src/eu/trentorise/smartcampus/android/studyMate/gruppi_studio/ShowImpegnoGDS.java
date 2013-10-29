@@ -1,13 +1,22 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.view.ViewConfiguration;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
+import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
@@ -18,6 +27,19 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.show_impegno_gds);
+
+		// codice per sistemare l'actionoverflow
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception ex) {
+			// Ignore
+		}
 
 		// personalizzazioje actionabar
 		ActionBar actionbar = getSupportActionBar();
@@ -39,6 +61,22 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		tv_data.setText(contextualAttivitaStudio.getData());
 		TextView tv_ora = (TextView) findViewById(R.id.textOra_impegno_showgds);
 		tv_ora.setText(contextualAttivitaStudio.getStart());
+		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
+		ArrayList<Allegato> contextualAllegatis = contextualAttivitaStudio
+				.getAllegati();
+		if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
+			Toast.makeText(MyApplication.getAppContext(),
+					"non ci sono allegati ne mostro uno per prova",
+					Toast.LENGTH_SHORT).show();
+			contextualAllegatis = new ArrayList<Allegato>();
+			Allegato fake = new Allegato(null, "nome allegato finto.pdf");
+			contextualAllegatis.add(fake);
+			contextualAllegatis.add(fake);
+		}
+		Allegati_to_list_arrayadapter adapter = new Allegati_to_list_arrayadapter(
+				ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
+				contextualAllegatis);
+		listview_allegati.setAdapter(adapter);
 		/*
 		 * manca altra roba
 		 */
@@ -67,10 +105,26 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_showimpegno_gds, menu);
+		return true;
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			ShowImpegnoGDS.this.finish();
+			return true;
+		case R.id.action_modifica_impegno:
+			Toast.makeText(ShowImpegnoGDS.this, "modifica impegno",
+					Toast.LENGTH_SHORT).show();
+			return true;
+
+		case R.id.action_elimina_impegno:
+			Toast.makeText(ShowImpegnoGDS.this, "elimina impegno",
+					Toast.LENGTH_SHORT).show();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

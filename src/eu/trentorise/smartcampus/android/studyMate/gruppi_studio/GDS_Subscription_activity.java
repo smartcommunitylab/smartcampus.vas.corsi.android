@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
@@ -34,7 +36,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout
-		setContentView(R.layout.gds_detail_activity);
+
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle("Iscrizione gruppo di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
@@ -45,7 +47,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
-		Button btn_subscribe_gds = (Button) findViewById(R.id.btn_subscribe_gds);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
 		logo_gds.setImageDrawable(contextualGDS.getLogo());
@@ -55,49 +56,14 @@ public class GDS_Subscription_activity extends SherlockActivity {
 				GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
 				contextualGDS.getMembri());
 		participants_gds.setAdapter(adapter);
-		btn_subscribe_gds.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
-						GDS_Subscription_activity.this);
-				alertdialogbuilder
-						.setTitle("Conferma iscrizione")
-						.setMessage(
-								"Vuoi iscriverti al gruppo \""
-										+ contextualGDS.getNome() + "\"?")
-						.setPositiveButton("Si",
-								new DialogInterface.OnClickListener() {
+	}
 
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-										// some logic here
-										Intent intent = new Intent(
-												GDS_Subscription_activity.this,
-												Lista_GDS_activity.class);
-										MyApplication.getContextualCollection()
-												.add(contextualGDS);
-										intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-										startActivity(intent);
-									}
-								})
-
-						.setNegativeButton("No",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-									}
-								});
-				AlertDialog alertdialog = alertdialogbuilder.create();
-				alertdialog.show();
-			}
-		});
-
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_gds_subscription, menu);
+		return true;
 	}
 
 	@Override
@@ -106,6 +72,45 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		case android.R.id.home:
 			GDS_Subscription_activity.this.finish();
 			return true;
+		case R.id.action_subscribe:
+			AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
+					GDS_Subscription_activity.this);
+			alertdialogbuilder
+					.setTitle("Conferma iscrizione")
+					.setMessage(
+							"Vuoi iscriverti al gruppo \""
+									+ contextualGDS.getNome() + "\"?")
+					.setPositiveButton("Si",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									// some logic here
+									Intent intent = new Intent(
+											GDS_Subscription_activity.this,
+											Lista_GDS_activity.class);
+									MyApplication.getContextualCollection()
+											.add(contextualGDS);
+									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									startActivity(intent);
+								}
+							})
+
+					.setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+			AlertDialog alertdialog = alertdialogbuilder.create();
+			alertdialog.show();
+			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}

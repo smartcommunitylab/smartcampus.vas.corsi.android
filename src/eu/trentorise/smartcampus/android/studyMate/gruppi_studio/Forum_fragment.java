@@ -72,7 +72,7 @@ public class Forum_fragment extends SherlockFragment {
 
 		Time now = new Time();
 		now.setToNow();
-		Allegato allegato = new Allegato(null);
+		Allegato allegato = new Allegato(null, "allegato 1");
 		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
 		ChatAttachment attach1 = new ChatAttachment(now, allegato);
 		forum.add(msg1);// occio qua quando si farà sul serio col forum
@@ -104,8 +104,6 @@ public class Forum_fragment extends SherlockFragment {
 			}
 		});
 	}
-
-	
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

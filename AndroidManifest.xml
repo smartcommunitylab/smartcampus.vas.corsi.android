@@ -13,8 +13,6 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
-
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -78,12 +76,11 @@
         <meta-data
             android:name="eu.trentorise.smartcampus.account.ACCOUNT_BASED_ACCESS"
             android:value="true" />
-
-        
-             <meta-data
+        <meta-data
             android:name="SHARED_PACKAGE"
             android:value="eu.trentorise.smartcampus.android.studyMate" />
-           <!--<meta-data
+        <!--
+        <meta-data
             android:name="ACCOUNT_TYPE"
             android:value="eu.trentorise.smartcampus.android.studyMate" />
         <meta-data
@@ -95,7 +92,6 @@
             android:name="eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/app_name"
-            
             android:logo="@drawable/smartuni_logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -103,7 +99,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="eu.trentorise.smartcampus.ac.embedded.EmbeddedAuthActivity"
             android:configChanges="orientation|keyboard"
@@ -249,6 +244,7 @@
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.GDS_Subscription_activity"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>

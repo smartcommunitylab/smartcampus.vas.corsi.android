@@ -1,15 +1,16 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ViewConfiguration;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -18,7 +19,6 @@ import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
@@ -30,6 +30,19 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.overview_gds_waitingforforum_layout);
+
+		// codice per sistemare l'actionoverflow
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception ex) {
+			// Ignore
+		}
 
 		/*
 		 * Come da politica di utilizzo del contextualcollection ogni volta che
@@ -98,6 +111,11 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	}
 
 	@Override
+	public void onBackPressed() {
+		Overview_GDS.this.finish();
+	}
+
+	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		// Bundle args = arg2.getExtras();
 		Toast.makeText(
@@ -141,6 +159,14 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			Overview_GDS.this.finish();
 			return true;
 		}
+		case R.id.action_abbandona_gruppo:
+			Toast.makeText(Overview_GDS.this, "abbandona gruppo",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.action_modifica_gruppo:
+			Toast.makeText(Overview_GDS.this, "modifica dettagli gruppo",
+					Toast.LENGTH_SHORT).show();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
