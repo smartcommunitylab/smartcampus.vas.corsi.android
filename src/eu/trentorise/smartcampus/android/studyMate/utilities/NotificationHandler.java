@@ -131,7 +131,7 @@ public class NotificationHandler extends
 					public void onClick(DialogInterface dialog, int which) {
 						// Editable value = input.getText();
 						Toast.makeText(context,
-								"Notifica...", Toast.LENGTH_SHORT).show();
+								"OK...", Toast.LENGTH_SHORT).show();
 						// e.printStackTrace();
 					}
 				});
