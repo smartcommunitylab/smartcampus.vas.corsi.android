@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- File created by the Android Action Bar Style Generator
+<!--
+     File created by the Android Action Bar Style Generator
 
      Copyright (C) 2011 The Android Open Source Project
      Copyright (C) 2012 readyState Software Ltd
@@ -28,11 +29,10 @@
         <item name="actionBarStyle">@style/ActionBar.Solid.Theme2_studymate</item>
         <item name="actionModeBackground">@drawable/cab_background_top_theme2_studymate</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_theme2_studymate</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Theme2_studymate</item>
+        <item name="actionModeCloseButtonStyle">@style/NoActionmodeDoneButton</item>
 
-                <!-- Light.DarkActionBar specific -->
+        <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Theme2_studymate.Widget</item>
-
     </style>
 
     <style name="ActionBar.Solid.Theme2_studymate" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
@@ -46,11 +46,11 @@
         <item name="background">@drawable/ab_transparent_theme2_studymate</item>
         <item name="progressBarStyle">@style/ProgressBar.Theme2_studymate</item>
     </style>
-	
-    <style name="PopupMenu.Theme2_studymate" parent="@style/Widget.Sherlock.ListPopupWindow">	
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_theme2_studymate</item>	
+
+    <style name="PopupMenu.Theme2_studymate" parent="@style/Widget.Sherlock.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_theme2_studymate</item>
     </style>
-	
+
     <style name="DropDownListView.Theme2_studymate" parent="@style/Widget.Sherlock.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_theme2_studymate</item>
     </style>
@@ -58,21 +58,25 @@
     <style name="ActionBarTabStyle.Theme2_studymate" parent="@style/Widget.Sherlock.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_theme2_studymate</item>
     </style>
-	
+
     <style name="DropDownNav.Theme2_studymate" parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar">
         <item name="android:background">@drawable/spinner_background_ab_theme2_studymate</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_theme2_studymate</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_theme2_studymate</item>
     </style>
-    
+
     <style name="ProgressBar.Theme2_studymate" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_theme2_studymate</item>
     </style>
-    
+
     <style name="ActionButton.CloseMode.Theme2_studymate" parent="@style/Widget.Sherlock.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_theme2_studymate</item>
     </style>
-    
+
+    <style name="NoActionmodeDoneButton" parent="@android:style/Widget.ActionButton.CloseMode">
+        <item name="android:visibility">gone</item>
+    </style>
+
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.Theme2_studymate.Widget" parent="@style/Theme.Sherlock">
         <item name="popupMenuStyle">@style/PopupMenu.Theme2_studymate</item>

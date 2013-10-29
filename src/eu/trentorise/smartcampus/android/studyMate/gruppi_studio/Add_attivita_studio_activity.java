@@ -50,12 +50,22 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		final int mMinute = c.get(Calendar.MINUTE);
 		final int mHour = c.get(Calendar.HOUR_OF_DAY);
 
+		ArrayList<String> edifici_values = new ArrayList<String>();
+		edifici_values.add("Povo, polo Ferraris");
+		edifici_values.add("Povo, polo 0");
+		edifici_values.add("Povo, nuovo polo");
+
+		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
+		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
+				this, android.R.layout.simple_spinner_item, edifici_values);
+		spinner_edificio.setAdapter(adapter_spinner_ed);
+
 		ArrayList<String> room_values = new ArrayList<String>();
-		for (int i = 1; i < 15; i++) {
-			room_values.add("a10" + i);
+		for (int i = 101; i < 115; i++) {
+			room_values.add("a" + i);
 		}
-		for (int i = 1; i < 15; i++) {
-			room_values.add("a20" + i);
+		for (int i = 201; i < 215; i++) {
+			room_values.add("a" + i);
 		}
 
 		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
@@ -97,7 +107,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attività di studio appena creata
+			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
 			 */
 			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
 			String oggetto = ((TextView) this
@@ -111,6 +121,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			String descrizione = ((TextView) this
 					.findViewById(R.id.editText_descrizione_impegno)).getText()
 					.toString();
+
+			String room = ((Spinner) Add_attivita_studio_activity.this
+					.findViewById(R.id.spinner_aula)).getSelectedItem()
+					.toString();
+
 			boolean prenotazione_aule = ((CheckBox) this
 					.findViewById(R.id.CheckBox1_prenotazione_aule))
 					.isChecked();
@@ -124,6 +139,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setOggetto(oggetto);
 			nuova_attivitaStudio.setData(data);
 			nuova_attivitaStudio.setStart(ora);
+			nuova_attivitaStudio.setRoom(room);
 			nuova_attivitaStudio.setDescrizione(descrizione);
 			nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
 			nuova_attivitaStudio.setMensa(mensa);

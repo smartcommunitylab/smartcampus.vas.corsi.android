@@ -27,6 +27,9 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 
 	private ArrayList<GruppoDiStudio> user_gds_list;
 	protected Object mActionMode;
+	private View longclikedview = null;// la view selezionata alla quale
+										// cambiare colore finchè l'actionmode è
+										// attiva
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,13 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 						.getSherlockActivity().startActionMode(
 								mActionModeCallback);
 
-				view.setSelected(true);
+				// view.setSelected(true);
+
+				view.setPressed(true);
+				longclikedview = view;
+
+				// view.setBackgroundColor(getResources().getColor(
+				// R.color.pressed_theme2_studymate));
 				return true;
 			}
 
@@ -141,6 +150,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 		// Called when the user exits the action mode
 		@Override
 		public void onDestroyActionMode(ActionMode mode) {
+			longclikedview.setPressed(false);
 			mActionMode = null;
 		}
 	};
