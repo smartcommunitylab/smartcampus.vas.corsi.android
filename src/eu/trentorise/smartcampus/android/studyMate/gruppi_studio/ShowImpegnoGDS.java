@@ -33,11 +33,11 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 					.getContextualCollection().get(0);
 		}
 
-		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_impegno_gds);
+		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
 		tv_oggetto.setText(contextualAttivitaStudio.getOggetto());
-		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_gds);
+		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		tv_data.setText(contextualAttivitaStudio.getData());
-		TextView tv_ora = (TextView) findViewById(R.id.textOra_impegno_gds);
+		TextView tv_ora = (TextView) findViewById(R.id.textOra_impegno_showgds);
 		tv_ora.setText(contextualAttivitaStudio.getStart());
 		/*
 		 * manca altra roba

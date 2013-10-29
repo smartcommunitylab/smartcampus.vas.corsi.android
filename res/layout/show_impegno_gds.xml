@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/oggetto_showgds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
@@ -22,7 +22,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/text_data_impegno_gds"
+            android:id="@+id/text_data_impegno_showgds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_vertical_margin"
@@ -37,7 +37,7 @@
             android:text="  -  " />
 
         <TextView
-            android:id="@+id/textOra_impegno_gds"
+            android:id="@+id/textOra_impegno_showgds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="14:30"
@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textLocation_impegno_gds"
+        android:id="@+id/textLocation_impegno_showgds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
@@ -62,7 +62,7 @@
         android:paddingTop="10dp" />
 
     <TextView
-        android:id="@+id/textDescription_impegno_gds"
+        android:id="@+id/textDescription_impegno_showgds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
