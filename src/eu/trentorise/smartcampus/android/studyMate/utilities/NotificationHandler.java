@@ -8,12 +8,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.R;
+import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
+import eu.trentorise.smartcampus.android.studyMate.phl.Materiali4LevelPhlFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnector;
 import eu.trentorise.smartcampus.communicator.model.Notification;
@@ -32,12 +45,15 @@ public class NotificationHandler extends
 	private ArrayList<String> datetimeList;
 	@SuppressWarnings("unused")
 	private ArrayList<String> usersList;
+	private SherlockFragmentActivity activity;
 
 	public NotificationHandler(Context applicationContext,
-			TextView textViewTitleNotices, ListView lvAllNotices) {
+			TextView textViewTitleNotices, ListView lvAllNotices, SherlockFragmentActivity act) {
 		this.context = applicationContext;
 		this.textViewTitleNotices = textViewTitleNotices;
 		this.lvAllNotices = lvAllNotices;
+		this.activity = act;
+		
 	}
 
 	private List<Notification> getNotification() throws Exception {
@@ -70,7 +86,7 @@ public class NotificationHandler extends
 			setListNotifications(notifies);
 	}
 
-	private void setListNotifications(List<Notification> notifies) {
+	private void setListNotifications(final List<Notification> notifies) {
 
 		for (Notification n : notifies) {
 			textViewTitleNotices.setText(n.getTitle());
@@ -103,6 +119,36 @@ public class NotificationHandler extends
 				R.id.listViewNotices, notifies);
 		lvAllNotices.setAdapter(adapterNotices);
 
+		lvAllNotices.setOnItemClickListener(new ListView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				//if (notifies.get(arg2).getType().equals("gds")) {
+				AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
+				mAlert.setTitle(notifies.get(arg2).getTitle());
+				mAlert.setMessage(notifies.get(arg2).getDescription());
+				mAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Editable value = input.getText();
+						Toast.makeText(context,
+								"Notifica...", Toast.LENGTH_SHORT).show();
+						// e.printStackTrace();
+					}
+				});
+				mAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Editable value = input.getText();
+						Toast.makeText(context,
+								"CANCEL...", Toast.LENGTH_SHORT).show();
+						// e.printStackTrace();
+					}
+				});
+				AlertDialog alert = mAlert.create();
+				
+				alert.show();
+				}
+			//}
+		});
 	}
 
 	private void setVoidNotify() {

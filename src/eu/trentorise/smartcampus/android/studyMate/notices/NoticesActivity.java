@@ -17,6 +17,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;
+	private SherlockFragmentActivity activity;
 	public static ProgressDialog pd;
 
 	@Override
@@ -26,7 +27,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
+		activity = NoticesActivity.this;
 		textViewTitleNotices = (TextView) findViewById(R.id.textViewTitleNotices);
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
@@ -35,7 +36,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 				"Caricamento...");
 
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-				lvAllNotices).execute();
+				lvAllNotices,activity).execute();
 
 	}
 

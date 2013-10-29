@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/oggetto_impegno_gds"
+        android:id="@+id/textTitleEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
@@ -22,7 +22,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/text_data_impegno_gds"
+            android:id="@+id/textDataEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_vertical_margin"
@@ -31,7 +31,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textOra_impegno_gds"
+            android:id="@+id/textOraEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_vertical_margin"
@@ -40,7 +40,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textDescription_impegno_gds"
+        android:id="@+id/textDescriptionEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
@@ -54,24 +54,17 @@
         android:paddingBottom="20dp"
         android:paddingTop="10dp" />
     <TextView
-        android:id="@+id/textAula_impegno_gds"
+        android:id="@+id/textAulaEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:text="Materia" />
     
         <TextView
-        android:id="@+id/textLocation_impegno_gds"
+        android:id="@+id/textLocationEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:text="Location" />
-
-
-    <ListView
-        android:id="@+id/lv_partecipanti_gds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
 
 </LinearLayout>
