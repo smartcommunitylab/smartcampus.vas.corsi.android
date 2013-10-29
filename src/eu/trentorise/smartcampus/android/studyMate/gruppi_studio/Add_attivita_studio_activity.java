@@ -18,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -126,25 +125,30 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					.findViewById(R.id.spinner_aula)).getSelectedItem()
 					.toString();
 
-			boolean prenotazione_aule = ((CheckBox) this
-					.findViewById(R.id.CheckBox1_prenotazione_aule))
-					.isChecked();
-			boolean mensa = ((CheckBox) this.findViewById(R.id.CheckBox2_mensa))
-					.isChecked();
-			boolean tutoring = ((CheckBox) this
-					.findViewById(R.id.CheckBox3_tutoring)).isChecked();
-			boolean biblioteca = ((CheckBox) this
-					.findViewById(R.id.CheckBox4_biblioteca)).isChecked();
+			String edificio = ((Spinner) Add_attivita_studio_activity.this
+					.findViewById(R.id.spinner_edificio)).getSelectedItem()
+					.toString();
+
+//			boolean prenotazione_aule = ((CheckBox) this
+//					.findViewById(R.id.CheckBox1_prenotazione_aule))
+//					.isChecked();
+//			boolean mensa = ((CheckBox) this.findViewById(R.id.CheckBox2_mensa))
+//					.isChecked();
+//			boolean tutoring = ((CheckBox) this
+//					.findViewById(R.id.CheckBox3_tutoring)).isChecked();
+//			boolean biblioteca = ((CheckBox) this
+//					.findViewById(R.id.CheckBox4_biblioteca)).isChecked();
 
 			nuova_attivitaStudio.setOggetto(oggetto);
 			nuova_attivitaStudio.setData(data);
 			nuova_attivitaStudio.setStart(ora);
 			nuova_attivitaStudio.setRoom(room);
+			nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setDescrizione(descrizione);
-			nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
-			nuova_attivitaStudio.setMensa(mensa);
-			nuova_attivitaStudio.setTutoring(tutoring);
-			nuova_attivitaStudio.setBiblioteca(biblioteca);
+//			nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
+//			nuova_attivitaStudio.setMensa(mensa);
+//			nuova_attivitaStudio.setTutoring(tutoring);
+//			nuova_attivitaStudio.setBiblioteca(biblioteca);
 
 			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
@@ -154,9 +158,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					Overview_GDS.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			return true;
 		}
 		case android.R.id.home: {
 			Add_attivita_studio_activity.this.finish();
+			return true;
 		}
 
 		default:

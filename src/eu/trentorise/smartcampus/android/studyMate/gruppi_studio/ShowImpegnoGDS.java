@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import android.os.Bundle;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -43,23 +42,24 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		/*
 		 * manca altra roba
 		 */
-		CheckBox c1 = (CheckBox) findViewById(R.id.CheckBox1_prenotazione_aule);
-		CheckBox c2 = (CheckBox) findViewById(R.id.CheckBox2_mensa);
-		CheckBox c3 = (CheckBox) findViewById(R.id.CheckBox3_tutoring);
-		CheckBox c4 = (CheckBox) findViewById(R.id.CheckBox4_biblioteca);
+		// CheckBox c1 = (CheckBox)
+		// findViewById(R.id.CheckBox1_prenotazione_aule);
+		// CheckBox c2 = (CheckBox) findViewById(R.id.CheckBox2_mensa);
+		// CheckBox c3 = (CheckBox) findViewById(R.id.CheckBox3_tutoring);
+		// CheckBox c4 = (CheckBox) findViewById(R.id.CheckBox4_biblioteca);
 
-		if (contextualAttivitaStudio.isPrenotazione_aule()) {
-			c1.setChecked(true);
-		}
-		if (contextualAttivitaStudio.isMensa()) {
-			c2.setChecked(true);
-		}
-		if (contextualAttivitaStudio.isTutoring()) {
-			c3.setChecked(true);
-		}
-		if (contextualAttivitaStudio.isBiblioteca()) {
-			c4.setChecked(true);
-		}
+		// if (contextualAttivitaStudio.isPrenotazione_aule()) {
+		// c1.setChecked(true);
+		// }
+		// if (contextualAttivitaStudio.isMensa()) {
+		// c2.setChecked(true);
+		// }
+		// if (contextualAttivitaStudio.isTutoring()) {
+		// c3.setChecked(true);
+		// }
+		// if (contextualAttivitaStudio.isBiblioteca()) {
+		// c4.setChecked(true);
+		// }
 
 		/*
 		 * e così via

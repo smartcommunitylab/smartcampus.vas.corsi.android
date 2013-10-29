@@ -34,23 +34,16 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 			row = inflater.inflate(R.layout.gds_row, null);
 		}
 
-		TextView anno_gds = (TextView) row.findViewById(R.id.header_gds);
 		TextView nome_gds = (TextView) row.findViewById(R.id.gds_name);
 		ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
+		TextView nome_corso = (TextView) row
+				.findViewById(R.id.gds_name_of_course);
 
-		anno_gds.setText(currentGDS.getAnno() + "° anno");
+		
 		nome_gds.setText(currentGDS.getNome());
 		logo_gds.setImageDrawable(currentGDS.getLogo());
-
-		GruppoDiStudio prev = null;
-		if (position > 0)
-			prev = getItem(position - 1);
-
-		if (prev == null || prev.getAnno() != currentGDS.getAnno()) {
-			anno_gds.setVisibility(View.VISIBLE);
-		} else {
-			anno_gds.setVisibility(View.GONE);
-		}
+		// in attesa di backend
+		// nome_corso.setText(getcorsobyid(currentGDS.getCorso().getname());		
 
 		return row;
 	}

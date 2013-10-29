@@ -2,21 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   
     android:divider="@color/Cyan"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/header_gds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/smartn_theme_color"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,16 +11,30 @@
         android:background="@drawable/selectable_background_theme2_studymate"
         android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/gds_name"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="left|center_vertical"
             android:layout_weight="1"
-            android:gravity="left"
-            android:paddingLeft="10dp"
-            android:text="TextView"
-            android:textSize="20dp" />
+            android:orientation="vertical"
+            android:paddingLeft="10dp" >
+
+            <TextView
+                android:id="@+id/gds_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="nome gruppo"
+                android:textSize="@dimen/textsize_big" />
+
+            <TextView
+                android:id="@+id/gds_name_of_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="corso del gds"
+                android:textSize="@dimen/textsize_small" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/gds_logo"

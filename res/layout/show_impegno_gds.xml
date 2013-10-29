@@ -6,11 +6,11 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/oggetto_impegno_gds"
+        android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:text="Oggetto"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/smartn_theme_color"
@@ -31,10 +31,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  -  " />
+
+        <TextView
             android:id="@+id/textOra_impegno_gds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_vertical_margin"
             android:text="14:30"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
@@ -43,9 +48,11 @@
         android:id="@+id/textLocation_impegno_gds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Location" />
+        android:text="Aula a205  -  Polo Ferrari"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
         android:layout_width="fill_parent"
@@ -64,15 +71,17 @@
         android:text="Descrizione"
         android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/scritta_allegati"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:drawableTop="@drawable/ic_pdffile"
-        android:text="file to download.ext"
-        android:textAppearance="@style/TextAppearance.Sherlock.Small" />
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Allegati"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/smartn_theme_color" />
 
+    <!--
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,5 +121,6 @@
             android:text="Biblioteca"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </GridLayout>
+    -->
 
 </LinearLayout>

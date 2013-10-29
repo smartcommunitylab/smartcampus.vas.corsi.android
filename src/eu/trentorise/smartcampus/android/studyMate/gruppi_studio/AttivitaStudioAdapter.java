@@ -42,14 +42,14 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 				.findViewById(R.id.data_attivitastudio);
 		TextView oggetto_view = (TextView) impegno_view
 				.findViewById(R.id.oggetto_attivitastudio);
-		TextView aula_view = (TextView) impegno_view
-				.findViewById(R.id.aula_attivitastudio);
+		TextView aula_edificio_view = (TextView) impegno_view
+				.findViewById(R.id.aula_attivitastudio_e_edificio);
 		TextView orario_view = (TextView) impegno_view
 				.findViewById(R.id.orario_attivitastudio);
 
 		data_view.setText(currentImpegno.getData());
 		oggetto_view.setText(currentImpegno.getOggetto());
-		aula_view.setText("Aula " + currentImpegno.getRoom());
+		aula_edificio_view.setText("Aula " + currentImpegno.getRoom()+" - "+currentImpegno.getEvent_location());
 		orario_view.setText(currentImpegno.getStart());
 
 		AttivitaStudio prev = null;

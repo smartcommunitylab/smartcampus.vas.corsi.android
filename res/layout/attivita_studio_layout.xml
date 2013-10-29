@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:text="oggetto"
-            android:textAppearance="@android:style/TextAppearance.Large" />
+            android:textSize="@dimen/textsize_big" />
 
         <RelativeLayout
             android:id="@+id/RelativeLayout1"
@@ -44,14 +44,14 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/aula_attivitastudio"
+                android:id="@+id/aula_attivitastudio_e_edificio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:paddingLeft="10dp"
-                android:text="aula a203"
-                android:textAppearance="@android:style/TextAppearance.Medium" />
+                android:text="aula a203 - Polo Ferrari"
+                android:textSize="@dimen/textsize_medium" />
 
             <TextView
                 android:id="@+id/orario_attivitastudio"
@@ -60,7 +60,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:text="08:30-10:30"
-                android:textAppearance="@android:style/TextAppearance.Medium" />
+                android:textSize="@dimen/textsize_medium" />
         </RelativeLayout>
     </LinearLayout>
 
