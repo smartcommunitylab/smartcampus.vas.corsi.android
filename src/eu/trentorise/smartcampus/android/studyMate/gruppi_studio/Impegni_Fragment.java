@@ -33,15 +33,17 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
-		getSherlockActivity().getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+		// getSherlockActivity().getWindow().setSoftInputMode(
+		// WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
+
 		lista_impegni = ((Overview_GDS) getActivity())
 				.getContextualListaImpegni();
 		/*
@@ -75,8 +77,10 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	}
 
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
 		inflater.inflate(R.menu.impegni_gds_menu, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -84,10 +88,12 @@ public class Impegni_Fragment extends SherlockFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+
 		case R.id.aggiungi_impegno: {
 			Intent intent = new Intent(MyApplication.getAppContext(),
 					Add_attivita_studio_activity.class);
 			startActivity(intent);
+			return true;
 		}
 
 		default:

@@ -39,10 +39,11 @@ public class Forum_fragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
-		getSherlockActivity().getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+		// getSherlockActivity().getWindow().setSoftInputMode(
+		// WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 	}
 
 	@Override
@@ -104,8 +105,11 @@ public class Forum_fragment extends SherlockFragment {
 		});
 	}
 
+	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
 		inflater = getSherlockActivity().getSupportMenuInflater();
 		inflater.inflate(R.menu.forum_gds_menu, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -114,12 +118,14 @@ public class Forum_fragment extends SherlockFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+
 		case R.id.aggiungi_allegato: {
 			Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 			intent.setType("file/*");
 			// startActivity(Intent.createChooser(intent, "File Browser"));
 			startActivityForResult(intent,
 					MyApplication.PICK_FILE_FROM_PHONE_MEMORY);
+			return true;
 		}
 		default:
 			return super.onOptionsItemSelected(item);

@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
@@ -26,6 +29,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.overview_gds_waitingforforum_layout);
 
 		/*
 		 * Come da politica di utilizzo del contextualcollection ogni volta che
@@ -54,34 +58,42 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		}
 
 		final ActionBar ab = getSupportActionBar();
-		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ab.setTitle(contextualGDS.getNome());
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
-		/** TabHost will have Tabs */
-		String tab1_txt = "Impegni";
-		String tab2_txt = "Forum";
+		FragmentTransaction ft = this.getSupportFragmentManager()
+				.beginTransaction();
+		Fragment fragment = new Impegni_Fragment();
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		ft.replace(R.id.impegni_fragment_container, fragment);
+		ft.addToBackStack(null);
+		ft.commit();
 
-		// tab1
-
-		Tab tab1 = ab
-				.newTab()
-				.setText(tab1_txt)
-				.setTabListener(
-						new TabListener<Impegni_Fragment>(this, "tab1",
-								Impegni_Fragment.class));
-		ab.addTab(tab1);
-
-		// tab2
-		Tab tab2 = ab
-				.newTab()
-				.setText(tab2_txt)
-				.setTabListener(
-						new TabListener<Forum_fragment>(this, "tab2",
-								Forum_fragment.class));
-		ab.addTab(tab2);
+		// /** TabHost will have Tabs */
+		// String tab1_txt = "Impegni";
+		// String tab2_txt = "Forum";
+		//
+		// // tab1
+		//
+		// Tab tab1 = ab
+		// .newTab()
+		// .setText(tab1_txt)
+		// .setTabListener(
+		// new TabListener<Impegni_Fragment>(this, "tab1",
+		// Impegni_Fragment.class));
+		// ab.addTab(tab1);
+		//
+		// // tab2
+		// Tab tab2 = ab
+		// .newTab()
+		// .setText(tab2_txt)
+		// .setTabListener(
+		// new TabListener<Forum_fragment>(this, "tab2",
+		// Forum_fragment.class));
+		// ab.addTab(tab2);
 
 	}
 
@@ -117,7 +129,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.overview__gd, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -126,6 +139,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
 			Overview_GDS.this.finish();
+			return true;
 		}
 		default:
 			return super.onOptionsItemSelected(item);
