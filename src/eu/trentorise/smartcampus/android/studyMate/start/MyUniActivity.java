@@ -214,8 +214,7 @@ public class MyUniActivity extends SherlockActivity {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				String userAuthToken = getAuthToken();
-				// ,CLIENT_ID, CLIENT_SECRET);
-				System.out.println(userAuthToken);
+//				System.out.println(userAuthToken);
 				BasicProfileService service = new BasicProfileService(
 						"https://vas-dev.smartcampuslab.it/aac");
 				bp = service.getBasicProfile(userAuthToken);
@@ -224,18 +223,19 @@ public class MyUniActivity extends SherlockActivity {
 				PushServiceConnector connector = new PushServiceConnector();
 				// //init connector
 				try {
-					System.out.println("token: " + userAuthToken);
+//					System.out.println("token: " + userAuthToken);
 					connector.init(getApplicationContext(), userAuthToken,
 							APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					e.printStackTrace();
 				}
-				try {
-					new PushServiceConnector().init(getApplicationContext(),
-							userAuthToken, APP_ID, SERVER_URL);
-				} catch (CommunicatorConnectorException e) {
-					e.printStackTrace();
-				}
+
+//				try {
+//					new PushServiceConnector().init(getApplicationContext(),
+//							userAuthToken, APP_ID, SERVER_URL);
+//				} catch (CommunicatorConnectorException e) {
+//					e.printStackTrace();
+//				}
 
 				return bp;
 			} catch (Exception e) {
