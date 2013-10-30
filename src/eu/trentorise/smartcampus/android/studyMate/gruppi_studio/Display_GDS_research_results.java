@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -40,7 +38,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		if (!MyApplication.getContextualCollection().isEmpty())
 			nomi_studenti_filter = (ArrayList<String>) MyApplication
 					.getContextualCollection().get(0);
-		//occio qua
+		// occio qua
 		universo_gds = (ArrayList<GruppoDiStudio>) MyApplication
 				.getContextualCollection().get(1);
 		MyApplication.getContextualCollection().clear();
@@ -55,16 +53,15 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
 		tv_nomeGruppo.setText(nome_gruppo_filter);
 
-		
-//		ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
-//				universo_gds, materia_filter, nome_gruppo_filter,
-//				nomi_studenti_filter);
+		// ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
+		// universo_gds, materia_filter, nome_gruppo_filter,
+		// nomi_studenti_filter);
 
 		ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
 
 		// sorting gds before rendering them on screen
 		// dovrei ordinare gli ammissibili e stamparli a schermo
-		Collections.sort(universo_gds);
+		// Collections.sort(universo_gds);
 
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,
@@ -99,75 +96,75 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 	public ArrayList<GruppoDiStudio> find_gds_ammissibili(
 			ArrayList<GruppoDiStudio> universo_gds, String materia_filter,
 			String nome_gruppo_filter, ArrayList<String> nomi_studenti_filter) {
-		// andrà fatta questa ricerca nella forma di database con query
-		// classiche tipo select * from gruppidistudio where
-		// filtro=valore_filtro
-		ArrayList<GruppoDiStudio> retval = new ArrayList<GruppoDiStudio>();
-
-		if (!nomi_studenti_filter.isEmpty()) {
-			if (nome_gruppo_filter == "Tutti") {
-				if (materia_filter == "Tutte") {// (1) caso con qualsiasi
-												// materia e
-												// qualsiasi nome_gruppo,
-												// aggiungi tutti i gds che
-												// concordano anche con i nomi
-												// studenti selezionati
-					for (GruppoDiStudio gds : universo_gds) {
-						// controllo consistenza con compagni di corso indicati
-						boolean check = true;
-						for (String nome_studente : nomi_studenti_filter) {
-							check = check
-									&& (gds.getMembri().contains(nome_studente));
-						}
-						if (check)
-							retval.add(gds);
-					}
-					// end(1)
-				} else {// (2)caso con materia selezionata ma corso qualsiasi
-					for (GruppoDiStudio gds : universo_gds) {
-
-						if (gds.getMateria() == materia_filter) {
-							// controllo consistenza con compagni di corso
-							// indicati
-							boolean check = true;
-							for (String nome_studente : nomi_studenti_filter) {
-								check = check
-										&& (gds.getMembri()
-												.contains(nome_studente));
-							}
-							if (check)
-								retval.add(gds);
-						}
-					}
-					// end(2)
-				}
-			} else {// (3) caso in cui un particolare nome_gruppo è stato
-					// selezionato
-				GruppoDiStudio selected_gds = null;
-				for (GruppoDiStudio gds : universo_gds) {
-					if (gds.getNome() == nome_gruppo_filter) {
-						selected_gds = gds;
-					}
-				}
-				// controllo consistenza con compagni di corso indicati
-				boolean check = true;
-				for (String nome_studente : nomi_studenti_filter) {
-					check = check
-							&& (selected_gds.getMembri()
-									.contains(nome_studente));
-				}
-				if (check)
-					retval.add(selected_gds);
-				// end(3)
-			}
-
-		}
-
-		for (GruppoDiStudio gds : retval) {
-			Toast.makeText(getApplicationContext(), gds.getNome(),
-					Toast.LENGTH_SHORT).show();
-		}
-		return retval;
+		// // andrà fatta questa ricerca nella forma di database con query
+		// // classiche tipo select * from gruppidistudio where
+		// // filtro=valore_filtro
+		// ArrayList<GruppoDiStudio> retval = new ArrayList<GruppoDiStudio>();
+		//
+		// if (!nomi_studenti_filter.isEmpty()) {
+		// if (nome_gruppo_filter == "Tutti") {
+		// if (materia_filter == "Tutte") {// (1) caso con qualsiasi
+		// // materia e
+		// // qualsiasi nome_gruppo,
+		// // aggiungi tutti i gds che
+		// // concordano anche con i nomi
+		// // studenti selezionati
+		// for (GruppoDiStudio gds : universo_gds) {
+		// // controllo consistenza con compagni di corso indicati
+		// boolean check = true;
+		// for (String nome_studente : nomi_studenti_filter) {
+		// check = check
+		// && (gds.getMembri().contains(nome_studente));
+		// }
+		// if (check)
+		// retval.add(gds);
+		// }
+		// // end(1)
+		// } else {// (2)caso con materia selezionata ma corso qualsiasi
+		// for (GruppoDiStudio gds : universo_gds) {
+		//
+		// if (gds.getMateria() == materia_filter) {
+		// // controllo consistenza con compagni di corso
+		// // indicati
+		// boolean check = true;
+		// for (String nome_studente : nomi_studenti_filter) {
+		// check = check
+		// && (gds.getMembri()
+		// .contains(nome_studente));
+		// }
+		// if (check)
+		// retval.add(gds);
+		// }
+		// }
+		// // end(2)
+		// }
+		// } else {// (3) caso in cui un particolare nome_gruppo è stato
+		// // selezionato
+		// GruppoDiStudio selected_gds = null;
+		// for (GruppoDiStudio gds : universo_gds) {
+		// if (gds.getNome() == nome_gruppo_filter) {
+		// selected_gds = gds;
+		// }
+		// }
+		// // controllo consistenza con compagni di corso indicati
+		// boolean check = true;
+		// for (String nome_studente : nomi_studenti_filter) {
+		// check = check
+		// && (selected_gds.getMembri()
+		// .contains(nome_studente));
+		// }
+		// if (check)
+		// retval.add(selected_gds);
+		// // end(3)
+		// }
+		//
+		// }
+		//
+		// for (GruppoDiStudio gds : retval) {
+		// Toast.makeText(getApplicationContext(), gds.getNome(),
+		// Toast.LENGTH_SHORT).show();
+		// }
+		return null;
 
 	}
 

@@ -66,7 +66,8 @@ public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 		TextView nome_gds = (TextView) littleSquare
 				.findViewById(R.id.gds_square_nome);
 
-		logo_gds.setImageDrawable(currentGDS.getLogo());
+		// da conformare al backend
+		// logo_gds.setImageDrawable(currentGDS.getLogo());
 		nome_gds.setText(currentGDS.getNome());
 		return littleSquare;
 	}

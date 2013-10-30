@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +50,7 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 				R.id.gridview_gruppi_di_studio);
 
 		// sorting gds before rendering them on screen
-		Collections.sort(user_gds_list);
+		// Collections.sort(user_gds_list);
 
 		Adapter_gds_to_grid adapter = new Adapter_gds_to_grid(getActivity(),
 				R.id.gridview_gruppi_di_studio, user_gds_list);

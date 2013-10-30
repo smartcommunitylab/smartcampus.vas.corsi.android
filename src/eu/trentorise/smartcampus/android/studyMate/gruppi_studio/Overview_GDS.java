@@ -19,15 +19,15 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	private GruppoDiStudio contextualGDS = new GruppoDiStudio();
-	private ArrayList<ChatObject> contextualForum = new ArrayList<ChatObject>();
-	private ArrayList<AttivitaStudio> contextualListaImpegni = new ArrayList<AttivitaStudio>();
+	private ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
+	private ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +59,16 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			Object obj = MyApplication.getContextualCollection().get(0);
 			if (obj instanceof GruppoDiStudio) {
 				contextualGDS = (GruppoDiStudio) obj;
-				contextualForum = contextualGDS.getForum();
-				contextualListaImpegni = contextualGDS.getAttivita_studio();
-			} else if (obj instanceof AttivitaStudio) {
+				// contextualForum = contextualGDS.getForum();
+				// da fare dentro la asynctask
+				// contextualListaImpegni = contextualGDS.getAttivita_studio();
+
+			} else if (obj instanceof AttivitaDiStudio) {
 				/*
 				 * todo here
 				 */
 
-				contextualListaImpegni.add((AttivitaStudio) obj);
+				contextualListaImpegni.add((AttivitaDiStudio) obj);
 			}
 
 			MyApplication.getContextualCollection().clear();
@@ -187,20 +189,20 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		this.contextualGDS = contextualGDS;
 	}
 
-	public ArrayList<ChatObject> getContextualForum() {
+	public ArrayList<ChatObj> getContextualForum() {
 		return contextualForum;
 	}
 
-	public void setContextualForum(ArrayList<ChatObject> contextualForum) {
+	public void setContextualForum(ArrayList<ChatObj> contextualForum) {
 		this.contextualForum = contextualForum;
 	}
 
-	public ArrayList<AttivitaStudio> getContextualListaImpegni() {
+	public ArrayList<AttivitaDiStudio> getContextualListaImpegni() {
 		return contextualListaImpegni;
 	}
 
 	public void setContextualListaImpegni(
-			ArrayList<AttivitaStudio> contextualListaImpegni) {
+			ArrayList<AttivitaDiStudio> contextualListaImpegni) {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 

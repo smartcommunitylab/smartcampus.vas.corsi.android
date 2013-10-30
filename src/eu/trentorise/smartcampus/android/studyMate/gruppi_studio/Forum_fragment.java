@@ -23,11 +23,11 @@ import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatAttachment;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 
 public class Forum_fragment extends SherlockFragment {
 
-	ArrayList<ChatObject> forum;
+	ArrayList<ChatObj> forum;
 	TextView chateText;
 
 	@Override

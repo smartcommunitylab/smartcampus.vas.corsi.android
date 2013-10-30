@@ -23,8 +23,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
@@ -77,9 +77,22 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		// inizializzaGrafiche();
 		nomi_gruppi.add("Tutti");
 		for (GruppoDiStudio gds : allChoosable_gds) {
-			materieset.add(gds.getMateria());
+			materieset.add("" + gds.getCorso());
 			nomi_gruppi.add(gds.getNome());
-			for (Studente studente : gds.getMembri()) {
+			// un po' di roba fake
+			ArrayList<Studente> membriGDS = new ArrayList<Studente>();
+			Studente s1 = new Studente();
+			s1.setNome("Pinco");
+			s1.setCognome("Pallino");
+			s1.setAnno_corso("2");
+			Studente s2 = new Studente();
+			s2.setNome("Pinco");
+			s2.setCognome("Pallino");
+			s2.setAnno_corso("2");
+			membriGDS.add(s1);
+			membriGDS.add(s1);
+			// fine roba fake
+			for (Studente studente : membriGDS/* gds.getIdsStudenti() */) {
 				nomi_membriset.add(studente.getNome() + " "
 						+ studente.getCognome());
 			}
@@ -186,8 +199,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			Choosable_gds = new ArrayList<GruppoDiStudio>();
 			ArrayList<Studente> membri_gds = new ArrayList<Studente>();
 
-			ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
-			ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
+			ArrayList<AttivitaDiStudio> attivita_studio_gds = new ArrayList<AttivitaDiStudio>();
+			ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
 
 			// ####################################
 			// creazione gruppi fake per popolare grafica, dovrei in realtà
@@ -216,35 +229,40 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			Date data1 = new Date();
 			data1.setTime(5000);
 
-			AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
-					null, "titolo as1", "Povo", "a203", "02/10/2013",
-					"descrizione as", "09:00", false, false, false, false,
-					false, false);
-			AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
-					null, "titolo as2", "Povo", "a203", "02/10/2013",
-					"descrizione as", "09:00", false, false, false, false,
-					false, false);
+			AttivitaDiStudio impegno1 = new AttivitaDiStudio();
+			// AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null,
+			// 14,
+			// null, "titolo as1", "Povo", "a203", "02/10/2013",
+			// "descrizione as", "09:00", false, false, false, false,
+			// false, false);
+			// AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null,
+			// 14,
+			// null, "titolo as2", "Povo", "a203", "02/10/2013",
+			// "descrizione as", "09:00", false, false, false, false,
+			// false, false);
 
 			attivita_studio_gds.add(impegno1);
-			attivita_studio_gds.add(impegno2);
 
-			GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-					"R. Sebastiani", membri_gds, null, attivita_studio_gds, 1,
-					forum, MyApplication.getAppContext().getResources()
-							.getDrawable(R.drawable.prouno_logo));
-			GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-					"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
-					forum, MyApplication.getAppContext().getResources()
-							.getDrawable(R.drawable.discreta_logo));
-			GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-					"Renato++", membri_gds, null, attivita_studio_gds, 2,
-					forum, MyApplication.getAppContext().getResources()
-							.getDrawable(R.drawable.reti_calcolatori_logo));
-			GruppoDiStudio gds4 = new GruppoDiStudio(
-					"Algoritmi e strutture dati", "ASD", membri_gds, null,
-					attivita_studio_gds, 2, forum, MyApplication
-							.getAppContext().getResources()
-							.getDrawable(R.drawable.algoritmi_logo));
+			GruppoDiStudio gds1 = new GruppoDiStudio();
+			gds1.setCorso(100);
+			gds1.setNome("Nome gruppo");
+			// GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
+			// "R. Sebastiani", membri_gds, null, attivita_studio_gds, 1,
+			// forum, MyApplication.getAppContext().getResources()
+			// .getDrawable(R.drawable.prouno_logo));
+			// GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
+			// "GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
+			// forum, MyApplication.getAppContext().getResources()
+			// .getDrawable(R.drawable.discreta_logo));
+			// GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
+			// "Renato++", membri_gds, null, attivita_studio_gds, 2,
+			// forum, MyApplication.getAppContext().getResources()
+			// .getDrawable(R.drawable.reti_calcolatori_logo));
+			// GruppoDiStudio gds4 = new GruppoDiStudio(
+			// "Algoritmi e strutture dati", "ASD", membri_gds, null,
+			// attivita_studio_gds, 2, forum, MyApplication
+			// .getAppContext().getResources()
+			// .getDrawable(R.drawable.algoritmi_logo));
 
 			// fine placeholder
 			// ############################
@@ -256,9 +274,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			// dal
 			// web
 			Choosable_gds.add(gds1);
-			Choosable_gds.add(gds2);
-			Choosable_gds.add(gds3);
-			Choosable_gds.add(gds4);
+			// Choosable_gds.add(gds2);
+			// Choosable_gds.add(gds3);
+			// Choosable_gds.add(gds4);
 
 			// ####################################
 			/*
@@ -377,7 +395,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 
 			} else {
 				for (GruppoDiStudio gds : all_choosable) {
-					if (gds.getMateria() == selected_value) {
+					if (("" + gds.getCorso()) == selected_value) {
 						nomi_gds_values.add(gds.getNome());
 					}
 				}
@@ -394,7 +412,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 			if (selected_value == "Tutti") {
 				Set<String> set = new TreeSet<String>();
 				for (GruppoDiStudio gds : all_choosable) {
-					set.add(gds.getMateria());
+					set.add("" + gds.getCorso());
 				}
 				materie_values.add("Tutte");
 				for (String string : set) {
@@ -403,7 +421,7 @@ final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
 			} else {
 				for (GruppoDiStudio gds : all_choosable) {
 					if (gds.getNome() == selected_value)
-						materie_values.add(gds.getMateria());
+						materie_values.add("" + gds.getCorso());
 				}
 				materie_values.add("Tutte");
 			}

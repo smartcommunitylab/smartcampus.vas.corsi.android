@@ -13,16 +13,16 @@ import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatAttachment;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 
-public class ChatObjectAdapter extends ArrayAdapter<ChatObject> {
+public class ChatObjectAdapter extends ArrayAdapter<ChatObj> {
 
 	@SuppressWarnings("unused")
-	private ArrayList<ChatObject> entries;
+	private ArrayList<ChatObj> entries;
 	Context context;
 
 	public ChatObjectAdapter(Context context, int textViewResourceId,
-			ArrayList<ChatObject> objects) {
+			ArrayList<ChatObj> objects) {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
@@ -32,7 +32,7 @@ public class ChatObjectAdapter extends ArrayAdapter<ChatObject> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View bubble = convertView;
-		ChatObject currentBubble = getItem(position);
+		ChatObj currentBubble = getItem(position);
 
 		if (bubble == null) {
 			LayoutInflater inflater = (LayoutInflater) context

@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -26,7 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
@@ -110,12 +112,13 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			/*
 			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
 			 */
-			AttivitaStudio nuova_attivitaStudio = new AttivitaStudio();
+			AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
 			String oggetto = ((TextView) this
 					.findViewById(R.id.editText_oggetto)).getText().toString();
 
-			String data = ((Button) this.findViewById(R.id.data_button_gds))
-					.getText().toString();
+			String stringdata = ((Button) this
+					.findViewById(R.id.data_button_gds)).getText().toString();
+
 			String ora = ((Button) this.findViewById(R.id.ora_button_gds))
 					.getText().toString();
 
@@ -142,9 +145,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// boolean biblioteca = ((CheckBox) this
 			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
 
-			nuova_attivitaStudio.setOggetto(oggetto);
+			nuova_attivitaStudio.setTopic(oggetto);
+			Date data = new Date();
 			nuova_attivitaStudio.setData(data);
-			nuova_attivitaStudio.setStart(ora);
+			Time start = new Time(100);
+			nuova_attivitaStudio.setStart(start);
 			nuova_attivitaStudio.setRoom(room);
 			nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setDescrizione(descrizione);
@@ -158,10 +163,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			MyAsyncTask task = new MyAsyncTask(
 					Add_attivita_studio_activity.this);
 			task.execute();
-			Intent intent = new Intent(Add_attivita_studio_activity.this,
-					Overview_GDS.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+
 			return true;
 		}
 		case android.R.id.home: {
@@ -292,6 +294,10 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
+			Intent intent = new Intent(Add_attivita_studio_activity.this,
+					Overview_GDS.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 
 		@Override

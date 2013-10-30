@@ -2,12 +2,12 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import android.text.format.Time;
 
-public abstract class ChatObject {
+public abstract class ChatObj {
 
 	// Autore
 	Time publicationTime;
 
-	public ChatObject(Time publicationTime) {
+	public ChatObj(Time publicationTime) {
 		super();
 		this.publicationTime = publicationTime;
 	}

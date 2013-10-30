@@ -1,220 +1,184 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.util.ArrayList;
-
-import android.graphics.drawable.Drawable;
+import java.util.List;
 
 /**
  * The Class GruppoDiStudio.
  */
 
-public class GruppoDiStudio implements Comparable<GruppoDiStudio> {
+//già da web
+public class GruppoDiStudio {
+	// id del gruppo
 
-	/** The materia. */
-	String materia;
+	private long id;
 
-	/** The nome. */
-	String nome;
+	// Nome del gruppo
 
-	/** The membri. */
-	ArrayList<Studente> membri;
+	private String nome;
 
-	/** The servizi_monitorati. */
-	ArrayList<Servizio> servizi_monitorati;
+	// corso di riferimento
 
-	/** The attivita_studio. */
-	ArrayList<AttivitaStudio> attivita_studio;
+	private long corso;
 
-	/** The anno. */
-	int anno;
+	private String idsStudenti;
 
-	ArrayList<ChatObject> forum;
+	private List<Studente> studentiGruppo;
 
-	Drawable logo;
+	// @Column(name = "LOGO")
+	// private Blob logo;
 
-	/**
-	 * Instantiates a new gruppo di studio.
-	 * 
-	 * @param materia
-	 *            the materia
-	 * @param nome
-	 *            the nome
-	 * @param membri
-	 *            the membri
-	 * @param servizi_monitorati
-	 *            the servizi_monitorati
-	 * @param attivita_studio
-	 *            the attivita_studio
-	 * @param anno
-	 *            the anno
-	 */
-
-	public Drawable getLogo() {
-		return logo;
-	}
+	private boolean visible;
 
 	public GruppoDiStudio() {
-
+		this.idsStudenti = "";
 	}
 
-	public GruppoDiStudio(String materia, String nome,
-			ArrayList<Studente> membri, ArrayList<Servizio> servizi_monitorati,
-			ArrayList<AttivitaStudio> attivita_studio, int anno,
-			ArrayList<ChatObject> forum, Drawable logo) {
-		super();
-		this.materia = materia;
-		this.nome = nome;
-		this.membri = membri;
-		this.servizi_monitorati = servizi_monitorati;
-		this.attivita_studio = attivita_studio;
-		this.anno = anno;
-		this.forum = forum;
-		this.logo = logo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setLogo(Drawable logo) {
-		this.logo = logo;
+	public long getCorso() {
+		return corso;
 	}
 
-	/**
-	 * Gets the anno.
-	 * 
-	 * @return the anno
-	 */
-	public int getAnno() {
-		return anno;
+	public void setCorso(long corso) {
+		this.corso = corso;
 	}
 
-	/**
-	 * Sets the anno.
-	 * 
-	 * @param anno
-	 *            the new anno
-	 */
-	public void setAnno(int anno) {
-		this.anno = anno;
-	}
-
-	public ArrayList<ChatObject> getForum() {
-		return forum;
-	}
-
-	public void setForum(ArrayList<ChatObject> forum) {
-		this.forum = forum;
-	}
-
-	/**
-	 * Gets the nome.
-	 * 
-	 * @return the nome
-	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * Sets the nome.
-	 * 
-	 * @param nome
-	 *            the new nome
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * Gets the materia.
-	 * 
-	 * @return the materia
-	 */
-	public String getMateria() {
-		return materia;
+	public long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the materia.
-	 * 
-	 * @param materia
-	 *            the new materia
-	 */
-	public void setMateria(String materia) {
-		this.materia = materia;
+	public String getIdsStudenti() {
+		return idsStudenti;
 	}
 
-	/**
-	 * Gets the membri.
-	 * 
-	 * @return the membri
-	 */
-	public ArrayList<Studente> getMembri() {
-		return membri;
+	public void setIdsStudenti(String idsStudenti) {
+		this.idsStudenti = idsStudenti;
 	}
 
-	/**
-	 * Sets the membri.
-	 * 
-	 * @param membri
-	 *            the new membri
-	 */
-	public void setMembri(ArrayList<Studente> membri) {
-		this.membri = membri;
+	public List<Studente> getStudentiGruppo() {
+		return studentiGruppo;
 	}
 
-	/**
-	 * Gets the servizi_monitorati.
-	 * 
-	 * @return the servizi_monitorati
-	 */
-	public ArrayList<Servizio> getServizi_monitorati() {
-		return servizi_monitorati;
+	// public Blob getLogo() {
+	// return logo;
+	// }
+	//
+	//
+	// public void setLogo(Blob logo) {
+	// this.logo = logo;
+	// }
+
+	public void setStudentiGruppo(List<Studente> studentiGruppo) {
+		this.studentiGruppo = studentiGruppo;
 	}
 
-	/**
-	 * Sets the servizi_monitorati.
-	 * 
-	 * @param servizi_monitorati
-	 *            the new servizi_monitorati
-	 */
-	public void setServizi_monitorati(ArrayList<Servizio> servizi_monitorati) {
-		this.servizi_monitorati = servizi_monitorati;
+	public boolean isVisible() {
+		return visible;
 	}
 
-	/**
-	 * Gets the attivita_studio.
-	 * 
-	 * @return the attivita_studio
-	 */
-	public ArrayList<AttivitaStudio> getAttivita_studio() {
-		return attivita_studio;
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
-	/**
-	 * Sets the attivita_studio.
-	 * 
-	 * @param attivita_studio
-	 *            the new attivita_studio
-	 */
-	public void setAttivita_studio(ArrayList<AttivitaStudio> attivita_studio) {
-		this.attivita_studio = attivita_studio;
+	public void setIfVisibleFromNumMembers() {
+		int numMembers = this.getIdsStudenti().split(",").length;
+
+		if (numMembers >= 2)
+			this.setVisible(true);
+		else
+			this.setVisible(false);
+
 	}
 
-	@Override
-	public int compareTo(GruppoDiStudio another) {
-		final int BEFORE = -1;
-		final int EQUAL = 0;
-		final int AFTER = 1;
+	public void addStudenteGruppo(long idStudenteDaAggiungere) {
+		// TODO Auto-generated method stub
+		this.setIdsStudenti(this.getIdsStudenti()
+				+ String.valueOf(idStudenteDaAggiungere) + ",");
+	}
 
-		if (this == another)
-			return EQUAL;
-		else if (this != another) {
-			if (this.anno < another.anno)
-				return BEFORE;
-			else if (this.anno > another.anno)
-				return AFTER;
-			else if (this.anno == another.anno)
-				return this.nome.compareTo(another.nome);
+	// chiamata soltanto alla creazione di un nuovo gruppo
+	public void initStudenteGruppo(long idStudenteDaAggiungere) {
+		// TODO Auto-generated method stub
+		this.setIdsStudenti(String.valueOf(idStudenteDaAggiungere) + ",");
+	}
+
+	public void removeStudenteGruppo(long id2) {
+		// TODO Auto-generated method stub
+		String studentiGruppoIds = null;
+
+		if (this.getIdsStudenti() == null)
+			return;
+
+		studentiGruppoIds = this.getIdsStudenti();
+
+		String[] listS = studentiGruppoIds.split(",");
+
+		String studentiGruppoAggiornato = "";
+
+		for (String s : listS) {
+			if (!s.equals(String.valueOf(id2))) {
+				studentiGruppoAggiornato = studentiGruppoAggiornato.concat(s
+						.toString() + ",");
+			}
 		}
-		return 15;// 15 as error code
+		this.setIdsStudenti(studentiGruppoAggiornato);
+	}
+
+	public boolean canRemoveGruppoDiStudioIfVoid() {
+		String[] listIds = this.getIdsStudenti().split(",");
+
+		if (listIds[0] == "")
+			return true;
+		else
+			return false;
+	}
+
+	public boolean isContainsStudente(long idStudente) {
+		// TODO Auto-generated method stub
+		String studentiGruppoIds = null;
+		studentiGruppoIds = this.getIdsStudenti();
+
+		String[] listS = studentiGruppoIds.split(",");
+
+		for (String s : listS) {
+			if (s.equals(String.valueOf(idStudente))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public List<String> getListInvited(long idStudente) {
+		return convertIdsInvitedToList(this.getIdsStudenti(), idStudente);
+	}
+
+	public List<String> convertIdsInvitedToList(String ids, long idStudente) {
+		String[] listIds = null;
+		List<String> listIdsInvited = new ArrayList<String>();
+
+		listIds = ids.split(",");
+
+		for (String id : listIds) {
+
+			if (!id.equals(String.valueOf(idStudente))) {
+				listIdsInvited.add(id);
+			}
+
+		}
+
+		return listIdsInvited;
 	}
 
 }

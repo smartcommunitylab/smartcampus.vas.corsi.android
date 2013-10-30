@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import android.text.format.Time;
 
-public class ChatMessage extends ChatObject {
+public class ChatMessage extends ChatObj {
 
 	String message;
 

@@ -20,10 +20,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 
 public class Impegni_Fragment extends SherlockFragment {
-	public ArrayList<AttivitaStudio> lista_impegni;
+	public ArrayList<AttivitaDiStudio> lista_impegni;
 	protected Object mActionMode;
 
 	@Override
@@ -69,8 +69,8 @@ public class Impegni_Fragment extends SherlockFragment {
 					int position, long id) {
 				AttivitaStudioAdapter adpt = (AttivitaStudioAdapter) parent
 						.getAdapter();
-				ArrayList<AttivitaStudio> entries = adpt.getEntries();
-				final AttivitaStudio selected_impegno = entries.get(position);
+				ArrayList<AttivitaDiStudio> entries = adpt.getEntries();
+				final AttivitaDiStudio selected_impegno = entries.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
 				MyApplication.getContextualCollection().add(selected_impegno);
 				startActivity(intent);
@@ -110,7 +110,7 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		//menu.clear();
+		// menu.clear();
 		inflater.inflate(R.menu.impegni_gds_menu, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -132,7 +132,7 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	}
 
-	public ArrayList<AttivitaStudio> getLista_impegni() {
+	public ArrayList<AttivitaDiStudio> getLista_impegni() {
 		return lista_impegni;
 	}
 

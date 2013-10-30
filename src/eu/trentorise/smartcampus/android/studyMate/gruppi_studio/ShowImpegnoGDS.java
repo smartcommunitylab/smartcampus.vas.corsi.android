@@ -17,11 +17,11 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
-	private AttivitaStudio contextualAttivitaStudio;
+	private AttivitaDiStudio contextualAttivitaStudio;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -51,19 +51,21 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		 * recupero contextualAttivitastudio da contextualcollection
 		 */
 		if (!MyApplication.getContextualCollection().isEmpty()) {
-			contextualAttivitaStudio = (AttivitaStudio) MyApplication
+			contextualAttivitaStudio = (AttivitaDiStudio) MyApplication
 					.getContextualCollection().get(0);
 		}
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
-		tv_oggetto.setText(contextualAttivitaStudio.getOggetto());
+		tv_oggetto.setText(contextualAttivitaStudio.getTopic());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
-		tv_data.setText(contextualAttivitaStudio.getData());
+		tv_data.setText(contextualAttivitaStudio.getData().toString());
 		TextView tv_ora = (TextView) findViewById(R.id.textOra_impegno_showgds);
-		tv_ora.setText(contextualAttivitaStudio.getStart());
+		tv_ora.setText(contextualAttivitaStudio.getStart().toString());
 		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
-		ArrayList<Allegato> contextualAllegatis = contextualAttivitaStudio
-				.getAllegati();
+		ArrayList<Allegato> contextualAllegatis = null; /*
+														 * contextualAttivitaStudio
+														 * .getAllegati();
+														 */
 		if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
 			Toast.makeText(MyApplication.getAppContext(),
 					"non ci sono allegati ne mostro uno per prova",

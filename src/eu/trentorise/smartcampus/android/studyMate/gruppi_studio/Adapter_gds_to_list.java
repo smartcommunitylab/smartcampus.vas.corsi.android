@@ -39,11 +39,10 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		TextView nome_corso = (TextView) row
 				.findViewById(R.id.gds_name_of_course);
 
-		
 		nome_gds.setText(currentGDS.getNome());
-		logo_gds.setImageDrawable(currentGDS.getLogo());
-		// in attesa di backend
-		// nome_corso.setText(getcorsobyid(currentGDS.getCorso().getname());		
+		// da conformare al backend
+		// logo_gds.setImageDrawable(currentGDS.getLogo());
+		// nome_corso.setText(getcorsobyid(currentGDS.getCorso().getname());
 
 		return row;
 	}

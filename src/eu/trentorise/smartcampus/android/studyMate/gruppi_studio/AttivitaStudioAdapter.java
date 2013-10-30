@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 
-public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
+public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 
-	private ArrayList<AttivitaStudio> entries;
+	private ArrayList<AttivitaDiStudio> entries;
 	Context context;
 
 	public AttivitaStudioAdapter(Context context, int textViewResourceId,
-			ArrayList<AttivitaStudio> objects) {
+			ArrayList<AttivitaDiStudio> objects) {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
@@ -27,7 +27,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View impegno_view = convertView;
-		AttivitaStudio currentImpegno = getItem(position);
+		AttivitaDiStudio currentImpegno = getItem(position);
 
 		if (impegno_view == null) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -47,12 +47,13 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 		TextView orario_view = (TextView) impegno_view
 				.findViewById(R.id.orario_attivitastudio);
 
-		data_view.setText(currentImpegno.getData());
-		oggetto_view.setText(currentImpegno.getOggetto());
-		aula_edificio_view.setText("Aula " + currentImpegno.getRoom()+" - "+currentImpegno.getEvent_location());
-		orario_view.setText(currentImpegno.getStart());
+		data_view.setText(currentImpegno.getData().toString());
+		oggetto_view.setText(currentImpegno.getTopic());
+		aula_edificio_view.setText("Aula " + currentImpegno.getRoom() + " - "
+				+ currentImpegno.getEvent_location());
+		orario_view.setText(currentImpegno.getStart().toString());
 
-		AttivitaStudio prev = null;
+		AttivitaDiStudio prev = null;
 		if (position > 0)
 			prev = getItem(position - 1);
 
@@ -66,7 +67,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaStudio> {
 		return impegno_view;
 	}
 
-	public ArrayList<AttivitaStudio> getEntries() {
+	public ArrayList<AttivitaDiStudio> getEntries() {
 		return entries;
 	}
 

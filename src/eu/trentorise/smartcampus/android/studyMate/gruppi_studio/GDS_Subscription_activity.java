@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +21,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 
 public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
@@ -44,17 +47,32 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
+		@SuppressWarnings("unused")
 		ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
-		logo_gds.setImageDrawable(contextualGDS.getLogo());
+		// da fare quando si potrà col backend
+		// logo_gds.setImageDrawable(contextualGDS.getLogo());
 		nome_gds.setText(contextualGDS.getNome());
-		materia_gds.setText(contextualGDS.getMateria());
+		materia_gds.setText("" + contextualGDS.getCorso());
+		// un po' di roba fake
+		ArrayList<Studente> membriGDS = new ArrayList<Studente>();
+		Studente s1 = new Studente();
+		s1.setNome("Pinco");
+		s1.setCognome("Pallino");
+		s1.setAnno_corso("2");
+		Studente s2 = new Studente();
+		s2.setNome("Pinco");
+		s2.setCognome("Pallino");
+		s2.setAnno_corso("2");
+		membriGDS.add(s1);
+		membriGDS.add(s1);
+		// fine roba fake
 		Students_to_listview_adapter adapter = new Students_to_listview_adapter(
 				GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
-				contextualGDS.getMembri());
+				/* contextualGDS.getMembri() */membriGDS);
 		participants_gds.setAdapter(adapter);
 
 	}

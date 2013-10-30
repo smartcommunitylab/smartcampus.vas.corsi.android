@@ -2,8 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,11 +21,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObject;
-import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
@@ -94,7 +88,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		// ordinamento dei gruppi di studio
-		Collections.sort(user_gds_list);
+		// Collections.sort(user_gds_list);
 
 		// inizializza la grafica in base allo stato booleano di isShownAsList
 		if (isShownAsList) {
@@ -262,63 +256,65 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	private void funzcheaggiungeduegruppi() {
 		// butto dentro due gruppi all'inizio per non dover sempre iscrivermi la
-		// prima volta
-		ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-
-		ArrayList<AttivitaStudio> attivita_studio_gds = new ArrayList<AttivitaStudio>();
-		ArrayList<ChatObject> forum = new ArrayList<ChatObject>();
-
-		// ####################################
-		// creazione gruppi fake per popolare grafica, dovrei in realtà
-		// recuperare tutto dal web
-		Dipartimento dipartimento = new Dipartimento();
-		dipartimento.setNome("Scienze dell'Informazione");
-		Studente s1 = new Studente();
-
-		s1.setNome("Federico");
-		s1.setCognome("Rossi");
-		s1.setDipartimento(dipartimento);
-		s1.setAnno_corso("2");
+		// // prima volta
+		// ArrayList<Studente> membri_gds = new ArrayList<Studente>();
+		//
+		// ArrayList<AttivitaDiStudio> attivita_studio_gds = new
+		// ArrayList<AttivitaDiStudio>();
+		// ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
+		//
+		// // ####################################
+		// // creazione gruppi fake per popolare grafica, dovrei in realtà
+		// // recuperare tutto dal web
+		// Dipartimento dipartimento = new Dipartimento();
+		// dipartimento.setNome("Scienze dell'Informazione");
+		// Studente s1 = new Studente();
+		//
+		// s1.setNome("Federico");
+		// s1.setCognome("Rossi");
+		// s1.setDipartimento(dipartimento);
+		// s1.setAnno_corso("2");
+		// //
 		// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
-
-		Studente s2 = new Studente();
-
-		s2.setNome("Gabriele");
-		s2.setCognome("Bianchi");
-
-		// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-		s2.setDipartimento(dipartimento);
-		s2.setAnno_corso("2");
-
-		membri_gds.add(s1);
-		membri_gds.add(s2);
-		Date data1 = new Date();
-		data1.setTime(5000);
-
-		AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
-				null, "titolo as1", "Povo", "a203", "02/10/2013",
-				"descrizione as", "09:00", false, false, false, false, false,
-				false);
-		AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
-				null, "titolo as2", "Povo", "a203", "02/10/2013",
-				"descrizione as", "09:00", false, false, false, false, false,
-				false);
-
-		attivita_studio_gds.add(impegno1);
-		attivita_studio_gds.add(impegno2);
-
-		GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-				"GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
-				MyApplication.getAppContext().getResources()
-						.getDrawable(R.drawable.discreta_logo));
-		GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-				"Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
-				MyApplication.getAppContext().getResources()
-						.getDrawable(R.drawable.reti_calcolatori_logo));
-
-		user_gds_list.clear();
-		user_gds_list.add(gds2);
-		user_gds_list.add(gds3);
+		//
+		// Studente s2 = new Studente();
+		//
+		// s2.setNome("Gabriele");
+		// s2.setCognome("Bianchi");
+		//
+		// // s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
+		// s2.setDipartimento(dipartimento);
+		// s2.setAnno_corso("2");
+		//
+		// membri_gds.add(s1);
+		// membri_gds.add(s2);
+		// Date data1 = new Date();
+		// data1.setTime(5000);
+		//
+		// AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
+		// null, "titolo as1", "Povo", "a203", "02/10/2013",
+		// "descrizione as", "09:00", false, false, false, false, false,
+		// false);
+		// AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
+		// null, "titolo as2", "Povo", "a203", "02/10/2013",
+		// "descrizione as", "09:00", false, false, false, false, false,
+		// false);
+		//
+		// attivita_studio_gds.add(impegno1);
+		// attivita_studio_gds.add(impegno2);
+		//
+		// GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
+		// "GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
+		// MyApplication.getAppContext().getResources()
+		// .getDrawable(R.drawable.discreta_logo));
+		// GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
+		// "Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
+		// MyApplication.getAppContext().getResources()
+		// .getDrawable(R.drawable.reti_calcolatori_logo));
+		//
+		// user_gds_list.clear();
+		// user_gds_list.add(gds2);
+		// user_gds_list.add(gds3);
 	}
 
 	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
