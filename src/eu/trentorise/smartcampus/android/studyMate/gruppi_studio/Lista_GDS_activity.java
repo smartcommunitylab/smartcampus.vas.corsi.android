@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -34,6 +37,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista_gds_activity);
 		ActionBar actionbar = getSupportActionBar();
@@ -62,6 +66,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		/*
 		 * user_gds_list = getUtente().getFrequentedGDS ()
 		 */
+		// LoadGDSHandler asd=new asdsad(user_gds_list, progress, boolean);
+		// asd.execute();
 
 		if (!MyApplication.getContextualCollection().isEmpty()) {
 			// Lista_GDS_activity può essere lanciata dalla home o al termine di
@@ -75,6 +81,9 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			}
 			MyApplication.getContextualCollection().clear();
 		}
+
+		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
+		task.execute();
 
 		// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 		TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
@@ -310,6 +319,55 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		user_gds_list.clear();
 		user_gds_list.add(gds2);
 		user_gds_list.add(gds3);
+	}
+
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
+		}
+
 	}
 
 }

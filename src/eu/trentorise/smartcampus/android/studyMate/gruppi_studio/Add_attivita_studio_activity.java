@@ -7,8 +7,11 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,7 +25,6 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
@@ -129,15 +131,16 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					.findViewById(R.id.spinner_edificio)).getSelectedItem()
 					.toString();
 
-//			boolean prenotazione_aule = ((CheckBox) this
-//					.findViewById(R.id.CheckBox1_prenotazione_aule))
-//					.isChecked();
-//			boolean mensa = ((CheckBox) this.findViewById(R.id.CheckBox2_mensa))
-//					.isChecked();
-//			boolean tutoring = ((CheckBox) this
-//					.findViewById(R.id.CheckBox3_tutoring)).isChecked();
-//			boolean biblioteca = ((CheckBox) this
-//					.findViewById(R.id.CheckBox4_biblioteca)).isChecked();
+			// boolean prenotazione_aule = ((CheckBox) this
+			// .findViewById(R.id.CheckBox1_prenotazione_aule))
+			// .isChecked();
+			// boolean mensa = ((CheckBox)
+			// this.findViewById(R.id.CheckBox2_mensa))
+			// .isChecked();
+			// boolean tutoring = ((CheckBox) this
+			// .findViewById(R.id.CheckBox3_tutoring)).isChecked();
+			// boolean biblioteca = ((CheckBox) this
+			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
 
 			nuova_attivitaStudio.setOggetto(oggetto);
 			nuova_attivitaStudio.setData(data);
@@ -145,15 +148,16 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setRoom(room);
 			nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setDescrizione(descrizione);
-//			nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
-//			nuova_attivitaStudio.setMensa(mensa);
-//			nuova_attivitaStudio.setTutoring(tutoring);
-//			nuova_attivitaStudio.setBiblioteca(biblioteca);
+			// nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
+			// nuova_attivitaStudio.setMensa(mensa);
+			// nuova_attivitaStudio.setTutoring(tutoring);
+			// nuova_attivitaStudio.setBiblioteca(biblioteca);
 
 			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
-			Toast.makeText(getApplicationContext(), "attività studio creata",
-					Toast.LENGTH_SHORT).show();
+			MyAsyncTask task = new MyAsyncTask(
+					Add_attivita_studio_activity.this);
+			task.execute();
 			Intent intent = new Intent(Add_attivita_studio_activity.this,
 					Overview_GDS.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -248,6 +252,55 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// b.refreshDrawableState();
 
 		}
+	}
+
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
+		}
+
 	}
 
 }

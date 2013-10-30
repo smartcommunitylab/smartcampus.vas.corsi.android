@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -26,7 +29,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 
-public class RicercaGruppiGenerale_activity extends SherlockActivity {
+public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	TreeSet<String> materieset;
 	ArrayList<String> nomi_gruppi;
@@ -64,7 +67,8 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		placeholder_gruppidistudio fake = new placeholder_gruppidistudio();
 		fake.initialize_some_gds();
 		allChoosable_gds = fake.getChoosable_gds();
-
+		MyAsyncTask task = new MyAsyncTask(RicercaGruppiGenerale_activity.this);
+		task.execute();
 		// disegno delle risorse in grafica
 		inizializzaRisorseSpinner_TextView();
 	}
@@ -276,6 +280,55 @@ public class RicercaGruppiGenerale_activity extends SherlockActivity {
 		public ArrayList<GruppoDiStudio> getChoosable_gds() {
 			initialize_some_gds();
 			return Choosable_gds;
+		}
+
+	}
+
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
 		}
 
 	}

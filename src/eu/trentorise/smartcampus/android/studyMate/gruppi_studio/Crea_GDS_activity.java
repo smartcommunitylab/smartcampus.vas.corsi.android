@@ -1,8 +1,11 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -50,16 +53,66 @@ public class Crea_GDS_activity extends SherlockActivity {
 			String materia = tv_materia.getText().toString();
 			String nome = tv_nome_gds.getText().toString();
 
-			Toast.makeText(
-					getApplicationContext(),
-					"Gruppo: " + nome + " della materia " + materia
-							+ " creato con successo", Toast.LENGTH_SHORT)
-					.show();
-			Crea_GDS_activity.this.finish();
+			MyAsyncTask task = new MyAsyncTask(Crea_GDS_activity.this);
+			task.execute();
+
 		}
 
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+
+	}
+
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			Intent intent = new Intent(Crea_GDS_activity.this,
+					Lista_GDS_activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
 		}
 
 	}

@@ -3,7 +3,10 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -76,6 +79,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
+
+		MyAsyncTask task = new MyAsyncTask(Overview_GDS.this);
+		task.execute();
 
 		FragmentTransaction ft = this.getSupportFragmentManager()
 				.beginTransaction();
@@ -198,4 +204,52 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
+		}
+
+	}
 }

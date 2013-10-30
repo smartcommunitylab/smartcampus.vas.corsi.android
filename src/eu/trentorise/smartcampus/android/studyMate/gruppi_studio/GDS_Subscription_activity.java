@@ -1,12 +1,12 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -88,13 +88,10 @@ public class GDS_Subscription_activity extends SherlockActivity {
 										int which) {
 									dialog.dismiss();
 									// some logic here
-									Intent intent = new Intent(
-											GDS_Subscription_activity.this,
-											Lista_GDS_activity.class);
-									MyApplication.getContextualCollection()
-											.add(contextualGDS);
-									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									startActivity(intent);
+									MyAsyncTask task = new MyAsyncTask(
+											GDS_Subscription_activity.this);
+									task.execute();
+
 								}
 							})
 
@@ -116,4 +113,57 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		}
 	}
 
+	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+
+		public MyAsyncTask() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyAsyncTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+					"Caricamento...");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			Intent intent = new Intent(GDS_Subscription_activity.this,
+					Lista_GDS_activity.class);
+			MyApplication.getContextualCollection().add(contextualGDS);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			attendi();
+			return null;
+		}
+
+	}
 }
