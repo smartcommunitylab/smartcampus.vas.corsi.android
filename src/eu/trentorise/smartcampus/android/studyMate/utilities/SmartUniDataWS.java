@@ -75,4 +75,9 @@ public final class SmartUniDataWS {
 
 	public static final String POST_WS_MY_FEEDBACK = "/commento";
 
+//gds///////////////////////////////////////////////////////////////
+	public static String GET_WS_MY_GDS = "/gruppodistudio/me";
+	
+	//gds///////////////////////////////////////////////////////////////
+		public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
 }

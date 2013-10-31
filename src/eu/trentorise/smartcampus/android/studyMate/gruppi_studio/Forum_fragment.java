@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,8 +20,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatAttachment;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 
 public class Forum_fragment extends SherlockFragment {
@@ -73,10 +70,10 @@ public class Forum_fragment extends SherlockFragment {
 		Time now = new Time();
 		now.setToNow();
 		Allegato allegato = new Allegato(null, "allegato 1");
-		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
-		ChatAttachment attach1 = new ChatAttachment(now, allegato);
-		forum.add(msg1);// occio qua quando si farà sul serio col forum
-		forum.add(attach1);// occio qua quando si farà sul serio col forum
+//		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
+//		ChatAttachment attach1 = new ChatAttachment(now, allegato);
+//		forum.add(msg1);// occio qua quando si farà sul serio col forum
+//		forum.add(attach1);// occio qua quando si farà sul serio col forum
 
 		/*
 		 * ora bisogna fare un arrayadapter per arraylist<chatobject> (dinamico
@@ -97,8 +94,8 @@ public class Forum_fragment extends SherlockFragment {
 				String text = chateText.getText().toString();
 				Time nunc = new Time();
 				nunc.setToNow();
-				ChatMessage newmessage = new ChatMessage(nunc, text);
-				forum.add(newmessage);
+				// ChatMessage newmessage = new ChatMessage(nunc, text);
+				// forum.add(newmessage);
 				chateText.setText("");
 
 			}

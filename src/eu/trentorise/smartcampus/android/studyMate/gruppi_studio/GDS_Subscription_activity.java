@@ -171,7 +171,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			pd.dismiss();
 			Intent intent = new Intent(GDS_Subscription_activity.this,
 					Lista_GDS_activity.class);
-			MyApplication.getContextualCollection().add(contextualGDS);
+			
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}

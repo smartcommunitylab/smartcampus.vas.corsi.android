@@ -25,7 +25,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	private GruppoDiStudio contextualGDS = new GruppoDiStudio();
+	private GruppoDiStudio contextualGDS = null;
 	private ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
 	private ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
 
@@ -46,33 +46,18 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		} catch (Exception ex) {
 			// Ignore
 		}
-
 		/*
 		 * Come da politica di utilizzo del contextualcollection ogni volta che
 		 * recupero un oggetto mi aspetto di trovarlo in posizione 0, appena
 		 * recupreato il tale oggetto mi preoccupo di pulire il
 		 * contextualcollection (a overview ecc ci posso arrivare partendo da:
-		 * lista dei gruppi di studio, oppure terminando l'aggiunta di un
-		 * impegno
+		 * lista dei gruppi di studio e trovando nel contextualcollection il
+		 * gruppo che ho cliccato tra quelli della lista
 		 */
 		if (!MyApplication.getContextualCollection().isEmpty()) {
 			Object obj = MyApplication.getContextualCollection().get(0);
-			if (obj instanceof GruppoDiStudio) {
-				contextualGDS = (GruppoDiStudio) obj;
-				// contextualForum = contextualGDS.getForum();
-				// da fare dentro la asynctask
-				// contextualListaImpegni = contextualGDS.getAttivita_studio();
-
-			} else if (obj instanceof AttivitaDiStudio) {
-				/*
-				 * todo here
-				 */
-
-				contextualListaImpegni.add((AttivitaDiStudio) obj);
-			}
-
+			contextualGDS = (GruppoDiStudio) obj;
 			MyApplication.getContextualCollection().clear();
-
 		}
 
 		final ActionBar ab = getSupportActionBar();
@@ -82,8 +67,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
-		MyAsyncTask task = new MyAsyncTask(Overview_GDS.this);
+		// retrieving impegni from web
+		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
+		// contextualForum = contextualGDS.getForum();
+		// da fare dentro la asynctask
+		// contextualListaImpegni = contextualGDS.getAttivita_studio();
 
 		FragmentTransaction ft = this.getSupportFragmentManager()
 				.beginTransaction();
@@ -134,25 +123,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		super.onActivityResult(arg0, arg1, arg2);
 	}
 
-	// @Override
-	// protected void onActivityResult(int requestCode, int resultCode, Intent
-	// data) {
-	// if (requestCode == MyApplication.PICK_FILE_FROM_PHONE_MEMORY) {
-	// Bundle args = data.getExtras();
-	// Toast.makeText(
-	// Overview_GDS.this,
-	// "resultcode=# " + resultCode + " #" + " mi hanno ritornato"
-	// + args.size() + " elem", Toast.LENGTH_SHORT).show();
-	// }
-	// Bundle args = data.getExtras();
-	// Toast.makeText(
-	// Overview_GDS.this,
-	// "resultcode= " + resultCode + " # requestCode= " + resultCode
-	// + "\n mi hanno ritornato" + args.size() + " elem",
-	// Toast.LENGTH_SHORT).show();
-	// super.onActivityResult(requestCode, resultCode, data);
-	// }
-
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -185,16 +155,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		return contextualGDS;
 	}
 
-	public void setContextualGDS(GruppoDiStudio contextualGDS) {
-		this.contextualGDS = contextualGDS;
-	}
-
 	public ArrayList<ChatObj> getContextualForum() {
 		return contextualForum;
-	}
-
-	public void setContextualForum(ArrayList<ChatObj> contextualForum) {
-		this.contextualForum = contextualForum;
 	}
 
 	public ArrayList<AttivitaDiStudio> getContextualListaImpegni() {
@@ -206,17 +168,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
 
-		public MyAsyncTask() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public MyAsyncTask(Context taskcontext) {
+		public AsyncTimpegniLoader(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
@@ -235,8 +192,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
-					"Caricamento...");
+			pd = ProgressDialog.show(taskcontext,
+					"Caricamento dettagli del gruppo di studio", "");
 		}
 
 		@Override

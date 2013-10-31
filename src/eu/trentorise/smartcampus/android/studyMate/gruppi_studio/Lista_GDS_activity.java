@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,28 +21,37 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	public static ArrayList<GruppoDiStudio> user_gds_list = new ArrayList<GruppoDiStudio>();
 	private static boolean isShownAsList = true;
+	private ProtocolCarrier mProtocolCarrier;
+	public String body;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
+		// impostazioni grafiche
 		setContentView(R.layout.lista_gds_activity);
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle("I miei gruppi");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
-
-		// butto dentro due gruppi per non dover sempre fare l'iscirzione
-		funzcheaggiungeduegruppi();
 
 		// codice per sistemare l'actionoverflow
 		try {
@@ -56,26 +66,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// Ignore
 		}
 
-		// retrieve gruppi
-		/*
-		 * user_gds_list = getUtente().getFrequentedGDS ()
-		 */
-		// LoadGDSHandler asd=new asdsad(user_gds_list, progress, boolean);
-		// asd.execute();
-
-		if (!MyApplication.getContextualCollection().isEmpty()) {
-			// Lista_GDS_activity può essere lanciata dalla home o al termine di
-			// una iscrizione ad un corso
-
-			// questo codice gestisce il caso in cui al termine di una ricerca
-			// sia stata effettuata l'iscrzione ad un corso appena selezionato
-			for (Object gds : MyApplication.getContextualCollection()) {
-				user_gds_list.add((GruppoDiStudio) gds);
-				// save this info onserver
-			}
-			MyApplication.getContextualCollection().clear();
-		}
-
+		// retrieve gruppi with followinf asynctask
 		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
 		task.execute();
 
@@ -108,53 +99,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			ft.addToBackStack(null);
 			ft.commit();
 		}
-
-		/*
-		 * sto commentone sarebbe il tour guidato che ho tolto per ora if
-		 * (user_gds_list.isEmpty()) { AlertDialog.Builder builder = new
-		 * AlertDialog.Builder( Lista_GDS_activity.this);
-		 * builder.setTitle("Avvio guidato"); builder.setMessage(
-		 * "Scopri le funzionalità dei Gruppi di Studio! Vuoi iscriverti ad un gruppo di studio?"
-		 * ); builder.setPositiveButton("Si", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) { //
-		 * shadowdialog = new Dialog( Lista_GDS_activity.this);
-		 * 
-		 * shadowdialog.getWindow().requestFeature( (int)
-		 * Window.FEATURE_NO_TITLE);
-		 * 
-		 * shadowdialog.getWindow().setFlags(
-		 * WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		 * WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		 * 
-		 * // layout to display shadowdialog
-		 * .setContentView(R.layout.tutorial_dialog_layout);
-		 * 
-		 * // set color transpartent
-		 * shadowdialog.getWindow().setBackgroundDrawable( new
-		 * ColorDrawable(Color.TRANSPARENT));
-		 * 
-		 * shadowdialog.show(); Button ok = (Button) shadowdialog
-		 * .findViewById(R.id.ok_button); ok.setOnClickListener(new
-		 * OnClickListener() {
-		 * 
-		 * @Override public void onClick(View v) { stub shadowdialog.dismiss();
-		 * } });
-		 * 
-		 * } }); builder.setNegativeButton("No", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) { //
-		 * TODO Auto-generated method stub dialog.dismiss(); Intent i = new
-		 * Intent(Lista_GDS_activity.this, MyUniActivity.class);
-		 * startActivity(i);
-		 * 
-		 * // poi faremo qlcs di logico } });
-		 * 
-		 * AlertDialog alert = builder.create(); alert.show(); }
-		 */
-
 	}
 
 	@Override
@@ -166,6 +110,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		// per rimuovere il bottone cambia layout nel caso in cui non ci sia
+		// alcun gruppo presente nella user_gds_list
 		if (user_gds_list.isEmpty()) {
 			MenuItem item = menu.findItem(R.id.action_cambia_layout);
 			item.setEnabled(false);
@@ -187,11 +133,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		case R.id.action_cambia_layout:
-
-			// Drawable actualicon = item.getIcon();
-
 			if (isShownAsList) {
-				// azione se
+				// azione se siamo in modalità lista
 				item.setIcon(R.drawable.collections_view_as_list);
 				isShownAsList = false;
 
@@ -205,7 +148,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.commit();
 
 			} else {
-				// azione
+				// azione se siamo in modalità griglia
 				item.setIcon(R.drawable.collections_view_as_grid);
 				isShownAsList = true;
 
@@ -254,91 +197,50 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		return user_gds_list;
 	}
 
-	private void funzcheaggiungeduegruppi() {
-		// butto dentro due gruppi all'inizio per non dover sempre iscrivermi la
-		// // prima volta
-		// ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-		//
-		// ArrayList<AttivitaDiStudio> attivita_studio_gds = new
-		// ArrayList<AttivitaDiStudio>();
-		// ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
-		//
-		// // ####################################
-		// // creazione gruppi fake per popolare grafica, dovrei in realtà
-		// // recuperare tutto dal web
-		// Dipartimento dipartimento = new Dipartimento();
-		// dipartimento.setNome("Scienze dell'Informazione");
-		// Studente s1 = new Studente();
-		//
-		// s1.setNome("Federico");
-		// s1.setCognome("Rossi");
-		// s1.setDipartimento(dipartimento);
-		// s1.setAnno_corso("2");
-		// //
-		// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
-		//
-		// Studente s2 = new Studente();
-		//
-		// s2.setNome("Gabriele");
-		// s2.setCognome("Bianchi");
-		//
-		// // s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-		// s2.setDipartimento(dipartimento);
-		// s2.setAnno_corso("2");
-		//
-		// membri_gds.add(s1);
-		// membri_gds.add(s2);
-		// Date data1 = new Date();
-		// data1.setTime(5000);
-		//
-		// AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null, 14,
-		// null, "titolo as1", "Povo", "a203", "02/10/2013",
-		// "descrizione as", "09:00", false, false, false, false, false,
-		// false);
-		// AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null, 14,
-		// null, "titolo as2", "Povo", "a203", "02/10/2013",
-		// "descrizione as", "09:00", false, false, false, false, false,
-		// false);
-		//
-		// attivita_studio_gds.add(impegno1);
-		// attivita_studio_gds.add(impegno2);
-		//
-		// GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-		// "GhiloniDOC", membri_gds, null, attivita_studio_gds, 1, forum,
-		// MyApplication.getAppContext().getResources()
-		// .getDrawable(R.drawable.discreta_logo));
-		// GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-		// "Renato++", membri_gds, null, attivita_studio_gds, 2, forum,
-		// MyApplication.getAppContext().getResources()
-		// .getDrawable(R.drawable.reti_calcolatori_logo));
-		//
-		// user_gds_list.clear();
-		// user_gds_list.add(gds2);
-		// user_gds_list.add(gds3);
-	}
-
 	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
-
-		public MyAsyncTask() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
 
 		public MyAsyncTask(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
-		public void attendi() {
+		private List<GruppoDiStudio> getMineGDS() {
+			mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_MY_GDS);
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			return Utils.convertJSONToObjects(body, GruppoDiStudio.class);
 		}
 
 		@Override
@@ -346,8 +248,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
-					"Caricamento...");
+			pd = ProgressDialog.show(taskcontext,
+					"Caricamento gruppi di studio personali", "");
 		}
 
 		@Override
@@ -359,8 +261,13 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
+			getMineGDS();
 			// TODO Auto-generated method stub
-			attendi();
+			user_gds_list.clear();
+			List<GruppoDiStudio> responselist = getMineGDS();
+			for (GruppoDiStudio gds : responselist) {
+				user_gds_list.add(gds);
+			}
 			return null;
 		}
 

@@ -1,31 +1,37 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-import android.text.format.Time;
+import java.sql.Date;
 
-public abstract class ChatObj {
+public class ChatObj {
+	// id del gruppo
 
-	// Autore
-	Time publicationTime;
+	private long id;
 
-	public ChatObj(Time publicationTime) {
-		super();
-		this.publicationTime = publicationTime;
+	// Nome del gruppo
+
+	private String nome;
+
+	// Nome del gruppo
+
+	private Date data;
+
+	public ChatObj() {
 	}
 
-	public Time getPublicationTime() {
-		return publicationTime;
+	public Date getData() {
+		return data;
 	}
 
-	public void setPublicationTime(Time publicationTime) {
-		this.publicationTime = publicationTime;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public boolean isMine(int param) {
-		return param == 1;
-		/*
-		 * questo metodo quando saprà come usare il campo autore della classe
-		 * chatobject mi dirà se il chatobject corrente è mio oppure no
-		 */
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
