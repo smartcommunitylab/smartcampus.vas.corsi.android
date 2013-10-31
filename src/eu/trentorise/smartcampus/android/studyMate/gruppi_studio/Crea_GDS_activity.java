@@ -96,18 +96,17 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 			MessageResponse response;
 			try {
-				
-				String eventoJSON = Utils.convertToJSON(gds_to_add);
 
-				request.setBody(eventoJSON);
-				response = mProtocolCarrier.invokeSync(request,
-						SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
+				String gds_to_addJSON = Utils.convertToJSON(gds_to_add);
 
-				
+				request.setBody(gds_to_addJSON);
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
 				if (response.getHttpStatus() == 200) {
 
 					return true;
-					//body = response.getBody();
 
 				} else {
 					return false;
@@ -126,15 +125,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 			return true;
 		}
 
-		public void attendi() {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -149,7 +139,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			
 			Intent intent = new Intent(Crea_GDS_activity.this,
 					Lista_GDS_activity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -159,7 +148,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			attendi();
 			@SuppressWarnings("unused")
 			String materia = tv_materia.getText().toString();
 			String nome = tv_nome_gds.getText().toString();
@@ -169,13 +157,31 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// salva il gruppo sul web
 
 			if (addGroup(justCreatedGds)) {
-				Toast.makeText(MyApplication.getAppContext(), "ok",
-						Toast.LENGTH_LONG).show();
 				// se tutto va bene
+				System.out
+						.println("Creazione del gruppo eseguita con successo");
+				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Toast.makeText(MyApplication.getAppContext(), "ok",
+								Toast.LENGTH_SHORT).show();
+					}
+				});
 				return null;
 			} else {
-				Toast.makeText(MyApplication.getAppContext(), "WTF",
-						Toast.LENGTH_LONG).show();
+				System.out
+						.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
+				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Toast.makeText(MyApplication.getAppContext(), "WTF",
+								Toast.LENGTH_SHORT).show();
+					}
+				});
 				return null;
 			}
 

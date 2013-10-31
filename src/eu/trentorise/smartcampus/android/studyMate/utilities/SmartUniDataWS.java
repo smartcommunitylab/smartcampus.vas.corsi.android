@@ -1,10 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-
 public final class SmartUniDataWS {
 
 	public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiweb.app.smartcampuslab.it";
-	//public static String TOKEN = MyUniActivity.getAuthToken();
+	// public static String TOKEN = MyUniActivity.getAuthToken();
 	public static final String TOKEN_NAME = "studymate";
 
 	// Notices
@@ -75,9 +74,12 @@ public final class SmartUniDataWS {
 
 	public static final String POST_WS_MY_FEEDBACK = "/commento";
 
-//gds///////////////////////////////////////////////////////////////
+	// gds///////////////////////////////////////////////////////////////
 	public static String GET_WS_MY_GDS = "/gruppodistudio/me";
-	
-	//gds///////////////////////////////////////////////////////////////
-		public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
+
+	// gds///////////////////////////////////////////////////////////////
+	public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
+
+	// gds///////////////////////////////////////////////////////////////
+	public static String DELETE_ABANDON_GDS = "/gruppodistudio/delete/me";
 }

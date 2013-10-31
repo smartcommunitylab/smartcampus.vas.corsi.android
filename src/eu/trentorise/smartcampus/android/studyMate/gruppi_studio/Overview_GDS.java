@@ -18,16 +18,29 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	private GruppoDiStudio contextualGDS = null;
 	private ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
 	private ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
+	private ProtocolCarrier mProtocolCarrier;
+	public String body;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +151,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			return true;
 		}
 		case R.id.action_abbandona_gruppo:
-			Toast.makeText(Overview_GDS.this, "abbandona gruppo",
-					Toast.LENGTH_SHORT).show();
+			AsyncTabbandonaGruppo task = new AsyncTabbandonaGruppo(
+					Overview_GDS.this, contextualGDS);
+			task.execute();
 			return true;
 		case R.id.action_modifica_gruppo:
 			Toast.makeText(Overview_GDS.this, "modifica dettagli gruppo",
@@ -207,6 +221,100 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			attendi();
+			return null;
+		}
+
+	}
+
+	private class AsyncTabbandonaGruppo extends
+			AsyncTask<GruppoDiStudio, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+		GruppoDiStudio toabandonGDS;
+
+		public AsyncTabbandonaGruppo(Context taskcontext,
+				GruppoDiStudio toabandonGDSgds) {
+			super();
+			this.taskcontext = taskcontext;
+			this.toabandonGDS = toabandonGDSgds;
+		}
+
+		private boolean abandonGDS(GruppoDiStudio gds_to_abandon) {
+			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.DELETE_ABANDON_GDS);
+			request.setMethod(Method.DELETE);
+
+			MessageResponse response;
+			try {
+
+				String gds_to_abandonJSON = Utils.convertToJSON(gds_to_abandon);
+
+				request.setBody(gds_to_abandonJSON);
+				/*
+				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
+				 * diversamente visto che stiamousando una delete
+				 */
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					return true;
+					// body = response.getBody();
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+
+		public void attendi() {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext,
+					"Rimozione del gruppo di studio", "");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			Overview_GDS.this.finish();
+		}
+
+		@Override
+		protected Void doInBackground(GruppoDiStudio... params) {
+			// TODO Auto-generated method stub
+			abandonGDS(toabandonGDS);
 			return null;
 		}
 

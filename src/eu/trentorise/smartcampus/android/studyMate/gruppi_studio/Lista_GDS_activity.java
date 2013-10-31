@@ -70,35 +70,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
 		task.execute();
 
-		// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
-		TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
-		if (user_gds_list.isEmpty()) {
-			tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
-		} else {
-			tv.setVisibility(View.GONE);
-		}
-
-		// ordinamento dei gruppi di studio
-		// Collections.sort(user_gds_list);
-
-		// inizializza la grafica in base allo stato booleano di isShownAsList
-		if (isShownAsList) {
-			FragmentTransaction ft = this.getSupportFragmentManager()
-					.beginTransaction();
-			Fragment fragment = new ViewGruppiList_Fragment();
-			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(R.id.list_container, fragment);
-			ft.addToBackStack(null);
-			ft.commit();
-		} else {
-			FragmentTransaction ft = this.getSupportFragmentManager()
-					.beginTransaction();
-			Fragment fragment = new ViewGruppiGrid_Fragment();
-			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(R.id.list_container, fragment);
-			ft.addToBackStack(null);
-			ft.commit();
-		}
 	}
 
 	@Override
@@ -201,6 +172,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		Context taskcontext;
 		public ProgressDialog pd;
+		List<GruppoDiStudio> responselist;
 
 		public MyAsyncTask(Context taskcontext) {
 			super();
@@ -257,6 +229,38 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
+
+			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
+			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
+			if (user_gds_list.isEmpty()) {
+				tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
+			} else {
+				tv.setVisibility(View.GONE);
+			}
+
+			// ordinamento dei gruppi di studio
+			// Collections.sort(user_gds_list);
+
+			// inizializza la grafica in base allo stato booleano di
+			// isShownAsList
+			if (isShownAsList) {
+				FragmentTransaction ft = Lista_GDS_activity.this
+						.getSupportFragmentManager().beginTransaction();
+				Fragment fragment = new ViewGruppiList_Fragment();
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				ft.replace(R.id.list_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+			} else {
+				FragmentTransaction ft = Lista_GDS_activity.this
+						.getSupportFragmentManager().beginTransaction();
+				Fragment fragment = new ViewGruppiGrid_Fragment();
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				ft.replace(R.id.list_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
+			}
+
 		}
 
 		@Override
@@ -264,10 +268,11 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			getMineGDS();
 			// TODO Auto-generated method stub
 			user_gds_list.clear();
-			List<GruppoDiStudio> responselist = getMineGDS();
+			responselist = getMineGDS();
 			for (GruppoDiStudio gds : responselist) {
 				user_gds_list.add(gds);
 			}
+
 			return null;
 		}
 
