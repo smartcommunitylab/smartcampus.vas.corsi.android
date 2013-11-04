@@ -145,37 +145,37 @@ public class MyUniActivity extends SherlockActivity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+//		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
+//		return super.onCreateOptionsMenu(menu);
+//	}
 
-	@Override
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.logout:
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						accessProvider.logout(MyUniActivity.this);
-
-					} catch (AACException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}).start();
-			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
-					Toast.LENGTH_SHORT).show();
-			finish();
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(
+//			com.actionbarsherlock.view.MenuItem item) {
+//		switch (item.getItemId()) {
+//		case R.id.logout:
+//			new Thread(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					try {
+//						accessProvider.logout(MyUniActivity.this);
+//
+//					} catch (AACException e) {
+//						e.printStackTrace();
+//					}
+//
+//				}
+//			}).start();
+//			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
+//					Toast.LENGTH_SHORT).show();
+//			finish();
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

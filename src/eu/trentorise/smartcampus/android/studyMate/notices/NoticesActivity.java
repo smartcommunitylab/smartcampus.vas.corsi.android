@@ -35,14 +35,14 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
 				"Caricamento...");
 
-		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-				lvAllNotices,activity).execute();
 
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
+				lvAllNotices,activity).execute();
 	}
 
 	@Override
