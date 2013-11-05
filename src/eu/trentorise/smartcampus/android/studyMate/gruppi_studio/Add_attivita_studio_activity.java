@@ -12,7 +12,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -27,9 +26,9 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
 
@@ -160,9 +159,9 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
-			MyAsyncTask task = new MyAsyncTask(
+			AddAttivitaHandler addAttivitaAsyncTask = new AddAttivitaHandler(
 					Add_attivita_studio_activity.this);
-			task.execute();
+			addAttivitaAsyncTask.execute();
 
 			return true;
 		}
@@ -256,28 +255,27 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		}
 	}
 
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class AddAttivitaHandler extends AsyncTask<Void, Void, Boolean> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
 
-		public MyAsyncTask() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
 
-		public MyAsyncTask(Context taskcontext) {
+
+		public AddAttivitaHandler(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
-		public void attendi() {
+		public Boolean attendi() {
 			try {
 				Thread.sleep(1000);
+				return true;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return null;
 		}
 
 		@Override
@@ -290,18 +288,20 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			Intent intent = new Intent(Add_attivita_studio_activity.this,
-					Overview_GDS.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			
+			Add_attivita_studio_activity.this.finish();
+//			Intent intent = new Intent(Add_attivita_studio_activity.this,
+//					Overview_GDS.class);
+			//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			attendi();
 			return null;

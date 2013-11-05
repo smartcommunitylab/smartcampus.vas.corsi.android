@@ -26,7 +26,6 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -40,6 +39,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class AddEventActivity extends SherlockFragmentActivity {
 	private int mYear;
@@ -213,8 +213,9 @@ public class AddEventActivity extends SherlockFragmentActivity {
 			BasicProfile bp = new BasicProfile();
 			MessageResponse response;
 			try {
-				response = mProtocolCarrier.invokeSync(request,
-						SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 

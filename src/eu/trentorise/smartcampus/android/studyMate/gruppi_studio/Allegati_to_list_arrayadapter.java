@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
-import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Allegati_to_list_arrayadapter extends ArrayAdapter<Allegato> {
 
@@ -32,10 +30,12 @@ public class Allegati_to_list_arrayadapter extends ArrayAdapter<Allegato> {
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row = inflater.inflate(R.layout.allegato_row, null);//cambia layout per allegato
+			row = inflater.inflate(R.layout.allegato_row, null);// cambia layout
+																// per allegato
 		}
 
-		TextView nome_allegato = (TextView) row.findViewById(R.id.nome_allegato);
+		TextView nome_allegato = (TextView) row
+				.findViewById(R.id.nome_allegato);
 		/*
 		 * per ora sono tutti pdf
 		 */

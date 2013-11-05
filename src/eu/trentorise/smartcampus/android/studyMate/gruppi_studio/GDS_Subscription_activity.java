@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -19,9 +20,9 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
@@ -168,10 +169,17 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			if (result == null) {
+
+				Toast.makeText(GDS_Subscription_activity.this,
+						"Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
+						.show();
+				GDS_Subscription_activity.this.finish();
+			}
 			pd.dismiss();
 			Intent intent = new Intent(GDS_Subscription_activity.this,
 					Lista_GDS_activity.class);
-			
+
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}

@@ -7,7 +7,7 @@ import java.util.List;
  * The Class GruppoDiStudio.
  */
 
-//già da web
+// già da web
 public class GruppoDiStudio {
 	// id del gruppo
 

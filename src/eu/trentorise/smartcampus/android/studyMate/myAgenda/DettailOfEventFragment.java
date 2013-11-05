@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class DettailOfEventFragment extends SherlockFragment {
 
@@ -43,13 +43,11 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.findViewById(R.id.textTitleEvent);
 		tvTitleEvent.setText(eventSelected.getTitolo());
 
-		TextView tvDateEvent = (TextView) view
-				.findViewById(R.id.textDataEvent);
+		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		tvDateEvent.setText(dateFormat.format(eventSelected.getData()));
 
-		TextView tvOraEvent = (TextView) view
-				.findViewById(R.id.textOraEvent);
+		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
 		tvOraEvent
 				.setText(eventSelected
 						.getStart()
@@ -70,8 +68,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.findViewById(R.id.textDescriptionEvent);
 		tvDescEvent.setText(eventSelected.getDescrizione());
 
-		TextView tvAulaEvent = (TextView) view
-				.findViewById(R.id.textAulaEvent);
+		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAulaEvent);
 		tvAulaEvent.setText(eventSelected.getRoom());
 
 		TextView tvLocationEvent = (TextView) view

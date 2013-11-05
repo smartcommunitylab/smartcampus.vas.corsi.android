@@ -18,9 +18,9 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Forum_fragment extends SherlockFragment {
 
@@ -70,10 +70,10 @@ public class Forum_fragment extends SherlockFragment {
 		Time now = new Time();
 		now.setToNow();
 		Allegato allegato = new Allegato(null, "allegato 1");
-//		ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
-//		ChatAttachment attach1 = new ChatAttachment(now, allegato);
-//		forum.add(msg1);// occio qua quando si farà sul serio col forum
-//		forum.add(attach1);// occio qua quando si farà sul serio col forum
+		// ChatMessage msg1 = new ChatMessage(now, "Finto messaggio1");
+		// ChatAttachment attach1 = new ChatAttachment(now, allegato);
+		// forum.add(msg1);// occio qua quando si farà sul serio col forum
+		// forum.add(attach1);// occio qua quando si farà sul serio col forum
 
 		/*
 		 * ora bisogna fare un arrayadapter per arraylist<chatobject> (dinamico

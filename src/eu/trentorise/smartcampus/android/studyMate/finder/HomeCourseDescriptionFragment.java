@@ -13,8 +13,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 

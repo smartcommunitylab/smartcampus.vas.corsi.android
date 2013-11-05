@@ -11,10 +11,10 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFragment extends SherlockFragment {
 

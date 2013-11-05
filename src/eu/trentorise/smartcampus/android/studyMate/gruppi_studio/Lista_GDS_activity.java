@@ -23,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -34,6 +33,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
@@ -168,7 +168,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		return user_gds_list;
 	}
 
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class MyAsyncTask extends
+			AsyncTask<Void, Void, List<GruppoDiStudio>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
@@ -225,7 +226,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(List<GruppoDiStudio> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
@@ -264,7 +265,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected List<GruppoDiStudio> doInBackground(Void... params) {
 			getMineGDS();
 			// TODO Auto-generated method stub
 			user_gds_list.clear();
@@ -273,7 +274,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				user_gds_list.add(gds);
 			}
 
-			return null;
+			return user_gds_list;
 		}
 
 	}

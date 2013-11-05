@@ -8,9 +8,9 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class CoursesPassedActivity extends SherlockFragmentActivity {
 
