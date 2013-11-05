@@ -87,14 +87,14 @@ public class PostGDSresponseHandler extends AsyncTask<String[], Void, Boolean> {
 		super.onPostExecute(result);
 
 		if (result.equals(true)) {
-			Toast.makeText(context, "Ora fai parte del gruppo!", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Ora fai parte del gruppo!",
+					Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(
-					context,
+			Toast.makeText(context,
 					"Ops! c'è stato un errore... Riprova più tardi",
 					Toast.LENGTH_LONG).show();
 		}
-		//AddRatingFromCoursesPassed.pd.dismiss();
+		// AddRatingFromCoursesPassed.pd.dismiss();
 		act.finish();
 
 	}

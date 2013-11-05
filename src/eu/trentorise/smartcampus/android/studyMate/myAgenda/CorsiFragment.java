@@ -8,9 +8,9 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
 	@Override

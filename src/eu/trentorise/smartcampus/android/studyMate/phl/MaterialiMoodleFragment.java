@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class MaterialiMoodleFragment extends SherlockFragment {
 

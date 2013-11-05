@@ -132,7 +132,7 @@ public class FindDepartmentsHandler extends
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			ArrayAdapter adapter = new ArrayAdapter(
 					context,
-					eu.trentorise.smartcampus.android.studyMate.R.layout.list_studymate_row_list_simple,
+					eu.trentorise.smartcampus.studymate.R.layout.list_studymate_row_list_simple,
 					listStringDepartments);
 			spinnerDepartments.setAdapter(adapter);
 			pd.dismiss();
