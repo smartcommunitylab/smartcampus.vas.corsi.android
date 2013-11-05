@@ -16,7 +16,8 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eu.trentorise.smartcampus.android.studyMate"
+    package="eu.trentorise.smartcampus.studymate"
+    android:sharedUserId="eu.trentorise.smartcampus.shared"
     android:versionCode="1"
     android:versionName="1.0" >
 

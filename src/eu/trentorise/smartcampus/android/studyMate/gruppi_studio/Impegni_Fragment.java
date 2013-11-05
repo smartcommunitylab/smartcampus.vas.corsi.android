@@ -16,8 +16,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Impegni_Fragment extends SherlockFragment {
 	public ArrayList<AttivitaDiStudio> lista_impegni;

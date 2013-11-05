@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.models.CourseLite;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class ResultSearchedActivity extends SherlockFragmentActivity {
 

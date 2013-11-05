@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class NoticesActivity extends SherlockFragmentActivity {
 
@@ -35,14 +35,13 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
 				"Caricamento...");
 
-
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-				lvAllNotices,activity).execute();
+				lvAllNotices, activity).execute();
 	}
 
 	@Override

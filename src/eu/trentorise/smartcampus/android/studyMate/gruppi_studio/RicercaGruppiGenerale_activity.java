@@ -22,12 +22,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
@@ -339,6 +339,13 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+//			if (result == null) {
+//
+//				Toast.makeText(RicercaGruppiGenerale_activity.this,
+//						"Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
+//						.show();
+//				RicercaGruppiGenerale_activity.this.finish();
+//			}
 			pd.dismiss();
 		}
 

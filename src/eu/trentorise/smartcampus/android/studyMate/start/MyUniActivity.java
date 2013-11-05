@@ -15,7 +15,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.ac.embedded.EmbeddedSCAccessProvider;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
@@ -28,6 +27,7 @@ import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
 
@@ -43,13 +43,13 @@ public class MyUniActivity extends SherlockActivity {
 	 * token
 	 */
 	private static SCAccessProvider accessProvider = null;
-	//public static String userAuthToken;
+	// public static String userAuthToken;
 	public static BasicProfile bp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mContext =  getApplicationContext();
+		mContext = getApplicationContext();
 		accessProvider = new EmbeddedSCAccessProvider();
 		try {
 			if (!accessProvider.login(this, null)) {
@@ -145,37 +145,38 @@ public class MyUniActivity extends SherlockActivity {
 
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-//		getSupportMenuInflater().inflate(R.menu.my_uni, menu);
-//		return super.onCreateOptionsMenu(menu);
-//	}
+	// @Override
+	// public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
+	// {
+	// getSupportMenuInflater().inflate(R.menu.my_uni, menu);
+	// return super.onCreateOptionsMenu(menu);
+	// }
 
-//	@Override
-//	public boolean onOptionsItemSelected(
-//			com.actionbarsherlock.view.MenuItem item) {
-//		switch (item.getItemId()) {
-//		case R.id.logout:
-//			new Thread(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					try {
-//						accessProvider.logout(MyUniActivity.this);
-//
-//					} catch (AACException e) {
-//						e.printStackTrace();
-//					}
-//
-//				}
-//			}).start();
-//			Toast.makeText(MyUniActivity.this, "You are logged OFF!",
-//					Toast.LENGTH_SHORT).show();
-//			finish();
-//			return true;
-//		}
-//		return false;
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(
+	// com.actionbarsherlock.view.MenuItem item) {
+	// switch (item.getItemId()) {
+	// case R.id.logout:
+	// new Thread(new Runnable() {
+	//
+	// @Override
+	// public void run() {
+	// try {
+	// accessProvider.logout(MyUniActivity.this);
+	//
+	// } catch (AACException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// }
+	// }).start();
+	// Toast.makeText(MyUniActivity.this, "You are logged OFF!",
+	// Toast.LENGTH_SHORT).show();
+	// finish();
+	// return true;
+	// }
+	// return false;
+	// }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -199,13 +200,12 @@ public class MyUniActivity extends SherlockActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	public static String getAuthToken() throws AACException{
+	public static String getAuthToken() throws AACException {
 		String userAuthToken;
 		userAuthToken = MyUniActivity.accessProvider.readToken(mContext);
 		return userAuthToken;
 	}
-	
-	
+
 	public class LoadUserDataFromACServiceTask extends
 			AsyncTask<Void, Void, BasicProfile> {
 
@@ -214,7 +214,7 @@ public class MyUniActivity extends SherlockActivity {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				String userAuthToken = getAuthToken();
-//				System.out.println(userAuthToken);
+				// System.out.println(userAuthToken);
 				BasicProfileService service = new BasicProfileService(
 						"https://vas-dev.smartcampuslab.it/aac");
 				bp = service.getBasicProfile(userAuthToken);
@@ -223,19 +223,19 @@ public class MyUniActivity extends SherlockActivity {
 				PushServiceConnector connector = new PushServiceConnector();
 				// //init connector
 				try {
-//					System.out.println("token: " + userAuthToken);
+					// System.out.println("token: " + userAuthToken);
 					connector.init(getApplicationContext(), userAuthToken,
 							APP_ID, SERVER_URL);
 				} catch (CommunicatorConnectorException e) {
 					e.printStackTrace();
 				}
 
-//				try {
-//					new PushServiceConnector().init(getApplicationContext(),
-//							userAuthToken, APP_ID, SERVER_URL);
-//				} catch (CommunicatorConnectorException e) {
-//					e.printStackTrace();
-//				}
+				// try {
+				// new PushServiceConnector().init(getApplicationContext(),
+				// userAuthToken, APP_ID, SERVER_URL);
+				// } catch (CommunicatorConnectorException e) {
+				// e.printStackTrace();
+				// }
 
 				return bp;
 			} catch (Exception e) {

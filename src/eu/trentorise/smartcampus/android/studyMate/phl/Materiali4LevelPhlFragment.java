@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class Materiali4LevelPhlFragment extends SherlockFragment {
 
