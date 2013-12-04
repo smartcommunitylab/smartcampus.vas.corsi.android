@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2012-2013 Trento RISE
+  
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+         http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+    <string name="title_gicercagruppigenerale_activity">Search study groups</string>
+    <string name="gruppi_studio_label">Study groups</string>
+    <string name="app_uid_label">SmartCampus</string>
+    <string name="app_name">StudyMate</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="tv_data">User Data</string>
+    <string name="tv_from_user_account">From user account:</string>
+    <string name="tv_user_id">User ID</string>
+    <string name="tv_from_ac_service">From AC service:</string>
+    <string name="tv_attributes">Attributes</string>
+    <string name="tv_from_profile_service">From profile service:</string>
+    <string name="tv_name">Name</string>
+    <string name="title_activity_file">FileActivity</string>
+    <string name="remote_file_storage_demo_label">Remote file storage demo</string>
+    <string name="photo_btn_label">Upload a photo!</string>
+    <string name="title_activity_my_uni">StudyMate</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_agenda_btn_label">Agenda</string>
+    <string name="find_courses_btn_label">Search courses</string>
+    <string name="phl_btn_label">Materials</string>
+    <string name="notices_btn_label">Notifications</string>
+    <string name="title_activity_notices">Notifications</string>
+    <string name="title_activity_my_agenda">Agenda</string>
+    <string name="title_activity_phl">PHL</string>
+    <string name="title_activity_find_courses">Search courses</string>
+    <string name="tab_overview">Overview</string>
+    <string name="tab_courses">Courses</string>
+    <string name="tab_home">HOME</string>
+    <string name="tab_recensioni">REVIEWS</string>
+    <string name="libretto">Academic transcript:</string>
+    <string name="interesse">Courses of interest:</string>
+    <string name="find_dipartimento">Department:</string>
+    <string name="title_activity_find_recensioni">Find Review</string>
+    <string name="find_recensioni_per">Review for: COURSE</string>
+    <string name="rate">Rate!</string>
+    <string name="title_activity_find_home_course">Find Home Course</string>
+    <string name="rating">Student reviews:</string>
+    <string name="title_activity_dati">Data</string>
+    <string name="my_courses">Courses that follow</string>
+    <string name="title_activity_search_home">Search courses</string>
+    <string name="choose_data">Date:</string>
+    <string name="choose_time">Time:</string>
+    <string name="add_event_corsi">Course:</string>
+    <string name="tab_PHL">PHL</string>
+    <string name="tab_moodle">MOODLE</string>
+    <!-- RICERCA -->
+    <string name="search_label_department"> Department </string>
+    <string name="search_label_courseDegree"> Course degree </string>
+    <string name="search_label_course"> Course </string>
+    <string name="search_button_search"> Search </string>
+    <string name="search_hint_course"> Name of the course </string>
+    <string name="title_activity_result_searched">Search Results</string>
+    <string name="search_label_searchedList">Hai cercato:</string>
+    <string name="find_label_searchingnow">"Looking for: "</string>
+    <string name="find_label_searching">"Search a course: "</string>
+    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="add_event">Add an event</string>
+    <string name="agenda_label_tab_overview">Overview</string>
+    <string name="notices_string_titlelist"></string>
+    <string name="notices_string_titlelistExist">List updated at: </string>
+    <string name="switch_on">ON</string>
+    <string name="switch_off">OFF</string>
+    <string name="monitor">Notifications active</string>
+    <string name="title_activity_add_event">Add an event</string>
+    <string name="title_activity_rate">Rate!</string>
+    <string name="tab_home_course">Description</string>
+    <string name="tab_feedback">Review</string>
+    <string name="feedback_title_of_list">Review for:</string>
+    <string name="textview_description_label">Description:</string>
+    <string name="add_rating_feedback_button">Add a review</string>
+    <string name="label_title_description_course">Description</string>
+    <string name="label_txtMonitor_on">Notifications active</string>
+    <string name="label_txtMonitor_off">Notifications inactive</string>
+    <string name="rating_context_contenuti">Contents</string>
+    <string name="rating_contextExplain_contenuti">Do you satisfied of the topics covered?</string>
+    <string name="rating_context_carico_studio">Study workload/cfu</string>
+    <string name="rating_contextExplain_carico_studio">Is the study workload commensurate with the credits?</string>
+    <string name="rating_context_lezioni">Lessons</string>
+    <string name="rating_contextExplain_lezioni">Are the lessons exhaustive?</string>
+    <string name="rating_context_materiali">Materials</string>
+    <string name="rating_contextExplain_materiali">Are the materials supplied suitable for the purposes of the exam?</string>
+    <string name="rating_context_esame">Exam</string>
+    <string name="rating_contextExplain_esame">Is the exam consistent with the topics covered?</string>
+    <string name="title_activity_work_in_progress">WorkInProgress</string>
+    <string name="rating_text_icon">Rate</string>
+    <string name="title_activity_lista__gds_activity">List_GDS_activity</string>
+    <string name="title_activity_overview__gds">Overview_GDS</string>
+    <string name="title_activity_add_attivita_studio_activity">Add_attivita_studio_activity</string>
+    <string name="title_activity_crea__gds_activity">Create_GDS_activity</string>
+    <string name="toast_switchfollow_error">Error! The request is not successful. </string>
+    <string name="toast_switchfollow_success"> You are following this course. </string>
+    <string name="toast_rate_access_denied"> You can not rate this course, first you have to pass the exam. </string>
+    <string name="toast_switchfollow_off"> You do not follow this course </string>
+
+</resources>
