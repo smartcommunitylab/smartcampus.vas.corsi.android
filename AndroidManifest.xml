@@ -51,17 +51,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Theme2_studymate" >
         <meta-data
-            android:name="SERVER_URL"
-            android:value="https://vas-dev.smartcampuslab.it/core.communicator" />
-        <meta-data
-            android:name="APP_ID"
-            android:value="studymate" />
-        <meta-data
-            android:name="eu.trentorise.smartcampus.account.CLIENT_ID"
-            android:value="b8fcb94d-b4cf-438f-802a-c0a560734c88" />
-        <meta-data
-            android:name="eu.trentorise.smartcampus.account.CLIENT_SECRET"
-            android:value="536560ac-cb74-4e1b-86a1-ef2c06c3313a" />
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="eu.trentorise.smartcampus.account.AUTH_URL"
             android:value="https://vas-dev.smartcampuslab.it/aac" />
@@ -77,22 +68,12 @@
         <meta-data
             android:name="eu.trentorise.smartcampus.account.ACCOUNT_BASED_ACCESS"
             android:value="true" />
-        <meta-data
-            android:name="SHARED_PACKAGE"
-            android:value="eu.trentorise.smartcampus.android.studyMate" />
-        <!--
-        <meta-data
-            android:name="ACCOUNT_TYPE"
-            android:value="eu.trentorise.smartcampus.android.studyMate" />
-        <meta-data
-            android:name="ACCOUNT_NAME"
-            android:value="SmartCampus Android Template" />
-        -->
 
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:logo="@drawable/smartuni_logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -101,11 +82,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="eu.trentorise.smartcampus.ac.embedded.EmbeddedAuthActivity"
+            android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <data android:scheme="db-yerhpkuav29wxou" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <activity android:name="eu.trentorise.smartcampus.ac.embedded.EmbeddedAuthActivity" />
+
+        <service
+            android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticationService"
+            android:exported="true"
+            android:permission="eu.trentorise.smartcampus.ac.AUTHENTICATE" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
+        <activity
+            android:name="eu.trentorise.smartcampus.ac.authenticator.AuthenticatorActivity"
+            android:configChanges="orientation|screenSize" />
+        
+        
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity"
             android:configChanges="orientation|keyboard"
