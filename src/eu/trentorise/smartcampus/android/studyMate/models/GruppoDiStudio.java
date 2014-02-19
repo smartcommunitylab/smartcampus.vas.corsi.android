@@ -25,7 +25,7 @@ public class GruppoDiStudio {
 
 	private List<Studente> studentiGruppo;
 
-	 private Byte[] logo;
+	private Byte[] logo;
 
 	private boolean visible;
 
@@ -69,14 +69,14 @@ public class GruppoDiStudio {
 		return studentiGruppo;
 	}
 
-	// public Blob getLogo() {
-	// return logo;
-	// }
-	//
-	//
-	// public void setLogo(Blob logo) {
-	// this.logo = logo;
-	// }
+	 public Byte[] getLogo() {
+	 return logo;
+	 }
+	
+	
+	 public void setLogo(Byte[] logo) {
+	 this.logo = logo;
+	 }
 
 	public void setStudentiGruppo(List<Studente> studentiGruppo) {
 		this.studentiGruppo = studentiGruppo;
@@ -178,14 +178,6 @@ public class GruppoDiStudio {
 		}
 
 		return listIdsInvited;
-	}
-
-	public Byte[] getLogo() {
-		return logo;
-	}
-
-	public void setLogo(Byte[] logo) {
-		this.logo = logo;
 	}
 
 }

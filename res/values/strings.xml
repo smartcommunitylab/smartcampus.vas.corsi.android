@@ -28,12 +28,12 @@
     <string name="tv_from_ac_service">From AC service:</string>
     <string name="tv_attributes">Attributes</string>
     <string name="tv_from_profile_service">From profile service:</string>
-    <string name="tv_name">Name</string>
+    <string name="tv_name">Nome</string>
     <string name="title_activity_file">FileActivity</string>
     <string name="remote_file_storage_demo_label">Remote file storage demo</string>
     <string name="photo_btn_label">Upload a photo!</string>
     <string name="title_activity_my_uni">StudyMate</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Opzioni</string>
     <string name="my_agenda_btn_label">Agenda</string>
     <string name="find_courses_btn_label">Ricerca corsi</string>
     <string name="phl_btn_label">Materiali</string>
@@ -49,9 +49,9 @@
     <string name="libretto">Corsi da libretto:</string>
     <string name="interesse">Corsi di interesse:</string>
     <string name="find_dipartimento">Dipartimento:</string>
-    <string name="title_activity_find_recensioni">FindRecensioni</string>
+    <string name="title_activity_find_recensioni"> Cerca Recensioni</string>
     <string name="find_recensioni_per">Recensioni per: MATERIA</string>
-    <string name="rate">Rate!</string>
+    <string name="rate">Vota!</string>
     <string name="title_activity_find_home_course">FindHomeCourse</string>
     <string name="rating">Voto degli studenti:</string>
     <string name="title_activity_dati">Dati</string>
