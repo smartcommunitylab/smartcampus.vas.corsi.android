@@ -63,12 +63,14 @@ public class Crea_GDS_activity extends SherlockActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
 			Crea_GDS_activity.this.finish();
+			return super.onOptionsItemSelected(item);
 		}
 		case R.id.action_done: {
 			// asynctask per aggiungere un gruppo di studio appena creato ai
 			// gruppi di studio persoanli
 			MyAsyncTask task = new MyAsyncTask(Crea_GDS_activity.this);
 			task.execute();
+			return super.onOptionsItemSelected(item);
 		}
 		default:
 			return super.onOptionsItemSelected(item);
@@ -86,12 +88,9 @@ public class Crea_GDS_activity extends SherlockActivity {
 		}
 
 		private boolean addGroup(GruppoDiStudio gds_to_add) {
-			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this,
-					SmartUniDataWS.TOKEN_NAME);
+			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this, SmartUniDataWS.TOKEN_NAME);
 
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.POST_ADD_NEW_GDS);
+			MessageRequest request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.POST_ADD_NEW_GDS);
 			request.setMethod(Method.POST);
 
 			MessageResponse response;
@@ -101,8 +100,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 				request.setBody(gds_to_addJSON);
 				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 
@@ -130,8 +128,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					"Sto creando il gruppo di studio", "");
+			pd = ProgressDialog.show(taskcontext, "Sto creando il gruppo di studio", "");
 		}
 
 		@Override
@@ -139,8 +136,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			Intent intent = new Intent(Crea_GDS_activity.this,
-					Lista_GDS_activity.class);
+			Intent intent = new Intent(Crea_GDS_activity.this, Lista_GDS_activity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}
@@ -158,28 +154,24 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 			if (addGroup(justCreatedGds)) {
 				// se tutto va bene
-				System.out
-						.println("Creazione del gruppo eseguita con successo");
+				System.out.println("Creazione del gruppo eseguita con successo");
 				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Toast.makeText(MyApplication.getAppContext(), "ok",
-								Toast.LENGTH_SHORT).show();
+						Toast.makeText(MyApplication.getAppContext(), "ok", Toast.LENGTH_SHORT).show();
 					}
 				});
 				return null;
 			} else {
-				System.out
-						.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
+				System.out.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
 				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Toast.makeText(MyApplication.getAppContext(), "WTF",
-								Toast.LENGTH_SHORT).show();
+						Toast.makeText(MyApplication.getAppContext(), "WTF", Toast.LENGTH_SHORT).show();
 					}
 				});
 				return null;

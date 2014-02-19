@@ -82,4 +82,35 @@ public final class SmartUniDataWS {
 
 	// gds///////////////////////////////////////////////////////////////
 	public static String DELETE_ABANDON_GDS = "/gruppodistudio/delete/me";
+
+	// gds///////////////////////////////////////////////////////////////
+	public static String GET_WS_ALLGDS = "/gruppodistudio/all";
+
+	// gds //////////////////////////////////////////////////////////
+	public static String GET_WS_GDS_BY_COURSE(long idCourse) {
+		return "/gruppodistudio/" + String.valueOf(idCourse);
+	}
+
+	// gds //////////////////////////////////////////////////////////
+	public static String GET_WS_GDS_CORSO_ME(long idCourse) {
+		return "/gruppodistudio/" + String.valueOf(idCourse) + "/me";
+	}
+
+	// gds //////////////////////////////////////////////////////////
+	public static String POST_ACCEPT_GDS = "/gruppodistudio/accept";
+
+	// gds //////////////////////////////////////////////////////////
+	public static String GET_CONTEXTUAL_ATTIVITASTUDIO(long idGDS) {
+		return "/attivitadistudio/" + String.valueOf(idGDS);
+	}
+
+	// gds //////////////////////////////////////////////////////////
+	public static String POST_ATTIVITASTUDIO_ADD = "/attivitadistudio/add";
+
+	// gds //////////////////////////////////////////////////////////
+	public static String POST_ATTIVITASTUDIO_MODIFY = "/attivitadistudio/change";
+
+	// gds //////////////////////////////////////////////////////////
+	public static String POST_ATTIVITASTUDIO_DELETE = "/attivitadistudio/delete";
+
 }

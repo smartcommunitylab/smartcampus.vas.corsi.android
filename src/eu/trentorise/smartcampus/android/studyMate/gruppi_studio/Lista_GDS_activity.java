@@ -56,8 +56,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		// codice per sistemare l'actionoverflow
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
-			Field menuKeyField = ViewConfiguration.class
-					.getDeclaredField("sHasPermanentMenuKey");
+			Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
 			if (menuKeyField != null) {
 				menuKeyField.setAccessible(true);
 				menuKeyField.setBoolean(config, false);
@@ -92,12 +91,10 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
-			Intent intent = new Intent(Lista_GDS_activity.this,
-					MyUniActivity.class);
+			Intent intent = new Intent(Lista_GDS_activity.this, MyUniActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
@@ -110,8 +107,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				isShownAsList = false;
 
 				this.getSupportFragmentManager().popBackStack();
-				FragmentTransaction ft = this.getSupportFragmentManager()
-						.beginTransaction();
+				FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiGrid_Fragment();
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.list_container, fragment);
@@ -124,8 +120,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				isShownAsList = true;
 
 				this.getSupportFragmentManager().popBackStack();
-				FragmentTransaction ft = this.getSupportFragmentManager()
-						.beginTransaction();
+				FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiList_Fragment();
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.list_container, fragment);
@@ -135,15 +130,13 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			}
 			return super.onOptionsItemSelected(item);
 		case R.id.action_iscriviti_nuovo_gruppo: {
-			Intent intent = new Intent(getApplicationContext(),
-					RicercaGruppiGenerale_activity.class);
+			Intent intent = new Intent(getApplicationContext(), RicercaGruppiGenerale_activity.class);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}
 
 		case R.id.action_crea_gruppo: {
-			Intent intent = new Intent(getApplicationContext(),
-					Crea_GDS_activity.class);
+			Intent intent = new Intent(getApplicationContext(), Crea_GDS_activity.class);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}
@@ -157,8 +150,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		Intent goToMyUniActivity = new Intent(getApplicationContext(),
-				MyUniActivity.class);
+		Intent goToMyUniActivity = new Intent(getApplicationContext(), MyUniActivity.class);
 		goToMyUniActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(goToMyUniActivity);
 
@@ -168,8 +160,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		return user_gds_list;
 	}
 
-	private class MyAsyncTask extends
-			AsyncTask<Void, Void, List<GruppoDiStudio>> {
+	private class MyAsyncTask extends AsyncTask<Void, Void, List<GruppoDiStudio>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
@@ -181,19 +172,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		private List<GruppoDiStudio> getMineGDS() {
-			mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this,
-					SmartUniDataWS.TOKEN_NAME);
+			mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this, SmartUniDataWS.TOKEN_NAME);
 
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_MY_GDS);
+			MessageRequest request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.GET_WS_MY_GDS);
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
 			try {
 				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 
@@ -221,8 +208,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					"Caricamento gruppi di studio personali", "");
+			pd = ProgressDialog.show(taskcontext, "Caricamento gruppi di studio personali", "");
 		}
 
 		@Override
@@ -245,16 +231,14 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// inizializza la grafica in base allo stato booleano di
 			// isShownAsList
 			if (isShownAsList) {
-				FragmentTransaction ft = Lista_GDS_activity.this
-						.getSupportFragmentManager().beginTransaction();
+				FragmentTransaction ft = Lista_GDS_activity.this.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiList_Fragment();
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.list_container, fragment);
 				ft.addToBackStack(null);
 				ft.commit();
 			} else {
-				FragmentTransaction ft = Lista_GDS_activity.this
-						.getSupportFragmentManager().beginTransaction();
+				FragmentTransaction ft = Lista_GDS_activity.this.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiGrid_Fragment();
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.list_container, fragment);

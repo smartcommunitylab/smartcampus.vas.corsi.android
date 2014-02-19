@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -36,9 +37,9 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	private GruppoDiStudio contextualGDS = null;
-	private ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
-	private ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
+	public GruppoDiStudio contextualGDS = null;
+	public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
+	public ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
@@ -173,6 +174,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		return contextualForum;
 	}
 
+	public void setContextualGDS(GruppoDiStudio contextualGDS) {
+		this.contextualGDS = contextualGDS;
+	}
+
 	public ArrayList<AttivitaDiStudio> getContextualListaImpegni() {
 		return contextualListaImpegni;
 	}
@@ -192,13 +197,41 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			this.taskcontext = taskcontext;
 		}
 
-		public void attendi() {
+		private List<AttivitaDiStudio> retrievedImpegni() {
+			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(contextualGDS
+							.getId()));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			return Utils.convertJSONToObjects(body, AttivitaDiStudio.class);
 		}
 
 		@Override
@@ -214,20 +247,28 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-//			if (result == null) {
-//
-//				Toast.makeText(Overview_GDS.this,
-//						"Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
-//						.show();
-//				Overview_GDS.this.finish();
-//			}
+			// if (result == null) {
+			//
+			// Toast.makeText(Overview_GDS.this,
+			// "Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
+			// .show();
+			// Overview_GDS.this.finish();
+			// }
 			pd.dismiss();
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			attendi();
+			// getMineGDS();
+			// // TODO Auto-generated method stub
+			// user_gds_list.clear();
+			// responselist = getMineGDS();
+			// for (GruppoDiStudio gds : responselist) {
+			// user_gds_list.add(gds);
+			// }
+			contextualListaImpegni.clear();
+			contextualListaImpegni = (ArrayList<AttivitaDiStudio>) retrievedImpegni();
 			return null;
 		}
 
@@ -259,9 +300,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			MessageResponse response;
 			try {
 
-				String gds_to_abandonJSON = Utils.convertToJSON(gds_to_abandon);
+				String IDgds_to_abandonJSON = Utils
+						.convertToJSON(gds_to_abandon.getId());
 
-				request.setBody(gds_to_abandonJSON);
+				request.setBody(IDgds_to_abandonJSON);
 				/*
 				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
 				 * diversamente visto che stiamousando una delete

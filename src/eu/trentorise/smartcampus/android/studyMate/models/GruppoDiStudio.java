@@ -25,8 +25,7 @@ public class GruppoDiStudio {
 
 	private List<Studente> studentiGruppo;
 
-	// @Column(name = "LOGO")
-	// private Blob logo;
+	 private Byte[] logo;
 
 	private boolean visible;
 
@@ -179,6 +178,14 @@ public class GruppoDiStudio {
 		}
 
 		return listIdsInvited;
+	}
+
+	public Byte[] getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Byte[] logo) {
+		this.logo = logo;
 	}
 
 }
