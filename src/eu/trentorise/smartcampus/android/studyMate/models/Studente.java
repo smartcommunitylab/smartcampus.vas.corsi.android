@@ -13,7 +13,7 @@ public class Studente {
 
 	private String cognome;
 
-	private String corso_laurea;
+	private CorsoLaurea corso_laurea;
 
 	private Dipartimento dipartimento;
 
@@ -77,11 +77,11 @@ public class Studente {
 		this.cognome = cognome;
 	}
 
-	public String getCorso_laurea() {
+	public CorsoLaurea getCorso_laurea() {
 		return corso_laurea;
 	}
 
-	public void setCorso_laurea(String corso_laurea) {
+	public void setCorso_laurea(CorsoLaurea corso_laurea) {
 		this.corso_laurea = corso_laurea;
 	}
 
