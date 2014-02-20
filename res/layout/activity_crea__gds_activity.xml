@@ -22,12 +22,10 @@
             android:layout_height="wrap_content"
             android:text="Materia:" />
 
-        <AutoCompleteTextView
-            android:id="@+id/scegli_materia"
+        <Spinner
+            android:id="@+id/spinner_materia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="" />
+            android:layout_height="wrap_content" />
 
         <requestFocus />
     </LinearLayout>

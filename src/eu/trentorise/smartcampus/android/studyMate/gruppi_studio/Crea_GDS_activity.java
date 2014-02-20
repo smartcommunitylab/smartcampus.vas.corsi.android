@@ -1,11 +1,16 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -15,7 +20,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -28,11 +35,12 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Crea_GDS_activity extends SherlockActivity {
-	AutoCompleteTextView tv_materia;
+	public Spinner spinner_scegli_materia;
 	AutoCompleteTextView tv_nome_gds;
 	AutoCompleteTextView tv_invitati;
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
+	public ArrayList<String> listaCorsi;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +53,17 @@ public class Crea_GDS_activity extends SherlockActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		tv_materia = (AutoCompleteTextView) findViewById(R.id.scegli_materia);
+		// tv_materia = (AutoCompleteTextView)
+		// findViewById(R.id.scegli_materia);
+		spinner_scegli_materia = (Spinner) findViewById(R.id.spinner_materia);
 		tv_nome_gds = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo);
 		tv_invitati = (AutoCompleteTextView) findViewById(R.id.invita_compagni_gds);
+
+		// spinner_edificio.setAdapter(adapter_spinner_ed);
+		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
+				Crea_GDS_activity.this);
+		task.execute();
+		// a questo punto le materie sono state caricate in listacorsi
 
 	}
 
@@ -88,9 +104,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 		}
 
 		private boolean addGroup(GruppoDiStudio gds_to_add) {
-			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this, SmartUniDataWS.TOKEN_NAME);
+			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
 
-			MessageRequest request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.POST_ADD_NEW_GDS);
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_ADD_NEW_GDS);
 			request.setMethod(Method.POST);
 
 			MessageResponse response;
@@ -100,7 +119,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 				request.setBody(gds_to_addJSON);
 				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
 
@@ -128,7 +148,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Sto creando il gruppo di studio", "");
+			pd = ProgressDialog.show(taskcontext,
+					"Sto creando il gruppo di studio", "");
 		}
 
 		@Override
@@ -136,7 +157,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			Intent intent = new Intent(Crea_GDS_activity.this, Lista_GDS_activity.class);
+			Intent intent = new Intent(Crea_GDS_activity.this,
+					Lista_GDS_activity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}
@@ -145,7 +167,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			@SuppressWarnings("unused")
-			String materia = tv_materia.getText().toString();
+			String materia = spinner_scegli_materia.getSelectedItem()
+					.toString();
 			String nome = tv_nome_gds.getText().toString();
 			GruppoDiStudio justCreatedGds = new GruppoDiStudio();
 			justCreatedGds.setNome(nome);
@@ -154,24 +177,28 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 			if (addGroup(justCreatedGds)) {
 				// se tutto va bene
-				System.out.println("Creazione del gruppo eseguita con successo");
+				System.out
+						.println("Creazione del gruppo eseguita con successo");
 				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Toast.makeText(MyApplication.getAppContext(), "ok", Toast.LENGTH_SHORT).show();
+						Toast.makeText(MyApplication.getAppContext(), "ok",
+								Toast.LENGTH_SHORT).show();
 					}
 				});
 				return null;
 			} else {
-				System.out.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
+				System.out
+						.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
 				Crea_GDS_activity.this.runOnUiThread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Toast.makeText(MyApplication.getAppContext(), "WTF", Toast.LENGTH_SHORT).show();
+						Toast.makeText(MyApplication.getAppContext(), "WTF",
+								Toast.LENGTH_SHORT).show();
 					}
 				});
 				return null;
@@ -181,4 +208,100 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 	}
 
+	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+		private ArrayList<Corso> temp_listacorsiArrayList;
+
+		public LoadSpinnerMaterieAsTask(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		protected ArrayList<Corso> webgetCorsiUtente() {
+			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
+			// alcune preparazioni iniziali
+			// recupero dello studente in sessione dalle sharedpreferences
+			String jsonstudente = load();
+			Studente studentesessione = Utils.convertJSONToObject(jsonstudente,
+					Studente.class);
+			MessageResponse response;
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(studentesessione
+							.getCorso_laurea().getId()));
+			request.setMethod(Method.GET);
+
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return (ArrayList<Corso>) Utils.convertJSONToObjects(body,
+					Corso.class);
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			temp_listacorsiArrayList = webgetCorsiUtente();
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
+					"");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {	// CONTROLLA IN DEBUG L'ERRORE!!!!!
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			listaCorsi.clear();
+			for (Corso tempcorso : temp_listacorsiArrayList) {
+				listaCorsi.add(tempcorso.getNome());
+			}
+			ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
+					Crea_GDS_activity.this,
+					android.R.layout.simple_spinner_item, listaCorsi);
+			spinner_scegli_materia.setAdapter(adapter_spinner_materie);
+			pd.dismiss();
+
+		}
+
+		public String load() {
+			SharedPreferences sharedPreferences = Crea_GDS_activity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String jsonStudente = sharedPreferences.getString(
+					"studenteSessioneJSON", null);
+			return jsonStudente;
+		}
+	}
 }
