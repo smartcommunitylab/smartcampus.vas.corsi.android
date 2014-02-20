@@ -24,6 +24,17 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	// protected Object mActionMode;
 
+	public static Impegni_Fragment newInstance(
+			ArrayList<AttivitaDiStudio> serializableobject) {
+		Impegni_Fragment myFragment = new Impegni_Fragment();
+
+		Bundle args = new Bundle();
+		args.putSerializable("serializableobject", serializableobject);
+		myFragment.setArguments(args);
+
+		return myFragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -36,6 +47,9 @@ public class Impegni_Fragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		lista_impegni = (ArrayList<AttivitaDiStudio>) getArguments()
+				.getSerializable("serializableobject");
+		return;
 	}
 
 	@Override

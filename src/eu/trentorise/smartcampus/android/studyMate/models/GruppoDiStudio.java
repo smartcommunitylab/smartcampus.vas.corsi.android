@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 
 // già da web
-public class GruppoDiStudio {
+public class GruppoDiStudio implements Serializable{
 	// id del gruppo
 
 	private long id;

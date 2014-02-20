@@ -40,7 +40,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 	AutoCompleteTextView tv_invitati;
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
-	public ArrayList<String> listaCorsi;
+	public ArrayList<String> listaCorsi = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -281,7 +281,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {	// CONTROLLA IN DEBUG L'ERRORE!!!!!
+		protected void onPostExecute(Void result) { // CONTROLLA IN DEBUG
+													// L'ERRORE!!!!!
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			listaCorsi.clear();

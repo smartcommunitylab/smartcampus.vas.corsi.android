@@ -26,11 +26,24 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
+	private ProtocolCarrier mProtocolCarrier;
+	public String body;
+	public AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +124,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			/*
 			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
 			 */
-			AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
 			String oggetto = ((TextView) this
 					.findViewById(R.id.editText_oggetto)).getText().toString();
 
@@ -260,22 +272,9 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		Context taskcontext;
 		public ProgressDialog pd;
 
-
-
 		public AddAttivitaHandler(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
-		}
-
-		public Boolean attendi() {
-			try {
-				Thread.sleep(1000);
-				return true;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
 		}
 
 		@Override
@@ -283,7 +282,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
+			pd = ProgressDialog.show(taskcontext, "Salvataggio del nuovo impegno",
 					"Caricamento...");
 		}
 
@@ -291,19 +290,66 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			pd.dismiss();
 			
+			pd.dismiss();
 			Add_attivita_studio_activity.this.finish();
-//			Intent intent = new Intent(Add_attivita_studio_activity.this,
-//					Overview_GDS.class);
-			//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			// Intent intent = new Intent(Add_attivita_studio_activity.this,
+			// Overview_GDS.class);
+			// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intent);
+		}
+
+		private boolean addAttivitaonweb() {
+			mProtocolCarrier = new ProtocolCarrier(
+					Add_attivita_studio_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageResponse response;
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_ATTIVITASTUDIO_ADD);
+			request.setMethod(Method.POST);
+
+			Boolean resultPost = false;
+
+			try {
+
+				String AttivitaJSON = Utils.convertToJSON(nuova_attivitaStudio);
+				System.out.println(AttivitaJSON);
+				request.setBody(AttivitaJSON);
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+					resultPost = Utils.convertJSONToObject(body, Boolean.class);
+
+				}
+
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return resultPost;
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			attendi();
+			addAttivitaonweb();
 			return null;
 		}
 

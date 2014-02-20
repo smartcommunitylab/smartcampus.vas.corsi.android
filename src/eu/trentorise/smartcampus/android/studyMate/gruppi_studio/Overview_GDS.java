@@ -11,7 +11,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -34,6 +36,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
+import eu.trentorise.smartcampus.studymate.ShowModifyGDSDetails_activity;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
@@ -84,17 +87,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		// retrieving impegni from web
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
-		// contextualForum = contextualGDS.getForum();
-		// da fare dentro la asynctask
-		// contextualListaImpegni = contextualGDS.getAttivita_studio();
-
-		FragmentTransaction ft = this.getSupportFragmentManager()
-				.beginTransaction();
-		Fragment fragment = new Impegni_Fragment();
-		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		ft.replace(R.id.impegni_fragment_container, fragment);
-		ft.addToBackStack(null);
-		ft.commit();
 
 		// /** TabHost will have Tabs */
 		// String tab1_txt = "Impegni";
@@ -155,11 +147,14 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			AsyncTabbandonaGruppo task = new AsyncTabbandonaGruppo(
 					Overview_GDS.this, contextualGDS);
 			task.execute();
-			return true;
+			return super.onOptionsItemSelected(item);
 		case R.id.action_modifica_gruppo:
-			Toast.makeText(Overview_GDS.this, "modifica dettagli gruppo",
-					Toast.LENGTH_SHORT).show();
-			return true;
+			
+			Intent intent = new Intent(Overview_GDS.this,
+					ShowModifyGDSDetails_activity.class);
+			intent.putExtra("contextualGDS", contextualGDS);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -238,38 +233,46 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
+			// ripulisco la lista impegni prima di caricare i nuovi impegni
+			contextualListaImpegni.clear();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
 					"Caricamento dettagli del gruppo di studio", "");
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			// if (result == null) {
-			//
-			// Toast.makeText(Overview_GDS.this,
-			// "Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
-			// .show();
-			// Overview_GDS.this.finish();
-			// }
-			pd.dismiss();
+		protected Void doInBackground(Void... params) {
+			// faccio andare il metodo web per recuperare la lista impegni dal
+			// web
+			contextualListaImpegni = (ArrayList<AttivitaDiStudio>) retrievedImpegni();
+			return null;
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
-			// getMineGDS();
-			// // TODO Auto-generated method stub
-			// user_gds_list.clear();
-			// responselist = getMineGDS();
-			// for (GruppoDiStudio gds : responselist) {
-			// user_gds_list.add(gds);
-			// }
-			contextualListaImpegni.clear();
-			contextualListaImpegni = (ArrayList<AttivitaDiStudio>) retrievedImpegni();
-			return null;
+			super.onPostExecute(result);
+			// ora che ho gli impegni pronti faccio partire la transaction che
+			// porta alla schermata dove vengono mostrati gli impegni
+
+			// faccio un controllo se non ci sono impegni
+			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
+			TextView tv = (TextView) findViewById(R.id.suggerimento_listaimpegni_vuota);
+			if (contextualListaImpegni.isEmpty()) {
+				tv.setText("Non sono stati fissati impegni!\nUtilizza il menù in alto a destra per fissare un nuovo impegno");
+			} else {
+				tv.setVisibility(View.GONE);
+			}
+			FragmentTransaction ft = Overview_GDS.this
+					.getSupportFragmentManager().beginTransaction();
+			// Fragment fragment = new Impegni_Fragment();
+			Fragment fragment = Impegni_Fragment
+					.newInstance(contextualListaImpegni);
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(R.id.impegni_fragment_container, fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+			pd.dismiss();
 		}
 
 	}
