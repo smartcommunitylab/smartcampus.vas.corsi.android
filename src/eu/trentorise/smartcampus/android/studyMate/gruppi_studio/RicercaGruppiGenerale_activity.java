@@ -211,7 +211,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 			s1.setNome("Federico");
 			s1.setCognome("Rossi");
-			s1.setDipartimento(dipartimento);
+			//s1.setDipartimento(dipartimento);
 			s1.setAnno_corso("2");
 			// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
 
@@ -221,7 +221,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			s2.setCognome("Bianchi");
 
 			// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-			s2.setDipartimento(dipartimento);
+			//s2.setDipartimento(dipartimento);
 			s2.setAnno_corso("2");
 
 			membri_gds.add(s1);

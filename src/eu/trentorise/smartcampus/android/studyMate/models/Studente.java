@@ -15,7 +15,7 @@ public class Studente {
 
 	private CorsoLaurea corso_laurea;
 
-	private Dipartimento dipartimento;
+	//private Dipartimento dipartimento;
 
 	private String anno_corso;
 
@@ -85,13 +85,13 @@ public class Studente {
 		this.corso_laurea = corso_laurea;
 	}
 
-	public Dipartimento getDipartimento() {
-		return dipartimento;
-	}
-
-	public void setDipartimento(Dipartimento dipartimento) {
-		this.dipartimento = dipartimento;
-	}
+//	public Dipartimento getDipartimento() {
+//		return dipartimento;
+//	}
+//
+//	public void setDipartimento(Dipartimento dipartimento) {
+//		this.dipartimento = dipartimento;
+//	}
 
 	public String getAnno_corso() {
 		return anno_corso;
