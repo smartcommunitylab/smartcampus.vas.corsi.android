@@ -59,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="08:30-10:30"
                 android:textSize="@dimen/textsize_medium" />
         </RelativeLayout>
     </LinearLayout>

@@ -22,7 +22,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class Impegni_Fragment extends SherlockFragment {
 	public ArrayList<AttivitaDiStudio> lista_impegni;
-	 GruppoDiStudio gds;
+	GruppoDiStudio gds;
 
 	// protected Object mActionMode;
 
@@ -79,7 +79,7 @@ public class Impegni_Fragment extends SherlockFragment {
 				ArrayList<AttivitaDiStudio> entries = adpt.getEntries();
 				final AttivitaDiStudio selected_impegno = entries.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
-				MyApplication.getContextualCollection().add(selected_impegno);
+				intent.putExtra("contextualAttivitaStudio", selected_impegno);
 				startActivity(intent);
 			}
 		});

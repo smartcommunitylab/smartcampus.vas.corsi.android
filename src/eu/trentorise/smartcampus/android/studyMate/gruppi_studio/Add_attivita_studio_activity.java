@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,11 +12,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -138,6 +140,23 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			String ora = ((Button) this.findViewById(R.id.ora_button_gds))
 					.getText().toString();
 
+			stringdata = stringdata + " " + ora;
+			Date data = null;
+
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			try {
+				data = format.parse(stringdata);
+				System.out.println(data);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+
 			String descrizione = ((TextView) this
 					.findViewById(R.id.editText_descrizione_impegno)).getText()
 					.toString();
@@ -162,10 +181,12 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
 
 			nuova_attivitaStudio.setTopic(oggetto);
-			Date data = new Date();
-			nuova_attivitaStudio.setData(data);
-			Time start = new Time(100);
-			nuova_attivitaStudio.setStart(start);
+			// Date data = new Date();
+			if (data != null) {
+				nuova_attivitaStudio.setData(data);
+			}
+
+			// nuova_attivitaStudio.setStart(start);
 			nuova_attivitaStudio.setRoom(room);
 			nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setDescrizione(descrizione);
@@ -214,17 +235,17 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			String phrase_date = (String) ((Button) Add_attivita_studio_activity.this
 					.findViewById(R.id.data_button_gds)).getText();
 
-			MyDate data = MyDate.parseFromString(phrase_date);
-			int mDay = data.getDay();
-			int mMonth = data.getMonth();
-			int mYear = data.getYear();
+			// MyDate data = MyDate.parseFromString(phrase_date);
+			// int mDay = data.getDay();
+			// int mMonth = data.getMonth();
+			// int mYear = data.getYear();
 
-			// // Use the current date as the default date in the picker
-			// final Calendar c = Calendar.getInstance();
-			// int mYear = c.get(Calendar.YEAR);
-			// int mMonth = c.get(Calendar.MONTH);
-			// int mDay = c.get(Calendar.DAY_OF_MONTH);
-			// //Create a new instance of DatePickerDialog and return it
+			// Use the current date as the default date in the picker
+			final Calendar c = Calendar.getInstance();
+			int mYear = c.get(Calendar.YEAR);
+			int mMonth = c.get(Calendar.MONTH);
+			int mDay = c.get(Calendar.DAY_OF_MONTH);
+			// Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(getActivity(), this, mYear, mMonth,
 					mDay);
 		}
@@ -232,8 +253,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			Button b = (Button) Add_attivita_studio_activity.this
 					.findViewById(R.id.data_button_gds);
-			MyDate date = new MyDate(year, month, day);
-			b.setText(date.toString());
+			// MyDate date = new MyDate(year, month, day);
+			b.setText("" + day + "/" + month + "/" + year);
 			// b.refreshDrawableState();
 
 		}

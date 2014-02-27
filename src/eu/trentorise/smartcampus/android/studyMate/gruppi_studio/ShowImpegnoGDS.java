@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.os.Bundle;
 import android.view.ViewConfiguration;
@@ -21,7 +23,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
-	private AttivitaDiStudio contextualAttivitaStudio;
+	AttivitaDiStudio contextualAttivitaStudio;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -48,19 +50,18 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		/*
-		 * recupero contextualAttivitastudio da contextualcollection
+		 * recupero contextualAttivitaStudio
 		 */
-		if (!MyApplication.getContextualCollection().isEmpty()) {
-			contextualAttivitaStudio = (AttivitaDiStudio) MyApplication
-					.getContextualCollection().get(0);
-		}
+		Bundle myextras = getIntent().getExtras();
+		contextualAttivitaStudio = (AttivitaDiStudio) myextras
+				.getSerializable("contextualAttivitaStudio");
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
 		tv_oggetto.setText(contextualAttivitaStudio.getTopic());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
-		tv_data.setText(contextualAttivitaStudio.getData().toString());
-		TextView tv_ora = (TextView) findViewById(R.id.textOra_impegno_showgds);
-		tv_ora.setText(contextualAttivitaStudio.getStart().toString());
+		Date data = contextualAttivitaStudio.getData();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		tv_data.setText(format.format(data));
 		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
 		ArrayList<Allegato> contextualAllegatis = null; /*
 														 * contextualAttivitaStudio
