@@ -17,19 +17,22 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Impegni_Fragment extends SherlockFragment {
 	public ArrayList<AttivitaDiStudio> lista_impegni;
+	 GruppoDiStudio gds;
 
 	// protected Object mActionMode;
 
 	public static Impegni_Fragment newInstance(
-			ArrayList<AttivitaDiStudio> serializableobject) {
+			ArrayList<AttivitaDiStudio> arraylistimpegni, GruppoDiStudio gds) {
 		Impegni_Fragment myFragment = new Impegni_Fragment();
 
 		Bundle args = new Bundle();
-		args.putSerializable("serializableobject", serializableobject);
+		args.putSerializable("lista_impegni", arraylistimpegni);
+		args.putSerializable("gds", gds);
 		myFragment.setArguments(args);
 
 		return myFragment;
@@ -49,6 +52,7 @@ public class Impegni_Fragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		lista_impegni = (ArrayList<AttivitaDiStudio>) getArguments()
 				.getSerializable("serializableobject");
+		gds = (GruppoDiStudio) getArguments().getSerializable("gds");
 		return;
 	}
 
@@ -122,6 +126,7 @@ public class Impegni_Fragment extends SherlockFragment {
 		case R.id.aggiungi_impegno: {
 			Intent intent = new Intent(MyApplication.getAppContext(),
 					Add_attivita_studio_activity.class);
+			intent.putExtra("gds", gds);
 			startActivity(intent);
 			return true;
 		}

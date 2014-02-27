@@ -63,19 +63,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		} catch (Exception ex) {
 			// Ignore
 		}
-		/*
-		 * Come da politica di utilizzo del contextualcollection ogni volta che
-		 * recupero un oggetto mi aspetto di trovarlo in posizione 0, appena
-		 * recupreato il tale oggetto mi preoccupo di pulire il
-		 * contextualcollection (a overview ecc ci posso arrivare partendo da:
-		 * lista dei gruppi di studio e trovando nel contextualcollection il
-		 * gruppo che ho cliccato tra quelli della lista
-		 */
-		if (!MyApplication.getContextualCollection().isEmpty()) {
-			Object obj = MyApplication.getContextualCollection().get(0);
-			contextualGDS = (GruppoDiStudio) obj;
-			MyApplication.getContextualCollection().clear();
-		}
+
+		Bundle myextras = getIntent().getExtras();
+		contextualGDS = (GruppoDiStudio) myextras.get("contextualGDS");
 
 		final ActionBar ab = getSupportActionBar();
 		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -83,10 +73,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
-		// retrieving impegni from web
-		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
-		task.execute();
 
 		// /** TabHost will have Tabs */
 		// String tab1_txt = "Impegni";
@@ -111,6 +97,15 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		// Forum_fragment.class));
 		// ab.addTab(tab2);
 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// retrieving impegni from web
+		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
+		task.execute();
 	}
 
 	@Override
@@ -149,7 +144,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			task.execute();
 			return super.onOptionsItemSelected(item);
 		case R.id.action_modifica_gruppo:
-			
+
 			Intent intent = new Intent(Overview_GDS.this,
 					ShowModifyGDSDetails_activity.class);
 			intent.putExtra("contextualGDS", contextualGDS);
@@ -266,8 +261,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			FragmentTransaction ft = Overview_GDS.this
 					.getSupportFragmentManager().beginTransaction();
 			// Fragment fragment = new Impegni_Fragment();
-			Fragment fragment = Impegni_Fragment
-					.newInstance(contextualListaImpegni);
+			Fragment fragment = Impegni_Fragment.newInstance(
+					contextualListaImpegni, contextualGDS);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(R.id.impegni_fragment_container, fragment);
 			ft.addToBackStack(null);

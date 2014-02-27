@@ -29,6 +29,7 @@ import android.widget.TimePicker;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -44,11 +45,15 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 	public AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
+	GruppoDiStudio gds;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
+
+		Bundle myextras = getIntent().getExtras();
+		gds = (GruppoDiStudio) myextras.getSerializable("gds");
 
 		ActionBar actionbar = getActionBar();
 
@@ -164,12 +169,15 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setRoom(room);
 			nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setDescrizione(descrizione);
+
+			nuova_attivitaStudio.setGruppo(gds.getId());
+
 			// nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
 			// nuova_attivitaStudio.setMensa(mensa);
 			// nuova_attivitaStudio.setTutoring(tutoring);
 			// nuova_attivitaStudio.setBiblioteca(biblioteca);
 
-			MyApplication.getContextualCollection().add(nuova_attivitaStudio);
+			// MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
 			AddAttivitaHandler addAttivitaAsyncTask = new AddAttivitaHandler(
 					Add_attivita_studio_activity.this);
@@ -282,15 +290,15 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Salvataggio del nuovo impegno",
-					"Caricamento...");
+			pd = ProgressDialog.show(taskcontext,
+					"Salvataggio del nuovo impegno", "Caricamento...");
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			
+
 			pd.dismiss();
 			Add_attivita_studio_activity.this.finish();
 			// Intent intent = new Intent(Add_attivita_studio_activity.this,

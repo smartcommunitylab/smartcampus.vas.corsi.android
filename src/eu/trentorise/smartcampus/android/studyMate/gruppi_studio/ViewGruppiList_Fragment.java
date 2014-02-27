@@ -77,8 +77,9 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 				 * contextualcollection
 				 */
 				GruppoDiStudio contextualGDS = user_gds_list.get(position);
-				MyApplication.getContextualCollection().add(contextualGDS);
+				//MyApplication.getContextualCollection().add(contextualGDS);
 				Intent intent = new Intent(getActivity(), Overview_GDS.class);
+				intent.putExtra("contextualGDS", contextualGDS);
 				startActivity(intent);
 
 			}
