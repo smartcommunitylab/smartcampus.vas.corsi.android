@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -54,63 +55,73 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 
 		// sorting gds before rendering them on screen
 		// Collections.sort(user_gds_list);
+		if (user_gds_list != null) {
+			TextView tv_errore = (TextView) getActivity().findViewById(
+					R.id.stringa_errore_caricamento_lista);
+			tv_errore.setVisibility(View.GONE);
+			Adapter_gds_to_list adapter = new Adapter_gds_to_list(
+					getActivity(), R.id.listview_gruppi_di_studio,
+					user_gds_list);
+			listview.setAdapter(adapter);
+			listview.setOnItemClickListener(new OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, View v,
+						int position, long id) {
 
-		Adapter_gds_to_list adapter = new Adapter_gds_to_list(getActivity(),
-				R.id.listview_gruppi_di_studio, user_gds_list);
-		listview.setAdapter(adapter);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
+					/*
+					 * Per passare il contextualGDS alla overview_GDS activity,
+					 * piazzo il contextualgds nel contextualcollection e poi
+					 * dalla overview_gds vado a recuperarlo. Il
+					 * contextualcollection è un Arraylist<Object> della classe
+					 * MyApplication. contextualcollection è statico e poichè la
+					 * classe myapplication è pubblica chiunque può accedere al
+					 * contextualcollection. Il contextualcollection lo uso come
+					 * spazio di memoria condivisa. Come politica di utilizzo mi
+					 * prefiggo di piazzare nel contextualcollection un oggetto
+					 * prima di cambiare activity, nella nuova activity per
+					 * prima cosa recupero tale oggetto e poi pulisco il
+					 * contextualcollection
+					 */
+					GruppoDiStudio contextualGDS = user_gds_list.get(position);
+					// MyApplication.getContextualCollection().add(contextualGDS);
+					Intent intent = new Intent(getActivity(),
+							Overview_GDS.class);
+					intent.putExtra("contextualGDS", contextualGDS);
+					startActivity(intent);
 
-				/*
-				 * Per passare il contextualGDS alla overview_GDS activity,
-				 * piazzo il contextualgds nel contextualcollection e poi dalla
-				 * overview_gds vado a recuperarlo. Il contextualcollection è un
-				 * Arraylist<Object> della classe MyApplication.
-				 * contextualcollection è statico e poichè la classe
-				 * myapplication è pubblica chiunque può accedere al
-				 * contextualcollection. Il contextualcollection lo uso come
-				 * spazio di memoria condivisa. Come politica di utilizzo mi
-				 * prefiggo di piazzare nel contextualcollection un oggetto
-				 * prima di cambiare activity, nella nuova activity per prima
-				 * cosa recupero tale oggetto e poi pulisco il
-				 * contextualcollection
-				 */
-				GruppoDiStudio contextualGDS = user_gds_list.get(position);
-				//MyApplication.getContextualCollection().add(contextualGDS);
-				Intent intent = new Intent(getActivity(), Overview_GDS.class);
-				intent.putExtra("contextualGDS", contextualGDS);
-				startActivity(intent);
+				}
+			});
 
-			}
-		});
+			listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent,
+						View view, int position, long id) {
+					// TODO Auto-generated method stub
+					if (mActionMode != null) {
+						return false;
+					}
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				if (mActionMode != null) {
-					return false;
+					// Start the CAB using the ActionMode.Callback defined above
+					mActionMode = ViewGruppiList_Fragment.this
+							.getSherlockActivity().startActionMode(
+									mActionModeCallback);
+
+					// view.setSelected(true);
+
+					view.setPressed(true);
+					longclikedview = view;
+
+					// view.setBackgroundColor(getResources().getColor(
+					// R.color.pressed_theme2_studymate));
+					return true;
 				}
 
-				// Start the CAB using the ActionMode.Callback defined above
-				mActionMode = ViewGruppiList_Fragment.this
-						.getSherlockActivity().startActionMode(
-								mActionModeCallback);
-
-				// view.setSelected(true);
-
-				view.setPressed(true);
-				longclikedview = view;
-
-				// view.setBackgroundColor(getResources().getColor(
-				// R.color.pressed_theme2_studymate));
-				return true;
-			}
-
-		});
+			});
+		} else {
+			TextView tv_errore = (TextView) getActivity().findViewById(
+					R.id.stringa_errore_caricamento_lista);
+			tv_errore.setVisibility(View.VISIBLE);
+		}
 
 	}
 

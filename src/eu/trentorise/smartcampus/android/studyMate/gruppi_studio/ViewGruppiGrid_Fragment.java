@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -52,56 +54,67 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 		// sorting gds before rendering them on screen
 		// Collections.sort(user_gds_list);
 
-		Adapter_gds_to_grid adapter = new Adapter_gds_to_grid(getActivity(),
-				R.id.gridview_gruppi_di_studio, user_gds_list);
-		gridview.setAdapter(adapter);
+		if (user_gds_list != null) {
+			TextView tv_errore = (TextView) getActivity().findViewById(
+					R.id.stringa_errore_caricamento_griglia);
+			tv_errore.setVisibility(View.GONE);
+			Adapter_gds_to_grid adapter = new Adapter_gds_to_grid(
+					getActivity(), R.id.gridview_gruppi_di_studio,
+					user_gds_list);
+			gridview.setAdapter(adapter);
 
-		gridview.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
+			gridview.setOnItemClickListener(new OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, View v,
+						int position, long id) {
 
-				/*
-				 * Per passare il contextualGDS alla overview_GDS activity,
-				 * piazzo il contextualgds nel contextualcollection e poi dalla
-				 * overview_gds vado a recuperarlo. Il contextualcollection è un
-				 * Arraylist<Object> della classe MyApplication.
-				 * contextualcollection è statico e poichè la classe
-				 * myapplication è pubblica chiunque può accedere al
-				 * contextualcollection. Il contextualcollection lo uso come
-				 * spazio di memoria condivisa. Come politica di utilizzo mi
-				 * prefiggo di piazzare nel contextualcollection un oggetto
-				 * prima di cambiare activity, nella nuova activity per prima
-				 * cosa recupero tale oggetto e poi pulisco il
-				 * contextualcollection
-				 */
-				GruppoDiStudio contextualGDS = user_gds_list.get(position);
-				//MyApplication.getContextualCollection().add(contextualGDS);
-				Intent intent = new Intent(getActivity(), Overview_GDS.class);
-				intent.putExtra("contextualGDS", contextualGDS);
-				startActivity(intent);
+					/*
+					 * Per passare il contextualGDS alla overview_GDS activity,
+					 * piazzo il contextualgds nel contextualcollection e poi
+					 * dalla overview_gds vado a recuperarlo. Il
+					 * contextualcollection è un Arraylist<Object> della classe
+					 * MyApplication. contextualcollection è statico e poichè la
+					 * classe myapplication è pubblica chiunque può accedere al
+					 * contextualcollection. Il contextualcollection lo uso come
+					 * spazio di memoria condivisa. Come politica di utilizzo mi
+					 * prefiggo di piazzare nel contextualcollection un oggetto
+					 * prima di cambiare activity, nella nuova activity per
+					 * prima cosa recupero tale oggetto e poi pulisco il
+					 * contextualcollection
+					 */
+					GruppoDiStudio contextualGDS = user_gds_list.get(position);
+					// MyApplication.getContextualCollection().add(contextualGDS);
+					Intent intent = new Intent(getActivity(),
+							Overview_GDS.class);
+					intent.putExtra("contextualGDS", contextualGDS);
+					startActivity(intent);
 
-			}
-		});
-
-		gridview.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if (mActionMode != null) {
-					return false;
 				}
+			});
 
-				// Start the CAB using the ActionMode.Callback defined above
+			gridview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-				mActionMode = ViewGruppiGrid_Fragment.this
-						.getSherlockActivity().startActionMode(
-								mActionModeCallback);
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent,
+						View view, int position, long id) {
+					if (mActionMode != null) {
+						return false;
+					}
 
-				view.setSelected(true);
-				return true;
-			}
-		});
+					// Start the CAB using the ActionMode.Callback defined above
+
+					mActionMode = ViewGruppiGrid_Fragment.this
+							.getSherlockActivity().startActionMode(
+									mActionModeCallback);
+
+					view.setSelected(true);
+					return true;
+				}
+			});
+		} else {
+			TextView tv_errore = (TextView) getActivity().findViewById(
+					R.id.stringa_errore_caricamento_griglia);
+			tv_errore.setVisibility(View.VISIBLE);
+		}
 
 	}
 

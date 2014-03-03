@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/stringa_errore_caricamento_griglia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:padding="2dp"
+        android:text="Siamo spiacenti, non siamo riusciti a caricare correttamente i tuoi gruppi...controlla la tua connessione ad internet per favore!"
+        android:textColor="@color/smartn_theme_color"
+        android:textSize="@dimen/textsize_medium"
+        android:textStyle="italic" />
+
     <GridView
         android:id="@+id/gridview_gruppi_di_studio"
         android:layout_width="fill_parent"

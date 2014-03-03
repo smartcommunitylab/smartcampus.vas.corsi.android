@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
@@ -121,14 +122,16 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			ShowImpegnoGDS.this.finish();
 			return true;
 		case R.id.action_modifica_impegno:
-			Toast.makeText(ShowImpegnoGDS.this, "modifica impegno",
-					Toast.LENGTH_SHORT).show();
-			return true;
+			Intent intent = new Intent(ShowImpegnoGDS.this,
+					ModifiyAttivitaStudio.class);
+			intent.putExtra("impegno_da_modificare", contextualAttivitaStudio);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
 
 		case R.id.action_elimina_impegno:
 			Toast.makeText(ShowImpegnoGDS.this, "elimina impegno",
 					Toast.LENGTH_SHORT).show();
-			return true;
+			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

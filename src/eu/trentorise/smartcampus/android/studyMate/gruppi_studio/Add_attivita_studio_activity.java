@@ -143,7 +143,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			stringdata = stringdata + " " + ora;
 			Date data = null;
 
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			try {
 				data = format.parse(stringdata);
 				System.out.println(data);

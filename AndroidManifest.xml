@@ -12,7 +12,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -252,11 +252,15 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="eu.trentorise.smartcampus.studymate.ShowModifyGDSDetails_activity"
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowModifyGDSDetails_activity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_show_modify_gdsdetails_activity"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio"
+            android:label="@string/title_activity_modifiy_attivita_studio" >
         </activity>
     </application>
 
