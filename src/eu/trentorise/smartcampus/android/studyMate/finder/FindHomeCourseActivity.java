@@ -15,7 +15,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
@@ -33,9 +33,9 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
-	public static Corso courseInfo;
+	public static AttivitaDidattica courseInfo;
 	public static String courseName;
-	public static Corso corsoAttuale;
+	public static AttivitaDidattica corsoAttuale;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		Intent intent = getIntent();
 		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(courseName);
-		corsoAttuale = new Corso();
-		corsoAttuale = (Corso) intent.getSerializableExtra("courseSelected");
+		corsoAttuale = new AttivitaDidattica();
+		corsoAttuale = (AttivitaDidattica) intent.getSerializableExtra("courseSelected");
 
 		Tab tab1 = ab
 				.newTab()
@@ -122,7 +122,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.itemAddRating:
 			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato
-					.getId());
+					.getAdId());
 
 			return true;
 		default:
@@ -195,12 +195,12 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
 				intentAddRating.putExtra("corso",
-						CoursesHandler.corsoSelezionato.getNome());
+						CoursesHandler.corsoSelezionato.getAdId());
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("NomeCorso",
-						CoursesHandler.corsoSelezionato.getNome());
+						CoursesHandler.corsoSelezionato.getDescription());
 				intentAddRating.putExtra("IdCorso",
-						CoursesHandler.corsoSelezionato.getId());
+						CoursesHandler.corsoSelezionato.getAdId());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 

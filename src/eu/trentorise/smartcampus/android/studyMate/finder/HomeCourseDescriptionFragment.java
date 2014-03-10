@@ -43,7 +43,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				R.id.txt_monitor);
 		feedbackHandler = (FeedbackHandler) new FeedbackHandler(
 				getSherlockActivity(),
-				FindHomeCourseActivity.corsoAttuale.getId(), act,
+				FindHomeCourseActivity.corsoAttuale.getAdId(), act,
 				ratingAverage, descriptionCourse, switchFollow, txtMonitor)
 				.execute();
 

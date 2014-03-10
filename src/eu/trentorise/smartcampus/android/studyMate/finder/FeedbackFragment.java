@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Author;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
@@ -45,8 +45,8 @@ public class FeedbackFragment extends SherlockFragment {
 
 		Intent intent = this.getActivity().getIntent();
 		@SuppressWarnings("unused")
-		CorsoLite corsoAttuale = new CorsoLite();
-		corsoAttuale = (CorsoLite) intent
+		AttivitaDidattica corsoAttuale = new AttivitaDidattica();
+		corsoAttuale = (AttivitaDidattica) intent
 				.getSerializableExtra("courseSelected");
 
 		TextView titleRatingFeedback = (TextView) view
@@ -57,7 +57,7 @@ public class FeedbackFragment extends SherlockFragment {
 			titleRatingFeedback.setVisibility(View.GONE);
 			return view;
 		} else {
-			titleRatingFeedback.setText(FeedbackHandler.corsoInfo.getNome());
+			titleRatingFeedback.setText(FeedbackHandler.corsoInfo.getDescription());
 
 		}
 

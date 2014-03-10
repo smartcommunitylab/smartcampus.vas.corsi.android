@@ -117,7 +117,7 @@ public class FindCoursesDegreeHandler extends
 
 		// aggiungo l'item "tutto" alla lista
 		CorsoLaurea courseTutto = new CorsoLaurea();
-		courseTutto.setNome("Tutto");
+		courseTutto.setName("Tutto");
 		listCourseDegree.add(0, courseTutto);
 
 		return listCourseDegree;
@@ -136,7 +136,7 @@ public class FindCoursesDegreeHandler extends
 			ArrayList<String> listStringDegree = new ArrayList<String>();
 
 			for (CorsoLaurea d : result) {
-				listStringDegree.add(d.getNome());
+				listStringDegree.add(d.getName());
 			}
 
 			// setto i corsi di laurea nello spinner

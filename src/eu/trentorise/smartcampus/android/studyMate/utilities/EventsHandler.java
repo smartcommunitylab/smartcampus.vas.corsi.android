@@ -151,8 +151,8 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 			int i = 0;
 
 			for (Evento ev : result) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getData(),
-						ev.getTitolo(), ev.getDescrizione(), ev.getStart()
+				AdptDetailedEvent e = new AdptDetailedEvent(ev.getDate(),
+						ev.getTitle(), ev.getType(), ev.getStart()
 								.toString(), ev.getRoom());
 				listEvItem[i++] = new EventItem(e);
 
@@ -194,7 +194,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
 	public class CustomComparator implements Comparator<Evento> {
 		public int compare(Evento object1, Evento object2) {
-			return object1.getData().compareTo(object2.getData());
+			return object1.getStart().compareTo(object2.getStart());
 		}
 	}
 }

@@ -14,8 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -26,14 +25,14 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
+public class CoursesPassedHandler extends AsyncTask<Void, Void, List<AttivitaDidattica>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
 	private String body;
 	private ListView listViewCorsiPassati;
 	public Activity currentActivity;
-	public static Corso corsoSelezionato;
+	public static AttivitaDidattica corsoSelezionato;
 	public static ProgressDialog pd;
 	public Bundle bundleParam;
 
@@ -45,7 +44,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 	}
 
 	// return list of all courses of all departments
-	private List<Corso> getAllCoursesPassed() {
+	private List<AttivitaDidattica> getAllCoursesPassed() {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -76,7 +75,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, Corso.class);
+		return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
 	}
 
 	@Override
@@ -88,7 +87,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 	}
 
 	@Override
-	protected void onPostExecute(final List<Corso> result) {
+	protected void onPostExecute(final List<AttivitaDidattica> result) {
 		super.onPostExecute(result);
 		if (result == null) {
 
@@ -99,9 +98,9 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 			TitledItem[] items = new TitledItem[result.size()];
 
 			int i = 0;
-			for (CorsoLite s : result) {
+			for (AttivitaDidattica s : result) {
 				items[i++] = new TitledItem("Corsi che posso votare",
-						s.getNome());
+						s.getDescription());
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);
@@ -116,15 +115,15 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 								int arg2, long arg3) {
 
 							// Pass Data to other Fragment
-							corsoSelezionato = new Corso();
+							corsoSelezionato = new AttivitaDidattica();
 							corsoSelezionato = result.get(arg2);
 
 							Intent intent = new Intent();
 							intent.setClass(currentActivity,
 									AddRatingFromCoursesPassed.class);
 							intent.putExtra("NomeCorso",
-									corsoSelezionato.getNome());
-							intent.putExtra("IdCorso", corsoSelezionato.getId());
+									corsoSelezionato.getDescription());
+							intent.putExtra("IdCorso", corsoSelezionato.getAdId());
 							currentActivity.startActivity(intent);
 
 							// Intent intent = new Intent(context,
@@ -142,7 +141,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<Corso>> {
 	}
 
 	@Override
-	protected List<Corso> doInBackground(Void... params) {
+	protected List<AttivitaDidattica> doInBackground(Void... params) {
 
 		return getAllCoursesPassed();
 	}

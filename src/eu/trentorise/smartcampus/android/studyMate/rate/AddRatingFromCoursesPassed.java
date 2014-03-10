@@ -52,7 +52,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
-		setTitle(CoursesPassedHandler.corsoSelezionato.getNome());
+		setTitle(CoursesPassedHandler.corsoSelezionato.getDescription());
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
@@ -269,7 +269,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesPassedHandler.corsoSelezionato
-									.getId());
+									.getAdId());
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -292,7 +292,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 									.show(AddRatingFromCoursesPassed.this,
 											"Salvataggio del tuo commento per "
 													+ CoursesPassedHandler.corsoSelezionato
-															.getNome()
+															.getDescription()
 															.toString()
 													+ " in corso ",
 											"Caricamento...");
@@ -323,7 +323,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS
 							.GET_WS_FEEDBACK_OF_STUDENT(CoursesPassedHandler.corsoSelezionato
-									.getId()));
+									.getAdId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;

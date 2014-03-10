@@ -18,7 +18,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
@@ -32,18 +32,18 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
+public class CoursesHandler extends AsyncTask<Bundle, Void, List<AttivitaDidattica>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	public List<Corso> coursesFiltered;
+	public List<AttivitaDidattica> coursesFiltered;
 	ListView listViewCorsiPersonali;
 	public String body;
 	public static ProgressDialog pd;
 	public Activity currentActivity;
 	public SherlockFragmentActivity currentSherlock;
 	public Bundle bundleParam;
-	public static Corso corsoSelezionato;
+	public static AttivitaDidattica corsoSelezionato;
 
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi,
 			Activity currentActivity, SherlockFragmentActivity currentSherlock) {
@@ -54,7 +54,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 	}
 
 	// return list of all courses of all departments
-	private List<Corso> getAllPersonalCourses() {
+	private List<AttivitaDidattica> getAllPersonalCourses() {
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -86,7 +86,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObjects(body, Corso.class);
+		return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 	}
 
 	@Override
-	protected void onPostExecute(final List<Corso> result) {
+	protected void onPostExecute(final List<AttivitaDidattica> result) {
 		super.onPostExecute(result);
 		if (result == null) {
 
@@ -109,8 +109,8 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 			TitledItem[] items = new TitledItem[result.size()];
 
 			int i = 0;
-			for (Corso s : result) {
-				items[i++] = new TitledItem("Corsi da libretto", s.getNome());
+			for (AttivitaDidattica s : result) {
+				items[i++] = new TitledItem("Corsi da libretto", s.getDescription());
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);
@@ -128,7 +128,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment
-							corsoSelezionato = new Corso();
+							corsoSelezionato = new AttivitaDidattica();
 							corsoSelezionato = result.get(arg2);
 
 							CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
@@ -150,7 +150,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<Corso>> {
 	}
 
 	@Override
-	protected List<Corso> doInBackground(Bundle... params) {
+	protected List<AttivitaDidattica> doInBackground(Bundle... params) {
 		bundleParam = params[0];
 
 		return getAllPersonalCourses();

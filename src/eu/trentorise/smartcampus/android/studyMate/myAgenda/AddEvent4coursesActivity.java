@@ -26,8 +26,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
@@ -58,7 +57,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
 	private Evento evento = null;
-	public Corso courseSelected;
+	public AttivitaDidattica courseSelected;
 	Spinner coursesSpinner;
 
 	@Override
@@ -194,18 +193,18 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>> {
+	private class CoursesLoader extends AsyncTask<Void, Void, List<AttivitaDidattica>> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public Context context;
 		String body;
 
 		@Override
-		protected List<CorsoLite> doInBackground(Void... params) {
+		protected List<AttivitaDidattica> doInBackground(Void... params) {
 			return getFollowingCourses();
 		}
 
-		private List<CorsoLite> getFollowingCourses() {
+		private List<AttivitaDidattica> getFollowingCourses() {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -239,20 +238,20 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 				e.printStackTrace();
 			}
 
-			return Utils.convertJSONToObjects(body, CorsoLite.class);
+			return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
 		}
 
 		@Override
-		protected void onPostExecute(List<CorsoLite> result) {
+		protected void onPostExecute(List<AttivitaDidattica> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
 
 			List<String> resultStrings = new ArrayList<String>();
 
-			courseSelected = new Corso();
-			courseSelected = (Corso) CoursesHandler.corsoSelezionato;
+			courseSelected = new AttivitaDidattica();
+			courseSelected = (AttivitaDidattica) CoursesHandler.corsoSelezionato;
 
-			resultStrings.add(courseSelected.getNome());
+			resultStrings.add(courseSelected.getDescription());
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 					AddEvent4coursesActivity.this,

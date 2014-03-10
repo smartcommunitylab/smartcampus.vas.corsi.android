@@ -42,11 +42,11 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
-		tvTitleEvent.setText(eventSelected.getTitolo());
+		tvTitleEvent.setText(eventSelected.getTitle());
 
 		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		tvDateEvent.setText(dateFormat.format(eventSelected.getData()));
+		tvDateEvent.setText(dateFormat.format(eventSelected.getStart()));
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
 		tvOraEvent
@@ -67,14 +67,14 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 
 		TextView tvDescEvent = (TextView) view
 				.findViewById(R.id.textDescriptionEvent);
-		tvDescEvent.setText(eventSelected.getDescrizione());
+		tvDescEvent.setText(eventSelected.getType());
 
 		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAulaEvent);
 		tvAulaEvent.setText(eventSelected.getRoom());
 
 		TextView tvLocationEvent = (TextView) view
 				.findViewById(R.id.textLocationEvent);
-		tvLocationEvent.setText(eventSelected.getEvent_location());
+		tvLocationEvent.setText(eventSelected.getRoom());
 		super.onStart();
 	}
 }

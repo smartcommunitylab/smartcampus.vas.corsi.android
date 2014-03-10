@@ -7,7 +7,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -17,7 +17,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
+public class CourseCompleteDataHandler extends AsyncTask<Void, Void, AttivitaDidattica> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -33,7 +33,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 		this.idCourse = idCourse;
 	}
 
-	private Corso getFullCourseById() {
+	private AttivitaDidattica getFullCourseById() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
@@ -67,7 +67,7 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 			e.printStackTrace();
 		}
 
-		return Utils.convertJSONToObject(body, Corso.class);
+		return Utils.convertJSONToObject(body, AttivitaDidattica.class);
 	}
 
 	@Override
@@ -77,15 +77,15 @@ public class CourseCompleteDataHandler extends AsyncTask<Void, Void, Corso> {
 	}
 
 	@Override
-	protected void onPostExecute(Corso course) {
+	protected void onPostExecute(AttivitaDidattica course) {
 		super.onPostExecute(course);
 	}
 
-	protected void loadDataLayout(Corso course) {
+	protected void loadDataLayout(AttivitaDidattica course) {
 	}
 
 	@Override
-	protected Corso doInBackground(Void... params) {
+	protected AttivitaDidattica doInBackground(Void... params) {
 		return getFullCourseById();
 	}
 }

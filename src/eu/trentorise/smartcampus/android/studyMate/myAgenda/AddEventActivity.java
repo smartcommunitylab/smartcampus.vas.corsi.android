@@ -26,7 +26,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLite;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
@@ -190,18 +190,18 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoLite>> {
+	private class CoursesLoader extends AsyncTask<Void, Void, List<AttivitaDidattica>> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public Context context;
 		String body;
 
 		@Override
-		protected List<CorsoLite> doInBackground(Void... params) {
+		protected List<AttivitaDidattica> doInBackground(Void... params) {
 			return getFollowingCourses();
 		}
 
-		private List<CorsoLite> getFollowingCourses() {
+		private List<AttivitaDidattica> getFollowingCourses() {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -235,18 +235,18 @@ public class AddEventActivity extends SherlockFragmentActivity {
 				e.printStackTrace();
 			}
 
-			return Utils.convertJSONToObjects(body, CorsoLite.class);
+			return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
 		}
 
 		@Override
-		protected void onPostExecute(List<CorsoLite> result) {
+		protected void onPostExecute(List<AttivitaDidattica> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
 
 			List<String> resultStrings = new ArrayList<String>();
 
-			for (CorsoLite cl : result) {
-				resultStrings.add(cl.getNome());
+			for (AttivitaDidattica cl : result) {
+				resultStrings.add(cl.getDescription());
 			}
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(

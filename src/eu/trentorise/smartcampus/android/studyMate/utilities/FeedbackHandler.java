@@ -19,8 +19,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -49,7 +49,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	private Studente studenteUser;
 
 	public static List<Commento> feedbackInfoList;
-	public static Corso corsoInfo;
+	public static AttivitaDidattica corsoInfo;
 
 	public FeedbackHandler(Context applicationContext, long idCourse,
 			SherlockFragmentActivity act, RatingBar ratingAverage,
@@ -111,7 +111,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			if (response.getHttpStatus() == 200) {
 
 				String bodyCorso = response.getBody();
-				corsoInfo = Utils.convertJSONToObject(bodyCorso, Corso.class);
+				corsoInfo = Utils.convertJSONToObject(bodyCorso, AttivitaDidattica.class);
 
 			} else {
 				return null;
@@ -183,13 +183,13 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		} else {
 			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
-				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-				txtMonitor.setText(R.string.label_txtMonitor_on);
-			} else {
-				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-				txtMonitor.setText(R.string.label_txtMonitor_off);
-			}
+//			if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+//				txtMonitor.setText(R.string.label_txtMonitor_on);
+//			} else {
+//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+//				txtMonitor.setText(R.string.label_txtMonitor_off);
+//			}
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
@@ -204,7 +204,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
-			act.getSupportActionBar().setTitle(corsoInfo.getNome());
+			act.getSupportActionBar().setTitle(corsoInfo.getDescription());
 			ratingAverage.setRating((float) corsoInfo.getValutazione_media());
 
 			RatingBar ratingCont = (RatingBar) act
@@ -227,7 +227,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 					.findViewById(R.id.ratingBarRowEsame);
 			ratingEsame.setRating(corsoInfo.getRating_esame());
 
-			descriptionCourse.setText(corsoInfo.getDescrizione());
+			descriptionCourse.setText(corsoInfo.getDescription());
 
 			pd.dismiss();
 
@@ -239,25 +239,25 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	protected List<Commento> doInBackground(Void... params) {
 		return getFullFeedbackById();
 	}
-
-	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
-	// stringa degli ids
-	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
-
-		if (stud.getIdsCorsiInteresse() == null) {
-			return false;
-		} else {
-			String[] listS = stud.getIdsCorsiInteresse().split(",");
-			boolean contenuto = false;
-
-			for (String s : listS) {
-				if (s.equals(corso.getId().toString())) {
-					contenuto = true;
-				}
-			}
-			return contenuto;
-		}
-
-	}
+//
+//	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
+//	// stringa degli ids
+//	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
+//
+//		if (stud.getIdsCorsiInteresse() == null) {
+//			return false;
+//		} else {
+//			String[] listS = stud.getIdsCorsiInteresse().split(",");
+//			boolean contenuto = false;
+//
+//			for (String s : listS) {
+//				if (s.equals(corso.getId().toString())) {
+//					contenuto = true;
+//				}
+//			}
+//			return contenuto;
+//		}
+//
+//	}
 
 }

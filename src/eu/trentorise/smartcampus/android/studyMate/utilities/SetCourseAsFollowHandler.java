@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -18,11 +18,11 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class SetCourseAsFollowHandler extends AsyncTask<Corso, Void, Boolean> {
+public class SetCourseAsFollowHandler extends AsyncTask<AttivitaDidattica, Void, Boolean> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
-	private Corso corso;
+	private AttivitaDidattica corso;
 	private Button monitorFollow;
 	private TextView txtFollow;
 
@@ -34,7 +34,7 @@ public class SetCourseAsFollowHandler extends AsyncTask<Corso, Void, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(Corso... params) {
+	protected Boolean doInBackground(AttivitaDidattica... params) {
 		// corso a cui mi riferisco
 		corso = params[0];
 

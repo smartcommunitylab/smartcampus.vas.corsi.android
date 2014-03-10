@@ -52,7 +52,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
-		setTitle(CoursesHandler.corsoSelezionato.getNome());
+		setTitle(CoursesHandler.corsoSelezionato.getDescription());
 		new ProgressDialog(AddRateActivity.this);
 		pd = ProgressDialog.show(AddRateActivity.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
@@ -278,7 +278,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 							commento.setData_inserimento(c.getTime().toString());
 
 							commento.setCorso(CoursesHandler.corsoSelezionato
-									.getId());
+									.getAdId());
 
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
@@ -319,7 +319,7 @@ public class AddRateActivity extends SherlockFragmentActivity {
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS
 							.GET_WS_FEEDBACK_OF_STUDENT(CoursesHandler.corsoSelezionato
-									.getId()));
+									.getAdId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;

@@ -104,7 +104,7 @@ public class FindDepartmentsHandler extends
 		} else {
 			// aggiungo l'item "tutto" alla lista
 			Dipartimento depTutto = new Dipartimento();
-			depTutto.setNome("Tutto");
+			depTutto.setDescription("Tutto");
 			listDepartments.add(0, depTutto);
 		}
 		return listDepartments;
@@ -125,7 +125,7 @@ public class FindDepartmentsHandler extends
 			ArrayList<String> listStringDepartments = new ArrayList<String>();
 
 			for (Dipartimento d : result) {
-				listStringDepartments.add(d.getNome());
+				listStringDepartments.add(d.getDescription());
 			}
 
 			// setto i dipartimenti nello spinner
