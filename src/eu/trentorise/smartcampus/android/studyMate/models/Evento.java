@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Evento extends BasicEntity implements Serializable{
+public class Evento implements Serializable{
 	/**
 	 * 
 	 */
@@ -101,7 +101,6 @@ public class Evento extends BasicEntity implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	
 	
 }

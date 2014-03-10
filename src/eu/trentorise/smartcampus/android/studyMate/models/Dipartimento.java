@@ -3,7 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 import java.io.Serializable;
 
 
-public class Dipartimento extends BasicEntity implements Serializable{
+public class Dipartimento implements Serializable{
 
 	private static final long serialVersionUID = 8681710690984301605L;
 

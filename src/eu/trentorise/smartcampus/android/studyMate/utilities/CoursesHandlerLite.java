@@ -62,7 +62,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES);
+				SmartUniDataWS.GET_WS_ALLCOURSES_ATT_DIDATTICA);
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -87,7 +87,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
 	}
 
@@ -168,7 +167,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 	@Override
 	protected List<AttivitaDidattica> doInBackground(Void... params) {
 
-		if (department.getDescription().equals("Tutto")) {
+		if (department.getDescription().contains("Tutto")) {
 			return getAllCourses();
 
 		} else {
@@ -188,7 +187,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(String.valueOf(deg.getId())));
+				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(String.valueOf(deg.getCdsId())));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -232,7 +231,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 						.setText(tvTitleNotices.getText() + " Dipartimento di "
 								+ department.getDescription().toString()
 								+ ", corso di laurea in "
-								+ degree.getName().toString());
+								+ degree.getDescripion());
 		} else {
 			if (department.equals("Tutto")) {
 				if (degree.equals("Tutto"))
@@ -241,7 +240,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 				else
 					tvTitleNotices.setText(tvTitleNotices.getText() + " "
 							+ course.toString() + " del corso di laurea in "
-							+ degree.getName().toString());
+							+ degree.getDescripion());
 			} else {
 				if (degree.equals("Tutto"))
 					tvTitleNotices.setText(tvTitleNotices.getText() + " "
@@ -252,7 +251,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 							+ course.toString() + " del dipartimento di "
 							+ department.getDescription().toString()
 							+ ", corso di laurea in "
-							+ degree.getName().toString());
+							+ degree.getDescripion());
 			}
 
 		}
@@ -305,7 +304,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 				corsoSelezionato.setCds_id(courses.get(arg2)
 						.getCds_id());
 
-				CoursesHandler.corsoSelezionato = (AttivitaDidattica) corsoSelezionato;
+				//CoursesHandler.corsoSelezionato = (AttivitaDidattica) corsoSelezionato;
 
 				i.putExtra("courseSelected", corsoSelezionato);
 				i.putExtra("courseSelectedName", courseSelectedName);

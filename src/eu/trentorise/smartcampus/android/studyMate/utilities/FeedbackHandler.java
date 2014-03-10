@@ -100,8 +100,9 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 
 		// prendo i dati aggiornati del corso
 		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_COURSE_COMPLETE_DATA(String
-						.valueOf(idCourse)));
+				SmartUniDataWS.GET_WS_COURSES_DETAILS(idCourse));
+		// GET_WS_COURSE_COMPLETE_DATA(String
+		// .valueOf(idCourse)));
 		request.setMethod(Method.GET);
 
 		try {
@@ -111,7 +112,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			if (response.getHttpStatus() == 200) {
 
 				String bodyCorso = response.getBody();
-				corsoInfo = Utils.convertJSONToObject(bodyCorso, AttivitaDidattica.class);
+				corsoInfo = Utils.convertJSONToObject(bodyCorso,
+						AttivitaDidattica.class);
 
 			} else {
 				return null;
@@ -183,13 +185,13 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		} else {
 			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-//			if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
-//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-//				txtMonitor.setText(R.string.label_txtMonitor_on);
-//			} else {
-//				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-//				txtMonitor.setText(R.string.label_txtMonitor_off);
-//			}
+			// if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
+			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+			// txtMonitor.setText(R.string.label_txtMonitor_on);
+			// } else {
+			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+			// txtMonitor.setText(R.string.label_txtMonitor_off);
+			// }
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
@@ -206,26 +208,33 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			feedbackInfoList = commenti;
 			act.getSupportActionBar().setTitle(corsoInfo.getDescription());
 			ratingAverage.setRating((float) corsoInfo.getValutazione_media());
-
 			RatingBar ratingCont = (RatingBar) act
 					.findViewById(R.id.ratingBarRowContenuti);
-			ratingCont.setRating(corsoInfo.getRating_contenuto());
-
 			RatingBar ratingCaricoStudio = (RatingBar) act
 					.findViewById(R.id.ratingBarRowCfu);
-			ratingCaricoStudio.setRating(corsoInfo.getRating_carico_studio());
-
 			RatingBar ratingLezioni = (RatingBar) act
 					.findViewById(R.id.ratingBarRowLezioni);
-			ratingLezioni.setRating(corsoInfo.getRating_lezioni());
-
 			RatingBar ratingMateriali = (RatingBar) act
 					.findViewById(R.id.ratingBarRowMateriali);
-			ratingMateriali.setRating(corsoInfo.getRating_materiali());
-
 			RatingBar ratingEsame = (RatingBar) act
 					.findViewById(R.id.ratingBarRowEsame);
-			ratingEsame.setRating(corsoInfo.getRating_esame());
+
+			if (corsoInfo.getValutazione_media() == 0) {
+				ratingCont.setRating(0);
+				ratingCaricoStudio.setRating(0);
+				ratingLezioni.setRating(0);
+				ratingMateriali.setRating(0);
+				ratingEsame.setRating(0);
+
+			} else {
+				ratingCont.setRating(corsoInfo.getRating_contenuto());
+				ratingCaricoStudio.setRating(corsoInfo
+						.getRating_carico_studio());
+				ratingLezioni.setRating(corsoInfo.getRating_lezioni());
+				ratingMateriali.setRating(corsoInfo.getRating_materiali());
+				ratingEsame.setRating(corsoInfo.getRating_esame());
+
+			}
 
 			descriptionCourse.setText(corsoInfo.getDescription());
 
@@ -239,25 +248,26 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	protected List<Commento> doInBackground(Void... params) {
 		return getFullFeedbackById();
 	}
-//
-//	// metodo che dato lo studente setta la lista dei corsi di interesse dalla
-//	// stringa degli ids
-//	private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
-//
-//		if (stud.getIdsCorsiInteresse() == null) {
-//			return false;
-//		} else {
-//			String[] listS = stud.getIdsCorsiInteresse().split(",");
-//			boolean contenuto = false;
-//
-//			for (String s : listS) {
-//				if (s.equals(corso.getId().toString())) {
-//					contenuto = true;
-//				}
-//			}
-//			return contenuto;
-//		}
-//
-//	}
+	//
+	// // metodo che dato lo studente setta la lista dei corsi di interesse
+	// dalla
+	// // stringa degli ids
+	// private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
+	//
+	// if (stud.getIdsCorsiInteresse() == null) {
+	// return false;
+	// } else {
+	// String[] listS = stud.getIdsCorsiInteresse().split(",");
+	// boolean contenuto = false;
+	//
+	// for (String s : listS) {
+	// if (s.equals(corso.getId().toString())) {
+	// contenuto = true;
+	// }
+	// }
+	// return contenuto;
+	// }
+	//
+	// }
 
 }

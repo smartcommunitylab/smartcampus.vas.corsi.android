@@ -1,8 +1,10 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
+import java.io.Serializable;
 
 
-public class PianoStudi extends BasicEntity {
+
+public class PianoStudi implements Serializable{
 
 	/**
 	 * 

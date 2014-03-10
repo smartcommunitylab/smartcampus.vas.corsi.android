@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
+import java.io.Serializable;
 
-public class AttivitaDidattica extends BasicEntity {
+
+public class AttivitaDidattica implements Serializable{
 
 
 	/**

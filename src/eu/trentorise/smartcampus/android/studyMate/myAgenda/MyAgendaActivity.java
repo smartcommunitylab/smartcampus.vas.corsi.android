@@ -188,7 +188,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		case R.id.menu_add_rating:
 			mystate = ChildActivity.ADD_RATING;
 			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato
-					.getAdId());
+					.getId());
 
 			return true;
 		default:
@@ -270,9 +270,9 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 						AddRatingFromCoursesPassed.class);
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("corso",
-						CoursesHandler.corsoSelezionato.getDescription());
+						CoursesHandler.corsoSelezionato.getName());
 				intentAddRating.putExtra("IdCorso",
-						CoursesHandler.corsoSelezionato.getAdId());
+						CoursesHandler.corsoSelezionato.getId());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 

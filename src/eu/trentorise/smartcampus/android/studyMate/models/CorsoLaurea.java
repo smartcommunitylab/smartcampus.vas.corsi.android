@@ -6,7 +6,7 @@ import java.util.List;
 import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 
 
-public class CorsoLaurea extends BasicProfile implements Serializable{
+public class CorsoLaurea implements Serializable{
 
 
 	/**

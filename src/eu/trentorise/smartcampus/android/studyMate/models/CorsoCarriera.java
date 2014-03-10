@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.util.Date;
 
-public class CorsoCarriera extends BasicEntity {
+public class CorsoCarriera {
 
 		/**
 	 * 

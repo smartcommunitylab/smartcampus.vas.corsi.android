@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
@@ -26,7 +27,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 
-	public AttivitaDidattica courseSelected;
+	public CorsoCarriera courseSelected;
 	public List<Evento> listaEventiFiltrati = null;
 
 	@Override
@@ -46,9 +47,9 @@ public class OverviewFilterFragment extends SherlockFragment {
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		listaEventiFiltrati = new ArrayList<Evento>();
 
-		courseSelected = new AttivitaDidattica();
-		courseSelected = (AttivitaDidattica) CoursesHandler.corsoSelezionato;
-		parent.setTitle(courseSelected.getDescription());
+		courseSelected = new CorsoCarriera();
+		courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
+		parent.setTitle(courseSelected.getName());
 		listaEventiFiltrati = filterEventsbyCourse();
 
 		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
@@ -90,14 +91,18 @@ public class OverviewFilterFragment extends SherlockFragment {
 		});
 
 	}
-
+@Override
+public void onResume() {
+	// TODO Auto-generated method stub
+	super.onResume();
+}
 	// filtro gli eventi in base al corso che ho selezionato
 	private List<Evento> filterEventsbyCourse() {
 
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 
 		for (Evento evento : EventsHandler.listaEventi) {
-			if (evento.getCds()==(courseSelected.getCds_id())) {
+			if (String.valueOf(evento.getTitle()).compareTo(courseSelected.getName())==0) {
 				eventiFiltrati.add(evento);
 			}
 		}

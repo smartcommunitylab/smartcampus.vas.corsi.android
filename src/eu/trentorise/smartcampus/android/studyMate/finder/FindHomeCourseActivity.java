@@ -19,6 +19,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
@@ -121,7 +122,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 			return true;
 		case R.id.itemAddRating:
-			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato
+			new IsCousePassedTask().execute(CoursesHandlerLite.corsoSelezionato
 					.getAdId());
 
 			return true;
@@ -195,12 +196,12 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
 				intentAddRating.putExtra("corso",
-						CoursesHandler.corsoSelezionato.getAdId());
+						CoursesHandler.corsoSelezionato.getId());
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("NomeCorso",
-						CoursesHandler.corsoSelezionato.getDescription());
+						CoursesHandler.corsoSelezionato.getName() );
 				intentAddRating.putExtra("IdCorso",
-						CoursesHandler.corsoSelezionato.getAdId());
+						CoursesHandler.corsoSelezionato.getId());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 

@@ -35,7 +35,8 @@ public class Commento {
 
 	// valutazione esame
 	private float rating_esame;
-
+	
+	private long timestamp;
 	public Commento() {
 	}
 
@@ -133,6 +134,14 @@ public class Commento {
 
 	public void setNome_studente(String nome_studente) {
 		this.nome_studente = nome_studente;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }
