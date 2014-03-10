@@ -188,7 +188,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(deg.getId()));
+				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(String.valueOf(deg.getId())));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;

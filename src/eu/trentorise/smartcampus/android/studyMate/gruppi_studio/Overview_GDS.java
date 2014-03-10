@@ -24,7 +24,6 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -40,7 +39,7 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	public GruppoDiStudio contextualGDS = null;
-	public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
+	//public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
 	public ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
@@ -159,9 +158,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		return contextualGDS;
 	}
 
-	public ArrayList<ChatObj> getContextualForum() {
-		return contextualForum;
-	}
+//	public ArrayList<ChatObj> getContextualForum() {
+//		return contextualForum;
+//	}
 
 	public void setContextualGDS(GruppoDiStudio contextualGDS) {
 		this.contextualGDS = contextualGDS;

@@ -183,13 +183,13 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setTopic(oggetto);
 			// Date data = new Date();
 			if (data != null) {
-				nuova_attivitaStudio.setData(data);
+				nuova_attivitaStudio.setDate(data);
 			}
 
 			// nuova_attivitaStudio.setStart(start);
 			nuova_attivitaStudio.setRoom(room);
-			nuova_attivitaStudio.setEvent_location(edificio);
-			nuova_attivitaStudio.setDescrizione(descrizione);
+			//nuova_attivitaStudio.setEvent_location(edificio);
+			nuova_attivitaStudio.setTopic(descrizione);
 
 			nuova_attivitaStudio.setGruppo(gds.getId());
 

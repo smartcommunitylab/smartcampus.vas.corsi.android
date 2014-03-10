@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Intent;
@@ -18,7 +17,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
 import eu.trentorise.smartcampus.studymate.R;
 
@@ -60,27 +58,28 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
 		tv_oggetto.setText(contextualAttivitaStudio.getTopic());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
-		Date data = contextualAttivitaStudio.getData();
+		Date data = contextualAttivitaStudio.getDate();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		tv_data.setText(format.format(data));
 		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
-		ArrayList<Allegato> contextualAllegatis = null; /*
+	//	ArrayList<Allegato> contextualAllegatis = null;
+		/*
 														 * contextualAttivitaStudio
 														 * .getAllegati();
 														 */
-		if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
-			Toast.makeText(MyApplication.getAppContext(),
-					"non ci sono allegati ne mostro uno per prova",
-					Toast.LENGTH_SHORT).show();
-			contextualAllegatis = new ArrayList<Allegato>();
-			Allegato fake = new Allegato(null, "nome allegato finto.pdf");
-			contextualAllegatis.add(fake);
-			contextualAllegatis.add(fake);
-		}
-		Allegati_to_list_arrayadapter adapter = new Allegati_to_list_arrayadapter(
-				ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
-				contextualAllegatis);
-		listview_allegati.setAdapter(adapter);
+//		if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
+//			Toast.makeText(MyApplication.getAppContext(),
+//					"non ci sono allegati ne mostro uno per prova",
+//					Toast.LENGTH_SHORT).show();
+//			contextualAllegatis = new ArrayList<Allegato>();
+//			Allegato fake = new Allegato(null, "nome allegato finto.pdf");
+//			contextualAllegatis.add(fake);
+//			contextualAllegatis.add(fake);
+//		}
+//		Allegati_to_list_arrayadapter adapter = new Allegati_to_list_arrayadapter(
+//				ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
+//				contextualAllegatis);
+//		listview_allegati.setAdapter(adapter);
 		/*
 		 * manca altra roba
 		 */

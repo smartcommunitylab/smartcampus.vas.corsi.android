@@ -56,7 +56,7 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 				this, android.R.layout.simple_spinner_item, edifici_values);
 		spinner_edificio.setAdapter(adapter_spinner_ed);
 
-		String location_actual = attivitaDiStudio.getEvent_location();
+		String location_actual = attivitaDiStudio.getRoom();
 		int spinnerPositionedificio = adapter_spinner_ed
 				.getPosition(location_actual);
 		spinner_edificio.setSelection(spinnerPositionedificio);
@@ -74,7 +74,7 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);
 		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
 
-		Date data = attivitaDiStudio.getData();
+		Date data = attivitaDiStudio.getDate();
 		SimpleDateFormat formatgiornoanno = new SimpleDateFormat("dd/MM/yyyy");
 		btn_data.setText(formatgiornoanno.format(data));
 

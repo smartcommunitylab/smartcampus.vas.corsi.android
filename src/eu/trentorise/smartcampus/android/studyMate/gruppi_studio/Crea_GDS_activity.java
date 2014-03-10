@@ -20,7 +20,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Corso;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -212,14 +212,14 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		Context taskcontext;
 		public ProgressDialog pd;
-		private ArrayList<Corso> temp_listacorsiArrayList;
+		private ArrayList<AttivitaDidattica> temp_listacorsiArrayList;
 
 		public LoadSpinnerMaterieAsTask(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
-		protected ArrayList<Corso> webgetCorsiUtente() {
+		protected ArrayList<AttivitaDidattica> webgetCorsiUtente() {
 			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 			// alcune preparazioni iniziali
@@ -231,8 +231,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(studentesessione
-							.getCorso_laurea().getId()));
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(studentesessione.getCds()));
+							//.getCorso_laurea().getId()));
 			request.setMethod(Method.GET);
 
 			try {
@@ -258,8 +258,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 				e.printStackTrace();
 			}
 
-			return (ArrayList<Corso>) Utils.convertJSONToObjects(body,
-					Corso.class);
+			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(body,
+					AttivitaDidattica.class);
 
 		}
 
@@ -286,8 +286,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			listaCorsi.clear();
-			for (Corso tempcorso : temp_listacorsiArrayList) {
-				listaCorsi.add(tempcorso.getNome());
+			for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
+				listaCorsi.add(tempcorso.getDescription());
 			}
 			ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
 					Crea_GDS_activity.this,

@@ -23,7 +23,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
@@ -200,13 +199,13 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			ArrayList<Studente> membri_gds = new ArrayList<Studente>();
 
 			ArrayList<AttivitaDiStudio> attivita_studio_gds = new ArrayList<AttivitaDiStudio>();
-			ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
+		//	ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
 
 			// ####################################
 			// creazione gruppi fake per popolare grafica, dovrei in realtà
 			// recuperare tutto dal web
 			Dipartimento dipartimento = new Dipartimento();
-			dipartimento.setNome("Scienze dell'Informazione");
+			dipartimento.setDescription("Scienze dell'Informazione");
 			Studente s1 = new Studente();
 
 			s1.setNome("Federico");

@@ -49,22 +49,22 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 			TextView orario_view = (TextView) impegno_view
 					.findViewById(R.id.orario_attivitastudio);
 
-			if (currentImpegno.getData() != null) {
-				data_view.setText(currentImpegno.getData().toString());
+			if (currentImpegno.getDate() != null) {
+				data_view.setText(currentImpegno.getDate().toString());
 			}
 
 			oggetto_view.setText(currentImpegno.getTopic());
 			aula_edificio_view.setText("Aula " + currentImpegno.getRoom()
-					+ " - " + currentImpegno.getEvent_location());
+					+ " - " + currentImpegno.getRoom());
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-			orario_view.setText(format.format(currentImpegno.getData()));
+			orario_view.setText(format.format(currentImpegno.getDate()));
 
 			AttivitaDiStudio prev = null;
 			if (position > 0)
 				prev = getItem(position - 1);
 
 			if (prev == null
-					|| (prev.getData().equals(currentImpegno.getData()) == false)) {
+					|| (prev.getDate().equals(currentImpegno.getDate()) == false)) {
 				data_view.setVisibility(View.VISIBLE);
 			} else {
 				data_view.setVisibility(View.GONE);

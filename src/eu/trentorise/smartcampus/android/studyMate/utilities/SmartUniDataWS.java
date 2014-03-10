@@ -19,8 +19,8 @@ public final class SmartUniDataWS {
 		return "/corso/dipartimento/" + String.valueOf(id_department);
 	}
 
-	public static String GET_WS_ALLCOURSES_OF_DEGREE(long id_degree) {
-		return "/corso/corsolaurea/" + String.valueOf(id_degree);
+	public static String GET_WS_ALLCOURSES_OF_DEGREE(String id_degree) {
+		return "/corso/corsolaurea/" + id_degree;
 	}
 
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
