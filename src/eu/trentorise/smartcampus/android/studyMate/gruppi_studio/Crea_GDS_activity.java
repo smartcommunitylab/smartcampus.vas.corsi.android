@@ -224,15 +224,14 @@ public class Crea_GDS_activity extends SherlockActivity {
 					SmartUniDataWS.TOKEN_NAME);
 			// alcune preparazioni iniziali
 			// recupero dello studente in sessione dalle sharedpreferences
-			String jsonstudente = load();
-			Studente studentesessione = Utils.convertJSONToObject(jsonstudente,
-					Studente.class);
+			String jsonattivitadidattica = load("attivitaDidatticaStudente");
+			AttivitaDidattica attivitadidatticastud = Utils.convertJSONToObject(jsonattivitadidattica,
+					AttivitaDidattica.class);
 			MessageResponse response;
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(studentesessione.getCds()));
-							//.getCorso_laurea().getId()));
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""+attivitadidatticastud.getCds_id()));
 			request.setMethod(Method.GET);
 
 			try {
@@ -258,8 +257,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 				e.printStackTrace();
 			}
 
-			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(body,
-					AttivitaDidattica.class);
+			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(
+					body, AttivitaDidattica.class);
 
 		}
 
@@ -297,12 +296,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		}
 
-		public String load() {
+		public String load(String key) {
 			SharedPreferences sharedPreferences = Crea_GDS_activity.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			String jsonStudente = sharedPreferences.getString(
-					"studenteSessioneJSON", null);
-			return jsonStudente;
+			String retvaljson = sharedPreferences.getString(
+					key, null);
+			return retvaljson;
 		}
 	}
 }

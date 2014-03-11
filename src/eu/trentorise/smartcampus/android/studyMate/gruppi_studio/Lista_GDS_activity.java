@@ -233,7 +233,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
-			if (user_gds_list.isEmpty()) {
+			if (user_gds_list.isEmpty() || user_gds_list == null) {
 				tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
 			} else {
 				tv.setVisibility(View.GONE);
@@ -269,8 +269,10 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			user_gds_list.clear();
 			responselist = getMineGDS();
-			for (GruppoDiStudio gds : responselist) {
-				user_gds_list.add(gds);
+			if (responselist != null) {
+				for (GruppoDiStudio gds : responselist) {
+					user_gds_list.add(gds);
+				}
 			}
 
 			return user_gds_list;

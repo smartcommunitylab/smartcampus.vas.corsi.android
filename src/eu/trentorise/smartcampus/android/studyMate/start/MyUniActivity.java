@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +14,12 @@ import com.actionbarsherlock.app.SherlockActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
@@ -84,14 +90,14 @@ public class MyUniActivity extends SherlockActivity {
 					}
 				});
 
-//		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(MyUniActivity.this,
-//						PHLActivity.class);
-//				MyUniActivity.this.startActivity(intent);
-//			}
-//		});
+		// findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// Intent intent = new Intent(MyUniActivity.this,
+		// PHLActivity.class);
+		// MyUniActivity.this.startActivity(intent);
+		// }
+		// });
 
 		findViewById(R.id.notices_btn).setOnClickListener(
 				new OnClickListener() {
@@ -140,6 +146,8 @@ public class MyUniActivity extends SherlockActivity {
 	public class LoadUserDataFromACServiceTask extends
 			AsyncTask<Void, Void, BasicProfile> {
 
+		ArrayList<CorsoCarriera> corsicarrierastudente;
+
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
@@ -158,12 +166,13 @@ public class MyUniActivity extends SherlockActivity {
 					e.printStackTrace();
 				}
 				if (bp != null) {
+					// proviamo a recuperare i dati studente
 					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
 							SmartUniDataWS.TOKEN_NAME);
 					MessageResponse response;
 					MessageRequest request = new MessageRequest(
 							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_STUDENT_DATA);
+							SmartUniDataWS.GET_WS_STUDENT_DATA_NO_SYNC);
 					request.setMethod(Method.GET);
 					try {
 						response = mProtocolCarrier.invokeSync(request,
@@ -175,7 +184,79 @@ public class MyUniActivity extends SherlockActivity {
 							// facciamo vedere XD
 							body = response.getBody();
 							String jsonstudente = body;
-							save(jsonstudente);
+							save("studenteSessioneJSON", jsonstudente);
+						} else {
+							return null;
+						}
+					} catch (ConnectionException e) {
+						e.printStackTrace();
+					} catch (ProtocolException e) {
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						e.printStackTrace();
+					} catch (AACException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					// proviamo a recueprare i dati relativi ai corsi dello
+					// studente
+					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+							SmartUniDataWS.TOKEN_NAME);
+					MessageResponse response1;
+					MessageRequest request1 = new MessageRequest(
+							SmartUniDataWS.URL_WS_SMARTUNI,
+							SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+					request.setMethod(Method.GET);
+					try {
+						response1 = mProtocolCarrier.invokeSync(request1,
+								SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+						if (response1.getHttpStatus() == 200) {
+
+							body = response1.getBody();
+							String jsoncorsidellostudente = body;
+							save("corsiStudente", jsoncorsidellostudente);
+							corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
+									.convertJSONToObjects(
+											jsoncorsidellostudente,
+											CorsoCarriera.class);
+						} else {
+							return null;
+						}
+					} catch (ConnectionException e) {
+						e.printStackTrace();
+					} catch (ProtocolException e) {
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						e.printStackTrace();
+					} catch (AACException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					// proviamo a recueprare i dati relativi al corso di laurea
+					// di
+					// uno studente tramite il codice prensete all'interno di
+					// uno
+					// dei corsicarriera che ci siamo appena presi
+					String cod = corsicarrierastudente.get(0).getCod();
+					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+							SmartUniDataWS.TOKEN_NAME);
+					MessageResponse response2;
+					MessageRequest request2 = new MessageRequest(
+							SmartUniDataWS.URL_WS_SMARTUNI,
+							SmartUniDataWS.GET_WS_COURSES_DETAILS(Integer
+									.parseInt(cod)));
+					request.setMethod(Method.GET);
+					try {
+						response2 = mProtocolCarrier.invokeSync(request2,
+								SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+						if (response2.getHttpStatus() == 200) {
+
+							body = response2.getBody();
+							String jsonattivitadidattica = body;
+							save("attivitaDidatticaStudente",
+									jsonattivitadidattica);
 						} else {
 							return null;
 						}
@@ -194,6 +275,7 @@ public class MyUniActivity extends SherlockActivity {
 				return bp;
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println(e.getMessage());
 				return null;
 			}
 
@@ -204,22 +286,11 @@ public class MyUniActivity extends SherlockActivity {
 			super.onPostExecute(result);
 		}
 
-		// private void save(boolean[] isChecked) {
-		// SharedPreferences sharedPreferences =
-		// context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-		// SharedPreferences.Editor editor = sharedPreferences.edit();
-		// for(Integer i=0;i<isChecked.length;i++)
-		// {
-		// editor.putBoolean(i.toString(), isChecked[i]);
-		// }
-		// editor.commit();
-		// }
-
-		private void save(String jsonTosaveinSharedP) {
+		private void save(String key, String jsonTosaveinSharedP) {
 			SharedPreferences sharedPreferences = MyUniActivity.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 			SharedPreferences.Editor editor = sharedPreferences.edit();
-			editor.putString("studenteSessioneJSON", jsonTosaveinSharedP);
+			editor.putString(key, jsonTosaveinSharedP);
 			editor.commit();
 		}
 	}

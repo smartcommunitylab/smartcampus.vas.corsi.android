@@ -58,6 +58,9 @@ public final class SmartUniDataWS {
 
 	// Student //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";
+	
+	// Student //////////////////////////////////////////////////////////
+		public static final String GET_WS_STUDENT_DATA_NO_SYNC = "/studente/me";
 
 	// Departments //////////////////////////////////////////////////////////
 	public static final String GET_WS_DEPARTMENTS_ALL = "/dipartimento/all";
