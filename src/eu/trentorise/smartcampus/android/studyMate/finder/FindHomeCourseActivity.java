@@ -123,7 +123,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.itemAddRating:
 			new IsCousePassedTask().execute(CoursesHandlerLite.corsoSelezionato
-					.getAdId());
+					.getAdCod());
 
 			return true;
 		default:
@@ -132,15 +132,15 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean> {
+	private class IsCousePassedTask extends AsyncTask<String, Void, Boolean> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public String body;
 
-		private Long corsoId;
+		private String corsoId;
 
 		@Override
-		protected Boolean doInBackground(Long... params) {
+		protected Boolean doInBackground(String... params) {
 			corsoId = params[0];
 
 			mProtocolCarrier = new ProtocolCarrier(FindHomeCourseActivity.this,
@@ -148,8 +148,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String
-							.valueOf(corsoId)));
+					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(corsoId));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
@@ -196,12 +195,12 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
 				intentAddRating.putExtra("corso",
-						CoursesHandler.corsoSelezionato.getId());
+						CoursesHandlerLite.corsoSelezionato.getAdCod());
 				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
 				intentAddRating.putExtra("NomeCorso",
-						CoursesHandler.corsoSelezionato.getName() );
+						CoursesHandlerLite.corsoSelezionato.getDescription());
 				intentAddRating.putExtra("IdCorso",
-						CoursesHandler.corsoSelezionato.getId());
+						CoursesHandlerLite.corsoSelezionato.getAdId());//CoursesHandler.corsoSelezionato.getId());
 				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 

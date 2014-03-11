@@ -113,11 +113,11 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarrie
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-
+							
 							// Pass Data to other Fragment
 							corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
-
+							CoursesPassedHandler.corsoSelezionato= CoursesHandler.corsoSelezionato;
 							Intent intent = new Intent();
 							intent.setClass(currentActivity,
 									AddRatingFromCoursesPassed.class);

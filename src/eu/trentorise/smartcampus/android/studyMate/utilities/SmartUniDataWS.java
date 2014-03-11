@@ -44,8 +44,8 @@ public final class SmartUniDataWS {
 	// My courses passed
 	public static final String GET_WS_MY_COURSES_NOT_PASSED = "/corsocarriera/notpassed/me";
 
-	public static final String GET_WS_COURSE_IS_PASSED(String adId) {
-		return "/corsocarriera/" + adId + "/superato/";
+	public static final String GET_WS_COURSE_IS_PASSED(String adCod) {
+		return "/corsocarriera/" + adCod + "/superato";
 	}
 
 	// Events /////////////////////////////////////////////////////////////

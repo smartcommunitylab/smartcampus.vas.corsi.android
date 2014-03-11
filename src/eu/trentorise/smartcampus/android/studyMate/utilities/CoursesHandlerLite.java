@@ -303,7 +303,8 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 				corsoSelezionato.setDescription(courses.get(arg2).getDescription());
 				corsoSelezionato.setCds_id(courses.get(arg2)
 						.getCds_id());
-
+				corsoSelezionato.setAdCod(courses.get(arg2).getAdCod());
+				CoursesHandlerLite.corsoSelezionato = corsoSelezionato; 
 				//CoursesHandler.corsoSelezionato = (AttivitaDidattica) corsoSelezionato;
 
 				i.putExtra("courseSelected", corsoSelezionato);

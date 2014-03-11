@@ -43,7 +43,7 @@ public class SetCourseAsFollowHandler extends AsyncTask<AttivitaDidattica, Void,
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.POST_WS_COURSE_AS_FOLLOW_NEW(corso.getAdId()));
+				SmartUniDataWS.POST_WS_COURSE_AS_FOLLOW_NEW(Long.parseLong(corso.getAdCod())));
 		request.setMethod(Method.POST);
 
 		MessageResponse response;

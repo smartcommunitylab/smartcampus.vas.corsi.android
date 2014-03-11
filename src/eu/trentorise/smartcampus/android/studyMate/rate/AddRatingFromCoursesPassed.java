@@ -27,6 +27,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -52,7 +53,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
-		setTitle(CoursesPassedHandler.corsoSelezionato.getName());
+		//setTitle(CoursesPassedHandler.corsoSelezionato.getName());
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
@@ -322,8 +323,8 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS
-							.GET_WS_FEEDBACK_OF_STUDENT(CoursesPassedHandler.corsoSelezionato
-									.getId()));
+							.GET_WS_FEEDBACK_OF_STUDENT(CoursesHandlerLite.corsoSelezionato
+									.getAdId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
