@@ -45,7 +45,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		tvDateEvent.setText(dateFormat.format(eventSelected.getStart()));
+		tvDateEvent.setText(dateFormat.format(eventSelected.getDate()));
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
 		tvOraEvent
