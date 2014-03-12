@@ -4,22 +4,37 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.studymate.R;
-import eu.trentorise.smartcampus.studymate.R.id;
-import eu.trentorise.smartcampus.studymate.R.layout;
 
 public class ModifiyAttivitaStudio extends SherlockActivity {
 	private AttivitaDiStudio attivitaDiStudio;
+	private ProtocolCarrier mProtocolCarrier;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +81,20 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 				this, android.R.layout.simple_spinner_item, edifici_values);
 		spinner_edificio.setAdapter(adapter_spinner_ed);
 
-//		String location_actual = attivitaDiStudio.getRoom();
-//		int spinnerPositionedificio = adapter_spinner_ed
-//				.getPosition(location_actual);
-//		spinner_edificio.setSelection(spinnerPositionedificio);
+		// String location_actual = attivitaDiStudio.getRoom();
+		// int spinnerPositionedificio = adapter_spinner_ed
+		// .getPosition(location_actual);
+		// spinner_edificio.setSelection(spinnerPositionedificio);
 
 		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
 		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, room_values);
 		spinner_aula.setAdapter(adapter_spinner_aule);
 
-//		String room_actual = attivitaDiStudio.getRoom();
-//		int spinnerPositionaula = adapter_spinner_aule.getPosition(room_actual);
-//		spinner_edificio.setSelection(spinnerPositionaula);
+		// String room_actual = attivitaDiStudio.getRoom();
+		// int spinnerPositionaula =
+		// adapter_spinner_aule.getPosition(room_actual);
+		// spinner_edificio.setSelection(spinnerPositionaula);
 
 		// retrieving & initializing some button
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);
@@ -104,10 +120,119 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
+		MenuInflater inflater = getSherlock().getMenuInflater();
+		inflater.inflate(R.menu.modifiy_attivita_studio, menu);
 		return super.onCreateOptionsMenu(menu);
-		/*
-		 * da fare l'optionmenu
-		 */
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home: {
+			ModifiyAttivitaStudio.this.finish();
+			return super.onOptionsItemSelected(item);
+		}
+		case R.id.action_done: {
+			ModifyAS salvamodificheAS = new ModifyAS(ModifiyAttivitaStudio.this);
+			salvamodificheAS.execute();
+			return super.onOptionsItemSelected(item);
+		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
+	}
+
+	private class ModifyAS extends AsyncTask<Void, Void, Boolean> {
+		Context taskcontext;
+		public ProgressDialog pd;
+		Boolean allright;
+
+		public ModifyAS(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext,
+					"Salvataggio modifiche in corso", "...");
+		}
+
+		private boolean modificaAS() {
+			mProtocolCarrier = new ProtocolCarrier(ModifiyAttivitaStudio.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageResponse response;
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_ATTIVITASTUDIO_MODIFY);
+			request.setMethod(Method.POST);
+
+			Boolean resultPost = false;
+
+			try {
+
+				String AttivitaJSON = Utils.convertToJSON(attivitaDiStudio);
+				System.out
+						.println("Il json dell'attività di studio che sto modificando è: "
+								+ AttivitaJSON);
+				request.setBody(AttivitaJSON);
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					String body = response.getBody();
+					resultPost = Utils.convertJSONToObject(body, Boolean.class);
+
+				}
+
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return resultPost;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			allright = modificaAS();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			if (allright) {
+				ModifiyAttivitaStudio.this.finish();
+			} else {
+				// merda
+				Toast.makeText(ModifiyAttivitaStudio.this,
+						"errore nella modifica dell'AS", Toast.LENGTH_SHORT)
+						.show();
+				ModifiyAttivitaStudio.this.finish();
+			}
+
+		}
+
 	}
 
 }
