@@ -49,11 +49,18 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	private RatingRowGroup rrg;
 	public SherlockFragmentActivity act;
 
+	
+	long idCorso;
+	String CorsoName;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
-		//setTitle(CoursesPassedHandler.corsoSelezionato.getName());
+		Intent intent = getIntent();
+		idCorso = intent.getLongExtra("IdCorso", 0);
+		CorsoName = intent.getStringExtra("NomeCorso");
+		setTitle(CorsoName);
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
 				"Caricamento dei dati della tua recensione", "Caricamento...");
@@ -269,8 +276,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							Calendar c = Calendar.getInstance();
 							commento.setData_inserimento(c.getTime().toString());
 
-							commento.setCorso(CoursesPassedHandler.corsoSelezionato
-									.getId());
+							commento.setCorso(idCorso);
 							commento.setRating_contenuto(ratings.get(0)
 									.getRating());
 							commento.setRating_carico_studio(ratings.get(1)
@@ -291,11 +297,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							new ProgressDialog(AddRatingFromCoursesPassed.this);
 							pd = ProgressDialog
 									.show(AddRatingFromCoursesPassed.this,
-											"Salvataggio del tuo commento per "
-													+ CoursesPassedHandler.corsoSelezionato
-															.getName()
-															.toString()
-													+ " in corso ",
+											"Salvataggio...",
 											"Caricamento...");
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this,
@@ -323,8 +325,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS
-							.GET_WS_FEEDBACK_OF_STUDENT(CoursesHandlerLite.corsoSelezionato
-									.getAdId()));
+							.GET_WS_FEEDBACK_OF_STUDENT(idCorso));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;

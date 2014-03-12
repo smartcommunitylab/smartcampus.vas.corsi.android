@@ -41,7 +41,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 	ListView listView;
 	TextView tvTitleNotices;
 	Activity currentAct;
-	public static AttivitaDidattica corsoSelezionato;
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
@@ -304,13 +303,15 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 				corsoSelezionato.setCds_id(courses.get(arg2)
 						.getCds_id());
 				corsoSelezionato.setAdCod(courses.get(arg2).getAdCod());
-				CoursesHandlerLite.corsoSelezionato = corsoSelezionato; 
-				//CoursesHandler.corsoSelezionato = (AttivitaDidattica) corsoSelezionato;
 
-				i.putExtra("courseSelected", corsoSelezionato);
-				i.putExtra("courseSelectedName", courseSelectedName);
-				i.putExtra("courseSelectedId", getIDCourseSelected(arg2));
+				i.putExtra("NomeCorso", corsoSelezionato.getDescription());
+				i.putExtra("IdCorso", corsoSelezionato.getAdId());
+				i.putExtra("adCod", corsoSelezionato.getAdCod());
 				currentAct.startActivity(i);
+//				i.putExtra("courseSelected", corsoSelezionato);
+//				i.putExtra("courseSelectedName", courseSelectedName);
+//				i.putExtra("courseSelectedId", getIDCourseSelected(arg2));
+//				currentAct.startActivity(i);
 			}
 
 		});

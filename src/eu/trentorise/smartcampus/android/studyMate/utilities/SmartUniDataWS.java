@@ -19,6 +19,9 @@ public final class SmartUniDataWS {
 	public static String POST_WS_COURSE_AS_FOLLOW_NEW (long adId){
 		return "/corsointeresse/" + String.valueOf(adId) + "/seguo";
 	}
+	public static String GET_WS_IF_FOLLOW (String adId){
+		return "/corsointeresse/" + adId + "/seguito";
+	}
 	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(long id_dep) {
 		return "/attivitadidattica/dipartimento/" + String.valueOf(id_dep);
 	}

@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
+
 public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 	private ProtocolCarrier mProtocolCarrier;
@@ -32,9 +32,8 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarrie
 	private String body;
 	private ListView listViewCorsiPassati;
 	public Activity currentActivity;
-	public static CorsoCarriera corsoSelezionato;
 	public static ProgressDialog pd;
-	public Bundle bundleParam;
+
 
 	public CoursesPassedHandler(Context applicationContext,
 			ListView listViewCorsi, Activity currentActivity) {
@@ -115,9 +114,8 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarrie
 								int arg2, long arg3) {
 							
 							// Pass Data to other Fragment
-							corsoSelezionato = new CorsoCarriera();
+							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
-							CoursesPassedHandler.corsoSelezionato= CoursesHandler.corsoSelezionato;
 							Intent intent = new Intent();
 							intent.setClass(currentActivity,
 									AddRatingFromCoursesPassed.class);

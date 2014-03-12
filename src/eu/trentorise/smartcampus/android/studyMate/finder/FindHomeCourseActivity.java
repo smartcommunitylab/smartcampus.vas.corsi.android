@@ -37,7 +37,9 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	public static AttivitaDidattica courseInfo;
 	public static String courseName;
 	public static AttivitaDidattica corsoAttuale;
-
+	public static long idCorso;
+	String corsoName;
+	String adCod;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,10 +54,14 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		String tab2_txt = getResources().getString(R.string.tab_feedback);
 
 		Intent intent = getIntent();
-		courseName = intent.getStringExtra("courseSelectedName");
-		setTitle(courseName);
-		corsoAttuale = new AttivitaDidattica();
-		corsoAttuale = (AttivitaDidattica) intent.getSerializableExtra("courseSelected");
+		idCorso = intent.getLongExtra("IdCorso", 0);
+		corsoName = intent.getStringExtra("NomeCorso");
+		adCod = intent.getStringExtra("adCod");
+//		Intent intent = getIntent();
+//		courseName = intent.getStringExtra("courseSelectedName");
+		setTitle(corsoName);
+//		corsoAttuale = new AttivitaDidattica();
+//		corsoAttuale = (AttivitaDidattica) intent.getSerializableExtra("courseSelected");
 
 		Tab tab1 = ab
 				.newTab()
@@ -122,8 +128,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 			return true;
 		case R.id.itemAddRating:
-			new IsCousePassedTask().execute(CoursesHandlerLite.corsoSelezionato
-					.getAdCod());
+			new IsCousePassedTask().execute(adCod);
 
 			return true;
 		default:
@@ -194,14 +199,13 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				Intent intentAddRating = new Intent(
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
-				intentAddRating.putExtra("corso",
-						CoursesHandlerLite.corsoSelezionato.getAdCod());
-				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
-				intentAddRating.putExtra("NomeCorso",
-						CoursesHandlerLite.corsoSelezionato.getDescription());
 				intentAddRating.putExtra("IdCorso",
-						CoursesHandlerLite.corsoSelezionato.getAdId());//CoursesHandler.corsoSelezionato.getId());
-				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						idCorso);
+				intentAddRating.putExtra("NomeCorso",
+						corsoName);
+//				intentAddRating.putExtra("IdCorso",
+//						CoursesHandlerLite.corsoSelezionato.getAdId());//CoursesHandler.corsoSelezionato.getId());
+//				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intentAddRating);
 
 			} else {

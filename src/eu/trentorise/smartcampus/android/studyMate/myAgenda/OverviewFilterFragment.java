@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -27,15 +29,17 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 
-	public CorsoCarriera courseSelected;
+	//public CorsoCarriera courseSelected;
 	public List<Evento> listaEventiFiltrati = null;
-
+	public static String nomeCorsoOW;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
 				container, false);
+		Bundle b = getArguments();
+		nomeCorsoOW= b.getString("NomeCorso");
 
 		return view;
 	}
@@ -47,13 +51,16 @@ public class OverviewFilterFragment extends SherlockFragment {
 		parent.setAgendaState(MenuKind.BASE_MENU);
 		listaEventiFiltrati = new ArrayList<Evento>();
 
-		courseSelected = new CorsoCarriera();
-		courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
-		parent.setTitle(courseSelected.getName());
+		//courseSelected = new CorsoCarriera();
+		//courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
+		parent.setTitle(nomeCorsoOW);
 		listaEventiFiltrati = filterEventsbyCourse();
 
 		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
-
+		if (listaEventiFiltrati.size()==0){
+			Toast.makeText(getSherlockActivity(), "Non sono disponibli eventi a breve per questo corso", Toast.LENGTH_SHORT).show();
+		}
+		else{
 		int i = 0;
 		for (Evento ev : listaEventiFiltrati) {
 			AdptDetailedEvent e = new AdptDetailedEvent(ev.getDate(),
@@ -89,11 +96,10 @@ public class OverviewFilterFragment extends SherlockFragment {
 			}
 
 		});
-
+		}
 	}
 @Override
 public void onResume() {
-	// TODO Auto-generated method stub
 	super.onResume();
 }
 	// filtro gli eventi in base al corso che ho selezionato
@@ -102,7 +108,7 @@ public void onResume() {
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 
 		for (Evento evento : EventsHandler.listaEventi) {
-			if (String.valueOf(evento.getTitle()).compareTo(courseSelected.getName())==0) {
+			if (String.valueOf(evento.getTitle()).compareTo(nomeCorsoOW)==0) {
 				eventiFiltrati.add(evento);
 			}
 		}

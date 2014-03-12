@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
+import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -44,7 +46,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 	public Activity currentActivity;
 	public SherlockFragmentActivity currentSherlock;
 	public Bundle bundleParam;
-	public static CorsoCarriera corsoSelezionato;
+
 
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi,
 			Activity currentActivity, SherlockFragmentActivity currentSherlock) {
@@ -129,15 +131,23 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment
-							corsoSelezionato = new CorsoCarriera();
+							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
+							//Intent intent = new Intent();
+//							intent.setClass(currentActivity,
+//									AddRatingFromCoursesPassed.class);
+//							intent.putExtra("NomeCorso",
+//									corsoSelezionato.getName());
+							//MyAgendaActivity.idCorsoMA=  corsoSelezionato.getCod();
+//							currentActivity.startActivity(intent);
 
-							//CoursesHandlerLite.corsoSelezionato = CoursesHandler.corsoSelezionato;
-
+							Bundle data = new Bundle();
+							data.putString("NomeCorso",corsoSelezionato.getName());
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();
 							Fragment fragment = new OverviewFilterFragment();
+							fragment.setArguments(data);
 							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 							ft.replace(R.id.tabCorsi, fragment);
 							ft.addToBackStack(null);

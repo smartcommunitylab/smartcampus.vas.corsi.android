@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +23,7 @@ import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -164,8 +166,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	@Override
 	protected void onPreExecute() {
 		new ProgressDialog(act);
-		pd = ProgressDialog.show(act, "Informazioni del corso di "
-				+ FindHomeCourseActivity.courseName, "Caricamento...");
+		pd = ProgressDialog.show(act, "Informazioni del corso...",
+				"Caricamento...");
 
 		super.onPreExecute();
 
@@ -175,6 +177,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	protected void onPostExecute(final List<Commento> commenti) {
 		super.onPostExecute(commenti);
 
+		new FollowTask().execute();
 		if (commenti == null) {
 
 			Toast.makeText(context, "Ops! C'e' stato un errore...",
@@ -185,13 +188,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		} else {
 			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			// if (isContainsInCorsiInteresse(studenteUser, corsoInfo)) {
-			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-			// txtMonitor.setText(R.string.label_txtMonitor_on);
-			// } else {
-			// swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
-			// txtMonitor.setText(R.string.label_txtMonitor_off);
-			// }
 
 			swichFollow.setOnClickListener(new OnClickListener() {
 
@@ -248,6 +244,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	protected List<Commento> doInBackground(Void... params) {
 		return getFullFeedbackById();
 	}
+
 	//
 	// // metodo che dato lo studente setta la lista dei corsi di interesse
 	// dalla
@@ -269,5 +266,73 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	// }
 	//
 	// }
+
+	private class FollowTask extends AsyncTask<String, Void, Boolean> {
+
+		private ProtocolCarrier mProtocolCarrier;
+		public String body;
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+
+			mProtocolCarrier = new ProtocolCarrier(context,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_IF_FOLLOW(String.valueOf(corsoInfo
+							.getAdId())));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, Boolean.class);
+
+		}
+
+		@Override
+		protected void onPostExecute(Boolean isPassed) {
+			super.onPostExecute(isPassed);
+
+			if (isPassed == null) {
+				Toast toast = Toast.makeText(context,
+						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
+				toast.show();
+				return;
+			}
+
+			if (isPassed) {
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+				txtMonitor.setText(R.string.label_txtMonitor_on);
+			} else {
+				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
+				txtMonitor.setText(R.string.label_txtMonitor_off);
+			}
+
+		}
+
+	}
 
 }

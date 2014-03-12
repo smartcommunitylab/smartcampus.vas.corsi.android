@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -21,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
@@ -58,8 +60,9 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
 	private Evento evento = null;
-	public CorsoCarriera courseSelected;
+	//public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
+	String cN;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +101,21 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 		super.onStart();
 		Button button_ok = (Button) findViewById(R.id.button_ok4Course);
+		Button button_cancel = (Button) findViewById(R.id.button_annulla4Course);
+		button_cancel.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 		button_ok.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				new PostEvent(getApplicationContext(), evento).execute();
+				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
+				onBackPressed();
 			}
 		});
 
@@ -249,10 +261,10 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 			List<String> resultStrings = new ArrayList<String>();
 
-			courseSelected = new CorsoCarriera();
-			courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
+//			courseSelected = new CorsoCarriera();
+//			courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
 
-			resultStrings.add(courseSelected.getName());
+			resultStrings.add(OverviewFilterFragment.nomeCorsoOW);//courseSelected.getName());
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 					AddEvent4coursesActivity.this,

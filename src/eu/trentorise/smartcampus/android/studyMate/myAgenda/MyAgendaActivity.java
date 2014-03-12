@@ -45,9 +45,16 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	private MenuKind agendaState;
 	private ChildActivity mystate;
 
+	public static String corsoNameMA;
+	String idCorsoMA;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		Intent intent = getIntent();
+		// idCorsoMA = intent.getLongExtra("IdCorso", 0);
+		corsoNameMA = intent.getStringExtra("NomeCorso");
 
 		agendaState = MenuKind.BASE_MENU;
 		mystate = ChildActivity.NONE;
@@ -182,15 +189,15 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			mystate = ChildActivity.ADD_EVENT_FOR_COURSES;
 			Intent intentEventAddEvent = new Intent(MyAgendaActivity.this,
 					AddEvent4coursesActivity.class);
+			
 			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEventAddEvent);
 			return true;
-		case R.id.menu_add_rating:
-			mystate = ChildActivity.ADD_RATING;
-			new IsCousePassedTask().execute(CoursesHandler.corsoSelezionato
-					.getId());
+			// case R.id.menu_add_rating:
+			// mystate = ChildActivity.ADD_RATING;
+			// new IsCousePassedTask().execute(String.valueOf(idCorsoMA));
 
-			return true;
+			// return true;
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -205,87 +212,86 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		this.agendaState = agendaState;
 	}
 
-	private class IsCousePassedTask extends AsyncTask<Long, Void, Boolean> {
-
-		private ProtocolCarrier mProtocolCarrier;
-		public String body;
-
-		private Long corsoId;
-
-		@Override
-		protected Boolean doInBackground(Long... params) {
-			corsoId = params[0];
-
-			mProtocolCarrier = new ProtocolCarrier(MyAgendaActivity.this,
-					SmartUniDataWS.TOKEN_NAME);
-
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_COURSE_IS_PASSED(String
-							.valueOf(corsoId)));
-			request.setMethod(Method.GET);
-
-			MessageResponse response;
-			try {
-				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-
-				if (response.getHttpStatus() == 200) {
-
-					body = response.getBody();
-
-				} else {
-					return false;
-				}
-			} catch (ConnectionException e) {
-				e.printStackTrace();
-			} catch (ProtocolException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (AACException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return Utils.convertJSONToObject(body, Boolean.class);
-
-		}
-
-		@Override
-		protected void onPostExecute(Boolean isPassed) {
-			super.onPostExecute(isPassed);
-
-			if (isPassed == null) {
-				Toast toast = Toast.makeText(MyAgendaActivity.this,
-						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
-				toast.show();
-				return;
-			}
-
-			if (isPassed) {
-
-				Intent intentAddRating = new Intent(MyAgendaActivity.this,
-						AddRatingFromCoursesPassed.class);
-				CoursesPassedHandler.corsoSelezionato = CoursesHandler.corsoSelezionato;
-				intentAddRating.putExtra("corso",
-						CoursesHandler.corsoSelezionato.getName());
-				intentAddRating.putExtra("IdCorso",
-						CoursesHandler.corsoSelezionato.getId());
-				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intentAddRating);
-
-			} else {
-				Toast toast = Toast.makeText(
-						MyAgendaActivity.this,
-						MyAgendaActivity.this.getResources().getText(
-								R.string.toast_rate_access_denied),
-						Toast.LENGTH_LONG);
-				toast.show();
-			}
-		}
-
-	}
+	// private class IsCousePassedTask extends AsyncTask<String, Void, Boolean>
+	// {
+	//
+	// private ProtocolCarrier mProtocolCarrier;
+	// public String body;
+	//
+	// private String corsoId;
+	//
+	// @Override
+	// protected Boolean doInBackground(String... params) {
+	// corsoId = params[0];
+	//
+	// mProtocolCarrier = new ProtocolCarrier(MyAgendaActivity.this,
+	// SmartUniDataWS.TOKEN_NAME);
+	//
+	// MessageRequest request = new MessageRequest(
+	// SmartUniDataWS.URL_WS_SMARTUNI,
+	// SmartUniDataWS.GET_WS_COURSE_IS_PASSED(corsoId));
+	// request.setMethod(Method.GET);
+	//
+	// MessageResponse response;
+	// try {
+	// response = mProtocolCarrier
+	// .invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+	// MyUniActivity.getAuthToken());
+	//
+	// if (response.getHttpStatus() == 200) {
+	//
+	// body = response.getBody();
+	//
+	// } else {
+	// return false;
+	// }
+	// } catch (ConnectionException e) {
+	// e.printStackTrace();
+	// } catch (ProtocolException e) {
+	// e.printStackTrace();
+	// } catch (SecurityException e) {
+	// e.printStackTrace();
+	// } catch (AACException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// return Utils.convertJSONToObject(body, Boolean.class);
+	//
+	// }
+	//
+	// @Override
+	// protected void onPostExecute(Boolean isPassed) {
+	// super.onPostExecute(isPassed);
+	//
+	// if (isPassed == null) {
+	// Toast toast = Toast.makeText(MyAgendaActivity.this,
+	// "Ops. C'è stato un errore", Toast.LENGTH_LONG);
+	// toast.show();
+	// return;
+	// }
+	//
+	// if (isPassed) {
+	//
+	// Intent intentAddRating = new Intent(MyAgendaActivity.this,
+	// AddRatingFromCoursesPassed.class);
+	// intentAddRating.putExtra("IdCorso",
+	// idCorsoMA);
+	// intentAddRating.putExtra("NomeCorso",
+	// corsoNameMA);
+	// intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	// startActivity(intentAddRating);
+	//
+	// } else {
+	// Toast toast = Toast.makeText(
+	// MyAgendaActivity.this,
+	// MyAgendaActivity.this.getResources().getText(
+	// R.string.toast_rate_access_denied),
+	// Toast.LENGTH_LONG);
+	// toast.show();
+	// }
+	// }
+	//
+	// }
 
 }

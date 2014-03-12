@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -21,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
@@ -95,14 +97,24 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	protected void onStart() {
 		super.onStart();
 		Button button_ok = (Button) findViewById(R.id.button_ok);
+		Button button_cancel = (Button) findViewById(R.id.button_annulla);
+		button_cancel.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 		button_ok.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				new PostEvent(getApplicationContext(), evento).execute();
+				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
+				onBackPressed();
 			}
 		});
+		
 
 	}
 

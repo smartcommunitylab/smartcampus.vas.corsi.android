@@ -1,5 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+   
+   <item android:id="@+id/menu_add_event_4_course" 
+        android:title="Aggiungi evento"
+        android:icon="@drawable/new_event" 
+        android:showAsAction="ifRoom|withText" 
+    />
 
+</menu>
+<!-- 
         <item
         android:id="@+id/three_dots_item2"
         android:icon="@drawable/options"
@@ -14,8 +22,9 @@
                 android:id="@+id/menu_add_rating"
                 android:showAsAction="always"
                 android:title="Vota il corso"/>
-            <!-- items to show -->
+            items to show
         </menu>
     </item>
 
 </menu>
+ -->
