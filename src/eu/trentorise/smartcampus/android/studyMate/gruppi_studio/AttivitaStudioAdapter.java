@@ -41,7 +41,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 		// recupera componenti da layout, assegnagli i testi del currentImpegno
 		try {
 			TextView data_view = (TextView) impegno_view
-					.findViewById(R.id.data_attivitastudio);
+					.findViewById(R.id.data_attivitastudio_adpt);
 			TextView oggetto_view = (TextView) impegno_view
 					.findViewById(R.id.oggetto_attivitastudio);
 			TextView aula_edificio_view = (TextView) impegno_view
@@ -50,13 +50,14 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 					.findViewById(R.id.orario_attivitastudio);
 
 			if (currentImpegno.getDate() != null) {
-				data_view.setText(currentImpegno.getDate().toString());
+				SimpleDateFormat format = new SimpleDateFormat(
+						"dd/MM/yyyy HH:mm");
+				data_view.setText(format.format(currentImpegno.getDate()));
 			}
 
-			oggetto_view.setText(currentImpegno.getTopic());
-			aula_edificio_view.setText("Aula " + currentImpegno.getRoom()
-					+ " - " + currentImpegno.getRoom());
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			oggetto_view.setText(currentImpegno.getTitle());
+			aula_edificio_view.setText(currentImpegno.getRoom());
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			orario_view.setText(format.format(currentImpegno.getDate()));
 
 			AttivitaDiStudio prev = null;

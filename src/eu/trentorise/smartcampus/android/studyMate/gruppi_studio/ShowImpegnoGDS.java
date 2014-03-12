@@ -4,12 +4,14 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -17,12 +19,24 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 	AttivitaDiStudio contextualAttivitaStudio;
+	private ProtocolCarrier mProtocolCarrier;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -56,30 +70,36 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 				.getSerializable("contextualAttivitaStudio");
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
-		tv_oggetto.setText(contextualAttivitaStudio.getTopic());
+		tv_oggetto.setText(contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		Date data = contextualAttivitaStudio.getDate();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		tv_data.setText(format.format(data));
+		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
+		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
+		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
+		tv_descrizione.setText(contextualAttivitaStudio.getTopic());
+
 		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
-	//	ArrayList<Allegato> contextualAllegatis = null;
+
+		// ArrayList<Allegato> contextualAllegatis = null;
 		/*
-														 * contextualAttivitaStudio
-														 * .getAllegati();
-														 */
-//		if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
-//			Toast.makeText(MyApplication.getAppContext(),
-//					"non ci sono allegati ne mostro uno per prova",
-//					Toast.LENGTH_SHORT).show();
-//			contextualAllegatis = new ArrayList<Allegato>();
-//			Allegato fake = new Allegato(null, "nome allegato finto.pdf");
-//			contextualAllegatis.add(fake);
-//			contextualAllegatis.add(fake);
-//		}
-//		Allegati_to_list_arrayadapter adapter = new Allegati_to_list_arrayadapter(
-//				ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
-//				contextualAllegatis);
-//		listview_allegati.setAdapter(adapter);
+		 * contextualAttivitaStudio .getAllegati();
+		 */
+		// if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
+		// Toast.makeText(MyApplication.getAppContext(),
+		// "non ci sono allegati ne mostro uno per prova",
+		// Toast.LENGTH_SHORT).show();
+		// contextualAllegatis = new ArrayList<Allegato>();
+		// Allegato fake = new Allegato(null, "nome allegato finto.pdf");
+		// contextualAllegatis.add(fake);
+		// contextualAllegatis.add(fake);
+		// }
+		// Allegati_to_list_arrayadapter adapter = new
+		// Allegati_to_list_arrayadapter(
+		// ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
+		// contextualAllegatis);
+		// listview_allegati.setAdapter(adapter);
 		/*
 		 * manca altra roba
 		 */
@@ -128,11 +148,90 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			return super.onOptionsItemSelected(item);
 
 		case R.id.action_elimina_impegno:
-			Toast.makeText(ShowImpegnoGDS.this, "elimina impegno",
-					Toast.LENGTH_SHORT).show();
+			AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
+					ShowImpegnoGDS.this, contextualAttivitaStudio);
+			task.execute();
 			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+
+	}
+
+	private class AsyncTabbandonaAttivitaStudio extends
+			AsyncTask<AttivitaDiStudio, Void, Void> {
+
+		Context taskcontext;
+		public ProgressDialog pd;
+		AttivitaDiStudio toabandonAS;
+
+		public AsyncTabbandonaAttivitaStudio(Context taskcontext,
+				AttivitaDiStudio toabandonAS) {
+			super();
+			this.taskcontext = taskcontext;
+			this.toabandonAS = toabandonAS;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
+					+ toabandonAS.getTopic(), "");
+		}
+
+		private boolean abandonAS(AttivitaDiStudio as_to_abandon) {
+			mProtocolCarrier = new ProtocolCarrier(ShowImpegnoGDS.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.DELETE_ATTIVITASTUDIO);
+			request.setMethod(Method.DELETE);
+
+			MessageResponse response;
+			try {
+				String as_to_abandonJSON = Utils.convertToJSON(as_to_abandon);
+				request.setBody(as_to_abandonJSON);
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					String body = response.getBody();
+					return true;
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+
+		@Override
+		protected Void doInBackground(AttivitaDiStudio... params) {
+			// TODO Auto-generated method stub
+			abandonAS(this.toabandonAS);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			ShowImpegnoGDS.this.finish();
 		}
 
 	}

@@ -155,8 +155,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				e.printStackTrace();
 			}
 
-			
-
 			String descrizione = ((TextView) this
 					.findViewById(R.id.editText_descrizione_impegno)).getText()
 					.toString();
@@ -180,15 +178,15 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// boolean biblioteca = ((CheckBox) this
 			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
 
-			nuova_attivitaStudio.setTopic(oggetto);
+			nuova_attivitaStudio.setTitle(oggetto);
 			// Date data = new Date();
 			if (data != null) {
 				nuova_attivitaStudio.setDate(data);
 			}
 
 			// nuova_attivitaStudio.setStart(start);
-			nuova_attivitaStudio.setRoom(room);
-			//nuova_attivitaStudio.setEvent_location(edificio);
+			nuova_attivitaStudio.setRoom(edificio + " - " + room);
+			// nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setTopic(descrizione);
 
 			nuova_attivitaStudio.setGruppo(gds.getId());
