@@ -11,6 +11,7 @@ public class Evento implements Serializable{
 	private static final long serialVersionUID = 4216708970101566299L;
 
 	private long id;
+	private long idEventAd;
 	private long cds;
 	private int yearCds;
 	private String title;
