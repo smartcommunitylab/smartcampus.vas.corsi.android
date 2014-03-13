@@ -1,44 +1,47 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Set;
-import java.util.TreeSet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
-	TreeSet<String> materieset;
-	ArrayList<String> nomi_gruppi;
-	TreeSet<String> nomi_membriset;
-	ArrayList<String> materie;
-	ArrayList<String> nomi_membri;
 	Spinner spinner_materia;
 	Spinner spinner_nome_gruppo;
 	AutoCompleteTextView autocomplete_ricercaXmembro;
-	ArrayList<GruppoDiStudio> allChoosable_gds;
+	public ArrayList<String> listaCorsi = new ArrayList<String>();
+	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
+	private ProtocolCarrier mProtocolCarrier;
+	public String body;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,83 +54,20 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		// creazione istanze strutture dati di supporto
-		materieset = new TreeSet<String>();
-		nomi_gruppi = new ArrayList<String>();
-		nomi_membriset = new TreeSet<String>();
-		materie = new ArrayList<String>();
-		nomi_membri = new ArrayList<String>();
 		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
 		autocomplete_ricercaXmembro = (AutoCompleteTextView) findViewById(R.id.autocomplete_ricerca_per_membro);
-		// generazione di gruppi di studio fake e setting della ricerca tra
-		// gruppi
-		placeholder_gruppidistudio fake = new placeholder_gruppidistudio();
-		fake.initialize_some_gds();
-		allChoosable_gds = fake.getChoosable_gds();
-		MyAsyncTask task = new MyAsyncTask(RicercaGruppiGenerale_activity.this);
+
+		// caricamento materie nello spinner materie, l'onitemselectedlistener
+		// penserà a far partire l'aggiornamento dello spinner nomi gruppo
+		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
+				RicercaGruppiGenerale_activity.this);
 		task.execute();
-		// disegno delle risorse in grafica
-		inizializzaRisorseSpinner_TextView();
-	}
 
-	void inizializzaRisorseSpinner_TextView() {
-		// inizializzaGrafiche();
-		nomi_gruppi.add("Tutti");
-		for (GruppoDiStudio gds : allChoosable_gds) {
-			materieset.add("" + gds.getCorso());
-			nomi_gruppi.add(gds.getNome());
-			// un po' di roba fake
-			ArrayList<Studente> membriGDS = new ArrayList<Studente>();
-			Studente s1 = new Studente();
-			s1.setNome("Pinco");
-			s1.setCognome("Pallino");
-			s1.setAnno_corso("2");
-			Studente s2 = new Studente();
-			s2.setNome("Pinco");
-			s2.setCognome("Pallino");
-			s2.setAnno_corso("2");
-			membriGDS.add(s1);
-			membriGDS.add(s1);
-			// fine roba fake
-			for (Studente studente : membriGDS/* gds.getIdsStudenti() */) {
-				nomi_membriset.add(studente.getNome() + " "
-						+ studente.getCognome());
-			}
+		// setting up degli spinner una volta recuperati i dati dal web delle
+		// risorse in grafica
 
-		}
-		materie.add("Tutte");
-		for (String string : materieset) {
-			materie.add(string);
-		}
-		for (String string : nomi_membriset) {
-			nomi_membri.add(string);
-		}
-
-		ArrayAdapter<String> adapter_spinner_materia = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, materie);
-		adapter_spinner_materia
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_materia.setAdapter(adapter_spinner_materia);
-
-		ArrayAdapter<String> adapter_spinner_nomigruppo = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, nomi_gruppi);
-		adapter_spinner_materia
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_nome_gruppo.setAdapter(adapter_spinner_nomigruppo);
-
-		ArrayAdapter<String> autotext_nomiMembri_adapter = new ArrayAdapter<String>(
-				RicercaGruppiGenerale_activity.this,
-				android.R.layout.simple_dropdown_item_1line, nomi_membri);
-		autocomplete_ricercaXmembro.setAdapter(autotext_nomiMembri_adapter);
-
-		// listener sugli spinner
-		SpinnerChangeListenerUpdater listener = new SpinnerChangeListenerUpdater(
-				spinner_materia, spinner_nome_gruppo, allChoosable_gds,
-				materie, nomi_gruppi, null);
-		spinner_materia.setOnItemSelectedListener(listener);
-		spinner_nome_gruppo.setOnItemSelectedListener(listener);
 	}
 
 	@Override
@@ -146,183 +86,89 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 
 		case R.id.action_ricerca_GO: {
+			// recupero materia e nome_gruppo
 			String materia = ((Spinner) RicercaGruppiGenerale_activity.this
 					.findViewById(R.id.spinner_materie)).getSelectedItem()
 					.toString();
 			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
 					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
 					.toString();
-			// generazione nomi_studenti da passare
-			ArrayList<String> nomi_studenti = new ArrayList<String>();
-			Studente s1 = new Studente();
-			s1.setNome("Albert");
-			s1.setCognome("Einstein");
-			// NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
-			// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
-			Studente s2 = new Studente();
-			s2.setNome("Enrico");
-			s2.setCognome("Fermi");
-			// NON MODIFICARE IL MODELLO CHE USIAMO ANCHE NOI!!!!!!!!!
-			// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-			// nomi_studenti.add(/* vari eventuali */null);
-			// String nome_studente = ((AutoCompleteTextView)
-			// RicercaGruppiGenerale_activity.this
-			// .findViewById(R.id.autocomplete_ricerca_per_membro))
-			// .getText().toString();
 
+			// passaggio parametri della ricerca a
+			// Display_GDS_research_resultsActivity
 			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
 					Display_GDS_research_results.class);
 			intent.putExtra("Selected_materia", materia);
 			intent.putExtra("Selected_nome_gruppo", nome_gruppo);
-			MyApplication.getContextualCollection().add(nomi_studenti);
-			MyApplication.getContextualCollection().add(allChoosable_gds);
 
 			startActivity(intent);
 			return true;
 		}
-
 		default:
 			return super.onOptionsItemSelected(item);
-
 		}
-
 	}
 
-	final class placeholder_gruppidistudio {
-		ArrayList<GruppoDiStudio> Choosable_gds;
-
-		public placeholder_gruppidistudio() {
-		}
-
-		public void initialize_some_gds() {
-			Choosable_gds = new ArrayList<GruppoDiStudio>();
-			ArrayList<Studente> membri_gds = new ArrayList<Studente>();
-
-			ArrayList<AttivitaDiStudio> attivita_studio_gds = new ArrayList<AttivitaDiStudio>();
-		//	ArrayList<ChatObj> forum = new ArrayList<ChatObj>();
-
-			// ####################################
-			// creazione gruppi fake per popolare grafica, dovrei in realtà
-			// recuperare tutto dal web
-			Dipartimento dipartimento = new Dipartimento();
-			dipartimento.setDescription("Scienze dell'Informazione");
-			Studente s1 = new Studente();
-
-			s1.setNome("Federico");
-			s1.setCognome("Rossi");
-			//s1.setDipartimento(dipartimento);
-			s1.setAnno_corso("2");
-			// s1.setFoto_studente(getResources().getDrawable(R.drawable.einstein));
-
-			Studente s2 = new Studente();
-
-			s2.setNome("Gabriele");
-			s2.setCognome("Bianchi");
-
-			// s2.setFoto_studente(getResources().getDrawable(R.drawable.fermi));
-			//s2.setDipartimento(dipartimento);
-			s2.setAnno_corso("2");
-
-			membri_gds.add(s1);
-			membri_gds.add(s2);
-			Date data1 = new Date();
-			data1.setTime(5000);
-
-			AttivitaDiStudio impegno1 = new AttivitaDiStudio();
-			// AttivitaStudio impegno1 = new AttivitaStudio("oggetto1", null,
-			// 14,
-			// null, "titolo as1", "Povo", "a203", "02/10/2013",
-			// "descrizione as", "09:00", false, false, false, false,
-			// false, false);
-			// AttivitaStudio impegno2 = new AttivitaStudio("oggetto2", null,
-			// 14,
-			// null, "titolo as2", "Povo", "a203", "02/10/2013",
-			// "descrizione as", "09:00", false, false, false, false,
-			// false, false);
-
-			attivita_studio_gds.add(impegno1);
-
-			GruppoDiStudio gds1 = new GruppoDiStudio();
-			gds1.setCorso(100);
-			gds1.setNome("Nome gruppo");
-			// GruppoDiStudio gds1 = new GruppoDiStudio("Programmazione 1",
-			// "R. Sebastiani", membri_gds, null, attivita_studio_gds, 1,
-			// forum, MyApplication.getAppContext().getResources()
-			// .getDrawable(R.drawable.prouno_logo));
-			// GruppoDiStudio gds2 = new GruppoDiStudio("Matematica Discreta 1",
-			// "GhiloniDOC", membri_gds, null, attivita_studio_gds, 1,
-			// forum, MyApplication.getAppContext().getResources()
-			// .getDrawable(R.drawable.discreta_logo));
-			// GruppoDiStudio gds3 = new GruppoDiStudio("Reti di calcolatori",
-			// "Renato++", membri_gds, null, attivita_studio_gds, 2,
-			// forum, MyApplication.getAppContext().getResources()
-			// .getDrawable(R.drawable.reti_calcolatori_logo));
-			// GruppoDiStudio gds4 = new GruppoDiStudio(
-			// "Algoritmi e strutture dati", "ASD", membri_gds, null,
-			// attivita_studio_gds, 2, forum, MyApplication
-			// .getAppContext().getResources()
-			// .getDrawable(R.drawable.algoritmi_logo));
-
-			// fine placeholder
-			// ############################
-			// qui
-			// fare
-			// un
-			// recupero
-			// info
-			// dal
-			// web
-			Choosable_gds.add(gds1);
-			// Choosable_gds.add(gds2);
-			// Choosable_gds.add(gds3);
-			// Choosable_gds.add(gds4);
-
-			// ####################################
-			/*
-			 * bug nel codice commentato sotto il codice intenderebbe non
-			 * mostrare in grafica i gruppi di studio che non possono essere
-			 * ricercati, rimuovendoli dall'inisieme di tutti i possibili gruppi
-			 * di studio
-			 */
-			// ArrayList<GruppoDiStudio> alreadyOfTheUser =
-			// Lista_GDS_activity.user_gds_list;
-			// for (GruppoDiStudio gds_already : alreadyOfTheUser) {
-			// for (GruppoDiStudio gds_possible : Choosable_gds) {
-			// if (gds_already.compareTo(gds_possible) == 0)
-			// Choosable_gds.remove(gds_possible);
-			// }
-			// }
-		}
-
-		public ArrayList<GruppoDiStudio> getChoosable_gds() {
-			initialize_some_gds();
-			return Choosable_gds;
-		}
-
-	}
-
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
+		private ArrayList<AttivitaDidattica> temp_listacorsiArrayList;
 
-		public MyAsyncTask() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public MyAsyncTask(Context taskcontext) {
+		public LoadSpinnerMaterieAsTask(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
-		public void attendi() {
+		protected ArrayList<AttivitaDidattica> webgetCorsiUtente() {
+			mProtocolCarrier = new ProtocolCarrier(
+					RicercaGruppiGenerale_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
+			// alcune preparazioni iniziali
+			// recupero dello studente in sessione dalle sharedpreferences
+			String jsonattivitadidattica = load("attivitaDidatticaStudente");
+			AttivitaDidattica attivitadidatticastud = Utils
+					.convertJSONToObject(jsonattivitadidattica,
+							AttivitaDidattica.class);
+			MessageResponse response;
+			if (attivitadidatticastud == null) {
+				return null;
+			}
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
+							+ attivitadidatticastud.getCds_id()));
+			request.setMethod(Method.GET);
+
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+				if (response.getHttpStatus() == 200) {
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(
+					body, AttivitaDidattica.class);
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			temp_listacorsiArrayList = webgetCorsiUtente();
+			return null;
 		}
 
 		@Override
@@ -330,122 +176,96 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
-					"Caricamento...");
+			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
+					"");
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-//			if (result == null) {
-//
-//				Toast.makeText(RicercaGruppiGenerale_activity.this,
-//						"Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
-//						.show();
-//				RicercaGruppiGenerale_activity.this.finish();
-//			}
-			pd.dismiss();
+			listaCorsi.clear();
+			if (temp_listacorsiArrayList != null) {
+				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
+					listaCorsi.add(tempcorso.getDescription());
+				}
+				ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
+						RicercaGruppiGenerale_activity.this,
+						android.R.layout.simple_spinner_item, listaCorsi);
+				spinner_materia.setAdapter(adapter_spinner_materie);
+				pd.dismiss();
+			} else {
+				pd.dismiss();
+				RicercaGruppiGenerale_activity.this.finish();
+				Toast.makeText(MyApplication.getAppContext(),
+						"Impossibile cercare un gruppo a cui iscriversi!",
+						Toast.LENGTH_LONG).show();
+			}
+
+		}
+
+		public String load(String key) {
+			SharedPreferences sharedPreferences = RicercaGruppiGenerale_activity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String retvaljson = sharedPreferences.getString(key, null);
+			return retvaljson;
+		}
+	}
+
+	private class LoadGDSofCourse extends
+			AsyncTask<AttivitaDidattica, Void, Void> {
+		/*
+		 * sto AsyncTask va buttato dentro nell'onitemselectedlistener dello
+		 * spinner_materia in modo che ogni volta che si cambia materia si
+		 * faccia partire il task che carica i nuovi GDS
+		 */
+		Context taskcontext;
+		public ProgressDialog pd;
+		private AttivitaDidattica materiaLookingForGDS;
+		private ArrayList<GruppoDiStudio> temp_listaGDS;
+
+		public LoadGDSofCourse(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected void onPreExecute() {
 			// TODO Auto-generated method stub
-			attendi();
+			super.onPreExecute();
+		}
+
+		ArrayList<GruppoDiStudio> getGDSofThatAttivitaDidattica(
+				AttivitaDidattica ad) {
+			/*
+			 * some webmethod
+			 */
 			return null;
 		}
 
-	}
-
-}
-
-final class SpinnerChangeListenerUpdater implements OnItemSelectedListener {
-
-	Spinner materie;
-	Spinner nomi_gds;
-	ArrayList<GruppoDiStudio> all_choosable;
-	ArrayList<String> materie_values;
-	ArrayList<String> nomi_gds_values;
-	ArrayList<String> nomi_componenti_values;
-
-	public SpinnerChangeListenerUpdater(Spinner materie, Spinner nomi_gds,
-			ArrayList<GruppoDiStudio> all_choosable,
-			ArrayList<String> materie_values,
-			ArrayList<String> nomi_gds_values,
-			ArrayList<String> nomi_componenti_values) {
-		super();
-		this.materie = materie;
-		this.nomi_gds = nomi_gds;
-		this.all_choosable = all_choosable;
-		this.materie_values = materie_values;
-		this.nomi_gds_values = nomi_gds_values;
-		this.nomi_componenti_values = nomi_componenti_values;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		// TODO Auto-generated method stub
-
-		if (parent.getId() == materie.getId()) {// se viene selezionata una
-			// materia
-			String selected_value = (String) parent.getItemAtPosition(pos);
-			nomi_gds_values.clear();
-
-			if (selected_value == "Tutte") {
-				nomi_gds_values.add("Tutti");
-				for (GruppoDiStudio gds : all_choosable) {
-					nomi_gds_values.add(gds.getNome());
-				}
-
-			} else {
-				for (GruppoDiStudio gds : all_choosable) {
-					if (("" + gds.getCorso()) == selected_value) {
-						nomi_gds_values.add(gds.getNome());
-					}
-				}
-				nomi_gds_values.add("Tutti");
-			}
-			((ArrayAdapter<String>) nomi_gds.getAdapter())
-					.notifyDataSetChanged();
-			return;
-		} else if (parent.getId() == nomi_gds.getId()) {// se viene selezionato
-			// il nome di un gds
-			String selected_value = (String) parent.getItemAtPosition(pos);
-			materie_values.clear();
-
-			if (selected_value == "Tutti") {
-				Set<String> set = new TreeSet<String>();
-				for (GruppoDiStudio gds : all_choosable) {
-					set.add("" + gds.getCorso());
-				}
-				materie_values.add("Tutte");
-				for (String string : set) {
-					materie_values.add(string);
-				}
-			} else {
-				for (GruppoDiStudio gds : all_choosable) {
-					if (gds.getNome() == selected_value)
-						materie_values.add("" + gds.getCorso());
-				}
-				materie_values.add("Tutte");
-			}
-
-			((ArrayAdapter<String>) materie.getAdapter())
-					.notifyDataSetChanged();
-			return;
+		@Override
+		protected Void doInBackground(AttivitaDidattica... params) {
+			// TODO Auto-generated method stub
+			materiaLookingForGDS = params[0];
+			ArrayList<GruppoDiStudio> temp_listaGDS = getGDSofThatAttivitaDidattica(materiaLookingForGDS);
+			return null;
 		}
 
-	}
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			listaCorsi.clear();
+			if (temp_listaGDS != null && temp_listaGDS.size() != 0) {
+				// se ci sono GDS della tale materia...
+				listaGDSxMateria = temp_listaGDS;
+				// e fare qualcosa con gli adapter probabilmente
+			} else {
+				// se non ci sono GDS della tale materia...
+				// ripartire da qualche passo precedente dell'activity
+			}
+		}
 
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-	}
-
-	public ArrayList<GruppoDiStudio> getAll_choosable() {
-		return all_choosable;
 	}
 
 }
