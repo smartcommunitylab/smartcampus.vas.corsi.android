@@ -1,8 +1,11 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -70,10 +73,22 @@ public class ShowModifyGDSDetails_activity extends SherlockActivity {
 
 	private class ASModificaDettagliGDS extends AsyncTask<Void, Void, Boolean> {
 
+		Context taskcontext;
+		public ProgressDialog pd;
+		Boolean allright;
+
+		public ASModificaDettagliGDS(Context taskcontext) {
+			super();
+			this.taskcontext = taskcontext;
+		}
+
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext, contextualGDS.getNome()
+					+ ": salvataggio modifiche in corso", "...");
 		}
 
 		@Override
@@ -89,7 +104,12 @@ public class ShowModifyGDSDetails_activity extends SherlockActivity {
 			/*
 			 * fare qulcosa via metodi web per salvare le modifiche ad un gruppo
 			 */
-			return retval;
+			Toast.makeText(
+					MyApplication.getAppContext(),
+					"Manca il metodo al backend per salvare le modifiche ad un gruppo!",
+					Toast.LENGTH_LONG).show();
+			// return retval;
+			return true;
 		}
 
 		@Override

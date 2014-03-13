@@ -6,6 +6,7 @@ import java.util.Date;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -129,10 +130,56 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
+
 			ModifiyAttivitaStudio.this.finish();
 			return super.onOptionsItemSelected(item);
+
 		}
 		case R.id.action_done: {
+			/*
+			 * recupero elementi grafici
+			 */
+			Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
+			Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
+			Button btn_data = (Button) findViewById(R.id.data_button_gds);
+			Button btn_time = (Button) findViewById(R.id.ora_button_gds);
+			TextView oggetto_tv = (TextView) this
+					.findViewById(R.id.editText_oggetto);
+			TextView descrizione_tv = (TextView) this
+					.findViewById(R.id.editText_descrizione_impegno);
+			/*
+			 * recupero informazioni dagli elementi grafici e aggiornamento di
+			 * attivitaDiStudio
+			 */
+			String edificio = spinner_edificio.getSelectedItem().toString();
+			String aula = spinner_aula.getSelectedItem().toString();
+
+			String oggetto = oggetto_tv.getText().toString();
+			String descrizione = descrizione_tv.getText().toString();
+
+			String stringdata = btn_data.getText().toString();
+			String ora = btn_time.getText().toString();
+			stringdata = stringdata + " " + ora;
+			Date data = null;
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			try {
+				data = format.parse(stringdata);
+				System.out.println(data);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			/*
+			 * salvataggio modifche in attivitaDiStudio
+			 */
+			attivitaDiStudio.setTitle(oggetto);
+			attivitaDiStudio.setTopic(descrizione);
+			attivitaDiStudio.setDate(data);
+			attivitaDiStudio.setRoom(edificio + " - " + aula);
 			ModifyAS salvamodificheAS = new ModifyAS(ModifiyAttivitaStudio.this);
 			salvamodificheAS.execute();
 			return super.onOptionsItemSelected(item);

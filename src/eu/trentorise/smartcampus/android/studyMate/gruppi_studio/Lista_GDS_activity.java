@@ -170,7 +170,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	private class MyAsyncTask extends
 			AsyncTask<Void, Void, List<GruppoDiStudio>> {
-
 		Context taskcontext;
 		public ProgressDialog pd;
 		List<GruppoDiStudio> responselist;
@@ -178,6 +177,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		public MyAsyncTask(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext,
+					"Caricamento gruppi di studio personali", "");
 		}
 
 		private List<GruppoDiStudio> getMineGDS() {
@@ -196,9 +204,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-
 					body = response.getBody();
-
 				} else {
 					return null;
 				}
@@ -212,17 +218,20 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			return Utils.convertJSONToObjects(body, GruppoDiStudio.class);
 		}
 
 		@Override
-		protected void onPreExecute() {
+		protected List<GruppoDiStudio> doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			super.onPreExecute();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					"Caricamento gruppi di studio personali", "");
+			user_gds_list.clear();
+			responselist = getMineGDS();
+			if (responselist != null) {
+				for (GruppoDiStudio gds : responselist) {
+					user_gds_list.add(gds);
+				}
+			}
+			return user_gds_list;
 		}
 
 		@Override
@@ -262,20 +271,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.commit();
 			}
 
-		}
-
-		@Override
-		protected List<GruppoDiStudio> doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			user_gds_list.clear();
-			responselist = getMineGDS();
-			if (responselist != null) {
-				for (GruppoDiStudio gds : responselist) {
-					user_gds_list.add(gds);
-				}
-			}
-
-			return user_gds_list;
 		}
 
 	}
