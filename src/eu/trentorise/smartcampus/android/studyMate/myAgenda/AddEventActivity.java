@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -31,6 +33,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -78,14 +81,29 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		// display the current date
 		updateDisplay();
 
-		@SuppressWarnings("unused")
+		
 		EditText title = (EditText) findViewById(R.id.editTextTitle);
-		@SuppressWarnings("unused")
 		EditText description = (EditText) findViewById(R.id.editTextDescription);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
-
 		new CoursesLoader().execute();
+		EventoId eId = new EventoId();
+		Date date = new Date();
+		date.setYear(mYear);
+		date.setMonth(mMonth);
+		date.setDate(mDay);
+		eId.setDate(date);
+		
+		
+		long millis = (hour*3600000)+(minute*60000);
 
+		//eId.setStart(millis);
+		evento.setTitle(title.getText().toString());
+		evento.setCds(coursesSpinner.getSelectedItemId());
+		evento.setIdStudente(Long.parseLong(MyUniActivity.bp.getUserId()));
+		evento.setTeacher("IO");
+		evento.setType("Evento personale");
+		evento.setPersonalDescription(description.getText().toString());
+		evento.setEventoId(eId);
 	}
 
 	@Override
@@ -280,4 +298,5 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 	}
 
+	
 }

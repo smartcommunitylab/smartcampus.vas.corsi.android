@@ -1,12 +1,14 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
 
 public class Evento implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -132877965855146086L;
 	private EventoId eventoId;
 	private long cds;
 	private int yearCds;
