@@ -298,11 +298,11 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 
 				AttivitaDidattica corsoSelezionato = new AttivitaDidattica();
 
-				corsoSelezionato.setAdId(courses.get(arg2).getAdId());
-				corsoSelezionato.setDescription(courses.get(arg2).getDescription());
-				corsoSelezionato.setCds_id(courses.get(arg2)
+				corsoSelezionato.setAdId(coursesFiltered.get(arg2).getAdId());
+				corsoSelezionato.setDescription(coursesFiltered.get(arg2).getDescription());
+				corsoSelezionato.setCds_id(coursesFiltered.get(arg2)
 						.getCds_id());
-				corsoSelezionato.setAdCod(courses.get(arg2).getAdCod());
+				corsoSelezionato.setAdCod(coursesFiltered.get(arg2).getAdCod());
 
 				i.putExtra("NomeCorso", corsoSelezionato.getDescription());
 				i.putExtra("IdCorso", corsoSelezionato.getAdId());
