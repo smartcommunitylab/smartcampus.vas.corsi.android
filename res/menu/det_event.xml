@@ -10,14 +10,14 @@
                 android:id="@+id/menu_add_note"
                 android:showAsAction="always"
                 android:title="Aggiungi Nota"/>
-            <item
+           <!--  <item
                 android:id="@+id/menu_add_notification"
                 android:showAsAction="always"
-                android:title="Invia segnalazione"/>
-            <item
+                android:title="Invia segnalazione"/> -->
+           <!--  <item
                 android:id="@+id/menu_share"
                 android:showAsAction="always"
-                android:title="Condividi evento"/>
+                android:title="Condividi evento"/> -->
             <item
                 android:id="@+id/menu_modify_event"
                 android:showAsAction="always"

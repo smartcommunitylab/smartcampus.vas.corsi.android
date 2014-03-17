@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
@@ -39,7 +43,7 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
 		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 		getSherlockActivity().supportInvalidateOptionsMenu();
-
+setHasOptionsMenu(true);
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
 		tvTitleEvent.setText(eventSelected.getTitle());
@@ -76,5 +80,32 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 				.findViewById(R.id.textLocationEvent);
 		tvLocationEvent.setText(eventSelected.getRoom());
 		super.onStart();
+	}
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		
+		case R.id.menu_add_note:
+			Toast.makeText(getSherlockActivity(), "TEST",
+				Toast.LENGTH_SHORT).show();
+			return true;  
+		case R.id.menu_modify_event:
+			Toast.makeText(getSherlockActivity(), "Coming soon!",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.menu_delete_event:
+			Toast.makeText(getSherlockActivity(), "Coming soon!",Toast.LENGTH_SHORT).show();
+			return true;
+			default:
+		        break;
+		}
+		return false;//super.onOptionsItemSelected(item);
 	}
 }
