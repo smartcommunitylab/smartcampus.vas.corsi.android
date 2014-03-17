@@ -18,6 +18,7 @@ public class Evento implements Serializable{
 	private String type;
 	private long idStudente;
 	private String personalDescription;
+	private long adCod;
 	
 
 
@@ -92,6 +93,14 @@ public class Evento implements Serializable{
 
 	public void setPersonalDescription(String personalDescription) {
 		this.personalDescription = personalDescription;
+	}
+
+	public long getAdCod() {
+		return adCod;
+	}
+
+	public void setAdCod(long adCod) {
+		this.adCod = adCod;
 	}
 
 
