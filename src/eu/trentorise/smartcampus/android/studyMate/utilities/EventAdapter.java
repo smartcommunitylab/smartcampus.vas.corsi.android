@@ -43,7 +43,7 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
 		ora.setText(item.getOra());
-		room.setText("Aula: " + item.getRoom());
+		room.setText(item.getRoom());
 		content.setPadding(
 				10,
 				8,
