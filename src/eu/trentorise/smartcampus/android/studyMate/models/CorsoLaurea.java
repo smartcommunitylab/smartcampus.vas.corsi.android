@@ -3,8 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 import java.io.Serializable;
 import java.util.List;
 
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
-
 
 public class CorsoLaurea implements Serializable{
 

@@ -3,7 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

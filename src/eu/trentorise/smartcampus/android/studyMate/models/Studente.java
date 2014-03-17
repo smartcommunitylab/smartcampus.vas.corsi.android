@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Studente {

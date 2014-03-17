@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,9 +21,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
-import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -126,8 +123,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-							MyAgendaActivity parent = (MyAgendaActivity) currentActivity;
-							parent.setAgendaState(MenuKind.OVERVIEW_FILTERED_BY_COURSE);
+							
 							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment

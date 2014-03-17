@@ -14,10 +14,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.studymate.R;
-import eu.trentorise.smartcampus.studymate.R.drawable;
-import eu.trentorise.smartcampus.studymate.R.id;
-import eu.trentorise.smartcampus.studymate.R.layout;
-import eu.trentorise.smartcampus.studymate.R.menu;
 
 public class ShowModifyGDSDetails_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;

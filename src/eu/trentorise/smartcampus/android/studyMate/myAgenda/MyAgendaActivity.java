@@ -1,11 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -19,17 +15,11 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
 
-	public enum MenuKind {
-		BASE_MENU, OVERVIEW_FILTERED_BY_COURSE, DETAIL_OF_EVENT, DETAIL_OF_EVENT_FOR_COURSE
-	}
-
 	public enum ChildActivity {
 		ADD_EVENT_FOR_COURSES, ADD_RATING, NONE
 	}
 
-	private MenuKind agendaState;
-	private ChildActivity mystate;
-
+	
 	public static String corsoNameMA;
 	String idCorsoMA;
 
@@ -40,8 +30,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		Intent intent = getIntent();
 		corsoNameMA = intent.getStringExtra("NomeCorso");
 
-		agendaState = MenuKind.BASE_MENU;
-		mystate = ChildActivity.NONE;
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		setTitle(getResources().getString(R.string.title_activity_my_agenda));
@@ -78,37 +66,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		if (agendaState == MenuKind.BASE_MENU) {
 			setTitle("Agenda");
-			if (mystate == ChildActivity.ADD_EVENT_FOR_COURSES) {
-				inflater.inflate(R.menu.add_event, menu);
-			} else if (mystate == ChildActivity.ADD_RATING) {
-				inflater.inflate(R.menu.add_event, menu);
-			} else {
-				inflater.inflate(R.menu.agenda, menu);
-			}
-		} else if (agendaState == MenuKind.OVERVIEW_FILTERED_BY_COURSE) {
-			inflater.inflate(R.menu.add_event, menu);
-		}
-		if ((agendaState == MenuKind.DETAIL_OF_EVENT)
-				|| (agendaState == MenuKind.DETAIL_OF_EVENT_FOR_COURSE)) {
-			inflater.inflate(R.menu.det_event, menu);
-		}
-		mystate = ChildActivity.NONE;
 		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (agendaState == MenuKind.DETAIL_OF_EVENT_FOR_COURSE) {
-			agendaState = MenuKind.OVERVIEW_FILTERED_BY_COURSE;
-		}
-		if (agendaState == MenuKind.DETAIL_OF_EVENT) {
-			agendaState = MenuKind.BASE_MENU;
-
-		}
-		supportInvalidateOptionsMenu();
-		super.onBackPressed();
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,55 +76,17 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			onBackPressed();
 			return true;
 		case R.id.add_event:
-			Intent intentEvent = new Intent(MyAgendaActivity.this,
-					AddEventActivity.class);
-			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEvent);
-			return true;
-		case R.id.menu_add_note:
-//			AlertDialog.Builder alertNote = new AlertDialog.Builder(
-//					MyAgendaActivity.this);
-//			final EditText inputNote = new EditText(MyAgendaActivity.this);
-//			alertNote.setView(inputNote);
-//			alertNote.setTitle("Inserisci nota");
-//			inputNote.setHint("Inserisci la nota qui...");
-//			alertNote.setPositiveButton("OK",
-//					new DialogInterface.OnClickListener() {
-//						public void onClick(DialogInterface dialog, int which) {
-//							Toast.makeText(getApplicationContext(), "Nota...",
-//									Toast.LENGTH_SHORT).show();
-//
-//						}
-//					});
-//			alertNote.show();
 			return false;
 		case R.id.menu_modify_event:
-//			Toast.makeText(getApplicationContext(), "Coming soon!",
-//					Toast.LENGTH_SHORT).show();
 			return false;
 		case R.id.menu_delete_event:
-//			Toast.makeText(getApplicationContext(), "Coming soon!",Toast.LENGTH_SHORT).show();
 			return false;
 		case R.id.menu_add_event_4_course:
-			mystate = ChildActivity.ADD_EVENT_FOR_COURSES;
-			Intent intentEventAddEvent = new Intent(MyAgendaActivity.this,
-					AddEvent4coursesActivity.class);
-			
-			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEventAddEvent);
-			return true;
+			return false;
 		default:
 			break;
 
 		}
 		return false;
-	}
-
-	public MenuKind isAgendaState() {
-		return agendaState;
-	}
-
-	public void setAgendaState(MenuKind agendaState) {
-		this.agendaState = agendaState;
 	}
 }

@@ -15,7 +15,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class DettailOfEventFragment4Courses extends SherlockFragment
@@ -40,34 +39,35 @@ public class DettailOfEventFragment4Courses extends SherlockFragment
 
 	@Override
 	public void onStart() {
-		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-		parent.setAgendaState(MenuKind.DETAIL_OF_EVENT_FOR_COURSE);
 		getSherlockActivity().supportInvalidateOptionsMenu();
-setHasOptionsMenu(true);
+		setHasOptionsMenu(true);
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
 		tvTitleEvent.setText(eventSelected.getTitle());
 
 		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		tvDateEvent.setText(dateFormat.format(eventSelected.getEventoId().getDate()));
+		tvDateEvent.setText(dateFormat.format(eventSelected.getEventoId()
+				.getDate()));
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
-		tvOraEvent
-				.setText(eventSelected.getEventoId()
-						.getStart()
+		tvOraEvent.setText(eventSelected
+				.getEventoId()
+				.getStart()
+				.toString()
+				.subSequence(
+						0,
+						eventSelected.getEventoId().getStart().toString()
+								.length() - 3)
+				+ " - "
+				+ eventSelected
+						.getEventoId()
+						.getStop()
 						.toString()
 						.subSequence(
 								0,
-								eventSelected.getEventoId().getStart().toString().length() - 3)
-						+ " - "
-						+ eventSelected.getEventoId()
-								.getStop()
-								.toString()
-								.subSequence(
-										0,
-										eventSelected.getEventoId().getStart().toString()
-												.length() - 3));
+								eventSelected.getEventoId().getStart()
+										.toString().length() - 3));
 
 		TextView tvDescEvent = (TextView) view
 				.findViewById(R.id.textDescriptionEvent);
@@ -81,31 +81,37 @@ setHasOptionsMenu(true);
 		tvLocationEvent.setText(eventSelected.getRoom());
 		super.onStart();
 	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-	
+		menu.clear();
+		if (eventSelected.getIdStudente() == 0) {
+			inflater.inflate(R.menu.det_event, menu);
+		} else {
+			menu.clear();
+		}
+		super.onCreateOptionsMenu(menu, inflater);}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-		
+
 		case R.id.menu_add_note:
-			Toast.makeText(getSherlockActivity(), "TEST",
-				Toast.LENGTH_SHORT).show();
-			return true;  
+			Toast.makeText(getSherlockActivity(), "TEST", Toast.LENGTH_SHORT)
+					.show();
+			return true;
 		case R.id.menu_modify_event:
 			Toast.makeText(getSherlockActivity(), "Coming soon!",
 					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.menu_delete_event:
-			Toast.makeText(getSherlockActivity(), "Coming soon!",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getSherlockActivity(), "Coming soon!",
+					Toast.LENGTH_SHORT).show();
 			return true;
-			default:
-		        break;
+		default:
+			break;
 		}
-		return false;//super.onOptionsItemSelected(item);
+		return false;// super.onOptionsItemSelected(item);
 	}
 }

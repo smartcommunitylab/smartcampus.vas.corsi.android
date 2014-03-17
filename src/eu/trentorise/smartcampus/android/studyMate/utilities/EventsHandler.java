@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,8 +17,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.DettailOfEventFragment;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity.MenuKind;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -144,16 +141,16 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 			fragment.finish();
 		} else {
 			// ordino per data
-			//Collections.sort(result, new CustomComparator());
+			// Collections.sort(result, new CustomComparator());
 
 			EventItem[] listEvItem = new EventItem[result.size()];
 
 			int i = 0;
 
 			for (Evento ev : result) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId().getDate(),
-						ev.getTitle(), ev.getType(), ev.getEventoId().getStart()
-								.toString(), ev.getRoom());
+				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+						.getDate(), ev.getTitle(), ev.getType(), ev
+						.getEventoId().getStart().toString(), ev.getRoom());
 				listEvItem[i++] = new EventItem(e);
 
 			}
@@ -168,8 +165,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					MyAgendaActivity parent = (MyAgendaActivity) fragment;
-					parent.setAgendaState(MenuKind.DETAIL_OF_EVENT);
 					fragment.supportInvalidateOptionsMenu();
 
 					Evento evento = result.get(arg2);
@@ -194,7 +189,8 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
 	public class CustomComparator implements Comparator<Evento> {
 		public int compare(Evento object1, Evento object2) {
-			return object1.getEventoId().getStart().compareTo(object2.getEventoId().getStart());
+			return object1.getEventoId().getStart()
+					.compareTo(object2.getEventoId().getStart());
 		}
 	}
 }

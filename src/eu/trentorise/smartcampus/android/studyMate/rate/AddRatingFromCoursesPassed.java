@@ -27,8 +27,6 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;
-import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
-import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
