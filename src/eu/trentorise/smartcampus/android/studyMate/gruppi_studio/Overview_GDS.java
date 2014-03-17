@@ -296,10 +296,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			MessageResponse response;
 			try {
 
-				String IDgds_to_abandonJSON = Utils
-						.convertToJSON(gds_to_abandon.getId());
+				String gds_to_abandonJSON = Utils
+						.convertToJSON(gds_to_abandon);
 
-				request.setBody(IDgds_to_abandonJSON);
+				request.setBody(gds_to_abandonJSON);
 				/*
 				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
 				 * diversamente visto che stiamousando una delete
@@ -330,14 +330,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			return true;
 		}
 
-		public void attendi() {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
 		@Override
 		protected void onPreExecute() {
@@ -345,7 +337,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Rimozione del gruppo di studio", "");
+					"Stai lasciando "+ toabandonGDS.getNome(), "");
 		}
 
 		@Override

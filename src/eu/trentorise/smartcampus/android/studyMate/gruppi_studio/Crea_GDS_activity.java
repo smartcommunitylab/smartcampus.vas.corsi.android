@@ -225,13 +225,17 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// alcune preparazioni iniziali
 			// recupero dello studente in sessione dalle sharedpreferences
 			String jsonattivitadidattica = load("attivitaDidatticaStudente");
-			AttivitaDidattica attivitadidatticastud = Utils.convertJSONToObject(jsonattivitadidattica,
-					AttivitaDidattica.class);
+			AttivitaDidattica attivitadidatticastud = Utils
+					.convertJSONToObject(jsonattivitadidattica,
+							AttivitaDidattica.class);
 			MessageResponse response;
-
+			if (attivitadidatticastud == null) {
+				return null;
+			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""+attivitadidatticastud.getCds_id()));
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
+							+ attivitadidatticastud.getCds_id()));
 			request.setMethod(Method.GET);
 
 			try {
@@ -273,34 +277,39 @@ public class Crea_GDS_activity extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
 					"");
 		}
 
 		@Override
-		protected void onPostExecute(Void result) { // CONTROLLA IN DEBUG
-													// L'ERRORE!!!!!
+		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			listaCorsi.clear();
-			for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
-				listaCorsi.add(tempcorso.getDescription());
+			if (temp_listacorsiArrayList != null) {
+				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
+					listaCorsi.add(tempcorso.getDescription());
+				}
+				ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
+						Crea_GDS_activity.this,
+						android.R.layout.simple_spinner_item, listaCorsi);
+				spinner_scegli_materia.setAdapter(adapter_spinner_materie);
+				pd.dismiss();
+			} else {
+				pd.dismiss();
+				Crea_GDS_activity.this.finish();
+				Toast.makeText(MyApplication.getAppContext(),
+						"Impossibile creare un nuovo gruppo!",
+						Toast.LENGTH_LONG).show();
 			}
-			ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
-					Crea_GDS_activity.this,
-					android.R.layout.simple_spinner_item, listaCorsi);
-			spinner_scegli_materia.setAdapter(adapter_spinner_materie);
-			pd.dismiss();
 
 		}
 
 		public String load(String key) {
 			SharedPreferences sharedPreferences = Crea_GDS_activity.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			String retvaljson = sharedPreferences.getString(
-					key, null);
+			String retvaljson = sharedPreferences.getString(key, null);
 			return retvaljson;
 		}
 	}

@@ -128,6 +128,6 @@ public final class SmartUniDataWS {
 	public static String POST_ATTIVITASTUDIO_MODIFY = "/attivitadistudio/change";
 
 	// gds //////////////////////////////////////////////////////////
-	public static String POST_ATTIVITASTUDIO_DELETE = "/attivitadistudio/delete";
+	public static String DELETE_ATTIVITASTUDIO = "/attivitadistudio/delete";
 
 }

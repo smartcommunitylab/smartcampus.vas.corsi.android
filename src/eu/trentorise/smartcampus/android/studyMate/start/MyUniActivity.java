@@ -238,14 +238,13 @@ public class MyUniActivity extends SherlockActivity {
 					// uno studente tramite il codice prensete all'interno di
 					// uno
 					// dei corsicarriera che ci siamo appena presi
-					String cod = corsicarrierastudente.get(0).getCod();
+					long cod = corsicarrierastudente.get(0).getId();
 					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
 							SmartUniDataWS.TOKEN_NAME);
 					MessageResponse response2;
 					MessageRequest request2 = new MessageRequest(
 							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_COURSES_DETAILS(Integer
-									.parseInt(cod)));
+							SmartUniDataWS.GET_WS_COURSES_DETAILS(cod));
 					request.setMethod(Method.GET);
 					try {
 						response2 = mProtocolCarrier.invokeSync(request2,
