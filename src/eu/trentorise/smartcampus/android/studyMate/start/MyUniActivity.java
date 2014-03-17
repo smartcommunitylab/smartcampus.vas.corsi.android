@@ -140,6 +140,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static String getAuthToken() throws AACException {
 		String mToken;
 		mToken = getAccessProvider().readToken(mContext);
+		System.out.println(mToken);
 		return mToken;
 	}
 

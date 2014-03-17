@@ -63,8 +63,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 		else{
 		int i = 0;
 		for (Evento ev : listaEventiFiltrati) {
-			AdptDetailedEvent e = new AdptDetailedEvent(ev.getDate(),
-					ev.getTitle(), ev.getTeacher(), ev.getStart()
+			AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId().getDate(),
+					ev.getTitle(), ev.getTeacher(), ev.getEventoId().getStart()
 							.toString(), ev.getRoom());
 			listEvItem[i++] = new EventItem(e);
 		}

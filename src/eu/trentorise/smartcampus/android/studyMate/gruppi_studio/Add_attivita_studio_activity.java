@@ -181,7 +181,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setTitle(oggetto);
 			// Date data = new Date();
 			if (data != null) {
-				nuova_attivitaStudio.setDate(data);
+				nuova_attivitaStudio.getEventoId().setDate(data);
 			}
 
 			// nuova_attivitaStudio.setStart(start);

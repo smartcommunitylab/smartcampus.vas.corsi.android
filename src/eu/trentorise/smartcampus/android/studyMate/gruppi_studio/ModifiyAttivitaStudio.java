@@ -101,7 +101,7 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);
 		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
 
-		Date data = attivitaDiStudio.getDate();
+		Date data = attivitaDiStudio.getEventoId().getDate();
 		SimpleDateFormat formatgiornoanno = new SimpleDateFormat("dd/MM/yyyy");
 		btn_data.setText(formatgiornoanno.format(data));
 
@@ -178,7 +178,7 @@ public class ModifiyAttivitaStudio extends SherlockActivity {
 			 */
 			attivitaDiStudio.setTitle(oggetto);
 			attivitaDiStudio.setTopic(descrizione);
-			attivitaDiStudio.setDate(data);
+			attivitaDiStudio.getEventoId().setDate(data);
 			attivitaDiStudio.setRoom(edificio + " - " + aula);
 			ModifyAS salvamodificheAS = new ModifyAS(ModifiyAttivitaStudio.this);
 			salvamodificheAS.execute();

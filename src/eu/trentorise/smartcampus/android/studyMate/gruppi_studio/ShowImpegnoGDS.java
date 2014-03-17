@@ -72,7 +72,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
 		tv_oggetto.setText(contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
-		Date data = contextualAttivitaStudio.getDate();
+		Date data = contextualAttivitaStudio.getEventoId().getDate();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		tv_data.setText(format.format(data));
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);

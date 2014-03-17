@@ -5,29 +5,25 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Evento implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4216708970101566299L;
 
-	private long id;
-	private long idEventAd;
+
+	private EventoId eventoId;
 	private long cds;
 	private int yearCds;
 	private String title;
 	private String room;
 	private String teacher;
-	private Time start;
-	private Time stop;
 	private String type;
-	private Date date;
+	private long idStudente;
 	
-	public long getId() {
-		return id;
+
+
+	public EventoId getEventoId() {
+		return eventoId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setEventoId(EventoId eventoId) {
+		this.eventoId = eventoId;
 	}
 
 	public String getRoom() {
@@ -38,21 +34,6 @@ public class Evento implements Serializable{
 		this.room = room;
 	}
 
-	public Time getStart() {
-		return start;
-	}
-
-	public void setStart(Time start) {
-		this.start = start;
-	}
-
-	public Time getStop() {
-		return stop;
-	}
-
-	public void setStop(Time stop) {
-		this.stop = stop;
-	}
 
 	public long getCds() {
 		return cds;
@@ -94,13 +75,6 @@ public class Evento implements Serializable{
 		this.type = type;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
 	
 }
