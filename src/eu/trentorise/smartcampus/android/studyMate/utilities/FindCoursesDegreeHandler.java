@@ -115,9 +115,9 @@ public class FindCoursesDegreeHandler extends
 		listCourseDegree = Utils.convertJSONToObjects(body, CorsoLaurea.class);
 
 		// aggiungo l'item "tutto" alla lista
-		CorsoLaurea courseTutto = new CorsoLaurea();
-		courseTutto.setDescripion("Tutto");
-		listCourseDegree.add(0, courseTutto);
+//		CorsoLaurea courseTutto = new CorsoLaurea();
+//		courseTutto.setDescripion("Tutto");
+//		listCourseDegree.add(0, courseTutto);
 
 		return listCourseDegree;
 

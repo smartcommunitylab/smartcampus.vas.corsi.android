@@ -102,10 +102,10 @@ public class FindDepartmentsHandler extends
 		if (listDepartments == null) {
 			currentActivity.finish();
 		} else {
-			// aggiungo l'item "tutto" alla lista
-			Dipartimento depTutto = new Dipartimento();
-			depTutto.setDescription("Tutto");
-			listDepartments.add(0, depTutto);
+//			// aggiungo l'item "tutto" alla lista
+//			Dipartimento depTutto = new Dipartimento();
+//			depTutto.setDescription("Tutto");
+//			listDepartments.add(0, depTutto);
 		}
 		return listDepartments;
 

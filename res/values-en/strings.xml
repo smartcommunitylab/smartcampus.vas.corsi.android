@@ -72,6 +72,8 @@
     <string name="search_label_searchedList">Hai cercato:</string>
     <string name="find_label_searchingnow">"Looking for: "</string>
     <string name="find_label_searching">"Search a course: "</string>
+        <string name="finder_initiallist_dep"> Select department </string>
+    <string name="finder_initiallist_deg"> Select course degree </string>
     <string name="title_activity_agenda">AgendaActivity</string>
     <string name="add_event">Add an event</string>
     <string name="agenda_label_tab_overview">Overview</string>
