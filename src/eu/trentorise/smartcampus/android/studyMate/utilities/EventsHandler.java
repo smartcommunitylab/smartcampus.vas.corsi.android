@@ -144,7 +144,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 			fragment.finish();
 		} else {
 			// ordino per data
-			Collections.sort(result, new CustomComparator());
+			//Collections.sort(result, new CustomComparator());
 
 			EventItem[] listEvItem = new EventItem[result.size()];
 
