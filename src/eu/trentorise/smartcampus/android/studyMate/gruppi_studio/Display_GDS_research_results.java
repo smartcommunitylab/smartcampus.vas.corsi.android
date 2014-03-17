@@ -14,6 +14,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.studymate.R;
 
@@ -30,28 +31,34 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		// allocazione strutture dati di supporto
-		ArrayList<String> nomi_studenti_filter = new ArrayList<String>();
-		ArrayList<GruppoDiStudio> universo_gds = new ArrayList<GruppoDiStudio>();
-
-		// recupero oggetti da contextualCoolection
-		if (!MyApplication.getContextualCollection().isEmpty())
-			nomi_studenti_filter = (ArrayList<String>) MyApplication
-					.getContextualCollection().get(0);
-		// occio qua
-		universo_gds = (ArrayList<GruppoDiStudio>) MyApplication
-				.getContextualCollection().get(1);
-		MyApplication.getContextualCollection().clear();
-		// fine magheggi
-
+		// // allocazione strutture dati di supporto
+		// ArrayList<String> nomi_studenti_filter = new ArrayList<String>();
+		// ArrayList<GruppoDiStudio> universo_gds = new
+		// ArrayList<GruppoDiStudio>();
+		//
+		// // recupero oggetti da contextualCoolection
+		// if (!MyApplication.getContextualCollection().isEmpty())
+		// nomi_studenti_filter = (ArrayList<String>) MyApplication
+		// .getContextualCollection().get(0);
+		// // occio qua
+		// universo_gds = (ArrayList<GruppoDiStudio>) MyApplication
+		// .getContextualCollection().get(1);
+		// MyApplication.getContextualCollection().clear();
+		// // fine magheggi
+		//
 		Bundle extras = getIntent().getExtras();
 		String materia_filter = extras.getString("Selected_materia");
-		String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
+		ArrayList<GruppoDiStudio> possibleGDS = (ArrayList<GruppoDiStudio>) extras
+				.getSerializable("PossibleGDS");
+		ArrayList<AttivitaDidattica> PossibleAttivitaDidattiche = (ArrayList<AttivitaDidattica>) extras
+				.getSerializable("PossibleAttivitaDidattiche");
+		 String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
 
 		TextView tv_materia = (TextView) findViewById(R.id.tv_filter_materia);
 		tv_materia.setText(materia_filter);
-		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
-		tv_nomeGruppo.setText(nome_gruppo_filter);
+		 TextView tv_nomeGruppo = (TextView)
+		 findViewById(R.id.tv_filter_nomegruppo);
+		 tv_nomeGruppo.setText(nome_gruppo_filter);
 
 		// ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
 		// universo_gds, materia_filter, nome_gruppo_filter,
@@ -65,7 +72,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,
-				universo_gds);// attenzione! al posto di universo_gds si
+				possibleGDS);// attenzione! al posto di universo_gds si
 								// dovrebbe mettere gds_ammissibili ma finchè
 								// non funzia lascio stare
 		results_list.setAdapter(adapter);
