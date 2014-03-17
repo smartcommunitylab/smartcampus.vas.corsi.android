@@ -59,7 +59,7 @@
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
-            android:drawableTop="@drawable/phl"
+            android:drawableTop="@drawable/materiali"
             android:text="@string/phl_btn_label" />
     </LinearLayout>
 

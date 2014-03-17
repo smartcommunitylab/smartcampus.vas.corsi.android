@@ -75,8 +75,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.findViewById(R.id.textDescriptionEvent);
 		tvDescEvent.setText(eventSelected.getType());
 
-		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textAulaEvent);
-		tvAulaEvent.setText(eventSelected.getRoom());
+		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textDescEvent);
+		tvAulaEvent.setText(eventSelected.getTeacher());
 
 		TextView tvLocationEvent = (TextView) view
 				.findViewById(R.id.textLocationEvent);
