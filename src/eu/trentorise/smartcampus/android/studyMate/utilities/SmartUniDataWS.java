@@ -11,11 +11,11 @@ public final class SmartUniDataWS {
 
 	// Courses ///////////////////////////////////////////////////////////
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corsocarriera/me";
-	public static final String GET_WS_FREQUENTEDCOURSES_SYNC = "/sync/corsocarriera/me";
+	public static final String GET_WS_FREQUENTEDCOURSES_SYNC = "sync/corsocarriera/me";
 	public static final String GET_WS_ALLCOURSES = "/corsolaurea/all";
 	public static final String GET_WS_ALLCOURSES_ATT_DIDATTICA = "/attivitadidattica/all";
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
-
+	public static final String DELETE_EVENTO = "/evento/delete";
 	
 	public static String POST_WS_COURSE_AS_FOLLOW_NEW (long adId){
 		return "/corsointeresse/" + String.valueOf(adId) + "/seguo";

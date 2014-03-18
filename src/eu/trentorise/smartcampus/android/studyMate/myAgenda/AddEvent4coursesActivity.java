@@ -1,7 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.DatePickerDialog;
@@ -9,6 +11,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -29,6 +32,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -60,11 +64,20 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 	//public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
 	String cN;
-
+	private CorsoCarriera cc;
+	private EditText title;
+	private EditText description;
+	private EventoId eId;
+	private Date date;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event_4_course);
+		Intent intent = getIntent();
+		cc = (CorsoCarriera) intent.getSerializableExtra("corsoCarrieraS");
+		evento = new Evento();
+		eId = new EventoId();
+		date= new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the current date
@@ -78,12 +91,25 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 		// display the current date
 		updateDisplay();
 
-		@SuppressWarnings("unused")
-		EditText title = (EditText) findViewById(R.id.editTextTitle4Course);
-		@SuppressWarnings("unused")
-		EditText description = (EditText) findViewById(R.id.editTextDescription4Course);
+		int customYear = mYear-1900;
+		date.setYear(customYear);
+		date.setMonth(mMonth);
+		date.setDate(mDay);	
+		eId.setStart(new Time(hour, minute, 0));
+		eId.setStop(new Time(hour, minute, 0));
+		
+		title = (EditText) findViewById(R.id.editTextTitle4Course);
+		description = (EditText) findViewById(R.id.editTextDescription4Course);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
-		new CoursesLoader().execute();
+		List<String> resultStrings = new ArrayList<String>();
+		resultStrings.add(cc.getName());
+		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
+				AddEvent4coursesActivity.this,
+				R.layout.list_studymate_row_list_simple, resultStrings);
+		coursesSpinner.setAdapter(adapterInitialList);
+		coursesSpinner.setEnabled(false);
+		coursesSpinner.setActivated(false);
+
 
 	}
 
@@ -110,6 +136,13 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
+				evento.setType(title.getText().toString());
+				evento.setTitle(cc.getName());
+				//evento.setTeacher("IO");
+				evento.setPersonalDescription(description.getText().toString());
+				evento.setEventoId(eId);
+				evento.setAdCod(Long.parseLong(cc.getCod()));
+				eId.setDate(date);
 				new PostEvent(getApplicationContext(), evento).execute();
 				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
 				onBackPressed();
@@ -170,6 +203,9 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 			((EditText) findViewById(R.id.myDatePickerButton4Course))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
+			date.setYear(year-1900);
+			date.setMonth(month);
+			date.setDate(day);
 
 		}
 
@@ -200,87 +236,9 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 						.setText(hourOfDay + ":" + minute);
 
 			}
+			eId.setStart(new Time(hourOfDay, minute, 0));
+			eId.setStop(new Time(hourOfDay, minute, 0));
 		}
-	}
-
-	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoCarriera>> {
-
-		private ProtocolCarrier mProtocolCarrier;
-		public Context context;
-		String body;
-
-		@Override
-		protected List<CorsoCarriera> doInBackground(Void... params) {
-			return getFollowingCourses();
-		}
-
-		private List<CorsoCarriera> getFollowingCourses() {
-			mProtocolCarrier = new ProtocolCarrier(context,
-					SmartUniDataWS.TOKEN_NAME);
-
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
-			request.setMethod(Method.GET);
-			@SuppressWarnings("unused")
-			BasicProfile bp = new BasicProfile();
-			MessageResponse response;
-			try {
-				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-
-				if (response.getHttpStatus() == 200) {
-
-					body = response.getBody();
-
-				} else {
-					return null;
-				}
-			} catch (ConnectionException e) {
-				e.printStackTrace();
-			} catch (ProtocolException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (AACException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return Utils.convertJSONToObjects(body, CorsoCarriera.class);
-		}
-
-		@Override
-		protected void onPostExecute(List<CorsoCarriera> result) {
-			super.onPostExecute(result);
-			pd.dismiss();
-
-			List<String> resultStrings = new ArrayList<String>();
-
-//			courseSelected = new CorsoCarriera();
-//			courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
-
-			resultStrings.add(OverviewFilterFragment.nomeCorsoOW);//courseSelected.getName());
-
-			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-					AddEvent4coursesActivity.this,
-					R.layout.list_studymate_row_list_simple, resultStrings);
-
-			coursesSpinner.setAdapter(adapterInitialList);
-			coursesSpinner.setEnabled(false);
-			coursesSpinner.setActivated(false);
-
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			new ProgressDialog(AddEvent4coursesActivity.this);
-			pd = ProgressDialog.show(AddEvent4coursesActivity.this,
-					"Caricamento della lista dei corsi ", "Caricamento...");
-		}
-
 	}
 
 }

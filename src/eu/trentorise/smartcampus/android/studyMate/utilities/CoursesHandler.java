@@ -130,6 +130,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
 							Bundle data = new Bundle();
+							data.putSerializable("corsoCarrieraSelezionato", corsoSelezionato);
 							data.putString("NomeCorso",corsoSelezionato.getName());
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()

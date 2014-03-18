@@ -1,8 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CorsoCarriera {
+public class CorsoCarriera implements Serializable{
 
 		/**
 	 * 

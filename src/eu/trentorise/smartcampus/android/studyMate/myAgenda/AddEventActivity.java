@@ -63,9 +63,9 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	private Evento evento = null;
 	Spinner coursesSpinner;
 	private EventoId eId;
+	private Date date;
 	private EditText title;
 	private EditText description;
-	private Date date;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,7 +85,9 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
 		updateDisplay();	
-		date.setYear(mYear);
+
+		int customYear = mYear-1900;
+		date.setYear(customYear);
 		date.setMonth(mMonth);
 		date.setDate(mDay);	
 		eId.setStart(new Time(hour, minute, 0));
@@ -120,8 +122,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 			public void onClick(View v) {
 			evento.setType(title.getText().toString());
 			evento.setTitle(cC.get(coursesSpinner.getSelectedItemPosition()).getName());
-			evento.setTeacher("IO");
-			evento.setType("Evento personale");
+			//evento.setTeacher("IO");
 			evento.setPersonalDescription(description.getText().toString());
 			evento.setEventoId(eId);
 			evento.setAdCod(Long.parseLong(cC.get(coursesSpinner.getSelectedItemPosition()).getCod()));
@@ -188,8 +189,8 @@ public class AddEventActivity extends SherlockFragmentActivity {
 			((EditText) findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
-			date.setYear(year);
-			date.setMonth(month + 1);
+			date.setYear(year-1900);
+			date.setMonth(month);
 			date.setDate(day);
 		}
 

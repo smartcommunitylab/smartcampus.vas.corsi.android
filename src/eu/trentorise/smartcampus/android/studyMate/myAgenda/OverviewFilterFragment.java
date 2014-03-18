@@ -19,6 +19,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
@@ -31,6 +32,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 	//public CorsoCarriera courseSelected;
 	public List<Evento> listaEventiFiltrati = null;
 	public static String nomeCorsoOW;
+	private CorsoCarriera cc;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 				container, false);
 		Bundle b = getArguments();
 		nomeCorsoOW= b.getString("NomeCorso");
-
+		//cc = new CorsoCarriera();
+		cc = (CorsoCarriera) b.getSerializable("corsoCarrieraSelezionato");
 		return view;
 	}
 
@@ -61,9 +64,9 @@ public class OverviewFilterFragment extends SherlockFragment {
 		else{
 		int i = 0;
 		for (Evento ev : listaEventiFiltrati) {
-			AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId().getDate(),
-					ev.getTitle(), ev.getTeacher(), ev.getEventoId().getStart()
-							.toString(), ev.getRoom());
+			AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+					.getDate(), ev.getTitle(), ev.getType(), ev
+					.getEventoId().getStart().toString(), ev.getRoom());
 			listEvItem[i++] = new EventItem(e);
 		}
 
@@ -80,10 +83,12 @@ public class OverviewFilterFragment extends SherlockFragment {
 				getSherlockActivity().supportInvalidateOptionsMenu();
 				// Pass Data to other Fragment
 				Evento evento = listaEventiFiltrati.get(arg2);
-
+				Bundle arguments = new Bundle();
+				arguments.putSerializable("eventSelected", evento);
 				FragmentTransaction ft = getSherlockActivity()
 						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new DettailOfEventFragment4Courses(evento);
+				Fragment fragment = new DettailOfEventFragment();
+				fragment.setArguments(arguments);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.tabCorsi, fragment);
 				ft.addToBackStack(null);
@@ -128,7 +133,7 @@ public void onResume() {
 		case R.id.menu_add_event_4_course:
 			Intent intentEventAddEvent = new Intent(getActivity(),
 					AddEvent4coursesActivity.class);
-			
+			intentEventAddEvent.putExtra("corsoCarrieraS", cc);
 			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intentEventAddEvent);
 			return true;

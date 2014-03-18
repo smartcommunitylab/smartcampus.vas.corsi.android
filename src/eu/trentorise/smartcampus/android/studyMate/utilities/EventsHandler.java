@@ -140,9 +140,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
 		} else {
-			// ordino per data
-			// Collections.sort(result, new CustomComparator());
-
 			EventItem[] listEvItem = new EventItem[result.size()];
 
 			int i = 0;

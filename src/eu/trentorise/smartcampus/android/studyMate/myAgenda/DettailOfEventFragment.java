@@ -37,8 +37,6 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 	@Override
 	public void onStart() {
-		MyAgendaActivity parent = (MyAgendaActivity) getActivity();
-	
 		setHasOptionsMenu(true);
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
@@ -68,17 +66,18 @@ public class DettailOfEventFragment extends SherlockFragment {
 								eventSelected.getEventoId().getStart()
 										.toString().length() - 3));
 
-		TextView tvDescEvent = (TextView) view
-				.findViewById(R.id.textDescriptionEvent);
-		tvDescEvent.setText(eventSelected.getType());
+		TextView tvTypeEvent = (TextView) view
+				.findViewById(R.id.textTypeEvent);
+		tvTypeEvent.setText(eventSelected.getType());
 
-		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textDescEvent);
+		TextView tvAulaEvent = (TextView) view.findViewById(R.id.textTeacherEvent);
 		tvAulaEvent.setText(eventSelected.getTeacher());
 
 		TextView tvLocationEvent = (TextView) view
 				.findViewById(R.id.textLocationEvent);
 		tvLocationEvent.setText(eventSelected.getRoom());
-
+		TextView tvDescEvent = (TextView) view.findViewById(R.id.textDescEvent);
+		tvDescEvent.setText(eventSelected.getPersonalDescription());
 		super.onStart();
 
 	}
