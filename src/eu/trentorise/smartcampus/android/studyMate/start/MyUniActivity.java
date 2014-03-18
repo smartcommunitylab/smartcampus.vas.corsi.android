@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activ
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
+import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
@@ -47,6 +49,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
+	public static ProgressDialog pd;
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
 	 * token
@@ -146,6 +149,15 @@ public class MyUniActivity extends SherlockActivity {
 			AsyncTask<Void, Void, BasicProfile> {
 
 		ArrayList<CorsoCarriera> corsicarrierastudente;
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			
+			pd = ProgressDialog.show(MyUniActivity.this,
+					"Sincronizzazione dei tuoi dati in corso.", "Caricamento...");
+		}
 
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
@@ -171,7 +183,7 @@ public class MyUniActivity extends SherlockActivity {
 					MessageResponse response;
 					MessageRequest request = new MessageRequest(
 							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_STUDENT_DATA_NO_SYNC);
+							SmartUniDataWS.GET_WS_STUDENT_DATA);
 					request.setMethod(Method.GET);
 					try {
 						response = mProtocolCarrier.invokeSync(request,
@@ -285,6 +297,7 @@ public class MyUniActivity extends SherlockActivity {
 		}
 
 		private void save(String key, String jsonTosaveinSharedP) {
+			pd.dismiss();
 			SharedPreferences sharedPreferences = MyUniActivity.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 			SharedPreferences.Editor editor = sharedPreferences.edit();
