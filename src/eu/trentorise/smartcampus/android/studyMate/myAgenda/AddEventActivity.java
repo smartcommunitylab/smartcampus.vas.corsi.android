@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,14 +58,21 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
 
+	private List<CorsoCarriera> cC;
 	public static ProgressDialog pd;
 	private Evento evento = null;
 	Spinner coursesSpinner;
-
+	private EventoId eId;
+	private EditText title;
+	private EditText description;
+	private Date date;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
+		evento = new Evento();
+		eId = new EventoId();
+		date= new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
 		// get the current date
@@ -76,33 +84,19 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
-		updateDisplay();
-
-		
-		EditText title = (EditText) findViewById(R.id.editTextTitle);
-		EditText description = (EditText) findViewById(R.id.editTextDescription);
+		updateDisplay();	
+		date.setYear(mYear);
+		date.setMonth(mMonth);
+		date.setDate(mDay);	
+		eId.setStart(new Time(hour, minute, 0));
+		eId.setStop(new Time(hour, minute, 0));
+		title = (EditText) findViewById(R.id.editTextTitle);
+		description = (EditText) findViewById(R.id.editTextDescription);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
 		new CoursesLoader().execute();
-//		EventoId eId = new EventoId();
-//		Date date = new Date();
-//		date.setYear(mYear);
-//		date.setMonth(mMonth);
-//		date.setDate(mDay);
-//		eId.setDate(date);
-//		
-//		
-//		long millis = (hour*3600000)+(minute*60000);
-//
-//		//eId.setStart(millis);
-//		evento.setTitle(title.getText().toString());
-//		evento.setCds(coursesSpinner.getSelectedItemId());
-//		evento.setIdStudente(Long.parseLong(MyUniActivity.bp.getUserId()));
-//		evento.setTeacher("IO");
-//		evento.setType("Evento personale");
-//		evento.setPersonalDescription(description.getText().toString());
-//		evento.setEventoId(eId);
 	}
 
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -124,6 +118,15 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
+			evento.setType(title.getText().toString());
+			evento.setTitle(cC.get(coursesSpinner.getSelectedItemPosition()).getName());
+			evento.setTeacher("IO");
+			evento.setType("Evento personale");
+			evento.setPersonalDescription(description.getText().toString());
+			evento.setEventoId(eId);
+			evento.setAdCod(Long.parseLong(cC.get(coursesSpinner.getSelectedItemPosition()).getCod()));
+			eId.setDate(date);
+			
 				new PostEvent(getApplicationContext(), evento).execute();
 				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
 				onBackPressed();
@@ -185,7 +188,9 @@ public class AddEventActivity extends SherlockFragmentActivity {
 			((EditText) findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
-
+			date.setYear(year);
+			date.setMonth(month + 1);
+			date.setDate(day);
 		}
 
 	}
@@ -215,6 +220,8 @@ public class AddEventActivity extends SherlockFragmentActivity {
 						.setText(hourOfDay + ":" + minute);
 
 			}
+			eId.setStart(new Time(hourOfDay, minute, 0));
+			eId.setStop(new Time(hourOfDay, minute, 0));
 		}
 	}
 
@@ -235,7 +242,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+					SmartUniDataWS.GET_WS_MY_COURSES_NOT_PASSED);
 			request.setMethod(Method.GET);
 			@SuppressWarnings("unused")
 			BasicProfile bp = new BasicProfile();
@@ -270,7 +277,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-
+			cC = result;
 			List<String> resultStrings = new ArrayList<String>();
 
 			for (CorsoCarriera cl : result) {

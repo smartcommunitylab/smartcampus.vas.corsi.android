@@ -11,6 +11,7 @@ public final class SmartUniDataWS {
 
 	// Courses ///////////////////////////////////////////////////////////
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corsocarriera/me";
+	public static final String GET_WS_FREQUENTEDCOURSES_SYNC = "sync/corsocarriera/me";
 	public static final String GET_WS_ALLCOURSES = "/corsolaurea/all";
 	public static final String GET_WS_ALLCOURSES_ATT_DIDATTICA = "/attivitadidattica/all";
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";

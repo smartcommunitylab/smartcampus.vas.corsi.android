@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
@@ -30,6 +31,7 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 			// If it exists, simply attach it in order to show it
 			ft.attach(mFragment);
 		}
+
 
 	}
 

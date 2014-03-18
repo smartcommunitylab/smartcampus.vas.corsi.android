@@ -60,7 +60,7 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+				SmartUniDataWS.GET_WS_MY_COURSES_NOT_PASSED);
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -129,14 +129,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 							// Pass Data to other Fragment
 							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
-							//Intent intent = new Intent();
-//							intent.setClass(currentActivity,
-//									AddRatingFromCoursesPassed.class);
-//							intent.putExtra("NomeCorso",
-//									corsoSelezionato.getName());
-							//MyAgendaActivity.idCorsoMA=  corsoSelezionato.getCod();
-//							currentActivity.startActivity(intent);
-
 							Bundle data = new Bundle();
 							data.putString("NomeCorso",corsoSelezionato.getName());
 							FragmentTransaction ft = currentSherlock

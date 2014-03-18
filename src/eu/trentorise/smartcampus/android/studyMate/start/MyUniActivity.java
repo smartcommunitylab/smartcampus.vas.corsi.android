@@ -204,7 +204,7 @@ public class MyUniActivity extends SherlockActivity {
 					MessageResponse response1;
 					MessageRequest request1 = new MessageRequest(
 							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_FREQUENTEDCOURSES);
+							SmartUniDataWS.GET_WS_FREQUENTEDCOURSES_SYNC);
 					request.setMethod(Method.GET);
 					try {
 						response1 = mProtocolCarrier.invokeSync(request1,

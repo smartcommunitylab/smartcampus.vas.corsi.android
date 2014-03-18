@@ -42,6 +42,7 @@ public class OverviewFragment extends SherlockFragment {
 
 	public void onStart() {
 		super.onStart();
+		
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
 
