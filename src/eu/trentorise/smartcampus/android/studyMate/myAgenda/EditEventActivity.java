@@ -60,6 +60,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 	static final int DATE_DIALOG_ID = 0;
 
 	public static ProgressDialog pd;
+	private Evento eventoModificato;
 	private Evento evento;
 	//public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
@@ -74,12 +75,12 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_add_event_4_course);
 		Intent intent = getIntent();
 		evento = (Evento) intent.getSerializableExtra("modEv");
-		
+		eId = new EventoId();
+		eventoModificato = evento;
 		date= new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the ex date of previous event
-		final Calendar c = Calendar.getInstance();
 		mYear = evento.getEventoId().getDate().getYear()+1900;
 		mMonth = evento.getEventoId().getDate().getMonth();
 		mDay = evento.getEventoId().getDate().getDay();
@@ -128,13 +129,11 @@ public class EditEventActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				evento.setType(title.getText().toString());
-				//evento.setTeacher("IO");
-				evento.setPersonalDescription(description.getText().toString());
-				evento.setEventoId(eId);
+				eventoModificato.setType(title.getText().toString());
+				eventoModificato.setPersonalDescription(description.getText().toString());
 				eId.setDate(date);
-				new PostEvent(getApplicationContext(), evento).execute();
-				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
+				eventoModificato.setEventoId(eId);
+				new ChangeEvent(evento, EditEventActivity.this, eventoModificato).execute();
 				onBackPressed();
 			}
 		});
@@ -229,6 +228,93 @@ public class EditEventActivity extends SherlockFragmentActivity {
 			eId.setStart(new Time(hourOfDay, minute, 0));
 			eId.setStop(new Time(hourOfDay, minute, 0));
 		}
+	}
+	
+	
+	
+	private class ChangeEvent extends AsyncTask<Evento, Void, Boolean> {
+
+		public ProgressDialog pd;
+		public ProtocolCarrier mProtocolCarrier;
+		Evento ev;
+		Evento evModificato;
+		private Context context;
+		
+		public ChangeEvent(Evento ev, Context context, Evento evModificato) {
+			this.context = context;
+			this.ev = ev;
+			this.evModificato = evModificato;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(EditEventActivity.this);
+			pd = ProgressDialog.show(EditEventActivity.this, "Sto aggiornando le modifiche al tuo evento..",
+					"Caricamento...");
+		}
+
+		private boolean changeEvent(Evento ev, long date, long from, long to) {
+			mProtocolCarrier = new ProtocolCarrier(context,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_WS_CHANGE_PERSONAL_EVENT(date, from, to));
+			request.setMethod(Method.POST);
+
+			MessageResponse response;
+			try {
+				String evJSON = Utils.convertToJSON(evModificato);
+				request.setBody(evJSON);
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					String body = response.getBody();
+					
+					Boolean result = Utils.convertJSONToObject(body, Boolean.class);
+					if(result)
+						return true;
+					else
+						return false;
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+
+		@Override
+		protected Boolean doInBackground(Evento... params) {
+			// TODO Auto-generated method stub
+			return changeEvent(ev,ev.getEventoId().getDate().getTime(), ev.getEventoId().getStart().getTime(), ev.getEventoId().getStop().getTime());
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+			if(result)
+				Toast.makeText(getApplicationContext(), "Evento modificato con successo", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(getApplicationContext(), "Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 }

@@ -7,7 +7,7 @@
         android:title="">
         <menu>
             <item
-                android:id="@+id/menu_add_note"
+                android:id="@+id/menu_change_event"
                 android:showAsAction="always"
                 android:title="Modifica"/>
            <!--  <item

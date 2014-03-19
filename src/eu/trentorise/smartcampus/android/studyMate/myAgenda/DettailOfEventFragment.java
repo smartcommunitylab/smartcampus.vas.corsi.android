@@ -2,13 +2,16 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.text.SimpleDateFormat;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +23,9 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -63,24 +68,36 @@ public class DettailOfEventFragment extends SherlockFragment {
 				.getDate()));
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
-		tvOraEvent.setText(eventSelected
-				.getEventoId()
-				.getStart()
-				.toString()
-				.subSequence(
-						0,
-						eventSelected.getEventoId().getStart().toString()
-								.length() - 3)
-				+ " - "
-				+ eventSelected
-						.getEventoId()
-						.getStop()
-						.toString()
-						.subSequence(
-								0,
-								eventSelected.getEventoId().getStart()
-										.toString().length() - 3));
 
+		// se è un evento personale non mostro la data di fine
+		if (eventSelected.getEventoId().getIdStudente() == -1)
+			tvOraEvent.setText(eventSelected
+					.getEventoId()
+					.getStart()
+					.toString()
+					.subSequence(
+							0,
+							eventSelected.getEventoId().getStart().toString()
+									.length() - 3)
+					+ " - "
+					+ eventSelected
+							.getEventoId()
+							.getStop()
+							.toString()
+							.subSequence(
+									0,
+									eventSelected.getEventoId().getStart()
+											.toString().length() - 3));
+		else
+			tvOraEvent.setText(eventSelected
+					.getEventoId()
+					.getStart()
+					.toString()
+					.subSequence(
+							0,
+							eventSelected.getEventoId().getStart().toString()
+									.length() - 3));
+			
 		TextView tvTypeEvent = (TextView) view.findViewById(R.id.textTypeEvent);
 		tvTypeEvent.setText(eventSelected.getType());
 
@@ -114,30 +131,13 @@ public class DettailOfEventFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 
-		case R.id.menu_add_note:
-//			Intent intentEvent = new Intent(getActivity(),
-//					EditEventActivity.class);
-//			intentEvent.putExtra("modEv", eventSelected);
-//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentEvent);
-//			return true;
-//			AlertDialog.Builder alertNote = new AlertDialog.Builder(
-//					getActivity());
-//			final EditText inputNote = new EditText(getActivity());
-//			alertNote.setView(inputNote);
-//			alertNote.setTitle("Modifica");
-//			inputNote.setText(eventSelected.getPersonalDescription());
-//			alertNote.setPositiveButton("OK",
-//					new DialogInterface.OnClickListener() {
-//						public void onClick(DialogInterface dialog, int which) {
-//							inputNote.getText();
-//							eventSelected.setPersonalDescription(inputNote.getText().toString());
-//							new PostEvent(getActivity(), eventSelected);
-//						}
-//					});
-//			alertNote.show();
-			Toast.makeText(getSherlockActivity(), "Coming Soon...",
-					Toast.LENGTH_SHORT).show();
+		case R.id.menu_change_event:
+			Intent intentEvent = new Intent(getActivity(),
+					EditEventActivity.class);
+			intentEvent.putExtra("modEv", eventSelected);
+			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intentEvent);
+
 			return true;
 		case R.id.menu_delete_event:
 			new DeleteEvent(eventSelected).execute();
