@@ -19,6 +19,8 @@ public class EventoId implements Serializable {
 	private Time start;
 
 	private Time stop;
+	
+	private long idStudente;
 
 	@Override
 	public int hashCode() {
@@ -64,5 +66,12 @@ public class EventoId implements Serializable {
 		this.idEventAd = idEventAd;
 	}
 
+	public long getIdStudente() {
+		return idStudente;
+	}
+
+	public void setIdStudente(long idStudente) {
+		this.idStudente = idStudente;
+	}
 	
 }

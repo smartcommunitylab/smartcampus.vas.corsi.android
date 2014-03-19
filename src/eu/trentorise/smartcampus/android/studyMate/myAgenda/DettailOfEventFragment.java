@@ -85,7 +85,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		if (eventSelected.getIdStudente() == -1) {
+		if (eventSelected.getEventoId().getIdStudente() == -1) {
 			menu.clear();
 		} else {
 			inflater.inflate(R.menu.det_event, menu);

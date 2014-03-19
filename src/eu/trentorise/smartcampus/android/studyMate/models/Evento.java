@@ -16,7 +16,6 @@ public class Evento implements Serializable{
 	private String room;
 	private String teacher;
 	private String type;
-	private long idStudente;
 	private String personalDescription;
 	private long adCod;
 	
@@ -77,14 +76,6 @@ public class Evento implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public long getIdStudente() {
-		return idStudente;
-	}
-
-	public void setIdStudente(long idStudente) {
-		this.idStudente = idStudente;
 	}
 
 	public String getPersonalDescription() {
