@@ -63,6 +63,12 @@ public final class SmartUniDataWS {
 	public static final String POST_WS_CHANGE_PERSONAL_EVENT(long date, long from, long to) {
 		return "/evento/change/date/" + date + "/from/"+from+"/to/"+to;
 	}
+	
+	public static final String GET_WS_NOTIFICATIONS(long fromDate) {
+		return "	/notifiche/"+fromDate+"/me";
+	}
+	
+
 
 	// Student //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";

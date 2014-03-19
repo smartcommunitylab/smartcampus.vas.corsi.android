@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.notices;
 
+import java.util.Date;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	private ListView lvAllNotices;
 	private SherlockFragmentActivity activity;
 	public static ProgressDialog pd;
+	private long fromDate;
+	private static final long TIMEFROM = 604800000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,12 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		Date date1Week = new Date(System.currentTimeMillis()-TIMEFROM);
+		fromDate = date1Week.getTime();
+		
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-				lvAllNotices, activity).execute();
+				lvAllNotices, activity, fromDate).execute();
 	}
 
 	@Override
