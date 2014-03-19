@@ -46,7 +46,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		this.context = applicationContext;
 	}
 
-	@SuppressWarnings("unused")
+
 	private List<Evento> getAllEventsOfCourse(String id_course) {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -190,4 +190,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 					.compareTo(object2.getEventoId().getStart());
 		}
 	}
+	
+	
+	
 }

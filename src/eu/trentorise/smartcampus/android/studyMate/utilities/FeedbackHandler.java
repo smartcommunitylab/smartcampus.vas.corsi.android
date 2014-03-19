@@ -228,9 +228,12 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				ratingEsame.setRating(corsoInfo.getRating_esame());
 
 			}
-
-			descriptionCourse.setText(corsoInfo.getDescription());
-
+			if(corsoInfo.getCourseDescription()==null){
+				
+			}
+			else{
+			descriptionCourse.setText(corsoInfo.getCourseDescription());
+			}
 			pd.dismiss();
 
 		}

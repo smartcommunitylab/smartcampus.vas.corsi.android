@@ -6,8 +6,8 @@ public class Notice {
 	public String description;
 	public Author author;
 	public String title;
-	public String updateTime;
-	public String timestamp;
+	public long updateTime;
+	public long timestamp;
 	public String user;
 
 	public Notice() {
@@ -38,11 +38,11 @@ public class Notice {
 		this.title = title;
 	}
 
-	public String getUpdateTime() {
+	public long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(long updateTime) {
 		this.updateTime = updateTime;
 	}
 
@@ -54,11 +54,11 @@ public class Notice {
 		this.id = id;
 	}
 
-	public String getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 

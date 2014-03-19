@@ -165,6 +165,12 @@
             android:label="@string/title_activity_add_event" >
         </activity>
         <activity
+            android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.EditEventActivity"
+            android:configChanges="orientation|keyboard"
+            android:icon="@drawable/ic_action_add"
+            android:label="@string/title_activity_add_event" >
+        </activity>
+        <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEvent4coursesActivity"
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_action_add"

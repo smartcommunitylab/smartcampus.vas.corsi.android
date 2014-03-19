@@ -22,7 +22,7 @@ public class AttivitaDidattica implements Serializable{
 	private Float rating_lezioni;
 	private Float rating_materiali;
 	private Float rating_esame;
-
+	private String courseDescription;
 	
 	public long getAdId() {
 		return adId;
@@ -118,6 +118,14 @@ public class AttivitaDidattica implements Serializable{
 
 	public void setRating_esame(Float rating_esame) {
 		this.rating_esame = rating_esame;
+	}
+
+	public String getCourseDescription() {
+		return courseDescription;
+	}
+
+	public void setCourseDescription(String courseDescription) {
+		this.courseDescription = courseDescription;
 	}	
 	
 	

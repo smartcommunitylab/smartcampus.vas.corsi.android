@@ -9,7 +9,7 @@
             <item
                 android:id="@+id/menu_add_note"
                 android:showAsAction="always"
-                android:title="Aggiungi Nota"/>
+                android:title="Modifica"/>
            <!--  <item
                 android:id="@+id/menu_add_notification"
                 android:showAsAction="always"
@@ -18,10 +18,10 @@
                 android:id="@+id/menu_share"
                 android:showAsAction="always"
                 android:title="Condividi evento"/> -->
-            <item
+            <!-- <item
                 android:id="@+id/menu_modify_event"
                 android:showAsAction="always"
-                android:title="Modifica evento"/>
+                android:title="Modifica evento"/> -->
             <item
                 android:id="@+id/menu_delete_event"
                 android:showAsAction="always"

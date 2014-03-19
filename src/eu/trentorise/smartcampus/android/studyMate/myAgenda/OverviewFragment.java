@@ -40,6 +40,11 @@ public class OverviewFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 	}
 
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
 	public void onStart() {
 		super.onStart();
 		

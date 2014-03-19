@@ -77,8 +77,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.add_event:
 			return false;
-		case R.id.menu_modify_event:
-			return false;
+//		case R.id.menu_modify_event:
+//			return false;
 		case R.id.menu_delete_event:
 			return false;
 		case R.id.menu_add_event_4_course:
