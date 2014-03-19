@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import eu.trentorise.smartcampus.communicator.model.Notification;
+import eu.trentorise.smartcampus.android.studyMate.models.Notification;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class AdapterNoticesList extends ArrayAdapter<Notification> {
@@ -38,39 +38,48 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 					false);
 		}
 
-		TextView title = (TextView) row.findViewById(R.id.textViewTitle);
-		TextView date = (TextView) row.findViewById(R.id.textViewDatetimeRow);
+		TextView title = (TextView) row.findViewById(R.id.textViewNoticeTitle);
+		TextView date = (TextView) row.findViewById(R.id.textViewDatetimeNoticeRow);
 		TextView content = (TextView) row
 				.findViewById(R.id.textViewDescriptionRow);
-		TextView author = (TextView) row.findViewById(R.id.textViewUserRow);
-
-		title.setText(item.getTitle());
 
 		long dateTS = item.getTimestamp();
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				"yyyy/MM/dd HH:mm:ss", Locale.ITALY);
+				"yyyy/MM/dd HH:mm", Locale.ITALY);
 
 		String dateString = dateFormat.format(dateTS);
-		date.setText(dateString);
+		
+		title.setText(item.getTitle());
+		date.setText(dateString+" ("+item.getType()+")");
 		content.setText(item.getDescription());
-		content.setPadding(
-				(int) context.getResources().getDimension(
-						R.dimen.activity_horizontal_margin),
-				0,
-				(int) context.getResources().getDimension(
-						R.dimen.activity_horizontal_margin), 0);
-		Notification prev = null;
-		if (position > 0)
-			prev = getItem(position - 1);
-
-		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
-			date.setVisibility(View.VISIBLE);
-		} else {
-			date.setVisibility(View.GONE);
+//		Notification prev = null;
+//		if (position > 0)
+//			prev = getItem(position - 1);
+//
+//		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
+//			date.setVisibility(View.VISIBLE);
+//		} else {
+//			date.setVisibility(View.GONE);
+//		}
+//		
+		if(item.getDescription().equals(""))
+			content.setVisibility(View.GONE);
+		else{
+			content.setVisibility(View.VISIBLE);
+//			content.setPadding(
+//					(int) context.getResources().getDimension(
+//							R.dimen.activity_horizontal_margin),
+//					0,
+//					(int) context.getResources().getDimension(
+//							R.dimen.activity_horizontal_margin), 0);
 		}
-
-		author.setText(item.getUser());
+		
+		if(item.getTitle().equals(""))
+			title.setVisibility(View.GONE);
+		else
+			title.setVisibility(View.VISIBLE);
+		
 
 		return row;
 

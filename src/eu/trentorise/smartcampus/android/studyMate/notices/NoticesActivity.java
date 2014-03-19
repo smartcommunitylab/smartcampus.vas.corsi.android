@@ -22,7 +22,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	private SherlockFragmentActivity activity;
 	public static ProgressDialog pd;
 	private long fromDate;
-	private static final long TIMEFROM = 604800000;
+	private static final long TIMEFROM = 604800000*2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

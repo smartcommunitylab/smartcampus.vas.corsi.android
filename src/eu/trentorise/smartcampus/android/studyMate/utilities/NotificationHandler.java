@@ -8,26 +8,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.Notice;
+import eu.trentorise.smartcampus.android.studyMate.models.Notification;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.communicator.CommunicatorConnector;
-import eu.trentorise.smartcampus.communicator.model.Notification;
-import eu.trentorise.smartcampus.communicator.model.Notifications;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -162,40 +154,40 @@ public class NotificationHandler extends
 				R.id.listViewNotices, notifies);
 		lvAllNotices.setAdapter(adapterNotices);
 
-		lvAllNotices.setOnItemClickListener(new ListView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// if (notifies.get(arg2).getType().equals("gds")) {
-				AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
-				mAlert.setTitle(notifies.get(arg2).getTitle());
-				mAlert.setMessage(notifies.get(arg2).getDescription());
-				mAlert.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Editable value = input.getText();
-								Toast.makeText(context, "OK...",
-										Toast.LENGTH_SHORT).show();
-								// e.printStackTrace();
-							}
-						});
-				mAlert.setNegativeButton("CANCEL",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Editable value = input.getText();
-								Toast.makeText(context, "CANCEL...",
-										Toast.LENGTH_SHORT).show();
-								// e.printStackTrace();
-							}
-						});
-				AlertDialog alert = mAlert.create();
-
-				alert.show();
-			}
-			// }
-		});
+//		lvAllNotices.setOnItemClickListener(new ListView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				// if (notifies.get(arg2).getType().equals("gds")) {
+//				AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
+//				mAlert.setTitle(notifies.get(arg2).getTitle());
+//				mAlert.setMessage(notifies.get(arg2).getDescription());
+//				mAlert.setPositiveButton("OK",
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog,
+//									int which) {
+//								// Editable value = input.getText();
+//								Toast.makeText(context, "OK...",
+//										Toast.LENGTH_SHORT).show();
+//								// e.printStackTrace();
+//							}
+//						});
+//				mAlert.setNegativeButton("CANCEL",
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog,
+//									int which) {
+//								// Editable value = input.getText();
+//								Toast.makeText(context, "CANCEL...",
+//										Toast.LENGTH_SHORT).show();
+//								// e.printStackTrace();
+//							}
+//						});
+//				AlertDialog alert = mAlert.create();
+//
+//				alert.show();
+//			}
+//			// }
+//		});
 	}
 
 	private void setVoidNotify() {
