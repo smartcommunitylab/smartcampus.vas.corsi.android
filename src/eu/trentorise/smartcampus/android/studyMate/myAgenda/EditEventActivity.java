@@ -82,7 +82,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		// get the ex date of previous event
 		mYear = evento.getEventoId().getDate().getYear() + 1900;
 		mMonth = evento.getEventoId().getDate().getMonth();
-		mDay = evento.getEventoId().getDate().getDay();
+		mDay = evento.getEventoId().getDate().getDate();
 		// get the current Time
 		hour = evento.getEventoId().getStart().getHours();
 		minute = evento.getEventoId().getStart().getMinutes();

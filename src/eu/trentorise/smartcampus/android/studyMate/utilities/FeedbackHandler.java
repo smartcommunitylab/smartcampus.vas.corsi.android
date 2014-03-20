@@ -20,6 +20,8 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoInteresse;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -212,13 +214,13 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		return getFullFeedbackById();
 	}
 
-	private class FollowTask extends AsyncTask<String, Void, Boolean> {
+	private class FollowTask extends AsyncTask<String, Void, CorsoInteresse> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public String body;
 
 		@Override
-		protected Boolean doInBackground(String... params) {
+		protected CorsoInteresse doInBackground(String... params) {
 
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
@@ -240,7 +242,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 					body = response.getBody();
 
 				} else {
-					return false;
+					return null;
 				}
 			} catch (ConnectionException e) {
 				e.printStackTrace();
@@ -253,29 +255,26 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				e.printStackTrace();
 			}
 
-			return Utils.convertJSONToObject(body, Boolean.class);
+			return Utils.convertJSONToObject(body, CorsoInteresse.class);
 
 		}
 
 		@Override
-		protected void onPostExecute(Boolean isPassed) {
-			super.onPostExecute(isPassed);
-
-			if (isPassed == null) {
-				Toast toast = Toast.makeText(context,
-						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
-				toast.show();
-				return;
-			}
-
-			if (isPassed) {
-				swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
-				txtMonitor.setText(R.string.label_txtMonitor_on);
-			} else {
+		protected void onPostExecute(CorsoInteresse cI) {
+			super.onPostExecute(cI);
+			if (cI == null) {
 				swichFollow.setBackgroundResource(R.drawable.ic_monitor_off);
 				txtMonitor.setText(R.string.label_txtMonitor_off);
+				return;
+			} else {
+				if (cI.isCorsoCarriera()) {
+					Toast.makeText(context, "Il corso è da libretto",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
+					txtMonitor.setText(R.string.label_txtMonitor_on);
+				}
 			}
-
 		}
 
 	}

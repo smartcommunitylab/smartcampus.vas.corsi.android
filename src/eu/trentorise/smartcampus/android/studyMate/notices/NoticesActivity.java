@@ -1,13 +1,18 @@
 package eu.trentorise.smartcampus.android.studyMate.notices;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
@@ -15,7 +20,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class NoticesActivity extends SherlockFragmentActivity {
+public class NoticesActivity extends SherlockFragmentActivity implements OnNavigationListener {
 
 	private TextView textViewTitleNotices;
 	private ListView lvAllNotices;
@@ -23,15 +28,24 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	public static ProgressDialog pd;
 	private long fromDate;
 	private static final long TIMEFROM = 604800000 * 2;
-
+	private String[] source;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notices);
-		com.actionbarsherlock.app.ActionBar ab = getSherlock().getActionBar();
+		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		activity = NoticesActivity.this;
+		ab.setDisplayShowTitleEnabled(false);
+		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		source = getResources().getStringArray(R.array.Source);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				NoticesActivity.this, android.R.layout.simple_list_item_1,
+				source);
+
+		// Set up the dropdown list navigation in the action bar.
+		ab.setListNavigationCallbacks(adapter, NoticesActivity.this);
+
 		textViewTitleNotices = (TextView) findViewById(R.id.textViewTitleNotices);
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
@@ -74,6 +88,18 @@ public class NoticesActivity extends SherlockFragmentActivity {
 			return super.onOptionsItemSelected(item);
 
 		}
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		// TODO Auto-generated method stub
+		try {
+			URLEncoder.encode(source[itemPosition], "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
