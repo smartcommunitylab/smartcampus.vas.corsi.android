@@ -52,15 +52,15 @@
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/findcourses"
             android:text="@string/find_courses_btn_label" />
-
-        <Button
-            android:id="@+id/phl_btn"
+<Button
+            android:id="@+id/rate_btn"
             android:layout_width="130dp"
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
-            android:drawableTop="@drawable/materiali"
-            android:text="@string/phl_btn_label" />
+            android:drawableTop="@drawable/ic_ratecourses"
+            android:text="@string/rating_text_icon" />
+        
     </LinearLayout>
 
     <LinearLayout
@@ -84,22 +84,22 @@
             android:text="@string/notices_btn_label" />
 
         <Button
-            android:id="@+id/rate_btn"
+            android:id="@+id/phl_btn"
             android:layout_width="130dp"
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
-            android:drawableTop="@drawable/ic_ratecourses"
-            android:text="@string/rating_text_icon" />
+            android:drawableTop="@drawable/materiali"
+            android:text="@string/phl_btn_label" />
 
-        <Button
+        <!-- <Button
             android:id="@+id/gruppi_studio_btn"
             android:layout_width="130dp"
             android:layout_height="90dp"
             android:layout_weight="0.50"
             android:background="#FFFFFFFF"
             android:drawableTop="@drawable/ic_studygroups"
-            android:text="@string/gruppi_studio_label" />
+            android:text="@string/gruppi_studio_label" /> -->
     </LinearLayout>
 
     <LinearLayout

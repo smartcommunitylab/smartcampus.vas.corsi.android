@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -87,14 +88,15 @@ public class MyUniActivity extends SherlockActivity {
 					}
 				});
 
-		// findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent(MyUniActivity.this,
-		// PHLActivity.class);
-		// MyUniActivity.this.startActivity(intent);
-		// }
-		// });
+		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
+//				Intent intent = new Intent(MyUniActivity.this,
+//						PHLActivity.class);
+//				MyUniActivity.this.startActivity(intent);
+			}
+		});
 
 		findViewById(R.id.notices_btn).setOnClickListener(
 				new OnClickListener() {
@@ -115,16 +117,16 @@ public class MyUniActivity extends SherlockActivity {
 			}
 		});
 
-		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								Lista_GDS_activity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+//		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+//				new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent intent = new Intent(MyUniActivity.this,
+//								Lista_GDS_activity.class);
+//						MyUniActivity.this.startActivity(intent);
+//					}
+//				});
 
 	}
 

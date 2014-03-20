@@ -119,14 +119,13 @@ public class NotificationHandler extends
 
 		NoticesActivity.pd.dismiss();
 
-		if (notifies == null) {
+		if (notifies == null) {			
 			setVoidNotify();
 		} else
-			setListNotifications(notifies);
+				setListNotifications(notifies);
 	}
 
 	private void setListNotifications(final List<Notification> notifies) {
-		//noNot.setVisibility(View.GONE);
 		for (Notification n : notifies) {
 			textViewTitleNotices.setText(n.getTitle());
 
@@ -196,7 +195,6 @@ public class NotificationHandler extends
 	}
 
 	private void setVoidNotify() {
-		noNot.setVisibility(View.VISIBLE);
 		textViewTitleNotices.setText(R.string.notices_string_titlelist);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
 				Locale.ITALY);
