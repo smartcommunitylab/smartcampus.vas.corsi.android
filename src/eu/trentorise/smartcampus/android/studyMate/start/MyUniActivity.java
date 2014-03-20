@@ -21,7 +21,6 @@ import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activ
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
-import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
@@ -40,9 +39,6 @@ import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
-
-	/** Logging tag */
-	private static final String TAG = "Main";
 
 	public static final String APP_ID = "studymate";
 	//
@@ -149,14 +145,14 @@ public class MyUniActivity extends SherlockActivity {
 			AsyncTask<Void, Void, BasicProfile> {
 
 		ArrayList<CorsoCarriera> corsicarrierastudente;
-		
+
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
-			
+
 			pd = ProgressDialog.show(MyUniActivity.this,
-					"Sincronizzazione dei tuoi dati in corso.", "Caricamento...");
+					"Sincronizzazione dei tuoi dati in corso.",
+					"Caricamento...");
 		}
 
 		@Override
@@ -206,7 +202,6 @@ public class MyUniActivity extends SherlockActivity {
 					} catch (SecurityException e) {
 						e.printStackTrace();
 					} catch (AACException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					// proviamo a recueprare i dati relativi ai corsi dello
@@ -241,7 +236,6 @@ public class MyUniActivity extends SherlockActivity {
 					} catch (SecurityException e) {
 						e.printStackTrace();
 					} catch (AACException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					// proviamo a recueprare i dati relativi al corso di laurea
@@ -277,7 +271,6 @@ public class MyUniActivity extends SherlockActivity {
 					} catch (SecurityException e) {
 						e.printStackTrace();
 					} catch (AACException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -285,7 +278,7 @@ public class MyUniActivity extends SherlockActivity {
 				return bp;
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println(e.getMessage());
+				// System.out.println(e.getMessage());
 				return null;
 			}
 

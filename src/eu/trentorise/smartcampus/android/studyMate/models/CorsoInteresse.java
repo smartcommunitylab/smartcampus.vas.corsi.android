@@ -1,49 +1,45 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-
 public class CorsoInteresse {
 
-		private long id;
+	private long id;
 
-		private AttivitaDidattica attivitaDidattica; 
-		
-		private long studenteId;
-		
-		private boolean isCorsoCarriera;
+	private AttivitaDidattica attivitaDidattica;
 
-		public long getId() {
-			return id;
-		}
+	private long studenteId;
 
-		public void setId(long id) {
-			this.id = id;
-		}
+	private boolean isCorsoCarriera;
 
-		public AttivitaDidattica getAttivitaDidattica() {
-			return attivitaDidattica;
-		}
+	public long getId() {
+		return id;
+	}
 
-		public void setAttivitaDidattica(AttivitaDidattica attivitaDidattica) {
-			this.attivitaDidattica = attivitaDidattica;
-		}
+	public void setId(long id) {
+		this.id = id;
+	}
 
-		public long getStudenteId() {
-			return studenteId;
-		}
+	public AttivitaDidattica getAttivitaDidattica() {
+		return attivitaDidattica;
+	}
 
-		public void setStudenteId(long studenteId) {
-			this.studenteId = studenteId;
-		}
+	public void setAttivitaDidattica(AttivitaDidattica attivitaDidattica) {
+		this.attivitaDidattica = attivitaDidattica;
+	}
 
-		public boolean isCorsoCarriera() {
-			return isCorsoCarriera;
-		}
+	public long getStudenteId() {
+		return studenteId;
+	}
 
-		public void setCorsoCarriera(boolean isCorsoCarriera) {
-			this.isCorsoCarriera = isCorsoCarriera;
-		}
-		
-		
-		
+	public void setStudenteId(long studenteId) {
+		this.studenteId = studenteId;
+	}
+
+	public boolean isCorsoCarriera() {
+		return isCorsoCarriera;
+	}
+
+	public void setCorsoCarriera(boolean isCorsoCarriera) {
+		this.isCorsoCarriera = isCorsoCarriera;
+	}
 
 }

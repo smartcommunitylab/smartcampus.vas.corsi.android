@@ -66,13 +66,15 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	private Date date;
 	private EditText title;
 	private EditText description;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
 		evento = new Evento();
 		eId = new EventoId();
-		date= new Date();
+		date = new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
 		// get the current date
@@ -84,12 +86,12 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
-		updateDisplay();	
+		updateDisplay();
 
-		int customYear = mYear-1900;
+		int customYear = mYear - 1900;
 		date.setYear(customYear);
 		date.setMonth(mMonth);
-		date.setDate(mDay);	
+		date.setDate(mDay);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
 		title = (EditText) findViewById(R.id.editTextTitle);
@@ -98,7 +100,6 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		new CoursesLoader().execute();
 	}
 
-	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -120,20 +121,23 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-			evento.setType(title.getText().toString());
-			evento.setTitle(cC.get(coursesSpinner.getSelectedItemPosition()).getName());
-			//evento.setTeacher("IO");
-			evento.setPersonalDescription(description.getText().toString());
-			evento.setEventoId(eId);
-			evento.setAdCod(Long.parseLong(cC.get(coursesSpinner.getSelectedItemPosition()).getCod()));
-			eId.setDate(date);
-			
+				evento.setType(title.getText().toString());
+				evento.setTitle(cC
+						.get(coursesSpinner.getSelectedItemPosition())
+						.getName());
+				// evento.setTeacher("IO");
+				evento.setPersonalDescription(description.getText().toString());
+				evento.setEventoId(eId);
+				evento.setAdCod(Long.parseLong(cC.get(
+						coursesSpinner.getSelectedItemPosition()).getCod()));
+				eId.setDate(date);
+
 				new PostEvent(getApplicationContext(), evento).execute();
-				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Evento aggiunto",
+						Toast.LENGTH_SHORT).show();
 				onBackPressed();
 			}
 		});
-		
 
 	}
 
@@ -184,12 +188,13 @@ public class AddEventActivity extends SherlockFragmentActivity {
 					mDay);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
 			((EditText) findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
-			date.setYear(year-1900);
+			date.setYear(year - 1900);
 			date.setMonth(month);
 			date.setDate(day);
 		}
@@ -211,6 +216,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
@@ -226,7 +232,8 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class CoursesLoader extends AsyncTask<Void, Void, List<CorsoCarriera>> {
+	private class CoursesLoader extends
+			AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 		private ProtocolCarrier mProtocolCarrier;
 		public Context context;
@@ -303,5 +310,4 @@ public class AddEventActivity extends SherlockFragmentActivity {
 
 	}
 
-	
 }

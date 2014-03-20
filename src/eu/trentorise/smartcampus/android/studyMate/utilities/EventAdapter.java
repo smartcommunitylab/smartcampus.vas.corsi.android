@@ -63,7 +63,7 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		if (position > 0)
 			prev = getItem(position - 1);
 
-		if (prev == null || !(prev.getTitle().compareTo(item.getTitle())==0)) {
+		if (prev == null || !(prev.getTitle().compareTo(item.getTitle()) == 0)) {
 			title.setVisibility(View.VISIBLE);
 		} else {
 			title.setVisibility(View.GONE);

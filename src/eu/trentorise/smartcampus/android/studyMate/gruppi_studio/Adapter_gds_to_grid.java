@@ -25,14 +25,6 @@ public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 		this.entries = objects;
 	}
 
-	// public int getCount() {
-	// return entries.size();
-	// }
-	//
-	// public long getItemId(int position) {
-	// return 0;
-	// }
-
 	// create a new ImageView for each item referenced by the Adapter
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -42,15 +34,6 @@ public class Adapter_gds_to_grid extends ArrayAdapter<GruppoDiStudio> {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			littleSquare = inflater.inflate(R.layout.gds_square, null);
-			// littleSquare.findViewById(R.id.little_square_for_gds)
-			// .setLayoutParams(new GridView.LayoutParams(85, 85));
-			/*
-			 * ((ImageView) littleSquare.findViewById(R.id.gds_square_logo))
-			 * .setScaleType(ImageView.ScaleType.CENTER_CROP);
-			 * littleSquare.findViewById
-			 * (R.id.little_square_for_gds).setPadding(8, 8, 8, 8);
-			 */
-
 		}
 
 		LinearLayout container = (LinearLayout) littleSquare

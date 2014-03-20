@@ -3,7 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 import java.io.Serializable;
 
 //già da web
-public class AttivitaDiStudio extends Evento implements Serializable{
+public class AttivitaDiStudio extends Evento implements Serializable {
 	/**
 	 * 
 	 */

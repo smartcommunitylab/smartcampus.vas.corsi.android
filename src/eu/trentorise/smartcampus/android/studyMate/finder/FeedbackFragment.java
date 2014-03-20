@@ -57,54 +57,60 @@ public class FeedbackFragment extends SherlockFragment {
 			titleRatingFeedback.setVisibility(View.GONE);
 			return view;
 		} else {
-			titleRatingFeedback.setText(FeedbackHandler.corsoInfo.getDescription());
+			List<Commento> comments = FeedbackHandler.feedbackInfoList;
+			if (comments != null) {
+				titleRatingFeedback.setText(comments.size()
+						+ " commenti presenti");
+				ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
-		}
+				for (int i = 0; i < comments.size(); i++) {
+					FeedbackRowGroup feedb = new FeedbackRowGroup();
+					Author auth = new Author();
+					auth.setName(comments.get(i).getNome_studente());
+					feedb.setAuthor(auth);
 
-		List<Commento> comments = FeedbackHandler.feedbackInfoList;
-		if (comments != null) {
-			ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
+					feedb.setRating((comments.get(i).getRating_carico_studio()
+							+ comments.get(i).getRating_contenuto()
+							+ comments.get(i).getRating_esame()
+							+ comments.get(i).getRating_lezioni() + comments
+							.get(i).getRating_materiali()) / 5);
+					feedb.setRating_cfu(comments.get(i)
+							.getRating_carico_studio());
+					feedb.setRating_contenuti(comments.get(i)
+							.getRating_contenuto());
+					feedb.setRating_esame(comments.get(i).getRating_esame());
+					feedb.setRating_lezioni(comments.get(i).getRating_lezioni());
+					feedb.setRating_materiale(comments.get(i)
+							.getRating_materiali());
+					feedb.setComment(comments.get(i).getTesto());
+					ratings.add(feedb);
+				}
 
-			for (int i = 0; i < comments.size(); i++) {
-				FeedbackRowGroup feedb = new FeedbackRowGroup();
-				Author auth = new Author();
-				auth.setName(comments.get(i).getNome_studente());
-				feedb.setAuthor(auth);
+				ExpandableListView listComments = (ExpandableListView) view
+						.findViewById(R.id.expandableListViewFeedback);
+				AdapterFeedbackList mAdapter = new AdapterFeedbackList(
+						getActivity(), ratings);
 
-				feedb.setRating((comments.get(i).getRating_carico_studio()
-						+ comments.get(i).getRating_contenuto()
-						+ comments.get(i).getRating_esame()
-						+ comments.get(i).getRating_lezioni() + comments.get(i)
-						.getRating_materiali()) / 5);
-				feedb.setRating_cfu(comments.get(i).getRating_carico_studio());
-				feedb.setRating_contenuti(comments.get(i).getRating_contenuto());
-				feedb.setRating_esame(comments.get(i).getRating_esame());
-				feedb.setRating_lezioni(comments.get(i).getRating_lezioni());
-				feedb.setRating_materiale(comments.get(i).getRating_materiali());
-				feedb.setComment(comments.get(i).getTesto());
-				ratings.add(feedb);
+				listComments.setAdapter(mAdapter);
+				listComments.setGroupIndicator(null);
+				listComments
+						.setOnGroupClickListener(new OnGroupClickListener() {
+
+							@Override
+							public boolean onGroupClick(
+									ExpandableListView parent, View v,
+									int groupPosition, long id) {
+								if (parent.isGroupExpanded(groupPosition))
+									parent.collapseGroup(groupPosition);
+								else
+									parent.expandGroup(groupPosition);
+								return true;
+							}
+						});
 			}
 
-			ExpandableListView listComments = (ExpandableListView) view
-					.findViewById(R.id.expandableListViewFeedback);
-			AdapterFeedbackList mAdapter = new AdapterFeedbackList(
-					getActivity(), ratings);
-
-			listComments.setAdapter(mAdapter);
-			listComments.setGroupIndicator(null);
-			listComments.setOnGroupClickListener(new OnGroupClickListener() {
-
-				@Override
-				public boolean onGroupClick(ExpandableListView parent, View v,
-						int groupPosition, long id) {
-					if (parent.isGroupExpanded(groupPosition))
-						parent.collapseGroup(groupPosition);
-					else
-						parent.expandGroup(groupPosition);
-					return true;
-				}
-			});
 		}
+
 		return view;
 	}
 }

@@ -30,13 +30,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -62,13 +59,15 @@ public class EditEventActivity extends SherlockFragmentActivity {
 	public static ProgressDialog pd;
 	private Evento eventoModificato;
 	private Evento evento;
-	//public CorsoCarriera courseSelected;
+	// public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
 	String cN;
 	private EditText title;
 	private EditText description;
 	private EventoId eId;
 	private Date date;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,11 +76,11 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		evento = (Evento) intent.getSerializableExtra("modEv");
 		eId = new EventoId();
 		eventoModificato = evento;
-		date= new Date();
+		date = new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the ex date of previous event
-		mYear = evento.getEventoId().getDate().getYear()+1900;
+		mYear = evento.getEventoId().getDate().getYear() + 1900;
 		mMonth = evento.getEventoId().getDate().getMonth();
 		mDay = evento.getEventoId().getDate().getDay();
 		// get the current Time
@@ -102,7 +101,6 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
 		coursesSpinner.setActivated(false);
-
 
 	}
 
@@ -130,10 +128,12 @@ public class EditEventActivity extends SherlockFragmentActivity {
 			@Override
 			public void onClick(View v) {
 				eventoModificato.setType(title.getText().toString());
-				eventoModificato.setPersonalDescription(description.getText().toString());
+				eventoModificato.setPersonalDescription(description.getText()
+						.toString());
 				eId.setDate(date);
 				eventoModificato.setEventoId(eId);
-				new ChangeEvent(evento, EditEventActivity.this, eventoModificato).execute();
+				new ChangeEvent(evento, EditEventActivity.this,
+						eventoModificato).execute();
 				onBackPressed();
 			}
 		});
@@ -187,12 +187,13 @@ public class EditEventActivity extends SherlockFragmentActivity {
 					mDay);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
 			((EditText) findViewById(R.id.myDatePickerButton4Course))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
-			date.setYear(year-1900);
+			date.setYear(year - 1900);
 			date.setMonth(month);
 			date.setDate(day);
 
@@ -215,6 +216,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
@@ -229,9 +231,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 			eId.setStop(new Time(hourOfDay, minute, 0));
 		}
 	}
-	
-	
-	
+
 	private class ChangeEvent extends AsyncTask<Evento, Void, Boolean> {
 
 		public ProgressDialog pd;
@@ -239,7 +239,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		Evento ev;
 		Evento evModificato;
 		private Context context;
-		
+
 		public ChangeEvent(Evento ev, Context context, Evento evModificato) {
 			this.context = context;
 			this.ev = ev;
@@ -251,7 +251,8 @@ public class EditEventActivity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(EditEventActivity.this);
-			pd = ProgressDialog.show(EditEventActivity.this, "Sto aggiornando le modifiche al tuo evento..",
+			pd = ProgressDialog.show(EditEventActivity.this,
+					"Sto aggiornando le modifiche al tuo evento..",
 					"Caricamento...");
 		}
 
@@ -261,7 +262,8 @@ public class EditEventActivity extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.POST_WS_CHANGE_PERSONAL_EVENT(date, from, to));
+					SmartUniDataWS
+							.POST_WS_CHANGE_PERSONAL_EVENT(date, from, to));
 			request.setMethod(Method.POST);
 
 			MessageResponse response;
@@ -274,9 +276,10 @@ public class EditEventActivity extends SherlockFragmentActivity {
 
 				if (response.getHttpStatus() == 200) {
 					String body = response.getBody();
-					
-					Boolean result = Utils.convertJSONToObject(body, Boolean.class);
-					if(result)
+
+					Boolean result = Utils.convertJSONToObject(body,
+							Boolean.class);
+					if (result)
 						return true;
 					else
 						return false;
@@ -301,7 +304,9 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		@Override
 		protected Boolean doInBackground(Evento... params) {
 			// TODO Auto-generated method stub
-			return changeEvent(ev,ev.getEventoId().getDate().getTime(), ev.getEventoId().getStart().getTime(), ev.getEventoId().getStop().getTime());
+			return changeEvent(ev, ev.getEventoId().getDate().getTime(), ev
+					.getEventoId().getStart().getTime(), ev.getEventoId()
+					.getStop().getTime());
 		}
 
 		@Override
@@ -309,10 +314,14 @@ public class EditEventActivity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			if(result)
-				Toast.makeText(getApplicationContext(), "Evento modificato con successo", Toast.LENGTH_SHORT).show();
+			if (result)
+				Toast.makeText(getApplicationContext(),
+						"Evento modificato con successo", Toast.LENGTH_SHORT)
+						.show();
 			else
-				Toast.makeText(getApplicationContext(), "Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),
+						"Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT)
+						.show();
 		}
 
 	}

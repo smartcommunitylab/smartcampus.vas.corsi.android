@@ -9,8 +9,13 @@ import java.util.List;
  */
 
 // già da web
-public class GruppoDiStudio implements Serializable{
+public class GruppoDiStudio implements Serializable {
 	// id del gruppo
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -76471671623419759L;
 
 	private long id;
 
@@ -70,14 +75,13 @@ public class GruppoDiStudio implements Serializable{
 		return studentiGruppo;
 	}
 
-	 public Byte[] getLogo() {
-	 return logo;
-	 }
-	
-	
-	 public void setLogo(Byte[] logo) {
-	 this.logo = logo;
-	 }
+	public Byte[] getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Byte[] logo) {
+		this.logo = logo;
+	}
 
 	public void setStudentiGruppo(List<Studente> studentiGruppo) {
 		this.studentiGruppo = studentiGruppo;

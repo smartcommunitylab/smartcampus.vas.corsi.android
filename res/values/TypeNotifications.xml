@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <item>Economia e management</item>
-       <item>Giurisprudenza</item>
-       <item>Fisica</item>
-       <item>Ingegneria civile, ambientale e meccanica</item>
-       <item>Ingegneria e scienza dell’informazione</item>
-       <item>Ingegneria industriale</item>
-       <item>Lettere e filosofia</item>
-       <item>Matematica</item>
-       <item>Psicologia e scienze cognitive</item>
-       <item>Sociologia e ricerca sociale</item>
-      <item>Opera Universitaria</item>
-       <item>Cisca</item>
-       <item>Ateneo</item>
-       <item>UniSport</item>
+
+<!--     <item>Economia e management</item>
+    <item>Giurisprudenza</item>
+    <item>Fisica</item>
+    <item>Ingegneria civile, ambientale e meccanica</item>
+    <item>Ingegneria e scienza dell’informazione</item>
+    <item>Ingegneria industriale</item>
+    <item>Lettere e filosofia</item>
+    <item>Matematica</item>
+    <item>Psicologia e scienze cognitive</item>
+    <item>Sociologia e ricerca sociale</item>
+    <item>Opera Universitaria</item>
+    <item>Cisca</item>
+    <item>Ateneo</item>
+    <item>UniSport</item>
+ -->
 </resources>

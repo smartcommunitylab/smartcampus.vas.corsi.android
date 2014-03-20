@@ -18,7 +18,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class SetCourseAsFollowHandler extends AsyncTask<AttivitaDidattica, Void, Boolean> {
+public class SetCourseAsFollowHandler extends
+		AsyncTask<AttivitaDidattica, Void, Boolean> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;

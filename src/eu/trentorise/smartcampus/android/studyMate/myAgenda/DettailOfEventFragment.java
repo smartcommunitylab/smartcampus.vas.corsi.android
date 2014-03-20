@@ -2,16 +2,13 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.text.SimpleDateFormat;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +20,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
-import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -97,7 +92,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 							0,
 							eventSelected.getEventoId().getStart().toString()
 									.length() - 3));
-			
+
 		TextView tvTypeEvent = (TextView) view.findViewById(R.id.textTypeEvent);
 		tvTypeEvent.setText(eventSelected.getType());
 
@@ -149,7 +144,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 		default:
 			break;
 		}
-		return false;// super.onOptionsItemSelected(item);
+		return false;
 	}
 
 	private class DeleteEvent extends AsyncTask<Evento, Void, Void> {
@@ -189,7 +184,6 @@ public class DettailOfEventFragment extends SherlockFragment {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					String body = response.getBody();
 					return true;
 
 				} else {
@@ -202,7 +196,6 @@ public class DettailOfEventFragment extends SherlockFragment {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -211,14 +204,12 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 		@Override
 		protected Void doInBackground(Evento... params) {
-			// TODO Auto-generated method stub
 			deleteEv(ev);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 		}

@@ -16,13 +16,15 @@ public final class SmartUniDataWS {
 	public static final String GET_WS_ALLCOURSES_ATT_DIDATTICA = "/attivitadidattica/all";
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
 	public static final String DELETE_EVENTO = "/evento/delete";
-	
-	public static String POST_WS_COURSE_AS_FOLLOW_NEW (long adId){
+
+	public static String POST_WS_COURSE_AS_FOLLOW_NEW(long adId) {
 		return "/corsointeresse/" + String.valueOf(adId) + "/seguo";
 	}
-	public static String GET_WS_IF_FOLLOW (String adId){
+
+	public static String GET_WS_IF_FOLLOW(String adId) {
 		return "/corsointeresse/" + adId + "/seguito";
 	}
+
 	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(long id_dep) {
 		return "/attivitadidattica/dipartimento/" + String.valueOf(id_dep);
 	}
@@ -30,7 +32,7 @@ public final class SmartUniDataWS {
 	public static String GET_WS_ALLCOURSES_OF_DEGREE(String id_cds) {
 		return "/attivitadidattica/corsolaurea/" + id_cds;
 	}
-	
+
 	public static String GET_WS_COURSES_DETAILS(long adId) {
 		return "/attivitadidattica/" + String.valueOf(adId);
 	}
@@ -44,7 +46,7 @@ public final class SmartUniDataWS {
 
 	// My courses passed
 	public static final String GET_WS_MY_COURSES_PASSED = "/corsocarriera/passed/me";
-	
+
 	// My courses passed
 	public static final String GET_WS_MY_COURSES_NOT_PASSED = "/corsocarriera/notpassed/me";
 
@@ -53,28 +55,27 @@ public final class SmartUniDataWS {
 	}
 
 	// Events /////////////////////////////////////////////////////////////
-	public static final String GET_WS_MYEVENTS = "/evento/me";//"/evento/me";
+	public static final String GET_WS_MYEVENTS = "/evento/me";// "/evento/me";
 	public static final String POST_NEW_EVENT = "/evento";
 
 	public static final String GET_WS_EVENTS_OF_COURSE(String idCourse) {
 		return "/evento/" + idCourse;
 	}
-	
-	public static final String POST_WS_CHANGE_PERSONAL_EVENT(long date, long from, long to) {
-		return "/evento/change/date/" + date + "/from/"+from+"/to/"+to;
-	}
-	
-	public static final String GET_WS_NOTIFICATIONS(long fromDate) {
-		return "	/notifiche/"+fromDate+"/me";
-	}
-	
 
+	public static final String POST_WS_CHANGE_PERSONAL_EVENT(long date,
+			long from, long to) {
+		return "/evento/change/date/" + date + "/from/" + from + "/to/" + to;
+	}
+
+	public static final String GET_WS_NOTIFICATIONS(long fromDate) {
+		return "	/notifiche/" + fromDate + "/me";
+	}
 
 	// Student //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";
-	
+
 	// Student //////////////////////////////////////////////////////////
-		public static final String GET_WS_STUDENT_DATA_NO_SYNC = "/studente/me";
+	public static final String GET_WS_STUDENT_DATA_NO_SYNC = "/studente/me";
 
 	// Departments //////////////////////////////////////////////////////////
 	public static final String GET_WS_DEPARTMENTS_ALL = "/dipartimento/all";

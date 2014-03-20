@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ public class CorsiFragment extends SherlockFragment {
 				container, false);
 		return view;
 	}
-
 
 	public void onStart() {
 		super.onStart();
@@ -66,9 +64,10 @@ public class CorsiFragment extends SherlockFragment {
 		}
 		return false;// super.onOptionsItemSelected(item);
 	}
-	
-//	public static void clearBackStack(FragmentManager manager){
-//	    int rootFragment = manager.getBackStackEntryAt(0).getId();
-//	    manager.popBackStack(rootFragment, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//	}
+
+	// public static void clearBackStack(FragmentManager manager){
+	// int rootFragment = manager.getBackStackEntryAt(0).getId();
+	// manager.popBackStack(rootFragment,
+	// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+	// }
 }

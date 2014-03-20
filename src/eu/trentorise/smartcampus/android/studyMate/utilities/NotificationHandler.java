@@ -42,11 +42,11 @@ public class NotificationHandler extends
 	private ArrayList<String> datetimeList;
 	@SuppressWarnings("unused")
 	private ArrayList<String> usersList;
+	@SuppressWarnings("unused")
 	private SherlockFragmentActivity activity;
 	private ProtocolCarrier mProtocolCarrier;
 	private long fromDate;
-	
-	
+
 	public NotificationHandler(Context applicationContext,
 			TextView textViewTitleNotices, ListView lvAllNotices,
 			SherlockFragmentActivity act, long fromDate) {
@@ -59,15 +59,15 @@ public class NotificationHandler extends
 
 	private List<Notification> getNotification() throws Exception {
 
-//		CommunicatorConnector cc = new CommunicatorConnector(
-//				MyUniActivity.SERVER_URL, MyUniActivity.APP_ID);
-//		Notifications list = cc.getNotificationsByApp(0L, 0, -1,
-//				MyUniActivity.getAuthToken());
-//		list.getNotifications();
-//		List<Notification> not = list.getNotifications();
-		
+		// CommunicatorConnector cc = new CommunicatorConnector(
+		// MyUniActivity.SERVER_URL, MyUniActivity.APP_ID);
+		// Notifications list = cc.getNotificationsByApp(0L, 0, -1,
+		// MyUniActivity.getAuthToken());
+		// list.getNotifications();
+		// List<Notification> not = list.getNotifications();
+
 		List<Notification> not = new ArrayList<Notification>();
-		
+
 		mProtocolCarrier = new ProtocolCarrier(context,
 				SmartUniDataWS.TOKEN_NAME);
 
@@ -94,12 +94,11 @@ public class NotificationHandler extends
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		not = Utils.convertJSONToObjects(body, Notification.class);
-		
+
 		return not;
 	}
 
@@ -154,40 +153,41 @@ public class NotificationHandler extends
 				R.id.listViewNotices, notifies);
 		lvAllNotices.setAdapter(adapterNotices);
 
-//		lvAllNotices.setOnItemClickListener(new ListView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// if (notifies.get(arg2).getType().equals("gds")) {
-//				AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
-//				mAlert.setTitle(notifies.get(arg2).getTitle());
-//				mAlert.setMessage(notifies.get(arg2).getDescription());
-//				mAlert.setPositiveButton("OK",
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog,
-//									int which) {
-//								// Editable value = input.getText();
-//								Toast.makeText(context, "OK...",
-//										Toast.LENGTH_SHORT).show();
-//								// e.printStackTrace();
-//							}
-//						});
-//				mAlert.setNegativeButton("CANCEL",
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog,
-//									int which) {
-//								// Editable value = input.getText();
-//								Toast.makeText(context, "CANCEL...",
-//										Toast.LENGTH_SHORT).show();
-//								// e.printStackTrace();
-//							}
-//						});
-//				AlertDialog alert = mAlert.create();
-//
-//				alert.show();
-//			}
-//			// }
-//		});
+		// lvAllNotices.setOnItemClickListener(new
+		// ListView.OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		// long arg3) {
+		// // if (notifies.get(arg2).getType().equals("gds")) {
+		// AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
+		// mAlert.setTitle(notifies.get(arg2).getTitle());
+		// mAlert.setMessage(notifies.get(arg2).getDescription());
+		// mAlert.setPositiveButton("OK",
+		// new DialogInterface.OnClickListener() {
+		// public void onClick(DialogInterface dialog,
+		// int which) {
+		// // Editable value = input.getText();
+		// Toast.makeText(context, "OK...",
+		// Toast.LENGTH_SHORT).show();
+		// // e.printStackTrace();
+		// }
+		// });
+		// mAlert.setNegativeButton("CANCEL",
+		// new DialogInterface.OnClickListener() {
+		// public void onClick(DialogInterface dialog,
+		// int which) {
+		// // Editable value = input.getText();
+		// Toast.makeText(context, "CANCEL...",
+		// Toast.LENGTH_SHORT).show();
+		// // e.printStackTrace();
+		// }
+		// });
+		// AlertDialog alert = mAlert.create();
+		//
+		// alert.show();
+		// }
+		// // }
+		// });
 	}
 
 	private void setVoidNotify() {

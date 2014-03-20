@@ -39,7 +39,7 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	public GruppoDiStudio contextualGDS = null;
-	//public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
+	// public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
 	public ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
@@ -158,9 +158,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		return contextualGDS;
 	}
 
-//	public ArrayList<ChatObj> getContextualForum() {
-//		return contextualForum;
-//	}
+	// public ArrayList<ChatObj> getContextualForum() {
+	// return contextualForum;
+	// }
 
 	public void setContextualGDS(GruppoDiStudio contextualGDS) {
 		this.contextualGDS = contextualGDS;
@@ -296,8 +296,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			MessageResponse response;
 			try {
 
-				String gds_to_abandonJSON = Utils
-						.convertToJSON(gds_to_abandon);
+				String gds_to_abandonJSON = Utils.convertToJSON(gds_to_abandon);
 
 				request.setBody(gds_to_abandonJSON);
 				/*
@@ -330,14 +329,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			return true;
 		}
 
-
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					"Stai lasciando "+ toabandonGDS.getNome(), "");
+			pd = ProgressDialog.show(taskcontext, "Stai lasciando "
+					+ toabandonGDS.getNome(), "");
 		}
 
 		@Override

@@ -47,10 +47,9 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 	private RatingRowGroup rrg;
 	public SherlockFragmentActivity act;
 
-	
 	long idCorso;
 	String CorsoName;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -293,10 +292,9 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							commento.setNome_studente(stud.getNome());
 
 							new ProgressDialog(AddRatingFromCoursesPassed.this);
-							pd = ProgressDialog
-									.show(AddRatingFromCoursesPassed.this,
-											"Salvataggio...",
-											"Caricamento...");
+							pd = ProgressDialog.show(
+									AddRatingFromCoursesPassed.this,
+									"Salvataggio...", "Caricamento...");
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this,
 									AddRatingFromCoursesPassed.this)
@@ -322,8 +320,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS
-							.GET_WS_FEEDBACK_OF_STUDENT(idCorso));
+					SmartUniDataWS.GET_WS_FEEDBACK_OF_STUDENT(idCorso));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;

@@ -10,9 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
@@ -28,22 +26,10 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-import eu.trentorise.smartcampus.ac.AACException;
-import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
-import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class AddEvent4coursesActivity extends SherlockFragmentActivity {
@@ -61,7 +47,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 
 	public static ProgressDialog pd;
 	private Evento evento = null;
-	//public CorsoCarriera courseSelected;
+	// public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
 	String cN;
 	private CorsoCarriera cc;
@@ -69,6 +55,8 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 	private EditText description;
 	private EventoId eId;
 	private Date date;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,7 +65,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 		cc = (CorsoCarriera) intent.getSerializableExtra("corsoCarrieraS");
 		evento = new Evento();
 		eId = new EventoId();
-		date= new Date();
+		date = new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
 		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
 		// get the current date
@@ -91,13 +79,13 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 		// display the current date
 		updateDisplay();
 
-		int customYear = mYear-1900;
+		int customYear = mYear - 1900;
 		date.setYear(customYear);
 		date.setMonth(mMonth);
-		date.setDate(mDay);	
+		date.setDate(mDay);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
-		
+
 		title = (EditText) findViewById(R.id.editTextTitle4Course);
 		description = (EditText) findViewById(R.id.editTextDescription4Course);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
@@ -109,7 +97,6 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
 		coursesSpinner.setActivated(false);
-
 
 	}
 
@@ -138,13 +125,14 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 			public void onClick(View v) {
 				evento.setType(title.getText().toString());
 				evento.setTitle(cc.getName());
-				//evento.setTeacher("IO");
+				// evento.setTeacher("IO");
 				evento.setPersonalDescription(description.getText().toString());
 				evento.setEventoId(eId);
 				evento.setAdCod(Long.parseLong(cc.getCod()));
 				eId.setDate(date);
 				new PostEvent(getApplicationContext(), evento).execute();
-				Toast.makeText(getApplicationContext(), "Evento aggiunto", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Evento aggiunto",
+						Toast.LENGTH_SHORT).show();
 				onBackPressed();
 			}
 		});
@@ -198,12 +186,13 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 					mDay);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
 			((EditText) findViewById(R.id.myDatePickerButton4Course))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
-			date.setYear(year-1900);
+			date.setYear(year - 1900);
 			date.setMonth(month);
 			date.setDate(day);
 
@@ -226,6 +215,7 @@ public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {

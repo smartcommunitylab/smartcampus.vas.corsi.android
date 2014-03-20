@@ -24,8 +24,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-
-public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarriera>> {
+public class CoursesPassedHandler extends
+		AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -33,7 +33,6 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarrie
 	private ListView listViewCorsiPassati;
 	public Activity currentActivity;
 	public static ProgressDialog pd;
-
 
 	public CoursesPassedHandler(Context applicationContext,
 			ListView listViewCorsi, Activity currentActivity) {
@@ -112,7 +111,7 @@ public class CoursesPassedHandler extends AsyncTask<Void, Void, List<CorsoCarrie
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-							
+
 							// Pass Data to other Fragment
 							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);

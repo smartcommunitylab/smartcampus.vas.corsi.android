@@ -7,7 +7,6 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
@@ -19,7 +18,6 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		ADD_EVENT_FOR_COURSES, ADD_RATING, NONE
 	}
 
-	
 	public static String corsoNameMA;
 	String idCorsoMA;
 
@@ -65,8 +63,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-			setTitle("Agenda");
+		setTitle("Agenda");
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -77,8 +74,8 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.add_event:
 			return false;
-//		case R.id.menu_modify_event:
-//			return false;
+			// case R.id.menu_modify_event:
+			// return false;
 		case R.id.menu_delete_event:
 			return false;
 		case R.id.menu_add_event_4_course:

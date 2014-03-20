@@ -45,9 +45,10 @@ public class OverviewFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
+
 	public void onStart() {
 		super.onStart();
-		
+
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
 

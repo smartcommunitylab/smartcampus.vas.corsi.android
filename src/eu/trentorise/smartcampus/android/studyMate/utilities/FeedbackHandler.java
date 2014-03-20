@@ -20,7 +20,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
-import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -45,7 +44,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	Button swichFollow;
 	public static ProgressDialog pd;
 	TextView txtMonitor;
-	private Studente studenteUser;
 
 	public static List<Commento> feedbackInfoList;
 	public static AttivitaDidattica corsoInfo;
@@ -156,7 +154,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		} else {
 			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-
 			swichFollow.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -199,11 +196,10 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				ratingEsame.setRating(corsoInfo.getRating_esame());
 
 			}
-			if(corsoInfo.getCourseDescription()==null){
-				
-			}
-			else{
-			descriptionCourse.setText(corsoInfo.getCourseDescription());
+			if (corsoInfo.getCourseDescription() == null) {
+
+			} else {
+				descriptionCourse.setText(corsoInfo.getCourseDescription());
 			}
 			pd.dismiss();
 
@@ -215,28 +211,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	protected List<Commento> doInBackground(Void... params) {
 		return getFullFeedbackById();
 	}
-
-	//
-	// // metodo che dato lo studente setta la lista dei corsi di interesse
-	// dalla
-	// // stringa degli ids
-	// private boolean isContainsInCorsiInteresse(Studente stud, Corso corso) {
-	//
-	// if (stud.getIdsCorsiInteresse() == null) {
-	// return false;
-	// } else {
-	// String[] listS = stud.getIdsCorsiInteresse().split(",");
-	// boolean contenuto = false;
-	//
-	// for (String s : listS) {
-	// if (s.equals(corso.getId().toString())) {
-	// contenuto = true;
-	// }
-	// }
-	// return contenuto;
-	// }
-	//
-	// }
 
 	private class FollowTask extends AsyncTask<String, Void, Boolean> {
 

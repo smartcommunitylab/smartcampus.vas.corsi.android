@@ -39,47 +39,47 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 		}
 
 		TextView title = (TextView) row.findViewById(R.id.textViewNoticeTitle);
-		TextView date = (TextView) row.findViewById(R.id.textViewDatetimeNoticeRow);
+		TextView date = (TextView) row
+				.findViewById(R.id.textViewDatetimeNoticeRow);
 		TextView content = (TextView) row
 				.findViewById(R.id.textViewDescriptionRow);
 
 		long dateTS = item.getTimestamp();
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				"yyyy/MM/dd HH:mm", Locale.ITALY);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm",
+				Locale.ITALY);
 
 		String dateString = dateFormat.format(dateTS);
-		
+
 		title.setText(item.getTitle());
-		date.setText(dateString+" ("+item.getType()+")");
+		date.setText(dateString + " (" + item.getType() + ")");
 		content.setText(item.getDescription());
-//		Notification prev = null;
-//		if (position > 0)
-//			prev = getItem(position - 1);
-//
-//		if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
-//			date.setVisibility(View.VISIBLE);
-//		} else {
-//			date.setVisibility(View.GONE);
-//		}
-//		
-		if(item.getDescription().equals(""))
+		// Notification prev = null;
+		// if (position > 0)
+		// prev = getItem(position - 1);
+		//
+		// if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
+		// date.setVisibility(View.VISIBLE);
+		// } else {
+		// date.setVisibility(View.GONE);
+		// }
+		//
+		if (item.getDescription().equals(""))
 			content.setVisibility(View.GONE);
-		else{
+		else {
 			content.setVisibility(View.VISIBLE);
-//			content.setPadding(
-//					(int) context.getResources().getDimension(
-//							R.dimen.activity_horizontal_margin),
-//					0,
-//					(int) context.getResources().getDimension(
-//							R.dimen.activity_horizontal_margin), 0);
+			// content.setPadding(
+			// (int) context.getResources().getDimension(
+			// R.dimen.activity_horizontal_margin),
+			// 0,
+			// (int) context.getResources().getDimension(
+			// R.dimen.activity_horizontal_margin), 0);
 		}
-		
-		if(item.getTitle().equals(""))
+
+		if (item.getTitle().equals(""))
 			title.setVisibility(View.GONE);
 		else
 			title.setVisibility(View.VISIBLE);
-		
 
 		return row;
 

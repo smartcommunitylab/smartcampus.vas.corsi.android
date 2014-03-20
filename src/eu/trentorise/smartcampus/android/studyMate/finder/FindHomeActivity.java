@@ -59,9 +59,11 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 
 		// setto la lista iniziale negli spinner
 		List<String> initialList = new ArrayList<String>();
-		initialList.add(new String(getResources().getString(R.string.finder_initiallist_dep)));
+		initialList.add(new String(getResources().getString(
+				R.string.finder_initiallist_dep)));
 		List<String> initialListDeg = new ArrayList<String>();
-		initialList.add(new String(getResources().getString(R.string.finder_initiallist_dep)));
+		initialList.add(new String(getResources().getString(
+				R.string.finder_initiallist_dep)));
 		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 				FindHomeActivity.this, R.layout.list_studymate_row_list_simple,
 				initialList);

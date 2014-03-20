@@ -37,6 +37,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 	public static long idCorso;
 	String corsoName;
 	String adCod;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,12 +55,7 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		idCorso = intent.getLongExtra("IdCorso", 0);
 		corsoName = intent.getStringExtra("NomeCorso");
 		adCod = intent.getStringExtra("adCod");
-//		Intent intent = getIntent();
-//		courseName = intent.getStringExtra("courseSelectedName");
 		setTitle(corsoName);
-//		corsoAttuale = new AttivitaDidattica();
-//		corsoAttuale = (AttivitaDidattica) intent.getSerializableExtra("courseSelected");
-
 		Tab tab1 = ab
 				.newTab()
 				.setText(tab1_txt)
@@ -196,13 +192,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				Intent intentAddRating = new Intent(
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
-				intentAddRating.putExtra("IdCorso",
-						idCorso);
-				intentAddRating.putExtra("NomeCorso",
-						corsoName);
-//				intentAddRating.putExtra("IdCorso",
-//						CoursesHandlerLite.corsoSelezionato.getAdId());//CoursesHandler.corsoSelezionato.getId());
-//				intentAddRating.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intentAddRating.putExtra("IdCorso", idCorso);
+				intentAddRating.putExtra("NomeCorso", corsoName);
 				startActivity(intentAddRating);
 
 			} else {

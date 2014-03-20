@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class EventoId implements Serializable {
 
-
 	/**
 	 * 
 	 */
@@ -19,7 +18,7 @@ public class EventoId implements Serializable {
 	private Time start;
 
 	private Time stop;
-	
+
 	private long idStudente;
 
 	@Override
@@ -33,7 +32,7 @@ public class EventoId implements Serializable {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	
+
 	public Time getStart() {
 		return start;
 	}
@@ -49,7 +48,7 @@ public class EventoId implements Serializable {
 	public void setStop(Time stop) {
 		this.stop = stop;
 	}
-	
+
 	public Date getDate() {
 		return date;
 	}
@@ -73,5 +72,5 @@ public class EventoId implements Serializable {
 	public void setIdStudente(long idStudente) {
 		this.idStudente = idStudente;
 	}
-	
+
 }

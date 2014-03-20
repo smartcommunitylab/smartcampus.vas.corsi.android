@@ -22,7 +22,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	private SherlockFragmentActivity activity;
 	public static ProgressDialog pd;
 	private long fromDate;
-	private static final long TIMEFROM = 604800000*2;
+	private static final long TIMEFROM = 604800000 * 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,10 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
-		Date date1Week = new Date(System.currentTimeMillis()-TIMEFROM);
+
+		Date date1Week = new Date(System.currentTimeMillis() - TIMEFROM);
 		fromDate = date1Week.getTime();
-		
+
 		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
 				lvAllNotices, activity, fromDate).execute();
 	}

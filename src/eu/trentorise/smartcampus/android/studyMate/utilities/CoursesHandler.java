@@ -20,7 +20,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -32,7 +31,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>> {
+public class CoursesHandler extends
+		AsyncTask<Bundle, Void, List<CorsoCarriera>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -43,7 +43,6 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 	public Activity currentActivity;
 	public SherlockFragmentActivity currentSherlock;
 	public Bundle bundleParam;
-
 
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi,
 			Activity currentActivity, SherlockFragmentActivity currentSherlock) {
@@ -123,15 +122,17 @@ public class CoursesHandler extends AsyncTask<Bundle, Void, List<CorsoCarriera>>
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-							
+
 							currentSherlock.supportInvalidateOptionsMenu();
 
 							// Pass Data to other Fragment
 							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
 							Bundle data = new Bundle();
-							data.putSerializable("corsoCarrieraSelezionato", corsoSelezionato);
-							data.putString("NomeCorso",corsoSelezionato.getName());
+							data.putSerializable("corsoCarrieraSelezionato",
+									corsoSelezionato);
+							data.putString("NomeCorso",
+									corsoSelezionato.getName());
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()
 									.beginTransaction();

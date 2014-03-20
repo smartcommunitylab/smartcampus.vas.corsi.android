@@ -52,20 +52,23 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 			if (currentImpegno.getEventoId().getDate() != null) {
 				SimpleDateFormat format = new SimpleDateFormat(
 						"dd/MM/yyyy HH:mm");
-				data_view.setText(format.format(currentImpegno.getEventoId().getDate()));
+				data_view.setText(format.format(currentImpegno.getEventoId()
+						.getDate()));
 			}
 
 			oggetto_view.setText(currentImpegno.getTitle());
 			aula_edificio_view.setText(currentImpegno.getRoom());
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			orario_view.setText(format.format(currentImpegno.getEventoId().getDate()));
+			orario_view.setText(format.format(currentImpegno.getEventoId()
+					.getDate()));
 
 			AttivitaDiStudio prev = null;
 			if (position > 0)
 				prev = getItem(position - 1);
 
 			if (prev == null
-					|| (prev.getEventoId().getDate().equals(currentImpegno.getEventoId().getDate()) == false)) {
+					|| (prev.getEventoId().getDate()
+							.equals(currentImpegno.getEventoId().getDate()) == false)) {
 				data_view.setVisibility(View.VISIBLE);
 			} else {
 				data_view.setVisibility(View.GONE);

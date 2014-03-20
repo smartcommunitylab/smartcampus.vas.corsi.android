@@ -52,13 +52,12 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				.getSerializable("PossibleGDS");
 		ArrayList<AttivitaDidattica> PossibleAttivitaDidattiche = (ArrayList<AttivitaDidattica>) extras
 				.getSerializable("PossibleAttivitaDidattiche");
-		 String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
+		String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
 
 		TextView tv_materia = (TextView) findViewById(R.id.tv_filter_materia);
 		tv_materia.setText(materia_filter);
-		 TextView tv_nomeGruppo = (TextView)
-		 findViewById(R.id.tv_filter_nomegruppo);
-		 tv_nomeGruppo.setText(nome_gruppo_filter);
+		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
+		tv_nomeGruppo.setText(nome_gruppo_filter);
 
 		// ArrayList<GruppoDiStudio> gds_ammissibili = find_gds_ammissibili(
 		// universo_gds, materia_filter, nome_gruppo_filter,

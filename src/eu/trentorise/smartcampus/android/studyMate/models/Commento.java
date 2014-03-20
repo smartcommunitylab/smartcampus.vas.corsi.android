@@ -35,8 +35,9 @@ public class Commento {
 
 	// valutazione esame
 	private float rating_esame;
-	
+
 	private long timestamp;
+
 	public Commento() {
 	}
 

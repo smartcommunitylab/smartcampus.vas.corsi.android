@@ -2,8 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.io.Serializable;
 
-public class Evento implements Serializable{
-
+public class Evento implements Serializable {
 
 	/**
 	 * 
@@ -18,8 +17,6 @@ public class Evento implements Serializable{
 	private String type;
 	private String personalDescription;
 	private long adCod;
-	
-
 
 	public EventoId getEventoId() {
 		return eventoId;
@@ -36,7 +33,6 @@ public class Evento implements Serializable{
 	public void setRoom(String room) {
 		this.room = room;
 	}
-
 
 	public long getCds() {
 		return cds;
@@ -94,6 +90,4 @@ public class Evento implements Serializable{
 		this.adCod = adCod;
 	}
 
-
-	
 }

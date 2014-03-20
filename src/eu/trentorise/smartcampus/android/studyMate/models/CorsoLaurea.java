@@ -3,9 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 import java.io.Serializable;
 import java.util.List;
 
-
-public class CorsoLaurea implements Serializable{
-
+public class CorsoLaurea implements Serializable {
 
 	/**
 	 * 
@@ -51,7 +49,6 @@ public class CorsoLaurea implements Serializable{
 		this.cdsCod = cdsCod;
 	}
 
-
 	public String getDescripion() {
 		return descripion;
 	}
@@ -84,5 +81,4 @@ public class CorsoLaurea implements Serializable{
 		this.pds = pds;
 	}
 
-	
 }

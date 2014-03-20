@@ -29,7 +29,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidattica>> {
+public class CoursesHandlerLite extends
+		AsyncTask<Void, Void, List<AttivitaDidattica>> {
 
 	private ProtocolCarrier mProtocolCarrier;
 	public Context context;
@@ -83,7 +84,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Utils.convertJSONToObjects(body, AttivitaDidattica.class);
@@ -119,7 +119,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -156,7 +155,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -186,7 +184,8 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(String.valueOf(deg.getCdsId())));
+				SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(String.valueOf(deg
+						.getCdsId())));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -222,15 +221,14 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 			if (department.equals("Tutto"))
 				tvTitleNotices.setText(tvTitleNotices.getText() + "Tutto");
 			else if (degree.equals("Tutto"))
-				tvTitleNotices
-						.setText(tvTitleNotices.getText() + " Dipartimento di "
-								+ department.getDescription().toString());
+				tvTitleNotices.setText(tvTitleNotices.getText()
+						+ " Dipartimento di "
+						+ department.getDescription().toString());
 			else
-				tvTitleNotices
-						.setText(tvTitleNotices.getText() + " Dipartimento di "
-								+ department.getDescription().toString()
-								+ ", corso di laurea in "
-								+ degree.getDescripion());
+				tvTitleNotices.setText(tvTitleNotices.getText()
+						+ " Dipartimento di "
+						+ department.getDescription().toString()
+						+ ", corso di laurea in " + degree.getDescripion());
 		} else {
 			if (department.equals("Tutto")) {
 				if (degree.equals("Tutto"))
@@ -249,8 +247,7 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 					tvTitleNotices.setText(tvTitleNotices.getText() + " "
 							+ course.toString() + " del dipartimento di "
 							+ department.getDescription().toString()
-							+ ", corso di laurea in "
-							+ degree.getDescripion());
+							+ ", corso di laurea in " + degree.getDescripion());
 			}
 
 		}
@@ -278,7 +275,8 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 		ArrayList<String> coursesFiltered_onlyName = new ArrayList<String>();
 
 		for (int i = 0; i < coursesFiltered.size(); i++) {
-			coursesFiltered_onlyName.add(i, coursesFiltered.get(i).getDescription());
+			coursesFiltered_onlyName.add(i, coursesFiltered.get(i)
+					.getDescription());
 		}
 
 		ArrayAdapter<String> adapterCursesList = new ArrayAdapter<String>(
@@ -292,14 +290,13 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				String courseSelectedName = (String) arg0
-						.getItemAtPosition(arg2);
 				Intent i = new Intent(context, FindHomeCourseActivity.class);
 
 				AttivitaDidattica corsoSelezionato = new AttivitaDidattica();
 
 				corsoSelezionato.setAdId(coursesFiltered.get(arg2).getAdId());
-				corsoSelezionato.setDescription(coursesFiltered.get(arg2).getDescription());
+				corsoSelezionato.setDescription(coursesFiltered.get(arg2)
+						.getDescription());
 				corsoSelezionato.setCds_id(coursesFiltered.get(arg2)
 						.getCds_id());
 				corsoSelezionato.setAdCod(coursesFiltered.get(arg2).getAdCod());
@@ -308,10 +305,6 @@ public class CoursesHandlerLite extends AsyncTask<Void, Void, List<AttivitaDidat
 				i.putExtra("IdCorso", corsoSelezionato.getAdId());
 				i.putExtra("adCod", corsoSelezionato.getAdCod());
 				currentAct.startActivity(i);
-//				i.putExtra("courseSelected", corsoSelezionato);
-//				i.putExtra("courseSelectedName", courseSelectedName);
-//				i.putExtra("courseSelectedId", getIDCourseSelected(arg2));
-//				currentAct.startActivity(i);
 			}
 
 		});

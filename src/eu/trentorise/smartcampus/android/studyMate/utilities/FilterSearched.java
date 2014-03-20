@@ -14,8 +14,8 @@ public class FilterSearched {
 
 	// filtro in base a quello che ho cercato controllando se le parole sono
 	// contenute nella lista
-	public ArrayList<AttivitaDidattica> filterListWithCourseSearched(String searched,
-			List<AttivitaDidattica> startList) {
+	public ArrayList<AttivitaDidattica> filterListWithCourseSearched(
+			String searched, List<AttivitaDidattica> startList) {
 
 		int length = startList.size();
 		coursesList = new ArrayList<AttivitaDidattica>(length);
@@ -26,7 +26,8 @@ public class FilterSearched {
 			}
 		} else {
 			for (int k = 0; k < length; k++) {
-				if (startList.get(k).getDescription().toLowerCase().contains(searched)) {
+				if (startList.get(k).getDescription().toLowerCase()
+						.contains(searched)) {
 					coursesList.add(startList.get(k));
 				}
 			}

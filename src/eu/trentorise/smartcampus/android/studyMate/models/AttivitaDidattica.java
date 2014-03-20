@@ -2,9 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.models;
 
 import java.io.Serializable;
 
-
-public class AttivitaDidattica implements Serializable{
-
+public class AttivitaDidattica implements Serializable {
 
 	/**
 	 * 
@@ -23,7 +21,7 @@ public class AttivitaDidattica implements Serializable{
 	private Float rating_materiali;
 	private Float rating_esame;
 	private String courseDescription;
-	
+
 	public long getAdId() {
 		return adId;
 	}
@@ -126,8 +124,6 @@ public class AttivitaDidattica implements Serializable{
 
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
-	}	
-	
-	
-	
+	}
+
 }

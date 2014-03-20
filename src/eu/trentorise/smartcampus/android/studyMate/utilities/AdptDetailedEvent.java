@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import java.util.Date;
 
-
 public class AdptDetailedEvent {
 	private Date date;
 	private String name;

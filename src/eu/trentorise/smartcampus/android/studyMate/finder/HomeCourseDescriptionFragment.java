@@ -32,7 +32,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 
 	@Override
 	public void onStart() {
-		
+
 		act = this.getSherlockActivity();
 		TextView descriptionCourse = (TextView) getSherlockActivity()
 				.findViewById(R.id.textViewDescriptioonCourseHome);
@@ -43,8 +43,7 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 		TextView txtMonitor = (TextView) getSherlockActivity().findViewById(
 				R.id.txt_monitor);
 		feedbackHandler = (FeedbackHandler) new FeedbackHandler(
-				getSherlockActivity(),
-				FindHomeCourseActivity.idCorso, act,
+				getSherlockActivity(), FindHomeCourseActivity.idCorso, act,
 				ratingAverage, descriptionCourse, switchFollow, txtMonitor)
 				.execute();
 
