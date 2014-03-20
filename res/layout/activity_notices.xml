@@ -3,21 +3,39 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <Spinner
+        android:id="@+id/spinnerNotifiche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/textViewTitleNotices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
+        android:paddingBottom="5dp"
         android:paddingLeft="8dp"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:text="@string/notices_string_titlelist" />
-<View
+
+    <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/smartn_theme_color"
         android:paddingBottom="20dp"
         android:paddingTop="10dp" />
+
+    <TextView
+        android:id="@+id/textViewDescNotices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="5dp"
+        android:text="No items" 
+        android:visibility="gone"/>
+    
     <ListView
         android:id="@+id/listViewNotices"
         android:layout_width="match_parent"

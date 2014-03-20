@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
 	@Override

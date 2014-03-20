@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.util.List;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFragment extends SherlockFragment {
 

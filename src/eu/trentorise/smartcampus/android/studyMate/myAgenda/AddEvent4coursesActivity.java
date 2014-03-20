@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -30,7 +31,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class AddEvent4coursesActivity extends SherlockFragmentActivity {
 	private int mYear;

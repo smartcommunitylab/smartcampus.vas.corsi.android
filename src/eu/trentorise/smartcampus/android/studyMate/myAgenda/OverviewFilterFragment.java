@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,7 +26,6 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 

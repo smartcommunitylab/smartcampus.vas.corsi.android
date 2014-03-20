@@ -8,8 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +29,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class NotificationHandler extends
 		AsyncTask<Void, Void, List<Notification>> {
@@ -46,15 +47,19 @@ public class NotificationHandler extends
 	private SherlockFragmentActivity activity;
 	private ProtocolCarrier mProtocolCarrier;
 	private long fromDate;
+	private String type;
+	private TextView noNot;
 
 	public NotificationHandler(Context applicationContext,
 			TextView textViewTitleNotices, ListView lvAllNotices,
-			SherlockFragmentActivity act, long fromDate) {
+			SherlockFragmentActivity act, long fromDate, String type, TextView noNot) {
 		this.context = applicationContext;
 		this.textViewTitleNotices = textViewTitleNotices;
 		this.lvAllNotices = lvAllNotices;
 		this.activity = act;
 		this.fromDate = fromDate;
+		this.type = type;
+		this.noNot = noNot;
 	}
 
 	private List<Notification> getNotification() throws Exception {
@@ -73,7 +78,7 @@ public class NotificationHandler extends
 
 		MessageRequest request = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_NOTIFICATIONS(fromDate));
+				SmartUniDataWS.GET_WS_NOTIFICATIONS(type, fromDate));
 		request.setMethod(Method.GET);
 
 		MessageResponse response;
@@ -121,7 +126,7 @@ public class NotificationHandler extends
 	}
 
 	private void setListNotifications(final List<Notification> notifies) {
-
+		//noNot.setVisibility(View.GONE);
 		for (Notification n : notifies) {
 			textViewTitleNotices.setText(n.getTitle());
 
@@ -191,6 +196,7 @@ public class NotificationHandler extends
 	}
 
 	private void setVoidNotify() {
+		noNot.setVisibility(View.VISIBLE);
 		textViewTitleNotices.setText(R.string.notices_string_titlelist);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
 				Locale.ITALY);

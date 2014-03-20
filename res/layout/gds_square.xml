@@ -3,7 +3,7 @@
     android:id="@+id/little_square_for_gds"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/selectable_background_theme2_studymate"
+    android:background="@drawable/selectable_background_sm_final"
     android:orientation="vertical"
     android:padding="10dp" >
 

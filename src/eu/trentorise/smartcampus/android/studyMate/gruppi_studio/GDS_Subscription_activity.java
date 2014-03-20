@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;

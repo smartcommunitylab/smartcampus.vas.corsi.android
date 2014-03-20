@@ -3,6 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import eu.trentorise.smartcampus.studymate.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 
