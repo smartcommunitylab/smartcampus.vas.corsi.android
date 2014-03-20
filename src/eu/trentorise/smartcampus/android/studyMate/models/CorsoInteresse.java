@@ -8,6 +8,8 @@ public class CorsoInteresse {
 		private AttivitaDidattica attivitaDidattica; 
 		
 		private long studenteId;
+		
+		private boolean isCorsoCarriera;
 
 		public long getId() {
 			return id;
@@ -31,6 +33,14 @@ public class CorsoInteresse {
 
 		public void setStudenteId(long studenteId) {
 			this.studenteId = studenteId;
+		}
+
+		public boolean isCorsoCarriera() {
+			return isCorsoCarriera;
+		}
+
+		public void setCorsoCarriera(boolean isCorsoCarriera) {
+			this.isCorsoCarriera = isCorsoCarriera;
 		}
 		
 		
