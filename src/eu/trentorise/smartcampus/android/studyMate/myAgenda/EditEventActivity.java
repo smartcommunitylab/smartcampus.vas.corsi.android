@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -17,8 +16,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
@@ -42,12 +44,15 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
-public class EditEventActivity extends SherlockFragmentActivity {
+public class EditEventActivity extends SherlockFragmentActivity{
 	private int mYear;
 	private int mMonth;
 	private int mDay;
 
+	public View view = null;
+	
 	private int hour;
 	private int minute;
 
@@ -67,6 +72,15 @@ public class EditEventActivity extends SherlockFragmentActivity {
 	private EventoId eId;
 	private Date date;
 
+//	@Override
+//public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//		Bundle savedInstanceState) {
+//		view = inflater.inflate(R.layout.activity_add_event_4_course, container,
+//				false);
+//	// TODO Auto-generated method stub
+//	return super.onCreateView(inflater, container, savedInstanceState);
+//}
+//	
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +100,8 @@ public class EditEventActivity extends SherlockFragmentActivity {
 		// get the current Time
 		hour = evento.getEventoId().getStart().getHours();
 		minute = evento.getEventoId().getStart().getMinutes();
+		eId.setStart(new Time(hour,minute,0));
+		eId.setStop(new Time(hour,minute,0));
 		// display the current date
 		updateDisplay();
 		title = (EditText) findViewById(R.id.editTextTitle4Course);
@@ -134,7 +150,7 @@ public class EditEventActivity extends SherlockFragmentActivity {
 				eventoModificato.setEventoId(eId);
 				new ChangeEvent(evento, EditEventActivity.this,
 						eventoModificato).execute();
-				onBackPressed();
+				onBackPressed();onBackPressed();
 			}
 		});
 
