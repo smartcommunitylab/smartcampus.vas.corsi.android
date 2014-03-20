@@ -128,35 +128,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			e.printStackTrace();
 		}
 
-		// prendo i dati aggiornati dello studente
-		request = new MessageRequest(SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.GET_WS_STUDENT_DATA);
-		request.setMethod(Method.GET);
-
-		try {
-			response = mProtocolCarrier.invokeSync(request,
-					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
-
-			if (response.getHttpStatus() == 200) {
-
-				String bodyStudente = response.getBody();
-				studenteUser = Utils.convertJSONToObject(bodyStudente,
-						Studente.class);
-
-			} else {
-				return null;
-			}
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		} catch (ProtocolException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (AACException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		return Utils.convertJSONToObjects(body, Commento.class);
 	}
 
