@@ -67,10 +67,10 @@ public final class SmartUniDataWS {
 		return "/evento/change/date/" + date + "/from/" + from + "/to/" + to;
 	}
 
-	public static final String GET_WS_NOTIFICATIONS(long fromDate) {
-		return "	/notifiche/" + fromDate + "/me";
+	public static final String GET_WS_NOTIFICATIONS(String type, long fromDate) {
+		return "/notifiche/type/" + type + "/date/"+String.valueOf(fromDate);
 	}
-
+	
 	// Student //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";
 
