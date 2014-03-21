@@ -47,8 +47,64 @@ public class OverviewFilterFragment extends SherlockFragment {
 		return view;
 	}
 
-	public void onStart() {
-		super.onStart();
+//	
+//	public void onStart() {
+//		super.onStart();
+//		setHasOptionsMenu(true);
+//
+//		listaEventiFiltrati = new ArrayList<Evento>();
+//
+//		// courseSelected = new CorsoCarriera();
+//		// courseSelected = (CorsoCarriera) CoursesHandler.corsoSelezionato;
+//		getActivity().setTitle(nomeCorsoOW);
+//		listaEventiFiltrati = filterEventsbyCourse();
+//
+//		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
+//		if (listaEventiFiltrati.size() == 0) {
+//			Toast.makeText(getSherlockActivity(),
+//					"Non sono disponibli eventi a breve per questo corso",
+//					Toast.LENGTH_SHORT).show();
+//		} else {
+//			int i = 0;
+//			for (Evento ev : listaEventiFiltrati) {
+//				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+//						.getDate(), ev.getTitle(), ev.getType(), ev
+//						.getEventoId().getStart().toString(), ev.getRoom());
+//				listEvItem[i++] = new EventItem(e);
+//			}
+//
+//			EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+//					listEvItem);
+//			ListView listView = (ListView) getSherlockActivity().findViewById(
+//					R.id.listViewEventi);
+//			listView.setAdapter(adapter);
+//			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+//
+//				@Override
+//				public void onItemClick(AdapterView<?> arg0, View arg1,
+//						int arg2, long arg3) {
+//					getSherlockActivity().supportInvalidateOptionsMenu();
+//					// Pass Data to other Fragment
+//					Evento evento = listaEventiFiltrati.get(arg2);
+//					Bundle arguments = new Bundle();
+//					arguments.putSerializable("eventSelected", evento);
+//					FragmentTransaction ft = getSherlockActivity()
+//							.getSupportFragmentManager().beginTransaction();
+//					Fragment fragment = new DettailOfEventFragment();
+//					fragment.setArguments(arguments);
+//					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//					ft.replace(R.id.tabCorsi, fragment);
+//					ft.addToBackStack(null);
+//					ft.commit();
+//				}
+//
+//			});
+//		}
+//	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		setHasOptionsMenu(true);
 
 		listaEventiFiltrati = new ArrayList<Evento>();
@@ -99,11 +155,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 			});
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
 	}
 
 	// filtro gli eventi in base al corso che ho selezionato

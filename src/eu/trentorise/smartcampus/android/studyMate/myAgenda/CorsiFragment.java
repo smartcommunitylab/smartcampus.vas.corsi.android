@@ -27,8 +27,10 @@ public class CorsiFragment extends SherlockFragment {
 		return view;
 	}
 
-	public void onStart() {
-		super.onStart();
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		setHasOptionsMenu(true);
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
 				R.id.listViewCorsi);
@@ -39,8 +41,21 @@ public class CorsiFragment extends SherlockFragment {
 				getActivity().getApplicationContext(), listViewCorsi,
 				getActivity(), getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
-
 	}
+//	public void onStart() {
+//		super.onStart();
+//		setHasOptionsMenu(true);
+//		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
+//				R.id.listViewCorsi);
+//		getSherlockActivity().supportInvalidateOptionsMenu();
+//
+//		Bundle arguments = new Bundle();
+//		CoursesHandler handlerPersonalCourses = new CoursesHandler(
+//				getActivity().getApplicationContext(), listViewCorsi,
+//				getActivity(), getSherlockActivity());
+//		handlerPersonalCourses.execute(arguments);
+//
+//	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

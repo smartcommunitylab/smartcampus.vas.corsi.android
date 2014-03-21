@@ -46,11 +46,6 @@ public class OverviewFragment extends SherlockFragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-	}
-
-	public void onStart() {
-		super.onStart();
-
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
 
@@ -61,8 +56,23 @@ public class OverviewFragment extends SherlockFragment {
 		eventsHandler = new EventsHandler(
 				getActivity().getApplicationContext(), getActivity());
 		eventsHandler.execute();
-
 	}
+
+//	public void onStart() {
+//		super.onStart();
+//
+//		setHasOptionsMenu(true);
+//		getSherlockActivity().supportInvalidateOptionsMenu();
+//
+//		new ProgressDialog(getActivity());
+//		OverviewFragment.pd = ProgressDialog.show(getActivity(),
+//				"Lista degli eventi personali", "Caricamento...");
+//
+//		eventsHandler = new EventsHandler(
+//				getActivity().getApplicationContext(), getActivity());
+//		eventsHandler.execute();
+//
+//	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
