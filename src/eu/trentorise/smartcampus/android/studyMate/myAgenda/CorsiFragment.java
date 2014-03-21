@@ -3,6 +3,8 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 import eu.trentorise.smartcampus.studymate.R;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +56,18 @@ public class CorsiFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 
 		case R.id.add_event:
-			Intent intentEvent = new Intent(getActivity(),
-					AddEventActivity.class);
-			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEvent);
+			FragmentTransaction ft = getSherlockActivity()
+			.getSupportFragmentManager()
+			.beginTransaction();
+			Fragment fragment = new AddEventActivity();
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(this.getId(), fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+//			Intent intentEvent = new Intent(getActivity(),
+//					AddEventActivity.class);
+//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intentEvent);
 			return true;
 		default:
 			break;

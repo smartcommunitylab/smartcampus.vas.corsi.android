@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,8 +15,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,7 +27,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -44,8 +45,9 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
-public class AddEventActivity extends SherlockFragmentActivity {
+public class AddEventActivity extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -57,6 +59,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	private EditText mPickDate;
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
+	public View fview;
 
 	private List<CorsoCarriera> cC;
 	public static ProgressDialog pd;
@@ -67,16 +70,49 @@ public class AddEventActivity extends SherlockFragmentActivity {
 	private EditText title;
 	private EditText description;
 
-	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_event);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		fview = inflater.inflate(R.layout.activity_add_event,
+				container, false);
+		return fview;
+	}
+
+	// @SuppressWarnings("deprecation")
+	// @Override
+	// protected void onCreate(Bundle savedInstanceState) {
+	// super.onCreate(savedInstanceState);
+	// setContentView(R.layout.activity_add_event);
+	//
+	// }
+
+	@Override
+	public void onStart() {
+		super.onStart();
 		evento = new Evento();
 		eId = new EventoId();
 		date = new Date();
-		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
-		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
+		mPickDate = (EditText) fview.findViewById(R.id.myDatePickerButton);
+		mPickTime = (EditText) fview.findViewById(R.id.myTimePickerButton);
+		mPickDate.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showDatePickerDialog(fview);
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		mPickTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showTimePickerDialog(fview);
+				// TODO Auto-generated method stub
+
+			}
+		});
 		// get the current date
 		final Calendar c = Calendar.getInstance();
 		mYear = c.get(Calendar.YEAR);
@@ -94,27 +130,17 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		date.setDate(mDay);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
-		title = (EditText) findViewById(R.id.editTextTitle);
-		description = (EditText) findViewById(R.id.editTextDescription);
-		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
+		title = (EditText) fview.findViewById(R.id.editTextTitle);
+		description = (EditText) fview.findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner) fview.findViewById(R.id.spinnerCorsi);
 		new CoursesLoader().execute();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Button button_ok = (Button) findViewById(R.id.button_ok);
-		Button button_cancel = (Button) findViewById(R.id.button_annulla);
+		Button button_ok = (Button) fview.findViewById(R.id.button_ok);
+		Button button_cancel = (Button) fview.findViewById(R.id.button_annulla);
 		button_cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				onBackPressed();
+				getActivity().onBackPressed();
 			}
 		});
 		button_ok.setOnClickListener(new OnClickListener() {
@@ -132,10 +158,10 @@ public class AddEventActivity extends SherlockFragmentActivity {
 						coursesSpinner.getSelectedItemPosition()).getCod()));
 				eId.setDate(date);
 
-				new PostEvent(getApplicationContext(), evento).execute();
-				Toast.makeText(getApplicationContext(), "Evento aggiunto",
+				new PostEvent(getActivity(), evento).execute();
+				Toast.makeText(getActivity(), "Evento aggiunto",
 						Toast.LENGTH_SHORT).show();
-				onBackPressed();
+				getActivity().onBackPressed();
 			}
 		});
 
@@ -156,21 +182,24 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.test, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+	// @Override
+	// public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
+	// {
+	// // Inflate the menu; this adds items to the action bar if it is present.
+	// getSupportMenuInflater().inflate(R.menu.test, menu);
+	// return super.onCreateOptionsMenu(menu);
+	// }
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
-		newFragment.show(getSupportFragmentManager(), "datePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"datePicker");
 	}
 
 	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getSupportFragmentManager(), "timePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
@@ -191,7 +220,7 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
-			((EditText) findViewById(R.id.myDatePickerButton))
+			((EditText) fview.findViewById(R.id.myDatePickerButton))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
 			date.setYear(year - 1900);
@@ -220,10 +249,10 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
-				((EditText) findViewById(R.id.myTimePickerButton))
+				((EditText) fview.findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":0" + minute);
 			} else {
-				((EditText) findViewById(R.id.myTimePickerButton))
+				((EditText) fview.findViewById(R.id.myTimePickerButton))
 						.setText(hourOfDay + ":" + minute);
 
 			}
@@ -293,8 +322,8 @@ public class AddEventActivity extends SherlockFragmentActivity {
 			}
 
 			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-					AddEventActivity.this,
-					R.layout.list_studymate_row_list_simple, resultStrings);
+					getActivity(), R.layout.list_studymate_row_list_simple,
+					resultStrings);
 
 			coursesSpinner.setAdapter(adapterInitialList);
 		}
@@ -303,8 +332,8 @@ public class AddEventActivity extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			new ProgressDialog(AddEventActivity.this);
-			pd = ProgressDialog.show(AddEventActivity.this,
+			new ProgressDialog(getActivity());
+			pd = ProgressDialog.show(getActivity(),
 					"Caricamento della lista dei corsi ", "Caricamento...");
 		}
 

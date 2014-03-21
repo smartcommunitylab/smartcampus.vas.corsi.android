@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -29,7 +28,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -46,13 +46,13 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class EditEventActivity extends SherlockFragmentActivity{
+public class EditEventActivity extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
 
-	public View view = null;
-	
+	public View fview;
+
 	private int hour;
 	private int minute;
 
@@ -61,7 +61,6 @@ public class EditEventActivity extends SherlockFragmentActivity{
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
 
-	public static ProgressDialog pd;
 	private Evento eventoModificato;
 	private Evento evento;
 	// public CorsoCarriera courseSelected;
@@ -72,27 +71,46 @@ public class EditEventActivity extends SherlockFragmentActivity{
 	private EventoId eId;
 	private Date date;
 
-//	@Override
-//public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//		Bundle savedInstanceState) {
-//		view = inflater.inflate(R.layout.activity_add_event_4_course, container,
-//				false);
-//	// TODO Auto-generated method stub
-//	return super.onCreateView(inflater, container, savedInstanceState);
-//}
-//	
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		fview = inflater.inflate(R.layout.activity_add_event_4_course,
+				container, false);
+		evento = (Evento) getArguments().getSerializable("eventSelectedEdit");
+		return fview;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_event_4_course);
-		Intent intent = getIntent();
-		evento = (Evento) intent.getSerializableExtra("modEv");
+	public void onStart() {
+
+		super.onStart();
 		eId = new EventoId();
 		eventoModificato = evento;
 		date = new Date();
-		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
-		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
+		mPickDate = (EditText) fview
+				.findViewById(R.id.myDatePickerButton4Course);
+		mPickDate.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showDatePickerDialog(fview);
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		mPickTime = (EditText) fview
+				.findViewById(R.id.myTimePickerButton4Course);
+		mPickTime.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showTimePickerDialog(fview);
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		// get the ex date of previous event
 		mYear = evento.getEventoId().getDate().getYear() + 1900;
 		mMonth = evento.getEventoId().getDate().getMonth();
@@ -100,43 +118,33 @@ public class EditEventActivity extends SherlockFragmentActivity{
 		// get the current Time
 		hour = evento.getEventoId().getStart().getHours();
 		minute = evento.getEventoId().getStart().getMinutes();
-		eId.setStart(new Time(hour,minute,0));
-		eId.setStop(new Time(hour,minute,0));
+		eId.setStart(new Time(hour, minute, 0));
+		eId.setStop(new Time(hour, minute, 0));
 		// display the current date
 		updateDisplay();
-		title = (EditText) findViewById(R.id.editTextTitle4Course);
+		title = (EditText) fview.findViewById(R.id.editTextTitle4Course);
 		title.setText(evento.getType());
-		description = (EditText) findViewById(R.id.editTextDescription4Course);
+		description = (EditText) fview
+				.findViewById(R.id.editTextDescription4Course);
 		description.setText(evento.getPersonalDescription());
-		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
+		coursesSpinner = (Spinner) fview.findViewById(R.id.spinnerCorsi4Course);
 		List<String> resultStrings = new ArrayList<String>();
 		resultStrings.add(evento.getTitle());
 		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-				EditEventActivity.this,
-				R.layout.list_studymate_row_list_simple, resultStrings);
+				getActivity(), R.layout.list_studymate_row_list_simple,
+				resultStrings);
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
 		coursesSpinner.setActivated(false);
 
-	}
-
-	@Override
-	protected void onResume() {
-
-		super.onResume();
-	}
-
-	@Override
-	protected void onStart() {
-
-		super.onStart();
-		Button button_ok = (Button) findViewById(R.id.button_ok4Course);
-		Button button_cancel = (Button) findViewById(R.id.button_annulla4Course);
+		Button button_ok = (Button) fview.findViewById(R.id.button_ok4Course);
+		Button button_cancel = (Button) fview
+				.findViewById(R.id.button_annulla4Course);
 		button_cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				onBackPressed();
+				getActivity().onBackPressed();
 			}
 		});
 		button_ok.setOnClickListener(new OnClickListener() {
@@ -148,9 +156,9 @@ public class EditEventActivity extends SherlockFragmentActivity{
 						.toString());
 				eId.setDate(date);
 				eventoModificato.setEventoId(eId);
-				new ChangeEvent(evento, EditEventActivity.this,
-						eventoModificato).execute();
-				onBackPressed();onBackPressed();
+				new ChangeEvent(evento, getActivity(), eventoModificato)
+						.execute();
+				getActivity().onBackPressed();
 			}
 		});
 
@@ -172,20 +180,19 @@ public class EditEventActivity extends SherlockFragmentActivity{
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.test, menu);
-		return super.onCreateOptionsMenu(menu);
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.test, menu);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
-		newFragment.show(getSupportFragmentManager(), "datePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
 	}
 
 	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getSupportFragmentManager(), "timePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
@@ -206,7 +213,7 @@ public class EditEventActivity extends SherlockFragmentActivity{
 		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user;
-			((EditText) findViewById(R.id.myDatePickerButton4Course))
+			((EditText) fview.findViewById(R.id.myDatePickerButton4Course))
 			// Month is 0 based so add 1
 					.setText(day + "-" + (month + 1) + "-" + year);
 			date.setYear(year - 1900);
@@ -236,10 +243,10 @@ public class EditEventActivity extends SherlockFragmentActivity{
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
-				((EditText) findViewById(R.id.myTimePickerButton4Course))
+				((EditText) fview.findViewById(R.id.myTimePickerButton4Course))
 						.setText(hourOfDay + ":0" + minute);
 			} else {
-				((EditText) findViewById(R.id.myTimePickerButton4Course))
+				((EditText) fview.findViewById(R.id.myTimePickerButton4Course))
 						.setText(hourOfDay + ":" + minute);
 
 			}
@@ -264,10 +271,9 @@ public class EditEventActivity extends SherlockFragmentActivity{
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
-			pd = new ProgressDialog(EditEventActivity.this);
-			pd = ProgressDialog.show(EditEventActivity.this,
+			pd = new ProgressDialog(getActivity());
+			pd = ProgressDialog.show(getActivity(),
 					"Sto aggiornando le modifiche al tuo evento..",
 					"Caricamento...");
 		}
@@ -310,7 +316,6 @@ public class EditEventActivity extends SherlockFragmentActivity{
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -319,7 +324,6 @@ public class EditEventActivity extends SherlockFragmentActivity{
 
 		@Override
 		protected Boolean doInBackground(Evento... params) {
-			// TODO Auto-generated method stub
 			return changeEvent(ev, ev.getEventoId().getDate().getTime(), ev
 					.getEventoId().getStart().getTime(), ev.getEventoId()
 					.getStop().getTime());
@@ -327,17 +331,14 @@ public class EditEventActivity extends SherlockFragmentActivity{
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)
-				Toast.makeText(getApplicationContext(),
-						"Evento modificato con successo", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getSherlockActivity(), "Evento modificato con successo",
+						Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(getApplicationContext(),
-						"Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getSherlockActivity(), "Ops! Qualcosa è andato storto.",
+						Toast.LENGTH_SHORT).show();
 		}
 
 	}

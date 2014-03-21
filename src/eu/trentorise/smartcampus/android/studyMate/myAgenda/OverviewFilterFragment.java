@@ -135,11 +135,23 @@ public class OverviewFilterFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 
 		case R.id.menu_add_event_4_course:
-			Intent intentEventAddEvent = new Intent(getActivity(),
-					AddEvent4coursesActivity.class);
-			intentEventAddEvent.putExtra("corsoCarrieraS", cc);
-			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEventAddEvent);
+			Bundle data = new Bundle();
+			data.putSerializable("ccSelected",
+					cc);
+			FragmentTransaction ft = getSherlockActivity()
+			.getSupportFragmentManager()
+			.beginTransaction();
+			Fragment fragment = new AddEvent4coursesActivity();
+			fragment.setArguments(data);
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(this.getId(), fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+//			Intent intentEventAddEvent = new Intent(getActivity(),
+//					AddEvent4coursesActivity.class);
+//			intentEventAddEvent.putExtra("corsoCarrieraS", cc);
+//			intentEventAddEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intentEventAddEvent);
 			return true;
 		default:
 			break;

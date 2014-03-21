@@ -2,11 +2,11 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.text.SimpleDateFormat;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +30,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class DettailOfEventFragment extends SherlockFragment {
 
@@ -127,11 +128,25 @@ public class DettailOfEventFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 
 		case R.id.menu_change_event:
-			Intent intentEvent = new Intent(getActivity(),
-					EditEventActivity.class);
-			intentEvent.putExtra("modEv", eventSelected);
-			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intentEvent);
+			Bundle data = new Bundle();
+			data.putSerializable("eventSelectedEdit",
+					eventSelected);
+			FragmentTransaction ft = getSherlockActivity()
+			.getSupportFragmentManager()
+			.beginTransaction();
+			Fragment fragment = new EditEventActivity();
+			fragment.setArguments(data);
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			ft.replace(this.getId(), fragment);
+			ft.addToBackStack(null);
+			ft.commit();
+	
+	
+//			Intent intentEvent = new Intent(getActivity(),
+//					EditEventActivity.class);
+//			intentEvent.putExtra("modEv", eventSelected);
+//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intentEvent);
 
 			return true;
 		case R.id.menu_delete_event:
