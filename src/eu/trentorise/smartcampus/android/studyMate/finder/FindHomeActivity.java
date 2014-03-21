@@ -3,7 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.finder;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindDepartmentsHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class FindHomeActivity extends SherlockFragmentActivity implements
 		TextWatcher {

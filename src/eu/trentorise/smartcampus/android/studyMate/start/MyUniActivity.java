@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 
 import java.util.ArrayList;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
-import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
@@ -38,6 +36,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
 
@@ -91,10 +90,11 @@ public class MyUniActivity extends SherlockActivity {
 		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
-//				Intent intent = new Intent(MyUniActivity.this,
-//						PHLActivity.class);
-//				MyUniActivity.this.startActivity(intent);
+				Toast.makeText(getApplicationContext(), "Coming Soon...",
+						Toast.LENGTH_SHORT).show();
+				// Intent intent = new Intent(MyUniActivity.this,
+				// PHLActivity.class);
+				// MyUniActivity.this.startActivity(intent);
 			}
 		});
 
@@ -117,16 +117,16 @@ public class MyUniActivity extends SherlockActivity {
 			}
 		});
 
-//		findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-//				new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						Intent intent = new Intent(MyUniActivity.this,
-//								Lista_GDS_activity.class);
-//						MyUniActivity.this.startActivity(intent);
-//					}
-//				});
+		// findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+		// new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// Intent intent = new Intent(MyUniActivity.this,
+		// Lista_GDS_activity.class);
+		// MyUniActivity.this.startActivity(intent);
+		// }
+		// });
 
 	}
 

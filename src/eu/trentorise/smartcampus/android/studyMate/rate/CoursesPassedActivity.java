@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.rate;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesPassedHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class CoursesPassedActivity extends SherlockFragmentActivity {
 

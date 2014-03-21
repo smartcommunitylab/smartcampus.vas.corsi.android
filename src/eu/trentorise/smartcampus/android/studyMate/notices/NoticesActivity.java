@@ -44,8 +44,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		ab.setDisplayHomeAsUpEnabled(true);
 		// ab.setDisplayShowTitleEnabled(false);
 		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		noNot= (TextView) findViewById(R.id.textViewDescNotices);
-		
+		noNot = (TextView) findViewById(R.id.textViewDescNotices);
+
 		source = getResources().getStringArray(R.array.Source);
 		//
 		//
@@ -78,8 +78,9 @@ public class NoticesActivity extends SherlockFragmentActivity {
 					int arg2, long arg3) {
 				try {
 					String type = URLEncoder.encode(source[arg2], "UTF-8");
-					new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-							lvAllNotices, activity, fromDate, type, noNot).execute();
+					new NotificationHandler(getApplicationContext(),
+							textViewTitleNotices, lvAllNotices, activity,
+							fromDate, type, noNot).execute();
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -96,8 +97,9 @@ public class NoticesActivity extends SherlockFragmentActivity {
 
 		});
 
-//		new NotificationHandler(getApplicationContext(), textViewTitleNotices,
-//				lvAllNotices, activity, fromDate).execute();
+		// new NotificationHandler(getApplicationContext(),
+		// textViewTitleNotices,
+		// lvAllNotices, activity, fromDate).execute();
 	}
 
 	@Override

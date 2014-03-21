@@ -10,7 +10,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
@@ -160,7 +159,7 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 				evento.setEventoId(eId);
 				evento.setAdCod(Long.parseLong(cc.getCod()));
 
-				long dateR = 10000*(date.getTime()/10000);
+				long dateR = 10000 * (date.getTime() / 10000);
 				eId.setDate(new Date(dateR));
 				new PostEvent(getActivity(), evento).execute();
 				Toast.makeText(getActivity(), "Evento aggiunto",

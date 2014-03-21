@@ -73,8 +73,7 @@ public class AddEventActivity extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		fview = inflater.inflate(R.layout.activity_add_event,
-				container, false);
+		fview = inflater.inflate(R.layout.activity_add_event, container, false);
 		return fview;
 	}
 
@@ -156,7 +155,7 @@ public class AddEventActivity extends SherlockFragment {
 				evento.setEventoId(eId);
 				evento.setAdCod(Long.parseLong(cC.get(
 						coursesSpinner.getSelectedItemPosition()).getCod()));
-				long dateR = 10000*(date.getTime()/10000);
+				long dateR = 10000 * (date.getTime() / 10000);
 				eId.setDate(new Date(dateR));
 
 				new PostEvent(getActivity(), evento).execute();

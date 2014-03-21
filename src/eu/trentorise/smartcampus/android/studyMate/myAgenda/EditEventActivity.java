@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -47,13 +46,12 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class EditEventActivity extends SherlockFragment{
+public class EditEventActivity extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
 	public View fview;
-	
-	
+
 	private int hour;
 	private int minute;
 
@@ -71,7 +69,7 @@ public class EditEventActivity extends SherlockFragment{
 	private EditText description;
 	private EventoId eId;
 	private Date date;
-	
+
 	private long dateInitial;
 	private long timeFromInitial;
 	private long timeToInitial;
@@ -85,53 +83,51 @@ public class EditEventActivity extends SherlockFragment{
 		dateInitial = evento.getEventoId().getDate().getTime();
 		timeFromInitial = evento.getEventoId().getStart().getTime();
 		timeToInitial = evento.getEventoId().getStop().getTime();
-		
+
 		return fview;
 	}
-	
 
 	@SuppressWarnings("deprecation")
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//
-//		
-//		eId = new EventoId();
-//		eventoModificato = new Evento();
-//		eventoModificato = evento;
-//		
-//		
-//
-//		date = new Date();
-//		mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
-//		mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
-//		// get the ex date of previous event
-//		mYear = evento.getEventoId().getDate().getYear() + 1900;
-//		mMonth = evento.getEventoId().getDate().getMonth();
-//		mDay = evento.getEventoId().getDate().getDate();
-//		// get the current Time
-//		hour = evento.getEventoId().getStart().getHours();
-//		minute = evento.getEventoId().getStart().getMinutes();
-//		eId.setStart(new Time(hour,minute,0));
-//		eId.setStop(new Time(hour,minute,0));
-//		// display the current date
-//		updateDisplay();
-//		title = (EditText) findViewById(R.id.editTextTitle4Course);
-//		title.setText(evento.getType());
-//		description = (EditText) findViewById(R.id.editTextDescription4Course);
-//		description.setText(evento.getPersonalDescription());
-//		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
-//		List<String> resultStrings = new ArrayList<String>();
-//		resultStrings.add(evento.getTitle());
-//		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-//				EditEventActivity.this,
-//				R.layout.list_studymate_row_list_simple, resultStrings);
-//		coursesSpinner.setAdapter(adapterInitialList);
-//		coursesSpinner.setEnabled(false);
-//		coursesSpinner.setActivated(false);
-//
-//	}
-
+	// @Override
+	// protected void onCreate(Bundle savedInstanceState) {
+	// super.onCreate(savedInstanceState);
+	//
+	//
+	// eId = new EventoId();
+	// eventoModificato = new Evento();
+	// eventoModificato = evento;
+	//
+	//
+	//
+	// date = new Date();
+	// mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
+	// mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
+	// // get the ex date of previous event
+	// mYear = evento.getEventoId().getDate().getYear() + 1900;
+	// mMonth = evento.getEventoId().getDate().getMonth();
+	// mDay = evento.getEventoId().getDate().getDate();
+	// // get the current Time
+	// hour = evento.getEventoId().getStart().getHours();
+	// minute = evento.getEventoId().getStart().getMinutes();
+	// eId.setStart(new Time(hour,minute,0));
+	// eId.setStop(new Time(hour,minute,0));
+	// // display the current date
+	// updateDisplay();
+	// title = (EditText) findViewById(R.id.editTextTitle4Course);
+	// title.setText(evento.getType());
+	// description = (EditText) findViewById(R.id.editTextDescription4Course);
+	// description.setText(evento.getPersonalDescription());
+	// coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
+	// List<String> resultStrings = new ArrayList<String>();
+	// resultStrings.add(evento.getTitle());
+	// ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
+	// EditEventActivity.this,
+	// R.layout.list_studymate_row_list_simple, resultStrings);
+	// coursesSpinner.setAdapter(adapterInitialList);
+	// coursesSpinner.setEnabled(false);
+	// coursesSpinner.setActivated(false);
+	//
+	// }
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -141,23 +137,23 @@ public class EditEventActivity extends SherlockFragment{
 		mPickDate = (EditText) fview
 				.findViewById(R.id.myDatePickerButton4Course);
 		mPickDate.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showDatePickerDialog(fview);
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		mPickTime = (EditText) fview
 				.findViewById(R.id.myTimePickerButton4Course);
 		mPickTime.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showTimePickerDialog(fview);
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		// get the ex date of previous event
@@ -195,7 +191,7 @@ public class EditEventActivity extends SherlockFragment{
 				getActivity().onBackPressed();
 			}
 		});
-		
+
 		button_ok.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -203,10 +199,10 @@ public class EditEventActivity extends SherlockFragment{
 				eventoModificato.setType(title.getText().toString());
 				eventoModificato.setPersonalDescription(description.getText()
 						.toString());
-				long dateR = 10000*(date.getTime()/10000);
+				long dateR = 10000 * (date.getTime() / 10000);
 				// get the current Time
-				eId.setStart(new Time(hour,minute,0));
-				eId.setStop(new Time(hour,minute,0));
+				eId.setStart(new Time(hour, minute, 0));
+				eId.setStop(new Time(hour, minute, 0));
 				eId.setDate(new Date(dateR));
 				eventoModificato.setEventoId(eId);
 				new ChangeEvent(getActivity()).execute();
@@ -239,12 +235,14 @@ public class EditEventActivity extends SherlockFragment{
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"datePicker");
 	}
 
 	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
@@ -271,9 +269,9 @@ public class EditEventActivity extends SherlockFragment{
 			date.setYear(year - 1900);
 			date.setMonth(month);
 			date.setDate(day);
-			
+
 			eId.setDate(date);
-			
+
 			eventoModificato.setEventoId(eId);
 
 		}
@@ -306,10 +304,10 @@ public class EditEventActivity extends SherlockFragment{
 						.setText(hourOfDay + ":" + minute);
 
 			}
-			
+
 			hour = hourOfDay;
 			EditEventActivity.this.minute = minute;
-			
+
 		}
 	}
 
@@ -391,13 +389,11 @@ public class EditEventActivity extends SherlockFragment{
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)
-				Toast.makeText(getActivity(),
-						"Evento modificato con successo", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getActivity(), "Evento modificato con successo",
+						Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(getActivity(),
-						"Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getActivity(), "Ops! Qualcosa è andato storto.",
+						Toast.LENGTH_SHORT).show();
 		}
 
 	}

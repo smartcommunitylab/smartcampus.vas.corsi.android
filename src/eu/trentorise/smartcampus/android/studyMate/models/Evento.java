@@ -89,13 +89,13 @@ public class Evento implements Serializable {
 	public void setAdCod(long adCod) {
 		this.adCod = adCod;
 	}
-	
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub

@@ -129,24 +129,21 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 		case R.id.menu_change_event:
 			Bundle data = new Bundle();
-			data.putSerializable("eventSelectedEdit",
-					eventSelected);
+			data.putSerializable("eventSelectedEdit", eventSelected);
 			FragmentTransaction ft = getSherlockActivity()
-			.getSupportFragmentManager()
-			.beginTransaction();
+					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new EditEventActivity();
 			fragment.setArguments(data);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(this.getId(), fragment);
 			ft.addToBackStack(null);
 			ft.commit();
-	
-	
-//			Intent intentEvent = new Intent(getActivity(),
-//					EditEventActivity.class);
-//			intentEvent.putExtra("modEv", eventSelected);
-//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentEvent);
+
+			// Intent intentEvent = new Intent(getActivity(),
+			// EditEventActivity.class);
+			// intentEvent.putExtra("modEv", eventSelected);
+			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intentEvent);
 
 			return true;
 		case R.id.menu_delete_event:

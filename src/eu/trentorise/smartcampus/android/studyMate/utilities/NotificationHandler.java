@@ -8,10 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +27,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class NotificationHandler extends
 		AsyncTask<Void, Void, List<Notification>> {
@@ -52,7 +51,8 @@ public class NotificationHandler extends
 
 	public NotificationHandler(Context applicationContext,
 			TextView textViewTitleNotices, ListView lvAllNotices,
-			SherlockFragmentActivity act, long fromDate, String type, TextView noNot) {
+			SherlockFragmentActivity act, long fromDate, String type,
+			TextView noNot) {
 		this.context = applicationContext;
 		this.textViewTitleNotices = textViewTitleNotices;
 		this.lvAllNotices = lvAllNotices;
@@ -119,10 +119,10 @@ public class NotificationHandler extends
 
 		NoticesActivity.pd.dismiss();
 
-		if (notifies == null) {			
+		if (notifies == null) {
 			setVoidNotify();
 		} else
-				setListNotifications(notifies);
+			setListNotifications(notifies);
 	}
 
 	private void setListNotifications(final List<Notification> notifies) {

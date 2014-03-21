@@ -68,9 +68,9 @@ public final class SmartUniDataWS {
 	}
 
 	public static final String GET_WS_NOTIFICATIONS(String type, long fromDate) {
-		return "/notifiche/type/" + type + "/date/"+String.valueOf(fromDate);
+		return "/notifiche/type/" + type + "/date/" + String.valueOf(fromDate);
 	}
-	
+
 	// Student //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";
 

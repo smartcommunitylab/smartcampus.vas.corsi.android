@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class HomeCourseDescriptionFragment extends SherlockFragment {
 

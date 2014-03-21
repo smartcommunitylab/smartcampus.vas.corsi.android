@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +10,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class MyAgendaActivity extends SherlockFragmentActivity {
 

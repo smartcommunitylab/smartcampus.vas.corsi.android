@@ -2,9 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.util.List;
 
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +18,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFragment extends SherlockFragment {
 
@@ -58,21 +57,21 @@ public class OverviewFragment extends SherlockFragment {
 		eventsHandler.execute();
 	}
 
-//	public void onStart() {
-//		super.onStart();
-//
-//		setHasOptionsMenu(true);
-//		getSherlockActivity().supportInvalidateOptionsMenu();
-//
-//		new ProgressDialog(getActivity());
-//		OverviewFragment.pd = ProgressDialog.show(getActivity(),
-//				"Lista degli eventi personali", "Caricamento...");
-//
-//		eventsHandler = new EventsHandler(
-//				getActivity().getApplicationContext(), getActivity());
-//		eventsHandler.execute();
-//
-//	}
+	// public void onStart() {
+	// super.onStart();
+	//
+	// setHasOptionsMenu(true);
+	// getSherlockActivity().supportInvalidateOptionsMenu();
+	//
+	// new ProgressDialog(getActivity());
+	// OverviewFragment.pd = ProgressDialog.show(getActivity(),
+	// "Lista degli eventi personali", "Caricamento...");
+	//
+	// eventsHandler = new EventsHandler(
+	// getActivity().getApplicationContext(), getActivity());
+	// eventsHandler.execute();
+	//
+	// }
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -90,18 +89,17 @@ public class OverviewFragment extends SherlockFragment {
 		case R.id.add_event:
 
 			FragmentTransaction ft = getSherlockActivity()
-			.getSupportFragmentManager()
-			.beginTransaction();
+					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new AddEventActivity();
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(this.getId(), fragment);
 			ft.addToBackStack(null);
 			ft.commit();
-			
-//			Intent intentEvent = new Intent(getActivity(),
-//					AddEventActivity.class);
-//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentEvent);
+
+			// Intent intentEvent = new Intent(getActivity(),
+			// AddEventActivity.class);
+			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intentEvent);
 			return true;
 		default:
 			break;

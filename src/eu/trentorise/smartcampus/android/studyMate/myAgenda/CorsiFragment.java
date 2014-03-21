@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import eu.trentorise.smartcampus.studymate.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +14,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
 	@Override
@@ -42,20 +41,21 @@ public class CorsiFragment extends SherlockFragment {
 				getActivity(), getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
 	}
-//	public void onStart() {
-//		super.onStart();
-//		setHasOptionsMenu(true);
-//		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
-//				R.id.listViewCorsi);
-//		getSherlockActivity().supportInvalidateOptionsMenu();
-//
-//		Bundle arguments = new Bundle();
-//		CoursesHandler handlerPersonalCourses = new CoursesHandler(
-//				getActivity().getApplicationContext(), listViewCorsi,
-//				getActivity(), getSherlockActivity());
-//		handlerPersonalCourses.execute(arguments);
-//
-//	}
+
+	// public void onStart() {
+	// super.onStart();
+	// setHasOptionsMenu(true);
+	// ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
+	// R.id.listViewCorsi);
+	// getSherlockActivity().supportInvalidateOptionsMenu();
+	//
+	// Bundle arguments = new Bundle();
+	// CoursesHandler handlerPersonalCourses = new CoursesHandler(
+	// getActivity().getApplicationContext(), listViewCorsi,
+	// getActivity(), getSherlockActivity());
+	// handlerPersonalCourses.execute(arguments);
+	//
+	// }
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -72,17 +72,16 @@ public class CorsiFragment extends SherlockFragment {
 
 		case R.id.add_event:
 			FragmentTransaction ft = getSherlockActivity()
-			.getSupportFragmentManager()
-			.beginTransaction();
+					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new AddEventActivity();
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(this.getId(), fragment);
 			ft.addToBackStack(null);
 			ft.commit();
-//			Intent intentEvent = new Intent(getActivity(),
-//					AddEventActivity.class);
-//			intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentEvent);
+			// Intent intentEvent = new Intent(getActivity(),
+			// AddEventActivity.class);
+			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intentEvent);
 			return true;
 		default:
 			break;
