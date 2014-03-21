@@ -156,7 +156,8 @@ public class AddEventActivity extends SherlockFragment {
 				evento.setEventoId(eId);
 				evento.setAdCod(Long.parseLong(cC.get(
 						coursesSpinner.getSelectedItemPosition()).getCod()));
-				eId.setDate(date);
+				long dateR = 10000*(date.getTime()/10000);
+				eId.setDate(new Date(dateR));
 
 				new PostEvent(getActivity(), evento).execute();
 				Toast.makeText(getActivity(), "Evento aggiunto",
