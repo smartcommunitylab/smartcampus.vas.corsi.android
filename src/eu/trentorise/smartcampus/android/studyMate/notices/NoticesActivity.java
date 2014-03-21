@@ -60,8 +60,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
 		new ProgressDialog(NoticesActivity.this);
-		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
-				"Caricamento...");
+//		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
+//				"Caricamento...");
 
 	}
 
@@ -77,6 +77,9 @@ public class NoticesActivity extends SherlockFragmentActivity {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				try {
+					
+					pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
+							"Caricamento...");
 					String type = URLEncoder.encode(source[arg2], "UTF-8");
 					new NotificationHandler(getApplicationContext(),
 							textViewTitleNotices, lvAllNotices, activity,

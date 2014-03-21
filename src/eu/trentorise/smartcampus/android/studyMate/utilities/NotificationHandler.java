@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -48,7 +49,6 @@ public class NotificationHandler extends
 	private long fromDate;
 	private String type;
 	private TextView noNot;
-
 	public NotificationHandler(Context applicationContext,
 			TextView textViewTitleNotices, ListView lvAllNotices,
 			SherlockFragmentActivity act, long fromDate, String type,
@@ -62,6 +62,7 @@ public class NotificationHandler extends
 		this.noNot = noNot;
 	}
 
+	
 	private List<Notification> getNotification() throws Exception {
 
 		// CommunicatorConnector cc = new CommunicatorConnector(
@@ -110,7 +111,7 @@ public class NotificationHandler extends
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-
+		
 	}
 
 	@Override
