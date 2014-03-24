@@ -61,14 +61,15 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 			Bundle savedInstanceState) {
 		fview = inflater.inflate(R.layout.activity_add_event_4_course,
 				container, false);
-		cc = (CorsoCarriera) getArguments().getSerializable(Constants.CC_SELECTED);
+		cc = (CorsoCarriera) getArguments().getSerializable(
+				Constants.CC_SELECTED);
 		return fview;
 	}
 
 	@Override
 	public void onStart() {
 
-super.onStart();
+		super.onStart();
 		evento = new Evento();
 		eId = new EventoId();
 		date = new Date();

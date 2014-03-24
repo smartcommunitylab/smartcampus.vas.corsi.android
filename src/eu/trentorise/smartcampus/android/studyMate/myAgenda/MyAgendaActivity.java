@@ -62,6 +62,13 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		super.onResume();
 	}
 
+	// @Override
+	// public void onBackPressed() {
+	// // TODO Auto-generated method stub
+	// super.onBackPressed();
+	// new EventsHandler(
+	// this.getApplicationContext(), this).execute();
+	// }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		setTitle("Agenda");

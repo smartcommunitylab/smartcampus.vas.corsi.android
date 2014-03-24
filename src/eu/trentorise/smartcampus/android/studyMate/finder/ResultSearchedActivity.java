@@ -38,7 +38,8 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		Intent i = getIntent();
-		depSelected = (Dipartimento) i.getSerializableExtra(Constants.DEPARTMENT);
+		depSelected = (Dipartimento) i
+				.getSerializableExtra(Constants.DEPARTMENT);
 		courseDegreeSelected = (CorsoLaurea) i
 				.getSerializableExtra(Constants.COURSE_DEG);
 		course = i.getStringExtra(Constants.COURSE_DEG_SPEC).toLowerCase();

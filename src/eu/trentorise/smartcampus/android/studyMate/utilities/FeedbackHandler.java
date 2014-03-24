@@ -155,16 +155,16 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		} else {
 			// prendo studente/me e lo assegno a stud
 			// se il corso corrente fa parte dei corsi che seguo lo setto on
-//			swichFollow.setOnClickListener(new OnClickListener() {
-//
-//				@Override
-//				public void onClick(View v) {
-//
-//					new SetCourseAsFollowHandler(context, swichFollow,
-//							txtMonitor).execute(corsoInfo);
-//				}
-//
-//			});
+			// swichFollow.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			//
+			// new SetCourseAsFollowHandler(context, swichFollow,
+			// txtMonitor).execute(corsoInfo);
+			// }
+			//
+			// });
 
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -46,8 +45,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 		view = inflater.inflate(R.layout.fragment_detail_of_event, container,
 				false);
 
-		eventSelected = (Evento) getArguments()
-				.getSerializable(Constants.SELECTED_EVENT);
+		eventSelected = (Evento) getArguments().getSerializable(
+				Constants.SELECTED_EVENT);
 
 		return view;
 	}
@@ -142,10 +141,10 @@ public class DettailOfEventFragment extends SherlockFragment {
 			return true;
 		case R.id.menu_delete_event:
 			new DeleteEvent(eventSelected).execute();
-			getActivity().onBackPressed();
-			Toast.makeText(getSherlockActivity(),
-					"L'evento verrà eliminato a breve..", Toast.LENGTH_SHORT)
-					.show();
+
+			// Toast.makeText(getSherlockActivity(),
+			// "L'evento verrà eliminato a breve..", Toast.LENGTH_SHORT)
+			// .show();
 			return true;
 		default:
 			break;
@@ -210,13 +209,16 @@ public class DettailOfEventFragment extends SherlockFragment {
 		@Override
 		protected Void doInBackground(Evento... params) {
 			deleteEv(ev);
+
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+
 			pd.dismiss();
+			getActivity().onBackPressed();
 		}
 
 	}

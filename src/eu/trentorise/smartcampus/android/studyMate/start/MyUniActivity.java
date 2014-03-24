@@ -23,7 +23,6 @@ import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -35,7 +34,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
@@ -43,7 +41,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String APP_ID = "studymate";
 	//
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
-	public static final String AUTH_URL ="https://vas-dev.smartcampuslab.it/aac";
+	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -162,19 +160,18 @@ public class MyUniActivity extends SherlockActivity {
 		protected BasicProfile doInBackground(Void... params) {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
-				BasicProfileService service = new BasicProfileService(
-						AUTH_URL);
+				BasicProfileService service = new BasicProfileService(AUTH_URL);
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
 				// init connector
-//				PushServiceConnector connector = new PushServiceConnector();
-//				try {
-//					connector.init(getApplicationContext(), getAuthToken(),
-//							APP_ID, SERVER_URL);
-//				} catch (CommunicatorConnectorException e) {
-//					e.printStackTrace();
-//				}
+				// PushServiceConnector connector = new PushServiceConnector();
+				// try {
+				// connector.init(getApplicationContext(), getAuthToken(),
+				// APP_ID, SERVER_URL);
+				// } catch (CommunicatorConnectorException e) {
+				// e.printStackTrace();
+				// }
 				if (bp != null) {
 					// proviamo a recuperare i dati studente
 					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
@@ -246,38 +243,39 @@ public class MyUniActivity extends SherlockActivity {
 					// uno studente tramite il codice prensete all'interno di
 					// uno
 					// dei corsicarriera che ci siamo appena presi
-					long cod = corsicarrierastudente.get(0).getId();
-					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
-							SmartUniDataWS.TOKEN_NAME);
-					MessageResponse response2;
-					MessageRequest request2 = new MessageRequest(
-							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_COURSES_DETAILS(cod));
-					request.setMethod(Method.GET);
-					try {
-						response2 = mProtocolCarrier.invokeSync(request2,
-								SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-						if (response2.getHttpStatus() == 200) {
-
-							body = response2.getBody();
-							String jsonattivitadidattica = body;
-							save("attivitaDidatticaStudente",
-									jsonattivitadidattica);
-						} else {
-							return null;
-						}
-					} catch (ConnectionException e) {
-						e.printStackTrace();
-					} catch (ProtocolException e) {
-						e.printStackTrace();
-					} catch (SecurityException e) {
-						e.printStackTrace();
-					} catch (AACException e) {
-						e.printStackTrace();
-					}
+					// long cod = corsicarrierastudente.get(0).getId();
+					// mProtocolCarrier = new
+					// ProtocolCarrier(MyUniActivity.this,
+					// SmartUniDataWS.TOKEN_NAME);
+					// MessageResponse response2;
+					// MessageRequest request2 = new MessageRequest(
+					// SmartUniDataWS.URL_WS_SMARTUNI,
+					// SmartUniDataWS.GET_WS_COURSES_DETAILS(cod));
+					// request.setMethod(Method.GET);
+					// try {
+					// response2 = mProtocolCarrier.invokeSync(request2,
+					// SmartUniDataWS.TOKEN_NAME,
+					// MyUniActivity.getAuthToken());
+					// if (response2.getHttpStatus() == 200) {
+					//
+					// body = response2.getBody();
+					// String jsonattivitadidattica = body;
+					// save("attivitaDidatticaStudente",
+					// jsonattivitadidattica);
+					// } else {
+					// return null;
+					// }
+					// } catch (ConnectionException e) {
+					// e.printStackTrace();
+					// } catch (ProtocolException e) {
+					// e.printStackTrace();
+					// } catch (SecurityException e) {
+					// e.printStackTrace();
+					// } catch (AACException e) {
+					// e.printStackTrace();
+					// }
+					// }
 				}
-
 				return bp;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -290,10 +288,10 @@ public class MyUniActivity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(BasicProfile result) {
 			super.onPostExecute(result);
+			pd.dismiss();
 		}
 
 		private void save(String key, String jsonTosaveinSharedP) {
-			pd.dismiss();
 			SharedPreferences sharedPreferences = MyUniActivity.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 			SharedPreferences.Editor editor = sharedPreferences.edit();

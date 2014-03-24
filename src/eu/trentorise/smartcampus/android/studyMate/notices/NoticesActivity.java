@@ -43,7 +43,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 		noNot = (TextView) findViewById(R.id.textViewDescNotices);
-		source = getResources().getStringArray(R.array.Source);;
+		source = getResources().getStringArray(R.array.Source);
+		;
 		spinner = (Spinner) findViewById(R.id.spinnerNotifiche);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				NoticesActivity.this, android.R.layout.simple_list_item_1,
@@ -68,9 +69,9 @@ public class NoticesActivity extends SherlockFragmentActivity {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				try {
-					
-					pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
-							"Caricamento...");
+
+					pd = ProgressDialog.show(NoticesActivity.this,
+							"Bacheca notifiche", "Caricamento...");
 					String type = URLEncoder.encode(source[arg2], "UTF-8");
 					new NotificationHandler(getApplicationContext(),
 							textViewTitleNotices, lvAllNotices, activity,

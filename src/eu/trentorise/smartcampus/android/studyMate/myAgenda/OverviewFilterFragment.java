@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,11 +43,11 @@ public class OverviewFilterFragment extends SherlockFragment {
 				container, false);
 		Bundle b = getArguments();
 		nomeCorsoOW = b.getString(Constants.COURSE_NAME);
-		cc = (CorsoCarriera) b.getSerializable(Constants.CORSO_CARRIERA_SELECTED);
+		cc = (CorsoCarriera) b
+				.getSerializable(Constants.CORSO_CARRIERA_SELECTED);
 		return view;
 	}
-	
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -55,6 +56,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 		listaEventiFiltrati = new ArrayList<Evento>();
 
 		getActivity().setTitle(nomeCorsoOW);
+
 		listaEventiFiltrati = filterEventsbyCourse();
 
 		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
@@ -91,7 +93,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 					Fragment fragment = new DettailOfEventFragment();
 					fragment.setArguments(arguments);
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(R.id.tabCorsi, fragment);
+					ft.replace(getId(), fragment);
 					ft.addToBackStack(null);
 					ft.commit();
 				}
@@ -102,13 +104,23 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	// filtro gli eventi in base al corso che ho selezionato
 	private List<Evento> filterEventsbyCourse() {
-		//new EventsHandler(getSherlockActivity().getApplicationContext(), getActivity()).execute();
+		// new EventsHandler(getSherlockActivity().getApplicationContext(),
+		// getActivity()).execute();
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 
-		for (Evento evento : EventsHandler.listaEventi) {
-			if (String.valueOf(evento.getTitle()).compareTo(nomeCorsoOW) == 0) {
-				eventiFiltrati.add(evento);
+		try {
+			for (Evento evento : new EventsHandler(getSherlockActivity()
+					.getApplicationContext(), getActivity()).execute().get()) {
+				if (String.valueOf(evento.getTitle()).compareTo(nomeCorsoOW) == 0) {
+					eventiFiltrati.add(evento);
+				}
 			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return eventiFiltrati;

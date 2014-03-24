@@ -119,7 +119,8 @@ public class CoursesPassedHandler extends
 									AddRatingFromCoursesPassed.class);
 							intent.putExtra(Constants.COURSE_NAME,
 									corsoSelezionato.getName());
-							intent.putExtra(Constants.COURSE_ID, corsoSelezionato.getId());
+							intent.putExtra(Constants.COURSE_ID,
+									corsoSelezionato.getId());
 							currentActivity.startActivity(intent);
 						}
 					});

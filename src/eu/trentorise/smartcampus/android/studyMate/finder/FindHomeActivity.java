@@ -72,7 +72,6 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialListDeg);
 
-
 		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(
 				getApplicationContext(), spinner1, spinner2, this).execute();
 
@@ -106,7 +105,8 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 			intentSearch.putExtra(Constants.COURSE_DEG,
 					FindCoursesDegreeHandler.corsoLaureaSelected);
 			MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
-			intentSearch.putExtra(Constants.COURSE_DEG_SPEC, textV.getText().toString());
+			intentSearch.putExtra(Constants.COURSE_DEG_SPEC, textV.getText()
+					.toString());
 			startActivity(intentSearch);
 			return true;
 		default:

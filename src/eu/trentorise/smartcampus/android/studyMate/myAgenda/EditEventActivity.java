@@ -88,7 +88,6 @@ public class EditEventActivity extends SherlockFragment {
 		return fview;
 	}
 
-	
 	@Override
 	public void onStart() {
 		super.onStart();

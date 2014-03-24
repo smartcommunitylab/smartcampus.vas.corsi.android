@@ -5,19 +5,11 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.DettailOfEventFragment;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -26,7 +18,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
@@ -92,57 +83,59 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 	}
 
 	@Override
-	protected void onPostExecute(final List<Evento> result) {
+	protected void onPostExecute(List<Evento> result) {
 		super.onPostExecute(result);
 
-		listaEventi = result;
+		// listaEventi = result;
 		if (result == null) {
 
 			Toast.makeText(context, "Ops! C'è stato un errore...",
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
 		} else {
-			EventItem[] listEvItem = new EventItem[result.size()];
+			listaEventi = result;
+			// EventItem[] listEvItem = new EventItem[result.size()];
+			//
+			// int i = 0;
+			//
+			// for (Evento ev : result) {
+			// AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+			// .getDate(), ev.getTitle(), ev.getType(), ev
+			// .getEventoId().getStart().toString(), ev.getRoom());
+			// listEvItem[i++] = new EventItem(e);
+			//
+			// }
+			//
+			// EventAdapter adapter = new EventAdapter(fragment, listEvItem);
+			// ListView listView = (ListView) fragment
+			// .findViewById(R.id.listViewEventi);
+			// listView.setAdapter(adapter);
+			//
+			// listView.setOnItemClickListener(new
+			// ListView.OnItemClickListener() {
+			//
+			// @Override
+			// public void onItemClick(AdapterView<?> arg0, View arg1,
+			// int arg2, long arg3) {
+			// fragment.supportInvalidateOptionsMenu();
+			//
+			// Evento evento = result.get(arg2);
+			//
+			// // Pass Data to other Fragment
+			// Bundle arguments = new Bundle();
+			// arguments.putSerializable(Constants.SELECTED_EVENT, evento);
+			// FragmentTransaction ft = fragment
+			// .getSupportFragmentManager().beginTransaction();
+			// Fragment fragment = new DettailOfEventFragment();
+			// fragment.setArguments(arguments);
+			// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			// ft.replace(R.id.tabOverview, fragment);
+			// ft.addToBackStack(null);
+			// ft.commit();
+			// }
+			// });
 
-			int i = 0;
-
-			for (Evento ev : result) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev
-						.getEventoId().getStart().toString(), ev.getRoom());
-				listEvItem[i++] = new EventItem(e);
-
-			}
-
-			EventAdapter adapter = new EventAdapter(fragment, listEvItem);
-			ListView listView = (ListView) fragment
-					.findViewById(R.id.listViewEventi);
-			listView.setAdapter(adapter);
-
-			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					fragment.supportInvalidateOptionsMenu();
-
-					Evento evento = result.get(arg2);
-
-					// Pass Data to other Fragment
-					Bundle arguments = new Bundle();
-					arguments.putSerializable(Constants.SELECTED_EVENT, evento);
-					FragmentTransaction ft = fragment
-							.getSupportFragmentManager().beginTransaction();
-					Fragment fragment = new DettailOfEventFragment();
-					fragment.setArguments(arguments);
-					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(R.id.tabOverview, fragment);
-					ft.addToBackStack(null);
-					ft.commit();
-				}
-			});
-
-			OverviewFragment.pd.dismiss();
+			// OverviewFragment.pd.dismiss();
 		}
 	}
 
