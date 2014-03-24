@@ -51,6 +51,7 @@
     <string name="title_activity_my_agenda">Agenda</string>
     <string name="title_activity_phl">PHL</string>
     <string name="title_activity_find_courses">Search courses</string>
+    <string name="title_activity_result_searched">Search Results</string>
     <string name="tab_overview">Overview</string>
     <string name="tab_courses">Courses</string>
     <string name="tab_home">HOME</string>
@@ -140,6 +141,7 @@
     <string name="dialog_courses_events">List of courses register for events</string>
     <string name="dialog_list_events">List of your events</string>
     <string name="dialog_not_events">There are no events coming soon</string>
+    <string name="dialog_searching_courses">Searching courses</string>
     
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
@@ -153,4 +155,5 @@
     <string name="addevent_description">Description</string>
     
     <string name="button_cancel">Cancel</string>
+    <string name="searchby_all">All</string>
 </resources>

@@ -143,6 +143,7 @@
     <string name="dialog_courses_events">Lista dei corsi registrati agli eventi</string>
     <string name="dialog_list_events">Lista dei tuoi eventi</string>
     <string name="dialog_not_events">Non ci sono eventi prossimamente</string>
+    <string name="dialog_searching_courses">Ricerca dei corsi</string>
     
     
      <!-- Toasts -->
@@ -157,5 +158,7 @@
     <string name="addevent_description">Descrizione</string>
     
     <string name="button_cancel">Annulla</string>
+    <string name="searchby_all">Tutto</string>
+
 
 </resources>

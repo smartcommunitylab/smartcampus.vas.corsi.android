@@ -164,11 +164,11 @@ public class CoursesHandlerLite extends
 	@Override
 	protected List<AttivitaDidattica> doInBackground(Void... params) {
 
-		if (department.getDescription().contains("Tutto")) {
+		if (department.getDescription().contains(context.getResources().getString(R.string.searchby_all))) {
 			return getAllCourses();
 
 		} else {
-			if (degree.getDescripion().equals("Tutto")) {
+			if (degree.getDescripion().equals(context.getResources().getString(R.string.searchby_all))) {
 				return getAllCoursesOfDepartment(department);
 			} else {
 				return getAllCoursesOfFaculty(degree);
@@ -218,9 +218,9 @@ public class CoursesHandlerLite extends
 	protected void onPreExecute() {
 		super.onPreExecute();
 		if (course.equals("")) {
-			if (department.equals("Tutto"))
-				tvTitleNotices.setText(tvTitleNotices.getText() + "Tutto");
-			else if (degree.equals("Tutto"))
+			if (department.equals(context.getResources().getString(R.string.searchby_all)))
+				tvTitleNotices.setText(tvTitleNotices.getText() + context.getResources().getString(R.string.searchby_all));
+			else if (degree.equals(context.getResources().getString(R.string.searchby_all)))
 				tvTitleNotices.setText(tvTitleNotices.getText()
 						+ " Dipartimento di "
 						+ department.getDescription().toString());
@@ -230,8 +230,8 @@ public class CoursesHandlerLite extends
 						+ department.getDescription().toString()
 						+ ", corso di laurea in " + degree.getDescripion());
 		} else {
-			if (department.equals("Tutto")) {
-				if (degree.equals("Tutto"))
+			if (department.equals(context.getResources().getString(R.string.searchby_all))) {
+				if (degree.equals(context.getResources().getString(R.string.searchby_all)))
 					tvTitleNotices.setText(tvTitleNotices.getText() + " "
 							+ course.toString());
 				else
