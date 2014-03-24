@@ -30,6 +30,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
+import eu.trentorise.smartcampus.studymate.R.string;
 
 public class CoursesHandler extends
 		AsyncTask<Bundle, Void, List<CorsoCarriera>> {
@@ -93,7 +94,7 @@ public class CoursesHandler extends
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity,
-				"Lista dei corsi da libretto", "Caricamento...");
+				context.getResources().getString(R.string.dialog_courses_events), context.getResources().getString(R.string.dialog_loading));
 	}
 
 	@Override
@@ -101,7 +102,7 @@ public class CoursesHandler extends
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -109,7 +110,11 @@ public class CoursesHandler extends
 
 			int i = 0;
 			for (CorsoCarriera s : result) {
-				items[i++] = new TitledItem("Corsi da libretto", s.getName());
+				if(s.getResult().equals("-1"))
+					items[i++] = new TitledItem(context.getResources().getString(R.string.header_course_interest), s.getName());
+				else
+					items[i++] = new TitledItem(context.getResources().getString(R.string.header_course_career), s.getName());
+					
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);

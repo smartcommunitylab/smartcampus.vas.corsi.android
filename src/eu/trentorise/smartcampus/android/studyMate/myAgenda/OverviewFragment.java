@@ -58,7 +58,7 @@ public class OverviewFragment extends SherlockFragment {
 
 		new ProgressDialog(getActivity());
 		OverviewFragment.pd = ProgressDialog.show(getActivity(),
-				"Lista degli eventi personali", "Caricamento...");
+				getActivity().getResources().getString(R.string.dialog_list_events), getActivity().getResources().getString(R.string.dialog_loading));
 
 		// getSherlockActivity().supportInvalidateOptionsMenu();
 
@@ -76,7 +76,7 @@ public class OverviewFragment extends SherlockFragment {
 		EventItem[] listEvItem = new EventItem[listaEventi.size()];
 		if (listaEventi.size() == 0) {
 			Toast.makeText(getSherlockActivity(),
-					"Non sono disponibli eventi...", Toast.LENGTH_SHORT).show();
+					getActivity().getResources().getString(R.string.dialog_not_events), Toast.LENGTH_SHORT).show();
 		} else {
 			int i = 0;
 

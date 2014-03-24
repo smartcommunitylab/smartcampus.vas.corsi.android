@@ -151,7 +151,7 @@ public class AddEventActivity extends SherlockFragment {
 				eId.setDate(new Date(dateR));
 
 				new PostEvent(getActivity(), evento).execute();
-				Toast.makeText(getActivity(), "Evento aggiunto",
+				Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.toast_event_added),
 						Toast.LENGTH_SHORT).show();
 				getActivity().onBackPressed();
 			}
@@ -325,7 +325,7 @@ public class AddEventActivity extends SherlockFragment {
 
 			new ProgressDialog(getActivity());
 			pd = ProgressDialog.show(getActivity(),
-					"Caricamento della lista dei corsi ", "Caricamento...");
+					getActivity().getResources().getString(R.string.dialog_courses_events), getActivity().getResources().getString(R.string.dialog_loading));
 		}
 
 	}
