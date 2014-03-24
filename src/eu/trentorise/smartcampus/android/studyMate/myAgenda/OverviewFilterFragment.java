@@ -93,7 +93,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 					Fragment fragment = new DettailOfEventFragment();
 					fragment.setArguments(arguments);
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(getId(), fragment);
+					ft.replace(R.id.tabCorsi, fragment);
 					ft.addToBackStack(null);
 					ft.commit();
 				}

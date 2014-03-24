@@ -46,42 +46,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		this.context = applicationContext;
 	}
 
-	// private List<Evento> getAllEventsOfCourse(String id_course) {
-	//
-	// mProtocolCarrier = new ProtocolCarrier(context,
-	// SmartUniDataWS.TOKEN_NAME);
-	//
-	// MessageRequest request = new MessageRequest(
-	// SmartUniDataWS.URL_WS_SMARTUNI,
-	// SmartUniDataWS.GET_WS_EVENTS_OF_COURSE(id_course));
-	// request.setMethod(Method.GET);
-	//
-	// MessageResponse response;
-	// try {
-	// response = mProtocolCarrier.invokeSync(request,
-	// SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
-	//
-	// if (response.getHttpStatus() == 200) {
-	//
-	// body = response.getBody();
-	//
-	// } else {
-	// return null;
-	// }
-	// } catch (ConnectionException e) {
-	// e.printStackTrace();
-	// } catch (ProtocolException e) {
-	// e.printStackTrace();
-	// } catch (SecurityException e) {
-	// e.printStackTrace();
-	// } catch (AACException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// return Utils.convertJSONToObjects(body, Evento.class);
-	// }
-
 	private List<Evento> getAllPersonalEvents() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -139,46 +103,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
 		} else {
-			EventItem[] listEvItem = new EventItem[result.size()];
-
-			int i = 0;
-
-			for (Evento ev : result) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev
-						.getEventoId().getStart().toString(), ev.getRoom());
-				listEvItem[i++] = new EventItem(e, context.getResources());
-
-			}
-
-			EventAdapter adapter = new EventAdapter(fragment, listEvItem);
-			ListView listView = (ListView) fragment
-					.findViewById(R.id.listViewEventi);
-			listView.setAdapter(adapter);
-
-			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					fragment.supportInvalidateOptionsMenu();
-
-					Evento evento = result.get(arg2);
-
-					// Pass Data to other Fragment
-					Bundle arguments = new Bundle();
-					arguments.putSerializable("eventSelected", evento);
-					FragmentTransaction ft = fragment
-							.getSupportFragmentManager().beginTransaction();
-					Fragment fragment = new DettailOfEventFragment();
-					fragment.setArguments(arguments);
-					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(R.id.tabOverview, fragment);
-					ft.addToBackStack(null);
-					ft.commit();
-				}
-			});
-
 			OverviewFragment.pd.dismiss();
 		}
 	}
