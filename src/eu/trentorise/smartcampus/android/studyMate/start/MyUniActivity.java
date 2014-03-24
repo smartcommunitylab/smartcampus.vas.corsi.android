@@ -43,6 +43,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String APP_ID = "studymate";
 	//
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
+	public static final String AUTH_URL ="https://vas-dev.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -162,18 +163,18 @@ public class MyUniActivity extends SherlockActivity {
 			try {
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				BasicProfileService service = new BasicProfileService(
-						"https://vas-dev.smartcampuslab.it/aac");
+						AUTH_URL);
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
 				// init connector
-				PushServiceConnector connector = new PushServiceConnector();
-				try {
-					connector.init(getApplicationContext(), getAuthToken(),
-							APP_ID, SERVER_URL);
-				} catch (CommunicatorConnectorException e) {
-					e.printStackTrace();
-				}
+//				PushServiceConnector connector = new PushServiceConnector();
+//				try {
+//					connector.init(getApplicationContext(), getAuthToken(),
+//							APP_ID, SERVER_URL);
+//				} catch (CommunicatorConnectorException e) {
+//					e.printStackTrace();
+//				}
 				if (bp != null) {
 					// proviamo a recuperare i dati studente
 					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,

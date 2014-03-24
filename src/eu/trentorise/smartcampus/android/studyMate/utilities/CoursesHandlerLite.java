@@ -301,9 +301,9 @@ public class CoursesHandlerLite extends
 						.getCds_id());
 				corsoSelezionato.setAdCod(coursesFiltered.get(arg2).getAdCod());
 
-				i.putExtra("NomeCorso", corsoSelezionato.getDescription());
-				i.putExtra("IdCorso", corsoSelezionato.getAdId());
-				i.putExtra("adCod", corsoSelezionato.getAdCod());
+				i.putExtra(Constants.COURSE_NAME, corsoSelezionato.getDescription());
+				i.putExtra(Constants.COURSE_ID, corsoSelezionato.getAdId());
+				i.putExtra(Constants.AD_COD, corsoSelezionato.getAdCod());
 				currentAct.startActivity(i);
 			}
 

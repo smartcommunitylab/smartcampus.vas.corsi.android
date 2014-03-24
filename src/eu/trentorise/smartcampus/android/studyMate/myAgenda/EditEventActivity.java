@@ -36,6 +36,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -79,7 +80,7 @@ public class EditEventActivity extends SherlockFragment {
 			Bundle savedInstanceState) {
 		fview = inflater.inflate(R.layout.activity_add_event_4_course,
 				container, false);
-		evento = (Evento) getArguments().getSerializable("eventSelectedEdit");
+		evento = (Evento) getArguments().getSerializable(Constants.EDIT_EVENT);
 		dateInitial = evento.getEventoId().getDate().getTime();
 		timeFromInitial = evento.getEventoId().getStart().getTime();
 		timeToInitial = evento.getEventoId().getStop().getTime();
@@ -87,47 +88,7 @@ public class EditEventActivity extends SherlockFragment {
 		return fview;
 	}
 
-	@SuppressWarnings("deprecation")
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	//
-	//
-	// eId = new EventoId();
-	// eventoModificato = new Evento();
-	// eventoModificato = evento;
-	//
-	//
-	//
-	// date = new Date();
-	// mPickDate = (EditText) findViewById(R.id.myDatePickerButton4Course);
-	// mPickTime = (EditText) findViewById(R.id.myTimePickerButton4Course);
-	// // get the ex date of previous event
-	// mYear = evento.getEventoId().getDate().getYear() + 1900;
-	// mMonth = evento.getEventoId().getDate().getMonth();
-	// mDay = evento.getEventoId().getDate().getDate();
-	// // get the current Time
-	// hour = evento.getEventoId().getStart().getHours();
-	// minute = evento.getEventoId().getStart().getMinutes();
-	// eId.setStart(new Time(hour,minute,0));
-	// eId.setStop(new Time(hour,minute,0));
-	// // display the current date
-	// updateDisplay();
-	// title = (EditText) findViewById(R.id.editTextTitle4Course);
-	// title.setText(evento.getType());
-	// description = (EditText) findViewById(R.id.editTextDescription4Course);
-	// description.setText(evento.getPersonalDescription());
-	// coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi4Course);
-	// List<String> resultStrings = new ArrayList<String>();
-	// resultStrings.add(evento.getTitle());
-	// ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-	// EditEventActivity.this,
-	// R.layout.list_studymate_row_list_simple, resultStrings);
-	// coursesSpinner.setAdapter(adapterInitialList);
-	// coursesSpinner.setEnabled(false);
-	// coursesSpinner.setActivated(false);
-	//
-	// }
+	
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -293,7 +254,6 @@ public class EditEventActivity extends SherlockFragment {
 					DateFormat.is24HourFormat(getActivity()));
 		}
 
-		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
@@ -379,13 +339,11 @@ public class EditEventActivity extends SherlockFragment {
 
 		@Override
 		protected Boolean doInBackground(Evento... params) {
-			// TODO Auto-generated method stub
 			return changeEvent(dateInitial, timeFromInitial, timeToInitial);
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)

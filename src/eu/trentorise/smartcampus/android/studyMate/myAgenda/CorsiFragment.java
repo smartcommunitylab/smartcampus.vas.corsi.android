@@ -28,7 +28,6 @@ public class CorsiFragment extends SherlockFragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		setHasOptionsMenu(true);
 		ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
@@ -41,21 +40,6 @@ public class CorsiFragment extends SherlockFragment {
 				getActivity(), getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
 	}
-
-	// public void onStart() {
-	// super.onStart();
-	// setHasOptionsMenu(true);
-	// ListView listViewCorsi = (ListView) getSherlockActivity().findViewById(
-	// R.id.listViewCorsi);
-	// getSherlockActivity().supportInvalidateOptionsMenu();
-	//
-	// Bundle arguments = new Bundle();
-	// CoursesHandler handlerPersonalCourses = new CoursesHandler(
-	// getActivity().getApplicationContext(), listViewCorsi,
-	// getActivity(), getSherlockActivity());
-	// handlerPersonalCourses.execute(arguments);
-	//
-	// }
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -78,15 +62,11 @@ public class CorsiFragment extends SherlockFragment {
 			ft.replace(this.getId(), fragment);
 			ft.addToBackStack(null);
 			ft.commit();
-			// Intent intentEvent = new Intent(getActivity(),
-			// AddEventActivity.class);
-			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intentEvent);
 			return true;
 		default:
 			break;
 		}
-		return false;// super.onOptionsItemSelected(item);
+		return false;
 	}
 
 	// public static void clearBackStack(FragmentManager manager){

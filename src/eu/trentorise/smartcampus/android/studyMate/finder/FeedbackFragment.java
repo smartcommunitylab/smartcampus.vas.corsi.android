@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.Author;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
@@ -42,13 +40,6 @@ public class FeedbackFragment extends SherlockFragment {
 
 		View view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
-
-		Intent intent = this.getActivity().getIntent();
-		@SuppressWarnings("unused")
-		AttivitaDidattica corsoAttuale = new AttivitaDidattica();
-		corsoAttuale = (AttivitaDidattica) intent
-				.getSerializableExtra("courseSelected");
-
 		TextView titleRatingFeedback = (TextView) view
 				.findViewById(R.id.textViewTitleFeedbackCourse);
 		if (FeedbackHandler.feedbackInfoList.get(0).getRating_contenuto() == -1) {

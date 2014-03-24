@@ -3,7 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.finder;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindDepartmentsHandler;
 import eu.trentorise.smartcampus.studymate.R;
@@ -34,8 +34,6 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 	public ArrayAdapter<String> adapter;
 	public static ProgressDialog pd;
 
-	public String departSelectedName = null;
-	public String courseSelected = null;
 	Dipartimento departSelected;
 	CorsoLaurea corsoLaureaSelected;
 	public List<Dipartimento> listDep;
@@ -74,8 +72,6 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialListDeg);
 
-		@SuppressWarnings("unused")
-		final Activity currentAct = this;
 
 		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(
 				getApplicationContext(), spinner1, spinner2, this).execute();
@@ -105,12 +101,12 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 		case R.id.itemSearchCourses:
 			Intent intentSearch = new Intent(FindHomeActivity.this,
 					ResultSearchedActivity.class);
-			intentSearch.putExtra("department",
+			intentSearch.putExtra(Constants.DEPARTMENT,
 					findDepHandler.getDepartSelected());
-			intentSearch.putExtra("courseDegree",
+			intentSearch.putExtra(Constants.COURSE_DEG,
 					FindCoursesDegreeHandler.corsoLaureaSelected);
 			MultiAutoCompleteTextView textV = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
-			intentSearch.putExtra("course", textV.getText().toString());
+			intentSearch.putExtra(Constants.COURSE_DEG_SPEC, textV.getText().toString());
 			startActivity(intentSearch);
 			return true;
 		default:

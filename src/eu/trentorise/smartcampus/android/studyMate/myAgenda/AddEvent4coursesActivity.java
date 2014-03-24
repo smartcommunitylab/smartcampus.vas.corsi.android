@@ -30,6 +30,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studymate.R;
 
@@ -41,14 +42,12 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 	private int hour;
 	private int minute;
 
-	// private TextView mDateDisplay;
 	private EditText mPickDate;
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
 	private View fview;
 	public static ProgressDialog pd;
 	private Evento evento = null;
-	// public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
 	String cN;
 	private CorsoCarriera cc;
@@ -62,25 +61,14 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 			Bundle savedInstanceState) {
 		fview = inflater.inflate(R.layout.activity_add_event_4_course,
 				container, false);
-		cc = (CorsoCarriera) getArguments().getSerializable("ccSelected");
+		cc = (CorsoCarriera) getArguments().getSerializable(Constants.CC_SELECTED);
 		return fview;
 	}
-
-	// @SuppressWarnings("deprecation")
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// setContentView(R.layout.activity_add_event_4_course);
-	//
-	// }
 
 	@Override
 	public void onStart() {
 
-		super.onStart();
-
-		// Intent intent = getIntent();
-		// cc = (CorsoCarriera) intent.getSerializableExtra("corsoCarrieraS");
+super.onStart();
 		evento = new Evento();
 		eId = new EventoId();
 		date = new Date();
@@ -93,7 +81,6 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				showDatePickerDialog(fview);
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -103,7 +90,6 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				showTimePickerDialog(fview);
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -154,7 +140,6 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 			public void onClick(View v) {
 				evento.setType(title.getText().toString());
 				evento.setTitle(cc.getName());
-				// evento.setTeacher("IO");
 				evento.setPersonalDescription(description.getText().toString());
 				evento.setEventoId(eId);
 				evento.setAdCod(Long.parseLong(cc.getCod()));
@@ -184,14 +169,6 @@ public class AddEvent4coursesActivity extends SherlockFragment {
 
 		}
 	}
-
-	// @Override
-	// public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
-	// {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getSupportMenuInflater().inflate(R.menu.test, menu);
-	// return super.onCreateOptionsMenu(menu);
-	// }
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();

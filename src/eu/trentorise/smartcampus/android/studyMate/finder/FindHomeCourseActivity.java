@@ -18,6 +18,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -52,9 +53,9 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 		String tab2_txt = getResources().getString(R.string.tab_feedback);
 
 		Intent intent = getIntent();
-		idCorso = intent.getLongExtra("IdCorso", 0);
-		corsoName = intent.getStringExtra("NomeCorso");
-		adCod = intent.getStringExtra("adCod");
+		idCorso = intent.getLongExtra(Constants.COURSE_ID, 0);
+		corsoName = intent.getStringExtra(Constants.COURSE_NAME);
+		adCod = intent.getStringExtra(Constants.AD_COD);
 		setTitle(corsoName);
 		Tab tab1 = ab
 				.newTab()
@@ -192,8 +193,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				Intent intentAddRating = new Intent(
 						FindHomeCourseActivity.this,
 						AddRatingFromCoursesPassed.class);
-				intentAddRating.putExtra("IdCorso", idCorso);
-				intentAddRating.putExtra("NomeCorso", corsoName);
+				intentAddRating.putExtra(Constants.COURSE_ID, idCorso);
+				intentAddRating.putExtra(Constants.COURSE_NAME, corsoName);
 				startActivity(intentAddRating);
 
 			} else {

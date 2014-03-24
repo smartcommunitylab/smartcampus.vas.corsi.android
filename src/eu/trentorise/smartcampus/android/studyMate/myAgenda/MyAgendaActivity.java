@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 import eu.trentorise.smartcampus.studymate.R;
 
@@ -26,7 +27,7 @@ public class MyAgendaActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		Intent intent = getIntent();
-		corsoNameMA = intent.getStringExtra("NomeCorso");
+		corsoNameMA = intent.getStringExtra(Constants.COURSE_NAME);
 
 		final ActionBar ab = getSupportActionBar();
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

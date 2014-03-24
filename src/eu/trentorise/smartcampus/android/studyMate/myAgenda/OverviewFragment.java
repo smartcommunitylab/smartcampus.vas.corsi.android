@@ -43,7 +43,6 @@ public class OverviewFragment extends SherlockFragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
@@ -55,27 +54,14 @@ public class OverviewFragment extends SherlockFragment {
 		eventsHandler = new EventsHandler(
 				getActivity().getApplicationContext(), getActivity());
 		eventsHandler.execute();
+		
+		
+		
+		
 	}
-
-	// public void onStart() {
-	// super.onStart();
-	//
-	// setHasOptionsMenu(true);
-	// getSherlockActivity().supportInvalidateOptionsMenu();
-	//
-	// new ProgressDialog(getActivity());
-	// OverviewFragment.pd = ProgressDialog.show(getActivity(),
-	// "Lista degli eventi personali", "Caricamento...");
-	//
-	// eventsHandler = new EventsHandler(
-	// getActivity().getApplicationContext(), getActivity());
-	// eventsHandler.execute();
-	//
-	// }
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		menu.clear();
 		inflater.inflate(R.menu.agenda, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -83,7 +69,6 @@ public class OverviewFragment extends SherlockFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 
 		case R.id.add_event:
@@ -96,14 +81,10 @@ public class OverviewFragment extends SherlockFragment {
 			ft.addToBackStack(null);
 			ft.commit();
 
-			// Intent intentEvent = new Intent(getActivity(),
-			// AddEventActivity.class);
-			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intentEvent);
 			return true;
 		default:
 			break;
 		}
-		return false;// super.onOptionsItemSelected(item);
+		return false;
 	}
 }

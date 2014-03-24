@@ -15,6 +15,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
 import eu.trentorise.smartcampus.studymate.R;
 
@@ -22,8 +23,6 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 
 	public List<AttivitaDidattica> courses;
 	public ArrayList<String> coursesFiltered;
-	String department = null;
-	String degree = null;
 	String course = null;
 	public static ProgressDialog pd;
 	public Dipartimento depSelected;
@@ -39,10 +38,10 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 		ab.setDisplayHomeAsUpEnabled(true);
 
 		Intent i = getIntent();
-		depSelected = (Dipartimento) i.getSerializableExtra("department");
+		depSelected = (Dipartimento) i.getSerializableExtra(Constants.DEPARTMENT);
 		courseDegreeSelected = (CorsoLaurea) i
-				.getSerializableExtra("courseDegree");
-		course = i.getStringExtra("course").toLowerCase();
+				.getSerializableExtra(Constants.COURSE_DEG);
+		course = i.getStringExtra(Constants.COURSE_DEG_SPEC).toLowerCase();
 
 		new ProgressDialog(ResultSearchedActivity.this);
 		pd = ProgressDialog.show(ResultSearchedActivity.this,

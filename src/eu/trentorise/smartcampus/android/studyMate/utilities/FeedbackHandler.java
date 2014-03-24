@@ -250,7 +250,6 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

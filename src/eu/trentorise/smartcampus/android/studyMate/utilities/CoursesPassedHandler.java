@@ -69,7 +69,6 @@ public class CoursesPassedHandler extends
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -118,17 +117,10 @@ public class CoursesPassedHandler extends
 							Intent intent = new Intent();
 							intent.setClass(currentActivity,
 									AddRatingFromCoursesPassed.class);
-							intent.putExtra("NomeCorso",
+							intent.putExtra(Constants.COURSE_NAME,
 									corsoSelezionato.getName());
-							intent.putExtra("IdCorso", corsoSelezionato.getId());
+							intent.putExtra(Constants.COURSE_ID, corsoSelezionato.getId());
 							currentActivity.startActivity(intent);
-
-							// Intent intent = new Intent(context,
-							// AddRatingFromCoursesPassed.class);
-
-							// currentActivity.getIntent().putExtra("CoursePassedSelected",
-							// corsoSelezionato);
-
 						}
 					});
 

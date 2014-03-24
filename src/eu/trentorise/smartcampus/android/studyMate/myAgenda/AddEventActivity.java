@@ -77,13 +77,6 @@ public class AddEventActivity extends SherlockFragment {
 		return fview;
 	}
 
-	// @SuppressWarnings("deprecation")
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// setContentView(R.layout.activity_add_event);
-	//
-	// }
 
 	@Override
 	public void onStart() {
@@ -303,7 +296,6 @@ public class AddEventActivity extends SherlockFragment {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

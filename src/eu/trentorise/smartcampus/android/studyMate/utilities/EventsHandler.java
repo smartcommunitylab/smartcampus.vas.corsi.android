@@ -46,42 +46,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		this.context = applicationContext;
 	}
 
-	// private List<Evento> getAllEventsOfCourse(String id_course) {
-	//
-	// mProtocolCarrier = new ProtocolCarrier(context,
-	// SmartUniDataWS.TOKEN_NAME);
-	//
-	// MessageRequest request = new MessageRequest(
-	// SmartUniDataWS.URL_WS_SMARTUNI,
-	// SmartUniDataWS.GET_WS_EVENTS_OF_COURSE(id_course));
-	// request.setMethod(Method.GET);
-	//
-	// MessageResponse response;
-	// try {
-	// response = mProtocolCarrier.invokeSync(request,
-	// SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
-	//
-	// if (response.getHttpStatus() == 200) {
-	//
-	// body = response.getBody();
-	//
-	// } else {
-	// return null;
-	// }
-	// } catch (ConnectionException e) {
-	// e.printStackTrace();
-	// } catch (ProtocolException e) {
-	// e.printStackTrace();
-	// } catch (SecurityException e) {
-	// e.printStackTrace();
-	// } catch (AACException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// return Utils.convertJSONToObjects(body, Evento.class);
-	// }
-
 	private List<Evento> getAllPersonalEvents() {
 
 		mProtocolCarrier = new ProtocolCarrier(context,
@@ -110,7 +74,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -167,7 +130,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
 					// Pass Data to other Fragment
 					Bundle arguments = new Bundle();
-					arguments.putSerializable("eventSelected", evento);
+					arguments.putSerializable(Constants.SELECTED_EVENT, evento);
 					FragmentTransaction ft = fragment
 							.getSupportFragmentManager().beginTransaction();
 					Fragment fragment = new DettailOfEventFragment();

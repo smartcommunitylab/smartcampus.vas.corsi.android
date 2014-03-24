@@ -27,6 +27,7 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -55,8 +56,8 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_rating);
 		Intent intent = getIntent();
-		idCorso = intent.getLongExtra("IdCorso", 0);
-		CorsoName = intent.getStringExtra("NomeCorso");
+		idCorso = intent.getLongExtra(Constants.COURSE_ID, 0);
+		CorsoName = intent.getStringExtra(Constants.COURSE_NAME);
 		setTitle(CorsoName);
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
@@ -262,7 +263,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 						@Override
 						public void onClick(View v) {
 							Intent intent = new Intent();
-							intent.putExtra("Rating", ratings);
+							intent.putExtra(Constants.RATING, ratings);
 							Commento commento = new Commento();
 
 							if (commentCourse.getText().toString() != null)
@@ -343,7 +344,6 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

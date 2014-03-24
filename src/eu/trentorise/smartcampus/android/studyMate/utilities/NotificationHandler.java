@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -157,42 +156,6 @@ public class NotificationHandler extends
 		AdapterNoticesList adapterNotices = new AdapterNoticesList(context,
 				R.id.listViewNotices, notifies);
 		lvAllNotices.setAdapter(adapterNotices);
-
-		// lvAllNotices.setOnItemClickListener(new
-		// ListView.OnItemClickListener() {
-		// @Override
-		// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-		// long arg3) {
-		// // if (notifies.get(arg2).getType().equals("gds")) {
-		// AlertDialog.Builder mAlert = new AlertDialog.Builder(activity);
-		// mAlert.setTitle(notifies.get(arg2).getTitle());
-		// mAlert.setMessage(notifies.get(arg2).getDescription());
-		// mAlert.setPositiveButton("OK",
-		// new DialogInterface.OnClickListener() {
-		// public void onClick(DialogInterface dialog,
-		// int which) {
-		// // Editable value = input.getText();
-		// Toast.makeText(context, "OK...",
-		// Toast.LENGTH_SHORT).show();
-		// // e.printStackTrace();
-		// }
-		// });
-		// mAlert.setNegativeButton("CANCEL",
-		// new DialogInterface.OnClickListener() {
-		// public void onClick(DialogInterface dialog,
-		// int which) {
-		// // Editable value = input.getText();
-		// Toast.makeText(context, "CANCEL...",
-		// Toast.LENGTH_SHORT).show();
-		// // e.printStackTrace();
-		// }
-		// });
-		// AlertDialog alert = mAlert.create();
-		//
-		// alert.show();
-		// }
-		// // }
-		// });
 	}
 
 	private void setVoidNotify() {

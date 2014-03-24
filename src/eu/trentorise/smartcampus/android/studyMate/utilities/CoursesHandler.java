@@ -129,9 +129,9 @@ public class CoursesHandler extends
 							CorsoCarriera corsoSelezionato = new CorsoCarriera();
 							corsoSelezionato = result.get(arg2);
 							Bundle data = new Bundle();
-							data.putSerializable("corsoCarrieraSelezionato",
+							data.putSerializable(Constants.CORSO_CARRIERA_SELECTED,
 									corsoSelezionato);
-							data.putString("NomeCorso",
+							data.putString(Constants.COURSE_NAME,
 									corsoSelezionato.getName());
 							FragmentTransaction ft = currentSherlock
 									.getSupportFragmentManager()

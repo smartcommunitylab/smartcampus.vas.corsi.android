@@ -42,15 +42,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		// ab.setDisplayShowTitleEnabled(false);
-		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		noNot = (TextView) findViewById(R.id.textViewDescNotices);
-
-		source = getResources().getStringArray(R.array.Source);
-		//
-		//
-		// // Set up the dropdown list navigation in the action bar.
-		// ab.setListNavigationCallbacks(adapter, NoticesActivity.this);
+		source = getResources().getStringArray(R.array.Source);;
 		spinner = (Spinner) findViewById(R.id.spinnerNotifiche);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				NoticesActivity.this, android.R.layout.simple_list_item_1,
@@ -60,8 +53,6 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
 		new ProgressDialog(NoticesActivity.this);
-//		pd = ProgressDialog.show(NoticesActivity.this, "Bacheca notifiche",
-//				"Caricamento...");
 
 	}
 
@@ -85,24 +76,17 @@ public class NoticesActivity extends SherlockFragmentActivity {
 							textViewTitleNotices, lvAllNotices, activity,
 							fromDate, type, noNot).execute();
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 
 		});
-
-		// new NotificationHandler(getApplicationContext(),
-		// textViewTitleNotices,
-		// lvAllNotices, activity, fromDate).execute();
 	}
 
 	@Override
@@ -128,17 +112,4 @@ public class NoticesActivity extends SherlockFragmentActivity {
 
 		}
 	}
-
-	// @Override
-	// public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-	// // TODO Auto-generated method stub
-	// try {
-	// URLEncoder.encode(source[itemPosition], "UTF-8");
-	// } catch (UnsupportedEncodingException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return false;
-	// }
-
 }

@@ -22,6 +22,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -46,7 +47,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 				false);
 
 		eventSelected = (Evento) getArguments()
-				.getSerializable("eventSelected");
+				.getSerializable(Constants.SELECTED_EVENT);
 
 		return view;
 	}
@@ -129,7 +130,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 		case R.id.menu_change_event:
 			Bundle data = new Bundle();
-			data.putSerializable("eventSelectedEdit", eventSelected);
+			data.putSerializable(Constants.EDIT_EVENT, eventSelected);
 			FragmentTransaction ft = getSherlockActivity()
 					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new EditEventActivity();
@@ -138,13 +139,6 @@ public class DettailOfEventFragment extends SherlockFragment {
 			ft.replace(this.getId(), fragment);
 			ft.addToBackStack(null);
 			ft.commit();
-
-			// Intent intentEvent = new Intent(getActivity(),
-			// EditEventActivity.class);
-			// intentEvent.putExtra("modEv", eventSelected);
-			// intentEvent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intentEvent);
-
 			return true;
 		case R.id.menu_delete_event:
 			new DeleteEvent(eventSelected).execute();
@@ -171,7 +165,6 @@ public class DettailOfEventFragment extends SherlockFragment {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(getSherlockActivity());
 			pd = ProgressDialog.show(getSherlockActivity(), "Sto eliminando..",
