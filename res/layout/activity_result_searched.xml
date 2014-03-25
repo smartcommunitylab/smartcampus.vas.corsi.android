@@ -2,15 +2,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+    
+    
     <TextView
-        android:id="@+id/textViewDatetimeRow"
+        android:id="@+id/textViewDepartmentSearched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="@string/search_label_searchedList" />
+        android:paddingTop="5dp"
+        android:textColor="@color/smartn_theme_color" 
+        android:text="@string/search_label_department" />
+        
+    <TextView
+        android:id="@+id/textViewCourseDegreeSearched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:textColor="@color/smartn_theme_color" 
+        android:text="@string/search_label_courseDegree" />
 
     <View
         android:layout_width="fill_parent"

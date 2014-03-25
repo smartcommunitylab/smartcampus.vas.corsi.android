@@ -120,7 +120,7 @@ public class FindDepartmentsHandler extends
 		listaDip = result;
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {

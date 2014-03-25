@@ -100,6 +100,7 @@
     <string name="textview_description_label">Description:</string>
     <string name="add_rating_feedback_button">Add a review</string>
     <string name="label_title_description_course">Description</string>
+    <string name="dialog_list_cds">List of courses degree</string>
     <string name="label_txtMonitor_on">Notifications active</string>
     <string name="label_txtMonitor_off">Notifications inactive</string>
     <string name="rating_context_contenuti">Contents</string>
