@@ -132,7 +132,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 			data.putSerializable(Constants.EDIT_EVENT, eventSelected);
 			FragmentTransaction ft = getSherlockActivity()
 					.getSupportFragmentManager().beginTransaction();
-			Fragment fragment = new EditEventActivity();
+			Fragment fragment = new EditEventFragment();
 			fragment.setArguments(data);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(getId(), fragment, getTag());

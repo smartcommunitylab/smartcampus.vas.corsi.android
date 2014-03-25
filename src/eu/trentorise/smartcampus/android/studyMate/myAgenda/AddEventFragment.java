@@ -47,7 +47,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class AddEventActivity extends SherlockFragment {
+public class AddEventFragment extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
