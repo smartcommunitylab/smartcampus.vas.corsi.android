@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -30,6 +33,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 
+	public static ProgressDialog pd;
 	public List<Evento> listaEventiFiltrati = null;
 	public static String nomeCorsoOW;
 	private CorsoCarriera cc;
@@ -55,50 +59,81 @@ public class OverviewFilterFragment extends SherlockFragment {
 		listaEventiFiltrati = new ArrayList<Evento>();
 
 		getActivity().setTitle(nomeCorsoOW);
+		
+		OverviewFilterFragment.pd = ProgressDialog
+				.show(getActivity(),
+						getActivity().getResources().getString(
+								R.string.dialog_list_events),
+						getActivity().getResources().getString(
+								R.string.dialog_loading));
+		
+		AsyncTask<Void, Void, Void> taskCourseEvents = new AsyncTask<Void, Void, Void>() {
 
-		listaEventiFiltrati = filterEventsbyCourse();
-
-		EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
-		if (listaEventiFiltrati.size() == 0) {
-			Toast.makeText(getSherlockActivity(),
-					"Non sono disponibli eventi a breve per questo corso",
-					Toast.LENGTH_SHORT).show();
-		} else {
-			int i = 0;
-			for (Evento ev : listaEventiFiltrati) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev
-						.getEventoId().getStart().toString(), ev.getRoom());
-				listEvItem[i++] = new EventItem(e, getActivity().getResources());
+			@Override
+			protected Void doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				listaEventiFiltrati = filterEventsbyCourse();
+				
+				return null;
 			}
+			
+			@Override
+			protected void onPostExecute(Void result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+				
+				OverviewFilterFragment.pd.dismiss();
+				
+				EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
+				if (listaEventiFiltrati.size() == 0) {
+					Toast.makeText(getSherlockActivity(),
+							"Non sono disponibli eventi a breve per questo corso",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					int i = 0;
+					for (Evento ev : listaEventiFiltrati) {
+						AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+								.getDate(), ev.getTitle(), ev.getType(), ev
+								.getEventoId().getStart().toString(), ev.getRoom());
+						listEvItem[i++] = new EventItem(e, getActivity().getResources());
+					}
 
-			EventAdapter adapter = new EventAdapter(getSherlockActivity(),
-					listEvItem);
-			ListView listView = (ListView) getSherlockActivity().findViewById(
-					R.id.listViewEventi);
-			listView.setAdapter(adapter);
-			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+					EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+							listEvItem);
+					ListView listView = (ListView) getSherlockActivity().findViewById(
+							R.id.listViewEventi);
+					listView.setAdapter(adapter);
+					listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					getSherlockActivity().supportInvalidateOptionsMenu();
-					// Pass Data to other Fragment
-					Evento evento = listaEventiFiltrati.get(arg2);
-					Bundle arguments = new Bundle();
-					arguments.putSerializable(Constants.SELECTED_EVENT, evento);
-					FragmentTransaction ft = getSherlockActivity()
-							.getSupportFragmentManager().beginTransaction();
-					Fragment fragment = new DettailOfEventFragment();
-					fragment.setArguments(arguments);
-					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(getId(), fragment, getTag());
-					ft.addToBackStack(getTag());
-					ft.commit();
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int arg2, long arg3) {
+							getSherlockActivity().supportInvalidateOptionsMenu();
+							// Pass Data to other Fragment
+							Evento evento = listaEventiFiltrati.get(arg2);
+							Bundle arguments = new Bundle();
+							arguments.putSerializable(Constants.SELECTED_EVENT, evento);
+							FragmentTransaction ft = getSherlockActivity()
+									.getSupportFragmentManager().beginTransaction();
+							Fragment fragment = new DettailOfEventFragment();
+							fragment.setArguments(arguments);
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(getId(), fragment, getTag());
+							ft.addToBackStack(getTag());
+							ft.commit();
+						}
+
+					});
 				}
+			}
+		};
 
-			});
-		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			taskCourseEvents.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+		else
+			taskCourseEvents.execute((Void[])null);
+
+
 	}
 
 	// filtro gli eventi in base al corso che ho selezionato
