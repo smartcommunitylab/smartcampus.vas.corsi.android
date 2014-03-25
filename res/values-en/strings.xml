@@ -169,6 +169,10 @@
 	<string name="feedback_course_is_career">The course is from the booklet</string>
 	<string name="feedback_courses_can_review">Courses that I can review</string>
 	
+		 <!-- Rate -->
+	 <string name="rate_review_course">Rate the course!</string>
+	 <string name="rate_insert_review">Please enter your comment ...</string>
+	
 	<string name="homecourse_description_not_present">No description found</string>
 	
 	<!-- Notifications -->

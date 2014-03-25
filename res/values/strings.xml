@@ -173,7 +173,8 @@
 	 <string name="homecourse_description_not_present">Nessuna descrizione trovata</string>
 	 
 	 <!-- Rate -->
-	 <string name="rate_">Caricamento dei dati della tua recensione</string>
+	 <string name="rate_review_course">Valuta il corso!</string>
+	 <string name="rate_insert_review">Inserisci il tuo commento...</string>
 	 
 	 <!-- Notifications -->
 	 <string name="notification_name">Bacheca notifiche</string>
