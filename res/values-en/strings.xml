@@ -142,6 +142,10 @@
     <string name="dialog_list_events">List of your events</string>
     <string name="dialog_not_events">There are no events coming soon</string>
     <string name="dialog_searching_courses">Searching courses</string>
+    <string name="dialog_searching_list_departments">List of departments</string>
+    <string name="dialog_rate_loading_feedback">Loading data of your review</string>
+    <string name="dialog_saving_feedback">Saving</string>
+    <string name="dialog_follow_list_courses_career">List of courses booklet</string>
     
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
@@ -156,4 +160,18 @@
     
     <string name="button_cancel">Cancel</string>
     <string name="searchby_all">All</string>
+    
+    
+    <!-- feedback -->
+	<string name="feedback_not_present">There are no comments...</string>
+	<string name="feedback_number_presents">comments found</string>
+	<string name="feedback_course_information">Course information</string>
+	<string name="feedback_course_is_career">The course is from the booklet</string>
+	<string name="feedback_courses_can_review">Courses that I can review</string>
+	
+	<string name="homecourse_description_not_present">No description found</string>
+	
+	<!-- Notifications -->
+	<string name="notification_name">Wall notifications</string>
+	
 </resources>

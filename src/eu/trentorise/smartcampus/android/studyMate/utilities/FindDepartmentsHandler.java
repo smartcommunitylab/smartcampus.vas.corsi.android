@@ -24,6 +24,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class FindDepartmentsHandler extends
 		AsyncTask<Void, Void, List<Dipartimento>> {
@@ -45,16 +46,7 @@ public class FindDepartmentsHandler extends
 	FindCoursesDegreeHandler findDegHandler;
 	Activity currentActivity;
 
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-
-		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity, "Lista dei dipartimenti",
-				"Caricamento...");
-
-	}
-
+	
 	public FindDepartmentsHandler(Context applicationContext,
 			Spinner spinnerDepartments, Spinner spinnerDegree,
 			Activity currentActivity) {
@@ -62,6 +54,16 @@ public class FindDepartmentsHandler extends
 		this.spinnerDepartments = spinnerDepartments;
 		this.spinnerDegree = spinnerDegree;
 		this.currentActivity = currentActivity;
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+
+		new ProgressDialog(currentActivity);
+		pd = ProgressDialog.show(currentActivity, context.getResources().getString(R.string.dialog_searching_list_departments),
+				context.getResources().getString(R.string.dialog_loading));
+
 	}
 
 	@Override

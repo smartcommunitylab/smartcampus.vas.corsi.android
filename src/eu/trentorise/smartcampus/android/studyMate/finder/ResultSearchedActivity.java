@@ -45,8 +45,9 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 		course = i.getStringExtra(Constants.COURSE_DEG_SPEC).toLowerCase();
 
 		new ProgressDialog(ResultSearchedActivity.this);
-		pd = ProgressDialog.show(ResultSearchedActivity.this,
-				getResources().getString(R.string.title_activity_result_searched), getResources().getString(R.string.dialog_searching_courses));
+		pd = ProgressDialog.show(ResultSearchedActivity.this, getResources()
+				.getString(R.string.title_activity_result_searched),
+				getResources().getString(R.string.dialog_searching_courses));
 
 		TextView tv = (TextView) findViewById(R.id.textViewDatetimeRow);
 		ListView listView = (ListView) findViewById(R.id.lv_partecipanti_gds);

@@ -71,7 +71,9 @@ public class NoticesActivity extends SherlockFragmentActivity {
 				try {
 
 					pd = ProgressDialog.show(NoticesActivity.this,
-							"Bacheca notifiche", "Caricamento...");
+							getResources()
+									.getString(R.string.notification_name),
+							getResources().getString(R.string.dialog_loading));
 					String type = URLEncoder.encode(source[arg2], "UTF-8");
 					new NotificationHandler(getApplicationContext(),
 							textViewTitleNotices, lvAllNotices, activity,

@@ -142,9 +142,13 @@
     <string name="dialog_error">Ops! C\'è stato un errore...</string>
     <string name="dialog_courses_events">Lista dei corsi registrati agli eventi</string>
     <string name="dialog_list_events">Lista dei tuoi eventi</string>
+    <string name="dialog_list_cds">Lista dei corsi di laurea</string>
     <string name="dialog_not_events">Non ci sono eventi prossimamente</string>
     <string name="dialog_searching_courses">Ricerca dei corsi</string>
-    
+    <string name="dialog_searching_list_departments">Lista dei dipartimenti</string>
+    <string name="dialog_rate_loading_feedback">Caricamento dei dati della tua recensione</string>
+    <string name="dialog_saving_feedback">Salvataggio in corso</string>
+    <string name="dialog_follow_list_courses_career">Lista dei corsi da libretto</string>
     
      <!-- Toasts -->
     <string name="toast_event_added">Evento personale aggiunto</string>
@@ -160,5 +164,18 @@
     <string name="button_cancel">Annulla</string>
     <string name="searchby_all">Tutto</string>
 
+    <!-- feedback -->
+	 <string name="feedback_not_present">Non sono presenti commenti...</string>
+	 <string name="feedback_number_presents">commenti presenti</string>
+	 <string name="feedback_course_information">Informazioni del corso</string>
+	 <string name="feedback_course_is_career">Il corso è da libretto</string>
+	 <string name="feedback_courses_can_review">Corsi che posso votare</string>
+	 <string name="homecourse_description_not_present">Nessuna descrizione trovata</string>
+	 
+	 <!-- Rate -->
+	 <string name="rate_">Caricamento dei dati della tua recensione</string>
+	 
+	 <!-- Notifications -->
+	 <string name="notification_name">Bacheca notifiche</string>
 
 </resources>

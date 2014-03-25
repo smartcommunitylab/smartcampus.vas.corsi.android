@@ -24,6 +24,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class FindCoursesDegreeHandler extends
 		AsyncTask<Void, Void, List<CorsoLaurea>> {
@@ -65,8 +66,8 @@ public class FindCoursesDegreeHandler extends
 		super.onPreExecute();
 
 		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity, "Lista dei corsi di laurea",
-				"Caricamento...");
+		pd = ProgressDialog.show(currentActivity, context.getResources().getString(R.string.dialog_list_cds),
+				context.getResources().getString(R.string.dialog_loading));
 
 	}
 
@@ -129,7 +130,7 @@ public class FindCoursesDegreeHandler extends
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {

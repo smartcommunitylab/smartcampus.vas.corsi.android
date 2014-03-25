@@ -44,14 +44,14 @@ public class FeedbackFragment extends SherlockFragment {
 				.findViewById(R.id.textViewTitleFeedbackCourse);
 		if (FeedbackHandler.feedbackInfoList.get(0).getRating_contenuto() == -1) {
 			Toast.makeText(getSherlockActivity(),
-					"Non sono presenti commenti...", Toast.LENGTH_SHORT).show();
+					getActivity().getResources().getString(R.string.feedback_not_present), Toast.LENGTH_SHORT).show();
 			titleRatingFeedback.setVisibility(View.GONE);
 			return view;
 		} else {
 			List<Commento> comments = FeedbackHandler.feedbackInfoList;
 			if (comments != null) {
 				titleRatingFeedback.setText(comments.size()
-						+ " commenti presenti");
+						+ getActivity().getResources().getString(R.string.feedback_number_presents));
 				ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
 				for (int i = 0; i < comments.size(); i++) {

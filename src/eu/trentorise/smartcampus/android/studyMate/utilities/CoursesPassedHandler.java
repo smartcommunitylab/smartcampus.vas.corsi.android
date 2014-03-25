@@ -23,6 +23,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class CoursesPassedHandler extends
 		AsyncTask<Void, Void, List<CorsoCarriera>> {
@@ -80,7 +81,7 @@ public class CoursesPassedHandler extends
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
 		pd = ProgressDialog.show(currentActivity,
-				"Lista dei corsi da libretto", "Caricamento...");
+				context.getResources().getString(R.string.dialog_follow_list_courses_career), context.getResources().getString(R.string.dialog_loading));
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class CoursesPassedHandler extends
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -96,7 +97,7 @@ public class CoursesPassedHandler extends
 
 			int i = 0;
 			for (CorsoCarriera s : result) {
-				items[i++] = new TitledItem("Corsi che posso votare",
+				items[i++] = new TitledItem(context.getResources().getString(R.string.feedback_courses_can_review),
 						s.getName());
 			}
 

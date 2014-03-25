@@ -133,8 +133,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	@Override
 	protected void onPreExecute() {
 		new ProgressDialog(act);
-		pd = ProgressDialog.show(act, "Informazioni del corso...",
-				"Caricamento...");
+		pd = ProgressDialog.show(act, context.getResources().getString(R.string.feedback_course_information),
+				context.getResources().getString(R.string.dialog_loading));
 
 		super.onPreExecute();
 
@@ -147,24 +147,12 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		new FollowTask().execute();
 		if (commenti == null) {
 
-			Toast.makeText(context, "Ops! C'e' stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 
 			pd.dismiss();
 			act.finish();
 		} else {
-			// prendo studente/me e lo assegno a stud
-			// se il corso corrente fa parte dei corsi che seguo lo setto on
-			// swichFollow.setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			//
-			// new SetCourseAsFollowHandler(context, swichFollow,
-			// txtMonitor).execute(corsoInfo);
-			// }
-			//
-			// });
 
 			Collections.reverse(commenti);
 			feedbackInfoList = commenti;
@@ -276,7 +264,7 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				return;
 			} else {
 				if (cI.isCorsoCarriera()) {
-					Toast.makeText(context, "Il corso è da libretto",
+					Toast.makeText(context, context.getResources().getString(R.string.feedback_course_is_career),
 							Toast.LENGTH_SHORT).show();
 					swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 				} else {
