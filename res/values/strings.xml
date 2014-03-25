@@ -175,6 +175,7 @@
 	 <!-- Rate -->
 	 <string name="rate_review_course">Valuta il corso!</string>
 	 <string name="rate_insert_review">Inserisci il tuo commento...</string>
+	 <string name="rate_review_added">Valutazione aggiunta!</string>
 	 
 	 <!-- Notifications -->
 	 <string name="notification_name">Bacheca notifiche</string>

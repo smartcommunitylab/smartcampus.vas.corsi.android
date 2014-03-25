@@ -19,6 +19,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 
@@ -88,11 +89,11 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 		super.onPostExecute(result);
 
 		if (result.equals(true)) {
-			Toast.makeText(context, "Voto Aggiunto!", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.rate_review_added), Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(
 					context,
-					"Ops! c'è stato un errore. La tua valutazione non è stata salvata",
+					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_LONG).show();
 		}
 		AddRatingFromCoursesPassed.pd.dismiss();

@@ -173,6 +173,7 @@
 		 <!-- Rate -->
 	 <string name="rate_review_course">Rate the course!</string>
 	 <string name="rate_insert_review">Please enter your comment ...</string>
+	 <string name="rate_review_added">Review added!</string>
 	
 	<string name="homecourse_description_not_present">No description found</string>
 	
