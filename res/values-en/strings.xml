@@ -179,4 +179,7 @@
 	<!-- Notifications -->
 	<string name="notification_name">Wall notifications</string>
 	
+	<!-- Event -->
+	 <string name="event_change_success">Event successfully updated</string>
+	
 </resources>

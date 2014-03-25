@@ -178,5 +178,8 @@
 	 
 	 <!-- Notifications -->
 	 <string name="notification_name">Bacheca notifiche</string>
+	 
+	 <!-- Event -->
+	 <string name="event_change_success">Evento modificato con successo</string>
 
 </resources>

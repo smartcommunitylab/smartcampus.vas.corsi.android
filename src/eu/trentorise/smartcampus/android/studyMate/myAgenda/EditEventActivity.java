@@ -68,6 +68,10 @@ public class EditEventActivity extends SherlockFragment {
 	private EditText description;
 	private EventoId eId;
 	private Date date;
+	
+	private long dateInitial;
+	private long timeFromInitial;
+	private long timeToInitial;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +79,9 @@ public class EditEventActivity extends SherlockFragment {
 		fview = inflater.inflate(R.layout.activity_add_event_4_course,
 				container, false);
 		evento = (Evento) getArguments().getSerializable("eventSelectedEdit");
+		dateInitial = evento.getEventoId().getDate().getTime();
+		timeFromInitial = evento.getEventoId().getStart().getTime();
+		timeToInitial = evento.getEventoId().getStop().getTime();
 		return fview;
 	}
 
@@ -149,10 +156,12 @@ public class EditEventActivity extends SherlockFragment {
 				eventoModificato.setType(title.getText().toString());
 				eventoModificato.setPersonalDescription(description.getText()
 						.toString());
-				eId.setDate(date);
+				long dateR = 10000*(date.getTime()/10000);
+				eId.setStart(new Time(hour,minute,0));
+				eId.setStop(new Time(hour,minute,0));
+				eId.setDate(new Date(dateR));
 				eventoModificato.setEventoId(eId);
-				new ChangeEvent(evento, getActivity(), eventoModificato)
-						.execute();
+				new ChangeEvent(getActivity()).execute();
 				getActivity().onBackPressed();
 			}
 		});
@@ -217,6 +226,9 @@ public class EditEventActivity extends SherlockFragment {
 			date.setMonth(month);
 			date.setDate(day);
 
+			eId.setDate(date);
+
+			eventoModificato.setEventoId(eId);
 		}
 
 	}
@@ -247,8 +259,8 @@ public class EditEventActivity extends SherlockFragment {
 						.setText(hourOfDay + ":" + minute);
 
 			}
-			eId.setStart(new Time(hourOfDay, minute, 0));
-			eId.setStop(new Time(hourOfDay, minute, 0));
+			hour = hourOfDay;
+			EditEventActivity.this.minute = minute;
 		}
 	}
 
@@ -256,18 +268,15 @@ public class EditEventActivity extends SherlockFragment {
 
 		public ProgressDialog pd;
 		public ProtocolCarrier mProtocolCarrier;
-		Evento ev;
-		Evento evModificato;
 		private Context context;
 
-		public ChangeEvent(Evento ev, Context context, Evento evModificato) {
+		public ChangeEvent(Context context) {
 			this.context = context;
-			this.ev = ev;
-			this.evModificato = evModificato;
 		}
 
 		@Override
 		protected void onPreExecute() {
+			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(getActivity());
 			pd = ProgressDialog.show(getActivity(),
@@ -275,7 +284,7 @@ public class EditEventActivity extends SherlockFragment {
 					"Caricamento...");
 		}
 
-		private boolean changeEvent(Evento ev, long date, long from, long to) {
+		private boolean changeEvent(long date, long from, long to) {
 			mProtocolCarrier = new ProtocolCarrier(context,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -287,8 +296,9 @@ public class EditEventActivity extends SherlockFragment {
 
 			MessageResponse response;
 			try {
-				String evJSON = Utils.convertToJSON(evModificato);
+				String evJSON = Utils.convertToJSON(eventoModificato);
 				request.setBody(evJSON);
+				System.out.println(evJSON);
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
 								MyUniActivity.getAuthToken());
@@ -321,9 +331,7 @@ public class EditEventActivity extends SherlockFragment {
 
 		@Override
 		protected Boolean doInBackground(Evento... params) {
-			return changeEvent(ev, ev.getEventoId().getDate().getTime(), ev
-					.getEventoId().getStart().getTime(), ev.getEventoId()
-					.getStop().getTime());
+			return changeEvent(dateInitial, timeFromInitial, timeToInitial);
 		}
 
 		@Override
@@ -331,12 +339,12 @@ public class EditEventActivity extends SherlockFragment {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)
-				Toast.makeText(getSherlockActivity(),
-						"Evento modificato con successo", Toast.LENGTH_SHORT)
+				Toast.makeText(context,
+						context.getResources().getString(R.string.event_change_success), Toast.LENGTH_SHORT)
 						.show();
 			else
-				Toast.makeText(getSherlockActivity(),
-						"Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT)
+				Toast.makeText(context,
+						context.getResources().getString(R.string.dialog_error), Toast.LENGTH_SHORT)
 						.show();
 		}
 
