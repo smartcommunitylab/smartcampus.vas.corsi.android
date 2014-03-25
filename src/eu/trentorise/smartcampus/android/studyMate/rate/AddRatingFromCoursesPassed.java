@@ -60,8 +60,10 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		CorsoName = intent.getStringExtra(Constants.COURSE_NAME);
 		setTitle(CorsoName);
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
-		pd = ProgressDialog.show(AddRatingFromCoursesPassed.this,
-				"Caricamento dei dati della tua recensione", "Caricamento...");
+		pd = ProgressDialog
+				.show(AddRatingFromCoursesPassed.this, getResources()
+						.getString(R.string.dialog_rate_loading_feedback),
+						getResources().getString(R.string.dialog_loading));
 
 		new LoaderFeedbackData(AddRatingFromCoursesPassed.this).execute();
 	}
@@ -295,7 +297,10 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 							new ProgressDialog(AddRatingFromCoursesPassed.this);
 							pd = ProgressDialog.show(
 									AddRatingFromCoursesPassed.this,
-									"Salvataggio...", "Caricamento...");
+									getResources().getString(
+											R.string.dialog_saving_feedback),
+									getResources().getString(
+											R.string.dialog_loading));
 							new AddFeedbackHandler(
 									AddRatingFromCoursesPassed.this,
 									AddRatingFromCoursesPassed.this)

@@ -102,7 +102,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 				})
 
 		// Button Cancel
-				.setNegativeButton("Cancel",
+				.setNegativeButton(
+						getResources().getString(R.id.button_annulla),
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								dialog.cancel();
@@ -170,7 +171,6 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -184,7 +184,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 			if (isPassed == null) {
 				Toast toast = Toast.makeText(FindHomeCourseActivity.this,
-						"Ops. C'è stato un errore", Toast.LENGTH_LONG);
+						getResources().getString(R.string.dialog_error),
+						Toast.LENGTH_LONG);
 				toast.show();
 				return;
 			}

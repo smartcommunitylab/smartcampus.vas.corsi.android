@@ -42,6 +42,8 @@ public class CoursesHandlerLite extends
 	ListView listView;
 	TextView tvTitleNotices;
 	Activity currentAct;
+	private TextView labelDepartment; 
+	private TextView labelCourseDegree; 
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
@@ -164,11 +166,11 @@ public class CoursesHandlerLite extends
 	@Override
 	protected List<AttivitaDidattica> doInBackground(Void... params) {
 
-		if (department.getDescription().contains("Tutto")) {
+		if (department.getDescription().contains(context.getResources().getString(R.string.searchby_all))) {
 			return getAllCourses();
 
 		} else {
-			if (degree.getDescripion().equals("Tutto")) {
+			if (degree.getDescripion().equals(context.getResources().getString(R.string.searchby_all))) {
 				return getAllCoursesOfDepartment(department);
 			} else {
 				return getAllCoursesOfFaculty(degree);
@@ -217,40 +219,48 @@ public class CoursesHandlerLite extends
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		if (course.equals("")) {
-			if (department.equals("Tutto"))
-				tvTitleNotices.setText(tvTitleNotices.getText() + "Tutto");
-			else if (degree.equals("Tutto"))
-				tvTitleNotices.setText(tvTitleNotices.getText()
-						+ " Dipartimento di "
-						+ department.getDescription().toString());
-			else
-				tvTitleNotices.setText(tvTitleNotices.getText()
-						+ " Dipartimento di "
-						+ department.getDescription().toString()
-						+ ", corso di laurea in " + degree.getDescripion());
-		} else {
-			if (department.equals("Tutto")) {
-				if (degree.equals("Tutto"))
-					tvTitleNotices.setText(tvTitleNotices.getText() + " "
-							+ course.toString());
-				else
-					tvTitleNotices.setText(tvTitleNotices.getText() + " "
-							+ course.toString() + " del corso di laurea in "
-							+ degree.getDescripion());
-			} else {
-				if (degree.equals("Tutto"))
-					tvTitleNotices.setText(tvTitleNotices.getText() + " "
-							+ course.toString() + " del dipartimento di "
-							+ department.getDescription().toString());
-				else
-					tvTitleNotices.setText(tvTitleNotices.getText() + " "
-							+ course.toString() + " del dipartimento di "
-							+ department.getDescription().toString()
-							+ ", corso di laurea in " + degree.getDescripion());
-			}
-
-		}
+//		if (course.equals("")) {
+//			if (department.equals(context.getResources().getString(R.string.searchby_all)))
+//				tvTitleNotices.setText(tvTitleNotices.getText() + context.getResources().getString(R.string.searchby_all));
+//			else if (degree.equals(context.getResources().getString(R.string.searchby_all)))
+//				tvTitleNotices.setText(tvTitleNotices.getText()
+//						+ " Dipartimento di "
+//						+ department.getDescription().toString());
+//			else
+//				tvTitleNotices.setText(tvTitleNotices.getText()
+//						+ " Dipartimento di "
+//						+ department.getDescription().toString()
+//						+ ", corso di laurea in " + degree.getDescripion());
+//		} else {
+//			if (department.equals(context.getResources().getString(R.string.searchby_all))) {
+//				if (degree.equals(context.getResources().getString(R.string.searchby_all)))
+//					tvTitleNotices.setText(tvTitleNotices.getText() + " "
+//							+ course.toString());
+//				else
+//					tvTitleNotices.setText(tvTitleNotices.getText() + " "
+//							+ course.toString() + " del corso di laurea in "
+//							+ degree.getDescripion());
+//			} else {
+//				if (degree.equals("Tutto"))
+//					tvTitleNotices.setText(tvTitleNotices.getText() + " "
+//							+ course.toString() + " del dipartimento di "
+//							+ department.getDescription().toString());
+//				else
+//					tvTitleNotices.setText(tvTitleNotices.getText() + " "
+//							+ course.toString() + " del dipartimento di "
+//							+ department.getDescription().toString()
+//							+ ", corso di laurea in " + degree.getDescripion());
+//			}
+//
+//		}
+		
+		labelDepartment = (TextView) currentAct.findViewById(R.id.textViewDepartmentSearched);
+		labelCourseDegree = (TextView) currentAct.findViewById(R.id.textViewCourseDegreeSearched);
+		
+		labelDepartment.setText(labelDepartment.getText() +": "+ department.getDescription().toString());
+		labelCourseDegree.setText(labelCourseDegree.getText() +": "+ degree.getDescripion().toString());
+		
+		
 	}
 
 	@Override

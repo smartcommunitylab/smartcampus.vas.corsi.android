@@ -58,7 +58,6 @@ public class PostEvent extends AsyncTask<Void, Void, Evento> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -135,16 +135,12 @@ public class DettailOfEventFragment extends SherlockFragment {
 			Fragment fragment = new EditEventActivity();
 			fragment.setArguments(data);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(this.getId(), fragment);
-			ft.addToBackStack(null);
+			ft.replace(getId(), fragment, getTag());
+			ft.addToBackStack(getTag());
 			ft.commit();
 			return true;
 		case R.id.menu_delete_event:
 			new DeleteEvent(eventSelected).execute();
-
-			// Toast.makeText(getSherlockActivity(),
-			// "L'evento verrà eliminato a breve..", Toast.LENGTH_SHORT)
-			// .show();
 			return true;
 		default:
 			break;

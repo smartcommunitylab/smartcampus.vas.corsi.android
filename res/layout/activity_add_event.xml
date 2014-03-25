@@ -21,7 +21,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="@dimen/activity_vertical_margin"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="Titolo"
+                android:text="@string/addevent_title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/activity_vertical_margin"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="Descrizione"
+                android:text="@string/addevent_description"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -128,14 +128,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancel" />
+                    android:text="@string/button_cancel" />
 
                 <Button
                     android:id="@+id/button_ok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="OK" />
+                    android:text="Ok" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

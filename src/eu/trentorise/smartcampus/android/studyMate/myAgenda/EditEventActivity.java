@@ -56,14 +56,12 @@ public class EditEventActivity extends SherlockFragment {
 	private int hour;
 	private int minute;
 
-	// private TextView mDateDisplay;
 	private EditText mPickDate;
 	private EditText mPickTime;
 	static final int DATE_DIALOG_ID = 0;
 
 	private Evento eventoModificato;
 	private Evento evento;
-	// public CorsoCarriera courseSelected;
 	Spinner coursesSpinner;
 	String cN;
 	private EditText title;
@@ -71,7 +69,6 @@ public class EditEventActivity extends SherlockFragment {
 	private EventoId eId;
 	private Date date;
 
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -92,23 +89,21 @@ public class EditEventActivity extends SherlockFragment {
 		mPickDate = (EditText) fview
 				.findViewById(R.id.myDatePickerButton4Course);
 		mPickDate.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showDatePickerDialog(fview);
-				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		mPickTime = (EditText) fview
 				.findViewById(R.id.myTimePickerButton4Course);
 		mPickTime.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showTimePickerDialog(fview);
-				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		// get the ex date of previous event
@@ -187,12 +182,14 @@ public class EditEventActivity extends SherlockFragment {
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"datePicker");
 	}
 
 	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+		newFragment.show(getActivity().getSupportFragmentManager(),
+				"timePicker");
 	}
 
 	public class DatePickerFragment extends DialogFragment implements
@@ -334,11 +331,13 @@ public class EditEventActivity extends SherlockFragment {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)
-				Toast.makeText(getSherlockActivity(), "Evento modificato con successo",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getSherlockActivity(),
+						"Evento modificato con successo", Toast.LENGTH_SHORT)
+						.show();
 			else
-				Toast.makeText(getSherlockActivity(), "Ops! Qualcosa è andato storto.",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getSherlockActivity(),
+						"Ops! Qualcosa è andato storto.", Toast.LENGTH_SHORT)
+						.show();
 		}
 
 	}

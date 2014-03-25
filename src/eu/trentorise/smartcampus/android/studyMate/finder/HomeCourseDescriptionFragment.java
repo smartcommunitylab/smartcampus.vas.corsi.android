@@ -46,7 +46,6 @@ public class HomeCourseDescriptionFragment extends SherlockFragment {
 				getSherlockActivity(), FindHomeCourseActivity.idCorso, act,
 				ratingAverage, descriptionCourse, switchFollow, txtMonitor)
 				.execute();
-
 		super.onStart();
 	}
 

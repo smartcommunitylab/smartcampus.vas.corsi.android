@@ -47,10 +47,10 @@ public class EventItem extends EventItem4Adapter {
 	public String getRoom() {
 		return object.getRoom();
 	}
-	
-	public String convertToDayOfWeek(int day){
+
+	public String convertToDayOfWeek(int day) {
 		String dayOfWeek = new String();
-		
+
 		switch (day) {
 		case 1:
 			dayOfWeek = res.getString(R.string.Sunday);
@@ -77,15 +77,15 @@ public class EventItem extends EventItem4Adapter {
 		default:
 			break;
 		}
-		
+
 		return dayOfWeek;
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		super.toString();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		return day+" - "+dateFormat.format(object.getDate());
+		return day + " - " + dateFormat.format(object.getDate());
 	}
 }

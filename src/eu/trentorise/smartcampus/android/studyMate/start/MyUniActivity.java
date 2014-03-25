@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -89,7 +88,8 @@ public class MyUniActivity extends SherlockActivity {
 		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Coming Soon...",
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.dialog_coming_soon),
 						Toast.LENGTH_SHORT).show();
 				// Intent intent = new Intent(MyUniActivity.this,
 				// PHLActivity.class);
@@ -151,9 +151,9 @@ public class MyUniActivity extends SherlockActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			pd = ProgressDialog.show(MyUniActivity.this,
-					"Sincronizzazione dei tuoi dati in corso.",
-					"Caricamento...");
+			pd = ProgressDialog.show(MyUniActivity.this, getResources()
+					.getString(R.string.dialog_sync_data), getResources()
+					.getString(R.string.dialog_loading));
 		}
 
 		@Override
@@ -190,8 +190,8 @@ public class MyUniActivity extends SherlockActivity {
 							// il body corrisponde al jsonstudente!! allora lo
 							// facciamo vedere XD
 							body = response.getBody();
-							String jsonstudente = body;
-							save("studenteSessioneJSON", jsonstudente);
+							// String jsonstudente = body;
+							// save("studenteSessioneJSON", jsonstudente);
 						} else {
 							return null;
 						}
@@ -221,7 +221,7 @@ public class MyUniActivity extends SherlockActivity {
 
 							body = response1.getBody();
 							String jsoncorsidellostudente = body;
-							save("corsiStudente", jsoncorsidellostudente);
+							// save("corsiStudente", jsoncorsidellostudente);
 							corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
 									.convertJSONToObjects(
 											jsoncorsidellostudente,
@@ -291,13 +291,13 @@ public class MyUniActivity extends SherlockActivity {
 			pd.dismiss();
 		}
 
-		private void save(String key, String jsonTosaveinSharedP) {
-			SharedPreferences sharedPreferences = MyUniActivity.this
-					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			SharedPreferences.Editor editor = sharedPreferences.edit();
-			editor.putString(key, jsonTosaveinSharedP);
-			editor.commit();
-		}
+		// private void save(String key, String jsonTosaveinSharedP) {
+		// SharedPreferences sharedPreferences = MyUniActivity.this
+		// .getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+		// SharedPreferences.Editor editor = sharedPreferences.edit();
+		// editor.putString(key, jsonTosaveinSharedP);
+		// editor.commit();
+		// }
 	}
 
 }

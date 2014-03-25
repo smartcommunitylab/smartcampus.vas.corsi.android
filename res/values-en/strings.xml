@@ -51,6 +51,7 @@
     <string name="title_activity_my_agenda">Agenda</string>
     <string name="title_activity_phl">PHL</string>
     <string name="title_activity_find_courses">Search courses</string>
+    <string name="title_activity_result_searched">Search Results</string>
     <string name="tab_overview">Overview</string>
     <string name="tab_courses">Courses</string>
     <string name="tab_home">HOME</string>
@@ -99,6 +100,7 @@
     <string name="textview_description_label">Description:</string>
     <string name="add_rating_feedback_button">Add a review</string>
     <string name="label_title_description_course">Description</string>
+    <string name="dialog_list_cds">List of courses degree</string>
     <string name="label_txtMonitor_on">Notifications active</string>
     <string name="label_txtMonitor_off">Notifications inactive</string>
     <string name="rating_context_contenuti">Contents</string>
@@ -128,5 +130,53 @@
     <string name="Friday">Friday</string>
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
-
+    
+    <string name="header_course_career">Courses in career</string>
+    <string name="header_course_interest">Courses of interest</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_coming_soon">Coming Soon...</string>
+    <string name="dialog_sync_data">Synchronizing personal data</string>
+    <string name="dialog_loading">Loading...</string>
+    <string name="dialog_error">Oops! There was an error...</string>
+    <string name="dialog_courses_events">List of courses register for events</string>
+    <string name="dialog_list_events">List of your events</string>
+    <string name="dialog_not_events">There are no events coming soon</string>
+    <string name="dialog_searching_courses">Searching courses</string>
+    <string name="dialog_searching_list_departments">List of departments</string>
+    <string name="dialog_rate_loading_feedback">Loading data of your review</string>
+    <string name="dialog_saving_feedback">Saving</string>
+    <string name="dialog_follow_list_courses_career">List of courses booklet</string>
+    
+    <!-- Toasts -->
+    <string name="toast_event_added">Personal event added</string>
+    
+    
+    <!-- add event -->
+    <string name="addevent_title">Title</string>
+    <string name="addevent_courses">Courses</string>
+    <string name="addevent_date">Date</string>
+    <string name="addevent_Time">Time</string>
+    <string name="addevent_description">Description</string>
+    
+    <string name="button_cancel">Cancel</string>
+    <string name="searchby_all">All</string>
+    
+    
+    <!-- feedback -->
+	<string name="feedback_not_present">There are no comments...</string>
+	<string name="feedback_number_presents">comments found</string>
+	<string name="feedback_course_information">Course information</string>
+	<string name="feedback_course_is_career">The course is from the booklet</string>
+	<string name="feedback_courses_can_review">Courses that I can review</string>
+	
+		 <!-- Rate -->
+	 <string name="rate_review_course">Rate the course!</string>
+	 <string name="rate_insert_review">Please enter your comment ...</string>
+	
+	<string name="homecourse_description_not_present">No description found</string>
+	
+	<!-- Notifications -->
+	<string name="notification_name">Wall notifications</string>
+	
 </resources>

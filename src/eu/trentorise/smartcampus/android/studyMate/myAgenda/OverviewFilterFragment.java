@@ -30,7 +30,6 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 
-	// public CorsoCarriera courseSelected;
 	public List<Evento> listaEventiFiltrati = null;
 	public static String nomeCorsoOW;
 	private CorsoCarriera cc;
@@ -93,8 +92,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 					Fragment fragment = new DettailOfEventFragment();
 					fragment.setArguments(arguments);
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(R.id.tabCorsi, fragment);
-					ft.addToBackStack(null);
+					ft.replace(getId(), fragment, getTag());
+					ft.addToBackStack(getTag());
 					ft.commit();
 				}
 
@@ -104,8 +103,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	// filtro gli eventi in base al corso che ho selezionato
 	private List<Evento> filterEventsbyCourse() {
-		// new EventsHandler(getSherlockActivity().getApplicationContext(),
-		// getActivity()).execute();
+		;
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 
 		try {
@@ -116,10 +114,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 				}
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -129,7 +125,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		menu.clear();
 		inflater.inflate(R.menu.add_event, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -137,7 +132,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 
 		case R.id.menu_add_event_4_course:
@@ -148,14 +142,14 @@ public class OverviewFilterFragment extends SherlockFragment {
 			Fragment fragment = new AddEvent4coursesActivity();
 			fragment.setArguments(data);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(this.getId(), fragment);
-			ft.addToBackStack(null);
+			ft.replace(getId(), fragment, getTag());
+			ft.addToBackStack(getTag());
 			ft.commit();
 			return true;
 		default:
 			break;
 		}
-		return false;// super.onOptionsItemSelected(item);
+		return false;
 	}
 
 }
