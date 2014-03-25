@@ -34,7 +34,7 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class AddEvent4coursesActivity extends SherlockFragment {
+public class AddEvent4coursesFragment extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;

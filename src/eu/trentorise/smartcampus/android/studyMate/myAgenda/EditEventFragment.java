@@ -46,7 +46,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class EditEventActivity extends SherlockFragment {
+public class EditEventFragment extends SherlockFragment {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -260,7 +260,7 @@ public class EditEventActivity extends SherlockFragment {
 
 			}
 			hour = hourOfDay;
-			EditEventActivity.this.minute = minute;
+			EditEventFragment.this.minute = minute;
 		}
 	}
 

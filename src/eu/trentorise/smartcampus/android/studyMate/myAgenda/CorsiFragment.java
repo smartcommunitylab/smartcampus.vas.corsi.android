@@ -55,7 +55,7 @@ public class CorsiFragment extends SherlockFragment {
 		case R.id.add_event:
 			FragmentTransaction ft = getSherlockActivity()
 					.getSupportFragmentManager().beginTransaction();
-			Fragment fragment = new AddEventActivity();
+			Fragment fragment = new AddEventFragment();
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(getId(), fragment, getTag());
 			ft.addToBackStack(getTag());

@@ -174,7 +174,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 			data.putSerializable(Constants.CC_SELECTED, cc);
 			FragmentTransaction ft = getSherlockActivity()
 					.getSupportFragmentManager().beginTransaction();
-			Fragment fragment = new AddEvent4coursesActivity();
+			Fragment fragment = new AddEvent4coursesFragment();
 			fragment.setArguments(data);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			ft.replace(getId(), fragment, getTag());
