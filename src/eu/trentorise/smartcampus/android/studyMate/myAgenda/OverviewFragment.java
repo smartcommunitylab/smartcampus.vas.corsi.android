@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -64,55 +66,89 @@ public class OverviewFragment extends SherlockFragment {
 								R.string.dialog_loading));
 
 		listaEventi = new ArrayList<Evento>();
-		listaEventi = getEvents();
+		
+		AsyncTask<Void, Void, Void> taskEvents = new AsyncTask<Void, Void, Void>() {
 
-		EventItem[] listEvItem = new EventItem[listaEventi.size()];
-		if (listaEventi.size() == 0) {
-			Toast.makeText(
-					getSherlockActivity(),
-					getActivity().getResources().getString(
-							R.string.dialog_not_events), Toast.LENGTH_SHORT)
-					.show();
-		} else {
-			int i = 0;
+			@Override
+			protected Void doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				try {
+					listaEventi = new EventsHandler(getSherlockActivity()
+							.getApplicationContext(), getActivity()).execute().get();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+				
+			}
+			
+			@Override
+			protected void onPostExecute(Void result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+				
+				OverviewFragment.pd.dismiss();
+				
+				EventItem[] listEvItem = new EventItem[listaEventi.size()];
+				if (listaEventi.size() == 0) {
+					Toast.makeText(
+							getSherlockActivity(),
+							getActivity().getResources().getString(
+									R.string.dialog_not_events), Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					int i = 0;
 
-			for (Evento ev : listaEventi) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev
-						.getEventoId().getStart().toString(), ev.getRoom());
-				listEvItem[i++] = new EventItem(e, getActivity().getResources());
+					for (Evento ev : listaEventi) {
+						AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+								.getDate(), ev.getTitle(), ev.getType(), ev
+								.getEventoId().getStart().toString(), ev.getRoom());
+						listEvItem[i++] = new EventItem(e, getActivity().getResources());
 
+					}
+
+					EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+							listEvItem);
+					ListView listView = (ListView) getSherlockActivity().findViewById(
+							R.id.listViewEventi);
+					listView.setAdapter(adapter);
+
+					listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int arg2, long arg3) {
+							getSherlockActivity().supportInvalidateOptionsMenu();
+
+							Evento evento = listaEventi.get(arg2);
+
+							// Pass Data to other Fragment
+							Bundle arguments = new Bundle();
+							arguments.putSerializable(Constants.SELECTED_EVENT, evento);
+							FragmentTransaction ft = getSherlockActivity()
+									.getSupportFragmentManager().beginTransaction();
+							Fragment fragment = new DettailOfEventFragment();
+							fragment.setArguments(arguments);
+							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+							ft.replace(getId(), fragment, getTag());
+							ft.addToBackStack(getTag());
+							ft.commit();
+						}
+					});
+				}
 			}
 
-			EventAdapter adapter = new EventAdapter(getSherlockActivity(),
-					listEvItem);
-			ListView listView = (ListView) getSherlockActivity().findViewById(
-					R.id.listViewEventi);
-			listView.setAdapter(adapter);
-
-			listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					getSherlockActivity().supportInvalidateOptionsMenu();
-
-					Evento evento = listaEventi.get(arg2);
-
-					// Pass Data to other Fragment
-					Bundle arguments = new Bundle();
-					arguments.putSerializable(Constants.SELECTED_EVENT, evento);
-					FragmentTransaction ft = getSherlockActivity()
-							.getSupportFragmentManager().beginTransaction();
-					Fragment fragment = new DettailOfEventFragment();
-					fragment.setArguments(arguments);
-					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(getId(), fragment, getTag());
-					ft.addToBackStack(getTag());
-					ft.commit();
-				}
-			});
-		}
+		};
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			taskEvents.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+		else
+			taskEvents.execute((Void[])null);
+		
 	}
 
 	@Override
@@ -142,24 +178,6 @@ public class OverviewFragment extends SherlockFragment {
 			break;
 		}
 		return false;
-	}
-
-	private List<Evento> getEvents() {
-		List<Evento> eventi = new ArrayList<Evento>();
-
-		try {
-			for (Evento evento : new EventsHandler(getSherlockActivity()
-					.getApplicationContext(), getActivity()).execute().get()) {
-				eventi.add(evento);
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-
-		return eventi;
-
 	}
 
 }

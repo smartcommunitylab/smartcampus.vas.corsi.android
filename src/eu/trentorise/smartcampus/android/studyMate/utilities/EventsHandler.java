@@ -19,6 +19,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 
@@ -91,12 +92,10 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		listaEventi = result;
 		if (result == null) {
 
-			Toast.makeText(context, "Ops! C'è stato un errore...",
+			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
-		} else {
-			OverviewFragment.pd.dismiss();
-		}
+		} 
 	}
 
 	public class CustomComparator implements Comparator<Evento> {
