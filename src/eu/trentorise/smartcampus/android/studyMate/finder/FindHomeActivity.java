@@ -117,13 +117,11 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void afterTextChanged(Editable arg0) {
-
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-
 	}
 
 	@Override

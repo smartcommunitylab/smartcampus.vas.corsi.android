@@ -53,7 +53,6 @@ public class ResultSearchedActivity extends SherlockFragmentActivity {
 		ListView listView = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
 		// get data from web service
-
 		new CoursesHandlerLite(getApplicationContext(), depSelected,
 				courseDegreeSelected, course, listView, tv, this).execute();
 

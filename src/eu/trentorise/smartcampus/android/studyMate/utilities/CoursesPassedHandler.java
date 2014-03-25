@@ -80,8 +80,9 @@ public class CoursesPassedHandler extends
 	protected void onPreExecute() {
 		super.onPreExecute();
 		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity,
-				context.getResources().getString(R.string.dialog_follow_list_courses_career), context.getResources().getString(R.string.dialog_loading));
+		pd = ProgressDialog.show(currentActivity, context.getResources()
+				.getString(R.string.dialog_follow_list_courses_career), context
+				.getResources().getString(R.string.dialog_loading));
 	}
 
 	@Override
@@ -89,7 +90,8 @@ public class CoursesPassedHandler extends
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
+			Toast.makeText(context,
+					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
@@ -97,8 +99,8 @@ public class CoursesPassedHandler extends
 
 			int i = 0;
 			for (CorsoCarriera s : result) {
-				items[i++] = new TitledItem(context.getResources().getString(R.string.feedback_courses_can_review),
-						s.getName());
+				items[i++] = new TitledItem(context.getResources().getString(
+						R.string.feedback_courses_can_review), s.getName());
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);

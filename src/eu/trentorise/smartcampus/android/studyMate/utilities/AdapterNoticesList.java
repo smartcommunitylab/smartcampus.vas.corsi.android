@@ -54,26 +54,10 @@ public class AdapterNoticesList extends ArrayAdapter<Notification> {
 		title.setText(item.getTitle());
 		date.setText(dateString + " (" + item.getType() + ")");
 		content.setText(item.getDescription());
-		// Notification prev = null;
-		// if (position > 0)
-		// prev = getItem(position - 1);
-		//
-		// if (prev == null || !(prev.getTitle().equals(item.getTitle()))) {
-		// date.setVisibility(View.VISIBLE);
-		// } else {
-		// date.setVisibility(View.GONE);
-		// }
-		//
 		if (item.getDescription().equals(""))
 			content.setVisibility(View.GONE);
 		else {
 			content.setVisibility(View.VISIBLE);
-			// content.setPadding(
-			// (int) context.getResources().getDimension(
-			// R.dimen.activity_horizontal_margin),
-			// 0,
-			// (int) context.getResources().getDimension(
-			// R.dimen.activity_horizontal_margin), 0);
 		}
 
 		if (item.getTitle().equals(""))

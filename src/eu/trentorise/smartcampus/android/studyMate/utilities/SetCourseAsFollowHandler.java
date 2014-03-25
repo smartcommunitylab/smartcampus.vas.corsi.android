@@ -69,7 +69,6 @@ public class SetCourseAsFollowHandler extends
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

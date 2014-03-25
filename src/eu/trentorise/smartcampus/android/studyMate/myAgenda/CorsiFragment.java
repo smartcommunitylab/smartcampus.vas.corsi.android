@@ -36,14 +36,13 @@ public class CorsiFragment extends SherlockFragment {
 
 		Bundle arguments = new Bundle();
 		CoursesHandler handlerPersonalCourses = new CoursesHandler(
-				getActivity().getApplicationContext(), listViewCorsi,
-				getActivity(), getSherlockActivity());
+				getActivity().getApplicationContext(), listViewCorsi, this,
+				getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		menu.clear();
 		inflater.inflate(R.menu.agenda, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -51,7 +50,6 @@ public class CorsiFragment extends SherlockFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 
 		case R.id.add_event:
@@ -59,8 +57,8 @@ public class CorsiFragment extends SherlockFragment {
 					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new AddEventActivity();
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(this.getId(), fragment);
-			ft.addToBackStack(null);
+			ft.replace(getId(), fragment, getTag());
+			ft.addToBackStack(getTag());
 			ft.commit();
 			return true;
 		default:
@@ -68,10 +66,4 @@ public class CorsiFragment extends SherlockFragment {
 		}
 		return false;
 	}
-
-	// public static void clearBackStack(FragmentManager manager){
-	// int rootFragment = manager.getBackStackEntryAt(0).getId();
-	// manager.popBackStack(rootFragment,
-	// FragmentManager.POP_BACK_STACK_INCLUSIVE);
-	// }
 }

@@ -51,32 +51,28 @@ public class OverviewFragment extends SherlockFragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
 
 		new ProgressDialog(getActivity());
-		OverviewFragment.pd = ProgressDialog.show(getActivity(),
-				getActivity().getResources().getString(R.string.dialog_list_events), getActivity().getResources().getString(R.string.dialog_loading));
-
-		// getSherlockActivity().supportInvalidateOptionsMenu();
-
-		// new ProgressDialog(getActivity());
-		// OverviewFragment.pd = ProgressDialog.show(getActivity(),
-		// "Lista degli eventi personali", "Caricamento...");
-
-		// eventsHandler = new EventsHandler(
-		// getActivity().getApplicationContext(), getActivity());
-		// eventsHandler.execute();
+		OverviewFragment.pd = ProgressDialog
+				.show(getActivity(),
+						getActivity().getResources().getString(
+								R.string.dialog_list_events),
+						getActivity().getResources().getString(
+								R.string.dialog_loading));
 
 		listaEventi = new ArrayList<Evento>();
 		listaEventi = getEvents();
 
 		EventItem[] listEvItem = new EventItem[listaEventi.size()];
 		if (listaEventi.size() == 0) {
-			Toast.makeText(getSherlockActivity(),
-					getActivity().getResources().getString(R.string.dialog_not_events), Toast.LENGTH_SHORT).show();
+			Toast.makeText(
+					getSherlockActivity(),
+					getActivity().getResources().getString(
+							R.string.dialog_not_events), Toast.LENGTH_SHORT)
+					.show();
 		} else {
 			int i = 0;
 
@@ -111,20 +107,16 @@ public class OverviewFragment extends SherlockFragment {
 					Fragment fragment = new DettailOfEventFragment();
 					fragment.setArguments(arguments);
 					ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					ft.replace(getId(), fragment);
-					ft.addToBackStack(null);
+					ft.replace(getId(), fragment, getTag());
+					ft.addToBackStack(getTag());
 					ft.commit();
 				}
 			});
 		}
-		eventsHandler = new EventsHandler(
-				getActivity().getApplicationContext(), getActivity());
-		eventsHandler.execute();
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		menu.clear();
 		inflater.inflate(R.menu.agenda, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -141,15 +133,15 @@ public class OverviewFragment extends SherlockFragment {
 					.getSupportFragmentManager().beginTransaction();
 			Fragment fragment = new AddEventActivity();
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(this.getId(), fragment);
-			ft.addToBackStack(null);
+			ft.replace(getId(), fragment, getTag());
+			ft.addToBackStack(getTag());
 			ft.commit();
 
 			return true;
 		default:
 			break;
 		}
-		return false;// super.onOptionsItemSelected(item);
+		return false;
 	}
 
 	private List<Evento> getEvents() {
@@ -161,10 +153,8 @@ public class OverviewFragment extends SherlockFragment {
 				eventi.add(evento);
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

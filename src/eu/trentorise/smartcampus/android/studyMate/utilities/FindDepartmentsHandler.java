@@ -46,7 +46,6 @@ public class FindDepartmentsHandler extends
 	FindCoursesDegreeHandler findDegHandler;
 	Activity currentActivity;
 
-	
 	public FindDepartmentsHandler(Context applicationContext,
 			Spinner spinnerDepartments, Spinner spinnerDegree,
 			Activity currentActivity) {
@@ -55,14 +54,15 @@ public class FindDepartmentsHandler extends
 		this.spinnerDegree = spinnerDegree;
 		this.currentActivity = currentActivity;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
 
 		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity, context.getResources().getString(R.string.dialog_searching_list_departments),
-				context.getResources().getString(R.string.dialog_loading));
+		pd = ProgressDialog.show(currentActivity, context.getResources()
+				.getString(R.string.dialog_searching_list_departments), context
+				.getResources().getString(R.string.dialog_loading));
 
 	}
 

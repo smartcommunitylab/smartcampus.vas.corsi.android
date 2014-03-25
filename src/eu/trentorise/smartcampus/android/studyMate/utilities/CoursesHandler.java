@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -30,7 +29,6 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
-import eu.trentorise.smartcampus.studymate.R.string;
 
 public class CoursesHandler extends
 		AsyncTask<Bundle, Void, List<CorsoCarriera>> {
@@ -41,15 +39,15 @@ public class CoursesHandler extends
 	ListView listViewCorsiPersonali;
 	public String body;
 	public static ProgressDialog pd;
-	public Activity currentActivity;
+	public Fragment currentFragment;
 	public SherlockFragmentActivity currentSherlock;
 	public Bundle bundleParam;
 
 	public CoursesHandler(Context applicationContext, ListView listViewCorsi,
-			Activity currentActivity, SherlockFragmentActivity currentSherlock) {
+			Fragment currentFragment, SherlockFragmentActivity currentSherlock) {
 		this.context = applicationContext;
 		this.listViewCorsiPersonali = listViewCorsi;
-		this.currentActivity = currentActivity;
+		this.currentFragment = currentFragment;
 		this.currentSherlock = currentSherlock;
 	}
 
@@ -82,7 +80,6 @@ public class CoursesHandler extends
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -92,9 +89,10 @@ public class CoursesHandler extends
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		new ProgressDialog(currentActivity);
-		pd = ProgressDialog.show(currentActivity,
-				context.getResources().getString(R.string.dialog_courses_events), context.getResources().getString(R.string.dialog_loading));
+		new ProgressDialog(currentSherlock);
+		pd = ProgressDialog.show(currentSherlock, context.getResources()
+				.getString(R.string.dialog_courses_events), context
+				.getResources().getString(R.string.dialog_loading));
 	}
 
 	@Override
@@ -102,19 +100,24 @@ public class CoursesHandler extends
 		super.onPostExecute(result);
 		if (result == null) {
 
-			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
+			Toast.makeText(context,
+					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
-			currentActivity.finish();
+			currentSherlock.finish();
 		} else {
 			TitledItem[] items = new TitledItem[result.size()];
 
 			int i = 0;
 			for (CorsoCarriera s : result) {
-				if(s.getResult().equals("-1"))
-					items[i++] = new TitledItem(context.getResources().getString(R.string.header_course_interest), s.getName());
+				if (s.getResult().equals("-1"))
+					items[i++] = new TitledItem(context.getResources()
+							.getString(R.string.header_course_interest),
+							s.getName());
 				else
-					items[i++] = new TitledItem(context.getResources().getString(R.string.header_course_career), s.getName());
-					
+					items[i++] = new TitledItem(context.getResources()
+							.getString(R.string.header_course_career),
+							s.getName());
+
 			}
 
 			TitledAdapter adapter = new TitledAdapter(context, items);
@@ -145,8 +148,9 @@ public class CoursesHandler extends
 							Fragment fragment = new OverviewFilterFragment();
 							fragment.setArguments(data);
 							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-							ft.replace(R.id.tabCorsi, fragment);
-							ft.addToBackStack(null);
+							ft.replace(currentFragment.getId(), fragment,
+									currentFragment.getTag());
+							ft.addToBackStack(currentFragment.getTag());
 							ft.commit();
 						}
 					});

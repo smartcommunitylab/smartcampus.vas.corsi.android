@@ -77,7 +77,6 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

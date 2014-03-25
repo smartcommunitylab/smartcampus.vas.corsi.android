@@ -90,8 +90,6 @@ public class AddEventActivity extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				showDatePickerDialog(fview);
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -100,8 +98,6 @@ public class AddEventActivity extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				showTimePickerDialog(fview);
-				// TODO Auto-generated method stub
-
 			}
 		});
 		// get the current date
@@ -151,8 +147,11 @@ public class AddEventActivity extends SherlockFragment {
 				eId.setDate(new Date(dateR));
 
 				new PostEvent(getActivity(), evento).execute();
-				Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.toast_event_added),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(
+						getActivity(),
+						getActivity().getResources().getString(
+								R.string.toast_event_added), Toast.LENGTH_SHORT)
+						.show();
 				getActivity().onBackPressed();
 			}
 		});
@@ -173,14 +172,6 @@ public class AddEventActivity extends SherlockFragment {
 
 		}
 	}
-
-	// @Override
-	// public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
-	// {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getSupportMenuInflater().inflate(R.menu.test, menu);
-	// return super.onCreateOptionsMenu(menu);
-	// }
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
@@ -324,8 +315,12 @@ public class AddEventActivity extends SherlockFragment {
 			super.onPreExecute();
 
 			new ProgressDialog(getActivity());
-			pd = ProgressDialog.show(getActivity(),
-					getActivity().getResources().getString(R.string.dialog_courses_events), getActivity().getResources().getString(R.string.dialog_loading));
+			pd = ProgressDialog.show(
+					getActivity(),
+					getActivity().getResources().getString(
+							R.string.dialog_courses_events),
+					getActivity().getResources().getString(
+							R.string.dialog_loading));
 		}
 
 	}

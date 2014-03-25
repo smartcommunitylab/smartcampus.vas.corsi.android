@@ -133,8 +133,11 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 	@Override
 	protected void onPreExecute() {
 		new ProgressDialog(act);
-		pd = ProgressDialog.show(act, context.getResources().getString(R.string.feedback_course_information),
-				context.getResources().getString(R.string.dialog_loading));
+		pd = ProgressDialog.show(
+				act,
+				context.getResources().getString(
+						R.string.feedback_course_information), context
+						.getResources().getString(R.string.dialog_loading));
 
 		super.onPreExecute();
 
@@ -147,7 +150,8 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 		new FollowTask().execute();
 		if (commenti == null) {
 
-			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
+			Toast.makeText(context,
+					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 
 			pd.dismiss();
@@ -264,7 +268,10 @@ public class FeedbackHandler extends AsyncTask<Void, Void, List<Commento>> {
 				return;
 			} else {
 				if (cI.isCorsoCarriera()) {
-					Toast.makeText(context, context.getResources().getString(R.string.feedback_course_is_career),
+					Toast.makeText(
+							context,
+							context.getResources().getString(
+									R.string.feedback_course_is_career),
 							Toast.LENGTH_SHORT).show();
 					swichFollow.setBackgroundResource(R.drawable.ic_monitor_on);
 				} else {
