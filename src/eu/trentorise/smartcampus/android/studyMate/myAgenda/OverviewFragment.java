@@ -46,14 +46,14 @@ public class OverviewFragment extends SherlockFragment {
 		return view;
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onStart() {
+		super.onStart();
 		setHasOptionsMenu(true);
 		getSherlockActivity().supportInvalidateOptionsMenu();
 
@@ -115,6 +115,9 @@ public class OverviewFragment extends SherlockFragment {
 							listEvItem);
 					ListView listView = (ListView) getSherlockActivity().findViewById(
 							R.id.listViewEventi);
+					if (listView == null){
+						return;
+						}
 					listView.setAdapter(adapter);
 
 					listView.setOnItemClickListener(new ListView.OnItemClickListener() {
