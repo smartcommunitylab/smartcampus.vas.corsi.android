@@ -50,7 +50,7 @@ public class MyUniActivity extends SherlockActivity {
 	 */
 	public ProtocolCarrier mProtocolCarrier;
 	public String body;
-	// public static String userAuthToken;
+    public static String userAuthToken;
 	public static BasicProfile bp;
 
 	@Override
@@ -138,7 +138,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static String getAuthToken() throws AACException {
 		String mToken;
 		mToken = getAccessProvider().readToken(mContext);
-		System.out.println(mToken);
+		System.out.println("token: "+mToken);
 		return mToken;
 	}
 
@@ -164,6 +164,7 @@ public class MyUniActivity extends SherlockActivity {
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
+				System.out.println("user token: "+getAuthToken());
 				// init connector
 				// PushServiceConnector connector = new PushServiceConnector();
 				// try {
