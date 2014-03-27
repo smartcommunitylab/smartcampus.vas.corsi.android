@@ -39,8 +39,8 @@ public class MyUniActivity extends SherlockActivity {
 
 	public static final String APP_ID = "studymate";
 	//
-	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
-	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
+	public static final String SERVER_URL = "https://vas.smartcampuslab.it/core.communicator";
+	public static final String AUTH_URL = "https://ac.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -50,7 +50,7 @@ public class MyUniActivity extends SherlockActivity {
 	 */
 	public ProtocolCarrier mProtocolCarrier;
 	public String body;
-	// public static String userAuthToken;
+    public static String userAuthToken;
 	public static BasicProfile bp;
 
 	@Override
@@ -138,7 +138,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static String getAuthToken() throws AACException {
 		String mToken;
 		mToken = getAccessProvider().readToken(mContext);
-		System.out.println(mToken);
+		System.out.println("token: "+mToken);
 		return mToken;
 	}
 
@@ -164,6 +164,7 @@ public class MyUniActivity extends SherlockActivity {
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
+				System.out.println("user token: "+getAuthToken());
 				// init connector
 				// PushServiceConnector connector = new PushServiceConnector();
 				// try {
