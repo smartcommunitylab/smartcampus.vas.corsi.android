@@ -25,6 +25,8 @@
 -->
 <resources>
 
+    <string name="internet_connection">An internet connection is required to use StudyMate</string>
+    
     <string name="title_gicercagruppigenerale_activity">Search study groups</string>
     <string name="gruppi_studio_label">Study groups</string>
     <string name="app_uid_label">SmartCampus</string>

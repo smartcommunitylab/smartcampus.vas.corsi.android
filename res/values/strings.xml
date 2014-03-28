@@ -25,7 +25,9 @@
 
 -->
 <resources>
-
+ <string name="internet_connection">L\'applicazione richiede la connessione ad internet per funzionare</string>
+ 
+ 
     <string name="title_gicercagruppigenerale_activity">Ricerca gruppi di studio</string>
     <string name="gruppi_studio_label">Gruppi di studio</string>
     <string name="app_uid_label">SmartCampus</string>

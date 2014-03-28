@@ -214,7 +214,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 			super.onPostExecute(result);
 
 			pd.dismiss();
-			getActivity().onBackPressed();
+			getSherlockActivity().onBackPressed();
 		}
 
 	}

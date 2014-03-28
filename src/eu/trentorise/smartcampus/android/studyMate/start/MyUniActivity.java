@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -57,12 +59,23 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-		new LoadUserDataFromACServiceTask().execute();
+		if (!isUserConnectedToInternet(mContext)){
+			Toast.makeText(mContext, R.string.internet_connection, Toast.LENGTH_SHORT).show();
+			MyUniActivity.this.finish();
+		}
+		else{
+			new LoadUserDataFromACServiceTask().execute();
+		}
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
+		if (!isUserConnectedToInternet(mContext)){
+			Toast.makeText(mContext, R.string.internet_connection, Toast.LENGTH_SHORT).show();
+			MyUniActivity.this.finish();
+		}
+		else{
 		setContentView(R.layout.activity_my_uni);
 
 		findViewById(R.id.my_agenda_btn).setOnClickListener(
@@ -115,7 +128,7 @@ public class MyUniActivity extends SherlockActivity {
 				MyUniActivity.this.startActivity(intent);
 			}
 		});
-
+		
 		// findViewById(R.id.gruppi_studio_btn).setOnClickListener(
 		// new OnClickListener() {
 		//
@@ -126,7 +139,7 @@ public class MyUniActivity extends SherlockActivity {
 		// MyUniActivity.this.startActivity(intent);
 		// }
 		// });
-
+		}
 	}
 
 	public static SCAccessProvider getAccessProvider() {
@@ -301,4 +314,15 @@ public class MyUniActivity extends SherlockActivity {
 		// }
 	}
 
+	
+	public static boolean isUserConnectedToInternet(Context context) {
+		ConnectivityManager connectivityManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+		if (netInfo != null) {
+			return netInfo.isConnected();
+		}
+		return false;
+	}
+	
 }

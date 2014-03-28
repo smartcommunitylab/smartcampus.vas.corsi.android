@@ -119,7 +119,7 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 		List<String> resultStrings = new ArrayList<String>();
 		resultStrings.add(cc.getName());
 		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-				getActivity(), R.layout.list_studymate_row_list_simple,
+				getSherlockActivity(), R.layout.list_studymate_row_list_simple,
 				resultStrings);
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
@@ -132,7 +132,7 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().onBackPressed();
+				getSherlockActivity().onBackPressed();
 			}
 		});
 		button_ok.setOnClickListener(new OnClickListener() {
@@ -147,10 +147,10 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 
 				long dateR = 10000 * (date.getTime() / 10000);
 				eId.setDate(new Date(dateR));
-				new PostEvent(getActivity(), evento).execute();
-				Toast.makeText(getActivity(), "Evento aggiunto",
+				new PostEvent(getSherlockActivity(), evento).execute();
+				Toast.makeText(getSherlockActivity(), "Evento aggiunto",
 						Toast.LENGTH_SHORT).show();
-				getActivity().onBackPressed();
+				getSherlockActivity().onBackPressed();
 			}
 		});
 
@@ -173,13 +173,13 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(),
+		newFragment.show(getSherlockActivity().getSupportFragmentManager(),
 				"datePicker");
 	}
 
 	public void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getActivity().getSupportFragmentManager(),
+		newFragment.show(getSherlockActivity().getSupportFragmentManager(),
 				"timePicker");
 	}
 
@@ -194,7 +194,7 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, mYear, mMonth,
+			return new DatePickerDialog(getSherlockActivity(), this, mYear, mMonth,
 					mDay);
 		}
 
@@ -223,8 +223,8 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getActivity()));
+			return new TimePickerDialog(getSherlockActivity(), this, hour, minute,
+					DateFormat.is24HourFormat(getSherlockActivity()));
 		}
 
 		@SuppressWarnings("deprecation")
