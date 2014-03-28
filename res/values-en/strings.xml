@@ -13,20 +13,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
-
-
-
-
-
-
-
-
 -->
+
 <resources>
 
     <string name="internet_connection">An internet connection is required to use StudyMate</string>
-    
     <string name="title_gicercagruppigenerale_activity">Search study groups</string>
     <string name="gruppi_studio_label">Study groups</string>
     <string name="app_uid_label">SmartCampus</string>
@@ -40,7 +31,7 @@
     <string name="tv_attributes">Attributes</string>
     <string name="tv_from_profile_service">From profile service:</string>
     <string name="tv_name">Name</string>
-    <string name="title_activity_file">FileActivity</string>
+    <string name="title_activity_file">File Activity</string>
     <string name="remote_file_storage_demo_label">Remote file storage demo</string>
     <string name="photo_btn_label">Upload a photo!</string>
     <string name="title_activity_my_uni">StudyMate</string>
@@ -67,7 +58,7 @@
     <string name="title_activity_find_home_course">Find Home Course</string>
     <string name="rating">Student reviews:</string>
     <string name="title_activity_dati">Data</string>
-    <string name="my_courses">Courses that follow</string>
+    <string name="my_courses">Courses that you follow</string>
     <string name="title_activity_search_home">Search courses</string>
     <string name="choose_data">Date:</string>
     <string name="choose_time">Time:</string>
@@ -75,22 +66,22 @@
     <string name="tab_PHL">PHL</string>
     <string name="tab_moodle">MOODLE</string>
     <!-- RICERCA -->
-    <string name="search_label_department"> Department </string>
-    <string name="search_label_courseDegree"> Course degree </string>
-    <string name="search_label_course"> Course </string>
-    <string name="search_button_search"> Search </string>
-    <string name="search_hint_course"> Name of the course </string>
+    <string name="search_label_department">Department</string>
+    <string name="search_label_courseDegree">Degree course</string>
+    <string name="search_label_course">Course</string>
+    <string name="search_button_search">Search</string>
+    <string name="search_hint_course">Name of the course</string>
     <string name="title_activity_result_searched">Search Results</string>
-    <string name="search_label_searchedList">Hai cercato:</string>
+    <string name="search_label_searchedList">You searched for:</string>
     <string name="find_label_searchingnow">"Looking for: "</string>
     <string name="find_label_searching">"Search a course: "</string>
-    <string name="finder_initiallist_dep"> Select department </string>
-    <string name="finder_initiallist_deg"> Select course degree </string>
-    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="finder_initiallist_dep">Select department</string>
+    <string name="finder_initiallist_deg">Select degree course</string>
+    <string name="title_activity_agenda">Agenda Activity</string>
     <string name="add_event">Add an event</string>
     <string name="agenda_label_tab_overview">Overview</string>
-    <string name="notices_string_titlelist"></string>
-    <string name="notices_string_titlelistExist">List updated at: </string>
+    <string name="notices_string_titlelist" />
+    <string name="notices_string_titlelistExist">List updated at:</string>
     <string name="switch_on">ON</string>
     <string name="switch_off">OFF</string>
     <string name="monitor">Notifications active</string>
@@ -102,11 +93,11 @@
     <string name="textview_description_label">Description:</string>
     <string name="add_rating_feedback_button">Add a review</string>
     <string name="label_title_description_course">Description</string>
-    <string name="dialog_list_cds">List of courses degree</string>
+    <string name="dialog_list_cds">List of degree courses</string>
     <string name="label_txtMonitor_on">Notifications active</string>
     <string name="label_txtMonitor_off">Notifications inactive</string>
     <string name="rating_context_contenuti">Contents</string>
-    <string name="rating_contextExplain_contenuti">Do you satisfied of the topics covered?</string>
+    <string name="rating_contextExplain_contenuti">Are you satisfied with the topics covered?</string>
     <string name="rating_context_carico_studio">Study workload/cfu</string>
     <string name="rating_contextExplain_carico_studio">Is the study workload commensurate with the credits?</string>
     <string name="rating_context_lezioni">Lessons</string>
@@ -115,16 +106,16 @@
     <string name="rating_contextExplain_materiali">Are the materials supplied suitable for the purposes of the exam?</string>
     <string name="rating_context_esame">Exam</string>
     <string name="rating_contextExplain_esame">Is the exam consistent with the topics covered?</string>
-    <string name="title_activity_work_in_progress">WorkInProgress</string>
+    <string name="title_activity_work_in_progress">Work In Progress</string>
     <string name="rating_text_icon">Rate</string>
     <string name="title_activity_lista__gds_activity">List_GDS_activity</string>
     <string name="title_activity_overview__gds">Overview_GDS</string>
-    <string name="title_activity_add_attivita_studio_activity">Add_attivita_studio_activity</string>
+    <string name="title_activity_add_attivita_studio_activity">Add_study_activity</string>
     <string name="title_activity_crea__gds_activity">Create_GDS_activity</string>
-    <string name="toast_switchfollow_error">Error! The request is not successful. </string>
-    <string name="toast_switchfollow_success"> You are following this course. </string>
-    <string name="toast_rate_access_denied"> You can not rate this course, first you have to pass the exam. </string>
-    <string name="toast_switchfollow_off"> You do not follow this course </string>
+    <string name="toast_switchfollow_error">Error! The request is not successful.</string>
+    <string name="toast_switchfollow_success">You are following this course.</string>
+    <string name="toast_rate_access_denied">You cannot rate this course until you have passed the exam.</string>
+    <string name="toast_switchfollow_off">You do not follow this course</string>
     <string name="Monday">Monday</string>
     <string name="Tuesday">Tuesday</string>
     <string name="Wednesday">Wednesday</string>
@@ -132,57 +123,47 @@
     <string name="Friday">Friday</string>
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
-    
     <string name="header_course_career">Courses in career</string>
     <string name="header_course_interest">Courses of interest</string>
-    
     <!-- Dialogs -->
     <string name="dialog_coming_soon">Coming Soon...</string>
     <string name="dialog_sync_data">Synchronizing personal data</string>
     <string name="dialog_loading">Loading...</string>
     <string name="dialog_error">Oops! There was an error...</string>
-    <string name="dialog_courses_events">List of courses register for events</string>
+    <string name="dialog_courses_events">Courses that will display events</string>
     <string name="dialog_list_events">List of your events</string>
     <string name="dialog_not_events">There are no events coming soon</string>
     <string name="dialog_searching_courses">Searching courses</string>
     <string name="dialog_searching_list_departments">List of departments</string>
-    <string name="dialog_rate_loading_feedback">Loading data of your review</string>
+    <string name="dialog_rate_loading_feedback">Loading data from your review</string>
     <string name="dialog_saving_feedback">Saving</string>
-    <string name="dialog_follow_list_courses_career">List of courses booklet</string>
-    <string name="invalid_career">you need a valid career...</string>
+    <string name="dialog_follow_list_courses_career">List of program study courses</string>
+    <string name="no_vote">You cannot evaluate any course</string>
+     <string name="invalid_career">You are not following any course</string>
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
-    
-    
     <!-- add event -->
     <string name="addevent_title">Title</string>
     <string name="addevent_courses">Courses</string>
     <string name="addevent_date">Date</string>
     <string name="addevent_Time">Time</string>
     <string name="addevent_description">Description</string>
-    
     <string name="button_cancel">Cancel</string>
     <string name="searchby_all">All</string>
-    
-    
     <!-- feedback -->
-	<string name="feedback_not_present">There are no comments...</string>
-	<string name="feedback_number_presents">comments found</string>
-	<string name="feedback_course_information">Course information</string>
-	<string name="feedback_course_is_career">The course is from the booklet</string>
-	<string name="feedback_courses_can_review">Courses that I can review</string>
-	
-		 <!-- Rate -->
-	 <string name="rate_review_course">Rate the course!</string>
-	 <string name="rate_insert_review">Please enter your comment ...</string>
-	 <string name="rate_review_added">Review added!</string>
-	
-	<string name="homecourse_description_not_present">No description found</string>
-	
-	<!-- Notifications -->
-	<string name="notification_name">Wall notifications</string>
-	
-	<!-- Event -->
-	 <string name="event_change_success">Event successfully updated</string>
-	
+    <string name="feedback_not_present">There are no comments...</string>
+    <string name="feedback_number_presents">comments found</string>
+    <string name="feedback_course_information">Course information</string>
+    <string name="feedback_course_is_career">The course is from the study plan</string>
+    <string name="feedback_courses_can_review">Courses that I can review</string>
+    <!-- Rate -->
+    <string name="rate_review_course">Rate the course!</string>
+    <string name="rate_insert_review">Please enter your comment ...</string>
+    <string name="rate_review_added">Review added!</string>
+    <string name="homecourse_description_not_present">No description found</string>
+    <!-- Notifications -->
+    <string name="notification_name">Wall notifications</string>
+    <!-- Event -->
+    <string name="event_change_success">Event successfully updated</string>
+
 </resources>

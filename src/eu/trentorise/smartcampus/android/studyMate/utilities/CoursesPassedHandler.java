@@ -88,13 +88,20 @@ public class CoursesPassedHandler extends
 	@Override
 	protected void onPostExecute(final List<CorsoCarriera> result) {
 		super.onPostExecute(result);
-		if (result == null) {
+		if (result == null){
 
 			Toast.makeText(context,
 					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {
+			if (result.size() == 0){
+				
+				Toast.makeText(context,
+						context.getResources().getString(R.string.no_vote),
+						Toast.LENGTH_SHORT).show();
+				currentActivity.finish();
+			}
 			TitledItem[] items = new TitledItem[result.size()];
 
 			int i = 0;
