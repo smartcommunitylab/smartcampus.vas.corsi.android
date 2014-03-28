@@ -151,6 +151,7 @@
     <string name="dialog_rate_loading_feedback">Caricamento dei dati della tua recensione</string>
     <string name="dialog_saving_feedback">Salvataggio in corso</string>
     <string name="dialog_follow_list_courses_career">Lista dei corsi da libretto</string>
+    <string name="invalid_career">Non possiedi una carriera universitaria valida...</string>
     
      <!-- Toasts -->
     <string name="toast_event_added">Evento personale aggiunto</string>

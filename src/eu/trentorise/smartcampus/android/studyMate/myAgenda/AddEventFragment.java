@@ -296,6 +296,11 @@ public class AddEventFragment extends SherlockFragment {
 		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
+			if (result==null){
+				Toast.makeText(getActivity(), R.string.invalid_career, Toast.LENGTH_SHORT).show();
+				getSherlockActivity().finish();
+			}
+			else{
 			cC = result;
 			List<String> resultStrings = new ArrayList<String>();
 
@@ -309,7 +314,7 @@ public class AddEventFragment extends SherlockFragment {
 
 			coursesSpinner.setAdapter(adapterInitialList);
 		}
-
+		}
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();

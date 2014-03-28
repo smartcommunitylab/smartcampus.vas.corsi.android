@@ -101,7 +101,7 @@ public class CoursesHandler extends
 		if (result == null) {
 
 			Toast.makeText(context,
-					context.getResources().getString(R.string.dialog_error),
+					context.getResources().getString(R.string.invalid_career),
 					Toast.LENGTH_SHORT).show();
 			currentSherlock.finish();
 		} else {
@@ -157,7 +157,7 @@ public class CoursesHandler extends
 
 			pd.dismiss();
 
-		}
+	}
 	}
 
 	@Override

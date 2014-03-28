@@ -149,7 +149,7 @@
     <string name="dialog_rate_loading_feedback">Loading data of your review</string>
     <string name="dialog_saving_feedback">Saving</string>
     <string name="dialog_follow_list_courses_career">List of courses booklet</string>
-    
+    <string name="invalid_career">you need a valid career...</string>
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
     
