@@ -19,7 +19,7 @@
     package="eu.trentorise.smartcampus.studymate"
     android:sharedUserId="eu.trentorise.smartcampus.shared"
     android:versionCode="1"
-    android:versionName="1.1" >
+    android:versionName="0.9.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
