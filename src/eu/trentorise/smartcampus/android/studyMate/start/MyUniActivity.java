@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
@@ -133,16 +135,16 @@ public class MyUniActivity extends SherlockActivity {
 						}
 					});
 
-			// findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-			// new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			// Intent intent = new Intent(MyUniActivity.this,
-			// Lista_GDS_activity.class);
-			// MyUniActivity.this.startActivity(intent);
-			// }
-			// });
+			findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									Lista_GDS_activity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 		}
 	}
 
@@ -163,7 +165,6 @@ public class MyUniActivity extends SherlockActivity {
 			AsyncTask<Void, Void, BasicProfile> {
 
 		ArrayList<CorsoCarriera> corsicarrierastudente;
-
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -190,110 +191,72 @@ public class MyUniActivity extends SherlockActivity {
 				// } catch (CommunicatorConnectorException e) {
 				// e.printStackTrace();
 				// }
-				if (bp != null) {
-					// proviamo a recuperare i dati studente
-					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
-							SmartUniDataWS.TOKEN_NAME);
-					MessageResponse response;
-					MessageRequest request = new MessageRequest(
-							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_STUDENT_DATA);
-					request.setMethod(Method.GET);
-					try {
-						response = mProtocolCarrier.invokeSync(request,
-								SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-						if (response.getHttpStatus() == 200) {
+				// proviamo a recuperare i dati studente
+				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+						SmartUniDataWS.TOKEN_NAME);
+				MessageResponse response;
+				MessageRequest request = new MessageRequest(
+						SmartUniDataWS.URL_WS_SMARTUNI,
+						SmartUniDataWS.GET_WS_STUDENT_DATA);
+				request.setMethod(Method.GET);
+				try {
+					response = mProtocolCarrier.invokeSync(request,
+							SmartUniDataWS.TOKEN_NAME,
+							MyUniActivity.getAuthToken());
+					if (response.getHttpStatus() == 200) {
 
-							// il body corrisponde al jsonstudente!! allora lo
-							// facciamo vedere XD
-							body = response.getBody();
-							// String jsonstudente = body;
-							// save("studenteSessioneJSON", jsonstudente);
-						} else {
-							return null;
-						}
-					} catch (ConnectionException e) {
-						e.printStackTrace();
-					} catch (ProtocolException e) {
-						e.printStackTrace();
-					} catch (SecurityException e) {
-						e.printStackTrace();
-					} catch (AACException e) {
-						e.printStackTrace();
+						// il body corrisponde al jsonstudente!! allora lo
+						// facciamo vedere XD
+						body = response.getBody();
+						String jsonstudente = body;
+						save("studenteSessioneJSON", jsonstudente);
+					} else {
+						return null;
 					}
-					// proviamo a recueprare i dati relativi ai corsi dello
-					// studente
-					mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
-							SmartUniDataWS.TOKEN_NAME);
-					MessageResponse response1;
-					MessageRequest request1 = new MessageRequest(
-							SmartUniDataWS.URL_WS_SMARTUNI,
-							SmartUniDataWS.GET_WS_FREQUENTEDCOURSES_SYNC);
-					request.setMethod(Method.GET);
-					try {
-						response1 = mProtocolCarrier.invokeSync(request1,
-								SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-						if (response1.getHttpStatus() == 200) {
-
-							body = response1.getBody();
-							String jsoncorsidellostudente = body;
-							// save("corsiStudente", jsoncorsidellostudente);
-							corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
-									.convertJSONToObjects(
-											jsoncorsidellostudente,
-											CorsoCarriera.class);
-						} else {
-							return null;
-						}
-					} catch (ConnectionException e) {
-						e.printStackTrace();
-					} catch (ProtocolException e) {
-						e.printStackTrace();
-					} catch (SecurityException e) {
-						e.printStackTrace();
-					} catch (AACException e) {
-						e.printStackTrace();
-					}
-					// proviamo a recueprare i dati relativi al corso di laurea
-					// di
-					// uno studente tramite il codice prensete all'interno di
-					// uno
-					// dei corsicarriera che ci siamo appena presi
-					// long cod = corsicarrierastudente.get(0).getId();
-					// mProtocolCarrier = new
-					// ProtocolCarrier(MyUniActivity.this,
-					// SmartUniDataWS.TOKEN_NAME);
-					// MessageResponse response2;
-					// MessageRequest request2 = new MessageRequest(
-					// SmartUniDataWS.URL_WS_SMARTUNI,
-					// SmartUniDataWS.GET_WS_COURSES_DETAILS(cod));
-					// request.setMethod(Method.GET);
-					// try {
-					// response2 = mProtocolCarrier.invokeSync(request2,
-					// SmartUniDataWS.TOKEN_NAME,
-					// MyUniActivity.getAuthToken());
-					// if (response2.getHttpStatus() == 200) {
-					//
-					// body = response2.getBody();
-					// String jsonattivitadidattica = body;
-					// save("attivitaDidatticaStudente",
-					// jsonattivitadidattica);
-					// } else {
-					// return null;
-					// }
-					// } catch (ConnectionException e) {
-					// e.printStackTrace();
-					// } catch (ProtocolException e) {
-					// e.printStackTrace();
-					// } catch (SecurityException e) {
-					// e.printStackTrace();
-					// } catch (AACException e) {
-					// e.printStackTrace();
-					// }
-					// }
+				} catch (ConnectionException e) {
+					e.printStackTrace();
+				} catch (ProtocolException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (AACException e) {
+					e.printStackTrace();
 				}
+				
+				// proviamo a recueprare i dati relativi ai corsi dello
+				// studente
+				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+						SmartUniDataWS.TOKEN_NAME);
+				MessageResponse response1;
+				MessageRequest request1 = new MessageRequest(
+						SmartUniDataWS.URL_WS_SMARTUNI,
+						SmartUniDataWS.GET_WS_FREQUENTEDCOURSES_SYNC);
+				request1.setMethod(Method.GET);
+				try {
+					response1 = mProtocolCarrier
+							.invokeSync(request1, SmartUniDataWS.TOKEN_NAME,
+									MyUniActivity.getAuthToken());
+					if (response1.getHttpStatus() == 200) {
+
+						body = response1.getBody();
+						String jsoncorsidellostudente = body;
+						save("corsiStudente", jsoncorsidellostudente);
+						corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
+								.convertJSONToObjects(jsoncorsidellostudente,
+										CorsoCarriera.class);
+					} else {
+						return null;
+					}
+				} catch (ConnectionException e) {
+					e.printStackTrace();
+				} catch (ProtocolException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (AACException e) {
+					e.printStackTrace();
+				}
+
 				return bp;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -309,13 +272,14 @@ public class MyUniActivity extends SherlockActivity {
 			pd.dismiss();
 		}
 
-		// private void save(String key, String jsonTosaveinSharedP) {
-		// SharedPreferences sharedPreferences = MyUniActivity.this
-		// .getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-		// SharedPreferences.Editor editor = sharedPreferences.edit();
-		// editor.putString(key, jsonTosaveinSharedP);
-		// editor.commit();
-		// }
+		private void save(String key, String jsonTosaveinSharedP) {
+			SharedPreferences sharedPreferences = MyUniActivity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPreferences.edit();
+			editor.putString(key, jsonTosaveinSharedP);
+			editor.commit();
+		}
+
 	}
 
 	public static boolean isUserConnectedToInternet(Context context) {

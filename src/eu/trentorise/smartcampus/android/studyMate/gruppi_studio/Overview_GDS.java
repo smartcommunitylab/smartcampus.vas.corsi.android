@@ -48,7 +48,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.overview_gds_waitingforforum_layout);
+	}
 
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		// codice per sistemare l'actionoverflow
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
@@ -95,16 +100,18 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		// Forum_fragment.class));
 		// ab.addTab(tab2);
 
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		// retrieving impegni from web
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
+
+	// @Override
+	// protected void onResume() {
+	// // TODO Auto-generated method stub
+	// super.onResume();
+	// // retrieving impegni from web
+	// AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
+	// task.execute();
+	// }
 
 	@Override
 	public void onBackPressed() {
@@ -135,6 +142,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		case android.R.id.home: {
 			Overview_GDS.this.finish();
 			return true;
+		}
+		case R.id.aggiungi_impegno: {
+			Intent intent = new Intent(MyApplication.getAppContext(),
+					Add_attivita_studio_activity.class);
+			intent.putExtra("gds", contextualGDS);
+			startActivity(intent);
+			return super.onOptionsItemSelected(item);
 		}
 		case R.id.action_abbandona_gruppo:
 			AsyncTabbandonaGruppo task = new AsyncTabbandonaGruppo(
@@ -255,16 +269,17 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				tv.setText("Non sono stati fissati impegni!\nUtilizza il menù in alto a destra per fissare un nuovo impegno");
 			} else {
 				tv.setVisibility(View.GONE);
+				FragmentTransaction ft = Overview_GDS.this
+						.getSupportFragmentManager().beginTransaction();
+				// Fragment fragment = new Impegni_Fragment();
+				Fragment fragment = Impegni_Fragment.newInstance(
+						contextualListaImpegni, contextualGDS);
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				ft.replace(R.id.impegni_fragment_container, fragment);
+				ft.addToBackStack(null);
+				ft.commit();
 			}
-			FragmentTransaction ft = Overview_GDS.this
-					.getSupportFragmentManager().beginTransaction();
-			// Fragment fragment = new Impegni_Fragment();
-			Fragment fragment = Impegni_Fragment.newInstance(
-					contextualListaImpegni, contextualGDS);
-			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(R.id.impegni_fragment_container, fragment);
-			ft.addToBackStack(null);
-			ft.commit();
+
 			pd.dismiss();
 		}
 

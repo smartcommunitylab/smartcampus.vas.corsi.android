@@ -188,7 +188,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.DELETE_ATTIVITASTUDIO);
-			request.setMethod(Method.DELETE);
+			request.setMethod(Method.POST);
 
 			MessageResponse response;
 			try {
@@ -232,6 +232,9 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			ShowImpegnoGDS.this.finish();
+//			Intent intent = new Intent(ShowImpegnoGDS.this, Overview_GDS.class);
+//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 		}
 
 	}
