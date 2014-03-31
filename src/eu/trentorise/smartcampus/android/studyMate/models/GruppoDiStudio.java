@@ -28,7 +28,7 @@ public class GruppoDiStudio implements Serializable {
 	private long corso;
 
 	private String materia;
-	
+
 	private String idsStudenti;
 
 	private List<Studente> studentiGruppo;

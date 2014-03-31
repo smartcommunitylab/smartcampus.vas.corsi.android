@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -284,8 +283,9 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.commit();
 			}
 
+		}
 	}
-}
+
 	private class GetRelatedCorsoAS extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
@@ -359,6 +359,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			pd.dismiss();
 		}
 
-}
+	}
 
 }

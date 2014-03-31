@@ -52,18 +52,18 @@ public class MyUniActivity extends SherlockActivity {
 	 */
 	public ProtocolCarrier mProtocolCarrier;
 	public String body;
-    public static String userAuthToken;
+	public static String userAuthToken;
 	public static BasicProfile bp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-		if (!isUserConnectedToInternet(mContext)){
-			Toast.makeText(mContext, R.string.internet_connection, Toast.LENGTH_SHORT).show();
+		if (!isUserConnectedToInternet(mContext)) {
+			Toast.makeText(mContext, R.string.internet_connection,
+					Toast.LENGTH_SHORT).show();
 			MyUniActivity.this.finish();
-		}
-		else{
+		} else {
 			new LoadUserDataFromACServiceTask().execute();
 		}
 	}
@@ -71,74 +71,78 @@ public class MyUniActivity extends SherlockActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		if (!isUserConnectedToInternet(mContext)){
-			Toast.makeText(mContext, R.string.internet_connection, Toast.LENGTH_SHORT).show();
+		if (!isUserConnectedToInternet(mContext)) {
+			Toast.makeText(mContext, R.string.internet_connection,
+					Toast.LENGTH_SHORT).show();
 			MyUniActivity.this.finish();
-		}
-		else{
-		setContentView(R.layout.activity_my_uni);
+		} else {
+			setContentView(R.layout.activity_my_uni);
 
-		findViewById(R.id.my_agenda_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								MyAgendaActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.my_agenda_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									MyAgendaActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.find_courses_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								FindHomeActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.find_courses_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									FindHomeActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.phl_btn).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.dialog_coming_soon),
-						Toast.LENGTH_SHORT).show();
-				// Intent intent = new Intent(MyUniActivity.this,
-				// PHLActivity.class);
-				// MyUniActivity.this.startActivity(intent);
-			}
-		});
+			findViewById(R.id.phl_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Toast.makeText(
+									getApplicationContext(),
+									getResources().getString(
+											R.string.dialog_coming_soon),
+									Toast.LENGTH_SHORT).show();
+							// Intent intent = new Intent(MyUniActivity.this,
+							// PHLActivity.class);
+							// MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.notices_btn).setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MyUniActivity.this,
-								NoticesActivity.class);
-						MyUniActivity.this.startActivity(intent);
-					}
-				});
+			findViewById(R.id.notices_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									NoticesActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
 
-		findViewById(R.id.rate_btn).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MyUniActivity.this,
-						CoursesPassedActivity.class);
-				MyUniActivity.this.startActivity(intent);
-			}
-		});
-		
-		// findViewById(R.id.gruppi_studio_btn).setOnClickListener(
-		// new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent(MyUniActivity.this,
-		// Lista_GDS_activity.class);
-		// MyUniActivity.this.startActivity(intent);
-		// }
-		// });
+			findViewById(R.id.rate_btn).setOnClickListener(
+					new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(MyUniActivity.this,
+									CoursesPassedActivity.class);
+							MyUniActivity.this.startActivity(intent);
+						}
+					});
+
+			// findViewById(R.id.gruppi_studio_btn).setOnClickListener(
+			// new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// Intent intent = new Intent(MyUniActivity.this,
+			// Lista_GDS_activity.class);
+			// MyUniActivity.this.startActivity(intent);
+			// }
+			// });
 		}
 	}
 
@@ -151,7 +155,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static String getAuthToken() throws AACException {
 		String mToken;
 		mToken = getAccessProvider().readToken(mContext);
-		System.out.println("token: "+mToken);
+		System.out.println("token: " + mToken);
 		return mToken;
 	}
 
@@ -177,7 +181,7 @@ public class MyUniActivity extends SherlockActivity {
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
-				System.out.println("user token: "+getAuthToken());
+				System.out.println("user token: " + getAuthToken());
 				// init connector
 				// PushServiceConnector connector = new PushServiceConnector();
 				// try {
@@ -314,7 +318,6 @@ public class MyUniActivity extends SherlockActivity {
 		// }
 	}
 
-	
 	public static boolean isUserConnectedToInternet(Context context) {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -324,5 +327,5 @@ public class MyUniActivity extends SherlockActivity {
 		}
 		return false;
 	}
-	
+
 }

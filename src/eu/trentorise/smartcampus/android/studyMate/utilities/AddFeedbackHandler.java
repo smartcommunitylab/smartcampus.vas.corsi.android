@@ -89,10 +89,13 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 		super.onPostExecute(result);
 
 		if (result.equals(true)) {
-			Toast.makeText(context, context.getResources().getString(R.string.rate_review_added), Toast.LENGTH_LONG).show();
-		} else {
 			Toast.makeText(
 					context,
+					context.getResources()
+							.getString(R.string.rate_review_added),
+					Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(context,
 					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_LONG).show();
 		}

@@ -283,7 +283,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 						Crea_GDS_activity.this,
 						android.R.layout.simple_spinner_item, listaCorsiString);
 				adapter_spinner_materie
-				 						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				spinner_scegli_materia.setAdapter(adapter_spinner_materie);
 				pd.dismiss();
 			} else {

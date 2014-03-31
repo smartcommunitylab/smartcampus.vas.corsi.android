@@ -196,8 +196,8 @@ public class AddEventFragment extends SherlockFragment {
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getSherlockActivity(), this, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(getSherlockActivity(), this, mYear,
+					mMonth, mDay);
 		}
 
 		@SuppressWarnings("deprecation")
@@ -224,8 +224,8 @@ public class AddEventFragment extends SherlockFragment {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getSherlockActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getSherlockActivity()));
+			return new TimePickerDialog(getSherlockActivity(), this, hour,
+					minute, DateFormat.is24HourFormat(getSherlockActivity()));
 		}
 
 		@SuppressWarnings("deprecation")
@@ -296,25 +296,26 @@ public class AddEventFragment extends SherlockFragment {
 		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			if (result==null){
-				Toast.makeText(getActivity(), R.string.invalid_career, Toast.LENGTH_SHORT).show();
+			if (result == null) {
+				Toast.makeText(getActivity(), R.string.invalid_career,
+						Toast.LENGTH_SHORT).show();
 				getSherlockActivity().finish();
+			} else {
+				cC = result;
+				List<String> resultStrings = new ArrayList<String>();
+
+				for (CorsoCarriera cl : result) {
+					resultStrings.add(cl.getName());
+				}
+
+				ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
+						getSherlockActivity(),
+						R.layout.list_studymate_row_list_simple, resultStrings);
+
+				coursesSpinner.setAdapter(adapterInitialList);
 			}
-			else{
-			cC = result;
-			List<String> resultStrings = new ArrayList<String>();
-
-			for (CorsoCarriera cl : result) {
-				resultStrings.add(cl.getName());
-			}
-
-			ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-					getSherlockActivity(), R.layout.list_studymate_row_list_simple,
-					resultStrings);
-
-			coursesSpinner.setAdapter(adapterInitialList);
 		}
-		}
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();

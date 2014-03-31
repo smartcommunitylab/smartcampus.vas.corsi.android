@@ -68,7 +68,7 @@ public class EditEventFragment extends SherlockFragment {
 	private EditText description;
 	private EventoId eId;
 	private Date date;
-	
+
 	private long dateInitial;
 	private long timeFromInitial;
 	private long timeToInitial;
@@ -156,9 +156,9 @@ public class EditEventFragment extends SherlockFragment {
 				eventoModificato.setType(title.getText().toString());
 				eventoModificato.setPersonalDescription(description.getText()
 						.toString());
-				long dateR = 10000*(date.getTime()/10000);
-				eId.setStart(new Time(hour,minute,0));
-				eId.setStop(new Time(hour,minute,0));
+				long dateR = 10000 * (date.getTime() / 10000);
+				eId.setStart(new Time(hour, minute, 0));
+				eId.setStop(new Time(hour, minute, 0));
 				eId.setDate(new Date(dateR));
 				eventoModificato.setEventoId(eId);
 				new ChangeEvent(getSherlockActivity()).execute();
@@ -212,8 +212,8 @@ public class EditEventFragment extends SherlockFragment {
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getSherlockActivity(), this, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(getSherlockActivity(), this, mYear,
+					mMonth, mDay);
 		}
 
 		@SuppressWarnings("deprecation")
@@ -244,8 +244,8 @@ public class EditEventFragment extends SherlockFragment {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getSherlockActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getSherlockActivity()));
+			return new TimePickerDialog(getSherlockActivity(), this, hour,
+					minute, DateFormat.is24HourFormat(getSherlockActivity()));
 		}
 
 		@SuppressWarnings("deprecation")
@@ -339,13 +339,16 @@ public class EditEventFragment extends SherlockFragment {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result)
-				Toast.makeText(context,
-						context.getResources().getString(R.string.event_change_success), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(
+						context,
+						context.getResources().getString(
+								R.string.event_change_success),
+						Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(context,
-						context.getResources().getString(R.string.dialog_error), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(
+						context,
+						context.getResources().getString(R.string.dialog_error),
+						Toast.LENGTH_SHORT).show();
 		}
 
 	}

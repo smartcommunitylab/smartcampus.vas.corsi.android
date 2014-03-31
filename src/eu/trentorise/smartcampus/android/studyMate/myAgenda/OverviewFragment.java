@@ -46,10 +46,10 @@ public class OverviewFragment extends SherlockFragment {
 		return view;
 	}
 
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//	}
+	// @Override
+	// public void onCreate(Bundle savedInstanceState) {
+	// super.onCreate(savedInstanceState);
+	// }
 
 	@Override
 	public void onStart() {
@@ -66,7 +66,7 @@ public class OverviewFragment extends SherlockFragment {
 								R.string.dialog_loading));
 
 		listaEventi = new ArrayList<Evento>();
-		
+
 		AsyncTask<Void, Void, Void> taskEvents = new AsyncTask<Void, Void, Void>() {
 
 			@Override
@@ -74,7 +74,8 @@ public class OverviewFragment extends SherlockFragment {
 				// TODO Auto-generated method stub
 				try {
 					listaEventi = new EventsHandler(getSherlockActivity()
-							.getApplicationContext(), getActivity()).execute().get();
+							.getApplicationContext(), getActivity()).execute()
+							.get();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -83,41 +84,43 @@ public class OverviewFragment extends SherlockFragment {
 					e.printStackTrace();
 				}
 				return null;
-				
+
 			}
-			
+
 			@Override
 			protected void onPostExecute(Void result) {
 				// TODO Auto-generated method stub
 				super.onPostExecute(result);
-				
+
 				OverviewFragment.pd.dismiss();
-				
+
 				EventItem[] listEvItem = new EventItem[listaEventi.size()];
 				if (listaEventi.size() == 0) {
 					Toast.makeText(
 							getSherlockActivity(),
 							getActivity().getResources().getString(
-									R.string.dialog_not_events), Toast.LENGTH_SHORT)
-							.show();
+									R.string.dialog_not_events),
+							Toast.LENGTH_SHORT).show();
 				} else {
 					int i = 0;
 
 					for (Evento ev : listaEventi) {
-						AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-								.getDate(), ev.getTitle(), ev.getType(), ev
-								.getEventoId().getStart().toString(), ev.getRoom());
-						listEvItem[i++] = new EventItem(e, getActivity().getResources());
+						AdptDetailedEvent e = new AdptDetailedEvent(ev
+								.getEventoId().getDate(), ev.getTitle(),
+								ev.getType(), ev.getEventoId().getStart()
+										.toString(), ev.getRoom());
+						listEvItem[i++] = new EventItem(e, getActivity()
+								.getResources());
 
 					}
 
-					EventAdapter adapter = new EventAdapter(getSherlockActivity(),
-							listEvItem);
-					ListView listView = (ListView) getSherlockActivity().findViewById(
-							R.id.listViewEventi);
-					if (listView == null){
+					EventAdapter adapter = new EventAdapter(
+							getSherlockActivity(), listEvItem);
+					ListView listView = (ListView) getSherlockActivity()
+							.findViewById(R.id.listViewEventi);
+					if (listView == null) {
 						return;
-						}
+					}
 					listView.setAdapter(adapter);
 
 					listView.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -125,15 +128,18 @@ public class OverviewFragment extends SherlockFragment {
 						@Override
 						public void onItemClick(AdapterView<?> arg0, View arg1,
 								int arg2, long arg3) {
-							getSherlockActivity().supportInvalidateOptionsMenu();
+							getSherlockActivity()
+									.supportInvalidateOptionsMenu();
 
 							Evento evento = listaEventi.get(arg2);
 
 							// Pass Data to other Fragment
 							Bundle arguments = new Bundle();
-							arguments.putSerializable(Constants.SELECTED_EVENT, evento);
+							arguments.putSerializable(Constants.SELECTED_EVENT,
+									evento);
 							FragmentTransaction ft = getSherlockActivity()
-									.getSupportFragmentManager().beginTransaction();
+									.getSupportFragmentManager()
+									.beginTransaction();
 							Fragment fragment = new DettailOfEventFragment();
 							fragment.setArguments(arguments);
 							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -146,12 +152,13 @@ public class OverviewFragment extends SherlockFragment {
 			}
 
 		};
-		
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			taskEvents.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+			taskEvents.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+					(Void[]) null);
 		else
-			taskEvents.execute((Void[])null);
-		
+			taskEvents.execute((Void[]) null);
+
 	}
 
 	@Override

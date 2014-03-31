@@ -36,19 +36,19 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 
 		TextView nome_gds = (TextView) row.findViewById(R.id.gds_name);
 		ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
-		 	//ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
-		  		TextView nome_corso = (TextView) row
-		  				.findViewById(R.id.gds_name_of_course);
-		  
-		 		// con questo task si caricano i dati dentro alla variabile di classe
-		 		// relatedAttivitaDidattica
-		 		// così si riesce a stampare la materia relativa al tale GDS
-		 
-		  		nome_gds.setText(currentGDS.getNome());
-		  		// da conformare al backend
-		  		// logo_gds.setImageDrawable(currentGDS.getLogo());
-		 		// nome_corso.setText(getcorsobyid(currentGDS.getCorso().getname());
-		 		nome_corso.setText(currentGDS.getMateria());
+		// ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
+		TextView nome_corso = (TextView) row
+				.findViewById(R.id.gds_name_of_course);
+
+		// con questo task si caricano i dati dentro alla variabile di classe
+		// relatedAttivitaDidattica
+		// così si riesce a stampare la materia relativa al tale GDS
+
+		nome_gds.setText(currentGDS.getNome());
+		// da conformare al backend
+		// logo_gds.setImageDrawable(currentGDS.getLogo());
+		// nome_corso.setText(getcorsobyid(currentGDS.getCorso().getname());
+		nome_corso.setText(currentGDS.getMateria());
 
 		return row;
 	}

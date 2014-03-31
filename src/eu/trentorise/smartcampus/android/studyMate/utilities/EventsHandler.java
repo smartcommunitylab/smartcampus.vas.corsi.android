@@ -10,7 +10,6 @@ import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -92,10 +91,11 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		listaEventi = result;
 		if (result == null) {
 
-			Toast.makeText(context, context.getResources().getString(R.string.dialog_error),
+			Toast.makeText(context,
+					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
 			fragment.finish();
-		} 
+		}
 	}
 
 	public class CustomComparator implements Comparator<Evento> {

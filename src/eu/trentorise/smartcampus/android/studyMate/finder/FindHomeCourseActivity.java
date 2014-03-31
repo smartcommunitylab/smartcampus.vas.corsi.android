@@ -88,7 +88,8 @@ public class FindHomeCourseActivity extends SherlockFragmentActivity {
 
 		final RatingBar rating = new RatingBar(this);
 		popDialog.setIcon(android.R.drawable.btn_star_big_on);
-		popDialog.setTitle(getResources().getString(R.string.rate_review_course));
+		popDialog.setTitle(getResources()
+				.getString(R.string.rate_review_course));
 		popDialog.setView(rating);
 		popDialog.setView(findViewById(R.layout.dialog_layout));
 

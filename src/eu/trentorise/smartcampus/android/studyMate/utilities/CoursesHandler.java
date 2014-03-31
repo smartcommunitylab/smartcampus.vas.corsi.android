@@ -157,7 +157,7 @@ public class CoursesHandler extends
 
 			pd.dismiss();
 
-	}
+		}
 	}
 
 	@Override
