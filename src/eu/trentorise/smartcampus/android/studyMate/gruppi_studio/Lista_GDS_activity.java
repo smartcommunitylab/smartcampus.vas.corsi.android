@@ -69,10 +69,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// Ignore
 		}
 
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		// retrieve gruppi with followinf asynctask
 		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
 		task.execute();
-
 	}
 
 	@Override
@@ -307,15 +312,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				GetRelatedCorsoAS task1 = new GetRelatedCorsoAS(
 						Lista_GDS_activity.this, gds);
 				task1.execute();
-//				while (!task1.isCancelled()) {
-//					// waiting until finished protected String[]
-//					// doInBackground(Void... params)
-//				}
+				// while (!task1.isCancelled()) {
+				// // waiting until finished protected String[]
+				// // doInBackground(Void... params)
+				// }
 			}
 
 			// inizializza la grafica in base allo stato booleano di
 			// isShownAsList
-			if (isShownAsList) {
+			if (isShownAsList ) {
 				FragmentTransaction ft = Lista_GDS_activity.this
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiList_Fragment();

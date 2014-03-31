@@ -110,7 +110,7 @@ public final class SmartUniDataWS {
 	public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
 
 	// gds///////////////////////////////////////////////////////////////
-	public static String DELETE_ABANDON_GDS = "/gruppodistudio/delete/me";
+	public static String POST_ABANDON_GDS = "/gruppodistudio/delete/me";
 
 	// gds///////////////////////////////////////////////////////////////
 	public static String GET_WS_ALLGDS = "/gruppodistudio/all";

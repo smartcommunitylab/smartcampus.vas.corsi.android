@@ -305,15 +305,16 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.DELETE_ABANDON_GDS);
-			request.setMethod(Method.DELETE);
+					SmartUniDataWS.POST_ABANDON_GDS);
+			request.setMethod(Method.POST);
 
 			MessageResponse response;
 			try {
 
-				String gds_to_abandonJSON = Utils.convertToJSON(gds_to_abandon);
+				// String gds_to_abandonJSON =
+				// Utils.convertToJSON(gds_to_abandon);
 
-				request.setBody(gds_to_abandonJSON);
+				request.setBody(gds_to_abandon.getId() + "");
 				/*
 				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
 				 * diversamente visto che stiamousando una delete
@@ -358,7 +359,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			Overview_GDS.this.finish();
+			// Overview_GDS.this.finish();
+			// devo ricaricare la listagdsact nel modo corretto
+			Intent intent = new Intent(Overview_GDS.this,
+					Lista_GDS_activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 
 		@Override
