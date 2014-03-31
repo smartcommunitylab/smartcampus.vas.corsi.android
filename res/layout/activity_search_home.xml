@@ -15,6 +15,7 @@
 
     <Spinner
         android:id="@+id/spinner1"
+        android:spinnerMode="dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/drop_down_spinner_departments"
@@ -31,6 +32,7 @@
 
     <Spinner
         android:id="@+id/spinner2"
+        android:spinnerMode="dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/drop_down_spinner_courses_all"
