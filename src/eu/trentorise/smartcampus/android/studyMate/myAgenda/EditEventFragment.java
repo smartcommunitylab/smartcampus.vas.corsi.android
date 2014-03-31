@@ -137,7 +137,7 @@ public class EditEventFragment extends SherlockFragment {
 				resultStrings);
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
-		coursesSpinner.setActivated(false);
+		//coursesSpinner.setActivated(false);
 
 		Button button_ok = (Button) fview.findViewById(R.id.button_ok4Course);
 		Button button_cancel = (Button) fview
