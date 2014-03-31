@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -248,8 +250,19 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				tv.setVisibility(View.GONE);
 			}
 
+			// per resettare l'optionmenu
+			supportInvalidateOptionsMenu();
 			// ordinamento dei gruppi di studio
 			// Collections.sort(user_gds_list);
+
+			// for each GDS set the correct Attribute (String Materia) to reduce
+			// web
+			// traffic
+			for (GruppoDiStudio gds : user_gds_list) {
+				GetRelatedCorsoAS task1 = new GetRelatedCorsoAS(
+						Lista_GDS_activity.this, gds);
+				task1.execute();
+			}
 
 			// inizializza la grafica in base allo stato booleano di
 			// isShownAsList
@@ -271,8 +284,81 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.commit();
 			}
 
+	}
+}
+	private class GetRelatedCorsoAS extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		GruppoDiStudio GDS;
+		public ProgressDialog pd;
+
+		public GetRelatedCorsoAS(Context taskcontext, GruppoDiStudio GDS) {
+			super();
+			this.taskcontext = taskcontext;
+			this.GDS = GDS;
 		}
 
-	}
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext,
+					"Caricamento gruppi di studio personali", "");
+		}
+
+		AttivitaDidattica getRelatedCorso() {
+			mProtocolCarrier = new ProtocolCarrier(taskcontext,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_COURSES_DETAILS(GDS.getCorso()));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			String body = null;
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Utils.convertJSONToObject(body, AttivitaDidattica.class);
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			AttivitaDidattica retval = getRelatedCorso();
+			if (retval != null) {
+				GDS.setMateria(retval.getDescription());
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			pd.dismiss();
+		}
+
+}
 
 }

@@ -27,6 +27,8 @@ public class GruppoDiStudio implements Serializable {
 
 	private long corso;
 
+	private String materia;
+	
 	private String idsStudenti;
 
 	private List<Studente> studentiGruppo;
@@ -183,6 +185,14 @@ public class GruppoDiStudio implements Serializable {
 		}
 
 		return listIdsInvited;
+	}
+
+	public String getMateria() {
+		return materia;
+	}
+
+	public void setMateria(String materia) {
+		this.materia = materia;
 	}
 
 }
