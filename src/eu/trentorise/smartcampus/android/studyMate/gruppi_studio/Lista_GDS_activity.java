@@ -312,15 +312,12 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				GetRelatedCorsoAS task1 = new GetRelatedCorsoAS(
 						Lista_GDS_activity.this, gds);
 				task1.execute();
-				// while (!task1.isCancelled()) {
-				// // waiting until finished protected String[]
-				// // doInBackground(Void... params)
-				// }
+
 			}
 
 			// inizializza la grafica in base allo stato booleano di
 			// isShownAsList
-			if (isShownAsList ) {
+			if (isShownAsList) {
 				FragmentTransaction ft = Lista_GDS_activity.this
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiList_Fragment();
@@ -428,6 +425,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
+			
 		}
 
 	}

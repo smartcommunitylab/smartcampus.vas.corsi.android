@@ -49,7 +49,8 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
+		// user_gds_list = ((Lista_GDS_activity)
+		// getActivity()).getUser_gds_list();
 		ListView listview = (ListView) getActivity().findViewById(
 				R.id.listview_gruppi_di_studio);
 

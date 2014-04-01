@@ -36,7 +36,7 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Crea_GDS_activity extends SherlockActivity {
 	public Spinner spinner_scegli_materia;
 	AutoCompleteTextView tv_nome_gds;
-	AutoCompleteTextView tv_invitati;
+	// AutoCompleteTextView tv_invitati;
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
@@ -57,7 +57,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 		// findViewById(R.id.scegli_materia);
 		spinner_scegli_materia = (Spinner) findViewById(R.id.spinner_materia);
 		tv_nome_gds = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo);
-		tv_invitati = (AutoCompleteTextView) findViewById(R.id.invita_compagni_gds);
+		// tv_invitati = (AutoCompleteTextView)
+		// findViewById(R.id.invita_compagni_gds);
 
 		// spinner_edificio.setAdapter(adapter_spinner_ed);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(

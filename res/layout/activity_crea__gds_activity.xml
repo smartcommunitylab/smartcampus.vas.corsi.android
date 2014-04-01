@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="25dp" >
+        android:paddingTop="45dp" >
 
         <TextView
             android:id="@+id/textview2"
@@ -56,6 +56,7 @@
         android:orientation="vertical"
         android:paddingTop="25dp" >
 
+        <!--
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content"
             android:ems="10" >
         </AutoCompleteTextView>
+        -->
     </LinearLayout>
 
 </LinearLayout>
