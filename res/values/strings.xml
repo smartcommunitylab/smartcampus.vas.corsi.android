@@ -185,5 +185,10 @@
 	 
 	 <!-- Event -->
 	 <string name="event_change_success">Evento modificato con successo</string>
+	 
+	 <string name="menu_courses_goto_home">Vai alla home</string>
+	 <string name="menu_courses_unfollow">Elimina dai corsi di interesse</string>
+	 
+	 
 
 </resources>

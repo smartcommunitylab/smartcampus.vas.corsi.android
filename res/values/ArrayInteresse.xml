@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="CorsiInteresse">
-        <item>Programmazione per sistemi mobili e tablet</item>
-        <item>Basi di dati</item>
-        <item>Sistemi Operativi</item>
+    <string-array name="dialogAgenda">
+        <item>@string/menu_courses_goto_home</item>
+        <item>@string/menu_courses_unfollow</item>
     </string-array>
-    <string-array name="EventiFuffa">
-        <item >12/06/2013,Appunti di programmazione 1</item>
-        <item >12/06/2013,Soluzioni appello giugno 2013</item>
-        <item >13/07/2013,Appunti di teoria</item>
-    </string-array>
+
 
 </resources>

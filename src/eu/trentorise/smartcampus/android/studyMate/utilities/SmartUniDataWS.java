@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 public final class SmartUniDataWS {
 
-	public static final String URL_WS_SMARTUNI = "https://smartcampusvascorsiwebtest.app.smartcampuslab.it";
+	public static final String URL_WS_SMARTUNI = "https://studymate-web.app.smartcampuslab.it";
 	// public static String TOKEN = MyUniActivity.getAuthToken();
 	public static final String TOKEN_NAME = "studymate";
 
@@ -108,6 +108,8 @@ public final class SmartUniDataWS {
 
 	// gds///////////////////////////////////////////////////////////////
 	public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
+	
+	public static String GET_WS_FIND_GDS = "/gruppodistudio/find";
 
 	// gds///////////////////////////////////////////////////////////////
 	public static String POST_ABANDON_GDS = "/gruppodistudio/delete/me";
@@ -144,7 +146,7 @@ public final class SmartUniDataWS {
 
 	public static final String POST_WS_CHANGE_ATTIVITASTUDIO(long date,
 			long from, long to) {
-		return "/attivitastudio/change/date/" + date + "/from/" + from + "/to/"
+		return "/attivitadistudio/change/date/" + date + "/from/" + from + "/to/"
 				+ to;
 	}
 
