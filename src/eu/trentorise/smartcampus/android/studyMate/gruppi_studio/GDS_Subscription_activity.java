@@ -31,12 +31,9 @@ public class GDS_Subscription_activity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// retrieving contextualgds from general collector
-		if (!MyApplication.getContextualCollection().isEmpty()) {
-			contextualGDS = (GruppoDiStudio) MyApplication
-					.getContextualCollection().get(0);
-			MyApplication.getContextualCollection().clear();
-		}
+		Bundle myextras = getIntent().getExtras();
+		contextualGDS = (GruppoDiStudio) myextras
+				.getSerializable("gds_to_subscribe");
 
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout

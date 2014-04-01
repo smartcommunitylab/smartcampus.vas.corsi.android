@@ -92,7 +92,8 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				GruppoDiStudio selected_gds = entries.get(position);
 				Intent intent = new Intent(Display_GDS_research_results.this,
 						GDS_Subscription_activity.class);
-				MyApplication.getContextualCollection().add(selected_gds);
+				intent.putExtra("gds_to_subscribe", selected_gds);
+				
 				startActivity(intent);
 			}
 		});
