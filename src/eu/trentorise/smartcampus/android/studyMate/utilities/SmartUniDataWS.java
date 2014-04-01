@@ -109,6 +109,7 @@ public final class SmartUniDataWS {
 	// gds///////////////////////////////////////////////////////////////
 	public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
 	
+	//ritorna i gruppi a cui uno studente può iscriversi//////////////////////
 	public static String GET_WS_FIND_GDS = "/gruppodistudio/find";
 
 	// gds///////////////////////////////////////////////////////////////
@@ -138,11 +139,12 @@ public final class SmartUniDataWS {
 	// gds //////////////////////////////////////////////////////////
 	public static String POST_ATTIVITASTUDIO_ADD = "/attivitadistudio/add";
 
+	
+	// gds //////////////////////////////////////////////////////////
+		public static String DELETE_ATTIVITASTUDIO = "/attivitadistudio/delete";
+		
 	// gds //////////////////////////////////////////////////////////
 	public static String POST_ATTIVITASTUDIO_MODIFY = "/attivitadistudio/change";
-
-	// gds //////////////////////////////////////////////////////////
-	public static String DELETE_ATTIVITASTUDIO = "/attivitadistudio/delete";
 
 	public static final String POST_WS_CHANGE_ATTIVITASTUDIO(long date,
 			long from, long to) {

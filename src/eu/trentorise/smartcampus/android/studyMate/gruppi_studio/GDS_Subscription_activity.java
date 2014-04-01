@@ -20,12 +20,25 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
+	private ProtocolCarrier mProtocolCarrier;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +50,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout
-
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle("Iscrizione gruppo di studio");
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
@@ -104,8 +116,9 @@ public class GDS_Subscription_activity extends SherlockActivity {
 										int which) {
 									dialog.dismiss();
 									// some logic here
-									MyAsyncTask task = new MyAsyncTask(
-											GDS_Subscription_activity.this);
+									ASTaskSubscribe task = new ASTaskSubscribe(
+											GDS_Subscription_activity.this,
+											contextualGDS);
 									task.execute();
 
 								}
@@ -129,28 +142,22 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		}
 	}
 
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class ASTaskSubscribe extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
+		private GruppoDiStudio gds_to_subscribe;
 
-		public MyAsyncTask() {
+		public ASTaskSubscribe() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-		public MyAsyncTask(Context taskcontext) {
+		public ASTaskSubscribe(Context taskcontext,
+				GruppoDiStudio gds_to_subscribe) {
 			super();
 			this.taskcontext = taskcontext;
-		}
-
-		public void attendi() {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			this.gds_to_subscribe = gds_to_subscribe;
 		}
 
 		@Override
@@ -158,34 +165,62 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Primo Progress Dialog",
-					"Caricamento...");
+			pd = ProgressDialog.show(taskcontext, "Iscrizione al gruppo "
+					+ gds_to_subscribe.getNome() + " in corso", "...");
+		}
+
+		void subscribetogds(GruppoDiStudio gds) {
+			mProtocolCarrier = new ProtocolCarrier(taskcontext,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI, "" + /*
+														 * qui ci va il metodo
+														 * per iscriversi
+														 */"");
+			request.setMethod(Method.POST);
+			String jsongds = Utils.convertToJSON(gds);
+			request.setBody(jsongds);
+
+			MessageResponse response;
+			String body = null;
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					body = response.getBody();
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			// subscribetogds(gds_to_subscribe);
+			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if (result == null) {
-
-				Toast.makeText(GDS_Subscription_activity.this,
-						"Ops! C'è stato un errore...", Toast.LENGTH_SHORT)
-						.show();
-				GDS_Subscription_activity.this.finish();
-			}
 			pd.dismiss();
 			Intent intent = new Intent(GDS_Subscription_activity.this,
 					Lista_GDS_activity.class);
-
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			attendi();
-			return null;
 		}
 
 	}
