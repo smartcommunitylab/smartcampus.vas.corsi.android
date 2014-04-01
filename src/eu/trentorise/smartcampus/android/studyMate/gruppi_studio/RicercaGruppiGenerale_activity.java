@@ -254,7 +254,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			} else {
 				pd.dismiss();
 				RicercaGruppiGenerale_activity.this.finish();
-				Toast.makeText(MyApplication.getAppContext(),
+				Toast.makeText(getApplicationContext(),
 						"Impossibile cercare un gruppo a cui iscriversi!",
 						Toast.LENGTH_LONG).show();
 			}
@@ -358,7 +358,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				// se non ci sono GDS della tale materia...
 				// ripartire da qualche passo precedente dell'activity
 				pd.dismiss();
-				Toast.makeText(MyApplication.getAppContext(),
+				Toast.makeText(getApplicationContext(),
 						"Impossibile cercare un gruppo a cui iscriversi!",
 						Toast.LENGTH_LONG).show();
 			}

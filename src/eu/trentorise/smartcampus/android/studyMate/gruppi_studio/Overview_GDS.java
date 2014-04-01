@@ -144,7 +144,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			return true;
 		}
 		case R.id.aggiungi_impegno: {
-			Intent intent = new Intent(MyApplication.getAppContext(),
+			Intent intent = new Intent(getApplicationContext(),
 					Add_attivita_studio_activity.class);
 			intent.putExtra("gds", contextualGDS);
 			startActivity(intent);

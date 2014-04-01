@@ -289,7 +289,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			} else {
 				pd.dismiss();
 				Crea_GDS_activity.this.finish();
-				Toast.makeText(MyApplication.getAppContext(),
+				Toast.makeText(getApplicationContext(),
 						"Impossibile creare un nuovo gruppo!",
 						Toast.LENGTH_LONG).show();
 			}

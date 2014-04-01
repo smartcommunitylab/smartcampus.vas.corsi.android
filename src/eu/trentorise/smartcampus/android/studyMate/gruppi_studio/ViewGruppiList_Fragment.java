@@ -149,7 +149,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.ac_elimina:
-				Toast.makeText(MyApplication.getAppContext(), "ole",
+				Toast.makeText(getActivity().getApplicationContext(), "ole",
 						Toast.LENGTH_SHORT).show();
 				mode.finish(); // Action picked, so close the CAB
 				return true;

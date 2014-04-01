@@ -101,7 +101,7 @@ public class ShowModifyGDSDetails_activity extends SherlockActivity {
 			 * fare qulcosa via metodi web per salvare le modifiche ad un gruppo
 			 */
 			Toast.makeText(
-					MyApplication.getAppContext(),
+					getApplicationContext(),
 					"Manca il metodo al backend per salvare le modifiche ad un gruppo!",
 					Toast.LENGTH_LONG).show();
 			// return retval;

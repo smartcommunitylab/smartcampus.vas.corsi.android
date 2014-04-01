@@ -76,7 +76,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 		} catch (Exception e) {
 			// TODO: handle exception
 			// merda
-			Toast.makeText(MyApplication.getAppContext(), "merda",
+			Toast.makeText(getContext(), "merda",
 					Toast.LENGTH_SHORT).show();
 		}
 
