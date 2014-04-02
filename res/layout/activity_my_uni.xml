@@ -110,7 +110,7 @@
             android:paddingRight="10dp"
             android:text="@string/phl_btn_label" />
 
-        <Button
+<!--         <Button
             android:id="@+id/gruppi_studio_btn"
             android:layout_width="130dp"
             android:layout_height="90dp"
@@ -119,7 +119,7 @@
             android:drawableTop="@drawable/ic_studygroups"
             android:paddingLeft="10dp"
             android:text="@string/gruppi_studio_label" >
-        </Button>
+        </Button> -->
     </LinearLayout>
 
 </LinearLayout>
