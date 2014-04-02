@@ -2,14 +2,19 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +24,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
+import eu.trentorise.smartcampus.android.studyMate.myAgenda.DialogCourseFragment;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -154,17 +160,97 @@ public class CoursesHandler extends
 							ft.commit();
 						}
 					});
+			
+			listViewCorsiPersonali.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					
+					CorsoCarriera corsoSelezionato = new CorsoCarriera();
+					corsoSelezionato = result.get(arg2);
+					
+					DialogCourseFragment dialog = new DialogCourseFragment(corsoSelezionato);
+					dialog.show(currentFragment.getFragmentManager(), currentFragment.getTag());
+//					MenuDialogFragment menuCourse = new MenuDialogFragment(corsoSelezionato);
+//					FragmentManager fm = menuCourse.getFragmentManager();
+//					menuCourse.setRetainInstance(true);
+//					menuCourse.show(fm, corsoSelezionato.getName());
+//					AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+//					LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+//			        View convertView = (View) inflater.inflate(R.layout.dialog_menu_coursesinterest, null);
+//			        alertDialog.setView(convertView);
+//			        alertDialog.setTitle(corsoSelezionato.getName());
+//			        ListView lv = (ListView) convertView.findViewById(R.id.listViewOptions);
+//			        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,context.getResources().getStringArray(R.array.dialogAgenda));
+//			        lv.setAdapter(adapter);
+//			        alertDialog.show();
+					
+					//MenuDialogFragment dialogCourseInterest = new MenuDialogFragment(corsoSelezionato);
+						
+					return true;
+				}
+			});
 
 			pd.dismiss();
 
 		}
 	}
 
+	
+//	public class MenuDialogFragment extends DialogFragment {
+//		CorsoCarriera corsoSelezionato;
+//		
+//		public MenuDialogFragment(CorsoCarriera corsoSelezionato) {
+//			this.corsoSelezionato = corsoSelezionato;
+//		}
+//	    @Override
+//	    public Dialog onCreateDialog(Bundle savedInstanceState) {
+//	        // Use the Builder class for convenient dialog construction
+//	        AlertDialog.Builder builder = new AlertDialog.Builder(context.getApplicationContext());
+//	        
+//	        
+//			Bundle data = new Bundle();
+//			data.putSerializable(
+//					Constants.CORSO_CARRIERA_SELECTED,
+//					corsoSelezionato);
+//			data.putString(Constants.COURSE_NAME,
+//					corsoSelezionato.getName());
+//			
+//			builder.setTitle(corsoSelezionato.getName());
+//			builder.setItems(R.array.dialogAgenda, new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//					
+//	               
+//	        // Create the AlertDialog object and return it
+//	        return builder.create();
+//	    }
+	    
+	    
+//	    @Override
+//	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//	    		Bundle savedInstanceState) {
+//	    	// TODO Auto-generated method stub
+//	    	View view = inflater.inflate(R.layout.dialog_courses_layout, container);
+//	    	
+//	    	return view;
+//	    }
+//	}
+	
+	
 	@Override
 	protected List<CorsoCarriera> doInBackground(Bundle... params) {
 		bundleParam = params[0];
 
 		return getAllPersonalCourses();
 	}
+	
+	
 
 }
