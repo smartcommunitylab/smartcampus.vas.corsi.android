@@ -114,6 +114,10 @@ public final class SmartUniDataWS {
 	// ritorna i gruppi a cui uno studente può iscriversi//////////////////////
 	public static String GET_WS_FIND_GDS = "/gruppodistudio/find";
 
+	public static final String GET_WS_FIND_GDS_OF_COURSE(long idad) {
+		return "gruppodistudio/find/" + idad;
+	}
+
 	// gds///////////////////////////////////////////////////////////////
 	public static String POST_ABANDON_GDS = "/gruppodistudio/delete/me";
 
@@ -143,6 +147,10 @@ public final class SmartUniDataWS {
 
 	// gds //////////////////////////////////////////////////////////
 	public static String DELETE_ATTIVITASTUDIO = "/attivitadistudio/delete";
+
+	public static final String GET_STUDENTE(long id_stud) {
+		return "/studente/" + id_stud;
+	}
 
 	public static final String POST_WS_CHANGE_ATTIVITASTUDIO(long dateold,
 			long fromold, long toold) {

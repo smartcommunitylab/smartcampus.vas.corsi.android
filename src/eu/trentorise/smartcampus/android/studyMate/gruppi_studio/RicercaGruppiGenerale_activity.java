@@ -211,8 +211,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
-							+ attivitadidatticastud.getCds_id()));
+					SmartUniDataWS
+							.GET_WS_FIND_GDS_OF_COURSE(attivitadidatticastud
+									.getCds_id()));
 			request.setMethod(Method.GET);
 
 			try {
@@ -261,7 +262,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
-			if (temp_listacorsiArrayList != null) {
+			if (temp_listacorsiArrayList != null
+					&& !temp_listacorsiArrayList.isEmpty()) {
 				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
 					listaCorsiString.add(tempcorso.getDescription());
 				}

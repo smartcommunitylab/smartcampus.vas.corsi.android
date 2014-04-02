@@ -139,12 +139,12 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			ShowImpegnoGDS.this.finish();
-			return true;
+			return super.onOptionsItemSelected(item);
 		case R.id.action_modifica_impegno:
-			Intent intent = new Intent(ShowImpegnoGDS.this,
+			Intent intent1 = new Intent(ShowImpegnoGDS.this,
 					ModifiyAttivitaStudio.class);
-			intent.putExtra("impegno_da_modificare", contextualAttivitaStudio);
-			startActivity(intent);
+			intent1.putExtra("impegno_da_modificare", contextualAttivitaStudio);
+			startActivity(intent1);
 			return super.onOptionsItemSelected(item);
 
 		case R.id.action_elimina_impegno:
@@ -232,9 +232,10 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			ShowImpegnoGDS.this.finish();
-//			Intent intent = new Intent(ShowImpegnoGDS.this, Overview_GDS.class);
-//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			// Intent intent = new Intent(ShowImpegnoGDS.this,
+			// Overview_GDS.class);
+			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intent);
 		}
 
 	}

@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -13,6 +12,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -317,6 +317,10 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			this.taskcontext = taskcontext;
 			this.oldone = oldone;
 			this.newone = newone;
+			System.out.println("date: "
+					+ oldone.getEventoId().getDate().getTime() + "\nstart: "
+					+ oldone.getEventoId().getStart().getTime() + "\nstop: "
+					+ oldone.getEventoId().getStop().getTime());
 		}
 
 		@Override
@@ -392,7 +396,12 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (allright) {
-				ModifiyAttivitaStudio.this.finish();
+				Intent intent = new Intent(ModifiyAttivitaStudio.this,
+						ShowImpegnoGDS.class);
+				intent.putExtra("contextualAttivitaStudio", newone);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				
 			} else {
 				// merda
 				Toast.makeText(ModifiyAttivitaStudio.this,
