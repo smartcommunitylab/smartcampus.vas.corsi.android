@@ -1,8 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Studente {
+public class Studente implements Serializable {
 
 	private long id;
 	private String nome;

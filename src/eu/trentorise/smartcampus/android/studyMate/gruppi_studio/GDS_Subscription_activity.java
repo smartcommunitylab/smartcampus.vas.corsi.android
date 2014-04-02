@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -43,10 +42,13 @@ public class GDS_Subscription_activity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		Bundle myextras = getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras
 				.getSerializable("gds_to_subscribe");
+
+		// questo carica la materia nel gruppo
+		new GetRelatedCorsoAS(GDS_Subscription_activity.this, contextualGDS)
+				.execute();
 
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout
@@ -57,7 +59,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
-		@SuppressWarnings("unused")
 		ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
@@ -66,24 +67,15 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		// da fare quando si potrà col backend
 		// logo_gds.setImageDrawable(contextualGDS.getLogo());
 		nome_gds.setText(contextualGDS.getNome());
-		materia_gds.setText("" + contextualGDS.getCorso());
-		// un po' di roba fake
-		ArrayList<Studente> membriGDS = new ArrayList<Studente>();
-		Studente s1 = new Studente();
-		s1.setNome("Pinco");
-		s1.setCognome("Pallino");
-		s1.setAnno_corso("2");
-		Studente s2 = new Studente();
-		s2.setNome("Pinco");
-		s2.setCognome("Pallino");
-		s2.setAnno_corso("2");
-		membriGDS.add(s1);
-		membriGDS.add(s1);
-		// fine roba fake
-		Students_to_listview_adapter adapter = new Students_to_listview_adapter(
-				GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
-				/* contextualGDS.getMembri() */membriGDS);
-		participants_gds.setAdapter(adapter);
+		materia_gds.setText(contextualGDS.getMateria());
+
+		if (contextualGDS.getStudentiGruppo() != null
+				&& !contextualGDS.getStudentiGruppo().isEmpty()) {
+			Students_to_listview_adapter adapter = new Students_to_listview_adapter(
+					GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
+					((ArrayList<Studente>) contextualGDS.getStudentiGruppo()));
+			participants_gds.setAdapter(adapter);
+		}
 
 	}
 
@@ -148,11 +140,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		public ProgressDialog pd;
 		private GruppoDiStudio gds_to_subscribe;
 
-		public ASTaskSubscribe() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
 		public ASTaskSubscribe(Context taskcontext,
 				GruppoDiStudio gds_to_subscribe) {
 			super();
@@ -174,10 +161,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 					SmartUniDataWS.TOKEN_NAME);
 
 			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI, "" + /*
-														 * qui ci va il metodo
-														 * per iscriversi
-														 */"");
+					SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.POST_ACCEPT_GDS);
 			request.setMethod(Method.POST);
 			String jsongds = Utils.convertToJSON(gds);
 			request.setBody(jsongds);
@@ -208,7 +192,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			// subscribetogds(gds_to_subscribe);
+			subscribetogds(gds_to_subscribe);
 			return null;
 		}
 
@@ -224,4 +208,84 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		}
 
 	}
+
+	private class GetRelatedCorsoAS extends AsyncTask<Void, Void, Void> {
+
+		Context taskcontext;
+		GruppoDiStudio GDS;
+		public ProgressDialog pd;
+
+		public GetRelatedCorsoAS(Context taskcontext, GruppoDiStudio GDS) {
+			super();
+			this.taskcontext = taskcontext;
+			this.GDS = GDS;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+
+			pd = new ProgressDialog(taskcontext);
+			pd = ProgressDialog.show(taskcontext,
+					"Caricamento gruppi di studio personali", "");
+		}
+
+		AttivitaDidattica getRelatedCorso() {
+			mProtocolCarrier = new ProtocolCarrier(taskcontext,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_COURSES_DETAILS(GDS.getCorso()));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			String body = null;
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Utils.convertJSONToObject(body, AttivitaDidattica.class);
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			AttivitaDidattica retval = getRelatedCorso();
+			if (retval != null) {
+				GDS.setMateria(retval.getDescription());
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
+			materia_gds.setText(GDS.getMateria());
+			pd.dismiss();
+
+		}
+
+	}
+
 }

@@ -211,9 +211,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS
-							.GET_WS_FIND_GDS_OF_COURSE(attivitadidatticastud
-									.getCds_id()));
+					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
+							+ attivitadidatticastud.getCds_id()));
 			request.setMethod(Method.GET);
 
 			try {
@@ -315,17 +314,14 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		private ArrayList<GruppoDiStudio> getGDSofThatAttivitaDidattica(
 				AttivitaDidattica ad) {
-
 			MessageResponse response;
 			if (ad == null) {
 				return null;
 			}
-			// occio qua a vedere se va preso l'adid oppure il cdsid
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_GDS_BY_COURSE(ad.getAdId()));
+					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(ad.getAdId()));
 			request.setMethod(Method.GET);
-
 			try {
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
@@ -363,6 +359,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			// aggiorno la lista di GDS associati alla materia
+			listaGDSxMateria.clear();
 			listaGDSxMateria = temp_listaGDS;
 			if (temp_listaGDS != null && temp_listaGDS.size() != 0) {
 				// se ci sono GDS della tale materia...

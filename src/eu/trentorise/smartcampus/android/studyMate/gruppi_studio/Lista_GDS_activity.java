@@ -198,6 +198,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		private List<GruppoDiStudio> getMineGDS() {
+			ArrayList<GruppoDiStudio> retval = null;
 			mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -214,6 +215,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 				if (response.getHttpStatus() == 200) {
 					body = response.getBody();
+					retval = (ArrayList<GruppoDiStudio>) Utils
+							.convertJSONToObjects(body, GruppoDiStudio.class);
 				} else {
 					return null;
 				}
@@ -227,7 +230,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return Utils.convertJSONToObjects(body, GruppoDiStudio.class);
+			return retval;
 		}
 
 		@Override
@@ -425,7 +428,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			
+
 		}
 
 	}
