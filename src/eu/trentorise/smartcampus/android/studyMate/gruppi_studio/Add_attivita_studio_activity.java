@@ -83,6 +83,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
 		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, edifici_values);
+		adapter_spinner_ed
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_edificio.setAdapter(adapter_spinner_ed);
 
 		ArrayList<String> room_values = new ArrayList<String>();
@@ -96,6 +98,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
 		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, room_values);
+		adapter_spinner_aule
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_aula.setAdapter(adapter_spinner_aule);
 
 		// retrieving & initializing some button
@@ -186,9 +190,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			if (data != null) {
 				EventoId eventoId = new EventoId();
 				eventoId.setDate(data);
-				Random randomGenerator = new Random();
-				int randomInt1 = randomGenerator.nextInt(1000);
-				Time time = new Time(data.getTime() + randomInt1);
+				Time time = new Time(data.getTime());
 				eventoId.setStart(time);
 				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
