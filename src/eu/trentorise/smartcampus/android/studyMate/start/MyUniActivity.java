@@ -43,8 +43,8 @@ public class MyUniActivity extends SherlockActivity {
 
 	public static final String APP_ID = "studymate";
 	//
-	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
-	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
+	public static final String SERVER_URL = "https://vas.smartcampuslab.it/core.communicator";
+	public static final String AUTH_URL = "https://ac.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
