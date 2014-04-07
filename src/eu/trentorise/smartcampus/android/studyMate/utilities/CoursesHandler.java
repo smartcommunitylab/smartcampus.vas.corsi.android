@@ -3,15 +3,13 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -25,7 +23,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.DialogCourseFragment;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.OverviewFilterFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -168,18 +165,30 @@ public class CoursesHandler extends
 				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					
-					CorsoCarriera corsoSelezionato = new CorsoCarriera();
-					corsoSelezionato = result.get(arg2);
-					
-					DialogCourseFragment dialog = new DialogCourseFragment(corsoSelezionato);
-					dialog.show(currentFragment.getFragmentManager(), currentFragment.getTag());
-					dialog.setRetainInstance(true);
+					AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+		                   currentSherlock);
+		            builderSingle.setTitle(result.get(arg2).getName());
+		           
+		            //ListView mLocationList = (ListView) currentSherlock.findViewById(R.id.lv);
+
+		    		if (result.get(arg2).getResult().equals("-1")) {
+
+		    			final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+		    					currentSherlock, android.R.layout.simple_list_item_1);
+
+		    			String[] cI =  currentSherlock.getResources().getStringArray(R.array.dialogAgendaInterest);
+		    			adapter.add(cI[0]);
+		    			adapter.add(cI[1]);	
+		    			builderSingle.setAdapter(adapter, null);
+
+		    		} else {
+		    			final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+		    					currentSherlock, android.R.layout.simple_list_item_1);
+		    			String[] cL =  currentSherlock.getResources().getStringArray(R.array.dialogAgendaCareer);
+		    			adapter.add(cL[0]);
+		    			builderSingle.setAdapter(adapter, null);	
+		    		}
 			
-					
-					
-					
-					
-					
 					return true;
 				}
 			});
@@ -188,52 +197,6 @@ public class CoursesHandler extends
 
 		}
 	}
-
-	
-//	public class MenuDialogFragment extends DialogFragment {
-//		CorsoCarriera corsoSelezionato;
-//		
-//		public MenuDialogFragment(CorsoCarriera corsoSelezionato) {
-//			this.corsoSelezionato = corsoSelezionato;
-//		}
-//	    @Override
-//	    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//	        // Use the Builder class for convenient dialog construction
-//	        AlertDialog.Builder builder = new AlertDialog.Builder(context.getApplicationContext());
-//	        
-//	        
-//			Bundle data = new Bundle();
-//			data.putSerializable(
-//					Constants.CORSO_CARRIERA_SELECTED,
-//					corsoSelezionato);
-//			data.putString(Constants.COURSE_NAME,
-//					corsoSelezionato.getName());
-//			
-//			builder.setTitle(corsoSelezionato.getName());
-//			builder.setItems(R.array.dialogAgenda, new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			});
-//					
-//	               
-//	        // Create the AlertDialog object and return it
-//	        return builder.create();
-//	    }
-	    
-	    
-//	    @Override
-//	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//	    		Bundle savedInstanceState) {
-//	    	// TODO Auto-generated method stub
-//	    	View view = inflater.inflate(R.layout.dialog_courses_layout, container);
-//	    	
-//	    	return view;
-//	    }
-//	}
 	
 	
 	@Override
