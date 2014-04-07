@@ -153,6 +153,8 @@
     <string name="dialog_follow_list_courses_career">Lista dei corsi da libretto</string>
     <string name="dialog_waiting_goto_home">Reindirizzamento alla home del corso</string>
     <string name="dialog_error_redirect">Errore! Non è possibile raggiungere la home del corso</string>
+    <string name="dialog_error_delete">Errore! Non è possibile eliminare il corso dalla lista</string>
+    <string name="dialog_success_delete">Corso eliminato dalla lista</string>
     <string name="invalid_career">"Non stai seguendo alcun corso</string>
     <string name="no_vote">Non puoi valutare nessun corso</string>
      <!-- Toasts -->

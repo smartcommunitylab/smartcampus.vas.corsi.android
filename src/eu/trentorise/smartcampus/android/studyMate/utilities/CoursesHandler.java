@@ -15,7 +15,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -189,7 +188,7 @@ public class CoursesHandler extends
 										.getStringArray(
 												R.array.dialogAgendaInterest);
 								adapter.add(cI[0]);
-								adapter.add(cI[1]);
+								//adapter.add(cI[1]);//////////////////////////////////////////////////////////////////////PROVVISORIO
 								builderSingle.setAdapter(adapter,
 										new ItemMenuCourseListener());
 							} else {
@@ -236,7 +235,12 @@ public class CoursesHandler extends
 
 			} else {
 				if (which == 1) {
-
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+						new AsyncDeleteCourseInterest().executeOnExecutor(
+								AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+					} else {
+						new AsyncDeleteCourseInterest().execute((Void[]) null);
+					}
 				}
 			}
 
@@ -244,6 +248,9 @@ public class CoursesHandler extends
 
 	}
 
+	
+	
+	
 	public class AsyncCourseAd extends AsyncTask<Void, Void, AttivitaDidattica> {
 
 		private ProtocolCarrier mProtocolCarrier;
@@ -321,6 +328,86 @@ public class CoursesHandler extends
 				pd.dismiss();
 
 				currentSherlock.startActivity(i);
+			}
+
+		}
+	}
+	
+	
+	
+	public class AsyncDeleteCourseInterest extends AsyncTask<Void, Void, Boolean> {
+
+		private ProtocolCarrier mProtocolCarrier;
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(currentSherlock);
+			pd = ProgressDialog.show(currentSherlock, context.getResources()
+					.getString(R.string.dialog_waiting_goto_home), context
+					.getResources().getString(R.string.dialog_loading));
+
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			mProtocolCarrier = new ProtocolCarrier(context,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_WS_COURSE_UNFOLLOW(corsoSelezionato
+							.getCod()));
+			request.setMethod(Method.POST);
+
+			MessageResponse response;
+			String body = null;
+
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, Boolean.class);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+
+			if (result == null) {
+				
+				pd.dismiss();
+				
+				Toast.makeText(currentSherlock, context.getResources()
+						.getString(R.string.dialog_error_delete),
+						Toast.LENGTH_SHORT).show();
+			} else if(result){
+
+
+				Toast.makeText(currentSherlock, context.getResources()
+						.getString(R.string.dialog_success_delete),
+						Toast.LENGTH_SHORT).show();
+				
+				
 			}
 
 		}

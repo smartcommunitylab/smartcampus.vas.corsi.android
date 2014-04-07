@@ -42,7 +42,10 @@ public final class SmartUniDataWS {
 	public static String GET_WS_COURSE_BY_COD(String adCod) {
 		return "/attivitadidattica/adcod/" + String.valueOf(adCod);
 	}
-
+	
+	public static String POST_WS_COURSE_UNFOLLOW(String adCod) {
+		return "/corsointeresse/" + String.valueOf(adCod)+"/delete";
+	}
 	
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
