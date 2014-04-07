@@ -38,7 +38,12 @@ public final class SmartUniDataWS {
 	public static String GET_WS_COURSES_DETAILS(long adId) {
 		return "/attivitadidattica/" + String.valueOf(adId);
 	}
+	
+	public static String GET_WS_COURSE_BY_COD(String adCod) {
+		return "/attivitadidattica/adcod/" + String.valueOf(adCod);
+	}
 
+	
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
 	// Courses complete

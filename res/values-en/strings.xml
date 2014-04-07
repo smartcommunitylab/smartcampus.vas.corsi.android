@@ -138,6 +138,8 @@
     <string name="dialog_rate_loading_feedback">Loading data from your review</string>
     <string name="dialog_saving_feedback">Saving</string>
     <string name="dialog_follow_list_courses_career">List of program study courses</string>
+    <string name="dialog_waiting_goto_home">Redirection to the home of the course</string>
+        <string name="dialog_error_redirect">Error! You can not reach the home of the course</string>
     <string name="no_vote">You cannot evaluate any course</string>
      <string name="invalid_career">You are not following any course</string>
     <!-- Toasts -->
