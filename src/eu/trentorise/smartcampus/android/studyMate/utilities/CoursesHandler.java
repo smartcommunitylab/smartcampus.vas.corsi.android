@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -172,22 +173,13 @@ public class CoursesHandler extends
 					
 					DialogCourseFragment dialog = new DialogCourseFragment(corsoSelezionato);
 					dialog.show(currentFragment.getFragmentManager(), currentFragment.getTag());
-//					MenuDialogFragment menuCourse = new MenuDialogFragment(corsoSelezionato);
-//					FragmentManager fm = menuCourse.getFragmentManager();
-//					menuCourse.setRetainInstance(true);
-//					menuCourse.show(fm, corsoSelezionato.getName());
-//					AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-//					LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-//			        View convertView = (View) inflater.inflate(R.layout.dialog_menu_coursesinterest, null);
-//			        alertDialog.setView(convertView);
-//			        alertDialog.setTitle(corsoSelezionato.getName());
-//			        ListView lv = (ListView) convertView.findViewById(R.id.listViewOptions);
-//			        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,context.getResources().getStringArray(R.array.dialogAgenda));
-//			        lv.setAdapter(adapter);
-//			        alertDialog.show();
+					dialog.setRetainInstance(true);
+			
 					
-					//MenuDialogFragment dialogCourseInterest = new MenuDialogFragment(corsoSelezionato);
-						
+					
+					
+					
+					
 					return true;
 				}
 			});

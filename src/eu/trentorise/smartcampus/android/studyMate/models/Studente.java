@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Studente implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 171703489618088890L;
 	private long id;
 	private String nome;
 	private String cognome;
