@@ -55,7 +55,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp" >
@@ -105,7 +105,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin"
                 android:text="@string/addevent_description"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
