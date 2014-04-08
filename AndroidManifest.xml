@@ -45,7 +45,6 @@
         android:protectionLevel="signature" />
 
     <application
-        android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/smartuni_logo_base"
         android:label="@string/app_name"
@@ -174,10 +173,6 @@
             android:configChanges="orientation|keyboard"
             android:icon="@drawable/ic_white_ratecourses"
             android:label="@string/title_activity_rate" >
-        </activity>
-        <activity
-            android:name="eu.trentorise.smartcampus.android.studyMate.start.WorkInProgress"
-            android:label="@string/title_activity_work_in_progress" >
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity"
