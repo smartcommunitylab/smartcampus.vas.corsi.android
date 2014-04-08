@@ -274,26 +274,21 @@ public class OverviewFilterFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-
-			if (result == null) {
-
-				pd.dismiss();
-
-				Toast.makeText(
-						getActivity(),
-						getActivity().getResources()
-								.getString(R.string.dialog_error_delete),
-						Toast.LENGTH_SHORT).show();
-			} else if (result) {
-
-				pd.dismiss();
-				Toast.makeText(
-						getActivity(),
-						getActivity().getResources()
-								.getString(R.string.dialog_success_delete),
-						Toast.LENGTH_SHORT).show();
-
-			}
+			pd.dismiss();
+//			if (result == null) {
+//				Toast.makeText(
+//						getActivity(),
+//						getActivity().getResources()
+//								.getString(R.string.dialog_error_delete),
+//						Toast.LENGTH_SHORT).show();
+//			} else if (result) {
+//				Toast.makeText(
+//						getActivity(),
+//						getActivity().getResources()
+//								.getString(R.string.dialog_success_delete),
+//						Toast.LENGTH_SHORT).show();
+//
+//			}
 
 		}
 	}
