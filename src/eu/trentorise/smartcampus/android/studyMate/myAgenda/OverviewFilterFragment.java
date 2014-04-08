@@ -22,13 +22,25 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.AsyncDeleteCourseInterest;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
@@ -187,10 +199,108 @@ public class OverviewFilterFragment extends SherlockFragment {
 			ft.addToBackStack(getTag());
 			ft.commit();
 			return true;
+		case R.id.menu_unfollow:
+			if (cc.getResult().compareTo("-1") == 0) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+					new AsyncDeleteCourseInterest().executeOnExecutor(
+							AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+					getActivity().onBackPressed();
+				} else {
+					new AsyncDeleteCourseInterest().execute((Void[]) null);
+					getActivity().onBackPressed();
+				}
+			} else {
+				Toast.makeText(getActivity(),
+						R.string.feedback_course_is_career, Toast.LENGTH_SHORT)
+						.show();
+			}
 		default:
 			break;
 		}
 		return false;
+	}
+
+	public class AsyncDeleteCourseInterest extends
+			AsyncTask<Void, Void, Boolean> {
+
+		private ProtocolCarrier mProtocolCarrier;
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pd = new ProgressDialog(getActivity());
+			pd = ProgressDialog.show(getActivity(),
+					getActivity().getApplicationContext().getResources()
+							.getString(R.string.dialog_waiting_goto_home),
+					getActivity().getApplicationContext().getResources()
+							.getString(R.string.dialog_loading));
+
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			mProtocolCarrier = new ProtocolCarrier(getActivity()
+					.getApplicationContext(), SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_WS_COURSE_UNFOLLOW(cc.getCod()));
+			request.setMethod(Method.POST);
+
+			MessageResponse response;
+			String body = null;
+
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, Boolean.class);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+
+			if (result == null) {
+
+				pd.dismiss();
+
+				Toast.makeText(
+						getActivity(),
+						getActivity().getApplicationContext().getResources()
+								.getString(R.string.dialog_error_delete),
+						Toast.LENGTH_SHORT).show();
+			} else if (result) {
+
+				pd.dismiss();
+				Toast.makeText(
+						getActivity(),
+						getActivity().getApplicationContext().getResources()
+								.getString(R.string.dialog_success_delete),
+						Toast.LENGTH_SHORT).show();
+
+			}
+
+		}
 	}
 
 }
