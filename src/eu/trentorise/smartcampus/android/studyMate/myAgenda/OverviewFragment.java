@@ -71,16 +71,13 @@ public class OverviewFragment extends SherlockFragment {
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				// TODO Auto-generated method stub
 				try {
 					listaEventi = new EventsHandler(getSherlockActivity()
 							.getApplicationContext(), getActivity()).execute()
 							.get();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return null;
@@ -89,7 +86,6 @@ public class OverviewFragment extends SherlockFragment {
 
 			@Override
 			protected void onPostExecute(Void result) {
-				// TODO Auto-generated method stub
 				super.onPostExecute(result);
 
 				OverviewFragment.pd.dismiss();

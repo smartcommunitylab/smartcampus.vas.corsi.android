@@ -3,6 +3,8 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 public final class SmartUniDataWS {
 
 	public static final String URL_WS_SMARTUNI = "https://studymate-web.app.smartcampuslab.it";
+	// public static final String URL_WS_SMARTUNI =
+	// "http://smartcampusvascorsiwebtest.app.smartcampuslab.it";
 	// public static String TOKEN = MyUniActivity.getAuthToken();
 	public static final String TOKEN_NAME = "studymate";
 
@@ -35,6 +37,14 @@ public final class SmartUniDataWS {
 
 	public static String GET_WS_COURSES_DETAILS(long adId) {
 		return "/attivitadidattica/" + String.valueOf(adId);
+	}
+
+	public static String GET_WS_COURSE_BY_COD(String adCod) {
+		return "/attivitadidattica/adcod/" + String.valueOf(adCod);
+	}
+
+	public static String POST_WS_COURSE_UNFOLLOW(String adCod) {
+		return "/corsointeresse/" + String.valueOf(adCod) + "/delete";
 	}
 
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
@@ -109,8 +119,15 @@ public final class SmartUniDataWS {
 	// gds///////////////////////////////////////////////////////////////
 	public static String POST_ADD_NEW_GDS = "/gruppodistudio/add";
 
+	// ritorna i gruppi a cui uno studente può iscriversi//////////////////////
+	public static String GET_WS_FIND_GDS = "/gruppodistudio/find";
+
+	public static final String GET_WS_FIND_GDS_OF_COURSE(long idad) {
+		return "gruppodistudio/find/" + idad;
+	}
+
 	// gds///////////////////////////////////////////////////////////////
-	public static String DELETE_ABANDON_GDS = "/gruppodistudio/delete/me";
+	public static String POST_ABANDON_GDS = "/gruppodistudio/delete/me";
 
 	// gds///////////////////////////////////////////////////////////////
 	public static String GET_WS_ALLGDS = "/gruppodistudio/all";
@@ -137,9 +154,16 @@ public final class SmartUniDataWS {
 	public static String POST_ATTIVITASTUDIO_ADD = "/attivitadistudio/add";
 
 	// gds //////////////////////////////////////////////////////////
-	public static String POST_ATTIVITASTUDIO_MODIFY = "/attivitadistudio/change";
-
-	// gds //////////////////////////////////////////////////////////
 	public static String DELETE_ATTIVITASTUDIO = "/attivitadistudio/delete";
+
+	public static final String GET_STUDENTE(long id_stud) {
+		return "/studente/" + id_stud;
+	}
+
+	public static final String POST_WS_CHANGE_ATTIVITASTUDIO(long dateold,
+			long fromold, long toold) {
+		return "/attivitadistudio/change/date/" + dateold + "/from/" + fromold
+				+ "/to/" + toold;
+	}
 
 }

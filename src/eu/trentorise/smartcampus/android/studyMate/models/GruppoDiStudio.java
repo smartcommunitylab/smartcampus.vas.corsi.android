@@ -4,32 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Class GruppoDiStudio.
- */
-
-// già da web
 public class GruppoDiStudio implements Serializable {
-	// id del gruppo
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -76471671623419759L;
+	private static final long serialVersionUID = -1179725685319910150L;
 
 	private long id;
 
-	// Nome del gruppo
-
 	private String nome;
-
-	// corso di riferimento
 
 	private long corso;
 
-	private String materia;
-
 	private String idsStudenti;
+
+	private String materia;
 
 	private List<Studente> studentiGruppo;
 
@@ -73,9 +63,9 @@ public class GruppoDiStudio implements Serializable {
 		this.idsStudenti = idsStudenti;
 	}
 
-	public List<Studente> getStudentiGruppo() {
-		return studentiGruppo;
-	}
+	// public List<Long> getIdStudentiGruppo() {
+	// return this.convertIdsAllStudentsToList();
+	// }
 
 	public Byte[] getLogo() {
 		return logo;
@@ -89,6 +79,10 @@ public class GruppoDiStudio implements Serializable {
 		this.studentiGruppo = studentiGruppo;
 	}
 
+	public List<Studente> getStudentiGruppo() {
+		return studentiGruppo;
+	}
+
 	public boolean isVisible() {
 		return visible;
 	}
@@ -97,14 +91,24 @@ public class GruppoDiStudio implements Serializable {
 		this.visible = visible;
 	}
 
+	public List<String> getListInvited(long idStudente) {
+		return convertIdsInvitedToList(this.getIdsStudenti(), idStudente);
+	}
+
 	public void setIfVisibleFromNumMembers() {
 		int numMembers = this.getIdsStudenti().split(",").length;
 
-		if (numMembers >= 2)
+		if (numMembers >= 1)
 			this.setVisible(true);
 		else
 			this.setVisible(false);
 
+	}
+
+	// chiamata soltanto alla creazione di un nuovo gruppo
+	public void initStudenteGruppo(long idStudenteDaAggiungere) {
+		// TODO Auto-generated method stub
+		this.setIdsStudenti(String.valueOf(idStudenteDaAggiungere) + ",");
 	}
 
 	public void addStudenteGruppo(long idStudenteDaAggiungere) {
@@ -113,10 +117,44 @@ public class GruppoDiStudio implements Serializable {
 				+ String.valueOf(idStudenteDaAggiungere) + ",");
 	}
 
-	// chiamata soltanto alla creazione di un nuovo gruppo
-	public void initStudenteGruppo(long idStudenteDaAggiungere) {
-		// TODO Auto-generated method stub
-		this.setIdsStudenti(String.valueOf(idStudenteDaAggiungere) + ",");
+	public List<String> convertIdsInvitedToList(String ids, long idStudente) {
+		String[] listIds = null;
+		List<String> listIdsInvited = new ArrayList<String>();
+
+		listIds = ids.split(",");
+
+		for (String id : listIds) {
+
+			if (!id.equals(String.valueOf(idStudente))) {
+				listIdsInvited.add(id);
+			}
+
+		}
+
+		return listIdsInvited;
+	}
+
+	// public List<Long> convertIdsAllStudentsToList() {
+	// String[] listIds = null;
+	// List<Long> listIdsInvited = new ArrayList<Long>();
+	//
+	// listIds = this.idsStudenti.split(",");
+	//
+	// for (String id : listIds) {
+	//
+	// listIdsInvited.add(Long.parseLong(id));
+	//
+	// }
+	//
+	// return listIdsInvited;
+	// }
+
+	public String getMateria() {
+		return materia;
+	}
+
+	public void setMateria(String materia) {
+		this.materia = materia;
 	}
 
 	public void removeStudenteGruppo(long id2) {
@@ -141,15 +179,6 @@ public class GruppoDiStudio implements Serializable {
 		this.setIdsStudenti(studentiGruppoAggiornato);
 	}
 
-	public boolean canRemoveGruppoDiStudioIfVoid() {
-		String[] listIds = this.getIdsStudenti().split(",");
-
-		if (listIds[0] == "")
-			return true;
-		else
-			return false;
-	}
-
 	public boolean isContainsStudente(long idStudente) {
 		// TODO Auto-generated method stub
 		String studentiGruppoIds = null;
@@ -166,33 +195,13 @@ public class GruppoDiStudio implements Serializable {
 		return false;
 	}
 
-	public List<String> getListInvited(long idStudente) {
-		return convertIdsInvitedToList(this.getIdsStudenti(), idStudente);
-	}
+	public boolean canRemoveGruppoDiStudioIfVoid() {
+		String[] listIds = this.getIdsStudenti().split(",");
 
-	public List<String> convertIdsInvitedToList(String ids, long idStudente) {
-		String[] listIds = null;
-		List<String> listIdsInvited = new ArrayList<String>();
-
-		listIds = ids.split(",");
-
-		for (String id : listIds) {
-
-			if (!id.equals(String.valueOf(idStudente))) {
-				listIdsInvited.add(id);
-			}
-
-		}
-
-		return listIdsInvited;
-	}
-
-	public String getMateria() {
-		return materia;
-	}
-
-	public void setMateria(String materia) {
-		this.materia = materia;
+		if (listIds[0] == "")
+			return true;
+		else
+			return false;
 	}
 
 }

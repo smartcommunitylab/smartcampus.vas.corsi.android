@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,7 +39,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	Spinner spinner_materia;
 	Spinner spinner_nome_gruppo;
-	AutoCompleteTextView autocomplete_ricercaXmembro;
+	// AutoCompleteTextView autocomplete_ricercaXmembro;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
 	public ArrayList<AttivitaDidattica> listaCorsi = new ArrayList<AttivitaDidattica>();
 	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
@@ -61,7 +60,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
-		autocomplete_ricercaXmembro = (AutoCompleteTextView) findViewById(R.id.autocomplete_ricerca_per_membro);
+		// autocomplete_ricercaXmembro = (AutoCompleteTextView)
+		// findViewById(R.id.autocomplete_ricerca_per_membro);
 
 		// caricamento materie nello spinner materie, l'onitemselectedlistener
 		// penserà a far partire l'aggiornamento dello spinner nomi gruppo
@@ -78,15 +78,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 					View selectedItemView, int position, long id) {
 				// TODO Auto-generated method stub
 
-				String selected_materia = (String) spinner_materia
-						.getItemAtPosition(position);
 				AttivitaDidattica attivitaDidattica = listaCorsi.get(position);
-				Toast.makeText(
-						RicercaGruppiGenerale_activity.this,
-						"Hai selezionato " + selected_materia
-								+ "\nIl campo id della materia è "
-								+ attivitaDidattica.getAdId(),
-						Toast.LENGTH_LONG).show();
 				LoadGDSofCourse task = new LoadGDSofCourse(
 						RicercaGruppiGenerale_activity.this);
 				task.execute(attivitaDidattica);
@@ -125,23 +117,50 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 					.findViewById(R.id.spinner_materie)).getSelectedItem()
 					.toString();
 
-			String nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
-					.findViewById(R.id.spinner_nomi_gruppi)).getSelectedItem()
-					.toString();
+			String nome_gruppo;
+			try {
+				nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
+						.findViewById(R.id.spinner_nomi_gruppi))
+						.getSelectedItem().toString();
+			} catch (NullPointerException e) {
+				// TODO: handle exception
+				System.out
+						.println("Nessun gruppo selezionato o nessun gruppo disponibile pertanto nomegruppo è null");
+				nome_gruppo = null;
+			}
 
 			// passaggio parametri della ricerca a
 			// Display_GDS_research_resultsActivity
-			Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
-					Display_GDS_research_results.class);
-			if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()) {
+			Intent intent;
+			if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
+					&& nome_gruppo.equals("Tutti")) {
+				// se ha selezionato la materia ma ha lasciato il campo nome
+				// gruppo a "Tutti"
+				intent = new Intent(RicercaGruppiGenerale_activity.this,
+						Display_GDS_research_results.class);
 				intent.putExtra("PossibleGDS", listaGDSxMateria);
-				intent.putExtra("Selected_nome_gruppo", spinner_nome_gruppo
-						.getSelectedItem().toString());
+				intent.putExtra("Selected_nome_gruppo", nome_gruppo);
+				intent.putExtra("Selected_materia", materia);
+			} else if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
+					&& !nome_gruppo.equals("Tutti")) {
+				// se ha selezionato la materia e ha scelto anche un gruppo in
+				// particolare
+				GruppoDiStudio gds_to_subscribe = null;
+				for (GruppoDiStudio gds : listaGDSxMateria) {
+					if (gds.getNome().equals(nome_gruppo))
+						gds_to_subscribe = gds;
+				}
+				intent = new Intent(RicercaGruppiGenerale_activity.this,
+						GDS_Subscription_activity.class);
+				intent.putExtra("gds_to_subscribe", gds_to_subscribe);
 			} else {
 				if (listaCorsi != null && !listaCorsi.isEmpty()) {
-					intent.putExtra("PossibleAttivitaDidattiche", listaCorsi);
-					intent.putExtra("Selected_materia", spinner_materia
-							.getSelectedItem().toString());
+					Toast.makeText(
+							RicercaGruppiGenerale_activity.this,
+							materia
+									+ ": purtroppo non ci sono gruppi per questa materia\nSeleziona un'altra materia",
+							Toast.LENGTH_LONG).show();
+					return super.onOptionsItemSelected(item);
 				} else {
 					Toast.makeText(RicercaGruppiGenerale_activity.this,
 							"Seleziona almeno la materia!", Toast.LENGTH_LONG)
@@ -239,7 +258,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
-			if (temp_listacorsiArrayList != null) {
+			if (temp_listacorsiArrayList != null
+					&& !temp_listacorsiArrayList.isEmpty()) {
 				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
 					listaCorsiString.add(tempcorso.getDescription());
 				}
@@ -254,7 +274,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			} else {
 				pd.dismiss();
 				RicercaGruppiGenerale_activity.this.finish();
-				Toast.makeText(MyApplication.getAppContext(),
+				Toast.makeText(getApplicationContext(),
 						"Impossibile cercare un gruppo a cui iscriversi!",
 						Toast.LENGTH_LONG).show();
 			}
@@ -291,17 +311,14 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		private ArrayList<GruppoDiStudio> getGDSofThatAttivitaDidattica(
 				AttivitaDidattica ad) {
-
 			MessageResponse response;
 			if (ad == null) {
 				return null;
 			}
-			// occio qua a vedere se va preso l'adid oppure il cdsid
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_GDS_BY_COURSE(ad.getAdId()));
+					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(ad.getAdId()));
 			request.setMethod(Method.GET);
-
 			try {
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
@@ -338,12 +355,14 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			// listaCorsiString.clear();
+			// aggiorno la lista di GDS associati alla materia
+			listaGDSxMateria.clear();
+			listaGDSxMateria = temp_listaGDS;
 			if (temp_listaGDS != null && temp_listaGDS.size() != 0) {
 				// se ci sono GDS della tale materia...
-				listaGDSxMateria = temp_listaGDS;
-				// e fare qualcosa con gli adapter probabilmente
+				// fare qualcosa con gli adapter
 				ArrayList<String> nomi_GDS = new ArrayList<String>();
+				nomi_GDS.add("Tutti");
 				for (GruppoDiStudio g : listaGDSxMateria) {
 					nomi_GDS.add(g.getNome());
 				}
@@ -353,13 +372,32 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				adapter_spinner_gds
 						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				spinner_nome_gruppo.setAdapter(adapter_spinner_gds);
+				// faccio in modo che lo spinner parta dal valore 'Tutti'
+				String myString = "Tutti"; // the value you want the position
+											// for
+				int spinnerPosition = adapter_spinner_gds.getPosition(myString);
+				// set the default according to value
+				spinner_nome_gruppo.setSelection(spinnerPosition);
+				//
+				// ((ArrayAdapter<String>) spinner_nome_gruppo.getAdapter())
+				// .notifyDataSetChanged();
+				spinner_nome_gruppo.setEnabled(true);
 				pd.dismiss();
 			} else {
 				// se non ci sono GDS della tale materia...
 				// ripartire da qualche passo precedente dell'activity
 				pd.dismiss();
-				Toast.makeText(MyApplication.getAppContext(),
-						"Impossibile cercare un gruppo a cui iscriversi!",
+				String materia = ((Spinner) RicercaGruppiGenerale_activity.this
+						.findViewById(R.id.spinner_materie)).getSelectedItem()
+						.toString();
+				// ((ArrayAdapter<String>) spinner_nome_gruppo.getAdapter())
+				// .notifyDataSetChanged();
+				spinner_nome_gruppo.setAdapter(null);
+				spinner_nome_gruppo.setEnabled(false);
+				Toast.makeText(
+						getApplicationContext(),
+						materia
+								+ ": non ci sono ancora gruppi a cui iscriversi!",
 						Toast.LENGTH_LONG).show();
 			}
 		}

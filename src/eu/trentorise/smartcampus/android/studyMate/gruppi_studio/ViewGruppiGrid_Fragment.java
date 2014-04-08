@@ -66,22 +66,7 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 				public void onItemClick(AdapterView<?> parent, View v,
 						int position, long id) {
 
-					/*
-					 * Per passare il contextualGDS alla overview_GDS activity,
-					 * piazzo il contextualgds nel contextualcollection e poi
-					 * dalla overview_gds vado a recuperarlo. Il
-					 * contextualcollection è un Arraylist<Object> della classe
-					 * MyApplication. contextualcollection è statico e poichè la
-					 * classe myapplication è pubblica chiunque può accedere al
-					 * contextualcollection. Il contextualcollection lo uso come
-					 * spazio di memoria condivisa. Come politica di utilizzo mi
-					 * prefiggo di piazzare nel contextualcollection un oggetto
-					 * prima di cambiare activity, nella nuova activity per
-					 * prima cosa recupero tale oggetto e poi pulisco il
-					 * contextualcollection
-					 */
 					GruppoDiStudio contextualGDS = user_gds_list.get(position);
-					// MyApplication.getContextualCollection().add(contextualGDS);
 					Intent intent = new Intent(getActivity(),
 							Overview_GDS.class);
 					intent.putExtra("contextualGDS", contextualGDS);
@@ -142,7 +127,7 @@ public class ViewGruppiGrid_Fragment extends SherlockFragment {
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.ac_elimina:
-				Toast.makeText(MyApplication.getAppContext(), "ole",
+				Toast.makeText(getActivity().getApplicationContext(), "ole",
 						Toast.LENGTH_SHORT).show();
 				mode.finish(); // Action picked, so close the CAB
 				return true;

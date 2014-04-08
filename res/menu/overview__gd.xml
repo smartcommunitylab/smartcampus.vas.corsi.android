@@ -1,6 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/aggiungi_impegno"
+        android:icon="@drawable/ic_action_add"
+        android:showAsAction="ifRoom"
+        android:title=""/>
+    <item
         android:id="@+id/action_modifica_gruppo"
         android:icon="@drawable/ic_edit"
         android:showAsAction="collapseActionView"

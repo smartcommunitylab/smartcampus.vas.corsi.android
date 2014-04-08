@@ -124,11 +124,11 @@ public class Impegni_Fragment extends SherlockFragment {
 		switch (item.getItemId()) {
 
 		case R.id.aggiungi_impegno: {
-			Intent intent = new Intent(MyApplication.getAppContext(),
+			Intent intent = new Intent(getActivity().getApplicationContext(),
 					Add_attivita_studio_activity.class);
 			intent.putExtra("gds", gds);
 			startActivity(intent);
-			return true;
+			return super.onOptionsItemSelected(item);
 		}
 
 		default:

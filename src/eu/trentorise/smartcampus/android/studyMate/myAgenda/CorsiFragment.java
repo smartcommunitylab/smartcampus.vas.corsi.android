@@ -66,4 +66,5 @@ public class CorsiFragment extends SherlockFragment {
 		}
 		return false;
 	}
+
 }

@@ -57,7 +57,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 		// findViewById(R.id.scegli_materia);
 		spinner_scegli_materia = (Spinner) findViewById(R.id.spinner_materia);
 		tv_nome_gds = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo);
-		tv_invitati = (AutoCompleteTextView) findViewById(R.id.invita_compagni_gds);
 
 		// spinner_edificio.setAdapter(adapter_spinner_ed);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
@@ -207,7 +206,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
@@ -289,7 +287,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			} else {
 				pd.dismiss();
 				Crea_GDS_activity.this.finish();
-				Toast.makeText(MyApplication.getAppContext(),
+				Toast.makeText(getApplicationContext(),
 						"Impossibile creare un nuovo gruppo!",
 						Toast.LENGTH_LONG).show();
 			}

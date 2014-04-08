@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -67,10 +69,15 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// Ignore
 		}
 
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		// retrieve gruppi with followinf asynctask
 		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
 		task.execute();
-
 	}
 
 	@Override
@@ -174,6 +181,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		Context taskcontext;
 		public ProgressDialog pd;
 		List<GruppoDiStudio> responselist;
+		ArrayList<CorsoCarriera> corsicarrierastudente;
 
 		public MyAsyncTask(Context taskcontext) {
 			super();
@@ -190,6 +198,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 
 		private List<GruppoDiStudio> getMineGDS() {
+			ArrayList<GruppoDiStudio> retval = null;
 			mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -206,6 +215,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 				if (response.getHttpStatus() == 200) {
 					body = response.getBody();
+					retval = (ArrayList<GruppoDiStudio>) Utils
+							.convertJSONToObjects(body, GruppoDiStudio.class);
 				} else {
 					return null;
 				}
@@ -219,7 +230,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return Utils.convertJSONToObjects(body, GruppoDiStudio.class);
+			return retval;
 		}
 
 		@Override
@@ -230,6 +241,49 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			if (responselist != null) {
 				for (GruppoDiStudio gds : responselist) {
 					user_gds_list.add(gds);
+				}
+			}
+
+			// proviamo a recueprare i dati relativi al corso di laurea
+			// di
+			// uno studente tramite il codice prensete all'interno di
+			// uno
+			// dei corsicarriera che ci siamo appena presi
+			String jsoncorsicarrierastudente = load("corsiStudente");
+			corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
+					.convertJSONToObjects(jsoncorsicarrierastudente,
+							CorsoCarriera.class);
+
+			if (corsicarrierastudente != null
+					&& !corsicarrierastudente.isEmpty()) {
+				long cod = corsicarrierastudente.get(0).getId();
+				mProtocolCarrier = new ProtocolCarrier(Lista_GDS_activity.this,
+						SmartUniDataWS.TOKEN_NAME);
+				MessageResponse response2;
+				MessageRequest request2 = new MessageRequest(
+						SmartUniDataWS.URL_WS_SMARTUNI,
+						SmartUniDataWS.GET_WS_COURSES_DETAILS(cod));
+				request2.setMethod(Method.GET);
+				try {
+					response2 = mProtocolCarrier.invokeSync(request2,
+							SmartUniDataWS.TOKEN_NAME,
+							MyUniActivity.getAuthToken());
+					if (response2.getHttpStatus() == 200) {
+
+						body = response2.getBody();
+						String jsonattivitadidattica = body;
+						save("attivitaDidatticaStudente", jsonattivitadidattica);
+					} else {
+						return null;
+					}
+				} catch (ConnectionException e) {
+					e.printStackTrace();
+				} catch (ProtocolException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (AACException e) {
+					e.printStackTrace();
 				}
 			}
 			return user_gds_list;
@@ -261,6 +315,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				GetRelatedCorsoAS task1 = new GetRelatedCorsoAS(
 						Lista_GDS_activity.this, gds);
 				task1.execute();
+
 			}
 
 			// inizializza la grafica in base allo stato booleano di
@@ -284,6 +339,22 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			}
 
 		}
+
+		private void save(String key, String jsonTosaveinSharedP) {
+			SharedPreferences sharedPreferences = Lista_GDS_activity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPreferences.edit();
+			editor.putString(key, jsonTosaveinSharedP);
+			editor.commit();
+		}
+
+		public String load(String key) {
+			SharedPreferences sharedPreferences = Lista_GDS_activity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String retvaljson = sharedPreferences.getString(key, null);
+			return retvaljson;
+		}
+
 	}
 
 	private class GetRelatedCorsoAS extends AsyncTask<Void, Void, Void> {
@@ -357,6 +428,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
+
 		}
 
 	}

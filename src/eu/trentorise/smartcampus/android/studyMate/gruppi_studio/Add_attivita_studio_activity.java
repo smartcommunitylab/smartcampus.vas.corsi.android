@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import android.widget.TimePicker;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -79,6 +82,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
 		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, edifici_values);
+		adapter_spinner_ed
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_edificio.setAdapter(adapter_spinner_ed);
 
 		ArrayList<String> room_values = new ArrayList<String>();
@@ -92,6 +97,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
 		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, room_values);
+		adapter_spinner_aule
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_aula.setAdapter(adapter_spinner_aule);
 
 		// retrieving & initializing some button
@@ -180,7 +187,13 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setTitle(oggetto);
 			// Date data = new Date();
 			if (data != null) {
-				nuova_attivitaStudio.getEventoId().setDate(data);
+				EventoId eventoId = new EventoId();
+				eventoId.setDate(data);
+				Time time = new Time(data.getTime());
+				eventoId.setStart(time);
+				eventoId.setStop(time);
+				// nuova_attivitaStudio.getEventoId().setDate(data);
+				nuova_attivitaStudio.setEventoId(eventoId);
 			}
 
 			// nuova_attivitaStudio.setStart(start);
@@ -201,11 +214,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					Add_attivita_studio_activity.this);
 			addAttivitaAsyncTask.execute();
 
-			return true;
+			return super.onOptionsItemSelected(item);
 		}
 		case android.R.id.home: {
 			Add_attivita_studio_activity.this.finish();
-			return true;
+			return super.onOptionsItemSelected(item);
 		}
 
 		default:
@@ -318,11 +331,12 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			super.onPostExecute(result);
 
 			pd.dismiss();
-			Add_attivita_studio_activity.this.finish();
-			// Intent intent = new Intent(Add_attivita_studio_activity.this,
-			// Overview_GDS.class);
-			// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intent);
+			// Add_attivita_studio_activity.this.finish();
+			Intent intent = new Intent(Add_attivita_studio_activity.this,
+					Overview_GDS.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("contextualGDS", gds);
+			startActivity(intent);
 		}
 
 		private boolean addAttivitaonweb() {
@@ -376,6 +390,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			addAttivitaonweb();
+
 			return null;
 		}
 
