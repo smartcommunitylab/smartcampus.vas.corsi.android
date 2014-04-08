@@ -2,9 +2,9 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 public final class SmartUniDataWS {
 
-	 public static final String URL_WS_SMARTUNI =
-	 "https://studymate-web.app.smartcampuslab.it";
-	//public static final String URL_WS_SMARTUNI = "http://smartcampusvascorsiwebtest.app.smartcampuslab.it";
+	public static final String URL_WS_SMARTUNI = "https://studymate-web.app.smartcampuslab.it";
+	// public static final String URL_WS_SMARTUNI =
+	// "http://smartcampusvascorsiwebtest.app.smartcampuslab.it";
 	// public static String TOKEN = MyUniActivity.getAuthToken();
 	public static final String TOKEN_NAME = "studymate";
 
@@ -38,15 +38,15 @@ public final class SmartUniDataWS {
 	public static String GET_WS_COURSES_DETAILS(long adId) {
 		return "/attivitadidattica/" + String.valueOf(adId);
 	}
-	
+
 	public static String GET_WS_COURSE_BY_COD(String adCod) {
 		return "/attivitadidattica/adcod/" + String.valueOf(adCod);
 	}
-	
+
 	public static String POST_WS_COURSE_UNFOLLOW(String adCod) {
-		return "/corsointeresse/" + String.valueOf(adCod)+"/delete";
+		return "/corsointeresse/" + String.valueOf(adCod) + "/delete";
 	}
-	
+
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
 	// Courses complete

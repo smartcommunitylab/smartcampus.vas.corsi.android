@@ -33,7 +33,6 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.AsyncDeleteCourseInterest;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -82,7 +81,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				// TODO Auto-generated method stub
 				listaEventiFiltrati = filterEventsbyCourse();
 
 				return null;
@@ -90,7 +88,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 			@Override
 			protected void onPostExecute(Void result) {
-				// TODO Auto-generated method stub
 				super.onPostExecute(result);
 
 				OverviewFilterFragment.pd.dismiss();
@@ -227,7 +224,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(getActivity());
 			pd = ProgressDialog.show(getActivity(),
@@ -277,7 +273,6 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 
 			if (result == null) {

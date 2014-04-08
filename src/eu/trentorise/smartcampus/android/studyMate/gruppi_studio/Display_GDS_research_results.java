@@ -93,7 +93,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				Intent intent = new Intent(Display_GDS_research_results.this,
 						GDS_Subscription_activity.class);
 				intent.putExtra("gds_to_subscribe", selected_gds);
-				
+
 				startActivity(intent);
 			}
 		});

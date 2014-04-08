@@ -188,7 +188,7 @@ public class CoursesHandler extends
 										.getStringArray(
 												R.array.dialogAgendaInterest);
 								adapter.add(cI[0]);
-								//adapter.add(cI[1]);//////////////////////////////////////////////////////////////////////PROVVISORIO
+								// adapter.add(cI[1]);//////////////////////////////////////////////////////////////////////PROVVISORIO
 								builderSingle.setAdapter(adapter,
 										new ItemMenuCourseListener());
 							} else {
@@ -248,9 +248,6 @@ public class CoursesHandler extends
 
 	}
 
-	
-	
-	
 	public class AsyncCourseAd extends AsyncTask<Void, Void, AttivitaDidattica> {
 
 		private ProtocolCarrier mProtocolCarrier;
@@ -310,11 +307,13 @@ public class CoursesHandler extends
 			super.onPostExecute(result);
 
 			if (result == null) {
-				
+
 				pd.dismiss();
-				
-				Toast.makeText(currentSherlock, currentSherlock.getResources()
-						.getString(R.string.dialog_error_redirect),
+
+				Toast.makeText(
+						currentSherlock,
+						currentSherlock.getResources().getString(
+								R.string.dialog_error_redirect),
 						Toast.LENGTH_SHORT).show();
 			} else {
 
@@ -332,10 +331,9 @@ public class CoursesHandler extends
 
 		}
 	}
-	
-	
-	
-	public class AsyncDeleteCourseInterest extends AsyncTask<Void, Void, Boolean> {
+
+	public class AsyncDeleteCourseInterest extends
+			AsyncTask<Void, Void, Boolean> {
 
 		private ProtocolCarrier mProtocolCarrier;
 
@@ -394,20 +392,22 @@ public class CoursesHandler extends
 			super.onPostExecute(result);
 
 			if (result == null) {
-				
+
 				pd.dismiss();
-				
-				Toast.makeText(currentSherlock, context.getResources()
-						.getString(R.string.dialog_error_delete),
-						Toast.LENGTH_SHORT).show();
-			} else if(result){
 
-
-				Toast.makeText(currentSherlock, context.getResources()
-						.getString(R.string.dialog_success_delete),
+				Toast.makeText(
+						currentSherlock,
+						context.getResources().getString(
+								R.string.dialog_error_delete),
 						Toast.LENGTH_SHORT).show();
-				
-				
+			} else if (result) {
+
+				Toast.makeText(
+						currentSherlock,
+						context.getResources().getString(
+								R.string.dialog_success_delete),
+						Toast.LENGTH_SHORT).show();
+
 			}
 
 		}

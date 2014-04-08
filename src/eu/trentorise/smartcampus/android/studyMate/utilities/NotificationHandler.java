@@ -47,6 +47,7 @@ public class NotificationHandler extends
 	private ProtocolCarrier mProtocolCarrier;
 	private long fromDate;
 	private String type;
+	@SuppressWarnings("unused")
 	private TextView noNot;
 
 	public NotificationHandler(Context applicationContext,

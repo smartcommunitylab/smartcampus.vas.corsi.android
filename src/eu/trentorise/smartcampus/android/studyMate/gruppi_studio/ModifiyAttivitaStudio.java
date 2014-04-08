@@ -401,7 +401,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 				intent.putExtra("contextualAttivitaStudio", newone);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
-				
+
 			} else {
 				// merda
 				Toast.makeText(ModifiyAttivitaStudio.this,

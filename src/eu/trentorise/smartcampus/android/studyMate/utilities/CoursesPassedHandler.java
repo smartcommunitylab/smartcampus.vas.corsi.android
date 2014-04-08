@@ -91,7 +91,11 @@ public class CoursesPassedHandler extends
 		if (result == null) {
 
 			Toast.makeText(context,
-					context.getResources().getString(R.string.dialog_error),//devi essere loggato con unitn?
+					context.getResources().getString(R.string.dialog_error),// devi
+																			// essere
+																			// loggato
+																			// con
+																			// unitn?
 					Toast.LENGTH_SHORT).show();
 			currentActivity.finish();
 		} else {

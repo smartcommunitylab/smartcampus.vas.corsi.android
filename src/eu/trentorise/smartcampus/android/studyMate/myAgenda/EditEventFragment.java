@@ -137,7 +137,7 @@ public class EditEventFragment extends SherlockFragment {
 				resultStrings);
 		coursesSpinner.setAdapter(adapterInitialList);
 		coursesSpinner.setEnabled(false);
-		//coursesSpinner.setActivated(false);
+		// coursesSpinner.setActivated(false);
 
 		Button button_ok = (Button) fview.findViewById(R.id.button_ok4Course);
 		Button button_cancel = (Button) fview
@@ -248,7 +248,6 @@ public class EditEventFragment extends SherlockFragment {
 					minute, DateFormat.is24HourFormat(getSherlockActivity()));
 		}
 
-		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
 			if (minute < 10) {
@@ -276,7 +275,6 @@ public class EditEventFragment extends SherlockFragment {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(getSherlockActivity());
 			pd = ProgressDialog.show(getSherlockActivity(),

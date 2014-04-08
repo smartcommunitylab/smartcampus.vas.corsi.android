@@ -20,7 +20,6 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
-import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
@@ -145,9 +144,9 @@ public class MyUniActivity extends SherlockActivity {
 									getResources().getString(
 											R.string.dialog_coming_soon),
 									Toast.LENGTH_SHORT).show();
-//							Intent intent = new Intent(MyUniActivity.this,
-//									Lista_GDS_activity.class);
-//							MyUniActivity.this.startActivity(intent);
+							// Intent intent = new Intent(MyUniActivity.this,
+							// Lista_GDS_activity.class);
+							// MyUniActivity.this.startActivity(intent);
 						}
 					});
 		}
@@ -162,7 +161,6 @@ public class MyUniActivity extends SherlockActivity {
 	public static String getAuthToken() throws AACException {
 		String mToken;
 		mToken = getAccessProvider().readToken(mContext);
-		System.out.println("token: " + mToken);
 		return mToken;
 	}
 
@@ -170,6 +168,7 @@ public class MyUniActivity extends SherlockActivity {
 			AsyncTask<Void, Void, BasicProfile> {
 
 		ArrayList<CorsoCarriera> corsicarrierastudente;
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -227,7 +226,7 @@ public class MyUniActivity extends SherlockActivity {
 				} catch (AACException e) {
 					e.printStackTrace();
 				}
-				
+
 				// proviamo a recueprare i dati relativi ai corsi dello
 				// studente
 				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
@@ -238,9 +237,9 @@ public class MyUniActivity extends SherlockActivity {
 						SmartUniDataWS.GET_WS_FREQUENTEDCOURSES_SYNC);
 				request1.setMethod(Method.GET);
 				try {
-					response1 = mProtocolCarrier
-							.invokeSync(request1, SmartUniDataWS.TOKEN_NAME,
-									MyUniActivity.getAuthToken());
+					response1 = mProtocolCarrier.invokeSync(request1,
+							SmartUniDataWS.TOKEN_NAME,
+							MyUniActivity.getAuthToken());
 					if (response1.getHttpStatus() == 200) {
 
 						body = response1.getBody();

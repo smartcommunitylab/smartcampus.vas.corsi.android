@@ -161,7 +161,8 @@ public class GDS_Subscription_activity extends SherlockActivity {
 					SmartUniDataWS.TOKEN_NAME);
 
 			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI, SmartUniDataWS.POST_ACCEPT_GDS);
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_ACCEPT_GDS);
 			request.setMethod(Method.POST);
 			String jsongds = Utils.convertToJSON(gds);
 			request.setBody(jsongds);

@@ -57,7 +57,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 		// findViewById(R.id.scegli_materia);
 		spinner_scegli_materia = (Spinner) findViewById(R.id.spinner_materia);
 		tv_nome_gds = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo);
-		
 
 		// spinner_edificio.setAdapter(adapter_spinner_ed);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(

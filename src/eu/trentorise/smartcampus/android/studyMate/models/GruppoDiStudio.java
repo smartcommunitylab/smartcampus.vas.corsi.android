@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GruppoDiStudio implements Serializable {
 
 	/**
@@ -64,9 +63,9 @@ public class GruppoDiStudio implements Serializable {
 		this.idsStudenti = idsStudenti;
 	}
 
-//	public List<Long> getIdStudentiGruppo() {
-//		return this.convertIdsAllStudentsToList();
-//	}
+	// public List<Long> getIdStudentiGruppo() {
+	// return this.convertIdsAllStudentsToList();
+	// }
 
 	public Byte[] getLogo() {
 		return logo;
@@ -79,8 +78,8 @@ public class GruppoDiStudio implements Serializable {
 	public void setStudentiGruppo(List<Studente> studentiGruppo) {
 		this.studentiGruppo = studentiGruppo;
 	}
-	
-	public List<Studente> getStudentiGruppo(){
+
+	public List<Studente> getStudentiGruppo() {
 		return studentiGruppo;
 	}
 
@@ -135,20 +134,20 @@ public class GruppoDiStudio implements Serializable {
 		return listIdsInvited;
 	}
 
-//	public List<Long> convertIdsAllStudentsToList() {
-//		String[] listIds = null;
-//		List<Long> listIdsInvited = new ArrayList<Long>();
-//
-//		listIds = this.idsStudenti.split(",");
-//
-//		for (String id : listIds) {
-//
-//			listIdsInvited.add(Long.parseLong(id));
-//
-//		}
-//
-//		return listIdsInvited;
-//	}
+	// public List<Long> convertIdsAllStudentsToList() {
+	// String[] listIds = null;
+	// List<Long> listIdsInvited = new ArrayList<Long>();
+	//
+	// listIds = this.idsStudenti.split(",");
+	//
+	// for (String id : listIds) {
+	//
+	// listIdsInvited.add(Long.parseLong(id));
+	//
+	// }
+	//
+	// return listIdsInvited;
+	// }
 
 	public String getMateria() {
 		return materia;
