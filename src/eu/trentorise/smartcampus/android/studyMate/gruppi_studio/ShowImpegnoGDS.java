@@ -21,7 +21,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -35,7 +35,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
-	AttivitaDiStudio contextualAttivitaStudio;
+	Evento contextualAttivitaStudio;
 	private ProtocolCarrier mProtocolCarrier;
 
 	@Override
@@ -66,7 +66,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		 * recupero contextualAttivitaStudio
 		 */
 		Bundle myextras = getIntent().getExtras();
-		contextualAttivitaStudio = (AttivitaDiStudio) myextras
+		contextualAttivitaStudio = (Evento) myextras
 				.getSerializable("contextualAttivitaStudio");
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
@@ -78,7 +78,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
 		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
-		tv_descrizione.setText(contextualAttivitaStudio.getTopic());
+		tv_descrizione.setText(contextualAttivitaStudio.getPersonalDescription());
 
 		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
 
@@ -159,14 +159,14 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	}
 
 	private class AsyncTabbandonaAttivitaStudio extends
-			AsyncTask<AttivitaDiStudio, Void, Void> {
+			AsyncTask<Evento, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
-		AttivitaDiStudio toabandonAS;
+		Evento toabandonAS;
 
 		public AsyncTabbandonaAttivitaStudio(Context taskcontext,
-				AttivitaDiStudio toabandonAS) {
+				Evento toabandonAS) {
 			super();
 			this.taskcontext = taskcontext;
 			this.toabandonAS = toabandonAS;
@@ -174,14 +174,13 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
-					+ toabandonAS.getTopic(), "");
+					+ toabandonAS.getPersonalDescription(), "");
 		}
 
-		private boolean abandonAS(AttivitaDiStudio as_to_abandon) {
+		private boolean abandonAS(Evento as_to_abandon) {
 			mProtocolCarrier = new ProtocolCarrier(ShowImpegnoGDS.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -212,7 +211,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -220,15 +218,13 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected Void doInBackground(AttivitaDiStudio... params) {
-			// TODO Auto-generated method stub
+		protected Void doInBackground(Evento... params) {
 			abandonAS(this.toabandonAS);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			ShowImpegnoGDS.this.finish();

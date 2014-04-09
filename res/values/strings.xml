@@ -138,7 +138,7 @@
     <string name="header_course_interest">Corsi di interesse</string>
     
     <!-- Dialogs -->
-    <string name="dialog_coming_soon">Coming Soon...</string>
+    <string name="dialog_coming_soon">Disponibile a breve</string>
     <string name="dialog_sync_data">Sincronizzazione dei dati personali in corso</string>
     <string name="dialog_loading">Caricamento...</string>
     <string name="dialog_error">Ops! C\'è stato un errore...</string>
@@ -157,6 +157,7 @@
     <string name="dialog_success_delete">Corso eliminato dalla lista</string>
     <string name="invalid_career">"Non stai seguendo alcun corso</string>
     <string name="no_vote">Non puoi valutare nessun corso</string>
+    <string name="no_events_now">Non sono disponibli eventi a breve per questo corso</string>
      <!-- Toasts -->
     <string name="toast_event_added">Evento personale aggiunto</string>
     
@@ -174,6 +175,7 @@
     <!-- feedback -->
 	 <string name="feedback_not_present">Non sono presenti commenti...</string>
 	 <string name="feedback_number_presents">commenti presenti</string>
+	 <string name="feedback_number_presents_for_1">1 commento presente</string>
 	 <string name="feedback_course_information">Informazioni del corso</string>
 	 <string name="feedback_course_is_career">Il corso è da libretto</string>
 	 <string name="feedback_courses_can_review">Corsi che posso votare</string>

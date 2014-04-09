@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.studymate.R;
 
-public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
+public class AttivitaStudioAdapter extends ArrayAdapter<Evento> {
 
-	private ArrayList<AttivitaDiStudio> entries;
+	private ArrayList<Evento> entries;
 	Context context;
 
 	public AttivitaStudioAdapter(Context context, int textViewResourceId,
-			ArrayList<AttivitaDiStudio> objects) {
+			ArrayList<Evento> objects) {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
@@ -29,7 +29,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View impegno_view = convertView;
-		AttivitaDiStudio currentImpegno = getItem(position);
+		Evento currentImpegno = getItem(position);
 
 		if (impegno_view == null) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -62,7 +62,7 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 			orario_view.setText(format.format(currentImpegno.getEventoId()
 					.getDate()));
 
-			AttivitaDiStudio prev = null;
+			Evento prev = null;
 			if (position > 0)
 				prev = getItem(position - 1);
 
@@ -74,15 +74,13 @@ public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 				data_view.setVisibility(View.GONE);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
-			// merda
-			Toast.makeText(getContext(), "merda", Toast.LENGTH_SHORT).show();
+
 		}
 
 		return impegno_view;
 	}
 
-	public ArrayList<AttivitaDiStudio> getEntries() {
+	public ArrayList<Evento> getEntries() {
 		return entries;
 	}
 

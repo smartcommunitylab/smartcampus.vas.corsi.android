@@ -1,11 +1,11 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -20,7 +20,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -40,7 +40,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
-	public ArrayList<AttivitaDidattica> listaCorsi = new ArrayList<AttivitaDidattica>();
+	public List<CorsoCarriera> listaCorsi = new ArrayList<CorsoCarriera>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 		case R.id.action_done: {
 			// asynctask per aggiungere un gruppo di studio appena creato ai
 			// gruppi di studio persoanli
-			MyAsyncTask task = new MyAsyncTask(Crea_GDS_activity.this);
+			PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
 			task.execute();
 			return super.onOptionsItemSelected(item);
 		}
@@ -92,12 +92,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 		}
 	}
 
-	private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class PostNewGDS extends AsyncTask<Void, Void, Void> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
 
-		public MyAsyncTask(Context taskcontext) {
+		public PostNewGDS(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
@@ -135,7 +135,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -144,7 +143,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
@@ -153,7 +151,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			Intent intent = new Intent(Crea_GDS_activity.this,
@@ -164,16 +161,15 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			@SuppressWarnings("unused")
 			String materia = spinner_scegli_materia.getSelectedItem()
 					.toString();
 			int position = spinner_scegli_materia.getSelectedItemPosition();
-			AttivitaDidattica attivitaDidattica = listaCorsi.get(position);
+			CorsoCarriera cc = listaCorsi.get(position);
 			String nome = tv_nome_gds.getText().toString();
 			GruppoDiStudio justCreatedGds = new GruppoDiStudio();
 			justCreatedGds.setNome(nome);
-			justCreatedGds.setCorso(attivitaDidattica.getAdId());
+			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
 			// salva il gruppo sul web
 
 			if (addGroup(justCreatedGds)) {
@@ -193,11 +189,10 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 	}
 
-	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, Void> {
+	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
-		private ArrayList<AttivitaDidattica> temp_listacorsiArrayList;
 
 		public LoadSpinnerMaterieAsTask(Context taskcontext) {
 			super();
@@ -212,23 +207,16 @@ public class Crea_GDS_activity extends SherlockActivity {
 					"");
 		}
 
-		protected ArrayList<AttivitaDidattica> webgetCorsiUtente() {
+		protected ArrayList<CorsoCarriera> webgetCorsiUtente() {
 			mProtocolCarrier = new ProtocolCarrier(Crea_GDS_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 			// alcune preparazioni iniziali
 			// recupero dello studente in sessione dalle sharedpreferences
-			String jsonattivitadidattica = load("attivitaDidatticaStudente");
-			AttivitaDidattica attivitadidatticastud = Utils
-					.convertJSONToObject(jsonattivitadidattica,
-							AttivitaDidattica.class);
+
 			MessageResponse response;
-			if (attivitadidatticastud == null) {
-				return null;
-			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
-							+ attivitadidatticastud.getCds_id()));
+					SmartUniDataWS.GET_WS_MY_COURSES_NOT_PASSED);
 			request.setMethod(Method.GET);
 
 			try {
@@ -250,32 +238,26 @@ public class Crea_GDS_activity extends SherlockActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(
-					body, AttivitaDidattica.class);
+			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(
+					body, CorsoCarriera.class);
 
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			temp_listacorsiArrayList = webgetCorsiUtente();
-			return null;
+		protected List<CorsoCarriera> doInBackground(Void... params) {
+			return webgetCorsiUtente();
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
+		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
-			listaCorsiString.clear();
-			listaCorsi.clear();
-			listaCorsi = temp_listacorsiArrayList;
-			if (temp_listacorsiArrayList != null) {
-				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
-					listaCorsiString.add(tempcorso.getDescription());
+			if (result != null) {
+				listaCorsi = result;
+				for (CorsoCarriera tempcorso : result) {
+					listaCorsiString.add(tempcorso.getName());
 				}
 				ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
 						Crea_GDS_activity.this,
@@ -292,13 +274,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 						Toast.LENGTH_LONG).show();
 			}
 
-		}
-
-		public String load(String key) {
-			SharedPreferences sharedPreferences = Crea_GDS_activity.this
-					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			String retvaljson = sharedPreferences.getString(key, null);
-			return retvaljson;
 		}
 	}
 }

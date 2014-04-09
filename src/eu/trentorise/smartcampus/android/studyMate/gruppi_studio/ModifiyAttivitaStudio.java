@@ -24,13 +24,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -43,9 +44,9 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class ModifiyAttivitaStudio extends FragmentActivity {
-	private AttivitaDiStudio attivitaDiStudioOld;
+	private Evento attivitaDiStudioOld;
 	private ProtocolCarrier mProtocolCarrier;
-
+	private EditText etLocation;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,56 +62,10 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		// recupero gds da modificare per impostare i campi di testo ecc da
 		// modificare con i valori preesistenti dell'attivitadistudio
 		Bundle myextras = getIntent().getExtras();
-		attivitaDiStudioOld = (AttivitaDiStudio) myextras
+		attivitaDiStudioOld = (Evento) myextras
 				.getSerializable("impegno_da_modificare");
-
-		// customizzazione del layout di questa activity. Si vuole mostrare
-		// nelle view disponibili i dati contenuti nella attivitadistudio che
-		// l'utente vuole modificare
-
-		// customizzazzione spinner: riempimento
-		ArrayList<String> edifici_values = new ArrayList<String>();
-		edifici_values.add("Povo, polo Ferraris");
-		edifici_values.add("Povo, polo 0");
-		edifici_values.add("Povo, nuovo polo");
-
-		ArrayList<String> room_values = new ArrayList<String>();
-		for (int i = 101; i < 115; i++) {
-			room_values.add("a" + i);
-		}
-		for (int i = 201; i < 215; i++) {
-			room_values.add("a" + i);
-		}
-
-		// customizzazzione spinner: setting up (riposizionare gli spinner su
-		// vecchia scelta di edificio e aula)
-		// se non si torna ad avere una
-		// event.location non serve a niente fare la ricerca and selection degli
-		// spinner perchè non si distinguono più edificio=location da aula=room
-
-		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
-		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, edifici_values);
-		adapter_spinner_ed
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_edificio.setAdapter(adapter_spinner_ed);
-
-		// String location_actual = attivitaDiStudio.getRoom();
-		// int spinnerPositionedificio = adapter_spinner_ed
-		// .getPosition(location_actual);
-		// spinner_edificio.setSelection(spinnerPositionedificio);
-
-		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
-		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, room_values);
-		adapter_spinner_aule
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_aula.setAdapter(adapter_spinner_aule);
-
-		// String room_actual = attivitaDiStudio.getRoom();
-		// int spinnerPositionaula =
-		// adapter_spinner_aule.getPosition(room_actual);
-		// spinner_edificio.setSelection(spinnerPositionaula);
+		etLocation = (EditText) findViewById(R.id.editText_location_impegno);
+		etLocation.setText(attivitaDiStudioOld.getPersonalDescription());
 
 		// retrieving & initializing some button
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);
@@ -130,12 +85,11 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 		TextView descrizione_tv = (TextView) this
 				.findViewById(R.id.editText_descrizione_impegno);
-		descrizione_tv.setText(attivitaDiStudioOld.getTopic());
+		descrizione_tv.setText(attivitaDiStudioOld.getPersonalDescription());
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		android.view.MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.modifiy_attivita_studio, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -154,8 +108,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			/*
 			 * recupero elementi grafici
 			 */
-			Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
-			Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
+			
 			Button btn_data = (Button) findViewById(R.id.data_button_gds);
 			Button btn_time = (Button) findViewById(R.id.ora_button_gds);
 			TextView oggetto_tv = (TextView) this
@@ -166,8 +119,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			 * recupero informazioni dagli elementi grafici e aggiornamento di
 			 * attivitaDiStudio
 			 */
-			String edificio = spinner_edificio.getSelectedItem().toString();
-			String aula = spinner_aula.getSelectedItem().toString();
+			String location = etLocation.getText().toString();
 
 			String oggetto = oggetto_tv.getText().toString();
 			String descrizione = descrizione_tv.getText().toString();
@@ -181,17 +133,15 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 				data = format.parse(stringdata);
 				System.out.println(data);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			/*
 			 * salvataggio modifche in attivitaDiStudio
 			 */
-			AttivitaDiStudio newattivitaDiStudio = new AttivitaDiStudio();
+			Evento newattivitaDiStudio = new Evento();
 
 			newattivitaDiStudio.setTitle(oggetto);
 			// Date data = new Date();
@@ -208,9 +158,9 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			}
 
 			// nuova_attivitaStudio.setStart(start);
-			newattivitaDiStudio.setRoom(edificio + " - " + aula);
+			newattivitaDiStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			newattivitaDiStudio.setTopic(descrizione);
+			newattivitaDiStudio.setPersonalDescription(descrizione);
 			newattivitaDiStudio.setGruppo(attivitaDiStudioOld.getGruppo());
 
 			ModifyAS salvamodificheAS = new ModifyAS(
@@ -309,10 +259,10 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		Context taskcontext;
 		public ProgressDialog pd;
 		Boolean allright;
-		AttivitaDiStudio oldone, newone;
+		Evento oldone, newone;
 
-		public ModifyAS(Context taskcontext, AttivitaDiStudio oldone,
-				AttivitaDiStudio newone) {
+		public ModifyAS(Context taskcontext, Evento oldone,
+				Evento newone) {
 			super();
 			this.taskcontext = taskcontext;
 			this.oldone = oldone;
@@ -373,10 +323,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -385,14 +333,12 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			allright = modificaAS();
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (allright) {

@@ -16,18 +16,18 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Impegni_Fragment extends SherlockFragment {
-	public ArrayList<AttivitaDiStudio> lista_impegni;
+	public ArrayList<Evento> lista_impegni;
 	GruppoDiStudio gds;
 
 	// protected Object mActionMode;
 
 	public static Impegni_Fragment newInstance(
-			ArrayList<AttivitaDiStudio> arraylistimpegni, GruppoDiStudio gds) {
+			ArrayList<Evento> arraylistimpegni, GruppoDiStudio gds) {
 		Impegni_Fragment myFragment = new Impegni_Fragment();
 
 		Bundle args = new Bundle();
@@ -50,7 +50,7 @@ public class Impegni_Fragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		lista_impegni = (ArrayList<AttivitaDiStudio>) getArguments()
+		lista_impegni = (ArrayList<Evento>) getArguments()
 				.getSerializable("serializableobject");
 		gds = (GruppoDiStudio) getArguments().getSerializable("gds");
 		return;
@@ -76,8 +76,8 @@ public class Impegni_Fragment extends SherlockFragment {
 					int position, long id) {
 				AttivitaStudioAdapter adpt = (AttivitaStudioAdapter) parent
 						.getAdapter();
-				ArrayList<AttivitaDiStudio> entries = adpt.getEntries();
-				final AttivitaDiStudio selected_impegno = entries.get(position);
+				ArrayList<Evento> entries = adpt.getEntries();
+				final Evento selected_impegno = entries.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
 				intent.putExtra("contextualAttivitaStudio", selected_impegno);
 				startActivity(intent);
@@ -137,7 +137,7 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	}
 
-	public ArrayList<AttivitaDiStudio> getLista_impegni() {
+	public ArrayList<Evento> getLista_impegni() {
 		return lista_impegni;
 	}
 

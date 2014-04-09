@@ -8,6 +8,7 @@ import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.myAgenda.CorsiFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -90,6 +91,7 @@ public class SetCourseAsFollowHandler extends
 			// faccio lo switch del bottone
 			if (txtFollow.getText() == context.getResources().getText(
 					R.string.label_txtMonitor_off)) {
+				CorsiFragment.followstate = true;
 				txtFollow.setText(context.getResources().getText(
 						R.string.label_txtMonitor_on));
 				monitorFollow.setBackgroundResource(R.drawable.ic_monitor_on);
@@ -99,6 +101,7 @@ public class SetCourseAsFollowHandler extends
 						Toast.LENGTH_LONG);
 				toast.show();
 			} else {
+				CorsiFragment.followstate = false;
 				txtFollow.setText(context.getResources().getText(
 						R.string.label_txtMonitor_off));
 				txtFollow.setText(R.string.label_txtMonitor_off);

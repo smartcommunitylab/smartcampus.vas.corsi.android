@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,12 +25,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
@@ -48,9 +48,9 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Add_attivita_studio_activity extends FragmentActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
-	public AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
+	public Evento nuova_attivitaStudio = new Evento();
 	GruppoDiStudio gds;
-
+	private EditText etLocation;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,33 +74,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		final int mMinute = c.get(Calendar.MINUTE);
 		final int mHour = c.get(Calendar.HOUR_OF_DAY);
 
-		ArrayList<String> edifici_values = new ArrayList<String>();
-		edifici_values.add("Povo, polo Ferraris");
-		edifici_values.add("Povo, polo 0");
-		edifici_values.add("Povo, nuovo polo");
 
-		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
-		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, edifici_values);
-		adapter_spinner_ed
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_edificio.setAdapter(adapter_spinner_ed);
-
-		ArrayList<String> room_values = new ArrayList<String>();
-		for (int i = 101; i < 115; i++) {
-			room_values.add("a" + i);
-		}
-		for (int i = 201; i < 215; i++) {
-			room_values.add("a" + i);
-		}
-
-		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
-		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, room_values);
-		adapter_spinner_aule
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_aula.setAdapter(adapter_spinner_aule);
-
+		etLocation = (EditText) findViewById(R.id.editText_location_impegno);
 		// retrieving & initializing some button
 		Button btn_data = (Button) findViewById(R.id.data_button_gds);
 		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
@@ -154,10 +129,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				data = format.parse(stringdata);
 				System.out.println(data);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -165,24 +138,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					.findViewById(R.id.editText_descrizione_impegno)).getText()
 					.toString();
 
-			String room = ((Spinner) Add_attivita_studio_activity.this
-					.findViewById(R.id.spinner_aula)).getSelectedItem()
-					.toString();
-
-			String edificio = ((Spinner) Add_attivita_studio_activity.this
-					.findViewById(R.id.spinner_edificio)).getSelectedItem()
-					.toString();
-
-			// boolean prenotazione_aule = ((CheckBox) this
-			// .findViewById(R.id.CheckBox1_prenotazione_aule))
-			// .isChecked();
-			// boolean mensa = ((CheckBox)
-			// this.findViewById(R.id.CheckBox2_mensa))
-			// .isChecked();
-			// boolean tutoring = ((CheckBox) this
-			// .findViewById(R.id.CheckBox3_tutoring)).isChecked();
-			// boolean biblioteca = ((CheckBox) this
-			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
+			String location = etLocation.getText().toString();
 
 			nuova_attivitaStudio.setTitle(oggetto);
 			// Date data = new Date();
@@ -197,9 +153,9 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			}
 
 			// nuova_attivitaStudio.setStart(start);
-			nuova_attivitaStudio.setRoom(edificio + " - " + room);
+			nuova_attivitaStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			nuova_attivitaStudio.setTopic(descrizione);
+			nuova_attivitaStudio.setPersonalDescription(descrizione);
 
 			nuova_attivitaStudio.setGruppo(gds.getId());
 
@@ -244,11 +200,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 			String phrase_date = (String) ((Button) Add_attivita_studio_activity.this
 					.findViewById(R.id.data_button_gds)).getText();
-
-			// MyDate data = MyDate.parseFromString(phrase_date);
-			// int mDay = data.getDay();
-			// int mMonth = data.getMonth();
-			// int mYear = data.getYear();
 
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
@@ -318,7 +269,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
@@ -327,7 +277,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 
 			pd.dismiss();
@@ -376,10 +325,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -388,7 +335,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			addAttivitaonweb();
 
 			return null;

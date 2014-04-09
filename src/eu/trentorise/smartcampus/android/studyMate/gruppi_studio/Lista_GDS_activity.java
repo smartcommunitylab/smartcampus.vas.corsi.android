@@ -41,7 +41,6 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	public static ArrayList<GruppoDiStudio> user_gds_list = new ArrayList<GruppoDiStudio>();
-	private static boolean isShownAsList = true;
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
@@ -73,10 +72,9 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		// retrieve gruppi with followinf asynctask
-		MyAsyncTask task = new MyAsyncTask(Lista_GDS_activity.this);
+		GetMyCds task = new GetMyCds(Lista_GDS_activity.this);
 		task.execute();
 	}
 
@@ -89,8 +87,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// per rimuovere il bottone cambia layout nel caso in cui non ci sia
-		// alcun gruppo presente nella user_gds_list
 		if (user_gds_list.isEmpty()) {
 			MenuItem item = menu.findItem(R.id.action_cambia_layout);
 			item.setEnabled(false);
@@ -104,43 +100,11 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
-			Intent intent = new Intent(Lista_GDS_activity.this,
-					MyUniActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			onBackPressed();
 			return super.onOptionsItemSelected(item);
 		}
 
 		case R.id.action_cambia_layout:
-			if (isShownAsList) {
-				// azione se siamo in modalità lista
-				item.setIcon(R.drawable.collections_view_as_list);
-				isShownAsList = false;
-
-				this.getSupportFragmentManager().popBackStack();
-				FragmentTransaction ft = this.getSupportFragmentManager()
-						.beginTransaction();
-				Fragment fragment = new ViewGruppiGrid_Fragment();
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.list_container, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
-
-			} else {
-				// azione se siamo in modalità griglia
-				item.setIcon(R.drawable.collections_view_as_grid);
-				isShownAsList = true;
-
-				this.getSupportFragmentManager().popBackStack();
-				FragmentTransaction ft = this.getSupportFragmentManager()
-						.beginTransaction();
-				Fragment fragment = new ViewGruppiList_Fragment();
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.list_container, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
-
-			}
 			return super.onOptionsItemSelected(item);
 		case R.id.action_iscriviti_nuovo_gruppo: {
 			Intent intent = new Intent(getApplicationContext(),
@@ -176,21 +140,20 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		return user_gds_list;
 	}
 
-	private class MyAsyncTask extends
+	private class GetMyCds extends
 			AsyncTask<Void, Void, List<GruppoDiStudio>> {
 		Context taskcontext;
 		public ProgressDialog pd;
 		List<GruppoDiStudio> responselist;
 		ArrayList<CorsoCarriera> corsicarrierastudente;
 
-		public MyAsyncTask(Context taskcontext) {
+		public GetMyCds(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
@@ -227,7 +190,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return retval;
@@ -235,7 +197,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected List<GruppoDiStudio> doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			user_gds_list.clear();
 			responselist = getMineGDS();
 			if (responselist != null) {
@@ -291,7 +252,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(List<GruppoDiStudio> result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 
@@ -320,7 +280,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 			// inizializza la grafica in base allo stato booleano di
 			// isShownAsList
-			if (isShownAsList) {
+			
 				FragmentTransaction ft = Lista_GDS_activity.this
 						.getSupportFragmentManager().beginTransaction();
 				Fragment fragment = new ViewGruppiList_Fragment();
@@ -328,16 +288,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				ft.replace(R.id.list_container, fragment);
 				ft.addToBackStack(null);
 				ft.commit();
-			} else {
-				FragmentTransaction ft = Lista_GDS_activity.this
-						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new ViewGruppiGrid_Fragment();
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.list_container, fragment);
-				ft.addToBackStack(null);
-				ft.commit();
-			}
-
+			
 		}
 
 		private void save(String key, String jsonTosaveinSharedP) {
@@ -371,7 +322,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
@@ -406,7 +356,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Utils.convertJSONToObject(body, AttivitaDidattica.class);
@@ -415,7 +364,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			AttivitaDidattica retval = getRelatedCorso();
 			if (retval != null) {
 				GDS.setMateria(retval.getDescription());
@@ -425,7 +373,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 

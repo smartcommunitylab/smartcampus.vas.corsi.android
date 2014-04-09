@@ -23,7 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -40,7 +40,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	public GruppoDiStudio contextualGDS = null;
 	// public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
-	public ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
+	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
@@ -52,7 +52,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		// codice per sistemare l'actionoverflow
 		try {
@@ -106,7 +105,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	// @Override
 	// protected void onResume() {
-	// // TODO Auto-generated method stub
 	// super.onResume();
 	// // retrieving impegni from web
 	// AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
@@ -180,12 +178,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		this.contextualGDS = contextualGDS;
 	}
 
-	public ArrayList<AttivitaDiStudio> getContextualListaImpegni() {
+	public ArrayList<Evento> getContextualListaImpegni() {
 		return contextualListaImpegni;
 	}
 
 	public void setContextualListaImpegni(
-			ArrayList<AttivitaDiStudio> contextualListaImpegni) {
+			ArrayList<Evento> contextualListaImpegni) {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 
@@ -199,7 +197,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			this.taskcontext = taskcontext;
 		}
 
-		private List<AttivitaDiStudio> retrievedImpegni() {
+		private List<Evento> retrievedImpegni() {
 			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -229,11 +227,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			return Utils.convertJSONToObjects(body, AttivitaDiStudio.class);
+			return Utils.convertJSONToObjects(body, Evento.class);
 		}
 
 		@Override
@@ -251,7 +248,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected Void doInBackground(Void... params) {
 			// faccio andare il metodo web per recuperare la lista impegni dal
 			// web
-			contextualListaImpegni = (ArrayList<AttivitaDiStudio>) retrievedImpegni();
+			contextualListaImpegni = (ArrayList<Evento>) retrievedImpegni();
 			return null;
 		}
 
@@ -338,7 +335,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -347,7 +343,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext, "Stai lasciando "
@@ -356,7 +351,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			// Overview_GDS.this.finish();
@@ -369,7 +363,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected Void doInBackground(GruppoDiStudio... params) {
-			// TODO Auto-generated method stub
 			abandonGDS(toabandonGDS);
 			return null;
 		}

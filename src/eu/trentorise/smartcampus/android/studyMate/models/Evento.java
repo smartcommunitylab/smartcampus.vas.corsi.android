@@ -17,6 +17,7 @@ public class Evento implements Serializable {
 	private String type;
 	private String personalDescription;
 	private long adCod;
+	private long gruppo;
 
 	public EventoId getEventoId() {
 		return eventoId;
@@ -100,6 +101,14 @@ public class Evento implements Serializable {
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub
 		return super.equals(o);
+	}
+
+	public long getGruppo() {
+		return gruppo;
+	}
+
+	public void setGruppo(long gruppo) {
+		this.gruppo = gruppo;
 	}
 
 }

@@ -126,7 +126,7 @@
     <string name="header_course_career">Courses in career</string>
     <string name="header_course_interest">Courses of interest</string>
     <!-- Dialogs -->
-    <string name="dialog_coming_soon">Coming Soon...</string>
+    <string name="dialog_coming_soon">Coming Soon</string>
     <string name="dialog_sync_data">Synchronizing personal data</string>
     <string name="dialog_loading">Loading...</string>
     <string name="dialog_error">Oops! There was an error...</string>
@@ -145,6 +145,7 @@
     
         
     <string name="no_vote">You cannot evaluate any course</string>
+    <string name="no_events_now">No events available at the moment for this course</string>
      <string name="invalid_career">You are not following any course</string>
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
@@ -159,6 +160,7 @@
     <!-- feedback -->
     <string name="feedback_not_present">There are no comments...</string>
     <string name="feedback_number_presents">comments found</string>
+    <string name="feedback_number_presents_for_1">comment found</string>
     <string name="feedback_course_information">Course information</string>
     <string name="feedback_course_is_career">The course is from the study plan</string>
     <string name="feedback_courses_can_review">Courses that I can review</string>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -20,6 +19,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
@@ -42,8 +42,8 @@ public class MyUniActivity extends SherlockActivity {
 
 	public static final String APP_ID = "studymate";
 	//
-	public static final String SERVER_URL = "https://vas.smartcampuslab.it/core.communicator";
-	public static final String AUTH_URL = "https://ac.smartcampuslab.it/aac";
+	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
+	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -139,14 +139,14 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-							Toast.makeText(
-									getApplicationContext(),
-									getResources().getString(
-											R.string.dialog_coming_soon),
-									Toast.LENGTH_SHORT).show();
-							// Intent intent = new Intent(MyUniActivity.this,
-							// Lista_GDS_activity.class);
-							// MyUniActivity.this.startActivity(intent);
+//							Toast.makeText(
+//									getApplicationContext(),
+//									getResources().getString(
+//											R.string.dialog_coming_soon),
+//									Toast.LENGTH_SHORT).show();
+							 Intent intent = new Intent(MyUniActivity.this,
+							 Lista_GDS_activity.class);
+							 MyUniActivity.this.startActivity(intent);
 						}
 					});
 		}
@@ -212,8 +212,6 @@ public class MyUniActivity extends SherlockActivity {
 						// il body corrisponde al jsonstudente!! allora lo
 						// facciamo vedere XD
 						body = response.getBody();
-						String jsonstudente = body;
-						save("studenteSessioneJSON", jsonstudente);
 					} else {
 						return null;
 					}
@@ -244,7 +242,6 @@ public class MyUniActivity extends SherlockActivity {
 
 						body = response1.getBody();
 						String jsoncorsidellostudente = body;
-						save("corsiStudente", jsoncorsidellostudente);
 						corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
 								.convertJSONToObjects(jsoncorsidellostudente,
 										CorsoCarriera.class);
@@ -276,13 +273,13 @@ public class MyUniActivity extends SherlockActivity {
 			pd.dismiss();
 		}
 
-		private void save(String key, String jsonTosaveinSharedP) {
-			SharedPreferences sharedPreferences = MyUniActivity.this
-					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			SharedPreferences.Editor editor = sharedPreferences.edit();
-			editor.putString(key, jsonTosaveinSharedP);
-			editor.commit();
-		}
+//		private void save(String key, String jsonTosaveinSharedP) {
+//			SharedPreferences sharedPreferences = MyUniActivity.this
+//					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+//			SharedPreferences.Editor editor = sharedPreferences.edit();
+//			editor.putString(key, jsonTosaveinSharedP);
+//			editor.commit();
+//		}
 
 	}
 

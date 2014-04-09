@@ -17,6 +17,7 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
+	public static boolean followstate;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class CorsiFragment extends SherlockFragment {
 				getActivity().getApplicationContext(), listViewCorsi, this,
 				getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
+		CorsiFragment.followstate = true;
 	}
 
 	@Override
