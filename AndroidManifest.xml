@@ -51,7 +51,7 @@
         android:theme="@style/Theme.Sm_final" >
         <meta-data
             android:name="eu.trentorise.smartcampus.account.AUTH_URL"
-            android:value="https://ac.smartcampuslab.it/aac" />
+            android:value="https://vas-dev.smartcampuslab.it/aac" />
         <meta-data
             android:name="eu.trentorise.smartcampus.account.ACCOUNT_TYPE"
             android:value="eu.trentorise.smartcampus.account" />
@@ -143,6 +143,12 @@
             android:icon="@drawable/findcourses_white"
             android:label="@string/title_activity_find_courses"
             android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+        <activity
+            android:name="eu.trentorise.smartcampus.android.studyMate.start.SetInfoStudentActivity"
+            android:configChanges="orientation|keyboard"
+            android:icon="@drawable/smartuni_logo"
+            android:label="@string/title_shared_studente" >
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.finder.ResultSearchedActivity"

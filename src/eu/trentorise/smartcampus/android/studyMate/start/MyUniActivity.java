@@ -1,16 +1,21 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -19,12 +24,16 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
-import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
+import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedDip;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.ItemMenuCourseListener;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -47,6 +56,12 @@ public class MyUniActivity extends SherlockActivity {
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
+	public Dipartimento studenteDipartimento;
+	public CorsoLaurea studenteCds;
+	public List<Dipartimento> listDipartimenti;
+	public List<CorsoLaurea> listCds;
+
+
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
 	 * token
@@ -139,16 +154,26 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-//							Toast.makeText(
-//									getApplicationContext(),
-//									getResources().getString(
-//											R.string.dialog_coming_soon),
-//									Toast.LENGTH_SHORT).show();
-							 Intent intent = new Intent(MyUniActivity.this,
-							 Lista_GDS_activity.class);
-							 MyUniActivity.this.startActivity(intent);
+							Toast.makeText(
+									getApplicationContext(),
+									getResources().getString(
+											R.string.dialog_coming_soon),
+									Toast.LENGTH_SHORT).show();
+							// Intent intent = new Intent(MyUniActivity.this,
+							// Lista_GDS_activity.class);
+							// MyUniActivity.this.startActivity(intent);
 						}
 					});
+
+			studenteDipartimento = SharedUtils
+					.getDipartimentoStudente(MyUniActivity.this);
+			studenteCds = SharedUtils.getCdsStudente(MyUniActivity.this);
+
+			if (studenteDipartimento == null || studenteCds == null) {
+				Intent intent = new Intent(MyUniActivity.this,
+						SetInfoStudentActivity.class);
+				MyUniActivity.this.startActivity(intent);
+			}
 		}
 	}
 
@@ -212,6 +237,8 @@ public class MyUniActivity extends SherlockActivity {
 						// il body corrisponde al jsonstudente!! allora lo
 						// facciamo vedere XD
 						body = response.getBody();
+						String jsonstudente = body;
+						save("studenteSessioneJSON", jsonstudente);
 					} else {
 						return null;
 					}
@@ -242,6 +269,7 @@ public class MyUniActivity extends SherlockActivity {
 
 						body = response1.getBody();
 						String jsoncorsidellostudente = body;
+						save("corsiStudente", jsoncorsidellostudente);
 						corsicarrierastudente = (ArrayList<CorsoCarriera>) Utils
 								.convertJSONToObjects(jsoncorsidellostudente,
 										CorsoCarriera.class);
@@ -273,13 +301,13 @@ public class MyUniActivity extends SherlockActivity {
 			pd.dismiss();
 		}
 
-//		private void save(String key, String jsonTosaveinSharedP) {
-//			SharedPreferences sharedPreferences = MyUniActivity.this
-//					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-//			SharedPreferences.Editor editor = sharedPreferences.edit();
-//			editor.putString(key, jsonTosaveinSharedP);
-//			editor.commit();
-//		}
+		private void save(String key, String jsonTosaveinSharedP) {
+			SharedPreferences sharedPreferences = MyUniActivity.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPreferences.edit();
+			editor.putString(key, jsonTosaveinSharedP);
+			editor.commit();
+		}
 
 	}
 
@@ -292,5 +320,7 @@ public class MyUniActivity extends SherlockActivity {
 		}
 		return false;
 	}
+
+	
 
 }
