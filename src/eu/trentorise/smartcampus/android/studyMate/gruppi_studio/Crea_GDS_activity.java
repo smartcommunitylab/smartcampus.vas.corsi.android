@@ -169,6 +169,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			String nome = tv_nome_gds.getText().toString();
 			GruppoDiStudio justCreatedGds = new GruppoDiStudio();
 			justCreatedGds.setNome(nome);
+			justCreatedGds.setMateria(materia);
 			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
 			// salva il gruppo sul web
 

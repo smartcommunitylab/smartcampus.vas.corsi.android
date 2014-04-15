@@ -151,6 +151,7 @@
     <string name="no_vote">You cannot evaluate any course</string>
     <string name="no_events_now">No events available at the moment for this course</string>
      <string name="invalid_career">You are not following any course</string>
+     <string name="attivitadistudio_string">Study\'s activity</string>
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
     <!-- add event -->

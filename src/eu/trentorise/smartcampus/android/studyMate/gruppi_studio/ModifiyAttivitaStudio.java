@@ -83,9 +83,9 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 				.findViewById(R.id.editText_oggetto);
 		oggetto_tv.setText(attivitaDiStudioOld.getTitle());
 
-		TextView descrizione_tv = (TextView) this
-				.findViewById(R.id.editText_descrizione_impegno);
-		descrizione_tv.setText(attivitaDiStudioOld.getPersonalDescription());
+//		TextView descrizione_tv = (TextView) this
+//				.findViewById(R.id.editText_descrizione_impegno);
+//		descrizione_tv.setText(attivitaDiStudioOld.getPersonalDescription());
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			Button btn_time = (Button) findViewById(R.id.ora_button_gds);
 			TextView oggetto_tv = (TextView) this
 					.findViewById(R.id.editText_oggetto);
-			TextView descrizione_tv = (TextView) this
-					.findViewById(R.id.editText_descrizione_impegno);
+//			TextView descrizione_tv = (TextView) this
+//					.findViewById(R.id.editText_descrizione_impegno);
 			/*
 			 * recupero informazioni dagli elementi grafici e aggiornamento di
 			 * attivitaDiStudio
@@ -122,7 +122,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			String location = etLocation.getText().toString();
 
 			String oggetto = oggetto_tv.getText().toString();
-			String descrizione = descrizione_tv.getText().toString();
+//			String descrizione = descrizione_tv.getText().toString();
 
 			String stringdata = btn_data.getText().toString();
 			String ora = btn_time.getText().toString();
@@ -160,7 +160,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			// nuova_attivitaStudio.setStart(start);
 			newattivitaDiStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			newattivitaDiStudio.setPersonalDescription(descrizione);
+			newattivitaDiStudio.setPersonalDescription(oggetto);
 			newattivitaDiStudio.setGruppo(attivitaDiStudioOld.getGruppo());
 
 			ModifyAS salvamodificheAS = new ModifyAS(

@@ -37,6 +37,7 @@
         android:entries="@array/drop_down_spinner_courses_all"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_vertical_margin"
+        android:clickable="false"
         android:spinnerMode="dialog" />
 
     <RelativeLayout

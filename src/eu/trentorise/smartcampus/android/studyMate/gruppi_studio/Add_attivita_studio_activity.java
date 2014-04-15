@@ -134,19 +134,20 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				e.printStackTrace();
 			}
 
-			String descrizione = ((TextView) this
-					.findViewById(R.id.editText_descrizione_impegno)).getText()
-					.toString();
+//			String descrizione = ((TextView) this
+//					.findViewById(R.id.editText_descrizione_impegno)).getText()
+//					.toString();
 
 			String location = etLocation.getText().toString();
 
-			nuova_attivitaStudio.setTitle(oggetto);
+			nuova_attivitaStudio.setTitle(gds.getMateria());
 			// Date data = new Date();
 			if (data != null) {
 				EventoId eventoId = new EventoId();
 				eventoId.setDate(data);
 				Time time = new Time(data.getTime());
 				eventoId.setStart(time);
+				eventoId.setIdEventAd(-2);
 				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
 				nuova_attivitaStudio.setEventoId(eventoId);
@@ -155,9 +156,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// nuova_attivitaStudio.setStart(start);
 			nuova_attivitaStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			nuova_attivitaStudio.setPersonalDescription(descrizione);
+			nuova_attivitaStudio.setPersonalDescription(oggetto);
+			
+			nuova_attivitaStudio.setType(getResources().getString(R.string.attivitadistudio_string));
 
-			nuova_attivitaStudio.setGruppo(gds.getId());
+			nuova_attivitaStudio.setGruppo(gds);
 
 			// nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
 			// nuova_attivitaStudio.setMensa(mensa);
