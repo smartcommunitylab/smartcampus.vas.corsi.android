@@ -1,6 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -41,7 +43,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 	Spinner spinner_nome_gruppo;
 	// AutoCompleteTextView autocomplete_ricercaXmembro;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
-	public ArrayList<AttivitaDidattica> listaCorsi = new ArrayList<AttivitaDidattica>();
+	public List<CorsoCarriera> listaCorsi = new ArrayList<CorsoCarriera>();
 	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
@@ -78,7 +80,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 					View selectedItemView, int position, long id) {
 				// TODO Auto-generated method stub
 
-				AttivitaDidattica attivitaDidattica = listaCorsi.get(position);
+				CorsoCarriera attivitaDidattica = listaCorsi.get(position);
 				LoadGDSofCourse task = new LoadGDSofCourse(
 						RicercaGruppiGenerale_activity.this);
 				task.execute(attivitaDidattica);
@@ -181,43 +183,37 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, Void> {
+	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
-		private ArrayList<AttivitaDidattica> temp_listacorsiArrayList;
 
 		public LoadSpinnerMaterieAsTask(Context taskcontext) {
 			super();
 			this.taskcontext = taskcontext;
 		}
 
-		protected ArrayList<AttivitaDidattica> webgetCorsiUtente() {
-			mProtocolCarrier = new ProtocolCarrier(
-					RicercaGruppiGenerale_activity.this,
+		protected ArrayList<CorsoCarriera> webgetCorsiUtente() {
+			mProtocolCarrier = new ProtocolCarrier(RicercaGruppiGenerale_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 			// alcune preparazioni iniziali
 			// recupero dello studente in sessione dalle sharedpreferences
-			String jsonattivitadidattica = load("attivitaDidatticaStudente");
-			AttivitaDidattica attivitadidatticastud = Utils
-					.convertJSONToObject(jsonattivitadidattica,
-							AttivitaDidattica.class);
+
 			MessageResponse response;
-			if (attivitadidatticastud == null) {
-				return null;
-			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_ALLCOURSES_OF_DEGREE(""
-							+ attivitadidatticastud.getCds_id()));
+					SmartUniDataWS.GET_WS_MY_COURSES_NOT_PASSED);
 			request.setMethod(Method.GET);
 
 			try {
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
 								MyUniActivity.getAuthToken());
+
 				if (response.getHttpStatus() == 200) {
+
 					body = response.getBody();
+
 				} else {
 					return null;
 				}
@@ -228,19 +224,17 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return (ArrayList<AttivitaDidattica>) Utils.convertJSONToObjects(
-					body, AttivitaDidattica.class);
+
+			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(
+					body, CorsoCarriera.class);
 
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			temp_listacorsiArrayList = webgetCorsiUtente();
-			return null;
+		protected List<CorsoCarriera> doInBackground(Void... params) {
+			return webgetCorsiUtente();
 		}
 
 		@Override
@@ -253,17 +247,17 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(List<CorsoCarriera> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
-			if (temp_listacorsiArrayList != null
-					&& !temp_listacorsiArrayList.isEmpty()) {
-				for (AttivitaDidattica tempcorso : temp_listacorsiArrayList) {
-					listaCorsiString.add(tempcorso.getDescription());
+			if (result != null
+					&& !result.isEmpty()) {
+				for (CorsoCarriera tempcorso : result) {
+					listaCorsiString.add(tempcorso.getName());
 				}
-				listaCorsi = temp_listacorsiArrayList;
+				listaCorsi = result;//temp_listacorsiArrayList;
 				ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
 						RicercaGruppiGenerale_activity.this,
 						android.R.layout.simple_spinner_item, listaCorsiString);
@@ -284,7 +278,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 	}
 
 	private class LoadGDSofCourse extends
-			AsyncTask<AttivitaDidattica, Void, Void> {
+			AsyncTask<CorsoCarriera, Void, Void> {
 		/*
 		 * sto AsyncTask va buttato dentro nell'onitemselectedlistener dello
 		 * spinner_materia in modo che ogni volta che si cambia materia si
@@ -292,7 +286,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		 */
 		Context taskcontext;
 		public ProgressDialog pd;
-		private AttivitaDidattica materiaLookingForGDS;
+		private CorsoCarriera materiaLookingForGDS;
 		private ArrayList<GruppoDiStudio> temp_listaGDS;
 
 		public LoadGDSofCourse(Context taskcontext) {
@@ -310,14 +304,14 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 
 		private ArrayList<GruppoDiStudio> getGDSofThatAttivitaDidattica(
-				AttivitaDidattica ad) {
+				CorsoCarriera ad) {
 			MessageResponse response;
 			if (ad == null) {
 				return null;
 			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(ad.getAdId()));
+					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(Long.parseLong(ad.getCod())));////CHECK METODO
 			request.setMethod(Method.GET);
 			try {
 				response = mProtocolCarrier
@@ -344,7 +338,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected Void doInBackground(AttivitaDidattica... params) {
+		protected Void doInBackground(CorsoCarriera... params) {
 			// TODO Auto-generated method stub
 			materiaLookingForGDS = params[0];
 			temp_listaGDS = getGDSofThatAttivitaDidattica(materiaLookingForGDS);

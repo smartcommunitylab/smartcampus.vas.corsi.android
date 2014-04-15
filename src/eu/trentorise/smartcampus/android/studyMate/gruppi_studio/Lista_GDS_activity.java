@@ -87,11 +87,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (user_gds_list.isEmpty()) {
-			MenuItem item = menu.findItem(R.id.action_cambia_layout);
-			item.setEnabled(false);
-			item.setVisible(false);
-		}
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -103,9 +98,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			onBackPressed();
 			return super.onOptionsItemSelected(item);
 		}
-
-		case R.id.action_cambia_layout:
-			return super.onOptionsItemSelected(item);
 		case R.id.action_iscriviti_nuovo_gruppo: {
 			Intent intent = new Intent(getApplicationContext(),
 					RicercaGruppiGenerale_activity.class);

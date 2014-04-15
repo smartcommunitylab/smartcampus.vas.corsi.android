@@ -5,11 +5,7 @@
         android:icon="@drawable/ic_action_add"
         android:showAsAction="ifRoom"
         android:title=""/>
-    <item
-        android:id="@+id/action_modifica_gruppo"
-        android:icon="@drawable/ic_edit"
-        android:showAsAction="collapseActionView"
-        android:title="Modifica dettagli gruppo"/>
+
     <item
         android:id="@+id/action_abbandona_gruppo"
         android:icon="@drawable/ic_remove"

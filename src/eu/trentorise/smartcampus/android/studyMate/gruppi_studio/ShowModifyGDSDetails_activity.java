@@ -67,52 +67,52 @@ public class ShowModifyGDSDetails_activity extends SherlockActivity {
 		}
 	}
 
-	private class ASModificaDettagliGDS extends AsyncTask<Void, Void, Boolean> {
-
-		Context taskcontext;
-		public ProgressDialog pd;
-		Boolean allright;
-
-		public ASModificaDettagliGDS(Context taskcontext) {
-			super();
-			this.taskcontext = taskcontext;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, contextualGDS.getNome()
-					+ ": salvataggio modifiche in corso", "...");
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			boolean retval = false;
-			retval = salvamodifichegruppo();
-			return retval;
-		}
-
-		Boolean salvamodifichegruppo() {
-			Boolean retval = false;
-			/*
-			 * fare qulcosa via metodi web per salvare le modifiche ad un gruppo
-			 */
-			Toast.makeText(
-					getApplicationContext(),
-					"Manca il metodo al backend per salvare le modifiche ad un gruppo!",
-					Toast.LENGTH_LONG).show();
-			// return retval;
-			return true;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-		}
-
-	}
+//	private class ASModificaDettagliGDS extends AsyncTask<Void, Void, Boolean> {
+//
+//		Context taskcontext;
+//		public ProgressDialog pd;
+//		Boolean allright;
+//
+//		public ASModificaDettagliGDS(Context taskcontext) {
+//			super();
+//			this.taskcontext = taskcontext;
+//		}
+//
+//		@Override
+//		protected void onPreExecute() {
+//			// TODO Auto-generated method stub
+//			super.onPreExecute();
+//			pd = new ProgressDialog(taskcontext);
+//			pd = ProgressDialog.show(taskcontext, contextualGDS.getNome()
+//					+ ": salvataggio modifiche in corso", "...");
+//		}
+//
+//		@Override
+//		protected Boolean doInBackground(Void... params) {
+//			// TODO Auto-generated method stub
+//			boolean retval = false;
+//			retval = salvamodifichegruppo();
+//			return retval;
+//		}
+//
+//		Boolean salvamodifichegruppo() {
+//			Boolean retval = false;
+//			/*
+//			 * fare qulcosa via metodi web per salvare le modifiche ad un gruppo
+//			 */
+//			Toast.makeText(
+//					getApplicationContext(),
+//					"Manca il metodo al backend per salvare le modifiche ad un gruppo!",
+//					Toast.LENGTH_LONG).show();
+//			// return retval;
+//			return true;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(Boolean result) {
+//			// TODO Auto-generated method stub
+//			super.onPostExecute(result);
+//		}
+//
+//	}
 }

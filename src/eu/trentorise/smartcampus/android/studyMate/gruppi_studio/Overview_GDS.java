@@ -153,13 +153,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 					Overview_GDS.this, contextualGDS);
 			task.execute();
 			return super.onOptionsItemSelected(item);
-		case R.id.action_modifica_gruppo:
-
-			Intent intent = new Intent(Overview_GDS.this,
-					ShowModifyGDSDetails_activity.class);
-			intent.putExtra("contextualGDS", contextualGDS);
-			startActivity(intent);
-			return super.onOptionsItemSelected(item);
+//		case R.id.action_modifica_gruppo:
+//
+//			Intent intent = new Intent(Overview_GDS.this,
+//					ShowModifyGDSDetails_activity.class);
+//			intent.putExtra("contextualGDS", contextualGDS);
+//			startActivity(intent);
+//			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

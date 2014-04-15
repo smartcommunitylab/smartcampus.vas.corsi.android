@@ -1,10 +1,8 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -24,16 +21,15 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedDip;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
-import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.ItemMenuCourseListener;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -154,14 +150,14 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-							Toast.makeText(
-									getApplicationContext(),
-									getResources().getString(
-											R.string.dialog_coming_soon),
-									Toast.LENGTH_SHORT).show();
-							// Intent intent = new Intent(MyUniActivity.this,
-							// Lista_GDS_activity.class);
-							// MyUniActivity.this.startActivity(intent);
+//							Toast.makeText(
+//									getApplicationContext(),
+//									getResources().getString(
+//											R.string.dialog_coming_soon),
+//									Toast.LENGTH_SHORT).show();
+							 Intent intent = new Intent(MyUniActivity.this,
+							 Lista_GDS_activity.class);
+							 MyUniActivity.this.startActivity(intent);
 						}
 					});
 
