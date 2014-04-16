@@ -50,15 +50,15 @@ public class AttivitaStudioAdapter extends ArrayAdapter<Evento> {
 					.findViewById(R.id.orario_attivitastudio);
 
 			if (currentImpegno.getEventoId().getDate() != null) {
-				SimpleDateFormat format = new SimpleDateFormat(
-						"dd/MM/yyyy HH:mm");
-				data_view.setText(format.format(currentImpegno.getEventoId()
+				SimpleDateFormat formatDay = new SimpleDateFormat(
+						"dd/MM/yyyy");
+				data_view.setText(formatDay.format(currentImpegno.getEventoId()
 						.getDate()));
 			}
 
 			oggetto_view.setText(currentImpegno.getTitle());
 			aula_edificio_view.setText(currentImpegno.getRoom());
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 			orario_view.setText(format.format(currentImpegno.getEventoId()
 					.getDate()));
 

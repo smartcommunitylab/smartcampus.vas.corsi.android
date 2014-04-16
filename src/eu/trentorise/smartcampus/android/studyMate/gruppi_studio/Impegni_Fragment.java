@@ -84,33 +84,6 @@ public class Impegni_Fragment extends SherlockFragment {
 			}
 		});
 
-		// impegni_listview
-		// .setOnItemLongClickListener(new OnItemLongClickListener() {
-		// @Override
-		// public boolean onItemLongClick(AdapterView<?> parent,
-		// View view, int position, long id) {
-		// // TODO Auto-generated method stub
-		// if (mActionMode != null) {
-		// return false;
-		// }
-		//
-		// // Start the CAB using the ActionMode.Callback defined
-		// // above
-		// mActionMode = Impegni_Fragment.this
-		// .getSherlockActivity().startActionMode(
-		// mActionModeCallback);
-		//
-		// // view.setSelected(true);
-		//
-		// view.setPressed(true);
-		//
-		// // view.setBackgroundColor(getResources().getColor(
-		// // R.color.pressed_theme2_studymate));
-		// return true;
-		// }
-		//
-		// });
-
 	}
 
 	@Override
@@ -137,50 +110,6 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	}
 
-	public ArrayList<Evento> getLista_impegni() {
-		return lista_impegni;
-	}
 
-	// private ActionMode.Callback mActionModeCallback = new
-	// ActionMode.Callback() {
-	//
-	// // Called when the action mode is created; startActionMode() was called
-	// @Override
-	// public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-	// // Inflate a menu resource providing context menu items
-	// MenuInflater inflater = mode.getMenuInflater();
-	// inflater.inflate(R.menu.action_mode_allgds, menu);
-	// return true;
-	// }
-	//
-	// // Called each time the action mode is shown. Always called after
-	// // onCreateActionMode, but
-	// // may be called multiple times if the mode is invalidated.
-	// @Override
-	// public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	// return false; // Return false if nothing is done
-	// }
-	//
-	// // Called when the user selects a contextual menu item
-	// @Override
-	// public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	// switch (item.getItemId()) {
-	// case R.id.ac_elimina:
-	// Toast.makeText(MyApplication.getAppContext(), "ole",
-	// Toast.LENGTH_SHORT).show();
-	// mode.finish(); // Action picked, so close the CAB
-	// return true;
-	// default:
-	// return false;
-	// }
-	// }
-	//
-	// // Called when the user exits the action mode
-	// @Override
-	// public void onDestroyActionMode(ActionMode mode) {
-	//
-	// mActionMode = null;
-	// }
-	// };
 
 }

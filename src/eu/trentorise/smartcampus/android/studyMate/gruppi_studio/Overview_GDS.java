@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -39,7 +38,6 @@ import eu.trentorise.smartcampus.studymate.R;
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	public GruppoDiStudio contextualGDS = null;
-	// public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
 	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
@@ -48,12 +46,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.overview_gds_waitingforforum_layout);
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// codice per sistemare l'actionoverflow
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
 			Field menuKeyField = ViewConfiguration.class
@@ -63,69 +55,20 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				menuKeyField.setBoolean(config, false);
 			}
 		} catch (Exception ex) {
-			// Ignore
 		}
-
+		
 		Bundle myextras = getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras.get("contextualGDS");
-
+		
 		final ActionBar ab = getSupportActionBar();
-		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ab.setTitle(contextualGDS.getNome());
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-
-		// /** TabHost will have Tabs */
-		// String tab1_txt = "Impegni";
-		// String tab2_txt = "Forum";
-		//
-		// // tab1
-		//
-		// Tab tab1 = ab
-		// .newTab()
-		// .setText(tab1_txt)
-		// .setTabListener(
-		// new TabListener<Impegni_Fragment>(this, "tab1",
-		// Impegni_Fragment.class));
-		// ab.addTab(tab1);
-		//
-		// // tab2
-		// Tab tab2 = ab
-		// .newTab()
-		// .setText(tab2_txt)
-		// .setTabListener(
-		// new TabListener<Forum_fragment>(this, "tab2",
-		// Forum_fragment.class));
-		// ab.addTab(tab2);
-
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
 
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// // retrieving impegni from web
-	// AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
-	// task.execute();
-	// }
-
-	@Override
-	public void onBackPressed() {
-		Overview_GDS.this.finish();
-	}
-
-	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// Bundle args = arg2.getExtras();
-		Toast.makeText(
-				Overview_GDS.this,
-				"resultcode= " + arg1 + " # requestCode= " + arg0
-						+ "\n mi hanno ritornato" + " elem", Toast.LENGTH_SHORT)
-				.show();
-		super.onActivityResult(arg0, arg1, arg2);
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -138,7 +81,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
-			Overview_GDS.this.finish();
+			onBackPressed();
 			return true;
 		}
 		case R.id.aggiungi_impegno: {
@@ -166,13 +109,14 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	}
 
+	@Override
+	public void onBackPressed() {
+		Overview_GDS.this.finish();
+	}
+	
 	public GruppoDiStudio getContextualGDS() {
 		return contextualGDS;
 	}
-
-	// public ArrayList<ChatObj> getContextualForum() {
-	// return contextualForum;
-	// }
 
 	public void setContextualGDS(GruppoDiStudio contextualGDS) {
 		this.contextualGDS = contextualGDS;
@@ -235,7 +179,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			// ripulisco la lista impegni prima di caricare i nuovi impegni
 			contextualListaImpegni.clear();
@@ -254,7 +197,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			// ora che ho gli impegni pronti faccio partire la transaction che
 			// porta alla schermata dove vengono mostrati gli impegni
@@ -268,7 +210,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				tv.setVisibility(View.GONE);
 				FragmentTransaction ft = Overview_GDS.this
 						.getSupportFragmentManager().beginTransaction();
-				// Fragment fragment = new Impegni_Fragment();
 				Fragment fragment = Impegni_Fragment.newInstance(
 						contextualListaImpegni, contextualGDS);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -307,15 +248,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 			MessageResponse response;
 			try {
-
-				// String gds_to_abandonJSON =
-				// Utils.convertToJSON(gds_to_abandon);
-
 				request.setBody(gds_to_abandon.getId() + "");
-				/*
-				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
-				 * diversamente visto che stiamousando una delete
-				 */
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
 								MyUniActivity.getAuthToken());
@@ -323,7 +256,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				if (response.getHttpStatus() == 200) {
 
 					return true;
-					// body = response.getBody();
 
 				} else {
 					return false;
@@ -353,12 +285,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			// Overview_GDS.this.finish();
-			// devo ricaricare la listagdsact nel modo corretto
-			Intent intent = new Intent(Overview_GDS.this,
-					Lista_GDS_activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			Intent intent = new Intent(Overview_GDS.this,
+//					Lista_GDS_activity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 		}
 
 		@Override
