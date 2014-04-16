@@ -159,6 +159,8 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 							// chiamo l'handler per il caricamento dei corsi di
 							// laurea
 							departSelected = listDipartimenti.get(pos);
+							
+							spinnerDegree.setClickable(true);
 
 							asyncGetCds = (AsyncSetSharedCds) new AsyncSetSharedCds(
 									context, spinnerDegree, departSelected, act)
