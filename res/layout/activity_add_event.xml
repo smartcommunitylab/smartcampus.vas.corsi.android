@@ -117,6 +117,23 @@
                 android:inputType="text"
                 android:text="" 
                 android:imeOptions="actionDone"/>
+            
+            <TextView
+                android:id="@+id/TextViewAddLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/addevent_location"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editText_eventlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
 
             <LinearLayout
                 android:layout_width="match_parent"

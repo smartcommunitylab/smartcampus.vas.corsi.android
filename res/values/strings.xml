@@ -202,6 +202,6 @@
 	 <string name="menu_courses_goto_home">Vai alla home</string>
 	 <string name="menu_courses_unfollow">Non seguire più</string>
 	 
-	 
-
+	 <!-- GDS -->
+	<string name="addevent_location">Luogo</string>
 </resources>

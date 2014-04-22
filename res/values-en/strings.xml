@@ -179,4 +179,7 @@
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
 
+    
+    <!-- GDS -->
+	<string name="addevent_location">Luogo</string>
 </resources>

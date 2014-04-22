@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -21,6 +22,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,6 +35,7 @@ import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
+import eu.trentorise.smartcampus.android.studyMate.myAgenda.EditEventFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -44,9 +47,29 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class ModifiyAttivitaStudio extends FragmentActivity {
-	private Evento attivitaDiStudioOld;
 	private ProtocolCarrier mProtocolCarrier;
 	private EditText etLocation;
+	private EditText mPickDate;
+	private EditText mPickTime;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+	private int mMinute;
+	private int mHour;
+	private int hour;
+	private int minute;
+	private Evento evento = null;
+	Spinner coursesSpinner;
+	private EventoId eId;
+	private Date date;
+	private EditText description;
+	private EditText eventlocation;
+	private EditText descrizione_tv;
+	private Evento eventoModificato;
+	private long dateInitial;
+	private long timeFromInitial;
+	private long timeToInitial;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,34 +81,64 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
-
 		// recupero gds da modificare per impostare i campi di testo ecc da
 		// modificare con i valori preesistenti dell'attivitadistudio
 		Bundle myextras = getIntent().getExtras();
-		attivitaDiStudioOld = (Evento) myextras
-				.getSerializable("impegno_da_modificare");
-		etLocation = (EditText) findViewById(R.id.editText_location_impegno);
-		etLocation.setText(attivitaDiStudioOld.getPersonalDescription());
+		evento = (Evento) myextras.getSerializable("impegno_da_modificare");
+		dateInitial = evento.getEventoId().getDate().getTime();
+		timeFromInitial = evento.getEventoId().getStart().getTime();
+		timeToInitial = evento.getEventoId().getStop().getTime();
 
-		// retrieving & initializing some button
-		Button btn_data = (Button) findViewById(R.id.data_button_gds);
-		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
+		eId = new EventoId();
+		eventoModificato = evento;
+		date = new Date();
+		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
+		mPickDate.setOnClickListener(new OnClickListener() {
 
-		Date data = attivitaDiStudioOld.getEventoId().getDate();
-		SimpleDateFormat formatgiornoanno = new SimpleDateFormat("dd/MM/yyyy");
-		btn_data.setText(formatgiornoanno.format(data));
+			@Override
+			public void onClick(View v) {
+				showDatePickerDialog();
 
-		SimpleDateFormat formatorariogiornata = new SimpleDateFormat("HH:mm");
-		btn_time.setText(formatorariogiornata.format(data));
+			}
+		});
+		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
+		mPickTime.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				showTimePickerDialog();
+
+			}
+		});
+
+		// get the ex date of previous event
+		mYear = evento.getEventoId().getDate().getYear() + 1900;
+		mMonth = evento.getEventoId().getDate().getMonth();
+		mDay = evento.getEventoId().getDate().getDate();
+		// get the current Time
+		hour = evento.getEventoId().getStart().getHours();
+		minute = evento.getEventoId().getStart().getMinutes();
+		eId.setStart(new Time(hour, minute, 0));
+		eId.setStop(new Time(hour, minute, 0));
+		// display the current date
+		updateDisplay();
+
+		description = (EditText) findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
+		description.setText(evento.getPersonalDescription());
 		// retrieving textview_oggetto
-		TextView oggetto_tv = (TextView) this
-				.findViewById(R.id.editText_oggetto);
-		oggetto_tv.setText(attivitaDiStudioOld.getTitle());
+		List<String> course = new ArrayList<String>();
+		course.add(new String(evento.getTitle()));
+		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
+				ModifiyAttivitaStudio.this,
+				R.layout.list_studymate_row_list_simple, course);
+		coursesSpinner.setAdapter(adapterCourse);
+		coursesSpinner.setClickable(false);
+		etLocation = (EditText) findViewById(R.id.editText_eventlocation);
+		etLocation.setText(evento.getRoom());
+		descrizione_tv = (EditText) this.findViewById(R.id.editTextDescription);
+		descrizione_tv.setText(evento.getPersonalDescription());
 
-//		TextView descrizione_tv = (TextView) this
-//				.findViewById(R.id.editText_descrizione_impegno);
-//		descrizione_tv.setText(attivitaDiStudioOld.getPersonalDescription());
 	}
 
 	@Override
@@ -108,27 +161,23 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			/*
 			 * recupero elementi grafici
 			 */
-			
-			Button btn_data = (Button) findViewById(R.id.data_button_gds);
-			Button btn_time = (Button) findViewById(R.id.ora_button_gds);
-			TextView oggetto_tv = (TextView) this
-					.findViewById(R.id.editText_oggetto);
-//			TextView descrizione_tv = (TextView) this
-//					.findViewById(R.id.editText_descrizione_impegno);
+
+			mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
+			mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
+
 			/*
 			 * recupero informazioni dagli elementi grafici e aggiornamento di
 			 * attivitaDiStudio
 			 */
 			String location = etLocation.getText().toString();
 
-			String oggetto = oggetto_tv.getText().toString();
-//			String descrizione = descrizione_tv.getText().toString();
+			// String descrizione = descrizione_tv.getText().toString();
 
-			String stringdata = btn_data.getText().toString();
-			String ora = btn_time.getText().toString();
+			String stringdata = mPickDate.getText().toString();
+			String ora = mPickTime.getText().toString();
 			stringdata = stringdata + " " + ora;
 			Date data = null;
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			try {
 				data = format.parse(stringdata);
 				System.out.println(data);
@@ -141,31 +190,31 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			/*
 			 * salvataggio modifche in attivitaDiStudio
 			 */
-			Evento newattivitaDiStudio = new Evento();
 
-			newattivitaDiStudio.setTitle(oggetto);
+			eventoModificato.setTitle(evento.getTitle());
 			// Date data = new Date();
 			if (data != null) {
 				EventoId eventoId = new EventoId();
-				long dateR = 10000 * (data.getTime() / 10000);
+				long dateR = 10000 * (date.getTime() / 10000);
 				eventoId.setDate(new Date(dateR));
-				newattivitaDiStudio.setEventoId(eventoId);
+				eventoModificato.setEventoId(eventoId);
 				Time time = new Time(data.getTime());
 				eventoId.setStart(time);
 				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
-				newattivitaDiStudio.setEventoId(eventoId);
+				eventoModificato.setEventoId(eventoId);
 			}
 
 			// nuova_attivitaStudio.setStart(start);
-			newattivitaDiStudio.setRoom(location);
+			eventoModificato.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			newattivitaDiStudio.setPersonalDescription(oggetto);
-			newattivitaDiStudio.setGruppo(attivitaDiStudioOld.getGruppo());
+			eventoModificato.setPersonalDescription(descrizione_tv.getText()
+					.toString());
+			eventoModificato.setGruppo(evento.getGruppo());
 
 			ModifyAS salvamodificheAS = new ModifyAS(
-					ModifiyAttivitaStudio.this, attivitaDiStudioOld,
-					newattivitaDiStudio);
+					ModifiyAttivitaStudio.this, evento,
+					eventoModificato);
 			salvamodificheAS.execute();
 			return super.onOptionsItemSelected(item);
 		}
@@ -175,52 +224,49 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 	}
 
-	public void showDatePickerDialog(View v) {
+	public void showDatePickerDialog() {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 
-	public void showTimePickerDialog(View v) {
+	public void showTimePickerDialog() {
 		DialogFragment newFragment = new TimePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
-	@SuppressLint("ValidFragment")
-	final class DatePickerFragment extends DialogFragment implements
+	public class DatePickerFragment extends DialogFragment implements
 			DatePickerDialog.OnDateSetListener {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-			String phrase_date = (String) ((Button) ModifiyAttivitaStudio.this
-					.findViewById(R.id.data_button_gds)).getText();
-
-			// MyDate data = MyDate.parseFromString(phrase_date);
-			// int mDay = data.getDay();
-			// int mMonth = data.getMonth();
-			// int mYear = data.getYear();
-
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
-			int mYear = c.get(Calendar.YEAR);
-			int mMonth = c.get(Calendar.MONTH);
-			int mDay = c.get(Calendar.DAY_OF_MONTH);
+			mYear = c.get(Calendar.YEAR);
+			mMonth = c.get(Calendar.MONTH);
+			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(ModifiyAttivitaStudio.this, this,
+					mYear, mMonth, mDay);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
-			Button b = (Button) ModifiyAttivitaStudio.this
-					.findViewById(R.id.data_button_gds);
-			// MyDate date = new MyDate(year, month, day);
-			b.setText("" + day + "/" + month + "/" + year);
-			// b.refreshDrawableState();
+			// Do something with the date chosen by the user;
+			((EditText) findViewById(R.id.myDatePickerButton))
+			// Month is 0 based so add 1
+					.setText(day + "-" + (month + 1) + "-" + year);
+			date.setYear(year - 1900);
+			date.setMonth(month);
+			date.setDate(day);
 
+			eId.setDate(date);
+
+			eventoModificato.setEventoId(eId);
 		}
+
 	}
 
-	@SuppressLint("ValidFragment")
-	final class TimePickerFragment extends DialogFragment implements
+	public class TimePickerFragment extends DialogFragment implements
 			TimePickerDialog.OnTimeSetListener {
 
 		@Override
@@ -231,27 +277,23 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getActivity()));
+			return new TimePickerDialog(ModifiyAttivitaStudio.this, this, hour,
+					minute,
+					DateFormat.is24HourFormat(ModifiyAttivitaStudio.this));
 		}
 
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
-			Button b = (Button) ModifiyAttivitaStudio.this
-					.findViewById(R.id.ora_button_gds);
 			if (minute < 10) {
-				if (hourOfDay < 10) {
-					b.setText("0" + hourOfDay + ":0" + minute);
-				} else
-					b.setText(hourOfDay + ":0" + minute);
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":0" + minute);
 			} else {
-				if (hourOfDay < 10) {
-					b.setText("0" + hourOfDay + ":" + minute);
-				} else
-					b.setText(hourOfDay + ":" + minute);
-			}
-			// b.refreshDrawableState();
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":" + minute);
 
+			}
+			hour = hourOfDay;
+			ModifiyAttivitaStudio.this.minute = minute;
 		}
 	}
 
@@ -261,8 +303,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		Boolean allright;
 		Evento oldone, newone;
 
-		public ModifyAS(Context taskcontext, Evento oldone,
-				Evento newone) {
+		public ModifyAS(Context taskcontext, Evento oldone, Evento newone) {
 			super();
 			this.taskcontext = taskcontext;
 			this.oldone = oldone;
@@ -289,10 +330,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.POST_WS_CHANGE_ATTIVITASTUDIO(oldone
-							.getEventoId().getDate().getTime(), oldone
-							.getEventoId().getStart().getTime(), oldone
-							.getEventoId().getStop().getTime()));
+					SmartUniDataWS.POST_WS_CHANGE_ATTIVITASTUDIO(dateInitial, timeFromInitial, timeToInitial));
 			request.setMethod(Method.POST);
 
 			Boolean resultPost = false;
@@ -358,6 +396,21 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 		}
 
+	}
+
+	public void updateDisplay() {
+		this.mPickDate.setText(new StringBuilder()
+
+		.append(mDay).append("-").append(mMonth + 1).append("-").append(mYear)
+				.append(" "));
+		if (minute < 10) {
+			this.mPickTime.setText(new StringBuilder().append(hour)
+					.append(":0").append(minute));
+		} else {
+			this.mPickTime.setText(new StringBuilder().append(hour).append(":")
+					.append(minute));
+
+		}
 	}
 
 }
