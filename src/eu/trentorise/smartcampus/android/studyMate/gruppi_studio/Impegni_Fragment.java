@@ -18,6 +18,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
+import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
+import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Impegni_Fragment extends SherlockFragment {
@@ -66,18 +69,28 @@ public class Impegni_Fragment extends SherlockFragment {
 		// gestione listaimpegni
 		ListView impegni_listview = (ListView) getSherlockActivity()
 				.findViewById(R.id.lista_impegni);
-		AttivitaStudioAdapter adapter = new AttivitaStudioAdapter(
-				getSherlockActivity(), R.id.lista_impegni, lista_impegni);
+		EventItem[] listEvItem = new EventItem[lista_impegni.size()];
+		int i = 0;
+		for (Evento ev : lista_impegni) {
+			AdptDetailedEvent e = new AdptDetailedEvent(ev
+					.getEventoId().getDate(), ev.getTitle(),
+					ev.getType(), ev.getEventoId().getStart()
+							.toString(), ev.getRoom());
+			listEvItem[i++] = new EventItem(e, getActivity()
+					.getResources());
+
+		}
+		EventAdapter adapter = new EventAdapter(
+				getSherlockActivity(), listEvItem);
 		impegni_listview.setAdapter(adapter);
 
 		impegni_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				AttivitaStudioAdapter adpt = (AttivitaStudioAdapter) parent
+				EventAdapter adpt = (EventAdapter) parent
 						.getAdapter();
-				ArrayList<Evento> entries = adpt.getEntries();
-				final Evento selected_impegno = entries.get(position);
+				final Evento selected_impegno = lista_impegni.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
 				intent.putExtra("contextualAttivitaStudio", selected_impegno);
 				startActivity(intent);

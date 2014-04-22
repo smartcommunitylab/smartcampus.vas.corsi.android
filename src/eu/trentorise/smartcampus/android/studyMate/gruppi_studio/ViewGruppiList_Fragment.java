@@ -56,7 +56,6 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 							Overview_GDS.class);
 					intent.putExtra("contextualGDS", contextualGDS);
 					startActivity(intent);
-
 				}
 			});
 
