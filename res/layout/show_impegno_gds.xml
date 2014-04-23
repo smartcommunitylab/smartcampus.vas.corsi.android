@@ -57,16 +57,6 @@
         android:text="Descrizione"
         android:textStyle="italic" />
 
-    <TextView
-        android:id="@+id/scritta_allegati"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:text="Allegati"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/smartn_theme_color" />
-
     <!--
     <GridLayout
         android:layout_width="match_parent"
@@ -108,11 +98,5 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </GridLayout>
     -->
-
-    <ListView
-        android:id="@+id/lista_allegati_showgds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
 
 </LinearLayout>

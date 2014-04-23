@@ -152,14 +152,10 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 						public void onItemSelected(AdapterView<?> parent,
 								View view, int pos, long id) {
 
-							if (i == 0) {
-								i++;
-								return;
-							}
 							// chiamo l'handler per il caricamento dei corsi di
 							// laurea
 							departSelected = listDipartimenti.get(pos);
-							
+
 							spinnerDegree.setClickable(true);
 
 							asyncGetCds = (AsyncSetSharedCds) new AsyncSetSharedCds(

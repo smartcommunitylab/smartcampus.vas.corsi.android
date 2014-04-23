@@ -80,51 +80,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
 		tv_descrizione.setText(contextualAttivitaStudio.getPersonalDescription());
 
-		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
-
-		// ArrayList<Allegato> contextualAllegatis = null;
-		/*
-		 * contextualAttivitaStudio .getAllegati();
-		 */
-		// if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
-		// Toast.makeText(MyApplication.getAppContext(),
-		// "non ci sono allegati ne mostro uno per prova",
-		// Toast.LENGTH_SHORT).show();
-		// contextualAllegatis = new ArrayList<Allegato>();
-		// Allegato fake = new Allegato(null, "nome allegato finto.pdf");
-		// contextualAllegatis.add(fake);
-		// contextualAllegatis.add(fake);
-		// }
-		// Allegati_to_list_arrayadapter adapter = new
-		// Allegati_to_list_arrayadapter(
-		// ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
-		// contextualAllegatis);
-		// listview_allegati.setAdapter(adapter);
-		/*
-		 * manca altra roba
-		 */
-		// CheckBox c1 = (CheckBox)
-		// findViewById(R.id.CheckBox1_prenotazione_aule);
-		// CheckBox c2 = (CheckBox) findViewById(R.id.CheckBox2_mensa);
-		// CheckBox c3 = (CheckBox) findViewById(R.id.CheckBox3_tutoring);
-		// CheckBox c4 = (CheckBox) findViewById(R.id.CheckBox4_biblioteca);
-
-		// if (contextualAttivitaStudio.isPrenotazione_aule()) {
-		// c1.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isMensa()) {
-		// c2.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isTutoring()) {
-		// c3.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isBiblioteca()) {
-		// c4.setChecked(true);
-		// }
-
-		/*
-		 * e così via
-		 */
 	}
 
 	@Override
