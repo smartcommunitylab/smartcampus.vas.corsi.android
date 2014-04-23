@@ -7,10 +7,13 @@ import java.util.Date;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -21,6 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -96,16 +100,44 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			ShowImpegnoGDS.this.finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.action_modifica_impegno:
-			Intent intent1 = new Intent(ShowImpegnoGDS.this,
-					ModifiyAttivitaStudio.class);
-			intent1.putExtra("impegno_da_modificare", contextualAttivitaStudio);
-			startActivity(intent1);
+			SharedPreferences sharedPreferences = ShowImpegnoGDS.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String studenteStr = sharedPreferences.getString("corsiStudente",
+					null);
+			Studente studLogged = Utils.convertJSONToObject(studenteStr,
+					Studente.class);
+			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLogged
+					.getId()) {
+				Toast.makeText(ShowImpegnoGDS.this,
+						getResources().getString(R.string.event_modify_not_allowed), Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				Intent intent1 = new Intent(ShowImpegnoGDS.this,
+						ModifiyAttivitaStudio.class);
+				intent1.putExtra("impegno_da_modificare",
+						contextualAttivitaStudio);
+				startActivity(intent1);
+			}
 			return super.onOptionsItemSelected(item);
 
 		case R.id.action_elimina_impegno:
-			AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
-					ShowImpegnoGDS.this, contextualAttivitaStudio);
-			task.execute();
+
+			SharedPreferences sharedPreferencesDel = ShowImpegnoGDS.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String studenteStrDel = sharedPreferencesDel.getString(
+					"corsiStudente", null);
+			Studente studLoggedDel = Utils.convertJSONToObject(studenteStrDel,
+					Studente.class);
+			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLoggedDel
+					.getId()) {
+				Toast.makeText(ShowImpegnoGDS.this,
+						getResources().getString(R.string.event_delete_not_allowed), Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
+						ShowImpegnoGDS.this, contextualAttivitaStudio);
+				task.execute();
+			}
 			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
@@ -131,8 +163,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.dialog_loading), "");
+			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
+					+ toabandonAS.getPersonalDescription(), "");
 		}
 
 		private boolean abandonAS(Evento as_to_abandon) {
@@ -183,6 +215,10 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			ShowImpegnoGDS.this.finish();
+			// Intent intent = new Intent(ShowImpegnoGDS.this,
+			// Overview_GDS.class);
+			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// startActivity(intent);
 		}
 
 	}

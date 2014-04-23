@@ -3,22 +3,28 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.ItemMenuCourseListener;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -141,6 +147,15 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 
 			pd.dismiss();
 
+			departSelected = SharedUtils.getDipartimentoStudente(act);
+			spinnerDepartments.setSelection(SharedUtils.getPosListFromShared(listStringDepartments,departSelected.getDescription()), true);
+			
+			if(departSelected != null){
+				asyncGetCds = (AsyncSetSharedCds) new AsyncSetSharedCds(
+						context, spinnerDegree, departSelected, act)
+						.execute();
+			}
+			
 			spinnerDepartments
 					.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 						public void onItemSelected(AdapterView<?> parent,

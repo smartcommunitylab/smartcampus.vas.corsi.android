@@ -175,6 +175,8 @@
     <string name="addevent_date">Data</string>
     <string name="addevent_Time">Ora</string>
     <string name="addevent_description">Descrizione</string>
+        <string name="event_modify_not_allowed">Solo chi ha creato l\'evento può modificarlo</string>
+    <string name="event_delete_not_allowed">Solo chi ha creato l\'evento può eliminarlo</string>
     
     <string name="button_cancel">Annulla</string>
     <string name="searchby_all">Tutto</string>

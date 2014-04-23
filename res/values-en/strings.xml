@@ -162,6 +162,8 @@
     <string name="addevent_description">Description</string>
     <string name="button_cancel">Cancel</string>
     <string name="searchby_all">All</string>
+    <string name="event_modify_not_allowed">Only the person who has created the event can edit it</string>
+    <string name="event_delete_not_allowed">Only the person who has created the event can delete it</string>
     <!-- feedback -->
     <string name="feedback_not_present">There are no comments...</string>
     <string name="feedback_number_presents">comments found</string>
