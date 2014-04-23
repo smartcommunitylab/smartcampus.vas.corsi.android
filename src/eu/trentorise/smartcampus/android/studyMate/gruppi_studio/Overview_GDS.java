@@ -285,10 +285,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-//			Intent intent = new Intent(Overview_GDS.this,
-//					Lista_GDS_activity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			Intent intent = new Intent(Overview_GDS.this,
+					Lista_GDS_activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 
 		@Override

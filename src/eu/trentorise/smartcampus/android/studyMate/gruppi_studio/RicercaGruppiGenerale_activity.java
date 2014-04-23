@@ -126,8 +126,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 						.getSelectedItem().toString();
 			} catch (NullPointerException e) {
 				// TODO: handle exception
-				System.out
-						.println("Nessun gruppo selezionato o nessun gruppo disponibile pertanto nomegruppo è null");
 				nome_gruppo = null;
 			}
 
@@ -252,6 +250,16 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
+			
+			if(result.size() < 1){
+				pd.dismiss();
+				RicercaGruppiGenerale_activity.this.finish();
+				Toast.makeText(getApplicationContext(),
+						"Non puoi iscriverti ad alcun gruppo di studio perchè non ci sono corsi che stai seguendo",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+			
 			if (result != null
 					&& !result.isEmpty()) {
 				for (CorsoCarriera tempcorso : result) {
@@ -390,8 +398,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(
 						getApplicationContext(),
-						materia
-								+ ": non ci sono ancora gruppi a cui iscriversi!",
+						"Non ci sono ancora gruppi a cui iscriversi per il corso "+materiaLookingForGDS.getName(),
 						Toast.LENGTH_LONG).show();
 			}
 		}

@@ -201,7 +201,8 @@
 	 
 	 <string name="menu_courses_goto_home">Vai alla home</string>
 	 <string name="menu_courses_unfollow">Non seguire più</string>
-	 
+	 <string name="menu_multi_courses_unfollow">Non seguire</string>
+	 <string name="menu_multi_courses_follow">Segui</string>
 	 <!-- GDS -->
 	<string name="addevent_location">Luogo</string>
 </resources>

@@ -68,7 +68,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		// logo_gds.setImageDrawable(contextualGDS.getLogo());
 		nome_gds.setText(contextualGDS.getNome());
 		materia_gds.setText(contextualGDS.getMateria());
-
+		
 		if (contextualGDS.getStudentiGruppo() != null
 				&& !contextualGDS.getStudentiGruppo().isEmpty()) {
 			Students_to_listview_adapter adapter = new Students_to_listview_adapter(
