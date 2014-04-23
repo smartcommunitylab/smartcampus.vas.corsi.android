@@ -23,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -62,23 +61,14 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
 		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
-		// autocomplete_ricercaXmembro = (AutoCompleteTextView)
-		// findViewById(R.id.autocomplete_ricerca_per_membro);
-
-		// caricamento materie nello spinner materie, l'onitemselectedlistener
-		// penserà a far partire l'aggiornamento dello spinner nomi gruppo
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
 				RicercaGruppiGenerale_activity.this);
 		task.execute();
-		// ora ci sono le materie nello spinner materie e dopo il postexecute
-		// possiamo metterci un listener sulle selezioni via spinner delle
-		// materie, di modo che carichiamo i relativi GDS di volta in volta
 		spinner_materia.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parentView,
 					View selectedItemView, int position, long id) {
-				// TODO Auto-generated method stub
 
 				CorsoCarriera attivitaDidattica = listaCorsi.get(position);
 				LoadGDSofCourse task = new LoadGDSofCourse(
@@ -88,13 +78,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parentView) {
-				// TODO Auto-generated method stub
 
 			}
 		});
-
-		// setting up degli spinner una volta recuperati i dati dal web delle
-		// risorse in grafica
 
 	}
 
@@ -125,17 +111,12 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 						.findViewById(R.id.spinner_nomi_gruppi))
 						.getSelectedItem().toString();
 			} catch (NullPointerException e) {
-				// TODO: handle exception
 				nome_gruppo = null;
 			}
 
-			// passaggio parametri della ricerca a
-			// Display_GDS_research_resultsActivity
 			Intent intent;
 			if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
-					&& nome_gruppo.equals("Tutti")) {
-				// se ha selezionato la materia ma ha lasciato il campo nome
-				// gruppo a "Tutti"
+					&& nome_gruppo.equals(getResources().getString(R.string.all_gds))) {
 				intent = new Intent(RicercaGruppiGenerale_activity.this,
 						Display_GDS_research_results.class);
 				intent.putExtra("PossibleGDS", listaGDSxMateria);
@@ -143,8 +124,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				intent.putExtra("Selected_materia", materia);
 			} else if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
 					&& !nome_gruppo.equals("Tutti")) {
-				// se ha selezionato la materia e ha scelto anche un gruppo in
-				// particolare
 				GruppoDiStudio gds_to_subscribe = null;
 				for (GruppoDiStudio gds : listaGDSxMateria) {
 					if (gds.getNome().equals(nome_gruppo))
@@ -168,11 +147,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 					return super.onOptionsItemSelected(item);
 				}
 			}
-			// Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
-			// Display_GDS_research_results.class);
-			// intent.putExtra("Selected_materia", materia);
-			// intent.putExtra("Selected_nome_gruppo", nome_gruppo);
-			//
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}
@@ -194,8 +168,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		protected ArrayList<CorsoCarriera> webgetCorsiUtente() {
 			mProtocolCarrier = new ProtocolCarrier(RicercaGruppiGenerale_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
-			// alcune preparazioni iniziali
-			// recupero dello studente in sessione dalle sharedpreferences
 
 			MessageResponse response;
 			MessageRequest request = new MessageRequest(
@@ -237,7 +209,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
@@ -246,7 +217,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(List<CorsoCarriera> result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
@@ -265,7 +235,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				for (CorsoCarriera tempcorso : result) {
 					listaCorsiString.add(tempcorso.getName());
 				}
-				listaCorsi = result;//temp_listacorsiArrayList;
+				listaCorsi = result;
 				ArrayAdapter<String> adapter_spinner_materie = new ArrayAdapter<String>(
 						RicercaGruppiGenerale_activity.this,
 						android.R.layout.simple_spinner_item, listaCorsiString);
@@ -287,11 +257,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	private class LoadGDSofCourse extends
 			AsyncTask<CorsoCarriera, Void, Void> {
-		/*
-		 * sto AsyncTask va buttato dentro nell'onitemselectedlistener dello
-		 * spinner_materia in modo che ogni volta che si cambia materia si
-		 * faccia partire il task che carica i nuovi GDS
-		 */
 		Context taskcontext;
 		public ProgressDialog pd;
 		private CorsoCarriera materiaLookingForGDS;
@@ -304,7 +269,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
@@ -319,7 +283,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(Long.parseLong(ad.getCod())));////CHECK METODO
+					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(Long.parseLong(ad.getCod())));
 			request.setMethod(Method.GET);
 			try {
 				response = mProtocolCarrier
@@ -337,7 +301,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return (ArrayList<GruppoDiStudio>) Utils.convertJSONToObjects(body,
@@ -347,7 +310,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected Void doInBackground(CorsoCarriera... params) {
-			// TODO Auto-generated method stub
 			materiaLookingForGDS = params[0];
 			temp_listaGDS = getGDSofThatAttivitaDidattica(materiaLookingForGDS);
 			return null;
@@ -355,7 +317,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			// aggiorno la lista di GDS associati alla materia
 			listaGDSxMateria.clear();
@@ -375,25 +336,16 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				spinner_nome_gruppo.setAdapter(adapter_spinner_gds);
 				// faccio in modo che lo spinner parta dal valore 'Tutti'
-				String myString = "Tutti"; // the value you want the position
-											// for
+				String myString = getResources().getString(R.string.all_gds);											
 				int spinnerPosition = adapter_spinner_gds.getPosition(myString);
-				// set the default according to value
 				spinner_nome_gruppo.setSelection(spinnerPosition);
-				//
-				// ((ArrayAdapter<String>) spinner_nome_gruppo.getAdapter())
-				// .notifyDataSetChanged();
 				spinner_nome_gruppo.setEnabled(true);
 				pd.dismiss();
 			} else {
-				// se non ci sono GDS della tale materia...
-				// ripartire da qualche passo precedente dell'activity
 				pd.dismiss();
 				String materia = ((Spinner) RicercaGruppiGenerale_activity.this
 						.findViewById(R.id.spinner_materie)).getSelectedItem()
 						.toString();
-				// ((ArrayAdapter<String>) spinner_nome_gruppo.getAdapter())
-				// .notifyDataSetChanged();
 				spinner_nome_gruppo.setAdapter(null);
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(

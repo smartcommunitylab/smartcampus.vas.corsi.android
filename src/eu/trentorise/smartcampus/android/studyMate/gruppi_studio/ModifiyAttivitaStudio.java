@@ -77,7 +77,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 		// personalizzazioje actionabar
 		android.app.ActionBar actionbar = getActionBar();
-		actionbar.setTitle("Modifica impegno");
+		actionbar.setTitle(R.string.mod_att);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -319,7 +319,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Salvataggio modifiche in corso", "...");
+					getResources().getString(R.string.dialog_saving_feedback), "");
 		}
 
 		private boolean modificaAS() {
@@ -338,9 +338,6 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			try {
 
 				String AttivitaJSON = Utils.convertToJSON(newone);
-				System.out
-						.println("Il json dell'attività di studio che sto modificando è: "
-								+ AttivitaJSON);
 				request.setBody(AttivitaJSON);
 
 				response = mProtocolCarrier
@@ -387,9 +384,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 				startActivity(intent);
 
 			} else {
-				// merda
 				Toast.makeText(ModifiyAttivitaStudio.this,
-						"errore nella modifica dell'AS", Toast.LENGTH_SHORT)
+						getResources().getString(R.string.dialog_error), Toast.LENGTH_SHORT)
 						.show();
 				ModifiyAttivitaStudio.this.finish();
 			}

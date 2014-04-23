@@ -46,7 +46,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		// impostazioni grafiche
 		setContentView(R.layout.lista_gds_activity);
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("I miei gruppi");
+		actionbar.setTitle(R.string.my_gds);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -139,7 +139,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Caricamento gruppi di studio personali", "");
+					getResources().getString(R.string.loading_gds), "");
 		}
 
 		private List<GruppoDiStudio> getMineGDS() {
@@ -196,7 +196,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
 			if (user_gds_list.isEmpty() || user_gds_list == null) {
-				tv.setText("Non sei ancora iscritto ad alcun gruppo di studio!\nUtilizza il menù in alto a destra per iscriverti ad un gruppo di studio");
+				tv.setText(getResources().getString(R.string.no_gds));
 			} else {
 				tv.setVisibility(View.GONE);
 			}

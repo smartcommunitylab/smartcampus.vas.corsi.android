@@ -214,4 +214,9 @@
 	<string name="no">No</string>
 	<string name="iscr_group_stud_dial">Iscrizione al gruppo di studio</string>
 	<string name="loading_gds">Caricamento gruppi di studio personali</string>
+	<string name="my_gds">I miei gruppi</string>
+	<string name="no_gds">Non sei ancora iscritto ad alcun gruppo di studio! Utilizza il menù in alto a destra per iscriverti ad un gruppo di studio</string>
+	<string name="mod_att">Modifica impegno</string>
+	<string name="all_gds">"Tutti"</string>
+	<string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
 </resources>

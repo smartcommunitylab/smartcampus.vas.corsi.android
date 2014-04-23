@@ -131,8 +131,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
-					+ toabandonAS.getPersonalDescription(), "");
+			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.dialog_loading)
+					, "");
 		}
 
 		private boolean abandonAS(Evento as_to_abandon) {
@@ -183,10 +183,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			ShowImpegnoGDS.this.finish();
-			// Intent intent = new Intent(ShowImpegnoGDS.this,
-			// Overview_GDS.class);
-			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intent);
 		}
 
 	}

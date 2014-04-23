@@ -184,7 +184,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			contextualListaImpegni.clear();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Caricamento dettagli del gruppo di studio", "");
+					getResources().getString(R.string.dialog_loading), "");
 		}
 
 		@Override
@@ -205,7 +205,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_listaimpegni_vuota);
 			if (contextualListaImpegni.isEmpty()) {
-				tv.setText("Non sono stati fissati impegni!\nUtilizza il menù in alto a destra per fissare un nuovo impegno");
+				tv.setText(getResources().getString(R.string.att_message));
 			} else {
 				tv.setVisibility(View.GONE);
 				FragmentTransaction ft = Overview_GDS.this
