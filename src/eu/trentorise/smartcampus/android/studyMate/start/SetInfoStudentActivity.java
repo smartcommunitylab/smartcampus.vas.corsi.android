@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedCds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedDip;
@@ -62,6 +65,32 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 		setDepHandler = (AsyncSetSharedDip) new AsyncSetSharedDip(
 				getApplicationContext(), spinner1, spinner2, SetInfoStudentActivity.this).execute();
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			moveTaskToBack(true);
+			return true;
+		default:
+			break;
+
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	        moveTaskToBack(true);
+	        return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 	
 //	@Override
