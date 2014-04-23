@@ -125,7 +125,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				intent.putExtra("Selected_nome_gruppo", nome_gruppo);
 				intent.putExtra("Selected_materia", materia);
 			} else if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
-					&& !nome_gruppo.equals("Tutti")) {
+					&& !nome_gruppo.equals(getResources().getString(R.string.all_gds))) {
 				GruppoDiStudio gds_to_subscribe = null;
 				for (GruppoDiStudio gds : listaGDSxMateria) {
 					if (gds.getNome().equals(nome_gruppo))
@@ -329,7 +329,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				// se ci sono GDS della tale materia...
 				// fare qualcosa con gli adapter
 				ArrayList<String> nomi_GDS = new ArrayList<String>();
-				nomi_GDS.add("Tutti");
+				nomi_GDS.add(getResources().getString(R.string.all_gds));
 				for (GruppoDiStudio g : listaGDSxMateria) {
 					nomi_GDS.add(g.getNome());
 				}

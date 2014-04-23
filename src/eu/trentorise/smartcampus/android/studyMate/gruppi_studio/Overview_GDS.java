@@ -276,8 +276,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Stai lasciando "
-					+ toabandonGDS.getNome(), "");
+			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.leave_gds)
+					+ " " + toabandonGDS.getNome(), "");
 		}
 
 		@Override

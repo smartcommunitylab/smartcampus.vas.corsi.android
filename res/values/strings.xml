@@ -220,5 +220,6 @@
 	<string name="no_gds">Non sei ancora iscritto ad alcun gruppo di studio! Utilizza il menù in alto a destra per iscriverti ad un gruppo di studio</string>
 	<string name="mod_att">Modifica impegno</string>
 	<string name="all_gds">"Tutti"</string>
+	<string name="leave_gds">"Stai lasciando"</string>
 	<string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
 </resources>
