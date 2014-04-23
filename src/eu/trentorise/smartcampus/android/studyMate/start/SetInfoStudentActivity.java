@@ -25,19 +25,18 @@ import eu.trentorise.smartcampus.studymate.R;
 public class SetInfoStudentActivity extends SherlockFragmentActivity {
 	private Spinner spinner1;
 	private Spinner spinner2;
-	
+
 	private AsyncSetSharedDip setDepHandler;
 	private AsyncSetSharedCds findDegHandler;
-	
-	
-	
 
-	
+	private boolean state;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_info_studente);
-		
+
+		state = getIntent().getBooleanExtra("FromMyUni", false);
 		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
@@ -53,17 +52,18 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 		initialList.add(new String(getResources().getString(
 				R.string.finder_initiallist_dep)));
 		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
-				SetInfoStudentActivity.this, R.layout.list_studymate_row_list_simple,
-				initialList);
+				SetInfoStudentActivity.this,
+				R.layout.list_studymate_row_list_simple, initialList);
 		ArrayAdapter<String> adapterInitialListDeg = new ArrayAdapter<String>(
-				SetInfoStudentActivity.this, R.layout.list_studymate_row_list_simple,
-				initialListDeg);
+				SetInfoStudentActivity.this,
+				R.layout.list_studymate_row_list_simple, initialListDeg);
 
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialListDeg);
 
 		setDepHandler = (AsyncSetSharedDip) new AsyncSetSharedDip(
-				getApplicationContext(), spinner1, spinner2, SetInfoStudentActivity.this).execute();
+				getApplicationContext(), spinner1, spinner2,
+				SetInfoStudentActivity.this).execute();
 
 	}
 
@@ -71,11 +71,15 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			moveTaskToBack(true);
+			if (state == true) {
+				onBackPressed();
+			} else {
+				moveTaskToBack(true);
+			}
 			return true;
 		default:
 			break;
@@ -83,45 +87,49 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if (keyCode == KeyEvent.KEYCODE_BACK) {
-	        moveTaskToBack(true);
-	        return true;
-	    }
-	    return super.onKeyDown(keyCode, event);
+		if (state == true) {
+			onBackPressed();
+		} else {
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				moveTaskToBack(true);
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
 	}
-	
-//	@Override
-//	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		MenuInflater inflater = getSupportMenuInflater();
-//		inflater.inflate(R.menu.menu_sharedp_studente, menu);
-//		return true;
-//	}
-	
-//	@Override
-//	public boolean onOptionsItemSelected(
-//			com.actionbarsherlock.view.MenuItem item) {
-//		switch (item.getItemId()) {
-//		case android.R.id.home:
-//			Intent intentHome = new Intent(SetInfoStudentActivity.this,
-//					MyUniActivity.class);
-//			intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intentHome);
-//			return true;
-//		case R.id.itemSearchCourses:
-//		
-//			SetInfoStudentActivity.this.finish();
-//			
-//			Toast.makeText(SetInfoStudentActivity.this, R.string.internet_connection,
-//					Toast.LENGTH_SHORT).show();
-//			
-//			return true;
-//		default:
-//			return super.onOptionsItemSelected(item);
-//
-//		}
-//	}
+	// @Override
+	// public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu)
+	// {
+	// // Inflate the menu; this adds items to the action bar if it is present.
+	// MenuInflater inflater = getSupportMenuInflater();
+	// inflater.inflate(R.menu.menu_sharedp_studente, menu);
+	// return true;
+	// }
+
+	// @Override
+	// public boolean onOptionsItemSelected(
+	// com.actionbarsherlock.view.MenuItem item) {
+	// switch (item.getItemId()) {
+	// case android.R.id.home:
+	// Intent intentHome = new Intent(SetInfoStudentActivity.this,
+	// MyUniActivity.class);
+	// intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	// startActivity(intentHome);
+	// return true;
+	// case R.id.itemSearchCourses:
+	//
+	// SetInfoStudentActivity.this.finish();
+	//
+	// Toast.makeText(SetInfoStudentActivity.this, R.string.internet_connection,
+	// Toast.LENGTH_SHORT).show();
+	//
+	// return true;
+	// default:
+	// return super.onOptionsItemSelected(item);
+	//
+	// }
+	// }
 }

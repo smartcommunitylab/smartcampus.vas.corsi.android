@@ -16,6 +16,9 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
@@ -56,7 +59,6 @@ public class MyUniActivity extends SherlockActivity {
 	public CorsoLaurea studenteCds;
 	public List<Dipartimento> listDipartimenti;
 	public List<CorsoLaurea> listCds;
-
 
 	/**
 	 * Provides access to the authentication mechanism. Used to retrieve the
@@ -150,14 +152,14 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-//							Toast.makeText(
-//									getApplicationContext(),
-//									getResources().getString(
-//											R.string.dialog_coming_soon),
-//									Toast.LENGTH_SHORT).show();
-							 Intent intent = new Intent(MyUniActivity.this,
-							 Lista_GDS_activity.class);
-							 MyUniActivity.this.startActivity(intent);
+							// Toast.makeText(
+							// getApplicationContext(),
+							// getResources().getString(
+							// R.string.dialog_coming_soon),
+							// Toast.LENGTH_SHORT).show();
+							Intent intent = new Intent(MyUniActivity.this,
+									Lista_GDS_activity.class);
+							MyUniActivity.this.startActivity(intent);
 						}
 					});
 
@@ -317,6 +319,26 @@ public class MyUniActivity extends SherlockActivity {
 		return false;
 	}
 
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.my_uni, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.preference:
+			Intent intent = new Intent(MyUniActivity.this,
+					SetInfoStudentActivity.class);
+			intent.putExtra("FromMyUni", true);
+			MyUniActivity.this.startActivity(intent);
+			return false;
+		default:
+			break;
+
+		}
+		return false;
+	}
 
 }
