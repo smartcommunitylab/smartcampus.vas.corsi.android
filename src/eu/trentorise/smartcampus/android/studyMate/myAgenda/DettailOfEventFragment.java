@@ -3,6 +3,9 @@ package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 import java.text.SimpleDateFormat;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.NetworkInfo.DetailedState;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -19,7 +23,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -127,19 +133,55 @@ public class DettailOfEventFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 
 		case R.id.menu_change_event:
-			Bundle data = new Bundle();
-			data.putSerializable(Constants.EDIT_EVENT, eventSelected);
-			FragmentTransaction ft = getSherlockActivity()
-					.getSupportFragmentManager().beginTransaction();
-			Fragment fragment = new EditEventFragment();
-			fragment.setArguments(data);
-			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			ft.replace(getId(), fragment, getTag());
-			ft.addToBackStack(getTag());
-			ft.commit();
+
+			SharedPreferences pref = getActivity().getSharedPreferences(
+					"sharedPrefs", Context.MODE_PRIVATE);
+
+			String jsonObjectStudente = pref.getString("studenteSessioneJSON", null);
+			Studente studentePref = Utils.convertJSONToObject(
+					jsonObjectStudente, Studente.class);
+			if (studentePref.getId() != eventSelected.getEventoId()
+					.getIdStudente()) {
+
+				Toast.makeText(
+						getActivity(),
+						getActivity().getResources().getString(
+								R.string.event_modify_not_allowed),
+						Toast.LENGTH_SHORT).show();
+
+			} else {
+
+				Bundle data = new Bundle();
+				data.putSerializable(Constants.EDIT_EVENT, eventSelected);
+				FragmentTransaction ft = getSherlockActivity()
+						.getSupportFragmentManager().beginTransaction();
+				Fragment fragment = new EditEventFragment();
+				fragment.setArguments(data);
+				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				ft.replace(getId(), fragment, getTag());
+				ft.addToBackStack(getTag());
+				ft.commit();
+			}
 			return true;
 		case R.id.menu_delete_event:
-			new DeleteEvent(eventSelected).execute();
+
+			SharedPreferences prefDel = getActivity().getSharedPreferences(
+					"sharedPrefs", Context.MODE_PRIVATE);
+
+			String jsonObjectStudenteDel = prefDel.getString("studenteSessioneJSON", null);
+			Studente studentePrefDel = Utils.convertJSONToObject(
+					jsonObjectStudenteDel, Studente.class);
+			if (studentePrefDel.getId() != eventSelected.getEventoId()
+					.getIdStudente()) {
+
+				Toast.makeText(
+						getActivity(),
+						getActivity().getResources().getString(
+								R.string.event_delete_not_allowed),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				new DeleteEvent(eventSelected).execute();
+			}
 			return true;
 		default:
 			break;

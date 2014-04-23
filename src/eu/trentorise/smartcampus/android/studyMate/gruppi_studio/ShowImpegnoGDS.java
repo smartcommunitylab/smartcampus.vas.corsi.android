@@ -102,7 +102,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		case R.id.action_modifica_impegno:
 			SharedPreferences sharedPreferences = ShowImpegnoGDS.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			String studenteStr = sharedPreferences.getString("corsiStudente",
+			String studenteStr = sharedPreferences.getString("studenteSessioneJSON",
 					null);
 			Studente studLogged = Utils.convertJSONToObject(studenteStr,
 					Studente.class);
@@ -125,7 +125,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			SharedPreferences sharedPreferencesDel = ShowImpegnoGDS.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 			String studenteStrDel = sharedPreferencesDel.getString(
-					"corsiStudente", null);
+					"studenteSessioneJSON", null);
 			Studente studLoggedDel = Utils.convertJSONToObject(studenteStrDel,
 					Studente.class);
 			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLoggedDel
