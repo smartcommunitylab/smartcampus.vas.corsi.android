@@ -3,23 +3,19 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedCds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedDip;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class SetInfoStudentActivity extends SherlockFragmentActivity {
@@ -36,7 +32,7 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_info_studente);
 
-		state = getIntent().getBooleanExtra("FromMyUni", false);
+		state = getIntent().getBooleanExtra(Constants.MY_UNI_STATE, false);
 		ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);

@@ -2,6 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 
 public final class Constants {
 
+	public static final String MY_UNI_STATE = "FromMyUni";
 	public static final String DEPARTMENT = "department";
 	public static final String COURSE_DEG = "courseDegree";
 	public static final String COURSE_DEG_SPEC = "course";

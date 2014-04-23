@@ -205,4 +205,13 @@
 	 <string name="menu_multi_courses_follow">Segui</string>
 	 <!-- GDS -->
 	<string name="addevent_location">Luogo</string>
+	<string name="new_att_stud">Nuova attività di studio</string>
+	<string name="new_group_stud">Nuovo gruppo</string>
+	<string name="iscr_group_stud">Iscrizione gruppo di studio</string>
+	<string name="sure_group_stud">Conferma iscrizione</string>
+	<string name="sure_group_stud_message">Vuoi iscriverti al gruppo</string>
+	<string name="yes">Si</string>
+	<string name="no">No</string>
+	<string name="iscr_group_stud_dial">Iscrizione al gruppo di studio</string>
+	<string name="loading_gds">Caricamento gruppi di studio personali</string>
 </resources>

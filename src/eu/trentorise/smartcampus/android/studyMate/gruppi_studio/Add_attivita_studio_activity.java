@@ -87,7 +87,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		gds = (GruppoDiStudio) myextras.getSerializable("gds");
 		ActionBar actionbar = getActionBar();
 
-		actionbar.setTitle("Nuova attività di studio");
+		actionbar.setTitle(R.string.new_att_stud);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -143,41 +143,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				Add_attivita_studio_activity.this,
 				R.layout.list_studymate_row_list_simple, course);
 		coursesSpinner.setAdapter(adapterCourse);
-		coursesSpinner.setClickable(false);
-
-//		Button button_ok = (Button) findViewById(R.id.button_ok);
-//		Button button_cancel = (Button) findViewById(R.id.button_annulla);
-//
-//		button_cancel.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				onBackPressed();
-//			}
-//		});
-//		button_ok.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				evento.setType(title.getText().toString());
-//				evento.setTitle(gds.getMateria());
-//				evento.setPersonalDescription(description.getText().toString());
-//				evento.setEventoId(eId);
-//				evento.setRoom(eventlocation.getText().toString());
-//				evento.setType(getResources().getString(
-//						R.string.attivitadistudio_string));
-//
-//				evento.setGruppo(gds);
-//				long dateR = 10000 * (date.getTime() / 10000);
-//				eId.setDate(new Date(dateR));
-//
-//				new AddAttivitaHandler(Add_attivita_studio_activity.this)
-//						.execute();
-//
-//				onBackPressed();
-//			}
-//		});
-		
+		coursesSpinner.setClickable(false);		
 
 	}
 
@@ -193,7 +159,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
+			 * crea e aggiugni agli impegni l'attività di studio appena creata
 			 */
 			description = (EditText) findViewById(R.id.editTextDescription);
 			coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
@@ -210,16 +176,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			try {
 				data = format.parse(stringdata);
-				System.out.println(data);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} catch (java.text.ParseException e) {
 				e.printStackTrace();
 			}
-
-//			String descrizione = ((TextView) this
-//					.findViewById(R.id.editText_descrizione_impegno)).getText()
-//					.toString();
 
 			String location = etLocation.getText().toString();
 
@@ -245,13 +206,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			nuova_attivitaStudio.setType(getResources().getString(R.string.attivitadistudio_string));
 
 			nuova_attivitaStudio.setGruppo(gds);
-
-			// nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
-			// nuova_attivitaStudio.setMensa(mensa);
-			// nuova_attivitaStudio.setTutoring(tutoring);
-			// nuova_attivitaStudio.setBiblioteca(biblioteca);
-
-			// MyApplication.getContextualCollection().add(nuova_attivitaStudio);
 
 			AddAttivitaHandler addAttivitaAsyncTask = new AddAttivitaHandler(
 					Add_attivita_studio_activity.this);
@@ -353,7 +307,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Salvataggio del nuovo impegno", "Caricamento...");
+					getResources().getString(R.string.dialog_saving_feedback), getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override

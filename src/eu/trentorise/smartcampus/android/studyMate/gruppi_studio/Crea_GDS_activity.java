@@ -48,7 +48,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 		setContentView(R.layout.activity_crea__gds_activity);
 
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("Nuovo Gruppo");
+		actionbar.setTitle(R.string.new_group_stud);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -146,7 +146,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Sto creando il gruppo di studio", "");
+					getResources().getString(R.string.dialog_saving_feedback), getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override
@@ -171,20 +171,9 @@ public class Crea_GDS_activity extends SherlockActivity {
 			justCreatedGds.setNome(nome);
 			justCreatedGds.setMateria(materia);
 			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
-			// salva il gruppo sul web
-
-			if (addGroup(justCreatedGds)) {
-				// se tutto va bene
-				System.out
-						.println("Creazione del gruppo eseguita con successo");
-
-				return null;
-			} else {
-				System.out
-						.println("Creazione del gruppo: PROBLEMA NON RISOLTO");
-
-				return null;
-			}
+		
+			return null;
+			
 
 		}
 
@@ -204,7 +193,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
+			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.dialog_loading),
 					"");
 		}
 
@@ -271,7 +260,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 				pd.dismiss();
 				Crea_GDS_activity.this.finish();
 				Toast.makeText(getApplicationContext(),
-						"Impossibile creare un nuovo gruppo!",
+						getResources().getString(R.string.dialog_error),
 						Toast.LENGTH_LONG).show();
 			}
 

@@ -31,6 +31,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.network.RemoteConnector;
@@ -331,7 +332,7 @@ public class MyUniActivity extends SherlockActivity {
 		case R.id.preference:
 			Intent intent = new Intent(MyUniActivity.this,
 					SetInfoStudentActivity.class);
-			intent.putExtra("FromMyUni", true);
+			intent.putExtra(Constants.MY_UNI_STATE, true);
 			MyUniActivity.this.startActivity(intent);
 			return false;
 		default:
