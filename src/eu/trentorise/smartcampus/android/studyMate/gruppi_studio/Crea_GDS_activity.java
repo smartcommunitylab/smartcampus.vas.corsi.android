@@ -146,7 +146,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.dialog_saving_feedback), getResources().getString(R.string.dialog_loading));
+					getResources().getString(R.string.dialog_saving_feedback),
+					getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override
@@ -171,15 +172,15 @@ public class Crea_GDS_activity extends SherlockActivity {
 			justCreatedGds.setNome(nome);
 			justCreatedGds.setMateria(materia);
 			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
-		
+			addGroup(justCreatedGds);
 			return null;
-			
 
 		}
 
 	}
 
-	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, List<CorsoCarriera>> {
+	private class LoadSpinnerMaterieAsTask extends
+			AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
@@ -193,8 +194,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.dialog_loading),
-					"");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.dialog_loading), "");
 		}
 
 		protected ArrayList<CorsoCarriera> webgetCorsiUtente() {
@@ -231,8 +232,8 @@ public class Crea_GDS_activity extends SherlockActivity {
 				e.printStackTrace();
 			}
 
-			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(
-					body, CorsoCarriera.class);
+			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(body,
+					CorsoCarriera.class);
 
 		}
 

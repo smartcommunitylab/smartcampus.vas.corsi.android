@@ -296,7 +296,7 @@ public class AddEventFragment extends SherlockFragment {
 		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			if ((result == null)||(result.size()==0)) {
+			if ((result == null) || (result.size() == 0)) {
 				Toast.makeText(getActivity(), R.string.invalid_career,
 						Toast.LENGTH_SHORT).show();
 				getSherlockActivity().finish();

@@ -48,8 +48,8 @@ public class FindCoursesDegreeHandler extends
 	FindDepartmentsHandler findDepartHandler;
 
 	public FindCoursesDegreeHandler(Context applicationContext,
-			Spinner spinnerCorsiLaurea, String departSelectedName, int pos, Activity currentActivity,
-			FindDepartmentsHandler findDepartHandler) {
+			Spinner spinnerCorsiLaurea, String departSelectedName, int pos,
+			Activity currentActivity, FindDepartmentsHandler findDepartHandler) {
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelectedName = departSelectedName;
@@ -139,7 +139,7 @@ public class FindCoursesDegreeHandler extends
 
 			spinnerCorsiLaurea.setEnabled(true);
 			spinnerCorsiLaurea.setClickable(true);
-			
+
 			// setto i corsi di laurea nello spinner
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			ArrayAdapter adapter = new ArrayAdapter(
@@ -148,7 +148,9 @@ public class FindCoursesDegreeHandler extends
 					listStringDegree);
 			spinnerCorsiLaurea.setAdapter(adapter);
 			corsoLaureaSelected = SharedUtils.getCdsStudente(currentActivity);
-			spinnerCorsiLaurea.setSelection(SharedUtils.getPosListFromShared(listStringDegree,corsoLaureaSelected.getDescripion()), true);
+			spinnerCorsiLaurea.setSelection(SharedUtils.getPosListFromShared(
+					listStringDegree, corsoLaureaSelected.getDescripion()),
+					true);
 
 			// listener spinner corso laurea
 			spinnerCorsiLaurea

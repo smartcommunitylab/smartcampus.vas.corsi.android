@@ -43,9 +43,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		TextView tv_nomeGruppo = (TextView) findViewById(R.id.tv_filter_nomegruppo);
 		tv_nomeGruppo.setText(nome_gruppo_filter);
 
-
 		ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
-
 
 		Adapter_gds_to_list adapter = new Adapter_gds_to_list(
 				getApplicationContext(), R.id.searchresults_gds_list,

@@ -65,7 +65,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		}
 		GetMyCds getCds = new GetMyCds(Lista_GDS_activity.this);
 		getCds.execute();
-		
+
 		FragmentTransaction ft = Lista_GDS_activity.this
 				.getSupportFragmentManager().beginTransaction();
 		Fragment fragment = new ViewGruppiList_Fragment();
@@ -73,9 +73,8 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ft.replace(R.id.list_container, fragment);
 		ft.addToBackStack(null);
 		ft.commit();
-		
-	}
 
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,6 +92,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		startActivity(goToMyUniActivity);
 
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {

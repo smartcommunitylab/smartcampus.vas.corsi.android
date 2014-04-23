@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -78,7 +77,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
 		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
-		tv_descrizione.setText(contextualAttivitaStudio.getPersonalDescription());
+		tv_descrizione.setText(contextualAttivitaStudio
+				.getPersonalDescription());
 
 	}
 
@@ -131,8 +131,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.dialog_loading)
-					, "");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.dialog_loading), "");
 		}
 
 		private boolean abandonAS(Evento as_to_abandon) {

@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -24,18 +23,15 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.EditEventFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -213,8 +209,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			eventoModificato.setGruppo(evento.getGruppo());
 
 			ModifyAS salvamodificheAS = new ModifyAS(
-					ModifiyAttivitaStudio.this, evento,
-					eventoModificato);
+					ModifiyAttivitaStudio.this, evento, eventoModificato);
 			salvamodificheAS.execute();
 			return super.onOptionsItemSelected(item);
 		}
@@ -319,7 +314,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.dialog_saving_feedback), "");
+					getResources().getString(R.string.dialog_saving_feedback),
+					"");
 		}
 
 		private boolean modificaAS() {
@@ -330,7 +326,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.POST_WS_CHANGE_ATTIVITASTUDIO(dateInitial, timeFromInitial, timeToInitial));
+					SmartUniDataWS.POST_WS_CHANGE_ATTIVITASTUDIO(dateInitial,
+							timeFromInitial, timeToInitial));
 			request.setMethod(Method.POST);
 
 			Boolean resultPost = false;
@@ -385,8 +382,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 
 			} else {
 				Toast.makeText(ModifiyAttivitaStudio.this,
-						getResources().getString(R.string.dialog_error), Toast.LENGTH_SHORT)
-						.show();
+						getResources().getString(R.string.dialog_error),
+						Toast.LENGTH_SHORT).show();
 				ModifiyAttivitaStudio.this.finish();
 			}
 

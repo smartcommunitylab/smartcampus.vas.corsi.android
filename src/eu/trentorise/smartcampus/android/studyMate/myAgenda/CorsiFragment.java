@@ -18,6 +18,7 @@ import eu.trentorise.smartcampus.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
 	public static boolean followstate;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

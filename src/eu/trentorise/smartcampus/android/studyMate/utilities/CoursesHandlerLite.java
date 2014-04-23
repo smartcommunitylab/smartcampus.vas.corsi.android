@@ -3,22 +3,17 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuInflater;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
@@ -54,7 +49,8 @@ public class CoursesHandlerLite extends
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
-			ListView listView, TextView tvTitleNotices, SherlockFragmentActivity currentAct) {
+			ListView listView, TextView tvTitleNotices,
+			SherlockFragmentActivity currentAct) {
 		this.context = applicationContext;
 		this.department = department;
 		this.degree = degree;
@@ -337,42 +333,42 @@ public class CoursesHandlerLite extends
 			}
 
 		});
-		
-//		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
-//			
-//			@Override
-//			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-//				// TODO Auto-generated method stub
-//				return false;
-//			}
-//			
-//			@Override
-//			public void onDestroyActionMode(ActionMode mode) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-//				// TODO Auto-generated method stub
-//				MenuInflater inflater = currentAct.getSupportMenuInflater();
-//                inflater.inflate(currentAct.getResources().get, menu);
-//                return true;
-//			}
-//			
-//			@Override
-//			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-//				// TODO Auto-generated method stub
-//				return false;
-//			}
-//			
-//			@Override
-//			public void onItemCheckedStateChanged(ActionMode mode, int position,
-//					long id, boolean checked) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+
+		// listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+		//
+		// @Override
+		// public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		// // TODO Auto-generated method stub
+		// return false;
+		// }
+		//
+		// @Override
+		// public void onDestroyActionMode(ActionMode mode) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		// // TODO Auto-generated method stub
+		// MenuInflater inflater = currentAct.getSupportMenuInflater();
+		// inflater.inflate(currentAct.getResources().get, menu);
+		// return true;
+		// }
+		//
+		// @Override
+		// public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		// // TODO Auto-generated method stub
+		// return false;
+		// }
+		//
+		// @Override
+		// public void onItemCheckedStateChanged(ActionMode mode, int position,
+		// long id, boolean checked) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 
 	}
 

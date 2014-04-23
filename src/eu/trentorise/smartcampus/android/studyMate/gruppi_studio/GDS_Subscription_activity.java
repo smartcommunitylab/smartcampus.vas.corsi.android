@@ -58,7 +58,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
-		//ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
+		// ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
@@ -93,9 +93,11 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
 					GDS_Subscription_activity.this);
 			alertdialogbuilder
-					.setTitle(getResources().getString(R.string.sure_group_stud))
+					.setTitle(
+							getResources().getString(R.string.sure_group_stud))
 					.setMessage(
-							getResources().getString(R.string.sure_group_stud_message)
+							getResources().getString(
+									R.string.sure_group_stud_message)
 									+ contextualGDS.getNome() + "\"?")
 					.setPositiveButton(R.string.yes,
 							new DialogInterface.OnClickListener() {
@@ -148,8 +150,10 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.iscr_group_stud_dial)
-					+ gds_to_subscribe.getNome(), getResources().getString(R.string.dialog_loading));
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.iscr_group_stud_dial)
+							+ gds_to_subscribe.getNome(), getResources()
+							.getString(R.string.dialog_loading));
 		}
 
 		void subscribetogds(GruppoDiStudio gds) {
@@ -170,7 +174,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					
+
 				}
 			} catch (ConnectionException e) {
 				e.printStackTrace();

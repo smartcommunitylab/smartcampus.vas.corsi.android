@@ -1,11 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;

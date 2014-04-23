@@ -34,11 +34,10 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		}
 
 		TextView nome_gds = (TextView) row.findViewById(R.id.gds_name);
-		//ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
+		// ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
 		TextView nome_corso = (TextView) row
 				.findViewById(R.id.gds_name_of_course);
-		TextView type_event = (TextView) row
-				.findViewById(R.id.gds_name);
+		TextView type_event = (TextView) row.findViewById(R.id.gds_name);
 		nome_gds.setText(currentGDS.getNome());
 		nome_corso.setText(currentGDS.getMateria());
 

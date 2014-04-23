@@ -56,10 +56,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			}
 		} catch (Exception ex) {
 		}
-		
+
 		Bundle myextras = getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras.get("contextualGDS");
-		
+
 		final ActionBar ab = getSupportActionBar();
 		ab.setTitle(contextualGDS.getNome());
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
@@ -68,7 +68,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -96,13 +95,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 					Overview_GDS.this, contextualGDS);
 			task.execute();
 			return super.onOptionsItemSelected(item);
-//		case R.id.action_modifica_gruppo:
-//
-//			Intent intent = new Intent(Overview_GDS.this,
-//					ShowModifyGDSDetails_activity.class);
-//			intent.putExtra("contextualGDS", contextualGDS);
-//			startActivity(intent);
-//			return super.onOptionsItemSelected(item);
+			// case R.id.action_modifica_gruppo:
+			//
+			// Intent intent = new Intent(Overview_GDS.this,
+			// ShowModifyGDSDetails_activity.class);
+			// intent.putExtra("contextualGDS", contextualGDS);
+			// startActivity(intent);
+			// return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -113,7 +112,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	public void onBackPressed() {
 		Overview_GDS.this.finish();
 	}
-	
+
 	public GruppoDiStudio getContextualGDS() {
 		return contextualGDS;
 	}

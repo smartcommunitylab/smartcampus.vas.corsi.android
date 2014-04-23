@@ -53,8 +53,8 @@ public class Impegni_Fragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		lista_impegni = (ArrayList<Evento>) getArguments()
-				.getSerializable("serializableobject");
+		lista_impegni = (ArrayList<Evento>) getArguments().getSerializable(
+				"serializableobject");
 		gds = (GruppoDiStudio) getArguments().getSerializable("gds");
 		return;
 	}
@@ -72,24 +72,21 @@ public class Impegni_Fragment extends SherlockFragment {
 		EventItem[] listEvItem = new EventItem[lista_impegni.size()];
 		int i = 0;
 		for (Evento ev : lista_impegni) {
-			AdptDetailedEvent e = new AdptDetailedEvent(ev
-					.getEventoId().getDate(), ev.getTitle(),
-					ev.getType(), ev.getEventoId().getStart()
-							.toString(), ev.getRoom());
-			listEvItem[i++] = new EventItem(e, getActivity()
-					.getResources());
+			AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
+					.getDate(), ev.getTitle(), ev.getType(), ev.getEventoId()
+					.getStart().toString(), ev.getRoom());
+			listEvItem[i++] = new EventItem(e, getActivity().getResources());
 
 		}
-		EventAdapter adapter = new EventAdapter(
-				getSherlockActivity(), listEvItem);
+		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+				listEvItem);
 		impegni_listview.setAdapter(adapter);
 
 		impegni_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				EventAdapter adpt = (EventAdapter) parent
-						.getAdapter();
+				EventAdapter adpt = (EventAdapter) parent.getAdapter();
 				final Evento selected_impegno = lista_impegni.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
 				intent.putExtra("contextualAttivitaStudio", selected_impegno);
@@ -122,7 +119,5 @@ public class Impegni_Fragment extends SherlockFragment {
 		}
 
 	}
-
-
 
 }

@@ -115,8 +115,10 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			}
 
 			Intent intent;
-			if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
-					&& nome_gruppo.equals(getResources().getString(R.string.all_gds))) {
+			if (listaGDSxMateria != null
+					&& !listaGDSxMateria.isEmpty()
+					&& nome_gruppo.equals(getResources().getString(
+							R.string.all_gds))) {
 				intent = new Intent(RicercaGruppiGenerale_activity.this,
 						Display_GDS_research_results.class);
 				intent.putExtra("PossibleGDS", listaGDSxMateria);
@@ -155,7 +157,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 	}
 
-	private class LoadSpinnerMaterieAsTask extends AsyncTask<Void, Void, List<CorsoCarriera>> {
+	private class LoadSpinnerMaterieAsTask extends
+			AsyncTask<Void, Void, List<CorsoCarriera>> {
 
 		Context taskcontext;
 		public ProgressDialog pd;
@@ -166,7 +169,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		}
 
 		protected ArrayList<CorsoCarriera> webgetCorsiUtente() {
-			mProtocolCarrier = new ProtocolCarrier(RicercaGruppiGenerale_activity.this,
+			mProtocolCarrier = new ProtocolCarrier(
+					RicercaGruppiGenerale_activity.this,
 					SmartUniDataWS.TOKEN_NAME);
 
 			MessageResponse response;
@@ -197,8 +201,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				e.printStackTrace();
 			}
 
-			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(
-					body, CorsoCarriera.class);
+			return (ArrayList<CorsoCarriera>) Utils.convertJSONToObjects(body,
+					CorsoCarriera.class);
 
 		}
 
@@ -220,18 +224,18 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			super.onPostExecute(result);
 			listaCorsiString.clear();
 			listaCorsi.clear();
-			
-			if(result.size() < 1){
+
+			if (result.size() < 1) {
 				pd.dismiss();
 				RicercaGruppiGenerale_activity.this.finish();
-				Toast.makeText(getApplicationContext(),
+				Toast.makeText(
+						getApplicationContext(),
 						"Non puoi iscriverti ad alcun gruppo di studio perchè non ci sono corsi che stai seguendo",
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-			
-			if (result != null
-					&& !result.isEmpty()) {
+
+			if (result != null && !result.isEmpty()) {
 				for (CorsoCarriera tempcorso : result) {
 					listaCorsiString.add(tempcorso.getName());
 				}
@@ -255,8 +259,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	}
 
-	private class LoadGDSofCourse extends
-			AsyncTask<CorsoCarriera, Void, Void> {
+	private class LoadGDSofCourse extends AsyncTask<CorsoCarriera, Void, Void> {
 		Context taskcontext;
 		public ProgressDialog pd;
 		private CorsoCarriera materiaLookingForGDS;
@@ -283,7 +286,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			}
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(Long.parseLong(ad.getCod())));
+					SmartUniDataWS.GET_WS_FIND_GDS_OF_COURSE(Long.parseLong(ad
+							.getCod())));
 			request.setMethod(Method.GET);
 			try {
 				response = mProtocolCarrier
@@ -336,7 +340,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				spinner_nome_gruppo.setAdapter(adapter_spinner_gds);
 				// faccio in modo che lo spinner parta dal valore 'Tutti'
-				String myString = getResources().getString(R.string.all_gds);											
+				String myString = getResources().getString(R.string.all_gds);
 				int spinnerPosition = adapter_spinner_gds.getPosition(myString);
 				spinner_nome_gruppo.setSelection(spinnerPosition);
 				spinner_nome_gruppo.setEnabled(true);
@@ -350,7 +354,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(
 						getApplicationContext(),
-						"Non ci sono ancora gruppi a cui iscriversi per il corso "+materiaLookingForGDS.getName(),
+						"Non ci sono ancora gruppi a cui iscriversi per il corso "
+								+ materiaLookingForGDS.getName(),
 						Toast.LENGTH_LONG).show();
 			}
 		}

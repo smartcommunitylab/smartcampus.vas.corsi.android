@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -15,7 +14,6 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,28 +23,19 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEventFragment.DatePickerFragment;
-import eu.trentorise.smartcampus.android.studyMate.myAgenda.AddEventFragment.TimePickerFragment;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -92,7 +81,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		//evento = new Evento();
+		// evento = new Evento();
 		eId = new EventoId();
 		date = new Date();
 
@@ -143,7 +132,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 				Add_attivita_studio_activity.this,
 				R.layout.list_studymate_row_list_simple, course);
 		coursesSpinner.setAdapter(adapterCourse);
-		coursesSpinner.setClickable(false);		
+		coursesSpinner.setClickable(false);
 
 	}
 
@@ -153,7 +142,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		inflater.inflate(R.menu.add_attivita_studio_activity, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
 		switch (item.getItemId()) {
@@ -166,7 +155,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 			mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 			mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
-			
+
 			String stringdata = mPickDate.getText().toString();
 			String ora = mPickTime.getText().toString();
 
@@ -201,9 +190,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// nuova_attivitaStudio.setStart(start);
 			nuova_attivitaStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			nuova_attivitaStudio.setPersonalDescription(description.getText().toString());
-			
-			nuova_attivitaStudio.setType(getResources().getString(R.string.attivitadistudio_string));
+			nuova_attivitaStudio.setPersonalDescription(description.getText()
+					.toString());
+
+			nuova_attivitaStudio.setType(getResources().getString(
+					R.string.attivitadistudio_string));
 
 			nuova_attivitaStudio.setGruppo(gds);
 
@@ -244,8 +235,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(Add_attivita_studio_activity.this, this, mYear,
-					mMonth, mDay);
+			return new DatePickerDialog(Add_attivita_studio_activity.this,
+					this, mYear, mMonth, mDay);
 		}
 
 		@SuppressWarnings("deprecation")
@@ -272,8 +263,10 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(Add_attivita_studio_activity.this, this, hour,
-					minute, DateFormat.is24HourFormat(Add_attivita_studio_activity.this));
+			return new TimePickerDialog(Add_attivita_studio_activity.this,
+					this, hour, minute,
+					DateFormat
+							.is24HourFormat(Add_attivita_studio_activity.this));
 		}
 
 		@SuppressWarnings("deprecation")
@@ -307,7 +300,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.dialog_saving_feedback), getResources().getString(R.string.dialog_loading));
+					getResources().getString(R.string.dialog_saving_feedback),
+					getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override
