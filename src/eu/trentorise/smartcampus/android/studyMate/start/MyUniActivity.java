@@ -15,6 +15,8 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
@@ -25,6 +27,7 @@ import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.android.studyMate.utilities.TutorialUtils;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -151,6 +154,22 @@ public class MyUniActivity extends SherlockActivity {
 					});
 		}
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.show_tutorial) {
+			TutorialUtils.enableTutorial(this);
+			TutorialUtils.getTutorial(this).showTutorials();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	public static SCAccessProvider getAccessProvider() {
 		if (accessProvider == null)
@@ -274,6 +293,9 @@ public class MyUniActivity extends SherlockActivity {
 		protected void onPostExecute(BasicProfile result) {
 			super.onPostExecute(result);
 			pd.dismiss();
+			if(TutorialUtils.isTutorialEnabled(MyUniActivity.this)){
+				TutorialUtils.getTutorial(MyUniActivity.this).showTutorials();
+			}
 		}
 
 		private void save(String key, String jsonTosaveinSharedP) {
@@ -295,5 +317,12 @@ public class MyUniActivity extends SherlockActivity {
 		}
 		return false;
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		TutorialUtils.getTutorial(this).onTutorialActivityResult(requestCode, resultCode, data);
+	}
+	
+	
 
 }

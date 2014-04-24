@@ -171,5 +171,15 @@
     <string name="notification_name">Wall notifications</string>
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
-
+    
+    
+    <!-- Tutorial -->
+    <string name="menu_title_tutorial">Tutorial</string>
+    <string name="tut_agenda">Check the list of courses and schedules for your career</string>
+    <string name="tut_searchcourse">Search for a course by department, degree and keyword</string>
+    <string name="tut_rate">Rate the classes you have already finished</string>
+    <string name="tut_notifications">Read the notifications from various departments and channels</string>
+    <string name="tut_materials">Find out what study materials are available for your courses</string>
+    <!-- /Tutorial -->
+    
 </resources>

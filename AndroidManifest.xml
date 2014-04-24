@@ -250,6 +250,16 @@
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio"
             android:label="@string/title_activity_modifiy_attivita_studio" >
         </activity>
+        
+        <activity
+            android:name="com.github.espiandev.showcaseview.TourActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:theme="@style/TutorialTheme" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
