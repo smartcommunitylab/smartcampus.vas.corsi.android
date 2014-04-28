@@ -111,7 +111,7 @@ public class Impegni_Fragment extends SherlockFragment {
 					Add_attivita_studio_activity.class);
 			intent.putExtra("gds", gds);
 			startActivity(intent);
-			return super.onOptionsItemSelected(item);
+			return true;
 		}
 
 		default:

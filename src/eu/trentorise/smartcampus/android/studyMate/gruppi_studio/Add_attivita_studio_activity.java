@@ -72,6 +72,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
 
+		System.out.println("addattività");
 		Bundle myextras = getIntent().getExtras();
 		gds = (GruppoDiStudio) myextras.getSerializable("gds");
 		ActionBar actionbar = getActionBar();
@@ -202,11 +203,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 					Add_attivita_studio_activity.this);
 			addAttivitaAsyncTask.execute();
 
-			return super.onOptionsItemSelected(item);
+			return false;
 		}
 		case android.R.id.home: {
 			Add_attivita_studio_activity.this.finish();
-			return super.onOptionsItemSelected(item);
+			return false;
 		}
 
 		default:
@@ -291,7 +292,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		public ProgressDialog pd;
 
 		public AddAttivitaHandler(Context taskcontext) {
-			super();
+
 			this.taskcontext = taskcontext;
 		}
 
@@ -400,4 +401,5 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		}
 	}
+
 }
