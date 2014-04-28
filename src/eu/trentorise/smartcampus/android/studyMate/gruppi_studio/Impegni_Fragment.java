@@ -96,28 +96,28 @@ public class Impegni_Fragment extends SherlockFragment {
 
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.impegni_gds_menu, menu);
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-
-		case R.id.aggiungi_impegno: {
-			Intent intent = new Intent(getActivity().getApplicationContext(),
-					Add_attivita_studio_activity.class);
-			intent.putExtra("gds", gds);
-			startActivity(intent);
-			return true;
-		}
-
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-
-	}
+//	@Override
+//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//		inflater.inflate(R.menu.impegni_gds_menu, menu);
+//		super.onCreateOptionsMenu(menu, inflater);
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//
+//		case R.id.aggiungi_impegno: {
+//			Intent intent = new Intent(getActivity().getApplicationContext(),
+//					Add_attivita_studio_activity.class);
+//			intent.putExtra("gds", gds);
+//			startActivity(intent);
+//			return true;
+//		}
+//
+//		default:
+//			return super.onOptionsItemSelected(item);
+//		}
+//
+//	}
 
 }
