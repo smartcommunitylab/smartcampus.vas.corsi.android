@@ -22,7 +22,9 @@ public class SetInfoStudentActivity extends SherlockFragmentActivity {
 	private Spinner spinner1;
 	private Spinner spinner2;
 
+	@SuppressWarnings("unused")
 	private AsyncSetSharedDip setDepHandler;
+	@SuppressWarnings("unused")
 	private AsyncSetSharedCds findDegHandler;
 
 	private boolean state;

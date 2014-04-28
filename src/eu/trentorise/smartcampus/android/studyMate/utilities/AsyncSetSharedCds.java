@@ -3,19 +3,6 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.trentorise.smartcampus.ac.AACException;
-import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
-import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
-import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
-import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -29,6 +16,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
+import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
+import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.studymate.R;
 
 public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
@@ -139,12 +139,15 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 					listStringDegree);
 
 			spinnerDegree.setAdapter(adapter);
-			
+
 			pd.dismiss();
 
 			corsoLaureaSelected = SharedUtils.getCdsStudente(currentActivity);
-			spinnerDegree.setSelection(SharedUtils.getPosListFromShared(listStringDegree,corsoLaureaSelected.getDescripion()), true);
-			
+			if (corsoLaureaSelected != null) {
+				spinnerDegree.setSelection(SharedUtils.getPosListFromShared(
+						listStringDegree, corsoLaureaSelected.getDescripion()),
+						true);
+			}
 			// listener spinner corso laurea
 			spinnerDegree
 					.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -221,7 +224,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 				}
 			});
 
-			
 		} else {
 			Toast.makeText(
 					context,
