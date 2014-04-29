@@ -99,7 +99,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 					.setMessage(
 							getResources().getString(
 									R.string.sure_group_stud_message)
-									+ contextualGDS.getNome() + "\"?")
+									+ " \"" + contextualGDS.getNome() + "\"?")
 					.setPositiveButton(R.string.yes,
 							new DialogInterface.OnClickListener() {
 

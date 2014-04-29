@@ -142,13 +142,17 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 					Toast.makeText(
 							RicercaGruppiGenerale_activity.this,
 							materia
-									+ ": purtroppo non ci sono gruppi per questa materia\nSeleziona un'altra materia",
+									+ ": "
+									+ getResources().getString(
+											R.string.toast_gds_no_gds_course),
 							Toast.LENGTH_LONG).show();
 					return super.onOptionsItemSelected(item);
 				} else {
-					Toast.makeText(RicercaGruppiGenerale_activity.this,
-							"Seleziona almeno la materia!", Toast.LENGTH_LONG)
-							.show();
+					Toast.makeText(
+							RicercaGruppiGenerale_activity.this,
+							getResources().getString(
+									R.string.toast_gds_select_course),
+							Toast.LENGTH_LONG).show();
 					return super.onOptionsItemSelected(item);
 				}
 			}
@@ -218,8 +222,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Caricamento materie utente",
-					"");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.dialog_list_courses),
+					getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override
@@ -233,7 +238,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				RicercaGruppiGenerale_activity.this.finish();
 				Toast.makeText(
 						getApplicationContext(),
-						"Non puoi iscriverti ad alcun gruppo di studio perchè non ci sono corsi che stai seguendo",
+						getResources().getString(
+								R.string.toast_gds_no_courses_followed),
 						Toast.LENGTH_LONG).show();
 				return;
 			}
@@ -253,8 +259,10 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			} else {
 				pd.dismiss();
 				RicercaGruppiGenerale_activity.this.finish();
-				Toast.makeText(getApplicationContext(),
-						"Impossibile cercare un gruppo a cui iscriversi!",
+				Toast.makeText(
+						getApplicationContext(),
+						getResources().getString(
+								R.string.toast_gds_no_find_to_subscribe),
 						Toast.LENGTH_LONG).show();
 			}
 
@@ -277,8 +285,11 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					"Caricamento Gruppi di studio associati...", "");
+			pd = ProgressDialog.show(
+					taskcontext,
+					getResources().getString(
+							R.string.dialog_gds_associated_loading),
+					getResources().getString(R.string.dialog_loading));
 		}
 
 		private ArrayList<GruppoDiStudio> getGDSofThatAttivitaDidattica(
@@ -357,8 +368,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(
 						getApplicationContext(),
-						"Non ci sono ancora gruppi a cui iscriversi per il corso "
-								+ materiaLookingForGDS.getName(),
+						getResources().getString(
+								R.string.toast_gds_no_find_to_subscribe),
 						Toast.LENGTH_LONG).show();
 			}
 		}

@@ -218,7 +218,7 @@
 	<string name="loading_gds">Caricamento gruppi di studio personali</string>
 	<string name="my_gds">I miei gruppi</string>
 	<string name="no_gds">Non sei ancora iscritto ad alcun gruppo di studio! Utilizza il menù in alto a destra per iscriverti ad un gruppo di studio</string>
-	<string name="mod_att">Modifica impegno</string>
+	<string name="mod_att">Modifica attività di studio</string>
 	<string name="all_gds">"Tutti"</string>
 	<string name="leave_gds">"Stai lasciando"</string>
 	<string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
@@ -227,6 +227,7 @@
 	<string name="string_year_at">anno presso</string>
 	<string name="menu_subscribe_group">Iscriviti ad un gruppo</string>
 	<string name="menu_add_group">Crea gruppo</string>
+	<string name="label_participants">Partecipanti:</string>
 	
 	
 	

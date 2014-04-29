@@ -66,18 +66,18 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
-		
+
 	}
 
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		
+
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -104,13 +104,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 					Overview_GDS.this, contextualGDS);
 			task.execute();
 			return super.onOptionsItemSelected(item);
-			// case R.id.action_modifica_gruppo:
-			//
-			// Intent intent = new Intent(Overview_GDS.this,
-			// ShowModifyGDSDetails_activity.class);
-			// intent.putExtra("contextualGDS", contextualGDS);
-			// startActivity(intent);
-			// return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -285,8 +278,9 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, getResources().getString(R.string.leave_gds)
-					+ " " + toabandonGDS.getNome(), "");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.leave_gds) + " "
+							+ toabandonGDS.getNome(), "");
 		}
 
 		@Override
