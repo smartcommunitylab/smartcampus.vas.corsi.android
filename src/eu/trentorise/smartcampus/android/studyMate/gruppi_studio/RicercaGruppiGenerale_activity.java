@@ -124,8 +124,10 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				intent.putExtra("PossibleGDS", listaGDSxMateria);
 				intent.putExtra("Selected_nome_gruppo", nome_gruppo);
 				intent.putExtra("Selected_materia", materia);
-			} else if (listaGDSxMateria != null && !listaGDSxMateria.isEmpty()
-					&& !nome_gruppo.equals(getResources().getString(R.string.all_gds))) {
+			} else if (listaGDSxMateria != null
+					&& !listaGDSxMateria.isEmpty()
+					&& !nome_gruppo.equals(getResources().getString(
+							R.string.all_gds))) {
 				GruppoDiStudio gds_to_subscribe = null;
 				for (GruppoDiStudio gds : listaGDSxMateria) {
 					if (gds.getNome().equals(nome_gruppo))

@@ -24,7 +24,6 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_gds_research_results_activity);
-		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setTitle(R.string.iscr_group_stud);
@@ -32,10 +31,13 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		Bundle extras = getIntent().getExtras();
 		String materia_filter = extras.getString("Selected_materia");
+		@SuppressWarnings("unchecked")
 		ArrayList<GruppoDiStudio> possibleGDS = (ArrayList<GruppoDiStudio>) extras
 				.getSerializable("PossibleGDS");
+		@SuppressWarnings({ "unchecked", "unused" })
 		ArrayList<AttivitaDidattica> PossibleAttivitaDidattiche = (ArrayList<AttivitaDidattica>) extras
 				.getSerializable("PossibleAttivitaDidattiche");
+
 		String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
 
 		TextView tv_materia = (TextView) findViewById(R.id.tv_filter_materia);
@@ -64,7 +66,9 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				intent.putExtra("gds_to_subscribe", selected_gds);
 
 				startActivity(intent);
+
 			}
+
 		});
 
 	}

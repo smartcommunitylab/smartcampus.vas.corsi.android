@@ -222,4 +222,12 @@
 	<string name="all_gds">"Tutti"</string>
 	<string name="leave_gds">"Stai lasciando"</string>
 	<string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
+	
+	
+	<string name="string_year_at">anno presso</string>
+	<string name="menu_subscribe_group">Iscriviti ad un gruppo</string>
+	<string name="menu_add_group">Crea gruppo</string>
+	
+	
+	
 </resources>

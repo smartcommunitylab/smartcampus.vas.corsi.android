@@ -122,9 +122,6 @@ public class MyUniActivity extends SherlockActivity {
 									getResources().getString(
 											R.string.dialog_coming_soon),
 									Toast.LENGTH_SHORT).show();
-							// Intent intent = new Intent(MyUniActivity.this,
-							// PHLActivity.class);
-							// MyUniActivity.this.startActivity(intent);
 						}
 					});
 
