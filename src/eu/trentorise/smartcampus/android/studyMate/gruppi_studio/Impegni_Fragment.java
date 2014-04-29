@@ -19,6 +19,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.studymate.R;
@@ -34,8 +35,8 @@ public class Impegni_Fragment extends SherlockFragment {
 		Impegni_Fragment myFragment = new Impegni_Fragment();
 
 		Bundle args = new Bundle();
-		args.putSerializable("lista_impegni", arraylistimpegni);
-		args.putSerializable("gds", gds);
+		args.putSerializable(Constants.IMPEGNI_LIST, arraylistimpegni);
+		args.putSerializable(Constants.GDS, gds);
 		myFragment.setArguments(args);
 
 		return myFragment;
@@ -55,7 +56,7 @@ public class Impegni_Fragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		lista_impegni = (ArrayList<Evento>) getArguments().getSerializable(
 				"serializableobject");
-		gds = (GruppoDiStudio) getArguments().getSerializable("gds");
+		gds = (GruppoDiStudio) getArguments().getSerializable(Constants.GDS);
 		return;
 	}
 
@@ -89,7 +90,7 @@ public class Impegni_Fragment extends SherlockFragment {
 				EventAdapter adpt = (EventAdapter) parent.getAdapter();
 				final Evento selected_impegno = lista_impegni.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
-				intent.putExtra("contextualAttivitaStudio", selected_impegno);
+				intent.putExtra(Constants.CONTEXTUAL_ATT, selected_impegno);
 				startActivity(intent);
 			}
 		});

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class ViewGruppiList_Fragment extends SherlockFragment {
@@ -54,7 +55,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 					GruppoDiStudio contextualGDS = user_gds_list.get(position);
 					Intent intent = new Intent(getActivity(),
 							Overview_GDS.class);
-					intent.putExtra("contextualGDS", contextualGDS);
+					intent.putExtra(Constants.CONTESTUAL_GDS, contextualGDS);
 					startActivity(intent);
 				}
 			});

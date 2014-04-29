@@ -26,6 +26,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -70,7 +71,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		 */
 		Bundle myextras = getIntent().getExtras();
 		contextualAttivitaStudio = (Evento) myextras
-				.getSerializable("contextualAttivitaStudio");
+				.getSerializable(Constants.CONTEXTUAL_ATT);
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
 		tv_oggetto.setText(contextualAttivitaStudio.getTitle());
@@ -114,7 +115,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			} else {
 				Intent intent1 = new Intent(ShowImpegnoGDS.this,
 						ModifiyAttivitaStudio.class);
-				intent1.putExtra("impegno_da_modificare",
+				intent1.putExtra(Constants.IMPEGNO_MOD,
 						contextualAttivitaStudio);
 				startActivity(intent1);
 			}

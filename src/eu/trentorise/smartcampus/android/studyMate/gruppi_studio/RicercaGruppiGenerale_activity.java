@@ -26,6 +26,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -121,9 +122,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 							R.string.all_gds))) {
 				intent = new Intent(RicercaGruppiGenerale_activity.this,
 						Display_GDS_research_results.class);
-				intent.putExtra("PossibleGDS", listaGDSxMateria);
-				intent.putExtra("Selected_nome_gruppo", nome_gruppo);
-				intent.putExtra("Selected_materia", materia);
+				intent.putExtra(Constants.POSSIBLE_GDS, listaGDSxMateria);
+				intent.putExtra(Constants.NOME_GRUPPO, nome_gruppo);
+				intent.putExtra(Constants.SELECTED_MATERIA, materia);
 			} else if (listaGDSxMateria != null
 					&& !listaGDSxMateria.isEmpty()
 					&& !nome_gruppo.equals(getResources().getString(
@@ -135,7 +136,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				}
 				intent = new Intent(RicercaGruppiGenerale_activity.this,
 						GDS_Subscription_activity.class);
-				intent.putExtra("gds_to_subscribe", gds_to_subscribe);
+				intent.putExtra(Constants.GDS_SUBS, gds_to_subscribe);
 			} else {
 				if (listaCorsi != null && !listaCorsi.isEmpty()) {
 					Toast.makeText(

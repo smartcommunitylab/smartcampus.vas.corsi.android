@@ -24,6 +24,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -43,7 +44,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		Bundle myextras = getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras
-				.getSerializable("gds_to_subscribe");
+				.getSerializable(Constants.GDS_SUBS);
 
 		// questo carica la materia nel gruppo
 		new GetRelatedCorsoAS(GDS_Subscription_activity.this, contextualGDS)

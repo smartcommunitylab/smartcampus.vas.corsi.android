@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class Display_GDS_research_results extends SherlockFragmentActivity {
@@ -30,15 +31,15 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		Bundle extras = getIntent().getExtras();
-		String materia_filter = extras.getString("Selected_materia");
+		String materia_filter = extras.getString(Constants.SELECTED_MATERIA);
 		@SuppressWarnings("unchecked")
 		ArrayList<GruppoDiStudio> possibleGDS = (ArrayList<GruppoDiStudio>) extras
-				.getSerializable("PossibleGDS");
+				.getSerializable(Constants.POSSIBLE_GDS);
 		@SuppressWarnings({ "unchecked", "unused" })
 		ArrayList<AttivitaDidattica> PossibleAttivitaDidattiche = (ArrayList<AttivitaDidattica>) extras
-				.getSerializable("PossibleAttivitaDidattiche");
+				.getSerializable(Constants.POSSIBLE_ATT);
 
-		String nome_gruppo_filter = extras.getString("Selected_nome_gruppo");
+		String nome_gruppo_filter = extras.getString(Constants.NOME_GRUPPO);
 
 		TextView tv_materia = (TextView) findViewById(R.id.tv_filter_materia);
 		tv_materia.setText(materia_filter);
@@ -63,7 +64,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 				GruppoDiStudio selected_gds = entries.get(position);
 				Intent intent = new Intent(Display_GDS_research_results.this,
 						GDS_Subscription_activity.class);
-				intent.putExtra("gds_to_subscribe", selected_gds);
+				intent.putExtra(Constants.GDS_SUBS, selected_gds);
 
 				startActivity(intent);
 

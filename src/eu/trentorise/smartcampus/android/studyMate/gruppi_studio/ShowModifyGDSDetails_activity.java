@@ -9,6 +9,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.studymate.R;
 
 public class ShowModifyGDSDetails_activity extends SherlockActivity {
@@ -27,7 +28,7 @@ public class ShowModifyGDSDetails_activity extends SherlockActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			contextualGDS = (GruppoDiStudio) extras
-					.getSerializable("contextualGDS");
+					.getSerializable(Constants.CONTESTUAL_GDS);
 
 			// setup degli elementi grafici
 			AutoCompleteTextView scegli_nome_gds_tv = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo_modifica_gds);

@@ -36,6 +36,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -72,9 +73,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
 
-		System.out.println("addattività");
 		Bundle myextras = getIntent().getExtras();
-		gds = (GruppoDiStudio) myextras.getSerializable("gds");
+		gds = (GruppoDiStudio) myextras.getSerializable(Constants.GDS);
 		ActionBar actionbar = getActionBar();
 
 		actionbar.setTitle(R.string.new_att_stud);
@@ -319,7 +319,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			Intent intent = new Intent(Add_attivita_studio_activity.this,
 					Overview_GDS.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("contextualGDS", gds);
+			intent.putExtra(Constants.CONTESTUAL_GDS, gds);
 			startActivity(intent);
 		}
 

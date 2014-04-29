@@ -25,6 +25,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -58,7 +59,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		}
 
 		Bundle myextras = getIntent().getExtras();
-		contextualGDS = (GruppoDiStudio) myextras.get("contextualGDS");
+		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
 
 		final ActionBar ab = getSupportActionBar();
 		ab.setTitle(contextualGDS.getNome());
@@ -94,7 +95,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		case R.id.aggiungi_impegno: {
 			Intent intent = new Intent(getApplicationContext(),
 					Add_attivita_studio_activity.class);
-			intent.putExtra("gds", contextualGDS);
+			intent.putExtra(Constants.GDS, contextualGDS);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}

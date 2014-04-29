@@ -33,6 +33,7 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -80,7 +81,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		// recupero gds da modificare per impostare i campi di testo ecc da
 		// modificare con i valori preesistenti dell'attivitadistudio
 		Bundle myextras = getIntent().getExtras();
-		evento = (Evento) myextras.getSerializable("impegno_da_modificare");
+		evento = (Evento) myextras.getSerializable(Constants.IMPEGNO_MOD);
 		dateInitial = evento.getEventoId().getDate().getTime();
 		timeFromInitial = evento.getEventoId().getStart().getTime();
 		timeToInitial = evento.getEventoId().getStop().getTime();
@@ -376,7 +377,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			if (allright) {
 				Intent intent = new Intent(ModifiyAttivitaStudio.this,
 						ShowImpegnoGDS.class);
-				intent.putExtra("contextualAttivitaStudio", newone);
+				intent.putExtra(Constants.CONTEXTUAL_ATT, newone);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 
