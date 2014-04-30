@@ -9,7 +9,7 @@
 //import android.widget.ArrayAdapter;
 //import android.widget.TextView;
 //import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
-//import eu.trentorise.smartcampus.studymate.R;
+//import it.smartcampuslab.studymate.R;
 //
 //public class Allegati_to_list_arrayadapter extends ArrayAdapter<Allegato> {
 //

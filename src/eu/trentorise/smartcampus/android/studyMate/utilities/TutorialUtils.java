@@ -5,7 +5,7 @@ import com.github.espiandev.showcaseview.TutorialItem;
 import com.github.espiandev.showcaseview.TutorialHelper.TutorialProvider;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;

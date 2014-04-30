@@ -20,7 +20,7 @@
 //
 //import eu.trentorise.smartcampus.android.studyMate.models.Allegato;
 //import eu.trentorise.smartcampus.android.studyMate.models.ChatObj;
-//import eu.trentorise.smartcampus.studymate.R;
+//import it.smartcampuslab.studymate.R;
 //
 //public class Forum_fragment extends SherlockFragment {
 //

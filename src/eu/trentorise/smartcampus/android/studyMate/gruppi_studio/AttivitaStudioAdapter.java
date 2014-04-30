@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class AttivitaStudioAdapter extends ArrayAdapter<AttivitaDiStudio> {
 

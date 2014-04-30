@@ -24,7 +24,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class FindDepartmentsHandler extends
 		AsyncTask<Void, Void, List<Dipartimento>> {
@@ -135,7 +135,7 @@ public class FindDepartmentsHandler extends
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			ArrayAdapter adapter = new ArrayAdapter(
 					context,
-					eu.trentorise.smartcampus.studymate.R.layout.list_studymate_row_list_simple,
+					R.layout.list_studymate_row_list_simple,
 					listStringDepartments);
 			spinnerDepartments.setAdapter(adapter);
 			pd.dismiss();

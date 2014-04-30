@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import android.content.res.Resources;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class EventItem extends EventItem4Adapter {
 
