@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_title">Welcome to StudyMate!</string>
+	<string name="welcome_msg">This app lets you check courses and schedules, follow classes you are interested in, read notifications, find course material, create study groups, and rate classes you have finished.</string>
+
+    <string name="menu_title_tutorial">Tutorial</string>
+    <string name="tut_agenda">Check the list of courses and schedules for your career</string>
+    <string name="tut_searchcourse">Search for a course by department, degree and keyword</string>
+    <string name="tut_rate">Rate the classes you have already finished</string>
+    <string name="tut_notifications">Read the notifications from various departments and channels</string>
+    <string name="tut_materials">Find out what study materials are available for your courses</string>
+</resources>

@@ -193,14 +193,6 @@
 	 <string name="menu_courses_goto_home">Vai alla home</string>
 	 <string name="menu_courses_unfollow">Non seguire più</string>
 	 
-	 <!-- Tutorial -->
-    <string name="menu_title_tutorial">Tutorial</string>
-    <string name="tut_agenda">Controlla elenco ed orari dei corsi nel tuo piano di studio</string>
-    <string name="tut_searchcourse">Effettua ricerche di corsi per dipartimento, laurea e parola chiave</string>
-    <string name="tut_rate">Valuta I corsi che hai già superato</string>
-    <string name="tut_notifications">Leggi gli avvisi dei dipartimenti e di altre fonti</string>
-    <string name="tut_materials">Scopri quali materiali didattici sono disponibili per i tuoi corsi</string>
-    <!-- /Tutorial -->
 	 
 	 
 

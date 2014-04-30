@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -18,24 +19,36 @@ public class TutorialUtils {
 
 	private static final String NAME = "studymatetut";
 
-	private static final String FIRSTLAUNCH = "studymatefirst";
+	private static String APP_FIRST_LAUNCH = "corsi_first_launch";
+
+	private static final String TUTORIAL = "tutorialenabled";
 
 	private static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(NAME, Context.MODE_PRIVATE);
 	}
 
+	public static boolean isFirstLaunch(Context ctx) {
+		return PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(
+				APP_FIRST_LAUNCH, true);
+	}
+
+	public static void disableFirstLanch(Context ctx) {
+		PreferenceManager.getDefaultSharedPreferences(ctx).edit()
+				.putBoolean(APP_FIRST_LAUNCH, false).commit();
+	}
+
 	public static void disableTutorial(Context ctx) {
 		SharedPreferences sp = getPrefs(ctx);
-		sp.edit().putBoolean(FIRSTLAUNCH, false).commit();
+		sp.edit().putBoolean(TUTORIAL, false).commit();
 	}
 
 	public static void enableTutorial(Context ctx) {
 		SharedPreferences sp = getPrefs(ctx);
-		sp.edit().putBoolean(FIRSTLAUNCH, true).commit();
+		sp.edit().putBoolean(TUTORIAL, true).commit();
 	}
 
 	public static boolean isTutorialEnabled(Context ctx) {
-		return getPrefs(ctx).getBoolean(FIRSTLAUNCH, true);
+		return getPrefs(ctx).getBoolean(TUTORIAL, true);
 	}
 
 	public static TutorialHelper getTutorial(final Activity act) {
@@ -78,8 +91,7 @@ public class TutorialUtils {
 					v = act.findViewById(R.id.find_courses_btn);
 					if (v != null && v.isShown()) {
 						v.getLocationOnScreen(location);
-						location[0] += convertPixelsToDp(
-								v.getWidth() / 2, act);
+						location[0] += convertPixelsToDp(v.getWidth() / 2, act);
 						location[1] += convertDpToPixel(8, act);
 						return new TutorialItem("search", location,
 								(int) (v.getWidth() / 2.5f),
@@ -90,8 +102,8 @@ public class TutorialUtils {
 				case 2:
 					v = act.findViewById(R.id.rate_btn);
 					v.getLocationOnScreen(location);
-					location[0] += convertPixelsToDp(
-							(v.getWidth() / 2) - 8, act);
+					location[0] += convertPixelsToDp((v.getWidth() / 2) - 8,
+							act);
 					location[1] += convertDpToPixel(8, act);
 					if (v != null && v.isShown()) {
 						return new TutorialItem("search", location,
@@ -103,8 +115,7 @@ public class TutorialUtils {
 				case 3:
 					v = act.findViewById(R.id.notices_btn);
 					v.getLocationOnScreen(location);
-					location[0] += convertPixelsToDp(
-							v.getWidth() / 2, act);
+					location[0] += convertPixelsToDp(v.getWidth() / 2, act);
 					location[1] += convertDpToPixel(12, act);
 					if (v != null && v.isShown()) {
 						return new TutorialItem("search", location,

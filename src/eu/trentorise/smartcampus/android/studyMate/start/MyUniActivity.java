@@ -2,8 +2,10 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -20,6 +22,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
+import eu.trentorise.smartcampus.android.common.LauncherHelper;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
@@ -63,12 +66,14 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-		if (!isUserConnectedToInternet(mContext)) {
-			Toast.makeText(mContext, R.string.internet_connection,
-					Toast.LENGTH_SHORT).show();
-			MyUniActivity.this.finish();
-		} else {
-			new LoadUserDataFromACServiceTask().execute();
+		if (LauncherHelper.isLauncherInstalled(this, true)) {
+			if (!isUserConnectedToInternet(mContext)) {
+				Toast.makeText(mContext, R.string.internet_connection,
+						Toast.LENGTH_SHORT).show();
+				MyUniActivity.this.finish();
+			} else {
+				new LoadUserDataFromACServiceTask().execute();
+			}
 		}
 	}
 
@@ -154,13 +159,12 @@ public class MyUniActivity extends SherlockActivity {
 					});
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -293,7 +297,38 @@ public class MyUniActivity extends SherlockActivity {
 		protected void onPostExecute(BasicProfile result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			if(TutorialUtils.isTutorialEnabled(MyUniActivity.this)){
+			if (TutorialUtils.isFirstLaunch(mContext)) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MyUniActivity.this);
+				builder.setTitle(R.string.welcome_title)
+						.setMessage(R.string.welcome_msg)
+						.setOnCancelListener(
+								new DialogInterface.OnCancelListener() {
+
+									@Override
+									public void onCancel(DialogInterface arg0) {
+										arg0.dismiss();
+										TutorialUtils.getTutorial(
+												MyUniActivity.this)
+												.showTutorials();
+									}
+								})
+						.setPositiveButton(getString(R.string.ok),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+										TutorialUtils.getTutorial(
+												MyUniActivity.this)
+												.showTutorials();
+
+									}
+								});
+				builder.create().show();
+				TutorialUtils.disableFirstLanch(MyUniActivity.this);
+			} else if (TutorialUtils.isTutorialEnabled(MyUniActivity.this)) {
 				TutorialUtils.getTutorial(MyUniActivity.this).showTutorials();
 			}
 		}
@@ -320,9 +355,8 @@ public class MyUniActivity extends SherlockActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		TutorialUtils.getTutorial(this).onTutorialActivityResult(requestCode, resultCode, data);
+		TutorialUtils.getTutorial(this).onTutorialActivityResult(requestCode,
+				resultCode, data);
 	}
-	
-	
 
 }
