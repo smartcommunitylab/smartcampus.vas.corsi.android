@@ -57,8 +57,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
-	private int mMinute;
-	private int mHour;
 	private int hour;
 	private int minute;
 	private Evento evento = null;
@@ -68,6 +66,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 	private EditText description;
 	private EditText eventlocation;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

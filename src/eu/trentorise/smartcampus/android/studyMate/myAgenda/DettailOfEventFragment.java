@@ -28,6 +28,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
+import eu.trentorise.smartcampus.android.studyMate.utilities.DatesUtil;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -65,9 +66,12 @@ public class DettailOfEventFragment extends SherlockFragment {
 		tvTitleEvent.setText(eventSelected.getTitle());
 
 		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		tvDateEvent.setText(dateFormat.format(eventSelected.getEventoId()
-				.getDate()));
+		
+		DatesUtil dateUtil = new DatesUtil(getSherlockActivity());
+		String dateEventFormatted = dateUtil.dateToAgendaFormat(eventSelected.getEventoId()
+				.getDate());
+		
+		tvDateEvent.setText(dateEventFormatted);
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
 

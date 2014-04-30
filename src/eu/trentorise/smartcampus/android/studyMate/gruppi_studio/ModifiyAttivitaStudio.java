@@ -51,8 +51,6 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
-	private int mMinute;
-	private int mHour;
 	private int hour;
 	private int minute;
 	private Evento evento = null;
@@ -60,13 +58,13 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 	private EventoId eId;
 	private Date date;
 	private EditText description;
-	private EditText eventlocation;
 	private EditText descrizione_tv;
 	private Evento eventoModificato;
 	private long dateInitial;
 	private long timeFromInitial;
 	private long timeToInitial;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -53,16 +53,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		// tv_materia = (AutoCompleteTextView)
-		// findViewById(R.id.scegli_materia);
 		spinner_scegli_materia = (Spinner) findViewById(R.id.spinner_materia);
 		tv_nome_gds = (AutoCompleteTextView) findViewById(R.id.scegli_nome_gruppo);
 
-		// spinner_edificio.setAdapter(adapter_spinner_ed);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
 				Crea_GDS_activity.this);
 		task.execute();
-		// a questo punto le materie sono state caricate in listacorsi
 
 	}
 
@@ -162,7 +158,6 @@ public class Crea_GDS_activity extends SherlockActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			@SuppressWarnings("unused")
 			String materia = spinner_scegli_materia.getSelectedItem()
 					.toString();
 			int position = spinner_scegli_materia.getSelectedItemPosition();

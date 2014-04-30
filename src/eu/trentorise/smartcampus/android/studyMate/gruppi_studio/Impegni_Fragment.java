@@ -12,9 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
@@ -50,6 +47,7 @@ public class Impegni_Fragment extends SherlockFragment {
 		return view;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +74,7 @@ public class Impegni_Fragment extends SherlockFragment {
 			AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
 					.getDate(), ev.getTitle(), ev.getType(), ev.getEventoId()
 					.getStart().toString(), ev.getRoom());
-			listEvItem[i++] = new EventItem(e, getActivity().getResources());
+			listEvItem[i++] = new EventItem(e, getActivity());
 
 		}
 		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
@@ -96,29 +94,5 @@ public class Impegni_Fragment extends SherlockFragment {
 		});
 
 	}
-
-//	@Override
-//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		inflater.inflate(R.menu.impegni_gds_menu, menu);
-//		super.onCreateOptionsMenu(menu, inflater);
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//
-//		case R.id.aggiungi_impegno: {
-//			Intent intent = new Intent(getActivity().getApplicationContext(),
-//					Add_attivita_studio_activity.class);
-//			intent.putExtra("gds", gds);
-//			startActivity(intent);
-//			return true;
-//		}
-//
-//		default:
-//			return super.onOptionsItemSelected(item);
-//		}
-//
-//	}
 
 }
