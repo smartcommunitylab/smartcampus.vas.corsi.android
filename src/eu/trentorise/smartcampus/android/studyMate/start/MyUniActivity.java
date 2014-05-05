@@ -72,7 +72,33 @@ public class MyUniActivity extends SherlockActivity {
 						Toast.LENGTH_SHORT).show();
 				MyUniActivity.this.finish();
 			} else {
-				new LoadUserDataFromACServiceTask().execute();
+				if (!TutorialUtils.isFirstLaunch(mContext)) {
+					new LoadUserDataFromACServiceTask().execute();
+				} else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder//.setTitle(R.string.welcome_title)
+							.setView(getLayoutInflater().inflate(R.layout.disclaimerdialog, null))
+							.setOnCancelListener(
+									new DialogInterface.OnCancelListener() {
+
+										@Override
+										public void onCancel(DialogInterface arg0) {
+											arg0.dismiss();
+											new LoadUserDataFromACServiceTask().execute();
+										}
+									})
+							.setPositiveButton(getString(R.string.ok),
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											new LoadUserDataFromACServiceTask().execute();
+										}
+									});
+					builder.create().show();
+				}
 			}
 		}
 	}
@@ -308,12 +334,19 @@ public class MyUniActivity extends SherlockActivity {
 									@Override
 									public void onCancel(DialogInterface arg0) {
 										arg0.dismiss();
-										TutorialUtils.getTutorial(
-												MyUniActivity.this)
-												.showTutorials();
 									}
 								})
 						.setPositiveButton(getString(R.string.ok),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+
+									}
+								})
+						.setNeutralButton(getString(R.string.begin_tut),
 								new DialogInterface.OnClickListener() {
 
 									@Override

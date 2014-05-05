@@ -172,6 +172,8 @@
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
     
+    <!-- Disclaimer -->
+    <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
     
     
     
