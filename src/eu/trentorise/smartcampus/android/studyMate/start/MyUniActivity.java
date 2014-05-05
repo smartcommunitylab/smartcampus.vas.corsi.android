@@ -336,17 +336,8 @@ public class MyUniActivity extends SherlockActivity {
 										arg0.dismiss();
 									}
 								})
-						.setPositiveButton(getString(R.string.ok),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-
-									}
-								})
-						.setNeutralButton(getString(R.string.begin_tut),
+								
+						.setPositiveButton(getString(R.string.begin_tut),
 								new DialogInterface.OnClickListener() {
 
 									@Override
@@ -356,6 +347,16 @@ public class MyUniActivity extends SherlockActivity {
 										TutorialUtils.getTutorial(
 												MyUniActivity.this)
 												.showTutorials();
+
+									}
+								})
+						.setNeutralButton(getString(android.R.string.cancel),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
 
 									}
 								});
