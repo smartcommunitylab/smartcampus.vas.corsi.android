@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
 
+
 public class EventItem extends EventItem4Adapter {
 
 	private AdptDetailedEvent object;

@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
-import eu.trentorise.smartcampus.studymate.R;
+
+import it.smartcampuslab.studymate.R;
+
 
 public class ViewGruppiList_Fragment extends SherlockFragment {
 

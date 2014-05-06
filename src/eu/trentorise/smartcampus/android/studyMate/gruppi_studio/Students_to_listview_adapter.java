@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
-import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
-import eu.trentorise.smartcampus.studymate.R;
+
+import it.smartcampuslab.studymate.R;
 
 public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 

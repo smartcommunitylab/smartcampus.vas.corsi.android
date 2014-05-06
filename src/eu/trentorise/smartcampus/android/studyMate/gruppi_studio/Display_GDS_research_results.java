@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
@@ -85,3 +86,4 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		}
 	}
 }
+

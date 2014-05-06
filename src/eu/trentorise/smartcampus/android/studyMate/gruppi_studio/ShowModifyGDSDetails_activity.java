@@ -9,8 +9,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
+
 
 public class ShowModifyGDSDetails_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;

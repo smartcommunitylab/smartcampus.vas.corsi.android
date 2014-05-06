@@ -210,6 +210,7 @@
     <string name="notification_name">Wall notifications</string>
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
+
     <string name="menu_multi_courses_unfollow">Unfollow</string>
     <string name="menu_multi_courses_follow">Follow</string>
 
@@ -222,5 +223,11 @@
     <string name="iscr_group_stud">Subscription study group</string>
     <string name="label_participants">Participants:</string>
     <string name="sure_group_stud_message">Do you want to join the group</string>
+
+
+    
+    <!-- Disclaimer -->
+    <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
+    
 
 </resources>

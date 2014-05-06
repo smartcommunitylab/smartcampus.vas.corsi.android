@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.Notification;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class AdapterNoticesList extends ArrayAdapter<Notification> {
 	@SuppressWarnings("unused")

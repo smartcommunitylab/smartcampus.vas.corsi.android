@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome_title">Benvenuto in Studymate!</string>
+    <string name="welcome_msg">Quest’app ti permetterà di controllare corsi e programmi, seguire corsi a cui sei interessato, leggere notifiche, trovare materiali per i corsi, creare gruppi di studio e valutare i corsi ultimati.</string>
+    
+    <string name="menu_title_tutorial">Tutorial</string>
+    <string name="tut_agenda">Controlla elenco ed orari dei corsi nel tuo piano di studio</string>
+    <string name="tut_searchcourse">Effettua ricerche di corsi per dipartimento, laurea e parola chiave</string>
+    <string name="tut_rate">Valuta I corsi che hai già superato</string>
+    <string name="tut_notifications">Leggi gli avvisi dei dipartimenti e di altre fonti</string>
+    <string name="tut_materials">Scopri quali materiali didattici sono disponibili per i tuoi corsi</string>
+
+</resources>

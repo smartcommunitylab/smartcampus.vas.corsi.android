@@ -21,7 +21,7 @@ import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class NoticesActivity extends SherlockFragmentActivity {
 

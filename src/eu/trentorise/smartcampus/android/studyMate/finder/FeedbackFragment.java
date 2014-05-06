@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FeedbackHandler;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class FeedbackFragment extends SherlockFragment {
 

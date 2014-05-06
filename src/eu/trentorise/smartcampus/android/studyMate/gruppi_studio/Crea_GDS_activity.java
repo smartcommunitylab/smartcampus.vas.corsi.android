@@ -31,7 +31,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class Crea_GDS_activity extends SherlockActivity {
 	public Spinner spinner_scegli_materia;

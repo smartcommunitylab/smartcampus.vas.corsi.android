@@ -3,8 +3,10 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -17,11 +19,11 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
+import eu.trentorise.smartcampus.android.common.LauncherHelper;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
@@ -34,6 +36,7 @@ import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.android.studyMate.utilities.TutorialUtils;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -45,7 +48,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import eu.trentorise.smartcampus.studymate.R;
+import it.smartcampuslab.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
 
@@ -74,12 +77,40 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-		if (!isUserConnectedToInternet(mContext)) {
-			Toast.makeText(mContext, R.string.internet_connection,
-					Toast.LENGTH_SHORT).show();
-			MyUniActivity.this.finish();
-		} else {
-			new LoadUserDataFromACServiceTask().execute();
+		if (LauncherHelper.isLauncherInstalled(this, true)) {
+			if (!isUserConnectedToInternet(mContext)) {
+				Toast.makeText(mContext, R.string.internet_connection,
+						Toast.LENGTH_SHORT).show();
+				MyUniActivity.this.finish();
+			} else {
+				if (!TutorialUtils.isFirstLaunch(mContext)) {
+					new LoadUserDataFromACServiceTask().execute();
+				} else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder//.setTitle(R.string.welcome_title)
+							.setView(getLayoutInflater().inflate(R.layout.disclaimerdialog, null))
+							.setOnCancelListener(
+									new DialogInterface.OnCancelListener() {
+
+										@Override
+										public void onCancel(DialogInterface arg0) {
+											arg0.dismiss();
+											new LoadUserDataFromACServiceTask().execute();
+										}
+									})
+							.setPositiveButton(getString(R.string.ok),
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											new LoadUserDataFromACServiceTask().execute();
+										}
+									});
+					builder.create().show();
+				}
+			}
 		}
 	}
 
@@ -171,6 +202,21 @@ public class MyUniActivity extends SherlockActivity {
 				MyUniActivity.this.startActivity(intent);
 			}
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.show_tutorial) {
+			TutorialUtils.enableTutorial(this);
+			TutorialUtils.getTutorial(this).showTutorials();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	public static SCAccessProvider getAccessProvider() {
@@ -295,6 +341,48 @@ public class MyUniActivity extends SherlockActivity {
 		protected void onPostExecute(BasicProfile result) {
 			super.onPostExecute(result);
 			pd.dismiss();
+			if (TutorialUtils.isFirstLaunch(mContext)) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MyUniActivity.this);
+				builder.setTitle(R.string.welcome_title)
+						.setMessage(R.string.welcome_msg)
+						.setOnCancelListener(
+								new DialogInterface.OnCancelListener() {
+
+									@Override
+									public void onCancel(DialogInterface arg0) {
+										arg0.dismiss();
+									}
+								})
+								
+						.setPositiveButton(getString(R.string.begin_tut),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+										TutorialUtils.getTutorial(
+												MyUniActivity.this)
+												.showTutorials();
+
+									}
+								})
+						.setNeutralButton(getString(android.R.string.cancel),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+
+									}
+								});
+				builder.create().show();
+				TutorialUtils.disableFirstLanch(MyUniActivity.this);
+			} else if (TutorialUtils.isTutorialEnabled(MyUniActivity.this)) {
+				TutorialUtils.getTutorial(MyUniActivity.this).showTutorials();
+			}
 		}
 
 		private void save(String key, String jsonTosaveinSharedP) {
@@ -318,6 +406,7 @@ public class MyUniActivity extends SherlockActivity {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.my_uni, menu);
@@ -337,6 +426,11 @@ public class MyUniActivity extends SherlockActivity {
 
 		}
 		return false;
+=======
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		TutorialUtils.getTutorial(this).onTutorialActivityResult(requestCode,
+				resultCode, data);
+>>>>>>> refs/remotes/origin/master
 	}
 
 }
