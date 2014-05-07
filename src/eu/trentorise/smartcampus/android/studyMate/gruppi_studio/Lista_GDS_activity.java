@@ -61,7 +61,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				menuKeyField.setBoolean(config, false);
 			}
 		} catch (Exception ex) {
-			// Ignore
 		}
 		GetMyCds getCds = new GetMyCds(Lista_GDS_activity.this);
 		getCds.execute();
@@ -193,7 +192,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		protected void onPostExecute(List<GruppoDiStudio> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
 			if (user_gds_list.isEmpty() || user_gds_list == null) {
 				tv.setText(getResources().getString(R.string.no_gds));

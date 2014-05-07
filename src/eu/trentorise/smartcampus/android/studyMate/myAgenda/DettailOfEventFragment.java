@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.NetworkInfo.DetailedState;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,12 +22,12 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.DatesUtil;
+import eu.trentorise.smartcampus.android.studyMate.utilities.FirstPageFragmentListener;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -44,6 +43,13 @@ public class DettailOfEventFragment extends SherlockFragment {
 	public Evento eventSelected = null;
 	public View view = null;
 	private ProtocolCarrier mProtocolCarrier;
+	static FirstPageFragmentListener firstPageListener;
+	
+	
+	public DettailOfEventFragment(FirstPageFragmentListener pageFragmentListener, Evento eventSelected) {
+		firstPageListener = pageFragmentListener;
+		this.eventSelected = eventSelected;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,14 +58,15 @@ public class DettailOfEventFragment extends SherlockFragment {
 		view = inflater.inflate(R.layout.fragment_detail_of_event, container,
 				false);
 
-		eventSelected = (Evento) getArguments().getSerializable(
-				Constants.SELECTED_EVENT);
+//		eventSelected = (Evento) getArguments().getSerializable(
+//				Constants.SELECTED_EVENT);
 
 		return view;
 	}
 
 	@Override
 	public void onStart() {
+		super.onStart();
 		setHasOptionsMenu(true);
 		TextView tvTitleEvent = (TextView) view
 				.findViewById(R.id.textTitleEvent);
@@ -116,7 +123,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 		tvLocationEvent.setText(eventSelected.getRoom());
 		TextView tvDescEvent = (TextView) view.findViewById(R.id.textDescEvent);
 		tvDescEvent.setText(eventSelected.getPersonalDescription());
-		super.onStart();
+		
 
 	}
 
@@ -263,5 +270,12 @@ public class DettailOfEventFragment extends SherlockFragment {
 		}
 
 	}
+	
+
+	
+	public void backPressed() {
+        firstPageListener.onSwitchToNextFragment();
+    }
+	
 
 }

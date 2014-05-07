@@ -35,6 +35,7 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
+import eu.trentorise.smartcampus.android.studyMate.utilities.FirstPageFragmentListener;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -49,8 +50,15 @@ public class OverviewFilterFragment extends SherlockFragment {
 
 	public static ProgressDialog pd;
 	public List<Evento> listaEventiFiltrati = null;
-	public static String nomeCorsoOW;
 	private CorsoCarriera cc;
+	static FirstPageFragmentListener secondPageListener;
+	public static Evento eventoSelezionato;
+
+	public OverviewFilterFragment(FirstPageFragmentListener secondPListener,
+			CorsoCarriera cc) {
+		secondPageListener = secondPListener;
+		this.cc = cc;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,10 +66,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
 				container, false);
-		Bundle b = getArguments();
-		nomeCorsoOW = b.getString(Constants.COURSE_NAME);
-		cc = (CorsoCarriera) b
-				.getSerializable(Constants.CORSO_CARRIERA_SELECTED);
+
 		return view;
 	}
 
@@ -74,84 +79,64 @@ public class OverviewFilterFragment extends SherlockFragment {
 		} else {
 			listaEventiFiltrati = new ArrayList<Evento>();
 
-			getActivity().setTitle(nomeCorsoOW);
+			getActivity().setTitle(cc.getName());
 
-			OverviewFilterFragment.pd = ProgressDialog.show(
-					getActivity(),
-					getActivity().getResources().getString(
-							R.string.dialog_list_events), getActivity()
-							.getResources().getString(R.string.dialog_loading));
+			listaEventiFiltrati = filterEventsbyCourse();
 
-			AsyncTask<Void, Void, Void> taskCourseEvents = new AsyncTask<Void, Void, Void>() {
-
-				@Override
-				protected Void doInBackground(Void... params) {
-					listaEventiFiltrati = filterEventsbyCourse();
-
-					return null;
+			EventItem[] listEvItem = new EventItem[listaEventiFiltrati.size()];
+			if (listaEventiFiltrati.size() == 0) {
+				Toast.makeText(getSherlockActivity(), R.string.no_events_now,
+						Toast.LENGTH_SHORT).show();
+			} else {
+				int i = 0;
+				for (Evento ev : listaEventiFiltrati) {
+					AdptDetailedEvent e = new AdptDetailedEvent(ev
+							.getEventoId().getDate(), ev.getTitle(),
+							ev.getType(), ev.getEventoId().getStart()
+									.toString(), ev.getRoom());
+					listEvItem[i++] = new EventItem(e, getActivity());
 				}
 
-				@Override
-				protected void onPostExecute(Void result) {
-					super.onPostExecute(result);
+				EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+						listEvItem);
+				ListView listView = (ListView) getSherlockActivity()
+						.findViewById(R.id.listViewEventi);
+				listView.setAdapter(adapter);
+				listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
-					OverviewFilterFragment.pd.dismiss();
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						getSherlockActivity().supportInvalidateOptionsMenu();
+						// Pass Data to other Fragment
+						// Evento evento =
+						// listaEventiFiltrati.get(arg2);
 
-					EventItem[] listEvItem = new EventItem[listaEventiFiltrati
-							.size()];
-					if (listaEventiFiltrati.size() == 0) {
-						Toast.makeText(getSherlockActivity(),
-								R.string.no_events_now, Toast.LENGTH_SHORT)
-								.show();
-					} else {
-						int i = 0;
-						for (Evento ev : listaEventiFiltrati) {
-							AdptDetailedEvent e = new AdptDetailedEvent(ev
-									.getEventoId().getDate(), ev.getTitle(),
-									ev.getType(), ev.getEventoId().getStart()
-											.toString(), ev.getRoom());
-							listEvItem[i++] = new EventItem(e, getActivity());
-						}
+						eventoSelezionato = listaEventiFiltrati.get(arg2);
+						// Bundle arguments = new Bundle();
+						// arguments.putSerializable(
+						// Constants.SELECTED_EVENT, evento);
+						// FragmentTransaction ft =
+						// getSherlockActivity()
+						// .getSupportFragmentManager()
+						// .beginTransaction();
+						// Fragment fragment = new
+						// DettailOfEventFragment();
+						// fragment.setArguments(arguments);
+						// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+						// ft.replace(getId(), fragment, getTag());
+						// ft.addToBackStack(getTag());
+						// ft.commit();
 
-						EventAdapter adapter = new EventAdapter(
-								getSherlockActivity(), listEvItem);
-						ListView listView = (ListView) getSherlockActivity()
-								.findViewById(R.id.listViewEventi);
-						listView.setAdapter(adapter);
-						listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-							@Override
-							public void onItemClick(AdapterView<?> arg0,
-									View arg1, int arg2, long arg3) {
-								getSherlockActivity()
-										.supportInvalidateOptionsMenu();
-								// Pass Data to other Fragment
-								Evento evento = listaEventiFiltrati.get(arg2);
-								Bundle arguments = new Bundle();
-								arguments.putSerializable(
-										Constants.SELECTED_EVENT, evento);
-								FragmentTransaction ft = getSherlockActivity()
-										.getSupportFragmentManager()
-										.beginTransaction();
-								Fragment fragment = new DettailOfEventFragment();
-								fragment.setArguments(arguments);
-								ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-								ft.replace(getId(), fragment, getTag());
-								ft.addToBackStack(getTag());
-								ft.commit();
-							}
-
-						});
+						secondPageListener.onSwitchToNextFragment();
 					}
-				}
-			};
 
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-				taskCourseEvents.executeOnExecutor(
-						AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-			else
-				taskCourseEvents.execute((Void[]) null);
+				});
+			}
+
 		}
+		;
+
 	}
 
 	// filtro gli eventi in base al corso che ho selezionato
@@ -159,17 +144,10 @@ public class OverviewFilterFragment extends SherlockFragment {
 		;
 		List<Evento> eventiFiltrati = new ArrayList<Evento>();
 
-		try {
-			for (Evento evento : new EventsHandler(getSherlockActivity()
-					.getApplicationContext(), getActivity()).execute().get()) {
-				if (String.valueOf(evento.getTitle()).compareTo(nomeCorsoOW) == 0) {
-					eventiFiltrati.add(evento);
-				}
+		for (Evento evento : MyAgendaActivity.getListEvents()) {
+			if (String.valueOf(evento.getTitle()).compareTo(cc.getName()) == 0) {
+				eventiFiltrati.add(evento);
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
 		}
 
 		return eventiFiltrati;
@@ -390,6 +368,10 @@ public class OverviewFilterFragment extends SherlockFragment {
 			}
 
 		}
+	}
+
+	public void backPressed() {
+		secondPageListener.onSwitchToNextFragment();
 	}
 
 }

@@ -99,9 +99,9 @@ public class CoursesHandler extends
 	protected void onPreExecute() {
 		super.onPreExecute();
 		new ProgressDialog(currentSherlock);
-		pd = ProgressDialog.show(currentSherlock, context.getResources()
-				.getString(R.string.dialog_courses_events), context
-				.getResources().getString(R.string.dialog_loading));
+//		pd = ProgressDialog.show(currentSherlock, context.getResources()
+//				.getString(R.string.dialog_courses_events), context
+//				.getResources().getString(R.string.dialog_loading));
 	}
 
 	@Override
@@ -149,16 +149,16 @@ public class CoursesHandler extends
 									corsoSelezionato);
 							data.putString(Constants.COURSE_NAME,
 									corsoSelezionato.getName());
-							FragmentTransaction ft = currentSherlock
-									.getSupportFragmentManager()
-									.beginTransaction();
-							Fragment fragment = new OverviewFilterFragment();
-							fragment.setArguments(data);
-							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-							ft.replace(currentFragment.getId(), fragment,
-									currentFragment.getTag());
-							ft.addToBackStack(currentFragment.getTag());
-							ft.commit();
+//							FragmentTransaction ft = currentSherlock
+//									.getSupportFragmentManager()
+//									.beginTransaction();
+//							Fragment fragment = new OverviewFilterFragment();
+//							fragment.setArguments(data);
+//							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//							ft.replace(currentFragment.getId(), fragment,
+//									currentFragment.getTag());
+//							ft.addToBackStack(currentFragment.getTag());
+//							ft.commit();
 						}
 					});
 
@@ -208,7 +208,7 @@ public class CoursesHandler extends
 						}
 					});
 
-			pd.dismiss();
+			//pd.dismiss();
 
 		}
 	}

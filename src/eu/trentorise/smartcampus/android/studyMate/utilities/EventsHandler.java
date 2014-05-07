@@ -78,11 +78,6 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 		return getAllPersonalEvents();
 	}
 
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-
-	}
 
 	@Override
 	protected void onPostExecute(final List<Evento> result) {
@@ -94,7 +89,7 @@ public class EventsHandler extends AsyncTask<Void, Void, List<Evento>> {
 			Toast.makeText(context,
 					context.getResources().getString(R.string.dialog_error),
 					Toast.LENGTH_SHORT).show();
-			fragment.finish();
+			//fragment.finish();
 		}
 	}
 
