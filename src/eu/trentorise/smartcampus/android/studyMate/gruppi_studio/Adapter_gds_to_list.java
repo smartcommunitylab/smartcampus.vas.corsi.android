@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -9,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import it.smartcampuslab.studymate.R;
 
 public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 

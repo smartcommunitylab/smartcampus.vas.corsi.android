@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 
@@ -9,8 +10,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import it.smartcampuslab.studymate.R;
-
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 
 public class ShowModifyGDSDetails_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;

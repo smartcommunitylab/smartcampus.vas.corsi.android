@@ -1,11 +1,9 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import java.text.SimpleDateFormat;
-
+import it.smartcampuslab.studymate.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.NetworkInfo.DetailedState;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +21,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -37,7 +34,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class DettailOfEventFragment extends SherlockFragment {
 
@@ -66,11 +62,11 @@ public class DettailOfEventFragment extends SherlockFragment {
 		tvTitleEvent.setText(eventSelected.getTitle());
 
 		TextView tvDateEvent = (TextView) view.findViewById(R.id.textDataEvent);
-		
+
 		DatesUtil dateUtil = new DatesUtil(getSherlockActivity());
-		String dateEventFormatted = dateUtil.dateToAgendaFormat(eventSelected.getEventoId()
-				.getDate());
-		
+		String dateEventFormatted = dateUtil.dateToAgendaFormat(eventSelected
+				.getEventoId().getDate());
+
 		tvDateEvent.setText(dateEventFormatted);
 
 		TextView tvOraEvent = (TextView) view.findViewById(R.id.textOraEvent);
@@ -141,7 +137,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 			SharedPreferences pref = getActivity().getSharedPreferences(
 					"sharedPrefs", Context.MODE_PRIVATE);
 
-			String jsonObjectStudente = pref.getString("studenteSessioneJSON", null);
+			String jsonObjectStudente = pref.getString("studenteSessioneJSON",
+					null);
 			Studente studentePref = Utils.convertJSONToObject(
 					jsonObjectStudente, Studente.class);
 			if (studentePref.getId() != eventSelected.getEventoId()
@@ -172,7 +169,8 @@ public class DettailOfEventFragment extends SherlockFragment {
 			SharedPreferences prefDel = getActivity().getSharedPreferences(
 					"sharedPrefs", Context.MODE_PRIVATE);
 
-			String jsonObjectStudenteDel = prefDel.getString("studenteSessioneJSON", null);
+			String jsonObjectStudenteDel = prefDel.getString(
+					"studenteSessioneJSON", null);
 			Studente studentePrefDel = Utils.convertJSONToObject(
 					jsonObjectStudenteDel, Studente.class);
 			if (studentePrefDel.getId() != eventSelected.getEventoId()

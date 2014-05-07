@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +13,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
@@ -103,15 +103,17 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		case R.id.action_modifica_impegno:
 			SharedPreferences sharedPreferences = ShowImpegnoGDS.this
 					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-			String studenteStr = sharedPreferences.getString("studenteSessioneJSON",
-					null);
+			String studenteStr = sharedPreferences.getString(
+					"studenteSessioneJSON", null);
 			Studente studLogged = Utils.convertJSONToObject(studenteStr,
 					Studente.class);
 			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLogged
 					.getId()) {
-				Toast.makeText(ShowImpegnoGDS.this,
-						getResources().getString(R.string.event_modify_not_allowed), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(
+						ShowImpegnoGDS.this,
+						getResources().getString(
+								R.string.event_modify_not_allowed),
+						Toast.LENGTH_SHORT).show();
 			} else {
 				Intent intent1 = new Intent(ShowImpegnoGDS.this,
 						ModifiyAttivitaStudio.class);
@@ -131,9 +133,11 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 					Studente.class);
 			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLoggedDel
 					.getId()) {
-				Toast.makeText(ShowImpegnoGDS.this,
-						getResources().getString(R.string.event_delete_not_allowed), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(
+						ShowImpegnoGDS.this,
+						getResources().getString(
+								R.string.event_delete_not_allowed),
+						Toast.LENGTH_SHORT).show();
 			} else {
 				AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
 						ShowImpegnoGDS.this, contextualAttivitaStudio);

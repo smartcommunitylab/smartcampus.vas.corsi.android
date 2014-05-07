@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
@@ -233,16 +234,16 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			listaCorsiString.clear();
 			listaCorsi.clear();
 
-			if (result.size() < 1) {
-				pd.dismiss();
-				RicercaGruppiGenerale_activity.this.finish();
-				Toast.makeText(
-						getApplicationContext(),
-						getResources().getString(
-								R.string.toast_gds_no_courses_followed),
-						Toast.LENGTH_LONG).show();
-				return;
-			}
+			// if (result.size() < 1) {
+			// pd.dismiss();
+			// RicercaGruppiGenerale_activity.this.finish();
+			// Toast.makeText(
+			// getApplicationContext(),
+			// getResources().getString(
+			// R.string.toast_gds_no_courses_followed),
+			// Toast.LENGTH_LONG).show();
+			// return;
+			// }
 
 			if (result != null && !result.isEmpty()) {
 				for (CorsoCarriera tempcorso : result) {

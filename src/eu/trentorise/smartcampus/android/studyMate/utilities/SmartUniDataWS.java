@@ -12,13 +12,12 @@ public final class SmartUniDataWS {
 	public static final String GET_WS_NOTIFICATIONS(String type, long fromDate) {
 		return "/notifiche/type/" + type + "/date/" + String.valueOf(fromDate);
 	}
-	
 
 	// corsocarriera
 	public static final String GET_WS_FREQUENTEDCOURSES = "/corsocarriera/me";
-	
+
 	public static final String GET_WS_FREQUENTEDCOURSES_SYNC = "/sync/corsocarriera/me";
-	
+
 	public static final String GET_WS_MY_COURSES_PASSED = "/corsocarriera/passed/me";
 
 	public static final String GET_WS_MY_COURSES_NOT_PASSED = "/corsocarriera/notpassed/me";
@@ -26,8 +25,6 @@ public final class SmartUniDataWS {
 	public static final String GET_WS_COURSE_IS_PASSED(String adCod) {
 		return "/corsocarriera/" + adCod + "/superato";
 	}
-	
-		
 
 	// corsointeresse
 	public static final String POST_WS_COURSE_AS_FOLLOW = "/corso/seguo";
@@ -46,13 +43,10 @@ public final class SmartUniDataWS {
 
 	public static final String GET_WS_MY_COURSES_INTEREST = "/corso/interesse/me";
 
-	
-	
-	
 	// AttivitaDidattica
 
 	public static final String GET_WS_ALLCOURSES_ATT_DIDATTICA = "/attivitadidattica/all";
-	
+
 	public static String GET_WS_ALLCOURSES_OF_DEPARTMENT(long id_dep) {
 		return "/attivitadidattica/dipartimento/" + String.valueOf(id_dep);
 	}
@@ -76,10 +70,10 @@ public final class SmartUniDataWS {
 	// CorsoLaurea ///////////////////////////////////////////////////////////
 
 	public static final String GET_WS_ALLCOURSES = "/corsolaurea/all";
+
 	public static String GET_WS_COURSESDEGREE_OF_DEPARTMENT(long idDepartment) {
 		return "/corsolaurea/" + String.valueOf(idDepartment);
 	}
-
 
 	// Studente //////////////////////////////////////////////////////////
 	public static final String GET_WS_STUDENT_DATA = "/sync/studente/me";
@@ -89,8 +83,7 @@ public final class SmartUniDataWS {
 	public static final String GET_STUDENTE(long id_stud) {
 		return "/studente/" + id_stud;
 	}
-	
-	
+
 	// Evento
 	public static final String GET_WS_MYEVENTS = "/evento/me";
 
@@ -110,14 +103,11 @@ public final class SmartUniDataWS {
 	// Dipartimento //////////////////////////////////////////////////////////
 	public static final String GET_WS_DEPARTMENTS_ALL = "/dipartimento/all";
 
-
-	
-
 	// Commento //////////////////////////////////////////////////////////
 	public static String GET_WS_FEEDBACK_OF_COURSE(long adId) {
 		return "/corso/" + String.valueOf(adId) + "/commento/all";
 	}
-	
+
 	public static String GET_WS_FEEDBACK_OF_STUDENT(long idCourse) {
 		return "/commento/" + String.valueOf(idCourse) + "/me";
 	}
@@ -150,7 +140,8 @@ public final class SmartUniDataWS {
 
 	public static String POST_ACCEPT_GDS = "/gruppodistudio/accept";
 
-	// AttivitaDiStudio //////////////////////////////////////////////////////////
+	// AttivitaDiStudio
+	// //////////////////////////////////////////////////////////
 	public static String GET_CONTEXTUAL_ATTIVITASTUDIO(long idGDS) {
 		return "/attivitadistudio/" + String.valueOf(idGDS);
 	}

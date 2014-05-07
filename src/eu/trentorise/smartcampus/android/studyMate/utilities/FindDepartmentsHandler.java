@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,6 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler.AsyncCourseAd;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -26,7 +27,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class FindDepartmentsHandler extends
 		AsyncTask<Void, Void, List<Dipartimento>> {
@@ -47,7 +47,7 @@ public class FindDepartmentsHandler extends
 	public List<CorsoLaurea> listCorLaurea;
 	FindCoursesDegreeHandler findDegHandler;
 	Activity currentActivity;
-	
+
 	public FindDepartmentsHandler(Context applicationContext,
 			Spinner spinnerDepartments, Spinner spinnerDegree,
 			Activity currentActivity) {
@@ -105,7 +105,7 @@ public class FindDepartmentsHandler extends
 		listDepartments = Utils.convertJSONToObjects(body, Dipartimento.class);
 		if (listDepartments == null) {
 			currentActivity.finish();
-		} 
+		}
 		return listDepartments;
 
 	}
@@ -129,30 +129,35 @@ public class FindDepartmentsHandler extends
 
 			// setto i dipartimenti nello spinner
 			@SuppressWarnings({ "rawtypes", "unchecked" })
-			ArrayAdapter adapter = new ArrayAdapter(
-					context,
+			ArrayAdapter adapter = new ArrayAdapter(context,
 					R.layout.list_studymate_row_list_simple,
 					listStringDepartments);
 			spinnerDepartments.setAdapter(adapter);
 			pd.dismiss();
-			
-			departSelected = SharedUtils.getDipartimentoStudente(currentActivity);
-			int posSelected = SharedUtils.getPosListFromShared(listStringDepartments,departSelected.getDescription());
-			spinnerDepartments.setSelection(SharedUtils.getPosListFromShared(listStringDepartments,departSelected.getDescription()), true);
-			
-			if(departSelected != null){
+
+			departSelected = SharedUtils
+					.getDipartimentoStudente(currentActivity);
+			int posSelected = SharedUtils.getPosListFromShared(
+					listStringDepartments, departSelected.getDescription());
+			spinnerDepartments.setSelection(SharedUtils.getPosListFromShared(
+					listStringDepartments, departSelected.getDescription()),
+					true);
+
+			if (departSelected != null) {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 					findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-							context, spinnerDegree, departSelectedName, posSelected, currentActivity,
+							context, spinnerDegree, departSelectedName,
+							posSelected, currentActivity,
 							FindDepartmentsHandler.this).executeOnExecutor(
-									AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+							AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 				} else {
 					findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-							context, spinnerDegree, departSelectedName, posSelected, currentActivity,
+							context, spinnerDegree, departSelectedName,
+							posSelected, currentActivity,
 							FindDepartmentsHandler.this).execute();
 				}
 			}
-			
+
 			spinnerDepartments
 					.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 						public void onItemSelected(AdapterView<?> parent,
@@ -161,16 +166,21 @@ public class FindDepartmentsHandler extends
 							// chiamo l'handler per il caricamento dei corsi di
 							// laurea
 							departSelected = result.get(pos);
-							
-														
+
 							if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 								findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-										context, spinnerDegree, departSelectedName, pos, currentActivity,
-										FindDepartmentsHandler.this).executeOnExecutor(
-												AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+										context, spinnerDegree,
+										departSelectedName, pos,
+										currentActivity,
+										FindDepartmentsHandler.this)
+										.executeOnExecutor(
+												AsyncTask.THREAD_POOL_EXECUTOR,
+												(Void[]) null);
 							} else {
 								findDegHandler = (FindCoursesDegreeHandler) new FindCoursesDegreeHandler(
-										context, spinnerDegree, departSelectedName, pos, currentActivity,
+										context, spinnerDegree,
+										departSelectedName, pos,
+										currentActivity,
 										FindDepartmentsHandler.this).execute();
 							}
 

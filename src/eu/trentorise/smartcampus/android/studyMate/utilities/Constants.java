@@ -18,10 +18,10 @@ public final class Constants {
 	public static final String CONTESTUAL_GDS = "contextualGDS";
 	public static final String SELECTED_MATERIA = "Selected_materia";
 	public static final String POSSIBLE_GDS = "PossibleGDS";
-	public static final String POSSIBLE_ATT= "PossibleAttivitaDidattiche";
-	public static final String NOME_GRUPPO= "Selected_nome_gruppo";
-	public static final String GDS_SUBS= "gds_to_subscribe";
-	public static final String IMPEGNI_LIST= "lista_impegni";
-	public static final String CONTEXTUAL_ATT= "contextualAttivitaStudio";
-	public static final String IMPEGNO_MOD= "impegno_da_modificare";
+	public static final String POSSIBLE_ATT = "PossibleAttivitaDidattiche";
+	public static final String NOME_GRUPPO = "Selected_nome_gruppo";
+	public static final String GDS_SUBS = "gds_to_subscribe";
+	public static final String IMPEGNI_LIST = "lista_impegni";
+	public static final String CONTEXTUAL_ATT = "contextualAttivitaStudio";
+	public static final String IMPEGNO_MOD = "impegno_da_modificare";
 }

@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import it.smartcampuslab.studymate.R;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -11,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.Notification;
-import it.smartcampuslab.studymate.R;
 
 public class AdapterNoticesList extends ArrayAdapter<Notification> {
 	@SuppressWarnings("unused")

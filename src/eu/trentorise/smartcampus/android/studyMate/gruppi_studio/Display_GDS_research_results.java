@@ -1,5 +1,6 @@
-<<<<<<< HEAD
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
+
+import it.smartcampuslab.studymate.R;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,6 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
-import eu.trentorise.smartcampus.studymate.R;
 
 public class Display_GDS_research_results extends SherlockFragmentActivity {
 
@@ -86,4 +86,3 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 		}
 	}
 }
-

@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -15,15 +17,10 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-<<<<<<< HEAD
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
-import eu.trentorise.smartcampus.studymate.R;
-=======
-import it.smartcampuslab.studymate.R;
->>>>>>> refs/remotes/origin/master
 
 public class Impegni_Fragment extends SherlockFragment {
 	public ArrayList<Evento> lista_impegni;

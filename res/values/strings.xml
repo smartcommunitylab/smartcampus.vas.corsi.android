@@ -13,22 +13,12 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
-
-
-
-
-
-
-
-
-
 -->
 <resources>
- <string name="internet_connection">L\'applicazione richiede la connessione ad internet per funzionare</string>
- 
-  <string name="salva">Salva</string>
-          <string name="search">Cerca</string>
+
+    <string name="salva">Salva</string>
+    <string name="internet_connection">L\'applicazione richiede la connessione ad internet per funzionare</string>
+    <string name="search">Cerca</string>
     <string name="title_gicercagruppigenerale_activity">Ricerca gruppi di studio</string>
     <string name="gruppi_studio_label">Gruppi di studio</string>
     <string name="app_uid_label">SmartCampus</string>
@@ -55,7 +45,7 @@
     <string name="title_activity_my_agenda">Agenda</string>
     <string name="title_activity_phl">PHL</string>
     <string name="title_activity_find_courses">Ricerca corsi</string>
-    <string name="title_shared_studente">Informazioni studente</string>
+     <string name="title_activity_result_searched">Risultati della ricerca</string>
     <string name="tab_overview">Overview</string>
     <string name="tab_courses">Corsi</string>
     <string name="tab_home">HOME</string>
@@ -71,6 +61,7 @@
     <string name="title_activity_dati">Dati</string>
     <string name="my_courses">Corsi che seguo</string>
     <string name="title_activity_search_home">Ricerca dei corsi</string>
+    <string name="title_shared_studente">Informazioni studente</string>
     <string name="choose_data">Data:</string>
     <string name="choose_time">Ora:</string>
     <string name="add_event_corsi">Corso:</string>
@@ -82,12 +73,12 @@
     <string name="search_label_course"> Corso </string>
     <string name="search_button_search"> Ricerca </string>
     <string name="search_hint_course"> Nome del corso </string>
-    <string name="finder_initiallist_dep"> Seleziona Dipartimento </string>
-    <string name="finder_initiallist_deg"> Seleziona corso di laurea </string>
     <string name="title_activity_result_searched">Risultati della ricerca</string>
     <string name="search_label_searchedList">Hai cercato:</string>
     <string name="find_label_searchingnow">"Stai cercando: "</string>
     <string name="find_label_searching">"Cerca un corso: "</string>
+    <string name="finder_initiallist_dep"> Seleziona Dipartimento </string>
+    <string name="finder_initiallist_deg"> Seleziona corso di laurea </string>
     <string name="title_activity_agenda">AgendaActivity</string>
     <string name="add_event">Aggiungi evento</string>
     <string name="agenda_label_tab_overview">Overview</string>
@@ -126,9 +117,7 @@
     <string name="toast_switchfollow_success"> Stai seguendo questo corso. </string>
     <string name="toast_rate_access_denied"> Non puoi votare questo corso, prima devi passare l\'esame. </string>
     <string name="toast_switchfollow_off"> Non segui più questo corso </string>
-    <string name="title_activity_show_modify_gdsdetails_activity">ShowModifyGDSDetails_activity</string>
-    <string name="title_activity_modifiy_attivita_studio">ModifiyAttivitaStudio</string>
-    <string name="attivitadistudio_string">Attività di studio</string>
+    
     <string name="Monday">Lunedì</string>
     <string name="Tuesday">Martedi</string>
     <string name="Wednesday">Mercoledì</string>
@@ -136,8 +125,6 @@
     <string name="Friday">Venerdì</string>
     <string name="Saturday">Sabato</string>
     <string name="Sunday">Domenica</string>
-    
-    
     <string name="January">Gennaio</string>
     <string name="February">Febbraio</string>
     <string name="March">Marzo</string>
@@ -150,20 +137,19 @@
     <string name="October">Ottobre</string>
     <string name="November">Novembre</string>
     <string name="December">Dicembre</string>
-    
     <string name="of">di</string>
-    
-    
     <string name="header_course_career">Corsi da libretto</string>
     <string name="header_course_interest">Corsi di interesse</string>
-    
+
     <!-- Dialogs -->
+    <string name="dialog_gds_associated_loading">Caricamento gruppi di studio associati</string>
     <string name="dialog_coming_soon">Disponibile a breve</string>
     <string name="dialog_sync_data">Sincronizzazione dei dati personali in corso</string>
     <string name="dialog_loading">Caricamento...</string>
     <string name="dialog_error">Ops! C\'è stato un errore...</string>
     <string name="dialog_courses_events">Lista dei corsi registrati agli eventi</string>
     <string name="dialog_list_events">Lista dei tuoi eventi</string>
+    <string name="dialog_list_courses">Lista dei tuoi corsi</string>
     <string name="dialog_list_cds">Lista dei corsi di laurea</string>
     <string name="dialog_not_events">Non ci sono eventi prossimamente</string>
     <string name="dialog_searching_courses">Ricerca dei corsi</string>
@@ -181,76 +167,77 @@
     <string name="dialog_shared_title_cds">Seleziona il tuo corso di laurea</string>
     <string name="dialog_shared_data_loading">Caricamento della lista dei dipartimenti e dei corsi di laurea</string>
     <string name="dialog_saved_pref">Informazioni salvate con successo</string>
-     <string name="no_events_now">Non sono disponibli eventi a breve per questo corso</string>
-     <!-- Toasts -->
+    <string name="no_events_now">Non sono disponibli eventi a breve per questo corso</string>
+     <string name="attivitadistudio_string">Attività di studio</string>
+    <string name="sure_group_stud">Conferma iscrizione</string>
+    <!-- Toasts -->
     <string name="toast_event_added">Evento personale aggiunto</string>
-    
-    
+    <string name="toast_gds_no_find_to_subscribe">Non puoi iscriverti a nessun gruppo</string>
+    <string name="toast_gds_no_gds_course">Non sono presenti gruppi per questa attività</string>
+    <string name="toast_gds_select_course">Seleziona un corso</string>
+    <string name="toast_gds_no_courses_followed">Non puoi iscriverti ad alcun gruppo di studio</string>
+
     <!-- add event -->
     <string name="addevent_title">Titolo</string>
     <string name="addevent_courses">Corsi</string>
     <string name="addevent_date">Data</string>
     <string name="addevent_Time">Ora</string>
     <string name="addevent_description">Descrizione</string>
-        <string name="event_modify_not_allowed">Solo chi ha creato l\'evento può modificarlo</string>
-    <string name="event_delete_not_allowed">Solo chi ha creato l\'evento può eliminarlo</string>
-    
     <string name="button_cancel">Annulla</string>
-    <string name="searchby_all">Tutto</string>
+    <string name="searchby_all">Tutti</string>
+    <string name="event_modify_not_allowed">Solo chi ha creato l\'evento può modificarlo</string>
+    <string name="event_delete_not_allowed">Solo chi ha creato l\'evento può eliminarlo</string>
+ <string name="mod_att">Modifica attività di studio</string>
 
     <!-- feedback -->
-	 <string name="feedback_not_present">Non sono presenti commenti...</string>
-	 <string name="feedback_number_presents">commenti presenti</string>
-	 	 <string name="feedback_number_presents_for_1">1 commento presente</string>
-	 <string name="feedback_course_information">Informazioni del corso</string>
-	 <string name="feedback_course_is_career">Il corso è da libretto</string>
-	 <string name="feedback_courses_can_review">Corsi che posso votare</string>
-	 <string name="homecourse_description_not_present">Nessuna descrizione trovata</string>
-	 
-	 <!-- Rate -->
-	 <string name="rate_review_course">Valuta il corso!</string>
-	 <string name="rate_insert_review">Inserisci il tuo commento...</string>
-	 <string name="rate_review_added">Valutazione aggiunta!</string>
-	 
-	 <!-- Notifications -->
-	 <string name="notification_name">Bacheca notifiche</string>
-	 
-	 <!-- Event -->
-	 <string name="event_change_success">Evento modificato con successo</string>
-	 
-	 <string name="menu_courses_goto_home">Vai alla home</string>
-	 <string name="menu_courses_unfollow">Non seguire più</string>
-	 <string name="menu_multi_courses_unfollow">Non seguire</string>
-	 <string name="menu_multi_courses_follow">Segui</string>
-	 <!-- GDS -->
-	<string name="addevent_location">Luogo</string>
-	<string name="new_att_stud">Nuova attività di studio</string>
-	<string name="new_group_stud">Nuovo gruppo</string>
-	<string name="iscr_group_stud">Iscrizione gruppo di studio</string>
-	<string name="sure_group_stud">Conferma iscrizione</string>
-	<string name="sure_group_stud_message">Vuoi iscriverti al gruppo</string>
-	<string name="yes">Si</string>
-	<string name="no">No</string>
-	<string name="iscr_group_stud_dial">Iscrizione al gruppo di studio</string>
-	<string name="loading_gds">Caricamento gruppi di studio personali</string>
-	<string name="my_gds">I miei gruppi</string>
-	<string name="no_gds">Non sei ancora iscritto ad alcun gruppo di studio! Utilizza il menù in alto a destra per iscriverti ad un gruppo di studio</string>
-	<string name="mod_att">Modifica attività di studio</string>
-	<string name="all_gds">"Tutti"</string>
-	<string name="leave_gds">"Stai lasciando"</string>
-	<string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
-	
-	
-	<string name="string_year_at">anno presso</string>
-	<string name="menu_subscribe_group">Iscriviti ad un gruppo</string>
-	<string name="menu_add_group">Crea gruppo</string>
-	<string name="label_participants">Partecipanti:</string>
-	
-	
-	
+    <string name="feedback_not_present">Non sono presenti commenti...</string>
+    <string name="feedback_number_presents">commenti presenti</string>
+    <string name="feedback_number_presents_for_1">1 commento presente</string>
+    <string name="feedback_course_information">Informazioni del corso</string>
+    <string name="feedback_course_is_career">Il corso è da libretto</string>
+    <string name="feedback_courses_can_review">Corsi che posso votare</string>
+
+    <!-- Rate -->
+    <string name="rate_review_course">Valuta il corso!</string>
+    <string name="rate_insert_review">Inserisci il tuo commento...</string>
+    <string name="rate_review_added">Valutazione aggiunta!</string>
+    <string name="homecourse_description_not_present">Nessuna descrizione trovata</string>
+
+    <!-- Notifications -->
+    <string name="notification_name">Bacheca notifiche</string>
+
+    <!-- Event -->
+    <string name="event_change_success">Evento modificato con successo</string>
+    <string name="menu_courses_goto_home">Vai alla home</string>
+    <string name="menu_courses_unfollow">Non seguire più</string>
+    <string name="menu_multi_courses_unfollow">Non seguire</string>
+    <string name="menu_multi_courses_follow">Segui</string>
+    <!-- GDS -->
+    <string name="title_activity_show_modify_gdsdetails_activity">ShowModifyGDSDetails_activity</string>
+    <string name="title_activity_modifiy_attivita_studio">ModifiyAttivitaStudio</string>
+    <string name="attivitadistudio_string">Attività di studio</string>
+    <string name="addevent_location">Luogo</string>
+    <string name="string_year_at">anno presso</string>
+    <string name="my_gds">I miei gruppi</string>
+    <string name="menu_subscribe_group">Iscriviti ad un gruppo</string>
+    <string name="menu_add_group">Crea gruppo</string>
+    <string name="iscr_group_stud">Iscrizione gruppo di studio</string>
+    <string name="label_participants">Partecipanti:</string>
+    <string name="sure_group_stud_message">Vuoi iscriverti al gruppo</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="iscr_group_stud_dial">Iscrizione al gruppo di studio</string>
+    <string name="loading_gds">Caricamento gruppi di studio personali</string>
+    <string name="no_gds">Non sei ancora iscritto ad alcun gruppo di studio! Utilizza il menù in alto a destra per iscriverti ad un gruppo di studio</string>
+    <string name="mod_att">Modifica attività di studio</string>
+    <string name="all_gds">"Tutti"</string>
+    <string name="leave_gds">"Stai lasciando"</string>
+    <string name="att_message">Non sono stati fissati impegni! Utilizza il menù in alto a destra per fissare un nuovo impegno</string>
+    <string name="new_att_stud">Nuova attività di studio</string>
+    <string name="new_group_stud">Nuovo gruppo</string>
+    <string name="sure_group_stud">Conferma iscrizione</string>
 
     <!-- Disclaimer -->
     <string name="disclaimer">Quest’app utilizza alcuni dati provenienti dal tuo account dell’Università di Trento. Per utilizzare appieno tutte le funzonalità di quest’app, devi consentire all’Università di Trento di rilasciare i tuoi dati a Smart Campus. Per favore visita il seguente sito web, accedi con il tuo account UniTn, e compila il form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
-  	 
-	 
+
 </resources>

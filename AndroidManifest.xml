@@ -244,8 +244,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+         <activity
+            android:name="eu.trentorise.smartcampus.android.studyMate.start.SetInfoStudentActivity"
+            android:configChanges="orientation|keyboard"
+            android:icon="@drawable/smartuni_logo"
+            android:label="@string/title_shared_studente" >
+        </activity>
         
     </application>
 
->>>>>>> refs/remotes/origin/master
 </manifest>

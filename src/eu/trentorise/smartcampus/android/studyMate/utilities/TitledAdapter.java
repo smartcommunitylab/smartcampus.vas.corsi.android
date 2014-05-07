@@ -1,12 +1,12 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import it.smartcampuslab.studymate.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import it.smartcampuslab.studymate.R;
 
 // in EventsListingFragment
 public class TitledAdapter extends ArrayAdapter<TitledItem> {

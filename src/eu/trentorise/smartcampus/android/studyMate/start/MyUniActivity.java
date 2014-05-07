@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
@@ -48,7 +51,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class MyUniActivity extends SherlockActivity {
 
@@ -87,25 +89,31 @@ public class MyUniActivity extends SherlockActivity {
 					new LoadUserDataFromACServiceTask().execute();
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					builder//.setTitle(R.string.welcome_title)
-							.setView(getLayoutInflater().inflate(R.layout.disclaimerdialog, null))
+					builder// .setTitle(R.string.welcome_title)
+					.setView(
+							getLayoutInflater().inflate(
+									R.layout.disclaimerdialog, null))
 							.setOnCancelListener(
 									new DialogInterface.OnCancelListener() {
 
 										@Override
-										public void onCancel(DialogInterface arg0) {
+										public void onCancel(
+												DialogInterface arg0) {
 											arg0.dismiss();
-											new LoadUserDataFromACServiceTask().execute();
+											new LoadUserDataFromACServiceTask()
+													.execute();
 										}
 									})
 							.setPositiveButton(getString(R.string.ok),
 									new DialogInterface.OnClickListener() {
 
 										@Override
-										public void onClick(DialogInterface dialog,
+										public void onClick(
+												DialogInterface dialog,
 												int which) {
 											dialog.dismiss();
-											new LoadUserDataFromACServiceTask().execute();
+											new LoadUserDataFromACServiceTask()
+													.execute();
 										}
 									});
 					builder.create().show();
@@ -202,21 +210,6 @@ public class MyUniActivity extends SherlockActivity {
 				MyUniActivity.this.startActivity(intent);
 			}
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.show_tutorial) {
-			TutorialUtils.enableTutorial(this);
-			TutorialUtils.getTutorial(this).showTutorials();
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	public static SCAccessProvider getAccessProvider() {
@@ -354,7 +347,7 @@ public class MyUniActivity extends SherlockActivity {
 										arg0.dismiss();
 									}
 								})
-								
+
 						.setPositiveButton(getString(R.string.begin_tut),
 								new DialogInterface.OnClickListener() {
 
@@ -406,7 +399,6 @@ public class MyUniActivity extends SherlockActivity {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.my_uni, menu);
@@ -421,16 +413,20 @@ public class MyUniActivity extends SherlockActivity {
 			intent.putExtra(Constants.MY_UNI_STATE, true);
 			MyUniActivity.this.startActivity(intent);
 			return false;
+		case R.id.show_tutorial:
+			TutorialUtils.enableTutorial(this);
+			TutorialUtils.getTutorial(this).showTutorials();
 		default:
 			break;
 
 		}
 		return false;
-=======
+	}
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		TutorialUtils.getTutorial(this).onTutorialActivityResult(requestCode,
 				resultCode, data);
->>>>>>> refs/remotes/origin/master
+
 	}
 
 }

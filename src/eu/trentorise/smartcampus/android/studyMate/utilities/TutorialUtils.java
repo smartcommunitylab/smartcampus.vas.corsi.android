@@ -1,10 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import com.github.espiandev.showcaseview.TutorialHelper;
-import com.github.espiandev.showcaseview.TutorialItem;
-import com.github.espiandev.showcaseview.TutorialHelper.TutorialProvider;
-
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import it.smartcampuslab.studymate.R;
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +9,10 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.github.espiandev.showcaseview.TutorialHelper;
+import com.github.espiandev.showcaseview.TutorialHelper.TutorialProvider;
+import com.github.espiandev.showcaseview.TutorialItem;
 
 public class TutorialUtils {
 
