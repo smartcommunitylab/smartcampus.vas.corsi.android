@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,10 +32,10 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
-	private Dipartimento dipartimento;
+//	private Dipartimento dipartimento;
 	private Context context;
-	private AlertDialog.Builder builder;
-	private Spinner spinner1;
+//	private AlertDialog.Builder builder;
+//	private Spinner spinner1;
 	private Spinner spinnerDegree;
 	public static ProgressDialog pd;
 
@@ -66,7 +65,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 		new ProgressDialog(currentActivity);
@@ -77,7 +75,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		// TODO Auto-generated method stub
 
 		mProtocolCarrier = new ProtocolCarrier(currentActivity,
 				SmartUniDataWS.TOKEN_NAME);
@@ -108,7 +105,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -123,7 +119,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
 	@Override
 	protected void onPostExecute(Boolean result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		if (result) {
@@ -177,7 +172,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 
 					boolean resultSharedDip = false;
 					boolean resultSharedCds = false;
@@ -218,7 +212,6 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 						}
 
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 

@@ -42,9 +42,10 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	Evento contextualAttivitaStudio;
 	private ProtocolCarrier mProtocolCarrier;
 
+
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
+	protected void onResume() {
+		super.onResume();
 		setContentView(R.layout.show_impegno_gds);
 
 		// codice per sistemare l'actionoverflow
@@ -84,9 +85,11 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
 		tv_descrizione.setText(contextualAttivitaStudio
 				.getPersonalDescription());
-
 	}
-
+	
+	
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -219,7 +222,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			ShowImpegnoGDS.this.finish();
+			onBackPressed();
+			//ShowImpegnoGDS.this.finish();
 			// Intent intent = new Intent(ShowImpegnoGDS.this,
 			// Overview_GDS.class);
 			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

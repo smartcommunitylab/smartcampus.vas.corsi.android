@@ -15,7 +15,7 @@ public class EventItem extends EventItem4Adapter {
 
 	public EventItem(AdptDetailedEvent obj, Context context) {
 		super();
-		this.res = context.getResources();
+		this.setRes(context.getResources());
 		this.object = obj;
 		this.context = context;
 	}
@@ -52,8 +52,15 @@ public class EventItem extends EventItem4Adapter {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		super.toString();
 		return day;
+	}
+
+	public Resources getRes() {
+		return res;
+	}
+
+	public void setRes(Resources res) {
+		this.res = res;
 	}
 }

@@ -1,10 +1,13 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import it.smartcampuslab.studymate.R;
+import it.smartcampuslab.studymate.R.color;
 
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +41,13 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		// ImageView logo_gds = (ImageView) row.findViewById(R.id.gds_logo);
 		TextView nome_corso = (TextView) row
 				.findViewById(R.id.gds_name_of_course);
+		nome_corso.setTextColor(Color.BLACK);
 		TextView type_event = (TextView) row.findViewById(R.id.gds_name);
+		type_event.setTextColor(Color.BLACK);
 		nome_gds.setText(currentGDS.getNome());
+		nome_gds.setTextColor(Color.BLACK);
 		nome_corso.setText(currentGDS.getMateria());
-
+		nome_corso.setTextColor(Color.BLACK);
 		return row;
 	}
 

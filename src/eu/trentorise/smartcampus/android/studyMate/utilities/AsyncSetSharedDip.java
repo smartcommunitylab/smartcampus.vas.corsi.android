@@ -42,6 +42,7 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 	public String courseSelected = null;
 	Dipartimento departSelected = null;
 	CorsoLaurea corsoLaureaSelected;
+	@SuppressWarnings("unused")
 	private AsyncSetSharedCds asyncGetCds;
 	int i;
 
@@ -56,7 +57,6 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 
 		new ProgressDialog(act);
@@ -99,7 +99,6 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (AACException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -110,13 +109,11 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 		} else {
 			return false;
 		}
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void onPostExecute(Boolean result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		if (result == false) {
@@ -174,7 +171,6 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 
 						@Override
 						public void onNothingSelected(AdapterView<?> arg0) {
-							// TODO Auto-generated method stub
 
 						}
 					});

@@ -234,6 +234,7 @@
     <string name="new_att_stud">New study activity</string>
     <string name="new_group_stud">New group</string>
     <string name="sure_group_stud">Registration confirmation</string>
+    <string name="no_group_name">Inserist a valid name</string>
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 

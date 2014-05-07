@@ -41,10 +41,11 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
+
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// impostazioni grafiche
+	protected void onResume() {
+		super.onResume();
 		setContentView(R.layout.lista_gds_activity);
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle(R.string.my_gds);
@@ -74,9 +75,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ft.replace(R.id.list_container, fragment);
 		ft.addToBackStack(null);
 		ft.commit();
-
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();

@@ -9,6 +9,7 @@ import android.content.Context;
 
 public class DatesUtil {
 
+	@SuppressWarnings("unused")
 	private Context context;
 	private String[] days;
 	private String[] months;
@@ -44,6 +45,7 @@ public class DatesUtil {
 		months = m;
 	}
 
+	@SuppressWarnings("deprecation")
 	public String dateToAgendaFormat(Date date) {
 		String dateFormatSM = null;
 

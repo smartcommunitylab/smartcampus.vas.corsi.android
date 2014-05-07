@@ -67,6 +67,7 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 		return fview;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onStart() {
 

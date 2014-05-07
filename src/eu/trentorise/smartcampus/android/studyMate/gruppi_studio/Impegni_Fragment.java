@@ -48,24 +48,23 @@ public class Impegni_Fragment extends SherlockFragment {
 		return view;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
-		lista_impegni = (ArrayList<Evento>) getArguments().getSerializable(
-				"serializableobject");
-		gds = (GruppoDiStudio) getArguments().getSerializable(Constants.GDS);
-		return;
-	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onStart() {
 		super.onStart();
+		setHasOptionsMenu(true);
+		lista_impegni = (ArrayList<Evento>) getArguments().getSerializable(
+				"serializableobject");
+		
+		gds = (GruppoDiStudio) getArguments().getSerializable(Constants.GDS);
 
+		}
+	@Override
+	public void onResume() {
+		super.onResume();
 		lista_impegni = ((Overview_GDS) getActivity())
 				.getContextualListaImpegni();
-
 		// gestione listaimpegni
 		ListView impegni_listview = (ListView) getSherlockActivity()
 				.findViewById(R.id.lista_impegni);
@@ -76,24 +75,23 @@ public class Impegni_Fragment extends SherlockFragment {
 					.getDate(), ev.getTitle(), ev.getType(), ev.getEventoId()
 					.getStart().toString(), ev.getRoom());
 			listEvItem[i++] = new EventItem(e, getActivity());
-
+			
 		}
 		EventAdapter adapter = new EventAdapter(getSherlockActivity(),
 				listEvItem);
 		impegni_listview.setAdapter(adapter);
-
+		
 		impegni_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				EventAdapter adpt = (EventAdapter) parent.getAdapter();
 				final Evento selected_impegno = lista_impegni.get(position);
 				Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
 				intent.putExtra(Constants.CONTEXTUAL_ATT, selected_impegno);
 				startActivity(intent);
 			}
 		});
-
 	}
+	
 
 }

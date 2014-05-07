@@ -22,7 +22,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="materia: " />
+            android:text="Materia: " />
 
         <TextView
             android:id="@+id/tv_filter_materia"
@@ -41,7 +41,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nome gruppo: " />
+            android:text="Nome gruppo: " />
 
         <TextView
             android:id="@+id/tv_filter_nomegruppo"
@@ -71,7 +71,8 @@
     <ListView
         android:id="@+id/searchresults_gds_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        >
     </ListView>
 
 </LinearLayout>

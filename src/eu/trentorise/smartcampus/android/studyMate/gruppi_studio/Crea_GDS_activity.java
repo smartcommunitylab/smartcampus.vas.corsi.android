@@ -80,8 +80,14 @@ public class Crea_GDS_activity extends SherlockActivity {
 		case R.id.action_done: {
 			// asynctask per aggiungere un gruppo di studio appena creato ai
 			// gruppi di studio persoanli
+			if (tv_nome_gds.getText().toString().equals("")) {
+
+				Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_group_name),
+						Toast.LENGTH_SHORT).show();
+			} else {
 			PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
 			task.execute();
+			}
 			return super.onOptionsItemSelected(item);
 		}
 		default:
@@ -151,10 +157,7 @@ public class Crea_GDS_activity extends SherlockActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			Intent intent = new Intent(Crea_GDS_activity.this,
-					Lista_GDS_activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			onBackPressed();
 		}
 
 		@Override
@@ -164,11 +167,13 @@ public class Crea_GDS_activity extends SherlockActivity {
 			int position = spinner_scegli_materia.getSelectedItemPosition();
 			CorsoCarriera cc = listaCorsi.get(position);
 			String nome = tv_nome_gds.getText().toString();
-			GruppoDiStudio justCreatedGds = new GruppoDiStudio();
-			justCreatedGds.setNome(nome);
-			justCreatedGds.setMateria(materia);
-			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
-			addGroup(justCreatedGds);
+
+				GruppoDiStudio justCreatedGds = new GruppoDiStudio();
+				justCreatedGds.setNome(nome);
+				justCreatedGds.setMateria(materia);
+				justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
+				addGroup(justCreatedGds);
+			
 			return null;
 
 		}

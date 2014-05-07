@@ -39,7 +39,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	public GruppoDiStudio contextualGDS = null;
+	public static GruppoDiStudio contextualGDS = null;
 	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
@@ -68,16 +68,10 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
-	}
-
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -111,12 +105,12 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 	}
 
-	@Override
-	public void onBackPressed() {
-		Overview_GDS.this.finish();
-	}
+//	@Override
+//	public void onBackPressed() {
+//		Overview_GDS.this.finish();
+//	}
 
-	public GruppoDiStudio getContextualGDS() {
+	public static GruppoDiStudio getContextualGDS() {
 		return contextualGDS;
 	}
 
@@ -216,7 +210,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 						contextualListaImpegni, contextualGDS);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.impegni_fragment_container, fragment);
-				ft.addToBackStack(null);
+				//ft.addToBackStack(null);
 				ft.commit();
 			}
 
@@ -288,10 +282,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			Intent intent = new Intent(Overview_GDS.this,
-					Lista_GDS_activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			onBackPressed();
+
 		}
 
 		@Override
