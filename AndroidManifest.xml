@@ -19,8 +19,8 @@
     package="it.smartcampuslab.studymate"
     android:sharedUserId="it.smartcampuslab.launcher"
     android:sharedUserLabel="@string/app_uid_label"
-    android:versionCode="5"
-    android:versionName="0.10.1" >
+    android:versionCode="6"
+    android:versionName="0.10.2" >
 
     <uses-sdk
         android:minSdkVersion="9"
