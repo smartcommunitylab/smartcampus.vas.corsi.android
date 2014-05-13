@@ -51,6 +51,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 	public static ProgressDialog pd;
 	public List<Evento> listaEventiFiltrati = null;
 	private CorsoCarriera cc;
+	View view = null;
 	static FirstPageFragmentListener secondPageListener;
 	public static Evento eventoSelezionato;
 
@@ -64,7 +65,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		View view = inflater.inflate(R.layout.fragment_myagenda_overview,
+		view = inflater.inflate(R.layout.fragment_myagenda_filter_overview,
 				container, false);
 
 		return view;
@@ -100,7 +101,7 @@ public class OverviewFilterFragment extends SherlockFragment {
 				EventAdapter adapter = new EventAdapter(getSherlockActivity(),
 						listEvItem);
 				ListView listView = (ListView) getSherlockActivity()
-						.findViewById(R.id.listViewEventi);
+						.findViewById(R.id.listViewFilterEventi);
 				listView.setAdapter(adapter);
 				listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
