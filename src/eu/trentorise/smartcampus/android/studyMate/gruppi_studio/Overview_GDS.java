@@ -39,14 +39,14 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	public static GruppoDiStudio contextualGDS = null;
+	public GruppoDiStudio contextualGDS = null;
 	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onResume() {
+		super.onResume();
 		setContentView(R.layout.overview_gds_waitingforforum_layout);
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
@@ -71,6 +71,11 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		
+//	}
 
 
 	@Override
@@ -110,7 +115,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 //		Overview_GDS.this.finish();
 //	}
 
-	public static GruppoDiStudio getContextualGDS() {
+	public GruppoDiStudio getContextualGDS() {
 		return contextualGDS;
 	}
 
@@ -206,8 +211,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				tv.setVisibility(View.GONE);
 				FragmentTransaction ft = Overview_GDS.this
 						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = Impegni_Fragment.newInstance(
-						contextualListaImpegni, contextualGDS);
+				Fragment fragment = new Impegni_Fragment();
+				//.newInstance(
+				//		contextualListaImpegni, contextualGDS);
+				Bundle args = new Bundle();
+				args.putSerializable(Constants.IMPEGNI_LIST, contextualListaImpegni);
+				args.putSerializable(Constants.GDS, contextualGDS);
+				fragment.setArguments(args);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.impegni_fragment_container, fragment);
 				//ft.addToBackStack(null);

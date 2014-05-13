@@ -362,9 +362,9 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				pd.dismiss();
 			} else {
 				pd.dismiss();
-				String materia = ((Spinner) RicercaGruppiGenerale_activity.this
-						.findViewById(R.id.spinner_materie)).getSelectedItem()
-						.toString();
+//				String materia = ((Spinner) RicercaGruppiGenerale_activity.this
+//						.findViewById(R.id.spinner_materie)).getSelectedItem()
+//						.toString();
 				spinner_nome_gruppo.setAdapter(null);
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(

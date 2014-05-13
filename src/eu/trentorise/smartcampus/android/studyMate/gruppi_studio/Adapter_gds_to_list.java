@@ -1,12 +1,10 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import it.smartcampuslab.studymate.R;
-import it.smartcampuslab.studymate.R.color;
 
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -25,6 +25,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
@@ -60,22 +61,23 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		} catch (Exception ex) {
 			// Ignore
 		}
-
-		// personalizzazioje actionabar
+		Bundle myextras = getIntent().getExtras();
+		contextualAttivitaStudio = (Evento) myextras
+				.getSerializable(Constants.CONTEXTUAL_ATT);
+		GruppoDiStudio contextualGDS = (GruppoDiStudio) myextras
+				.getSerializable(Constants.CONTESTUAL_GDS);
+		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("Dettagli impegno");
+		actionbar.setTitle(contextualAttivitaStudio.getTitle());
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		/*
 		 * recupero contextualAttivitaStudio
 		 */
-		Bundle myextras = getIntent().getExtras();
-		contextualAttivitaStudio = (Evento) myextras
-				.getSerializable(Constants.CONTEXTUAL_ATT);
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
-		tv_oggetto.setText(contextualAttivitaStudio.getTitle());
+		tv_oggetto.setText(contextualGDS.getMateria());//contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		Date data = contextualAttivitaStudio.getEventoId().getDate();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -157,7 +159,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			AsyncTask<Evento, Void, Void> {
 
 		Context taskcontext;
-		public ProgressDialog pd;
+		
 		Evento toabandonAS;
 
 		public AsyncTabbandonaAttivitaStudio(Context taskcontext,
@@ -170,9 +172,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
-					+ toabandonAS.getPersonalDescription(), "");
 		}
 
 		private boolean abandonAS(Evento as_to_abandon) {
@@ -193,7 +192,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					String body = response.getBody();
+//					String body = response.getBody();
 					return true;
 
 				} else {
@@ -221,7 +220,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			pd.dismiss();
 			onBackPressed();
 			//ShowImpegnoGDS.this.finish();
 			// Intent intent = new Intent(ShowImpegnoGDS.this,

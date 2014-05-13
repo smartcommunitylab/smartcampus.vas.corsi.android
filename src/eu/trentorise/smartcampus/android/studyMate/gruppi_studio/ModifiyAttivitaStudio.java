@@ -124,7 +124,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		description.setText(evento.getPersonalDescription());
 		// retrieving textview_oggetto
 		List<String> course = new ArrayList<String>();
-		course.add(new String(evento.getTitle()));
+		course.add(new String(evento.getGruppo().getMateria()));
 		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
 				ModifiyAttivitaStudio.this,
 				R.layout.list_studymate_row_list_simple, course);
@@ -296,6 +296,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		Context taskcontext;
 		public ProgressDialog pd;
 		Boolean allright;
+		@SuppressWarnings("unused")
 		Evento oldone, newone;
 
 		public ModifyAS(Context taskcontext, Evento oldone, Evento newone) {
@@ -374,11 +375,12 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (allright) {
-				Intent intent = new Intent(ModifiyAttivitaStudio.this,
-						ShowImpegnoGDS.class);
-				intent.putExtra(Constants.CONTEXTUAL_ATT, newone);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				onBackPressed();
+//				Intent intent = new Intent(ModifiyAttivitaStudio.this,
+//						ShowImpegnoGDS.class);
+//				intent.putExtra(Constants.CONTEXTUAL_ATT, newone);
+//				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
 
 			} else {
 				Toast.makeText(ModifiyAttivitaStudio.this,

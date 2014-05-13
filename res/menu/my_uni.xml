@@ -12,7 +12,7 @@
                 android:title="@string/menu_title_tutorial"/>
             <item
                 android:id="@+id/preference"
-                android:icon="@drawable/ic_star"
+                android:title="@string/menu_title_preference"
                 android:showAsAction="always"/>
         </menu>
     </item>

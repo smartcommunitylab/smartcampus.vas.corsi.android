@@ -16,6 +16,7 @@
 -->
 <resources>
 
+    <string name="menu_title_preference">Preferenze</string>
     <string name="salva">Salva</string>
     <string name="internet_connection">L\'applicazione richiede la connessione ad internet per funzionare</string>
     <string name="search">Cerca</string>
@@ -237,7 +238,7 @@
     <string name="new_group_stud">Nuovo gruppo</string>
     <string name="sure_group_stud">Conferma iscrizione</string>
     <string name="no_group_name">Inserisci un nome per il gruppo</string>
-
+	<string name="no_att_name">Inserisci un nome per l\'attività</string>
     <!-- Disclaimer -->
     <string name="disclaimer">Quest’app utilizza alcuni dati provenienti dal tuo account dell’Università di Trento. Per utilizzare appieno tutte le funzonalità di quest’app, devi consentire all’Università di Trento di rilasciare i tuoi dati a Smart Campus. Per favore visita il seguente sito web, accedi con il tuo account UniTn, e compila il form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 

@@ -60,11 +60,11 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 	private int mDay;
 	private int hour;
 	private int minute;
-	private Evento evento = null;
 	Spinner coursesSpinner;
 	private EventoId eId;
 	private Date date;
-	private EditText description;
+	private EditText description, editTextTitleGDS;
+	@SuppressWarnings("unused")
 	private EditText eventlocation;
 
 	@SuppressWarnings("deprecation")
@@ -73,6 +73,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
 
+		editTextTitleGDS = (EditText) findViewById(R.id.editTextTitleGDS);
 		Bundle myextras = getIntent().getExtras();
 		gds = (GruppoDiStudio) myextras.getSerializable(Constants.GDS);
 		ActionBar actionbar = getActionBar();
@@ -151,6 +152,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			/*
 			 * crea e aggiugni agli impegni l'attività di studio appena creata
 			 */
+
 			description = (EditText) findViewById(R.id.editTextDescription);
 			coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
 
@@ -173,8 +175,14 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			}
 
 			String location = etLocation.getText().toString();
-
-			nuova_attivitaStudio.setTitle(gds.getMateria());
+			String name = editTextTitleGDS.getText().toString();
+			if (name.equals("")) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.no_att_name),
+						Toast.LENGTH_SHORT).show();
+				return false;
+			}
+			nuova_attivitaStudio.setTitle(name);// gds.getMateria()
 			// Date data = new Date();
 			if (data != null) {
 				EventoId eventoId = new EventoId();
@@ -193,7 +201,6 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			// nuova_attivitaStudio.setEvent_location(edificio);
 			nuova_attivitaStudio.setPersonalDescription(description.getText()
 					.toString());
-
 			nuova_attivitaStudio.setType(getResources().getString(
 					R.string.attivitadistudio_string));
 

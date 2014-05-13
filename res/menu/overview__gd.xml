@@ -3,8 +3,8 @@
     <item
         android:id="@+id/aggiungi_impegno"
         android:icon="@drawable/ic_action_add"
-        android:showAsAction="ifRoom"
-        android:title=""/>
+        android:showAsAction="collapseActionView"
+        android:title="Aggiungi impegno"/>
 
     <item
         android:id="@+id/action_abbandona_gruppo"
