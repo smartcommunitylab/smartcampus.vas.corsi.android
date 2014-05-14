@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 	Evento contextualAttivitaStudio;
+	GruppoDiStudio contextualGDS; 
 	private ProtocolCarrier mProtocolCarrier;
 
 
@@ -64,8 +66,12 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		Bundle myextras = getIntent().getExtras();
 		contextualAttivitaStudio = (Evento) myextras
 				.getSerializable(Constants.CONTEXTUAL_ATT);
-		GruppoDiStudio contextualGDS = (GruppoDiStudio) myextras
+		contextualGDS = (GruppoDiStudio) myextras
 				.getSerializable(Constants.CONTESTUAL_GDS);
+		
+		
+		
+		
 		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle(contextualAttivitaStudio.getTitle());
@@ -80,8 +86,10 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		tv_oggetto.setText(contextualGDS.getMateria());//contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		Date data = contextualAttivitaStudio.getEventoId().getDate();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		tv_data.setText(format.format(data));
+		java.sql.Time time = contextualAttivitaStudio.getEventoId().getStart();
+		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		tv_data.setText(formatDate.format(data)+" "+time.toString());
+		
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
 		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
@@ -124,6 +132,8 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 						ModifiyAttivitaStudio.class);
 				intent1.putExtra(Constants.IMPEGNO_MOD,
 						contextualAttivitaStudio);
+				intent1.putExtra(Constants.CONTESTUAL_GDS,
+						contextualGDS);
 				startActivity(intent1);
 			}
 			return super.onOptionsItemSelected(item);
