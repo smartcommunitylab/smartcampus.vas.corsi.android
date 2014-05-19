@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -39,8 +40,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	private ArrayList<GruppoDiStudio> user_gds_list = new ArrayList<GruppoDiStudio>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
-
-
 
 	@Override
 	protected void onResume() {
@@ -75,6 +74,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		ft.addToBackStack(null);
 		ft.commit();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -178,32 +178,40 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected List<GruppoDiStudio> doInBackground(Void... params) {
-			//user_gds_list.clear();
+			// user_gds_list.clear();
 			List<GruppoDiStudio> responselist = getMineGDS();
-//			if (responselist != null) {
-//				for (GruppoDiStudio gds : responselist) {
-//					user_gds_list.add(gds);
-//				}
-//			}
-			return responselist;//user_gds_list;
+			// if (responselist != null) {
+			// for (GruppoDiStudio gds : responselist) {
+			// user_gds_list.add(gds);
+			// }
+			// }
+			return responselist;// user_gds_list;
 		}
 
 		@Override
 		protected void onPostExecute(List<GruppoDiStudio> result) {
 			super.onPostExecute(result);
-			user_gds_list.clear();
-			for (GruppoDiStudio gds : result) {
-				user_gds_list.add(gds);
-			}
 			pd.dismiss();
-			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
-			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
-			if (user_gds_list.isEmpty() || user_gds_list == null) {
-				tv.setText(getResources().getString(R.string.no_gds));
+			if (result == null) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.dialog_error),
+						Toast.LENGTH_SHORT).show();
+				onBackPressed();
 			} else {
-				tv.setVisibility(View.GONE);
+				user_gds_list.clear();
+				for (GruppoDiStudio gds : result) {
+					user_gds_list.add(gds);
+				}
+				// se la user_gds_list è vuota proponiamo all'utente di fare
+				// qlcs..
+				TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
+				if (user_gds_list.isEmpty() || user_gds_list == null) {
+					tv.setText(getResources().getString(R.string.no_gds));
+				} else {
+					tv.setVisibility(View.GONE);
+				}
+				supportInvalidateOptionsMenu();
 			}
-			supportInvalidateOptionsMenu();
 		}
 	}
 }

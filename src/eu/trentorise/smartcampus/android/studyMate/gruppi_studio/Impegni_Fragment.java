@@ -42,11 +42,12 @@ public class Impegni_Fragment extends SherlockFragment {
 	GruppoDiStudio gds;
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
-
+	private View view;
+	private ListView impegni_listview;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.listaimpegni_fragment, container,
+		view = inflater.inflate(R.layout.listaimpegni_fragment, container,
 				false);
 		return view;
 	}
@@ -54,15 +55,16 @@ public class Impegni_Fragment extends SherlockFragment {
 
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		impegni_listview = (ListView) view
+				.findViewById(R.id.lista_impegni);
 		setHasOptionsMenu(true);	
 		new AsyncTimpegniLoader(getActivity()).execute();		
 		gds = (GruppoDiStudio) getArguments().getSerializable(Constants.GDS);
-		
-		
 	}
-	
+
 	
 	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
@@ -127,8 +129,7 @@ public class Impegni_Fragment extends SherlockFragment {
 			
 			lista_impegni = contextualListaImpegni;
 			// gestione listaimpegni
-			ListView impegni_listview = (ListView) getSherlockActivity()
-					.findViewById(R.id.lista_impegni);
+			
 			EventItem[] listEvItem = new EventItem[lista_impegni.size()];
 			int i = 0;
 			for (Evento ev : lista_impegni) {

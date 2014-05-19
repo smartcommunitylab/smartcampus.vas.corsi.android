@@ -22,17 +22,11 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 public class ViewGruppiList_Fragment extends SherlockFragment {
 
 	private ArrayList<GruppoDiStudio> user_gds_list;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
-	}
-
+private View view;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.list_gruppi_studio_4fragment,
+		view = inflater.inflate(R.layout.list_gruppi_studio_4fragment,
 				container, false);
 		return view;
 	}
@@ -41,10 +35,11 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ListView listview = (ListView) getActivity().findViewById(
+		user_gds_list = ((Lista_GDS_activity) getActivity()).getUser_gds_list();
+		ListView listview = (ListView) view.findViewById(
 				R.id.listview_gruppi_di_studio);
 		if (user_gds_list != null) {
-			TextView tv_errore = (TextView) getActivity().findViewById(
+			TextView tv_errore = (TextView) view.findViewById(
 					R.id.stringa_errore_caricamento_lista);
 			tv_errore.setVisibility(View.GONE);
 			Adapter_gds_to_list adapter = new Adapter_gds_to_list(
@@ -63,7 +58,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 			});
 
 		} else {
-			TextView tv_errore = (TextView) getActivity().findViewById(
+			TextView tv_errore = (TextView) view.findViewById(
 					R.id.stringa_errore_caricamento_lista);
 			tv_errore.setVisibility(View.VISIBLE);
 		}
