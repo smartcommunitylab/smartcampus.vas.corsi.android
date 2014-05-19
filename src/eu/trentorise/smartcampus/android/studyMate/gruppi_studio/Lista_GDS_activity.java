@@ -178,19 +178,23 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected List<GruppoDiStudio> doInBackground(Void... params) {
-			user_gds_list.clear();
+			//user_gds_list.clear();
 			List<GruppoDiStudio> responselist = getMineGDS();
-			if (responselist != null) {
-				for (GruppoDiStudio gds : responselist) {
-					user_gds_list.add(gds);
-				}
-			}
-			return user_gds_list;
+//			if (responselist != null) {
+//				for (GruppoDiStudio gds : responselist) {
+//					user_gds_list.add(gds);
+//				}
+//			}
+			return responselist;//user_gds_list;
 		}
 
 		@Override
 		protected void onPostExecute(List<GruppoDiStudio> result) {
 			super.onPostExecute(result);
+			user_gds_list.clear();
+			for (GruppoDiStudio gds : result) {
+				user_gds_list.add(gds);
+			}
 			pd.dismiss();
 			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);

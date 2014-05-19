@@ -37,6 +37,7 @@ public class ViewGruppiList_Fragment extends SherlockFragment {
 		return view;
 	}
 
+	
 	@Override
 	public void onStart() {
 		super.onStart();
