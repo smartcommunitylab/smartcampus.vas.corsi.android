@@ -6,13 +6,11 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -168,6 +166,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	private class AsyncTabbandonaAttivitaStudio extends
 			AsyncTask<Evento, Void, Void> {
 
+		@SuppressWarnings("unused")
 		Context taskcontext;
 		
 		Evento toabandonAS;

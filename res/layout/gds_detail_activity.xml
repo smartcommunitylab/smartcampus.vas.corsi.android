@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="Materia"
+                android:text="@string/gds_materia"
                 android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>

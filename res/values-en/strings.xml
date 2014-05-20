@@ -237,6 +237,13 @@
     <string name="sure_group_stud">Registration confirmation</string>
     <string name="no_group_name">Inserist a valid name</string>
     <string name="no_att_name">Inserist a valid name</string>
+    <string name="gds_materia">Subject:</string>
+	<string name="gds_name_of">Group\'s name:</string>
+	<string name="gds_result">Results:</string>
+	<string name="gds_mod_impegno">Modify activity</string>
+	<string name="gds_del_impegno">Delete activity</string>
+	<string name="gds_add_impegno">Add activity</string>
+	<string name="gds_abb_group">Leave group</string>
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 

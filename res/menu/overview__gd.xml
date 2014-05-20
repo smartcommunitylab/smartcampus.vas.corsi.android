@@ -4,12 +4,12 @@
         android:id="@+id/aggiungi_impegno"
         android:icon="@drawable/ic_action_add"
         android:showAsAction="collapseActionView"
-        android:title="Aggiungi impegno"/>
+        android:title="@string/gds_add_impegno"/>
 
     <item
         android:id="@+id/action_abbandona_gruppo"
         android:icon="@drawable/ic_remove"
         android:showAsAction="collapseActionView"
-        android:title="Abbandona il gruppo"/>
+        android:title="@string/gds_abb_group"/>
 
 </menu>

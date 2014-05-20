@@ -18,7 +18,7 @@
             android:id="@+id/TextView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Materia:" />
+            android:text="@string/gds_materia" />
 
         <Spinner
             android:id="@+id/spinner_materia"
@@ -38,7 +38,7 @@
             android:id="@+id/textview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome del gruppo:" />
+            android:text="@string/gds_name_of" />
 
         <AutoCompleteTextView
             android:id="@+id/scegli_nome_gruppo"
