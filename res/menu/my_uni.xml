@@ -1,6 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/preference"
+        android:showAsAction="always"
+        android:title="@string/menu_title_preference"
+        android:icon="@drawable/ic_star"/>
+    <item
         android:id="@+id/menu_overflow"
         android:icon="@drawable/abs__ic_menu_moreoverflow_normal_holo_dark"
         android:orderInCategory="11111"
@@ -10,10 +15,7 @@
                 android:id="@+id/show_tutorial"
                 android:showAsAction="never"
                 android:title="@string/menu_title_tutorial"/>
-            <item
-                android:id="@+id/preference"
-                android:title="@string/menu_title_preference"
-                android:showAsAction="always"/>
         </menu>
     </item>
+
 </menu>
