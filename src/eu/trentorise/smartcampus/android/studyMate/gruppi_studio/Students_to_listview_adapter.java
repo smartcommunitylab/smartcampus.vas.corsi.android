@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -10,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
-import it.smartcampuslab.studymate.R;
 
 public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 
@@ -45,8 +46,10 @@ public class Students_to_listview_adapter extends ArrayAdapter<Studente> {
 		// foto_studente.setImageDrawable(currentStudent.getFoto_studente());
 		nomeEcognome_studente.setText(currentStudent.getNome() + " "
 				+ currentStudent.getCognome());
-		info_studente.setText(currentStudent.getAnno_corso() + "° anno presso "
-		/* + currentStudent.getDipartimento().getNome() */);
+
+		info_studente.setText(currentStudent.getAnno_corso() + "° "
+				+ context.getResources().getString(R.string.string_year_at)
+				+ " " + entries.get(position).getCds());
 
 		return student_view;
 	}

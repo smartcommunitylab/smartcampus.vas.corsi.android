@@ -1,9 +1,10 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
@@ -27,7 +31,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class CoursesHandlerLite extends
 		AsyncTask<Void, Void, List<AttivitaDidattica>> {
@@ -41,13 +44,14 @@ public class CoursesHandlerLite extends
 	public static ArrayList<AttivitaDidattica> coursesFiltered;
 	ListView listView;
 	TextView tvTitleNotices;
-	Activity currentAct;
+	SherlockFragmentActivity currentAct;
 	private TextView labelDepartment;
 	private TextView labelCourseDegree;
 
 	public CoursesHandlerLite(Context applicationContext,
 			Dipartimento department, CorsoLaurea degree, String course,
-			ListView listView, TextView tvTitleNotices, Activity currentAct) {
+			ListView listView, TextView tvTitleNotices,
+			SherlockFragmentActivity currentAct) {
 		this.context = applicationContext;
 		this.department = department;
 		this.degree = degree;
@@ -330,6 +334,42 @@ public class CoursesHandlerLite extends
 			}
 
 		});
+
+		// listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+		//
+		// @Override
+		// public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		// // TODO Auto-generated method stub
+		// return false;
+		// }
+		//
+		// @Override
+		// public void onDestroyActionMode(ActionMode mode) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		// // TODO Auto-generated method stub
+		// MenuInflater inflater = currentAct.getSupportMenuInflater();
+		// inflater.inflate(currentAct.getResources().get, menu);
+		// return true;
+		// }
+		//
+		// @Override
+		// public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		// // TODO Auto-generated method stub
+		// return false;
+		// }
+		//
+		// @Override
+		// public void onItemCheckedStateChanged(ActionMode mode, int position,
+		// long id, boolean checked) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 
 	}
 

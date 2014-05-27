@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.notices;
 
+import it.smartcampuslab.studymate.R;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -21,7 +23,6 @@ import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
-import it.smartcampuslab.studymate.R;
 
 public class NoticesActivity extends SherlockFragmentActivity {
 
@@ -30,7 +31,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	private SherlockFragmentActivity activity;
 	public static ProgressDialog pd;
 	private long fromDate;
-	private static final long TIMEFROM = 604800000 * 2;
+	private static final long TIMEFROM = 604800000 * 10;
 	private String[] source;
 	private Spinner spinner;
 	private TextView noNot;
@@ -44,7 +45,6 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		ab.setDisplayHomeAsUpEnabled(true);
 		noNot = (TextView) findViewById(R.id.textViewDescNotices);
 		source = getResources().getStringArray(R.array.Source);
-		;
 		spinner = (Spinner) findViewById(R.id.spinnerNotifiche);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				NoticesActivity.this, android.R.layout.simple_list_item_1,

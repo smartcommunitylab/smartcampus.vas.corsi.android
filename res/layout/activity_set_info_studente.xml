@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_home"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewDatetimeRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="@string/search_label_department" />
+
+    <Spinner
+        android:id="@+id/spinnerDip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/drop_down_spinner_departments"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:id="@+id/textViewUserRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/adpt_activity_vertical_margin"
+        android:text="@string/search_label_courseDegree" />
+
+    <Spinner
+        android:id="@+id/spinnerCds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/drop_down_spinner_courses_all"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:clickable="false"
+        android:spinnerMode="dialog" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/smartn_theme_color"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/salva"
+            android:textColor="@color/white_smartn_theme" />
+
+    </RelativeLayout>
+
+</LinearLayout>

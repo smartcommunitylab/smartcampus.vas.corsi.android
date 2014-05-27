@@ -22,7 +22,7 @@
             android:id="@+id/data_attivitastudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Materia:" />
+            android:text="@string/gds_materia" />
 
         <Spinner
             android:id="@+id/spinner_materie"
@@ -34,13 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="45dp" >
+        android:paddingTop="10dp" >
 
         <TextView
             android:id="@+id/dataora_attivitastudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome del gruppo:" />
+            android:text="@string/gds_name_of" />
 
         <Spinner
             android:id="@+id/spinner_nomi_gruppi"

@@ -11,12 +11,16 @@
             <item
                 android:id="@+id/menu_add_event_4_course"
                 android:showAsAction="ifRoom|withText"
-                android:title="Aggiungi evento"/>
+                android:title="@string/add_event"/>
                <!--  android:icon="@drawable/new_event" -->
             <item
                 android:id="@+id/menu_unfollow"
                 android:showAsAction="always"
                 android:title="@string/menu_courses_unfollow"/>
+            <item
+                android:id="@+id/menu_home_course"
+                android:showAsAction="always"
+                android:title="@string/menu_courses_goto_home"/>
         </menu>
     </item>
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="@color/smartn_theme_color"
         android:textSize="@dimen/textsize_big"
         android:textStyle="italic" />

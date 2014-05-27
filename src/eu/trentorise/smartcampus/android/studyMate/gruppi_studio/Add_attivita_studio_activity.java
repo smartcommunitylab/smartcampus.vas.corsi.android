@@ -1,12 +1,14 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -23,19 +25,20 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.MyDate;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -43,83 +46,95 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
-import it.smartcampuslab.studymate.R;
 
 public class Add_attivita_studio_activity extends FragmentActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
-	public AttivitaDiStudio nuova_attivitaStudio = new AttivitaDiStudio();
+	public Evento nuova_attivitaStudio = new Evento();
 	GruppoDiStudio gds;
+	private EditText etLocation;
+	private EditText mPickDate;
+	private EditText mPickTime;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+	private int hour;
+	private int minute;
+	Spinner coursesSpinner;
+	private EventoId eId;
+	private Date date;
+	private EditText description, editTextTitleGDS;
+	@SuppressWarnings("unused")
+	private EditText eventlocation;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_attivita_studio_activity);
 
+		editTextTitleGDS = (EditText) findViewById(R.id.editTextTitleGDS);
 		Bundle myextras = getIntent().getExtras();
-		gds = (GruppoDiStudio) myextras.getSerializable("gds");
-
+		gds = (GruppoDiStudio) myextras.getSerializable(Constants.GDS);
 		ActionBar actionbar = getActionBar();
 
-		actionbar.setTitle("Nuova attività di studio");
+		actionbar.setTitle(R.string.new_att_stud);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
+		// evento = new Evento();
+		eId = new EventoId();
+		date = new Date();
+
 		// retrieving actual data and time
 		final Calendar c = Calendar.getInstance();
-		final int mYear = c.get(Calendar.YEAR);
-		final int mMonth = c.get(Calendar.MONTH);
-		final int mDay = c.get(Calendar.DAY_OF_MONTH);
-		final int mMinute = c.get(Calendar.MINUTE);
-		final int mHour = c.get(Calendar.HOUR_OF_DAY);
 
-		ArrayList<String> edifici_values = new ArrayList<String>();
-		edifici_values.add("Povo, polo Ferraris");
-		edifici_values.add("Povo, polo 0");
-		edifici_values.add("Povo, nuovo polo");
-
-		Spinner spinner_edificio = (Spinner) findViewById(R.id.spinner_edificio);
-		ArrayAdapter<String> adapter_spinner_ed = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, edifici_values);
-		adapter_spinner_ed
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_edificio.setAdapter(adapter_spinner_ed);
-
-		ArrayList<String> room_values = new ArrayList<String>();
-		for (int i = 101; i < 115; i++) {
-			room_values.add("a" + i);
-		}
-		for (int i = 201; i < 215; i++) {
-			room_values.add("a" + i);
-		}
-
-		Spinner spinner_aula = (Spinner) findViewById(R.id.spinner_aula);
-		ArrayAdapter<String> adapter_spinner_aule = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, room_values);
-		adapter_spinner_aule
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_aula.setAdapter(adapter_spinner_aule);
-
+		etLocation = (EditText) findViewById(R.id.editText_eventlocation);
 		// retrieving & initializing some button
-		Button btn_data = (Button) findViewById(R.id.data_button_gds);
-		Button btn_time = (Button) findViewById(R.id.ora_button_gds);
+		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
+		mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
+		mPickDate.setOnClickListener(new OnClickListener() {
 
-		if (mMinute < 10) {
-			if (mHour < 10) {// minute and hour<10
-				btn_time.setText("0" + mHour + ":0" + mMinute);
-			} else
-				// onlyminute<10
-				btn_time.setText(mHour + ":0" + mMinute);
-		} else {
-			if (mHour < 10) {// only hour<10
-				btn_time.setText("0" + mHour + ":" + mMinute);
-			} else
-				// minute and hour>10
-				btn_time.setText(mHour + ":" + mMinute);
-		}
-		MyDate date = new MyDate(mYear, mMonth, mDay);
-		btn_data.setText(date.toString());
+			@Override
+			public void onClick(View v) {
+				showDatePickerDialog();
+			}
+		});
+
+		mPickTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showTimePickerDialog();
+			}
+		});
+
+		mYear = c.get(Calendar.YEAR);
+		mMonth = c.get(Calendar.MONTH);
+		mDay = c.get(Calendar.DAY_OF_MONTH);
+		// get the current Time
+		hour = c.get(Calendar.HOUR_OF_DAY);
+		minute = c.get(Calendar.MINUTE);
+		// display the current date
+		updateDisplay();
+
+		int customYear = mYear - 1900;
+		date.setYear(customYear);
+		date.setMonth(mMonth);
+		date.setDate(mDay);
+		eId.setStart(new Time(hour, minute, 0));
+		eId.setStop(new Time(hour, minute, 0));
+		description = (EditText) findViewById(R.id.editTextDescription);
+		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
+		eventlocation = (EditText) findViewById(R.id.editText_eventlocation);
+		List<String> course = new ArrayList<String>();
+		course.add(new String(gds.getMateria()));
+		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
+				Add_attivita_studio_activity.this,
+				R.layout.list_studymate_row_list_simple, course);
+		coursesSpinner.setAdapter(adapterCourse);
+		coursesSpinner.setClickable(false);
 
 	}
 
@@ -135,90 +150,71 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
-			 * crea e aggiugni agli impegni l'attivit� di studio appena creata
+			 * crea e aggiugni agli impegni l'attività di studio appena creata
 			 */
-			String oggetto = ((TextView) this
-					.findViewById(R.id.editText_oggetto)).getText().toString();
 
-			String stringdata = ((Button) this
-					.findViewById(R.id.data_button_gds)).getText().toString();
+			description = (EditText) findViewById(R.id.editTextDescription);
+			coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
 
-			String ora = ((Button) this.findViewById(R.id.ora_button_gds))
-					.getText().toString();
+			mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
+			mPickTime = (EditText) findViewById(R.id.myTimePickerButton);
+
+			String stringdata = mPickDate.getText().toString();
+			String ora = mPickTime.getText().toString();
 
 			stringdata = stringdata + " " + ora;
 			Date data = null;
 
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			try {
 				data = format.parse(stringdata);
-				System.out.println(data);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			String descrizione = ((TextView) this
-					.findViewById(R.id.editText_descrizione_impegno)).getText()
-					.toString();
-
-			String room = ((Spinner) Add_attivita_studio_activity.this
-					.findViewById(R.id.spinner_aula)).getSelectedItem()
-					.toString();
-
-			String edificio = ((Spinner) Add_attivita_studio_activity.this
-					.findViewById(R.id.spinner_edificio)).getSelectedItem()
-					.toString();
-
-			// boolean prenotazione_aule = ((CheckBox) this
-			// .findViewById(R.id.CheckBox1_prenotazione_aule))
-			// .isChecked();
-			// boolean mensa = ((CheckBox)
-			// this.findViewById(R.id.CheckBox2_mensa))
-			// .isChecked();
-			// boolean tutoring = ((CheckBox) this
-			// .findViewById(R.id.CheckBox3_tutoring)).isChecked();
-			// boolean biblioteca = ((CheckBox) this
-			// .findViewById(R.id.CheckBox4_biblioteca)).isChecked();
-
-			nuova_attivitaStudio.setTitle(oggetto);
+			String location = etLocation.getText().toString();
+			String name = editTextTitleGDS.getText().toString();
+			if (name.equals("")) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.no_att_name),
+						Toast.LENGTH_SHORT).show();
+				return false;
+			}
+			nuova_attivitaStudio.setTitle(name);// gds.getMateria()
 			// Date data = new Date();
 			if (data != null) {
 				EventoId eventoId = new EventoId();
-				eventoId.setDate(data);
+				long dateR = 10000 * (date.getTime() / 10000);
+				eventoId.setDate(new Date(dateR));
 				Time time = new Time(data.getTime());
 				eventoId.setStart(time);
+				eventoId.setIdEventAd(-2);
 				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
 				nuova_attivitaStudio.setEventoId(eventoId);
 			}
 
 			// nuova_attivitaStudio.setStart(start);
-			nuova_attivitaStudio.setRoom(edificio + " - " + room);
+			nuova_attivitaStudio.setRoom(location);
 			// nuova_attivitaStudio.setEvent_location(edificio);
-			nuova_attivitaStudio.setTopic(descrizione);
+			nuova_attivitaStudio.setPersonalDescription(description.getText()
+					.toString());
+			nuova_attivitaStudio.setType(getResources().getString(
+					R.string.attivitadistudio_string));
 
-			nuova_attivitaStudio.setGruppo(gds.getId());
-
-			// nuova_attivitaStudio.setPrenotazione_aule(prenotazione_aule);
-			// nuova_attivitaStudio.setMensa(mensa);
-			// nuova_attivitaStudio.setTutoring(tutoring);
-			// nuova_attivitaStudio.setBiblioteca(biblioteca);
-
-			// MyApplication.getContextualCollection().add(nuova_attivitaStudio);
+			nuova_attivitaStudio.setGruppo(gds);
 
 			AddAttivitaHandler addAttivitaAsyncTask = new AddAttivitaHandler(
 					Add_attivita_studio_activity.this);
 			addAttivitaAsyncTask.execute();
 
-			return super.onOptionsItemSelected(item);
+			return false;
 		}
 		case android.R.id.home: {
 			Add_attivita_studio_activity.this.finish();
-			return super.onOptionsItemSelected(item);
+			return false;
 		}
 
 		default:
@@ -236,42 +232,35 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		newFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
-	@SuppressLint("ValidFragment")
-	final class DatePickerFragment extends DialogFragment implements
+	public class DatePickerFragment extends DialogFragment implements
 			DatePickerDialog.OnDateSetListener {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-			String phrase_date = (String) ((Button) Add_attivita_studio_activity.this
-					.findViewById(R.id.data_button_gds)).getText();
-
-			// MyDate data = MyDate.parseFromString(phrase_date);
-			// int mDay = data.getDay();
-			// int mMonth = data.getMonth();
-			// int mYear = data.getYear();
-
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
-			int mYear = c.get(Calendar.YEAR);
-			int mMonth = c.get(Calendar.MONTH);
-			int mDay = c.get(Calendar.DAY_OF_MONTH);
+			mYear = c.get(Calendar.YEAR);
+			mMonth = c.get(Calendar.MONTH);
+			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(Add_attivita_studio_activity.this,
+					this, mYear, mMonth, mDay);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onDateSet(DatePicker view, int year, int month, int day) {
-			Button b = (Button) Add_attivita_studio_activity.this
-					.findViewById(R.id.data_button_gds);
-			// MyDate date = new MyDate(year, month, day);
-			b.setText("" + day + "/" + month + "/" + year);
-			// b.refreshDrawableState();
-
+			// Do something with the date chosen by the user;
+			((EditText) findViewById(R.id.myDatePickerButton))
+			// Month is 0 based so add 1
+					.setText(day + "-" + (month + 1) + "-" + year);
+			date.setYear(year - 1900);
+			date.setMonth(month);
+			date.setDate(day);
 		}
+
 	}
 
-	@SuppressLint("ValidFragment")
-	final class TimePickerFragment extends DialogFragment implements
+	public class TimePickerFragment extends DialogFragment implements
 			TimePickerDialog.OnTimeSetListener {
 
 		@Override
@@ -282,27 +271,25 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			int minute = c.get(Calendar.MINUTE);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getActivity()));
+			return new TimePickerDialog(Add_attivita_studio_activity.this,
+					this, hour, minute,
+					DateFormat
+							.is24HourFormat(Add_attivita_studio_activity.this));
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// Do something with the time chosen by the user
-			Button b = (Button) Add_attivita_studio_activity.this
-					.findViewById(R.id.ora_button_gds);
 			if (minute < 10) {
-				if (hourOfDay < 10) {
-					b.setText("0" + hourOfDay + ":0" + minute);
-				} else
-					b.setText(hourOfDay + ":0" + minute);
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":0" + minute);
 			} else {
-				if (hourOfDay < 10) {
-					b.setText("0" + hourOfDay + ":" + minute);
-				} else
-					b.setText(hourOfDay + ":" + minute);
-			}
-			// b.refreshDrawableState();
+				((EditText) findViewById(R.id.myTimePickerButton))
+						.setText(hourOfDay + ":" + minute);
 
+			}
+			eId.setStart(new Time(hourOfDay, minute, 0));
+			eId.setStop(new Time(hourOfDay, minute, 0));
 		}
 	}
 
@@ -312,30 +299,34 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		public ProgressDialog pd;
 
 		public AddAttivitaHandler(Context taskcontext) {
-			super();
+
 			this.taskcontext = taskcontext;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Salvataggio del nuovo impegno", "Caricamento...");
+					getResources().getString(R.string.dialog_saving_feedback),
+					getResources().getString(R.string.dialog_loading));
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 
 			pd.dismiss();
+			Toast.makeText(
+					taskcontext,
+					taskcontext.getResources().getString(
+							R.string.toast_event_added), Toast.LENGTH_SHORT)
+					.show();
 			// Add_attivita_studio_activity.this.finish();
 			Intent intent = new Intent(Add_attivita_studio_activity.this,
 					Overview_GDS.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("contextualGDS", gds);
+			intent.putExtra(Constants.CONTESTUAL_GDS, gds);
 			startActivity(intent);
 		}
 
@@ -376,10 +367,8 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -388,12 +377,36 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			addAttivitaonweb();
 
 			return null;
 		}
 
+	}
+
+	public void showDatePickerDialog() {
+		DialogFragment newFragment = new DatePickerFragment();
+		newFragment.show(getSupportFragmentManager(), "datePicker");
+	}
+
+	public void showTimePickerDialog() {
+		DialogFragment newFragment = new TimePickerFragment();
+		newFragment.show(getSupportFragmentManager(), "timePicker");
+	}
+
+	public void updateDisplay() {
+		this.mPickDate.setText(new StringBuilder()
+				// Month is 0 based so add 1
+				.append(mDay).append("-").append(mMonth + 1).append("-")
+				.append(mYear).append(" "));
+		if (minute < 10) {
+			this.mPickTime.setText(new StringBuilder().append(hour)
+					.append(":0").append(minute));
+		} else {
+			this.mPickTime.setText(new StringBuilder().append(hour).append(":")
+					.append(minute));
+
+		}
 	}
 
 }

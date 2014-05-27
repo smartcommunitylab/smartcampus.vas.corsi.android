@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import it.smartcampuslab.studymate.R;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +47,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class AddEventFragment extends SherlockFragment {
 	private int mYear;
@@ -77,6 +78,7 @@ public class AddEventFragment extends SherlockFragment {
 		return fview;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -296,7 +298,7 @@ public class AddEventFragment extends SherlockFragment {
 		protected void onPostExecute(List<CorsoCarriera> result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-			if ((result == null)||(result.size()==0)) {
+			if ((result == null) || (result.size() == 0)) {
 				Toast.makeText(getActivity(), R.string.invalid_career,
 						Toast.LENGTH_SHORT).show();
 				getSherlockActivity().finish();

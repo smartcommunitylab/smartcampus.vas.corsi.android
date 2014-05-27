@@ -1,17 +1,19 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -21,8 +23,11 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -31,16 +36,17 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
-	AttivitaDiStudio contextualAttivitaStudio;
+	Evento contextualAttivitaStudio;
+	GruppoDiStudio contextualGDS; 
 	private ProtocolCarrier mProtocolCarrier;
 
+
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
+	protected void onResume() {
+		super.onResume();
 		setContentView(R.layout.show_impegno_gds);
 
 		// codice per sistemare l'actionoverflow
@@ -55,78 +61,43 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		} catch (Exception ex) {
 			// Ignore
 		}
-
-		// personalizzazioje actionabar
+		Bundle myextras = getIntent().getExtras();
+		contextualAttivitaStudio = (Evento) myextras
+				.getSerializable(Constants.CONTEXTUAL_ATT);
+		contextualGDS = (GruppoDiStudio) myextras
+				.getSerializable(Constants.CONTESTUAL_GDS);
+		
+		
+		
+		
+		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("Dettagli impegno");
+		actionbar.setTitle(contextualAttivitaStudio.getTitle());
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		/*
 		 * recupero contextualAttivitaStudio
 		 */
-		Bundle myextras = getIntent().getExtras();
-		contextualAttivitaStudio = (AttivitaDiStudio) myextras
-				.getSerializable("contextualAttivitaStudio");
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
-		tv_oggetto.setText(contextualAttivitaStudio.getTitle());
+		tv_oggetto.setText(contextualGDS.getMateria());//contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		Date data = contextualAttivitaStudio.getEventoId().getDate();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		tv_data.setText(format.format(data));
+		java.sql.Time time = contextualAttivitaStudio.getEventoId().getStart();
+		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		tv_data.setText(formatDate.format(data)+" "+time.toString());
+		
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
 		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
-		tv_descrizione.setText(contextualAttivitaStudio.getTopic());
-
-		ListView listview_allegati = (ListView) findViewById(R.id.lista_allegati_showgds);
-
-		// ArrayList<Allegato> contextualAllegatis = null;
-		/*
-		 * contextualAttivitaStudio .getAllegati();
-		 */
-		// if (contextualAllegatis == null || contextualAllegatis.isEmpty()) {
-		// Toast.makeText(MyApplication.getAppContext(),
-		// "non ci sono allegati ne mostro uno per prova",
-		// Toast.LENGTH_SHORT).show();
-		// contextualAllegatis = new ArrayList<Allegato>();
-		// Allegato fake = new Allegato(null, "nome allegato finto.pdf");
-		// contextualAllegatis.add(fake);
-		// contextualAllegatis.add(fake);
-		// }
-		// Allegati_to_list_arrayadapter adapter = new
-		// Allegati_to_list_arrayadapter(
-		// ShowImpegnoGDS.this, R.id.lista_allegati_showgds,
-		// contextualAllegatis);
-		// listview_allegati.setAdapter(adapter);
-		/*
-		 * manca altra roba
-		 */
-		// CheckBox c1 = (CheckBox)
-		// findViewById(R.id.CheckBox1_prenotazione_aule);
-		// CheckBox c2 = (CheckBox) findViewById(R.id.CheckBox2_mensa);
-		// CheckBox c3 = (CheckBox) findViewById(R.id.CheckBox3_tutoring);
-		// CheckBox c4 = (CheckBox) findViewById(R.id.CheckBox4_biblioteca);
-
-		// if (contextualAttivitaStudio.isPrenotazione_aule()) {
-		// c1.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isMensa()) {
-		// c2.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isTutoring()) {
-		// c3.setChecked(true);
-		// }
-		// if (contextualAttivitaStudio.isBiblioteca()) {
-		// c4.setChecked(true);
-		// }
-
-		/*
-		 * e così via
-		 */
+		tv_descrizione.setText(contextualAttivitaStudio
+				.getPersonalDescription());
 	}
-
+	
+	
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -141,16 +112,50 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			ShowImpegnoGDS.this.finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.action_modifica_impegno:
-			Intent intent1 = new Intent(ShowImpegnoGDS.this,
-					ModifiyAttivitaStudio.class);
-			intent1.putExtra("impegno_da_modificare", contextualAttivitaStudio);
-			startActivity(intent1);
+			SharedPreferences sharedPreferences = ShowImpegnoGDS.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String studenteStr = sharedPreferences.getString(
+					"studenteSessioneJSON", null);
+			Studente studLogged = Utils.convertJSONToObject(studenteStr,
+					Studente.class);
+			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLogged
+					.getId()) {
+				Toast.makeText(
+						ShowImpegnoGDS.this,
+						getResources().getString(
+								R.string.event_modify_not_allowed),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				Intent intent1 = new Intent(ShowImpegnoGDS.this,
+						ModifiyAttivitaStudio.class);
+				intent1.putExtra(Constants.IMPEGNO_MOD,
+						contextualAttivitaStudio);
+				intent1.putExtra(Constants.CONTESTUAL_GDS,
+						contextualGDS);
+				startActivity(intent1);
+			}
 			return super.onOptionsItemSelected(item);
 
 		case R.id.action_elimina_impegno:
-			AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
-					ShowImpegnoGDS.this, contextualAttivitaStudio);
-			task.execute();
+
+			SharedPreferences sharedPreferencesDel = ShowImpegnoGDS.this
+					.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+			String studenteStrDel = sharedPreferencesDel.getString(
+					"studenteSessioneJSON", null);
+			Studente studLoggedDel = Utils.convertJSONToObject(studenteStrDel,
+					Studente.class);
+			if (contextualAttivitaStudio.getEventoId().getIdStudente() != studLoggedDel
+					.getId()) {
+				Toast.makeText(
+						ShowImpegnoGDS.this,
+						getResources().getString(
+								R.string.event_delete_not_allowed),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				AsyncTabbandonaAttivitaStudio task = new AsyncTabbandonaAttivitaStudio(
+						ShowImpegnoGDS.this, contextualAttivitaStudio);
+				task.execute();
+			}
 			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
@@ -159,14 +164,15 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 	}
 
 	private class AsyncTabbandonaAttivitaStudio extends
-			AsyncTask<AttivitaDiStudio, Void, Void> {
+			AsyncTask<Evento, Void, Void> {
 
+		@SuppressWarnings("unused")
 		Context taskcontext;
-		public ProgressDialog pd;
-		AttivitaDiStudio toabandonAS;
+		
+		Evento toabandonAS;
 
 		public AsyncTabbandonaAttivitaStudio(Context taskcontext,
-				AttivitaDiStudio toabandonAS) {
+				Evento toabandonAS) {
 			super();
 			this.taskcontext = taskcontext;
 			this.toabandonAS = toabandonAS;
@@ -174,14 +180,10 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Stai cancellando:  "
-					+ toabandonAS.getTopic(), "");
 		}
 
-		private boolean abandonAS(AttivitaDiStudio as_to_abandon) {
+		private boolean abandonAS(Evento as_to_abandon) {
 			mProtocolCarrier = new ProtocolCarrier(ShowImpegnoGDS.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -199,7 +201,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					String body = response.getBody();
+//					String body = response.getBody();
 					return true;
 
 				} else {
@@ -212,7 +214,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -220,18 +221,16 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		}
 
 		@Override
-		protected Void doInBackground(AttivitaDiStudio... params) {
-			// TODO Auto-generated method stub
+		protected Void doInBackground(Evento... params) {
 			abandonAS(this.toabandonAS);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			pd.dismiss();
-			ShowImpegnoGDS.this.finish();
+			onBackPressed();
+			//ShowImpegnoGDS.this.finish();
 			// Intent intent = new Intent(ShowImpegnoGDS.this,
 			// Overview_GDS.class);
 			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

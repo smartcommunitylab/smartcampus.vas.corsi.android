@@ -1,228 +1,142 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res/smartcampus.android.template.standalone"
     android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:orientation="vertical"
-    tools:context=".Add_attivita_studio_activity" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp" >
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-        <EditText
-            android:id="@+id/editText_oggetto"
+       <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Oggetto"
-            android:paddingTop="4dp" >
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingRight="20dp" >
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/data_button_gds"
+           <TextView
+                android:id="@+id/textViewTitleGDS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mybutton"
-                android:onClick="showDatePickerDialog"
-                android:padding="8dp"
-                android:text="Button" />
-        </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/addevent_title"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingLeft="20dp" >
+            <EditText
+                android:id="@+id/editTextTitleGDS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="" 
+                android:imeOptions="actionDone">
+                <requestFocus />
+            </EditText>
 
-            <Button
-                android:id="@+id/ora_button_gds"
+
+            <TextView
+                android:id="@+id/textViewCorso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mybutton"
-                android:onClick="showTimePickerDialog"
-                android:padding="3dp"
-                android:text="Button" />
-        </LinearLayout>
-    </LinearLayout>
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/add_event_corsi"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="20dp"
-        android:weightSum="2" >
+            <Spinner
+                android:id="@+id/spinnerCorsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/drop_down_spinner_courses_all"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin" />
 
-        <Spinner
-            android:id="@+id/spinner_edificio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Spinner
-            android:id="@+id/spinner_aula"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp" >
-
-        <EditText
-            android:id="@+id/editText_descrizione_impegno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="descrizione" />
-    </LinearLayout>
-
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
-
-                <ImageButton
-                    android:id="@+id/btn_subscribe_gds"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/mybutton"
-                    android:padding="3dp"
-                    android:src="@drawable/phl" />
-
-                <TextView
-                    android:id="@+id/tv_nome_gds_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="Allega un documento presente su PHL" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp" >
-
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/mybutton"
-                    android:padding="3dp"
-                    android:src="@drawable/filebrowser" />
-
-                <TextView
-                    android:id="@+id/tv_info_studente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="Carica un file dal tuo smartphone" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-    -->
-
-
-    <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin" >
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp" >
 
                 <TextView
-                    android:id="@+id/tv_filter_materia"
+                    android:id="@+id/textViewData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Servizi da monitorare" />
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:text="@string/choose_data"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <GridLayout
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/myDatePickerButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:columnCount="2"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:rowCount="2" >
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:onClick="showDatePickerDialog" />
 
-                    <CheckBox
-                        android:id="@+id/CheckBox1_prenotazione_aule"
-                        android:layout_gravity="left"
-                        android:text="Prenotazione aule"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:id="@+id/textViewOra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:text="@string/choose_time"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <CheckBox
-                        android:id="@+id/CheckBox2_mensa"
-                        android:layout_gravity="left"
-                        android:text="Mensa"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <CheckBox
-                        android:id="@+id/CheckBox3_tutoring"
-                        android:layout_gravity="left"
-                        android:text="Tutoring"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <CheckBox
-                        android:id="@+id/CheckBox4_biblioteca"
-                        android:layout_gravity="left"
-                        android:text="Biblioteca"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-                </GridLayout>
+                <EditText
+                    android:id="@+id/myTimePickerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:onClick="showTimePickerDialog" />
             </LinearLayout>
-    -->
+
+            <TextView
+                android:id="@+id/textViewLabelCercando"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/addevent_description"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+           <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="" 
+                android:imeOptions="actionDone">    
+            </EditText>
+
+            <TextView
+                android:id="@+id/TextViewLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/addevent_location"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editText_eventlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
+
+       </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

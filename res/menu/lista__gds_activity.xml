@@ -1,19 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_cambia_layout"
-        android:icon="@drawable/collections_view_as_grid"
-        android:showAsAction="ifRoom"
-        android:title="mostra in griglia"/>
-    <item
         android:id="@+id/action_iscriviti_nuovo_gruppo"
         android:icon="@drawable/ic_social_add_group"
         android:showAsAction="collapseActionView"
-        android:title="Iscriviti ad un gruppo"/>
+        android:title="@string/menu_subscribe_group"/>
     <item
         android:id="@+id/action_crea_gruppo"
         android:icon="@drawable/ic_action_add"
         android:showAsAction="collapseActionView"
-        android:title="Crea gruppo"/>
+        android:title="@string/menu_add_group"/>
 
 </menu>

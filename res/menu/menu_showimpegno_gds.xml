@@ -5,11 +5,11 @@
         android:id="@+id/action_modifica_impegno"
         android:icon="@drawable/ic_edit"
         android:showAsAction="collapseActionView"
-        android:title="Modifica impegno"/>
+        android:title="@string/gds_mod_impegno"/>
     <item
         android:id="@+id/action_elimina_impegno"
         android:icon="@drawable/ic_remove"
         android:showAsAction="collapseActionView"
-        android:title="Elimina impegno"/>
+        android:title="@string/gds_del_impegno"/>
 
 </menu>

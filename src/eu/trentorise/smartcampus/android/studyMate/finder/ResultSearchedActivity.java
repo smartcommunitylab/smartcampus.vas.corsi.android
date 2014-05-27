@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandlerLite;
-import it.smartcampuslab.studymate.R;
 
 public class ResultSearchedActivity extends SherlockFragmentActivity {
 

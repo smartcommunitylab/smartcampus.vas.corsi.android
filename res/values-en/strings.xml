@@ -17,7 +17,10 @@
 
 <resources>
 
+    <string name="menu_title_preference">Preferences</string>
+    <string name="salva">Save</string>
     <string name="internet_connection">An internet connection is required to use StudyMate</string>
+    <string name="search">Search</string>
     <string name="title_gicercagruppigenerale_activity">Search study groups</string>
     <string name="gruppi_studio_label">Study groups</string>
     <string name="app_uid_label">SmartCampus</string>
@@ -60,6 +63,7 @@
     <string name="title_activity_dati">Data</string>
     <string name="my_courses">Courses that you follow</string>
     <string name="title_activity_search_home">Search courses</string>
+    <string name="title_shared_studente">Student information</string>
     <string name="choose_data">Date:</string>
     <string name="choose_time">Time:</string>
     <string name="add_event_corsi">Course:</string>
@@ -123,15 +127,31 @@
     <string name="Friday">Friday</string>
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
+    <string name="January">January</string>
+    <string name="February">February</string>
+    <string name="March">March</string>
+    <string name="April">April</string>
+    <string name="May">May</string>
+    <string name="June">June</string>
+    <string name="July">July</string>
+    <string name="August">August</string>
+    <string name="September">September</string>
+    <string name="October">October</string>
+    <string name="November">November</string>
+    <string name="December">December</string>
+    <string name="of">of</string>
     <string name="header_course_career">Courses in career</string>
     <string name="header_course_interest">Courses of interest</string>
     <!-- Dialogs -->
-    <string name="dialog_coming_soon">Coming Soon...</string>
+    <string name="dialog_gds_associated_loading">Loading study groups associated</string>
+    <string name="dialog_coming_soon">Coming Soon</string>
     <string name="dialog_sync_data">Synchronizing personal data</string>
     <string name="dialog_loading">Loading...</string>
     <string name="dialog_error">Oops! There was an error...</string>
     <string name="dialog_courses_events">Courses that will display events</string>
     <string name="dialog_list_events">List of your events</string>
+    <string name="dialog_list_courses">List of the courses</string>
+    <string name="dialog_list_cds">List of the courses</string>
     <string name="dialog_not_events">There are no events coming soon</string>
     <string name="dialog_searching_courses">Searching courses</string>
     <string name="dialog_searching_list_departments">List of departments</string>
@@ -142,12 +162,23 @@
     <string name="dialog_error_redirect">Error! You can not reach the home of the course</string>
     <string name="dialog_error_delete">Error! You can not delete the course from the list</string>
     <string name="dialog_success_delete">Course deleted from the list</string>
-    
-        
+    <string name="invalid_career">You are not following any course</string>
     <string name="no_vote">You cannot evaluate any course</string>
-     <string name="invalid_career">You are not following any course</string>
+    <string name="dialog_shared_title_dip">Select your department </string>
+    <string name="dialog_shared_title_cds">Select your degree course</string>
+    <string name="dialog_shared_data_loading">Loading of the departments and degree courses</string>
+    <string name="dialog_saved_pref">Informations correctly saved</string>
+    <string name="no_events_now">No events available at the moment for this course</string>
+    <string name="attivitadistudio_string">Study\'s activity</string>
+    <string name="sure_group_stud">Subscription confirmation</string>
+
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
+    <string name="toast_gds_no_find_to_subscribe">There is no group in which you can subscribe</string>
+    <string name="toast_gds_no_gds_course">unfortunately there are not study groups for this study activities</string>
+    <string name="toast_gds_select_course">First you have to select a course</string>
+    <string name="toast_gds_no_courses_followed">You may not subscribe to any study group because there are not courses that you are following</string>
+
     <!-- add event -->
     <string name="addevent_title">Title</string>
     <string name="addevent_courses">Courses</string>
@@ -156,10 +187,15 @@
     <string name="addevent_description">Description</string>
     <string name="button_cancel">Cancel</string>
     <string name="searchby_all">All</string>
+    <string name="att_message">There were no fixed activity study. Use the menu at the top right to establish a new one.</string>
+    <string name="event_modify_not_allowed">Only the person who has created the event can edit it</string>
+    <string name="event_delete_not_allowed">Only the person who has created the event can delete it</string>
+    <string name="mod_att">Edit study activity.</string>
     <!-- feedback -->
     <string name="feedback_not_present">There are no comments...</string>
     <string name="feedback_number_presents">comments found</string>
     <string name="feedback_course_information">Course information</string>
+    <string name="feedback_number_presents_for_1">comment found</string>
     <string name="feedback_course_is_career">The course is from the study plan</string>
     <string name="feedback_courses_can_review">Courses that I can review</string>
     <!-- Rate -->
@@ -171,10 +207,44 @@
     <string name="notification_name">Wall notifications</string>
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
-    
+    <string name="menu_multi_courses_unfollow">Unfollow</string>
+    <string name="menu_multi_courses_follow">Follow</string>
+    <string name="menu_courses_goto_home">Home</string>
+    <string name="menu_courses_unfollow">Unfollow</string>
+    <!-- GDS -->
+    <string name="title_activity_show_modify_gdsdetails_activity">ShowModifyGDSDetails_activity</string>
+    <string name="title_activity_modifiy_attivita_studio">ModifiyAttivitaStudio</string>
+    <string name="attivitadistudio_string">Study activity</string>
+    <string name="addevent_location">Location</string>
+    <string name="string_year_at">Year at</string>
+    <string name="my_gds">My study groups</string>
+    <string name="menu_subscribe_group">Join a group</string>
+    <string name="menu_add_group">Create group</string>
+    <string name="iscr_group_stud">Subscription study group</string>
+    <string name="label_participants">Participants:</string>
+    <string name="sure_group_stud_message">Do you want to join the group</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="iscr_group_stud_dial">Group\'s subsicription</string>
+    <string name="loading_gds">Loading groups</string>
+    <string name="no_gds">Not yet a member of any study group! Use the menu at the top right to join a study group</string>
+    <string name="mod_att">Edit study\'s activity</string>
+    <string name="all_gds">"All"</string>
+    <string name="leave_gds">"Leaving"</string>
+    <string name="att_message">No commitments yet! Use the menu at the top right to establish a new commitment</string>
+    <string name="new_att_stud">New study activity</string>
+    <string name="new_group_stud">New group</string>
+    <string name="sure_group_stud">Registration confirmation</string>
+    <string name="no_group_name">Inserist a valid name</string>
+    <string name="no_att_name">Inserist a valid name</string>
+    <string name="gds_materia">Subject:</string>
+	<string name="gds_name_of">Group\'s name:</string>
+	<string name="gds_result">Results:</string>
+	<string name="gds_mod_impegno">Modify activity</string>
+	<string name="gds_del_impegno">Delete activity</string>
+	<string name="gds_add_impegno">Add activity</string>
+	<string name="gds_abb_group">Leave group</string>
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
-    
-    
-    
+
 </resources>

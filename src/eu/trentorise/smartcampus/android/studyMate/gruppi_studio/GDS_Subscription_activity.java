@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -9,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -33,7 +35,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class GDS_Subscription_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
@@ -44,7 +45,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		Bundle myextras = getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras
-				.getSerializable("gds_to_subscribe");
+				.getSerializable(Constants.GDS_SUBS);
 
 		// questo carica la materia nel gruppo
 		new GetRelatedCorsoAS(GDS_Subscription_activity.this, contextualGDS)
@@ -53,19 +54,17 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle("Iscrizione gruppo di studio");
+		actionbar.setTitle(R.string.iscr_group_stud);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
-		ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
+		// ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
 
-		// da fare quando si potrà col backend
-		// logo_gds.setImageDrawable(contextualGDS.getLogo());
 		nome_gds.setText(contextualGDS.getNome());
 		materia_gds.setText(contextualGDS.getMateria());
 
@@ -96,11 +95,13 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
 					GDS_Subscription_activity.this);
 			alertdialogbuilder
-					.setTitle("Conferma iscrizione")
+					.setTitle(
+							getResources().getString(R.string.sure_group_stud))
 					.setMessage(
-							"Vuoi iscriverti al gruppo \""
-									+ contextualGDS.getNome() + "\"?")
-					.setPositiveButton("Si",
+							getResources().getString(
+									R.string.sure_group_stud_message)
+									+ " \"" + contextualGDS.getNome() + "\"?")
+					.setPositiveButton(R.string.yes,
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -116,7 +117,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 								}
 							})
 
-					.setNegativeButton("No",
+					.setNegativeButton(R.string.no,
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -149,11 +150,12 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Iscrizione al gruppo "
-					+ gds_to_subscribe.getNome() + " in corso", "...");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.iscr_group_stud_dial)
+							+ gds_to_subscribe.getNome(), getResources()
+							.getString(R.string.dialog_loading));
 		}
 
 		void subscribetogds(GruppoDiStudio gds) {
@@ -168,14 +170,13 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			request.setBody(jsongds);
 
 			MessageResponse response;
-			String body = null;
 			try {
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					body = response.getBody();
+
 				}
 			} catch (ConnectionException e) {
 				e.printStackTrace();
@@ -184,7 +185,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return;
@@ -192,14 +192,12 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			subscribetogds(gds_to_subscribe);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
 			Intent intent = new Intent(GDS_Subscription_activity.this,
@@ -224,12 +222,11 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Caricamento gruppi di studio personali", "");
+					getResources().getString(R.string.loading_gds), "");
 		}
 
 		AttivitaDidattica getRelatedCorso() {
@@ -260,7 +257,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Utils.convertJSONToObject(body, AttivitaDidattica.class);
@@ -269,7 +265,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			AttivitaDidattica retval = getRelatedCorso();
 			if (retval != null) {
 				GDS.setMateria(retval.getDescription());
@@ -279,7 +274,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 			materia_gds.setText(GDS.getMateria());

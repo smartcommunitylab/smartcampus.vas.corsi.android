@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class FindCoursesDegreeHandler extends
 		AsyncTask<Void, Void, List<CorsoLaurea>> {
@@ -39,7 +40,6 @@ public class FindCoursesDegreeHandler extends
 	String departSelectedName;
 	public List<Dipartimento> listDep;
 	FindDepartmentsHandler findDepHandler;
-	AdapterView<?> parent;
 	int pos;
 	public static CorsoLaurea corsoLaureaSelected = null;
 	public String courseSelected = null;
@@ -49,13 +49,11 @@ public class FindCoursesDegreeHandler extends
 	FindDepartmentsHandler findDepartHandler;
 
 	public FindCoursesDegreeHandler(Context applicationContext,
-			Spinner spinnerCorsiLaurea, String departSelectedName,
-			AdapterView<?> parent, int pos, Activity currentActivity,
-			FindDepartmentsHandler findDepartHandler) {
+			Spinner spinnerCorsiLaurea, String departSelectedName, int pos,
+			Activity currentActivity, FindDepartmentsHandler findDepartHandler) {
 		this.context = applicationContext;
 		this.spinnerCorsiLaurea = spinnerCorsiLaurea;
 		this.departSelectedName = departSelectedName;
-		this.parent = parent;
 		this.pos = pos;
 		this.currentActivity = currentActivity;
 		this.findDepartHandler = findDepartHandler;
@@ -75,8 +73,6 @@ public class FindCoursesDegreeHandler extends
 	@SuppressWarnings("static-access")
 	@Override
 	protected List<CorsoLaurea> doInBackground(Void... params) {
-
-		departSelectedName = parent.getItemAtPosition(pos).toString();
 
 		departSelected = new Dipartimento();
 
@@ -142,13 +138,18 @@ public class FindCoursesDegreeHandler extends
 				listStringDegree.add(d.getDescripion());
 			}
 
+			spinnerCorsiLaurea.setEnabled(true);
+			spinnerCorsiLaurea.setClickable(true);
+
 			// setto i corsi di laurea nello spinner
 			@SuppressWarnings({ "unchecked", "rawtypes" })
-			ArrayAdapter adapter = new ArrayAdapter(
-					context,
-					R.layout.list_studymate_row_list_simple,
-					listStringDegree);
+			ArrayAdapter adapter = new ArrayAdapter(context,
+					R.layout.list_studymate_row_list_simple, listStringDegree);
 			spinnerCorsiLaurea.setAdapter(adapter);
+			corsoLaureaSelected = SharedUtils.getCdsStudente(currentActivity);
+			spinnerCorsiLaurea.setSelection(SharedUtils.getPosListFromShared(
+					listStringDegree, corsoLaureaSelected.getDescripion()),
+					true);
 
 			// listener spinner corso laurea
 			spinnerCorsiLaurea

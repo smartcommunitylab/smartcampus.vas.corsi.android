@@ -54,9 +54,16 @@ public class FeedbackFragment extends SherlockFragment {
 		} else {
 			List<Commento> comments = FeedbackHandler.feedbackInfoList;
 			if (comments != null) {
-				titleRatingFeedback.setText(comments.size()
-						+ getActivity().getResources().getString(
-								R.string.feedback_number_presents));
+				if (comments.size() == 1) {
+					titleRatingFeedback
+							.setText(getActivity().getResources().getString(
+									R.string.feedback_number_presents_for_1));
+				} else {
+					titleRatingFeedback.setText(comments.size()
+							+ " "
+							+ getActivity().getResources().getString(
+									R.string.feedback_number_presents));
+				}
 				ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
 				for (int i = 0; i < comments.size(); i++) {

@@ -1,10 +1,13 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +27,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeCourseActivity;
+import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDidattica;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
@@ -40,7 +45,6 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class OverviewFilterFragment extends SherlockFragment {
 
@@ -66,89 +70,89 @@ public class OverviewFilterFragment extends SherlockFragment {
 	public void onResume() {
 		super.onResume();
 		setHasOptionsMenu(true);
+		if (CorsiFragment.followstate == false) {
+			getActivity().onBackPressed();
+		} else {
+			listaEventiFiltrati = new ArrayList<Evento>();
 
-		listaEventiFiltrati = new ArrayList<Evento>();
+			getActivity().setTitle(nomeCorsoOW);
 
-		getActivity().setTitle(nomeCorsoOW);
+			OverviewFilterFragment.pd = ProgressDialog.show(
+					getActivity(),
+					getActivity().getResources().getString(
+							R.string.dialog_list_events), getActivity()
+							.getResources().getString(R.string.dialog_loading));
 
-		OverviewFilterFragment.pd = ProgressDialog.show(
-				getActivity(),
-				getActivity().getResources().getString(
-						R.string.dialog_list_events), getActivity()
-						.getResources().getString(R.string.dialog_loading));
+			AsyncTask<Void, Void, Void> taskCourseEvents = new AsyncTask<Void, Void, Void>() {
 
-		AsyncTask<Void, Void, Void> taskCourseEvents = new AsyncTask<Void, Void, Void>() {
+				@Override
+				protected Void doInBackground(Void... params) {
+					listaEventiFiltrati = filterEventsbyCourse();
 
-			@Override
-			protected Void doInBackground(Void... params) {
-				listaEventiFiltrati = filterEventsbyCourse();
+					return null;
+				}
 
-				return null;
-			}
+				@Override
+				protected void onPostExecute(Void result) {
+					super.onPostExecute(result);
 
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
+					OverviewFilterFragment.pd.dismiss();
 
-				OverviewFilterFragment.pd.dismiss();
-
-				EventItem[] listEvItem = new EventItem[listaEventiFiltrati
-						.size()];
-				if (listaEventiFiltrati.size() == 0) {
-					Toast.makeText(
-							getSherlockActivity(),
-							"Non sono disponibli eventi a breve per questo corso",
-							Toast.LENGTH_SHORT).show();
-				} else {
-					int i = 0;
-					for (Evento ev : listaEventiFiltrati) {
-						AdptDetailedEvent e = new AdptDetailedEvent(ev
-								.getEventoId().getDate(), ev.getTitle(),
-								ev.getType(), ev.getEventoId().getStart()
-										.toString(), ev.getRoom());
-						listEvItem[i++] = new EventItem(e, getActivity()
-								.getResources());
-					}
-
-					EventAdapter adapter = new EventAdapter(
-							getSherlockActivity(), listEvItem);
-					ListView listView = (ListView) getSherlockActivity()
-							.findViewById(R.id.listViewEventi);
-					listView.setAdapter(adapter);
-					listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-						@Override
-						public void onItemClick(AdapterView<?> arg0, View arg1,
-								int arg2, long arg3) {
-							getSherlockActivity()
-									.supportInvalidateOptionsMenu();
-							// Pass Data to other Fragment
-							Evento evento = listaEventiFiltrati.get(arg2);
-							Bundle arguments = new Bundle();
-							arguments.putSerializable(Constants.SELECTED_EVENT,
-									evento);
-							FragmentTransaction ft = getSherlockActivity()
-									.getSupportFragmentManager()
-									.beginTransaction();
-							Fragment fragment = new DettailOfEventFragment();
-							fragment.setArguments(arguments);
-							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-							ft.replace(getId(), fragment, getTag());
-							ft.addToBackStack(getTag());
-							ft.commit();
+					EventItem[] listEvItem = new EventItem[listaEventiFiltrati
+							.size()];
+					if (listaEventiFiltrati.size() == 0) {
+						Toast.makeText(getSherlockActivity(),
+								R.string.no_events_now, Toast.LENGTH_SHORT)
+								.show();
+					} else {
+						int i = 0;
+						for (Evento ev : listaEventiFiltrati) {
+							AdptDetailedEvent e = new AdptDetailedEvent(ev
+									.getEventoId().getDate(), ev.getTitle(),
+									ev.getType(), ev.getEventoId().getStart()
+											.toString(), ev.getRoom());
+							listEvItem[i++] = new EventItem(e, getActivity());
 						}
 
-					});
+						EventAdapter adapter = new EventAdapter(
+								getSherlockActivity(), listEvItem);
+						ListView listView = (ListView) getSherlockActivity()
+								.findViewById(R.id.listViewEventi);
+						listView.setAdapter(adapter);
+						listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+							@Override
+							public void onItemClick(AdapterView<?> arg0,
+									View arg1, int arg2, long arg3) {
+								getSherlockActivity()
+										.supportInvalidateOptionsMenu();
+								// Pass Data to other Fragment
+								Evento evento = listaEventiFiltrati.get(arg2);
+								Bundle arguments = new Bundle();
+								arguments.putSerializable(
+										Constants.SELECTED_EVENT, evento);
+								FragmentTransaction ft = getSherlockActivity()
+										.getSupportFragmentManager()
+										.beginTransaction();
+								Fragment fragment = new DettailOfEventFragment();
+								fragment.setArguments(arguments);
+								ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+								ft.replace(getId(), fragment, getTag());
+								ft.addToBackStack(getTag());
+								ft.commit();
+							}
+
+						});
+					}
 				}
-			}
-		};
+			};
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			taskCourseEvents.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-					(Void[]) null);
-		else
-			taskCourseEvents.execute((Void[]) null);
-
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				taskCourseEvents.executeOnExecutor(
+						AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+			else
+				taskCourseEvents.execute((Void[]) null);
+		}
 	}
 
 	// filtro gli eventi in base al corso che ho selezionato
@@ -211,6 +215,16 @@ public class OverviewFilterFragment extends SherlockFragment {
 						R.string.feedback_course_is_career, Toast.LENGTH_SHORT)
 						.show();
 			}
+			return true;
+		case R.id.menu_home_course:
+			// getActivity().onBackPressed();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+				new AsyncCourseAd().executeOnExecutor(
+						AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+			} else {
+				new AsyncCourseAd().execute((Void[]) null);
+			}
+
 		default:
 			break;
 		}
@@ -275,20 +289,106 @@ public class OverviewFilterFragment extends SherlockFragment {
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-//			if (result == null) {
-//				Toast.makeText(
-//						getActivity(),
-//						getActivity().getResources()
-//								.getString(R.string.dialog_error_delete),
-//						Toast.LENGTH_SHORT).show();
-//			} else if (result) {
-//				Toast.makeText(
-//						getActivity(),
-//						getActivity().getResources()
-//								.getString(R.string.dialog_success_delete),
-//						Toast.LENGTH_SHORT).show();
-//
-//			}
+			// if (result == null) {
+			// Toast.makeText(
+			// getActivity(),
+			// getActivity().getResources()
+			// .getString(R.string.dialog_error_delete),
+			// Toast.LENGTH_SHORT).show();
+			// } else if (result) {
+			// Toast.makeText(
+			// getActivity(),
+			// getActivity().getResources()
+			// .getString(R.string.dialog_success_delete),
+			// Toast.LENGTH_SHORT).show();
+			//
+			// }
+
+		}
+	}
+
+	public class AsyncCourseAd extends AsyncTask<Void, Void, AttivitaDidattica> {
+
+		private ProtocolCarrier mProtocolCarrier;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(getActivity());
+			pd = ProgressDialog.show(
+					getActivity(),
+					getActivity().getResources().getString(
+							R.string.dialog_waiting_goto_home),
+					getActivity().getResources().getString(
+							R.string.dialog_loading));
+
+		}
+
+		@Override
+		protected AttivitaDidattica doInBackground(Void... params) {
+			mProtocolCarrier = new ProtocolCarrier(getActivity(),
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_COURSE_BY_COD(cc.getCod()));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			String body = null;
+
+			try {
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					body = response.getBody();
+				} else {
+					return null;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObject(body, AttivitaDidattica.class);
+		}
+
+		@Override
+		protected void onPostExecute(AttivitaDidattica result) {
+			super.onPostExecute(result);
+
+			if (result == null) {
+
+				pd.dismiss();
+
+				Toast.makeText(
+						getActivity(),
+						getActivity().getResources().getString(
+								R.string.dialog_error_redirect),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				// if (cc.getResult().compareTo("-1") == 0) {
+				// getActivity().onBackPressed();
+				// }
+				Intent i = new Intent(getActivity(),
+						FindHomeCourseActivity.class);
+
+				i.putExtra(Constants.COURSE_NAME, result.getDescription());
+				i.putExtra(Constants.COURSE_ID, result.getAdId());
+				i.putExtra(Constants.AD_COD, result.getAdCod());
+
+				pd.dismiss();
+
+				getActivity().startActivity(i);
+			}
 
 		}
 	}

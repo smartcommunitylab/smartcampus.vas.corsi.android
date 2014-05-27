@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,6 @@ import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindCoursesDegreeHandler;
 import eu.trentorise.smartcampus.android.studyMate.utilities.FindDepartmentsHandler;
-import it.smartcampuslab.studymate.R;
 
 public class FindHomeActivity extends SherlockFragmentActivity implements
 		TextWatcher {
@@ -60,8 +61,8 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 		initialList.add(new String(getResources().getString(
 				R.string.finder_initiallist_dep)));
 		List<String> initialListDeg = new ArrayList<String>();
-		initialList.add(new String(getResources().getString(
-				R.string.finder_initiallist_dep)));
+		initialListDeg.add(new String(getResources().getString(
+				R.string.finder_initiallist_deg)));
 		ArrayAdapter<String> adapterInitialList = new ArrayAdapter<String>(
 				FindHomeActivity.this, R.layout.list_studymate_row_list_simple,
 				initialList);
@@ -71,6 +72,7 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 
 		spinner1.setAdapter(adapterInitialList);
 		spinner2.setAdapter(adapterInitialListDeg);
+		spinner2.setClickable(false);
 
 		findDepHandler = (FindDepartmentsHandler) new FindDepartmentsHandler(
 				getApplicationContext(), spinner1, spinner2, this).execute();

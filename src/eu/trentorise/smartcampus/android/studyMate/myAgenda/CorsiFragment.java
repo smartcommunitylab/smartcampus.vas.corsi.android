@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import it.smartcampuslab.studymate.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,9 +15,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.android.studyMate.utilities.CoursesHandler;
-import it.smartcampuslab.studymate.R;
 
 public class CorsiFragment extends SherlockFragment {
+	public static boolean followstate;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class CorsiFragment extends SherlockFragment {
 				getActivity().getApplicationContext(), listViewCorsi, this,
 				getSherlockActivity());
 		handlerPersonalCourses.execute(arguments);
+		CorsiFragment.followstate = true;
 	}
 
 	@Override

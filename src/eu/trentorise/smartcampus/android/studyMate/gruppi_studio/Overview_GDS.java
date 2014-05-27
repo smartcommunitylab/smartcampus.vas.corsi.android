@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import it.smartcampuslab.studymate.R;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -23,9 +24,10 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.models.AttivitaDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -34,27 +36,19 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
-import it.smartcampuslab.studymate.R;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
 	public GruppoDiStudio contextualGDS = null;
-	// public ArrayList<ChatObj> contextualForum = new ArrayList<ChatObj>();
-	public ArrayList<AttivitaDiStudio> contextualListaImpegni = new ArrayList<AttivitaDiStudio>();
+	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onResume() {
+		super.onResume();
 		setContentView(R.layout.overview_gds_waitingforforum_layout);
-	}
-
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		// codice per sistemare l'actionoverflow
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
 			Field menuKeyField = ViewConfiguration.class
@@ -64,70 +58,26 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				menuKeyField.setBoolean(config, false);
 			}
 		} catch (Exception ex) {
-			// Ignore
 		}
 
 		Bundle myextras = getIntent().getExtras();
-		contextualGDS = (GruppoDiStudio) myextras.get("contextualGDS");
+		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
 
 		final ActionBar ab = getSupportActionBar();
-		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ab.setTitle(contextualGDS.getNome());
 		ab.setLogo(R.drawable.gruppistudio_icon_white);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
-		// /** TabHost will have Tabs */
-		// String tab1_txt = "Impegni";
-		// String tab2_txt = "Forum";
-		//
-		// // tab1
-		//
-		// Tab tab1 = ab
-		// .newTab()
-		// .setText(tab1_txt)
-		// .setTabListener(
-		// new TabListener<Impegni_Fragment>(this, "tab1",
-		// Impegni_Fragment.class));
-		// ab.addTab(tab1);
-		//
-		// // tab2
-		// Tab tab2 = ab
-		// .newTab()
-		// .setText(tab2_txt)
-		// .setTabListener(
-		// new TabListener<Forum_fragment>(this, "tab2",
-		// Forum_fragment.class));
-		// ab.addTab(tab2);
-
 		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
 		task.execute();
 	}
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		
+//	}
 
-	// @Override
-	// protected void onResume() {
-	// // TODO Auto-generated method stub
-	// super.onResume();
-	// // retrieving impegni from web
-	// AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
-	// task.execute();
-	// }
-
-	@Override
-	public void onBackPressed() {
-		Overview_GDS.this.finish();
-	}
-
-	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// Bundle args = arg2.getExtras();
-		Toast.makeText(
-				Overview_GDS.this,
-				"resultcode= " + arg1 + " # requestCode= " + arg0
-						+ "\n mi hanno ritornato" + " elem", Toast.LENGTH_SHORT)
-				.show();
-		super.onActivityResult(arg0, arg1, arg2);
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -140,13 +90,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home: {
-			Overview_GDS.this.finish();
+			onBackPressed();
 			return true;
 		}
 		case R.id.aggiungi_impegno: {
 			Intent intent = new Intent(getApplicationContext(),
 					Add_attivita_studio_activity.class);
-			intent.putExtra("gds", contextualGDS);
+			intent.putExtra(Constants.GDS, contextualGDS);
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		}
@@ -155,37 +105,31 @@ public class Overview_GDS extends SherlockFragmentActivity {
 					Overview_GDS.this, contextualGDS);
 			task.execute();
 			return super.onOptionsItemSelected(item);
-		case R.id.action_modifica_gruppo:
-
-			Intent intent = new Intent(Overview_GDS.this,
-					ShowModifyGDSDetails_activity.class);
-			intent.putExtra("contextualGDS", contextualGDS);
-			startActivity(intent);
-			return super.onOptionsItemSelected(item);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 
 	}
 
+//	@Override
+//	public void onBackPressed() {
+//		Overview_GDS.this.finish();
+//	}
+
 	public GruppoDiStudio getContextualGDS() {
 		return contextualGDS;
 	}
-
-	// public ArrayList<ChatObj> getContextualForum() {
-	// return contextualForum;
-	// }
 
 	public void setContextualGDS(GruppoDiStudio contextualGDS) {
 		this.contextualGDS = contextualGDS;
 	}
 
-	public ArrayList<AttivitaDiStudio> getContextualListaImpegni() {
+	public ArrayList<Evento> getContextualListaImpegni() {
 		return contextualListaImpegni;
 	}
 
 	public void setContextualListaImpegni(
-			ArrayList<AttivitaDiStudio> contextualListaImpegni) {
+			ArrayList<Evento> contextualListaImpegni) {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 
@@ -199,7 +143,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			this.taskcontext = taskcontext;
 		}
 
-		private List<AttivitaDiStudio> retrievedImpegni() {
+		private List<Evento> retrievedImpegni() {
 			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
 					SmartUniDataWS.TOKEN_NAME);
 
@@ -229,35 +173,32 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			return Utils.convertJSONToObjects(body, AttivitaDiStudio.class);
+			return Utils.convertJSONToObjects(body, Evento.class);
 		}
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			// ripulisco la lista impegni prima di caricare i nuovi impegni
 			contextualListaImpegni.clear();
 			pd = new ProgressDialog(taskcontext);
 			pd = ProgressDialog.show(taskcontext,
-					"Caricamento dettagli del gruppo di studio", "");
+					getResources().getString(R.string.dialog_loading), "");
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			// faccio andare il metodo web per recuperare la lista impegni dal
 			// web
-			contextualListaImpegni = (ArrayList<AttivitaDiStudio>) retrievedImpegni();
+			contextualListaImpegni = (ArrayList<Evento>) retrievedImpegni();
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			// ora che ho gli impegni pronti faccio partire la transaction che
 			// porta alla schermata dove vengono mostrati gli impegni
@@ -266,17 +207,21 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
 			TextView tv = (TextView) findViewById(R.id.suggerimento_listaimpegni_vuota);
 			if (contextualListaImpegni.isEmpty()) {
-				tv.setText("Non sono stati fissati impegni!\nUtilizza il menù in alto a destra per fissare un nuovo impegno");
+				tv.setText(getResources().getString(R.string.att_message));
 			} else {
 				tv.setVisibility(View.GONE);
 				FragmentTransaction ft = Overview_GDS.this
 						.getSupportFragmentManager().beginTransaction();
-				// Fragment fragment = new Impegni_Fragment();
-				Fragment fragment = Impegni_Fragment.newInstance(
-						contextualListaImpegni, contextualGDS);
+				Fragment fragment = new Impegni_Fragment();
+				//.newInstance(
+				//		contextualListaImpegni, contextualGDS);
+				Bundle args = new Bundle();
+				args.putSerializable(Constants.IMPEGNI_LIST, contextualListaImpegni);
+				args.putSerializable(Constants.GDS, contextualGDS);
+				fragment.setArguments(args);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				ft.replace(R.id.impegni_fragment_container, fragment);
-				ft.addToBackStack(null);
+				//ft.addToBackStack(null);
 				ft.commit();
 			}
 
@@ -310,15 +255,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 			MessageResponse response;
 			try {
-
-				// String gds_to_abandonJSON =
-				// Utils.convertToJSON(gds_to_abandon);
-
 				request.setBody(gds_to_abandon.getId() + "");
-				/*
-				 * pare ci sia un bug qui, forse perchè la invokesync va fatta
-				 * diversamente visto che stiamousando una delete
-				 */
 				response = mProtocolCarrier
 						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
 								MyUniActivity.getAuthToken());
@@ -326,7 +263,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				if (response.getHttpStatus() == 200) {
 
 					return true;
-					// body = response.getBody();
 
 				} else {
 					return false;
@@ -338,7 +274,6 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (AACException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -347,29 +282,23 @@ public class Overview_GDS extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext, "Stai lasciando "
-					+ toabandonGDS.getNome(), "");
+			pd = ProgressDialog.show(taskcontext,
+					getResources().getString(R.string.leave_gds) + " "
+							+ toabandonGDS.getNome(), "");
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			pd.dismiss();
-			// Overview_GDS.this.finish();
-			// devo ricaricare la listagdsact nel modo corretto
-			Intent intent = new Intent(Overview_GDS.this,
-					Lista_GDS_activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			onBackPressed();
+
 		}
 
 		@Override
 		protected Void doInBackground(GruppoDiStudio... params) {
-			// TODO Auto-generated method stub
 			abandonGDS(toabandonGDS);
 			return null;
 		}

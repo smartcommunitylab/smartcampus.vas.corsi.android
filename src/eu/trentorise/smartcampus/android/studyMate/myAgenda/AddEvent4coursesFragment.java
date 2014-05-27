@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import it.smartcampuslab.studymate.R;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +34,6 @@ import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.PostEvent;
-import it.smartcampuslab.studymate.R;
 
 public class AddEvent4coursesFragment extends SherlockFragment {
 	private int mYear;
@@ -66,6 +67,7 @@ public class AddEvent4coursesFragment extends SherlockFragment {
 		return fview;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onStart() {
 

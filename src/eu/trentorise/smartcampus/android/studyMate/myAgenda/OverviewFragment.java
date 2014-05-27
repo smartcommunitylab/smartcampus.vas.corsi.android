@@ -1,5 +1,7 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
+import it.smartcampuslab.studymate.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +30,6 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventsHandler;
-import it.smartcampuslab.studymate.R;
 
 public class OverviewFragment extends SherlockFragment {
 
@@ -105,8 +106,7 @@ public class OverviewFragment extends SherlockFragment {
 								.getEventoId().getDate(), ev.getTitle(),
 								ev.getType(), ev.getEventoId().getStart()
 										.toString(), ev.getRoom());
-						listEvItem[i++] = new EventItem(e, getActivity()
-								.getResources());
+						listEvItem[i++] = new EventItem(e, getActivity());
 
 					}
 
