@@ -2,7 +2,7 @@
 <resources>
 <string-array name="Source">
     <item>Ateneo</item>
-    <item>Ingegneria e scienza dell’informazione</item>
+    <item>Ingegneria e scienza dell\'informazione</item>
     <item>Matematica</item>
     <item>Fisica</item>
     <item>Ingegneria civile, ambientale e meccanica</item>

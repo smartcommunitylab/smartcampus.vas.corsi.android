@@ -3,7 +3,7 @@ package eu.trentorise.smartcampus.android.studyMate.utilities;
 public final class SmartUniDataWS {
 
 	// general
-	public static final String URL_WS_SMARTUNI = "studymate-webapp-test.app.smartcampuslab.it";// "http://studymate-test.app.smartcampuslab.it";
+	public static final String URL_WS_SMARTUNI = "http://studymate-webapp-test.app.smartcampuslab.it";// "http://studymate-test.app.smartcampuslab.it";
 	public static final String TOKEN_NAME = "studymate";
 
 	// Notification
