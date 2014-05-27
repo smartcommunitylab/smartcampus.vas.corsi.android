@@ -189,14 +189,14 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-							// Toast.makeText(
-							// getApplicationContext(),
-							// getResources().getString(
-							// R.string.dialog_coming_soon),
-							// Toast.LENGTH_SHORT).show();
-							Intent intent = new Intent(MyUniActivity.this,
-									Lista_GDS_activity.class);
-							MyUniActivity.this.startActivity(intent);
+							 Toast.makeText(
+							 getApplicationContext(),
+							 getResources().getString(
+							 R.string.dialog_coming_soon),
+							 Toast.LENGTH_SHORT).show();
+//							Intent intent = new Intent(MyUniActivity.this,
+//									Lista_GDS_activity.class);
+//							MyUniActivity.this.startActivity(intent);
 						}
 					});
 

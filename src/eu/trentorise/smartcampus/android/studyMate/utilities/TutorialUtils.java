@@ -55,7 +55,7 @@ public class TutorialUtils {
 
 			@Override
 			public int size() {
-				return 5;
+				return 4;
 			}
 
 			@Override
@@ -123,19 +123,19 @@ public class TutorialUtils {
 								act.getString(R.string.tut_notifications));
 					}
 					break;
-				case 4:
-					v = act.findViewById(R.id.phl_btn);
-					v.getLocationOnScreen(location);
-					location[0] += convertPixelsToDp((v.getWidth() / 2) - 18,
-							act);
-					location[1] += convertDpToPixel(8, act);
-					if (v != null && v.isShown()) {
-						return new TutorialItem("search", location,
-								(int) (v.getWidth() / 2.5f),
-								act.getString(R.string.phl_btn_label),
-								act.getString(R.string.tut_materials));
-					}
-					break;
+//				case 4:
+//					v = act.findViewById(R.id.phl_btn);
+//					v.getLocationOnScreen(location);
+//					location[0] += convertPixelsToDp((v.getWidth() / 2) - 18,
+//							act);
+//					location[1] += convertDpToPixel(8, act);
+//					if (v != null && v.isShown()) {
+//						return new TutorialItem("search", location,
+//								(int) (v.getWidth() / 2.5f),
+//								act.getString(R.string.phl_btn_label),
+//								act.getString(R.string.tut_materials));
+//					}
+//					break;
 				}
 				return null;
 			}
