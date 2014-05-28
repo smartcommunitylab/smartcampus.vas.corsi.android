@@ -107,7 +107,7 @@ public final class SmartUniDataWS {
 
 	// Commento //////////////////////////////////////////////////////////
 	public static String GET_WS_FEEDBACK_OF_COURSE(long adId) {
-		return "/rest/corso/" + String.valueOf(adId) + "/commento/all";
+		return "/rest/corso/" + String.valueOf(adId) + "/commento/approved";
 	}
 
 	public static String GET_WS_FEEDBACK_OF_STUDENT(long idCourse) {
