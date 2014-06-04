@@ -209,7 +209,7 @@
     <string name="event_change_success">Event successfully updated</string>
     <string name="menu_multi_courses_unfollow">Unfollow</string>
     <string name="menu_multi_courses_follow">Follow</string>
-    <string name="menu_courses_goto_home">Home</string>
+    <string name="menu_courses_goto_home">Go to course</string>
     <string name="menu_courses_unfollow">Unfollow</string>
     <!-- GDS -->
     <string name="title_activity_show_modify_gdsdetails_activity">ShowModifyGDSDetails_activity</string>
