@@ -40,6 +40,8 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TutorialUtils;
+import eu.trentorise.smartcampus.communicator.CommunicatorConnector;
+import eu.trentorise.smartcampus.communicator.CommunicatorConnectorException;
 import eu.trentorise.smartcampus.network.RemoteConnector;
 import eu.trentorise.smartcampus.network.RemoteConnector.CLIENT_TYPE;
 import eu.trentorise.smartcampus.profileservice.BasicProfileService;
@@ -51,13 +53,14 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
 public class MyUniActivity extends SherlockActivity {
 
 	public static final String APP_ID = "studymate";
 	//
-	public static final String SERVER_URL = "https://vas.smartcampuslab.it/core.communicator";
-	public static final String AUTH_URL = "https://ac.smartcampuslab.it/aac";
+	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
+	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -241,6 +244,17 @@ public class MyUniActivity extends SherlockActivity {
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
+				PushServiceConnector connector = new PushServiceConnector();
+				// //init connector
+				try {
+					System.out.println("token: " + userAuthToken);
+					connector.init(getApplicationContext(), userAuthToken,
+							APP_ID, SERVER_URL);
+				} catch (CommunicatorConnectorException e) {
+					e.printStackTrace();
+				}		
+				
+				
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				BasicProfileService service = new BasicProfileService(AUTH_URL);
 				bp = service.getBasicProfile(getAuthToken());
