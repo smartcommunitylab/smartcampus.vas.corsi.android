@@ -5,6 +5,7 @@ import it.smartcampuslab.studymate.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -44,6 +46,7 @@ public class Impegni_Fragment extends SherlockFragment {
 	public String body;
 	private View view;
 	private ListView impegni_listview;
+	private ProgressDialog pd;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -53,23 +56,25 @@ public class Impegni_Fragment extends SherlockFragment {
 	}
 
 
-
 	@Override
 	public void onStart() {
+
+
 		// TODO Auto-generated method stub
-		super.onStart();
 		impegni_listview = (ListView) view
 				.findViewById(R.id.lista_impegni);
 		setHasOptionsMenu(true);	
 		new AsyncTimpegniLoader(getActivity()).execute();		
-		gds = (GruppoDiStudio) getArguments().getSerializable(Constants.GDS);
+		gds = Overview_GDS.contextualGDS;
+
+		super.onStart();
+		
 	}
 
 	
 	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
 		public AsyncTimpegniLoader(Context taskcontext) {
-			super();
 		}
 
 		private List<Evento> retrievedImpegni() {
@@ -111,8 +116,9 @@ public class Impegni_Fragment extends SherlockFragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			pd = new ProgressDialog(getActivity());
 			// ripulisco la lista impegni prima di caricare i nuovi impegni
-			contextualListaImpegni.clear();
+			//contextualListaImpegni.clear();
 		}
 
 		@Override
@@ -127,6 +133,12 @@ public class Impegni_Fragment extends SherlockFragment {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			
+//			TextView tv = (TextView) getActivity().findViewById(R.id.suggerimento_listaimpegni_vuota);
+//			if (contextualListaImpegni.isEmpty()) {
+//				tv.setText(getResources().getString(R.string.att_message));
+//			} else {
+//				tv.setVisibility(View.GONE);
+				
 			lista_impegni = contextualListaImpegni;
 			// gestione listaimpegni
 			
@@ -156,8 +168,8 @@ public class Impegni_Fragment extends SherlockFragment {
 			});
 		}
 
+	//}
+		
 	}
-
-	
 
 }

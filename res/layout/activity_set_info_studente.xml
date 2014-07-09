@@ -6,6 +6,12 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/tv_help_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_help_msg" />
+
+    <TextView
         android:id="@+id/textViewDatetimeRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

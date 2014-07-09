@@ -247,4 +247,7 @@
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 
+    <string name="tv_help_msg">Insert your data to help us find your information</string>
+    
+    <string name="main_empty_list">There is no recent conversation, write new message to start one.</string>
 </resources>

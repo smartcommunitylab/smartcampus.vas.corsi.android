@@ -18,6 +18,7 @@ import android.view.ViewConfiguration;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -29,6 +30,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
@@ -39,16 +41,51 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Overview_GDS extends SherlockFragmentActivity {
 
-	public GruppoDiStudio contextualGDS = null;
+	public static GruppoDiStudio contextualGDS = null;
 	public ArrayList<Evento> contextualListaImpegni = new ArrayList<Evento>();
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
+	
+@Override
+protected void onCreate(Bundle arg0) {
+	super.onCreate(arg0);
+	Bundle myextras = getIntent().getExtras();
+	contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
+//	Bundle args = new Bundle();
+//	args.putSerializable(Constants.GDS, contextualGDS);
 
+	
+	
+	final ActionBar ab = getSupportActionBar();
+	ab.setTitle(contextualGDS.getNome());
+	ab.setLogo(R.drawable.gruppistudio_icon_white);
+	ab.setHomeButtonEnabled(true);
+	ab.setDisplayHomeAsUpEnabled(true);
+	String tab1_txt = "attività";//getResources().getString(R.string.tab_home);
+	String tab2_txt = "chat";//getResources().getString(R.string.tab_courses);
+	
+	ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	Tab tab1 = ab
+			.newTab()
+			.setText(tab1_txt)
+			.setTabListener(
+					new TabListener<Impegni_Fragment>(this, "tab1",
+							Impegni_Fragment.class));
+	ab.addTab(tab1);
+
+	Tab tab2 = ab
+			.newTab()
+			.setText(tab2_txt)
+			.setTabListener(
+					new TabListener<Chat_Fragment>(this, "tab2",
+							Chat_Fragment.class));
+	ab.addTab(tab2);
+}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setContentView(R.layout.overview_gds_waitingforforum_layout);
+		//setContentView(R.layout.overview_gds_waitingforforum_layout);
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
 			Field menuKeyField = ViewConfiguration.class
@@ -60,23 +97,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		} catch (Exception ex) {
 		}
 
-		Bundle myextras = getIntent().getExtras();
-		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
-
-		final ActionBar ab = getSupportActionBar();
-		ab.setTitle(contextualGDS.getNome());
-		ab.setLogo(R.drawable.gruppistudio_icon_white);
-		ab.setHomeButtonEnabled(true);
-		ab.setDisplayHomeAsUpEnabled(true);
-
-		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
-		task.execute();
+		
+		
+//		AsyncTimpegniLoader task = new AsyncTimpegniLoader(Overview_GDS.this);
+//		task.execute();
+		
 	}
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		
-//	}
+
 
 
 	@Override
@@ -210,19 +237,17 @@ public class Overview_GDS extends SherlockFragmentActivity {
 				tv.setText(getResources().getString(R.string.att_message));
 			} else {
 				tv.setVisibility(View.GONE);
-				FragmentTransaction ft = Overview_GDS.this
-						.getSupportFragmentManager().beginTransaction();
-				Fragment fragment = new Impegni_Fragment();
-				//.newInstance(
-				//		contextualListaImpegni, contextualGDS);
-				Bundle args = new Bundle();
-				args.putSerializable(Constants.IMPEGNI_LIST, contextualListaImpegni);
-				args.putSerializable(Constants.GDS, contextualGDS);
-				fragment.setArguments(args);
-				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				ft.replace(R.id.impegni_fragment_container, fragment);
-				//ft.addToBackStack(null);
-				ft.commit();
+//				FragmentTransaction ft = Overview_GDS.this
+//						.getSupportFragmentManager().beginTransaction();
+//				Fragment fragment = new Impegni_Fragment();
+//				Bundle args = new Bundle();
+//				args.putSerializable(Constants.IMPEGNI_LIST, contextualListaImpegni);
+//				args.putSerializable(Constants.GDS, contextualGDS);
+//				fragment.setArguments(args);
+//				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				ft.replace(android.R.id.content, fragment);
+//				//ft.addToBackStack(null);
+//				ft.commit();
 			}
 
 			pd.dismiss();
