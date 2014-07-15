@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gcm.GCMRegistrar;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
@@ -61,6 +63,11 @@ public class MyUniActivity extends SherlockActivity {
 	//
 	public static final String SERVER_URL = "https://vas-dev.smartcampuslab.it/core.communicator";
 	public static final String AUTH_URL = "https://vas-dev.smartcampuslab.it/aac";
+
+	// This is the project id generated from the Google console when
+	// you defined a Google APIs project.
+	private static final String PROJECT_ID = "674612024423";
+
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
 	public static ProgressDialog pd;
@@ -192,14 +199,14 @@ public class MyUniActivity extends SherlockActivity {
 
 						@Override
 						public void onClick(View v) {
-							 Toast.makeText(
-							 getApplicationContext(),
-							 getResources().getString(
-							 R.string.dialog_coming_soon),
-							 Toast.LENGTH_SHORT).show();
-//							Intent intent = new Intent(MyUniActivity.this,
-//									Lista_GDS_activity.class);
-//							MyUniActivity.this.startActivity(intent);
+							// Toast.makeText(
+							// getApplicationContext(),
+							// getResources().getString(
+							// R.string.dialog_coming_soon),
+							// Toast.LENGTH_SHORT).show();
+							Intent intent = new Intent(MyUniActivity.this,
+									Lista_GDS_activity.class);
+							MyUniActivity.this.startActivity(intent);
 						}
 					});
 
@@ -244,23 +251,22 @@ public class MyUniActivity extends SherlockActivity {
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
-				PushServiceConnector connector = new PushServiceConnector();
-				// //init connector
-				try {
-					System.out.println("token: " + userAuthToken);
-					connector.init(getApplicationContext(), userAuthToken,
-							APP_ID, SERVER_URL);
-				} catch (CommunicatorConnectorException e) {
-					e.printStackTrace();
-				}		
-				
-				
+
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				BasicProfileService service = new BasicProfileService(AUTH_URL);
 				bp = service.getBasicProfile(getAuthToken());
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
 				System.out.println("user token: " + getAuthToken());
+
+				boolean isFirstTime = SharedUtils.isFirstTime(mContext);
+
+				// se è il primo avvio dell'app sul dispositivo -> registro
+				// regid nel server
+				if (isFirstTime) {
+					registrationDevice();
+				}
+
 				// init connector
 				// PushServiceConnector connector = new PushServiceConnector();
 				// try {
@@ -443,4 +449,96 @@ public class MyUniActivity extends SherlockActivity {
 
 	}
 
+	private void registrationDevice() {
+		final String TAG = "REG_ID";
+		String registrationStatus = "";
+		String regId = "";
+
+		try {
+			// Check that the device supports GCM (should be in a try / catch)
+			GCMRegistrar.checkDevice(mContext);
+
+			// Check the manifest to be sure this app has all the required
+			// permissions.
+			GCMRegistrar.checkManifest(mContext);
+
+			// Get the existing registration id, if it exists.
+			regId = GCMRegistrar.getRegistrationId(mContext);
+
+			if (regId.equals("")) {
+
+				// register this device for this project
+				GCMRegistrar.register(mContext, PROJECT_ID);
+				regId = GCMRegistrar.getRegistrationId(mContext);
+				
+				registrationStatus = "New Registration";
+
+				// This is actually a dummy function. At this point, one
+				// would send the registration id, and other identifying
+				// information to your server, which should save the id
+				// for use when broadcasting messages.
+				sendRegistrationToServer(regId);
+
+			} else {
+
+				registrationStatus = "Already registered";
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			registrationStatus = e.getMessage();
+
+		}
+
+		Log.d(TAG, registrationStatus);
+
+		// This is part of our CHEAT. For this demo, you'll need to
+		// capture this registration id so it can be used in our demo web
+		// service.
+		Log.d(TAG, regId);
+
+	}
+
+	private boolean sendRegistrationToServer(String regId) {
+
+		mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+				SmartUniDataWS.TOKEN_NAME);
+		MessageResponse response;
+		MessageRequest request1 = new MessageRequest(
+				SmartUniDataWS.URL_WS_SMARTUNI,
+				SmartUniDataWS.POST_WS_REGISTRATION_GCM(bp.getUserId(), regId));
+		request1.setMethod(Method.POST);
+		try {
+			response = mProtocolCarrier.invokeSync(request1,
+					SmartUniDataWS.TOKEN_NAME, MyUniActivity.getAuthToken());
+			if (response.getHttpStatus() == 200) {
+
+				body = response.getBody();
+				if (Boolean.getBoolean(body)) {
+					Log.d("REG_ID", "registration to server done!");
+				} else {
+					Log.d("REG_ID", "registration to server failed!");
+				}
+
+				return Boolean.getBoolean(body);
+
+			} else {
+				Log.d("REG_ID", "registration to server failed!");
+				return false;
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (AACException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
 }

@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +133,7 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 			// setto i dipartimenti nello spinner
 			ArrayAdapter<String> adapterDep = new ArrayAdapter<String>(
 					act,
-					it.smartcampuslab.studymate.R.layout.list_studymate_row_list_simple,
+					R.layout.list_studymate_row_list_simple,
 					listStringDepartments);
 			spinnerDepartments.setAdapter(adapterDep);
 

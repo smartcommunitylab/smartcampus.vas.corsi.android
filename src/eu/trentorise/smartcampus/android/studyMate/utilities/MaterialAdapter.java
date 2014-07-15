@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

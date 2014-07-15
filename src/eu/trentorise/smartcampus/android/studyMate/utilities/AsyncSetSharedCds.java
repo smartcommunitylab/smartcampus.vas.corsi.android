@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +131,7 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 			// setto i corsi di laurea nello spinner
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 					currentActivity,
-					it.smartcampuslab.studymate.R.layout.list_studymate_row_list_simple,
+					R.layout.list_studymate_row_list_simple,
 					listStringDegree);
 
 			spinnerDegree.setAdapter(adapter);

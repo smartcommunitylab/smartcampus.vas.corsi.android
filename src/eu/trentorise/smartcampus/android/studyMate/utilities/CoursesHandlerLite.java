@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
 import java.util.List;

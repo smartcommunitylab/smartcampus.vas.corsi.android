@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.rate;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;

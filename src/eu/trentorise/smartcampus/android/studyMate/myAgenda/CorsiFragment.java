@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;

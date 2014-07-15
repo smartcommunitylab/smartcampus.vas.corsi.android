@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.smartcampuslab.studymate"
+    package="eu.trentorise.smartcampus.android.studyMate"
     android:sharedUserId="it.smartcampuslab.launcher"
     android:sharedUserLabel="@string/app_uid_label"
     android:versionCode="8"
@@ -252,11 +252,11 @@
         </activity>
         
          
-        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+        <receiver android:name=".GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.avilyne.android.gcmclient" />  
+                <category android:name="eu.trentorise.smartcampus.android.studyMate" />  
             </intent-filter>   
         </receiver>
         <service

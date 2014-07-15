@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.notices;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

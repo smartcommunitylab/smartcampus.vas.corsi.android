@@ -1,4 +1,4 @@
-package eu.trentorise.smartcampus.android.studyMate.gcmservice;
+package eu.trentorise.smartcampus.android.studyMate;
 
 import android.content.Context;
 import android.content.Intent;

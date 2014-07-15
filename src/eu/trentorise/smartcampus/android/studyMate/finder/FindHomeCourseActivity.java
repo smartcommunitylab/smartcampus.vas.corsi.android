@@ -1,6 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
-import it.smartcampuslab.studymate.R;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

@@ -14,6 +14,8 @@ public final class SharedUtils {
 	private static final String STUDENTE_DIPARTIMENTO_SHARED_PREFERENCES = "studente_dipartimento_shared_preferences";
 	private static final String STUDENTE_CDS_SHARED_PREFERENCES = "studente_cds_shared_preferences";
 	private static final String STUDENTE_DIPARTIMENTO = "studente_dipartimento";
+	private static final String IS_FIRST_TIME = "is_first_time";
+	private static final String IS_FIRST_TIME_PREFERENCES = "is_first_time_preferences";
 	private static final String STUDENTE_CDS = "studente_cds";
 
 	public static boolean setDipartimentoStudente(Context context,
@@ -79,6 +81,31 @@ public final class SharedUtils {
 		}
 
 		return pos;
+	}
+
+	public static boolean isFirstTime(Context context) {
+		// TODO Auto-generated method stub
+		SharedPreferences pref = context.getSharedPreferences(
+				IS_FIRST_TIME_PREFERENCES, Context.MODE_PRIVATE);
+
+		String firstTime = pref.getString(STUDENTE_CDS, null);
+
+		if (firstTime == null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public static boolean setFirstTime(Context context) {
+		// TODO Auto-generated method stub
+		SharedPreferences pref = context.getSharedPreferences(
+				IS_FIRST_TIME_PREFERENCES, Context.MODE_PRIVATE);
+
+		Editor editor = pref.edit();
+		editor.putString(STUDENTE_CDS, Utils.convertToJSON(IS_FIRST_TIME));
+
+		return editor.commit();
 	}
 
 }
