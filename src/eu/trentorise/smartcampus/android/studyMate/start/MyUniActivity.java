@@ -2,15 +2,20 @@ package eu.trentorise.smartcampus.android.studyMate.start;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -25,11 +30,16 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gcm.GCMRegistrar;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.ac.SCAccessProvider;
 import eu.trentorise.smartcampus.android.common.LauncherHelper;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.R.id;
+import eu.trentorise.smartcampus.android.studyMate.R.layout;
+import eu.trentorise.smartcampus.android.studyMate.R.menu;
+import eu.trentorise.smartcampus.android.studyMate.R.string;
 import eu.trentorise.smartcampus.android.studyMate.finder.FindHomeActivity;
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
@@ -67,6 +77,20 @@ public class MyUniActivity extends SherlockActivity {
 	// This is the project id generated from the Google console when
 	// you defined a Google APIs project.
 	private static final String PROJECT_ID = "674612024423";
+	public static final String EXTRA_MESSAGE = "message";
+	public static final String PROPERTY_REG_ID = "registration_id";
+	private static final String PROPERTY_APP_VERSION = "appVersion";
+	private String regId = "";
+
+	/**
+	 * Tag used on log messages.
+	 */
+	static final String TAG = "GCMDemo";
+	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	// This intent filter will be set to filter on the string
+	// "GCM_RECEIVED_ACTION"
+	private IntentFilter gcmFilter;
+	private GoogleCloudMessaging gcm;
 
 	private static Context mContext;
 	private static SCAccessProvider accessProvider = null;
@@ -89,6 +113,12 @@ public class MyUniActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
+
+		// Create our IntentFilter, which will be used in conjunction with a
+		// broadcast receiver.
+		gcmFilter = new IntentFilter();
+		gcmFilter.addAction("GCM_RECEIVED_ACTION");
+
 		if (LauncherHelper.isLauncherInstalled(this, true)) {
 			if (!isUserConnectedToInternet(mContext)) {
 				Toast.makeText(mContext, R.string.internet_connection,
@@ -452,38 +482,56 @@ public class MyUniActivity extends SherlockActivity {
 	private void registrationDevice() {
 		final String TAG = "REG_ID";
 		String registrationStatus = "";
-		String regId = "";
 
 		try {
-			// Check that the device supports GCM (should be in a try / catch)
-			GCMRegistrar.checkDevice(mContext);
 
-			// Check the manifest to be sure this app has all the required
-			// permissions.
-			GCMRegistrar.checkManifest(mContext);
-
-			// Get the existing registration id, if it exists.
-			regId = GCMRegistrar.getRegistrationId(mContext);
-
-			if (regId.equals("")) {
-
-				// register this device for this project
-				GCMRegistrar.register(mContext, PROJECT_ID);
-				regId = GCMRegistrar.getRegistrationId(mContext);
-				
-				registrationStatus = "New Registration";
-
-				// This is actually a dummy function. At this point, one
-				// would send the registration id, and other identifying
-				// information to your server, which should save the id
-				// for use when broadcasting messages.
-				sendRegistrationToServer(regId);
-
-			} else {
-
-				registrationStatus = "Already registered";
-
+			if (gcm == null) {
+				gcm = GoogleCloudMessaging.getInstance(this);
 			}
+
+			regId = getRegistrationId(mContext);
+
+			if (regId.isEmpty()) {
+
+				String msg = "";
+
+				try {
+					if (gcm == null) {
+						gcm = GoogleCloudMessaging.getInstance(mContext);
+					}
+					regId = gcm.register(PROJECT_ID);
+					msg = "Device registered, registration ID=" + regId;
+
+					// You should send the registration ID to your server over
+					// HTTP,
+					// so it can use GCM/HTTP or CCS to send messages to your
+					// app.
+					// The request to your server should be authenticated if
+					// your app
+					// is using accounts.
+					sendRegistrationToServer(regId);
+
+					// For this demo: we don't need to send it because the
+					// device
+					// will send upstream messages to a server that echo back
+					// the
+					// message using the 'from' address in the message.
+
+					// Persist the regID - no need to register again.
+					storeRegistrationId(mContext, regId);
+				} catch (IOException ex) {
+					msg = "Error :" + ex.getMessage();
+					// If there is an error, don't just keep trying to register.
+					// Require the user to click a button again, or perform
+					// exponential back-off.
+				}
+			}
+
+			// This is actually a dummy function. At this point, one
+			// would send the registration id, and other identifying
+			// information to your server, which should save the id
+			// for use when broadcasting messages.
+			sendRegistrationToServer(regId);
 
 		} catch (Exception e) {
 
@@ -508,7 +556,7 @@ public class MyUniActivity extends SherlockActivity {
 		MessageResponse response;
 		MessageRequest request1 = new MessageRequest(
 				SmartUniDataWS.URL_WS_SMARTUNI,
-				SmartUniDataWS.POST_WS_REGISTRATION_GCM(bp.getUserId(), regId));
+				SmartUniDataWS.POST_WS_REGISTRATION_GCM(regId));
 		request1.setMethod(Method.POST);
 		try {
 			response = mProtocolCarrier.invokeSync(request1,
@@ -516,13 +564,17 @@ public class MyUniActivity extends SherlockActivity {
 			if (response.getHttpStatus() == 200) {
 
 				body = response.getBody();
-				if (Boolean.getBoolean(body)) {
+				
+				if (body.equals("true")) {
+					SharedUtils.setFirstTime(mContext);
 					Log.d("REG_ID", "registration to server done!");
+					return true;
 				} else {
 					Log.d("REG_ID", "registration to server failed!");
+					return false;
 				}
 
-				return Boolean.getBoolean(body);
+				
 
 			} else {
 				Log.d("REG_ID", "registration to server failed!");
@@ -540,5 +592,104 @@ public class MyUniActivity extends SherlockActivity {
 
 		return false;
 
+	}
+
+	// A BroadcastReceiver must override the onReceive() event.
+	private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+
+		}
+	};
+
+	// If our activity is paused, it is important to UN-register any
+	// broadcast receivers.
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		unregisterReceiver(gcmReceiver);
+		
+	}
+
+	// When an activity is resumed, be sure to register any
+	// broadcast receivers with the appropriate intent
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerReceiver(gcmReceiver, gcmFilter);
+
+	}
+
+	/**
+	 * Gets the current registration ID for application on GCM service.
+	 * <p>
+	 * If result is empty, the app needs to register.
+	 * 
+	 * @return registration ID, or empty string if there is no existing
+	 *         registration ID.
+	 */
+	private String getRegistrationId(Context context) {
+		final SharedPreferences prefs = getGCMPreferences(context);
+		String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+		if (registrationId.isEmpty()) {
+			Log.i(TAG, "Registration not found.");
+			return "";
+		}
+		// Check if app was updated; if so, it must clear the registration ID
+		// since the existing regID is not guaranteed to work with the new
+		// app version.
+		int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION,
+				Integer.MIN_VALUE);
+		int currentVersion = getAppVersion(context);
+		if (registeredVersion != currentVersion) {
+			Log.i(TAG, "App version changed.");
+			return "";
+		}
+		return registrationId;
+	}
+
+	/**
+	 * @return Application's {@code SharedPreferences}.
+	 */
+	private SharedPreferences getGCMPreferences(Context context) {
+		// This sample app persists the registration ID in shared preferences,
+		// but
+		// how you store the regID in your app is up to you.
+		return getSharedPreferences(MyUniActivity.class.getSimpleName(),
+				Context.MODE_PRIVATE);
+	}
+
+	/**
+	 * @return Application's version code from the {@code PackageManager}.
+	 */
+	private static int getAppVersion(Context context) {
+		try {
+			PackageInfo packageInfo = context.getPackageManager()
+					.getPackageInfo(context.getPackageName(), 0);
+			return packageInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			// should never happen
+			throw new RuntimeException("Could not get package name: " + e);
+		}
+	}
+
+	/**
+	 * Stores the registration ID and app versionCode in the application's
+	 * {@code SharedPreferences}.
+	 * 
+	 * @param context
+	 *            application's context.
+	 * @param regId
+	 *            registration ID
+	 */
+	private void storeRegistrationId(Context context, String regId) {
+		final SharedPreferences prefs = getGCMPreferences(context);
+		int appVersion = getAppVersion(context);
+		Log.i(TAG, "Saving regId on app version " + appVersion);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(PROPERTY_REG_ID, regId);
+		editor.putInt(PROPERTY_APP_VERSION, appVersion);
+		editor.commit();
 	}
 }

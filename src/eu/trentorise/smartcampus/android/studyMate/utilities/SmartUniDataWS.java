@@ -160,8 +160,8 @@ public final class SmartUniDataWS {
 	
 	//CHAT GDS | GCM
 	//////////////////////////////////////////////
-	public static final String POST_WS_REGISTRATION_GCM(String studentId, String regId) {
-		return "/rest/gcm/student/"+studentId+"/reg_id/"+regId;
+	public static final String POST_WS_REGISTRATION_GCM(String regId) {
+		return "/rest/gcm/reg_id/"+regId;
 	}
 	
 	public static final String POST_WS_MESSAGE_CHAT_GDS(long studentId, long gdsId,

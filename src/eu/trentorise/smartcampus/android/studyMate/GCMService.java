@@ -9,7 +9,7 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMService extends GCMBaseIntentService {
 
-	private static final String PROJECT_ID = "it.smartcampuslab.studymate"; //to add project id
+	private static final String PROJECT_ID = "674612024423"; //to add project id
     
 	private static final String TAG = "GCMIntentService";
 	

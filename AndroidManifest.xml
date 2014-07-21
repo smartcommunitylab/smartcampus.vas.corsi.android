@@ -9,6 +9,11 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="16" />
 
+    
+        <permission
+        android:name="eu.trentorise.smartcampus.android.studyMate.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -25,9 +30,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="eu.trentorise.smartcampus.android.studyMate.permission.C2D_MESSAGE" />
 
-    <permission
-        android:name="eu.trentorise.smartcampus.android.studyMate.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
+
 
     <application
         android:allowBackup="true"
@@ -262,6 +265,7 @@
         <service
             android:name=".GCMService">
         </service>
+        
     </application>
 
 </manifest>
