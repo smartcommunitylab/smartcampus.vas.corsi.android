@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.Comparator;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
 import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;

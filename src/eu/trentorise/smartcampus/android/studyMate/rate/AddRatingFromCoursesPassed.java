@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.rate;
 
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.RatingRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterFeedbackList;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdapterRating;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AddFeedbackHandler;

@@ -1,4 +1,4 @@
-package eu.trentorise.smartcampus.android.studyMate.start;
+package eu.trentorise.smartcampus.android.studyMate;
 
 import eu.trentorise.smartcampus.android.studyMate.R;
 
@@ -6,9 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +25,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,6 +55,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.android.studyMate.myAgenda.MyAgendaActivity;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.android.studyMate.rate.CoursesPassedActivity;
+import eu.trentorise.smartcampus.android.studyMate.start.SetInfoStudentActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -65,6 +73,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
+import eu.trentorise.smartcampus.pushservice.NotificationCenter;
 import eu.trentorise.smartcampus.pushservice.PushServiceConnector;
 
 public class MyUniActivity extends SherlockActivity {
@@ -81,6 +90,7 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String PROPERTY_REG_ID = "registration_id";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private String regId = "";
+	private String broadcastMessage = "No broadcast message";
 
 	/**
 	 * Tag used on log messages.
@@ -108,16 +118,66 @@ public class MyUniActivity extends SherlockActivity {
 	public String body;
 	public static String userAuthToken;
 	public static BasicProfile bp;
+	
+	
+//	public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
+//	    @Override
+//	    public void onReceive(Context context, Intent intent) {
+//	        // Explicitly specify that GcmIntentService will handle the intent.
+//	        ComponentName comp = new ComponentName(context.getPackageName(),
+//	                GcmIntentService.class.getName());
+//	        // Start the service, keeping the device awake while it is launching.
+//	        startWakefulService(context, (intent.setComponent(comp)));
+//	        setResultCode(Activity.RESULT_OK);
+//	    }
+//	}
+
+	// A BroadcastReceiver must override the onReceive() event.
+	private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.d("GCM","Message received!");
+
+			new NotificationCenter(mContext).publishNotification(intent,
+					1234, MyUniActivity.class);
+
+			broadcastMessage = intent.getExtras().getString("gcm");
+			
+			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext).setContentTitle("My notification").setContentText("Hello World!");
+			// Creates an explicit intent for an Activity in your app
+			Intent resultIntent = new Intent(mContext, MyUniActivity.class);
+
+			// The stack builder object will contain an artificial back stack for the
+			// started Activity.
+			// This ensures that navigating backward from the Activity leads out of
+			// your application to the Home screen.
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
+			// Adds the back stack for the Intent (but not the Intent itself)
+			stackBuilder.addParentStack(MyUniActivity.class);
+			// Adds the Intent that starts the Activity to the top of the stack
+			stackBuilder.addNextIntent(resultIntent);
+			PendingIntent resultPendingIntent =
+			        stackBuilder.getPendingIntent(
+			            0,
+			            PendingIntent.FLAG_UPDATE_CURRENT
+			        );
+			mBuilder.setContentIntent(resultPendingIntent);
+			NotificationManager mNotificationManager =
+			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			// mId allows you to update the notification later on.
+			mNotificationManager.notify(2134, mBuilder.build());
+		}
+	};
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
 
-		// Create our IntentFilter, which will be used in conjunction with a
-		// broadcast receiver.
-		gcmFilter = new IntentFilter();
-		gcmFilter.addAction("GCM_RECEIVED_ACTION");
+
 
 		if (LauncherHelper.isLauncherInstalled(this, true)) {
 			if (!isUserConnectedToInternet(mContext)) {
@@ -250,6 +310,11 @@ public class MyUniActivity extends SherlockActivity {
 				MyUniActivity.this.startActivity(intent);
 			}
 		}
+		
+		// Create our IntentFilter, which will be used in conjunction with a
+		// broadcast receiver.
+		gcmFilter = new IntentFilter();
+		gcmFilter.addAction("GCM_RECEIVED_ACTION");
 	}
 
 	public static SCAccessProvider getAccessProvider() {
@@ -281,6 +346,8 @@ public class MyUniActivity extends SherlockActivity {
 		@Override
 		protected BasicProfile doInBackground(Void... params) {
 			try {
+				
+				String reg_id = getRegistrationId(mContext); /////////////////////////////////////TEST
 
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				BasicProfileService service = new BasicProfileService(AUTH_URL);
@@ -296,6 +363,8 @@ public class MyUniActivity extends SherlockActivity {
 				if (isFirstTime) {
 					registrationDevice();
 				}
+				
+				
 
 				// init connector
 				// PushServiceConnector connector = new PushServiceConnector();
@@ -306,7 +375,7 @@ public class MyUniActivity extends SherlockActivity {
 				// e.printStackTrace();
 				// }
 				// proviamo a recuperare i dati studente
-				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
+ 				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
 						SmartUniDataWS.TOKEN_NAME);
 				MessageResponse response;
 				MessageRequest request = new MessageRequest(
@@ -594,21 +663,13 @@ public class MyUniActivity extends SherlockActivity {
 
 	}
 
-	// A BroadcastReceiver must override the onReceive() event.
-	private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-
-		}
-	};
 
 	// If our activity is paused, it is important to UN-register any
 	// broadcast receivers.
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		unregisterReceiver(gcmReceiver);
+		unregisterReceiver(gcmReceiver);
 		
 	}
 

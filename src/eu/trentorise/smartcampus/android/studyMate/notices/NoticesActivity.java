@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.notices;
 
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.io.UnsupportedEncodingException;
@@ -21,7 +22,6 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 
-import eu.trentorise.smartcampus.android.studyMate.start.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationHandler;
 
 public class NoticesActivity extends SherlockFragmentActivity {
