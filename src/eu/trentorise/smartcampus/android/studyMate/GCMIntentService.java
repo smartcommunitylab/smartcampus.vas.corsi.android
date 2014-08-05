@@ -30,6 +30,8 @@ public class GCMIntentService extends GCMBaseIntentService {
     
 	private static final String TAG = "GCMService";
 	
+	private static final int NOTIFICATION_ID = 1234;
+	
 	
 	public GCMIntentService()
 	{
@@ -49,14 +51,14 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 		Log.d(TAG, "Message Received");
 
-//		new NotificationCenter(ctx).publishNotification(intent,
-//				NOTIFICATION_ID, MyUniActivity.class);
-//
-//		
-				
-		String message = intent.getStringExtra("message");
+		new NotificationCenter(ctx).publishNotification(intent,
+				NOTIFICATION_ID, MyUniActivity.class);
+
 		
-		sendGCMIntent(ctx, message);
+				
+		//String message = intent.getStringExtra("message");
+		
+		//sendGCMIntent(ctx, message);
 		
 		
 	}
@@ -78,7 +80,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction("GCM_RECEIVED_ACTION");
 		
-		broadcastIntent.putExtra("gcm", message);
+		broadcastIntent.putExtra("message", message);
 		
 		ctx.sendBroadcast(broadcastIntent);
 		
