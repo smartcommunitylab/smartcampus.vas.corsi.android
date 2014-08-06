@@ -54,7 +54,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 		new NotificationCenter(ctx).publishNotification(intent,
 				NOTIFICATION_ID, MyUniActivity.class);
 
-		
 				
 		//String message = intent.getStringExtra("message");
 		
