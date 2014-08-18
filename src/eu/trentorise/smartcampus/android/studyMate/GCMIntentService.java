@@ -20,8 +20,10 @@ import android.util.Log;
 
 
 
+
 import com.google.android.gcm.GCMBaseIntentService;
 
+import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 import eu.trentorise.smartcampus.pushservice.NotificationCenter;
 
 public class GCMIntentService extends GCMBaseIntentService {
@@ -30,7 +32,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     
 	private static final String TAG = "GCMService";
 	
-	private static final int NOTIFICATION_ID = 1234;
+	private static final int NOTIFICATION_ID = 7204;
 	
 	
 	public GCMIntentService()
@@ -50,8 +52,11 @@ public class GCMIntentService extends GCMBaseIntentService {
 	protected void onMessage(Context ctx, Intent intent) {
 
 		Log.d(TAG, "Message Received");
+		
+		intent.putExtra("content.delay", "0");
+		
 
-		new NotificationCenter(ctx).publishNotification(intent,
+		new NotificationCenterGds(ctx).publishNotification(intent,
 				NOTIFICATION_ID, MyUniActivity.class);
 
 				
