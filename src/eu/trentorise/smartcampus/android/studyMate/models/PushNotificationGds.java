@@ -10,10 +10,11 @@ public class PushNotificationGds {
 	private String gdsId;
 	private boolean mRead = false;
 	
-	public PushNotificationGds(String msg, String gds_id) {
+	public PushNotificationGds(String msg, String gds_id, boolean read) {
 		
 		this.message = msg;
 		this.gdsId = gds_id;
+		this.mRead = read;
 		
 	}
 	
@@ -24,7 +25,7 @@ public class PushNotificationGds {
 			throw new RuntimeException("Notification's empy");
 
 		out.put(NotificationDBGdsHelper.MESSAGE_KEY,message);
-		out.put(NotificationDBGdsHelper.GDS_ID_KEY,gdsId);
+		out.put(NotificationDBGdsHelper.GDS_KEY,gdsId);
 		out.put(NotificationDBGdsHelper.READ_KEY, mRead ? 1 : 0);
 		
 		return out;

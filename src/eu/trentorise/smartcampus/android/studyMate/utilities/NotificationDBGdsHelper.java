@@ -15,7 +15,7 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 	static final String ID_KEY = "not_id";
 
 	public static final String MESSAGE_KEY = "message";
-	public static final String GDS_ID_KEY = "gds";
+	public static final String GDS_KEY = "gds";
 
 
 	// 0 for read
@@ -35,8 +35,10 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 			+ " integer PRIMARY_KEY, "
 			+ MESSAGE_KEY
 			+ " text not null, "
-			+ GDS_ID_KEY
-			+ " text not null);";
+			+ GDS_KEY
+			+ " text not null, "
+			+ READ_KEY
+			+ " integer DEFAULT 0) ";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {

@@ -96,7 +96,7 @@ public class NotificationCenterGds extends NotificationCenter {
 	
 	private PushNotificationGds buildPushNotification(Intent i) {
 		
-		return new PushNotificationGds(i.getStringExtra(MESSAGE_KEY),i.getStringExtra(GDS_ID_KEY));
+		return new PushNotificationGds(i.getStringExtra(MESSAGE_KEY),i.getStringExtra(GDS_ID_KEY),false);
 	}
 	
 	public String getJourneyId(String json) {
