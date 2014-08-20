@@ -1,30 +1,14 @@
 package eu.trentorise.smartcampus.android.studyMate;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import com.google.android.gcm.GCMBaseIntentService;
 
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
+import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Overview_GDS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
-import eu.trentorise.smartcampus.pushservice.NotificationCenter;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
@@ -52,12 +36,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 	protected void onMessage(Context ctx, Intent intent) {
 
 		Log.d(TAG, "Message Received");
-		
-		intent.putExtra("content.delay", "0");
-		
-
+			
 		new NotificationCenterGds(ctx).publishNotification(intent,
-				NOTIFICATION_ID, MyUniActivity.class);
+				NOTIFICATION_ID, Lista_GDS_activity.class);
 
 				
 		//String message = intent.getStringExtra("message");

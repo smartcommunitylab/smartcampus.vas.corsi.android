@@ -3,26 +3,41 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
+import eu.trentorise.smartcampus.android.studyMate.models.PushNotificationGds;
+import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 
 public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 
 	ArrayList<GruppoDiStudio> entries;
 	Context context;
+	List<PushNotificationGds> listNotificationsGds;
 
 	public Adapter_gds_to_list(Context context, int textViewResourceId,
 			ArrayList<GruppoDiStudio> objects) {
 		super(context, textViewResourceId, objects);
 		this.entries = objects;
 		this.context = context;
+	}
+	
+	
+	public Adapter_gds_to_list(Context context, int textViewResourceId,
+			ArrayList<GruppoDiStudio> objects, List<PushNotificationGds> listNotifications) {
+		super(context, textViewResourceId, objects);
+		this.entries = objects;
+		this.context = context;
+		this.listNotificationsGds = listNotifications;
 	}
 
 	@Override
@@ -46,11 +61,46 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		nome_gds.setTextColor(Color.BLACK);
 		nome_corso.setText(currentGDS.getMateria());
 		nome_corso.setTextColor(Color.BLACK);
+		
+		int numberOfNotifications = getNumberOfUnreadNotifications(currentGDS.getId());
+		ImageView imageNotification = (ImageView)row.findViewById(R.id.ImageViewNotification);
+		
+		if(numberOfNotifications > 0){
+			
+		String uri = "@drawable/notification_"+numberOfNotifications+".png";
+		
+		int imageResource = getFlagResource(context, "notification_"+numberOfNotifications);
+
+		//int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+		Drawable resImage = context.getResources().getDrawable(imageResource);
+		imageNotification.setImageDrawable(resImage);
+		}else{
+			imageNotification.setVisibility(View.GONE);
+		}
+		
 		return row;
 	}
 
 	public ArrayList<GruppoDiStudio> getEntries() {
 		return entries;
+	}
+	
+	public int getNumberOfUnreadNotifications(Long gdsId) {
+		int count = 0;
+		
+		for (PushNotificationGds notif : listNotificationsGds) {
+			if(notif.getGdsId().equals(gdsId)){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	
+	public int getFlagResource(Context context, String name) {
+	   int resId = context.getResources().getIdentifier(name, "drawable", "eu.trentorise.smartcampus.android.studyMate");
+	   return resId;
 	}
 
 }

@@ -16,6 +16,9 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 
 	public static final String MESSAGE_KEY = "message";
 	public static final String GDS_KEY = "gds";
+	public static final String GDS_NAME = "gds_name";
+	public static final String DATE_KEY = "date";
+	
 
 
 	// 0 for read
@@ -37,8 +40,11 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 			+ " text not null, "
 			+ GDS_KEY
 			+ " text not null, "
+			+ GDS_NAME
+			+ " text not null, "
 			+ READ_KEY
-			+ " integer DEFAULT 0) ";
+			+ " integer DEFAULT 0,"
+			+ DATE_KEY + " DATE DEFAULT (datetime('now')))";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
