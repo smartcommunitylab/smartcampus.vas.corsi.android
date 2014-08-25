@@ -17,8 +17,11 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Message;
 import eu.trentorise.smartcampus.android.studyMate.utilities.ChatAdapter;
+import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
+import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 
 public class Chat_Fragment extends SherlockFragment {
 
@@ -30,6 +33,7 @@ public class Chat_Fragment extends SherlockFragment {
 	static Random rand = new Random();
 	static String sender;
 	private ListView chat;
+	private GruppoDiStudio contextualGDS;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +44,13 @@ public class Chat_Fragment extends SherlockFragment {
 
 	@Override
 	public void onStart() {
+		
+		Bundle myextras = getActivity().getIntent().getExtras();
+		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
+
+		NotificationCenterGds notifCenter = new NotificationCenterGds(getActivity().getApplicationContext());
+		notifCenter.deleteNotificationGds(contextualGDS.getId());
+		
 		
 		text = (EditText) getActivity().findViewById(R.id.text);
 

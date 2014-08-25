@@ -83,7 +83,7 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 			imageNotification.setImageDrawable(resImage);
 			imageNotification.setVisibility(View.VISIBLE);
 		} else {
-			//imageNotification.setVisibility(View.GONE);
+			imageNotification.setVisibility(View.GONE);
 		}
 
 		return row;

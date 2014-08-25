@@ -102,12 +102,67 @@ public class NotificationCenterGds extends NotificationCenter {
 
 		return notifs;
 	}
+	
+	
+	public List<PushNotificationGds> getGdsNotificationsOfGds(long gdsId) {
+		SQLiteDatabase db = mDB.getReadableDatabase();
+		String sql = " select * from "
+				+ NotificationDBGdsHelper.DB_TABLE_NOTIFICATION + " order by "
+				+ NotificationDBGdsHelper.DATE_KEY + " DESC";
+		ArrayList<PushNotificationGds> notifs = new ArrayList<PushNotificationGds>();
+		try {
+			db.beginTransaction();
+			Cursor cursor = db.rawQuery(sql, null);
+			db.setTransactionSuccessful();
+
+			while (cursor.moveToNext()) {
+				PushNotificationGds notif = new PushNotificationGds(
+						cursor.getString(cursor
+								.getColumnIndex(NotificationDBGdsHelper.MESSAGE_KEY)),
+						cursor.getLong(cursor
+								.getColumnIndex(NotificationDBGdsHelper.GDS_KEY)),
+						cursor.getString(cursor
+								.getColumnIndex(NotificationDBGdsHelper.GDS_NAME)),
+						cursor.getInt(cursor
+								.getColumnIndex(NotificationDBGdsHelper.READ_KEY)) > 0 ? true
+								: false,
+						new Date(
+								cursor.getLong(cursor
+										.getColumnIndex(NotificationDBGdsHelper.DATE_KEY))));
+
+				notifs.add(notif);
+			}
+		} catch (Exception ex) {
+			Log.e(this.getClass().getName(), ex.toString());
+		} finally {
+			db.endTransaction();
+		}
+
+		return notifs;
+	}
+	
 
 	@Override
 	public void deleteNotification(PushNotification notif) {
 		super.deleteNotification(notif);
 	}
-
+	
+	public void deleteNotificationGds(Long gdsId) {
+		SQLiteDatabase db = mDB.getWritableDatabase();
+		try {
+			db.beginTransaction();
+			db.delete(NotificationDBGdsHelper.DB_TABLE_NOTIFICATION,
+					NotificationDBGdsHelper.GDS_KEY + "=?",
+					new String[] { gdsId + "" });
+			db.setTransactionSuccessful();
+		} catch (Exception ex) {
+			Log.e(this.getClass().getName(), ex.toString());
+		} finally {
+			db.endTransaction();
+		}
+		db.close();
+	}
+	
 	@Override
 	public void setNotificationRead(int id) {
 		super.setNotificationRead(id);

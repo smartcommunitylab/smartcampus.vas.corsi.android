@@ -80,8 +80,5 @@ public class PushNotificationGds {
 	public void setmDate(Date mDate) {
 		this.mDate = mDate;
 	}
-	
-	
-	
 
 }
