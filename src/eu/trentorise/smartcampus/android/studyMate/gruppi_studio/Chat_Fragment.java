@@ -101,7 +101,7 @@ public class Chat_Fragment extends SherlockFragment {
 		}
 	}
 
-	private class SendMessage extends AsyncTask<Void, String, Boolean> {
+	private class SendMessage extends AsyncTask<Void, Void, Boolean> {
 
 		private ProtocolCarrier mProtocolCarrier;
 
@@ -183,6 +183,7 @@ public class Chat_Fragment extends SherlockFragment {
 		messages.add(m);
 		adapter.notifyDataSetChanged();
 		chat.setSelection(messages.size() - 1);
+		text.setText("");
 	}
 
 	@Override
