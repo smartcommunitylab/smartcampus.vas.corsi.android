@@ -1,10 +1,15 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +22,21 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
+import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Message;
 import eu.trentorise.smartcampus.android.studyMate.utilities.ChatAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
+import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
+import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageRequest;
+import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
+import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class Chat_Fragment extends SherlockFragment {
 
@@ -44,14 +59,10 @@ public class Chat_Fragment extends SherlockFragment {
 
 	@Override
 	public void onStart() {
-		
+
 		Bundle myextras = getActivity().getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
 
-		NotificationCenterGds notifCenter = new NotificationCenterGds(getActivity().getApplicationContext());
-		notifCenter.deleteNotificationGds(contextualGDS.getId());
-		
-		
 		text = (EditText) getActivity().findViewById(R.id.text);
 
 		sender = UtilityProvvisoria.sender[rand
@@ -62,106 +73,108 @@ public class Chat_Fragment extends SherlockFragment {
 		messages.add(new Message("Test", false));
 		messages.add(new Message("Test?", true));
 		messages.add(new Message("YUP", false));
-		messages.add(new Message("LOL",
-				true));
+		messages.add(new Message("LOL", true));
 		messages.add(new Message("???!", true));
-		messages.add(new Message("funge!",
-				false));
+		messages.add(new Message("funge!", false));
 
 		adapter = new ChatAdapter(getActivity(), messages);
 		chat = (ListView) getActivity().findViewById(R.id.list_chat);
 		chat.setAdapter(adapter);
-//		setListAdapter(adapter);
-		addNewMessage(new Message(
-				"=)", true));
-		
+		// setListAdapter(adapter);
+		addNewMessage(new Message("=)", true));
+
 		Button sendBtn = (Button) getActivity().findViewById(R.id.send_chat);
-		sendBtn.setOnClickListener(
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						sendMessage(v);
-					}
-				});
+		sendBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendMessage(v);
+			}
+		});
 		super.onStart();
 	}
 
 	public void sendMessage(View v) {
-		String newMessage = text.getText().toString().trim();
-		if (newMessage.length() > 0) {
-			text.setText("");
-			addNewMessage(new Message(newMessage, true));
+		//String newMessage = text.getText().toString().trim();
+		if (text.getText().toString().length() > 0) {
+			//addNewMessage(new Message(newMessage, true));
 			new SendMessage().execute();
 		}
 	}
 
-	private class SendMessage extends AsyncTask<Void, String, String> {
+	private class SendMessage extends AsyncTask<Void, String, Boolean> {
+
+		private ProtocolCarrier mProtocolCarrier;
+
 		@Override
-		protected String doInBackground(Void... params) {
-			try {
-				Thread.sleep(2000); // simulate a network call
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		protected Boolean doInBackground(Void... params) {
+			mProtocolCarrier = new ProtocolCarrier(getActivity(),
+					SmartUniDataWS.TOKEN_NAME);
 
-			this.publishProgress(String.format("%s started writing", sender));
-			try {
-				Thread.sleep(2000); // simulate a network call
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			this.publishProgress(String.format("%s has entered text", sender));
-			try {
-				Thread.sleep(3000);// simulate a network call
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_WS_MESSAGE_CHAT_GDS(
+							contextualGDS.getId(), text.getText().toString()
+									.trim()));
+			request.setMethod(Method.POST);
 
-			return UtilityProvvisoria.messages[rand
-					.nextInt(UtilityProvvisoria.messages.length - 1)];
+			MessageResponse response;
+			try {
+
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+					
+					Boolean state = Boolean.valueOf(response.getBody());
+
+					if(state != null){
+					return state; 
+					}else{
+						return false;
+					}
+
+				}
+
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+			return false;
 
 		}
 
 		@Override
-		public void onProgressUpdate(String... v) {
+		protected void onPostExecute(Boolean operation) {
 
-			if (messages.get(messages.size() - 1).isStatusMessage())// check
-																	// wether we
-																	// have
-																	// already
-																	// added a
-																	// status
-																	// message
-			{
-				messages.get(messages.size() - 1).setMessage(v[0]); // update
-																	// the
-																	// status
-																	// for that
-				adapter.notifyDataSetChanged();
-				chat.setSelection(messages.size() - 1);
-			} else {
-				addNewMessage(new Message(true, v[0])); // add new message, if
-														// there is no existing
-														// status message
+			if (operation) {
+
+				if (messages.get(messages.size() - 1).isStatusMessage())
+				{
+					messages.remove(messages.size() - 1);
+				}
+
+				addNewMessage(new Message(text.getText().toString().trim(), true)); // add the orignal
+															// message
+															// from server.
+
 			}
 		}
 
-		@Override
-		protected void onPostExecute(String text) {
-			if (messages.get(messages.size() - 1).isStatusMessage())// check if
-																	// there is
-																	// any
-																	// status
-																	// message,
-																	// now
-																	// remove
-																	// it.
-			{
-				messages.remove(messages.size() - 1);
-			}
+	}
 
-			addNewMessage(new Message(text, false)); // add the orignal message
-														// from server.
+	private class GetListMessages extends
+			AsyncTask<Void, String, List<ChatMessage>> {
+		@Override
+		protected List<ChatMessage> doInBackground(Void... params) {
+
+			return null;
+
 		}
 
 	}
@@ -170,5 +183,15 @@ public class Chat_Fragment extends SherlockFragment {
 		messages.add(m);
 		adapter.notifyDataSetChanged();
 		chat.setSelection(messages.size() - 1);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		NotificationCenterGds notifCenter = new NotificationCenterGds(
+				getActivity().getApplicationContext());
+		notifCenter.deleteNotificationGds(contextualGDS.getId());
+
 	}
 }
