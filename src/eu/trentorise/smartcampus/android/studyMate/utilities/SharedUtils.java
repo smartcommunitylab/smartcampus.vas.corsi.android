@@ -8,12 +8,15 @@ import android.content.SharedPreferences.Editor;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
+import eu.trentorise.smartcampus.profileservice.model.BasicProfile;
 
 public final class SharedUtils {
 
 	private static final String STUDENTE_DIPARTIMENTO_SHARED_PREFERENCES = "studente_dipartimento_shared_preferences";
 	private static final String STUDENTE_CDS_SHARED_PREFERENCES = "studente_cds_shared_preferences";
 	private static final String STUDENTE_DIPARTIMENTO = "studente_dipartimento";
+	private static final String STUDENTE_INFO = "studente_info";
+	private static final String STUDENTE_INFO_PREFERENCES = "studente_info_preferences";
 	private static final String IS_FIRST_TIME = "is_first_time";
 	private static final String IS_FIRST_TIME_PREFERENCES = "is_first_time_preferences";
 	private static final String STUDENTE_CDS = "studente_cds";
@@ -106,6 +109,31 @@ public final class SharedUtils {
 		editor.putString(STUDENTE_CDS, Utils.convertToJSON(IS_FIRST_TIME));
 
 		return editor.commit();
+	}
+
+	public static boolean setStudentInfo(Context context, BasicProfile bp) {
+		
+		SharedPreferences pref = context.getSharedPreferences(
+				STUDENTE_INFO_PREFERENCES, Context.MODE_PRIVATE);
+
+		Editor editor = pref.edit();
+		editor.putString(STUDENTE_INFO, Utils.convertToJSON(bp));
+
+		return editor.commit();
+		
+	}
+
+	public static BasicProfile getStudentInfo(Context context) {
+		// TODO Auto-generated method stub
+		SharedPreferences pref = context.getSharedPreferences(
+				STUDENTE_INFO_PREFERENCES, Context.MODE_PRIVATE);
+
+		String jsonObjectBasicProfile = pref.getString(STUDENTE_INFO, null);
+
+		BasicProfile bp = Utils.convertJSONToObject(
+				jsonObjectBasicProfile, BasicProfile.class);
+		
+		return bp;
 	}
 
 }

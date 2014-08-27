@@ -253,4 +253,8 @@
 
     <string name="main_empty_list">Non ci sono conversazioni recenti, scrivi un nuovo messaggio per iniziarne una.</string>
     
+    
+    <!-- chat -->
+    <string name="chat_messages">Messaggi della chat</string>
+    
 </resources>

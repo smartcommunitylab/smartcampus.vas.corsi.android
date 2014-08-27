@@ -328,6 +328,11 @@ public class MyUniActivity extends SherlockActivity {
 				System.out.println(bp.getName());
 				System.out.println("USERID: " + bp.getUserId());
 				System.out.println("user token: " + getAuthToken());
+				
+				
+				if(SharedUtils.getStudentInfo(mContext) == null)
+					SharedUtils.setStudentInfo(mContext, bp);
+				
 
 				boolean isFirstTime = SharedUtils.isFirstTime(mContext);
 

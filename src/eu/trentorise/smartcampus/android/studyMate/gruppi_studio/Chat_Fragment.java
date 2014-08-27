@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.google.android.gms.internal.ch;
 
 import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
@@ -29,6 +31,7 @@ import eu.trentorise.smartcampus.android.studyMate.models.Message;
 import eu.trentorise.smartcampus.android.studyMate.utilities.ChatAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
+import eu.trentorise.smartcampus.android.studyMate.utilities.SharedUtils;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -49,6 +52,7 @@ public class Chat_Fragment extends SherlockFragment {
 	static String sender;
 	private ListView chat;
 	private GruppoDiStudio contextualGDS;
+	public static ProgressDialog pd;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,23 +69,12 @@ public class Chat_Fragment extends SherlockFragment {
 
 		text = (EditText) getActivity().findViewById(R.id.text);
 
-		sender = UtilityProvvisoria.sender[rand
-				.nextInt(UtilityProvvisoria.sender.length - 1)];
-		getActivity().setTitle(sender);
-		messages = new ArrayList<Message>();
-
-		messages.add(new Message("Test", false));
-		messages.add(new Message("Test?", true));
-		messages.add(new Message("YUP", false));
-		messages.add(new Message("LOL", true));
-		messages.add(new Message("???!", true));
-		messages.add(new Message("funge!", false));
-
-		adapter = new ChatAdapter(getActivity(), messages);
-		chat = (ListView) getActivity().findViewById(R.id.list_chat);
-		chat.setAdapter(adapter);
-		// setListAdapter(adapter);
-		addNewMessage(new Message("=)", true));
+		// sender = UtilityProvvisoria.sender[rand
+		// .nextInt(UtilityProvvisoria.sender.length - 1)];
+		// getActivity().setTitle(sender);
+		//
+		GetListMessages getMessagesTask = new GetListMessages();
+		getMessagesTask.execute();
 
 		Button sendBtn = (Button) getActivity().findViewById(R.id.send_chat);
 		sendBtn.setOnClickListener(new OnClickListener() {
@@ -94,9 +87,9 @@ public class Chat_Fragment extends SherlockFragment {
 	}
 
 	public void sendMessage(View v) {
-		//String newMessage = text.getText().toString().trim();
+		// String newMessage = text.getText().toString().trim();
 		if (text.getText().toString().length() > 0) {
-			//addNewMessage(new Message(newMessage, true));
+			// addNewMessage(new Message(newMessage, true));
 			new SendMessage().execute();
 		}
 	}
@@ -125,12 +118,12 @@ public class Chat_Fragment extends SherlockFragment {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-					
+
 					Boolean state = Boolean.valueOf(response.getBody());
 
-					if(state != null){
-					return state; 
-					}else{
+					if (state != null) {
+						return state;
+					} else {
 						return false;
 					}
 
@@ -154,16 +147,22 @@ public class Chat_Fragment extends SherlockFragment {
 
 			if (operation) {
 
-				if (messages.get(messages.size() - 1).isStatusMessage())
-				{
-					messages.remove(messages.size() - 1);
+				if (messages.size() >= 1) {
+
+					if (messages.get(messages.size() - 1).isStatusMessage()) {
+						messages.remove(messages.size() - 1);
+					}
+
+					addNewMessage(new Message(text.getText().toString().trim(),
+							true)); // add the orignal
+					// message
+					// from server.
+
+				}else{
+					text.setText("");
 				}
 
-				addNewMessage(new Message(text.getText().toString().trim(), true)); // add the orignal
-															// message
-															// from server.
-
-			}else{
+			} else {
 				text.setText("");
 			}
 		}
@@ -172,11 +171,89 @@ public class Chat_Fragment extends SherlockFragment {
 
 	private class GetListMessages extends
 			AsyncTask<Void, String, List<ChatMessage>> {
+
+		private ProtocolCarrier mProtocolCarrier;
+		private List<ChatMessage> listMessages;
+		private String bodyResponse;
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+
+			new ProgressDialog(getActivity());
+			pd = ProgressDialog.show(
+					getActivity(),
+					getActivity().getResources().getString(
+							R.string.chat_messages),
+					getActivity().getResources().getString(
+							R.string.dialog_loading));
+		}
+
 		@Override
 		protected List<ChatMessage> doInBackground(Void... params) {
 
-			return null;
+			mProtocolCarrier = new ProtocolCarrier(getActivity(),
+					SmartUniDataWS.TOKEN_NAME);
 
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.GET_WS_MESSAGE_CHAT_GDS(contextualGDS
+							.getId()));
+			request.setMethod(Method.GET);
+
+			MessageResponse response;
+			try {
+
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					bodyResponse = response.getBody();
+
+				}
+
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+
+			return Utils.convertJSONToObjects(bodyResponse, ChatMessage.class);
+
+		}
+
+		@Override
+		protected void onPostExecute(List<ChatMessage> listMessages) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(listMessages);
+
+			messages = new ArrayList<Message>();
+
+			for (ChatMessage chatMessage : listMessages) {
+				if (chatMessage.getId_studente() + "" == SharedUtils
+						.getStudentInfo(getActivity().getApplicationContext())
+						.getUserId()) {
+					messages.add(new Message(chatMessage.getTesto(), true));
+				} else {
+					messages.add(new Message(chatMessage.getTesto(), false));
+				}
+			}
+
+			if (messages != null) {
+				adapter = new ChatAdapter(getActivity(), messages);
+				chat = (ListView) getActivity().findViewById(R.id.list_chat);
+				chat.setAdapter(adapter);
+				// setListAdapter(adapter);
+			}
+
+			pd.dismiss();
 		}
 
 	}
