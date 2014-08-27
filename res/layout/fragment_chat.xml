@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/message_bar" >
+android:background="@drawable/message_bar" >
 
         <EditText
             android:id="@+id/text"
@@ -19,22 +19,17 @@
             android:layout_height="fill_parent"
             android:layout_margin="5sp"
             android:layout_weight="1"
-            android:background="@drawable/message_field"
             android:hint="Write here"
             android:padding="5sp"
             android:textColor="@color/textFieldColor" />
+<!--             android:background="@drawable/message_field" -->
 
         <Button
             android:id="@+id/send_chat"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_margin="5sp"
-            android:background="@drawable/send_button"
-            android:paddingBottom="5sp"
-            android:paddingLeft="15sp"
-            android:paddingRight="15sp"
-            android:paddingTop="5sp"
-            android:text="Send"
+            android:background="@drawable/social_send_now"
             android:textColor="#FFF" />
     </LinearLayout>
 
