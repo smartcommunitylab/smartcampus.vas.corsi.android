@@ -322,8 +322,6 @@ public class MyUniActivity extends SherlockActivity {
 		protected BasicProfile doInBackground(Void... params) {
 			try {
 				
-				String reg_id = getRegistrationId(mContext); /////////////////////////////////////TEST
-
 				RemoteConnector.setClientType(CLIENT_TYPE.CLIENT_ACCEPTALL);
 				BasicProfileService service = new BasicProfileService(AUTH_URL);
 				bp = service.getBasicProfile(getAuthToken());

@@ -163,6 +163,8 @@ public class Chat_Fragment extends SherlockFragment {
 															// message
 															// from server.
 
+			}else{
+				text.setText("");
 			}
 		}
 
