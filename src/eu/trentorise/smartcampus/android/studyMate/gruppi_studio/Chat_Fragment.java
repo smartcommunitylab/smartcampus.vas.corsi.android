@@ -233,9 +233,10 @@ public class Chat_Fragment extends SherlockFragment {
 			messages = new ArrayList<Message>();
 
 			for (ChatMessage chatMessage : listMessages) {
-				if (chatMessage.getId_studente() + "" == SharedUtils
-						.getStudentInfo(getActivity().getApplicationContext())
-						.getUserId()) {
+				if (String.valueOf(chatMessage.getId_studente()).equals(
+						SharedUtils.getStudentInfo(
+								getActivity().getApplicationContext())
+								.getUserId())) {
 					messages.add(new Message(chatMessage.getTesto(), true));
 				} else {
 					messages.add(new Message(chatMessage.getTesto(), false));
