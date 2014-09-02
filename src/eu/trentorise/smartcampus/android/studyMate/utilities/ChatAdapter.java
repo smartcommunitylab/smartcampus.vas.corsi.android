@@ -63,13 +63,13 @@ public class ChatAdapter extends BaseAdapter{
 			//Check whether message is mine to show green background and align to right
 			if(message.isMine())
 			{
-				holder.message.setBackgroundResource(R.drawable.speech_bubble_green);
+				holder.message.setBackgroundResource(R.drawable.speech_bubble_orange);
 				lp.gravity = Gravity.RIGHT;
 			}
 			//If not mine then it is from sender to show orange background and align to left
 			else
 			{
-				holder.message.setBackgroundResource(R.drawable.speech_bubble_orange);
+				holder.message.setBackgroundResource(R.drawable.speech_bubble_cyan);
 				lp.gravity = Gravity.LEFT;
 			}
 			holder.message.setLayoutParams(lp);
