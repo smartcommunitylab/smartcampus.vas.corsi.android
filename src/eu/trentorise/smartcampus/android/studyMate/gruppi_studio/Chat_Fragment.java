@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -49,6 +53,8 @@ public class Chat_Fragment extends SherlockFragment {
 	private ListView chat;
 	private GruppoDiStudio contextualGDS;
 	public static ProgressDialog pd;
+	// This intent filter will be set to filter on the string "GCM_RECEIVED_ACTION"
+	IntentFilter gcmFilter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +68,12 @@ public class Chat_Fragment extends SherlockFragment {
 
 		Bundle myextras = getActivity().getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
+		
+		// Create our IntentFilter, which will be used in conjunction with a
+		// broadcast receiver.
+		gcmFilter = new IntentFilter();
+		gcmFilter.addAction("GCM_RECEIVED_ACTION");
+
 
 		text = (EditText) getActivity().findViewById(R.id.text);
 
@@ -80,7 +92,35 @@ public class Chat_Fragment extends SherlockFragment {
 			}
 		});
 		super.onStart();
+		getActivity().registerReceiver(gcmReceiver, gcmFilter);
 	}
+	
+	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		getActivity().unregisterReceiver(gcmReceiver);
+	}
+	
+	
+	// A BroadcastReceiver must override the onReceive() event.
+		private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
+
+			@Override
+			public void onReceive(Context context, Intent intent) {
+
+				String message = intent.getExtras().getString("message");
+
+				if (message != null) {
+					// display our received message
+					addNewMessage(new Message(message.toString().trim(),
+							false));
+				}
+			}
+		};
+	
+	
 
 	public void sendMessage(View v) {
 		// String newMessage = text.getText().toString().trim();

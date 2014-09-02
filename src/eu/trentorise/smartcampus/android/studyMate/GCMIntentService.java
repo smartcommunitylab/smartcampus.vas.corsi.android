@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
+import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 
 public class GCMIntentService extends GCMBaseIntentService {
@@ -37,9 +38,12 @@ public class GCMIntentService extends GCMBaseIntentService {
 		new NotificationCenterGds(ctx).publishNotification(intent,
 				NOTIFICATION_ID, Lista_GDS_activity.class);
 
-		// String message = intent.getStringExtra("message");
+		String message = intent.getStringExtra("message");
+		String gds = intent.getStringExtra("gds");
+		String gds_name = intent.getStringExtra("gds_name");
+		String date = intent.getStringExtra("date");
 
-		// sendGCMIntent(ctx, message);
+		sendGCMIntent(ctx, message, gds, gds_name, date);
 
 	}
 
@@ -54,15 +58,20 @@ public class GCMIntentService extends GCMBaseIntentService {
 		// send notification to your server to remove that regId
 	}
 
-	private void sendGCMIntent(Context ctx, String message) {
+	private void sendGCMIntent(Context ctx, String message, String gds, String gds_name, String date) {
 
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction("GCM_RECEIVED_ACTION");
 
 		broadcastIntent.putExtra("message", message);
-
+		broadcastIntent.putExtra("gds", gds);
+		broadcastIntent.putExtra("gds_name", gds_name);
+		broadcastIntent.putExtra("date", date);
+		
 		ctx.sendBroadcast(broadcastIntent);
 
 	}
+	
+	
 
 }

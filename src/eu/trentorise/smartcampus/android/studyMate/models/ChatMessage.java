@@ -1,6 +1,13 @@
 package eu.trentorise.smartcampus.android.studyMate.models;
 
-public class ChatMessage {
+import java.io.Serializable;
+
+public class ChatMessage implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private long id;
 
@@ -55,6 +62,14 @@ public class ChatMessage {
 
 	public void setGds(long gds) {
 		this.gds = gds;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
