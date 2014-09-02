@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 
@@ -9,6 +8,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 

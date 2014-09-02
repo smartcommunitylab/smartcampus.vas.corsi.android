@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.start;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedCds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AsyncSetSharedDip;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;

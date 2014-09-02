@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -11,6 +9,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

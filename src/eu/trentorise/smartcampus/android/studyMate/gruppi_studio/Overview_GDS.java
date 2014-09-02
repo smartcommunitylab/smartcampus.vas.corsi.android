@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
@@ -26,12 +21,11 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.PushNotificationGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
-import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
-import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationDBGdsHelper;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.TabListener;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

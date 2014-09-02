@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +17,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Notification;
 import eu.trentorise.smartcampus.android.studyMate.notices.NoticesActivity;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

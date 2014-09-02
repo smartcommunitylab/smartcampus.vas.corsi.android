@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.finder;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Author;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;

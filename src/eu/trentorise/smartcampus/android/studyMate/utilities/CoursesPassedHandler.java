@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.List;
 
 import android.app.Activity;
@@ -16,6 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.rate.AddRatingFromCoursesPassed;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;

@@ -4,16 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,7 +17,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import eu.trentorise.smartcampus.android.studyMate.models.PushNotificationGds;
 import eu.trentorise.smartcampus.pushservice.NotificationCenter;
-import eu.trentorise.smartcampus.pushservice.NotificationDBHelper;
 import eu.trentorise.smartcampus.pushservice.PushNotification;
 import eu.trentorise.smartcampus.pushservice.R;
 
@@ -102,8 +96,7 @@ public class NotificationCenterGds extends NotificationCenter {
 
 		return notifs;
 	}
-	
-	
+
 	public List<PushNotificationGds> getGdsNotificationsOfGds(long gdsId) {
 		SQLiteDatabase db = mDB.getReadableDatabase();
 		String sql = " select * from "
@@ -140,13 +133,12 @@ public class NotificationCenterGds extends NotificationCenter {
 
 		return notifs;
 	}
-	
 
 	@Override
 	public void deleteNotification(PushNotification notif) {
 		super.deleteNotification(notif);
 	}
-	
+
 	public void deleteNotificationGds(Long gdsId) {
 		SQLiteDatabase db = mDB.getWritableDatabase();
 		try {
@@ -162,7 +154,7 @@ public class NotificationCenterGds extends NotificationCenter {
 		}
 		db.close();
 	}
-	
+
 	@Override
 	public void setNotificationRead(int id) {
 		super.setNotificationRead(id);
@@ -219,8 +211,9 @@ public class NotificationCenterGds extends NotificationCenter {
 	private PushNotificationGds buildPushNotification(Intent i) {
 
 		return new PushNotificationGds(i.getStringExtra(MESSAGE_KEY),
-				Long.valueOf(i.getStringExtra(GDS_ID_KEY)), i.getStringExtra(GDS_NAME_KEY), false, new Date(Long.parseLong(i.getStringExtra(
-						DATE_KEY))));
+				Long.valueOf(i.getStringExtra(GDS_ID_KEY)),
+				i.getStringExtra(GDS_NAME_KEY), false, new Date(
+						Long.parseLong(i.getStringExtra(DATE_KEY))));
 	}
 
 	public String getJourneyId(String json) {

@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +30,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
@@ -83,7 +82,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		// modificare con i valori preesistenti dell'attivitadistudio
 		Bundle myextras = getIntent().getExtras();
 		evento = (Evento) myextras.getSerializable(Constants.IMPEGNO_MOD);
-		contextualGds = (GruppoDiStudio) myextras.getSerializable(Constants.CONTESTUAL_GDS);
+		contextualGds = (GruppoDiStudio) myextras
+				.getSerializable(Constants.CONTESTUAL_GDS);
 		dateInitial = evento.getEventoId().getDate().getTime();
 		timeFromInitial = evento.getEventoId().getStart().getTime();
 		timeToInitial = evento.getEventoId().getStop().getTime();
@@ -378,7 +378,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (allright) {
-				Intent intent = new Intent(ModifiyAttivitaStudio.this, ShowImpegnoGDS.class);
+				Intent intent = new Intent(ModifiyAttivitaStudio.this,
+						ShowImpegnoGDS.class);
 				intent.putExtra(Constants.CONTEXTUAL_ATT, newone);
 				intent.putExtra(Constants.CONTESTUAL_GDS, contextualGds);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -388,9 +389,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 				Toast.makeText(ModifiyAttivitaStudio.this,
 						getResources().getString(R.string.dialog_error),
 						Toast.LENGTH_SHORT).show();
-				
-				
-				
+
 				ModifiyAttivitaStudio.this.finish();
 			}
 

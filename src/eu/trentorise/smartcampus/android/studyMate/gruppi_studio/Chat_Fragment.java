@@ -1,16 +1,10 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.ac.AACException;
-import eu.trentorise.smartcampus.android.common.Utils;
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,10 +16,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.google.android.gms.internal.ch;
 
+import eu.trentorise.smartcampus.ac.AACException;
+import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
-import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Message;
 import eu.trentorise.smartcampus.android.studyMate.utilities.ChatAdapter;
@@ -158,7 +154,7 @@ public class Chat_Fragment extends SherlockFragment {
 					// message
 					// from server.
 
-				}else{
+				} else {
 					text.setText("");
 				}
 

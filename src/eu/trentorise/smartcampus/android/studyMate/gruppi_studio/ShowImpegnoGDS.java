@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +21,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;
@@ -40,9 +39,8 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 	Evento contextualAttivitaStudio;
-	GruppoDiStudio contextualGDS; 
+	GruppoDiStudio contextualGDS;
 	private ProtocolCarrier mProtocolCarrier;
-
 
 	@Override
 	protected void onResume() {
@@ -66,10 +64,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 				.getSerializable(Constants.CONTEXTUAL_ATT);
 		contextualGDS = (GruppoDiStudio) myextras
 				.getSerializable(Constants.CONTESTUAL_GDS);
-		
-		
-		
-		
+
 		// personalizzazione actionabar
 		ActionBar actionbar = getSupportActionBar();
 		actionbar.setTitle(contextualAttivitaStudio.getTitle());
@@ -81,23 +76,20 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		 */
 
 		TextView tv_oggetto = (TextView) findViewById(R.id.oggetto_showgds);
-		tv_oggetto.setText(contextualGDS.getMateria());//contextualAttivitaStudio.getTitle());
+		tv_oggetto.setText(contextualGDS.getMateria());// contextualAttivitaStudio.getTitle());
 		TextView tv_data = (TextView) findViewById(R.id.text_data_impegno_showgds);
 		Date data = contextualAttivitaStudio.getEventoId().getDate();
 		java.sql.Time time = contextualAttivitaStudio.getEventoId().getStart();
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-		tv_data.setText(formatDate.format(data)+" "+time.toString());
-		
+		tv_data.setText(formatDate.format(data) + " " + time.toString());
+
 		TextView polo_aula_tv = (TextView) findViewById(R.id.textLocation_impegno_showgds);
 		polo_aula_tv.setText(contextualAttivitaStudio.getRoom());
 		TextView tv_descrizione = (TextView) findViewById(R.id.textDescription_impegno_showgds);
 		tv_descrizione.setText(contextualAttivitaStudio
 				.getPersonalDescription());
 	}
-	
-	
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -130,8 +122,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 						ModifiyAttivitaStudio.class);
 				intent1.putExtra(Constants.IMPEGNO_MOD,
 						contextualAttivitaStudio);
-				intent1.putExtra(Constants.CONTESTUAL_GDS,
-						contextualGDS);
+				intent1.putExtra(Constants.CONTESTUAL_GDS, contextualGDS);
 				startActivity(intent1);
 			}
 			return super.onOptionsItemSelected(item);
@@ -168,7 +159,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 
 		@SuppressWarnings("unused")
 		Context taskcontext;
-		
+
 		Evento toabandonAS;
 
 		public AsyncTabbandonaAttivitaStudio(Context taskcontext,
@@ -201,7 +192,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 								MyUniActivity.getAuthToken());
 
 				if (response.getHttpStatus() == 200) {
-//					String body = response.getBody();
+					// String body = response.getBody();
 					return true;
 
 				} else {
@@ -230,7 +221,7 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			onBackPressed();
-			//ShowImpegnoGDS.this.finish();
+			// ShowImpegnoGDS.this.finish();
 			// Intent intent = new Intent(ShowImpegnoGDS.this,
 			// Overview_GDS.class);
 			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

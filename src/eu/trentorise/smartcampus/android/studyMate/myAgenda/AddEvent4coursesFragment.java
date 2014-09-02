@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.myAgenda;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +27,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;

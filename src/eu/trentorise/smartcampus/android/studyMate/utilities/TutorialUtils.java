@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +12,8 @@ import android.view.View;
 import com.github.espiandev.showcaseview.TutorialHelper;
 import com.github.espiandev.showcaseview.TutorialHelper.TutorialProvider;
 import com.github.espiandev.showcaseview.TutorialItem;
+
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 public class TutorialUtils {
 
@@ -123,19 +124,19 @@ public class TutorialUtils {
 								act.getString(R.string.tut_notifications));
 					}
 					break;
-//				case 4:
-//					v = act.findViewById(R.id.phl_btn);
-//					v.getLocationOnScreen(location);
-//					location[0] += convertPixelsToDp((v.getWidth() / 2) - 18,
-//							act);
-//					location[1] += convertDpToPixel(8, act);
-//					if (v != null && v.isShown()) {
-//						return new TutorialItem("search", location,
-//								(int) (v.getWidth() / 2.5f),
-//								act.getString(R.string.phl_btn_label),
-//								act.getString(R.string.tut_materials));
-//					}
-//					break;
+				// case 4:
+				// v = act.findViewById(R.id.phl_btn);
+				// v.getLocationOnScreen(location);
+				// location[0] += convertPixelsToDp((v.getWidth() / 2) - 18,
+				// act);
+				// location[1] += convertDpToPixel(8, act);
+				// if (v != null && v.isShown()) {
+				// return new TutorialItem("search", location,
+				// (int) (v.getWidth() / 2.5f),
+				// act.getString(R.string.phl_btn_label),
+				// act.getString(R.string.tut_materials));
+				// }
+				// break;
 				}
 				return null;
 			}

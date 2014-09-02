@@ -191,7 +191,8 @@
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Overview_GDS"
-            android:label="@string/title_activity_overview__gds" >
+            android:label="@string/title_activity_overview__gds" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.RicercaGruppiGenerale_activity"
@@ -215,20 +216,19 @@
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" 
+            android:configChanges="orientation|keyboard">
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" 
+            android:configChanges="orientation|keyboard">
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.GDS_Subscription_activity"
             android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" 
+            android:configChanges="orientation|keyboard">
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowModifyGDSDetails_activity"
@@ -239,7 +239,8 @@
         </activity>
         <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ModifiyAttivitaStudio"
-            android:label="@string/title_activity_modifiy_attivita_studio" >
+            android:label="@string/title_activity_modifiy_attivita_studio" 
+            android:configChanges="orientation|keyboard">
         </activity>
         
         <activity

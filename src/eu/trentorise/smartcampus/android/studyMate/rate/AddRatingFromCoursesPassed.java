@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.rate;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -23,6 +20,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Commento;
 import eu.trentorise.smartcampus.android.studyMate.models.RatingRowGroup;
 import eu.trentorise.smartcampus.android.studyMate.models.Studente;

@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +23,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
@@ -362,9 +361,10 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				pd.dismiss();
 			} else {
 				pd.dismiss();
-//				String materia = ((Spinner) RicercaGruppiGenerale_activity.this
-//						.findViewById(R.id.spinner_materie)).getSelectedItem()
-//						.toString();
+				// String materia = ((Spinner)
+				// RicercaGruppiGenerale_activity.this
+				// .findViewById(R.id.spinner_materie)).getSelectedItem()
+				// .toString();
 				spinner_nome_gruppo.setAdapter(null);
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(

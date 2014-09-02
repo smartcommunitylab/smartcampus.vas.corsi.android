@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -11,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.FeedbackRowGroup;
 
 public class AdapterFeedbackList extends BaseExpandableListAdapter {

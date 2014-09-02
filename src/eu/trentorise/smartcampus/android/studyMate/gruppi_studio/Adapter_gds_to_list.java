@@ -1,7 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.models.PushNotificationGds;
-import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 
 public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 
@@ -72,14 +70,13 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 			int imageResource = getFlagResource(context, "notification_"
 					+ numberOfNotifications);
 
-			if(imageResource == 0)
+			if (imageResource == 0)
 				return row;
 			// int imageResource = context.getResources().getIdentifier(uri,
 			// null, context.getPackageName());
 			Drawable resImage = context.getResources().getDrawable(
 					imageResource);
-			
-			
+
 			imageNotification.setImageDrawable(resImage);
 			imageNotification.setVisibility(View.VISIBLE);
 		} else {

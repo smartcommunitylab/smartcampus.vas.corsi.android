@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +22,9 @@ import com.actionbarsherlock.view.MenuInflater;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
-import eu.trentorise.smartcampus.android.studyMate.models.PushNotificationGds;
-import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -200,7 +197,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 						Toast.LENGTH_SHORT).show();
 				onBackPressed();
 			} else {
-				
+
 				user_gds_list.clear();
 				for (GruppoDiStudio gds : result) {
 					user_gds_list.add(gds);

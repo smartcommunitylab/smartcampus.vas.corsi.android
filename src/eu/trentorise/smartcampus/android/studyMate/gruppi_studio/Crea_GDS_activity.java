@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +19,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -81,11 +80,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 			// gruppi di studio persoanli
 			if (tv_nome_gds.getText().toString().equals("")) {
 
-				Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_group_name),
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.no_group_name),
 						Toast.LENGTH_SHORT).show();
 			} else {
-			PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
-			task.execute();
+				PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
+				task.execute();
 			}
 			return super.onOptionsItemSelected(item);
 		}
@@ -167,12 +167,12 @@ public class Crea_GDS_activity extends SherlockActivity {
 			CorsoCarriera cc = listaCorsi.get(position);
 			String nome = tv_nome_gds.getText().toString();
 
-				GruppoDiStudio justCreatedGds = new GruppoDiStudio();
-				justCreatedGds.setNome(nome);
-				justCreatedGds.setMateria(materia);
-				justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
-				addGroup(justCreatedGds);
-			
+			GruppoDiStudio justCreatedGds = new GruppoDiStudio();
+			justCreatedGds.setNome(nome);
+			justCreatedGds.setMateria(materia);
+			justCreatedGds.setCorso(Long.parseLong(cc.getCod()));
+			addGroup(justCreatedGds);
+
 			return null;
 
 		}

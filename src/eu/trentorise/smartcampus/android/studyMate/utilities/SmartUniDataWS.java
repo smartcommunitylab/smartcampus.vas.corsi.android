@@ -157,20 +157,19 @@ public final class SmartUniDataWS {
 		return "/rest/attivitadistudio/change/date/" + dateold + "/from/"
 				+ fromold + "/to/" + toold;
 	}
-	
-	//CHAT GDS | GCM
-	//////////////////////////////////////////////
+
+	// CHAT GDS | GCM
+	// ////////////////////////////////////////////
 	public static final String POST_WS_REGISTRATION_GCM(String regId) {
-		return "/rest/gcm/reg_id/"+regId;
+		return "/rest/gcm/reg_id/" + regId;
 	}
-	
-	public static final String POST_WS_MESSAGE_CHAT_GDS(long gdsId,
-			String text) {
-		return "/rest/gcm/messagecommunicator/gds/"+gdsId+"/text/"+text;
+
+	public static final String POST_WS_MESSAGE_CHAT_GDS(long gdsId, String text) {
+		return "/rest/gcm/messagecommunicator/gds/" + gdsId + "/text/" + text;
 	}
-	
+
 	public static final String GET_WS_MESSAGE_CHAT_GDS(long gdsId) {
-		return "/rest/chat/messages/gds/"+gdsId;
+		return "/rest/chat/messages/gds/" + gdsId;
 	}
 
 }

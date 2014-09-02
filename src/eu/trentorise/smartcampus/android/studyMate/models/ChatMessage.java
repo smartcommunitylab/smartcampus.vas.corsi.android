@@ -5,15 +5,15 @@ public class ChatMessage {
 	private long id;
 
 	private String nome_studente;
-	
+
 	private long id_studente;
 
 	private Long data;
-	
+
 	private String testo;
-	
+
 	private long gds;
-	
+
 	public String getTesto() {
 		return testo;
 	}
@@ -57,6 +57,4 @@ public class ChatMessage {
 		this.gds = gds;
 	}
 
-
-	
 }

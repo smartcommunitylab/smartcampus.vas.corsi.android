@@ -1,11 +1,10 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 public class DatesUtil {
 

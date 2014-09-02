@@ -93,9 +93,9 @@ public final class SharedUtils {
 
 		String firstTime = pref.getString(STUDENTE_CDS, null);
 
-		if (firstTime == null){
+		if (firstTime == null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -112,7 +112,7 @@ public final class SharedUtils {
 	}
 
 	public static boolean setStudentInfo(Context context, BasicProfile bp) {
-		
+
 		SharedPreferences pref = context.getSharedPreferences(
 				STUDENTE_INFO_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -120,7 +120,7 @@ public final class SharedUtils {
 		editor.putString(STUDENTE_INFO, Utils.convertToJSON(bp));
 
 		return editor.commit();
-		
+
 	}
 
 	public static BasicProfile getStudentInfo(Context context) {
@@ -130,9 +130,9 @@ public final class SharedUtils {
 
 		String jsonObjectBasicProfile = pref.getString(STUDENTE_INFO, null);
 
-		BasicProfile bp = Utils.convertJSONToObject(
-				jsonObjectBasicProfile, BasicProfile.class);
-		
+		BasicProfile bp = Utils.convertJSONToObject(jsonObjectBasicProfile,
+				BasicProfile.class);
+
 		return bp;
 	}
 

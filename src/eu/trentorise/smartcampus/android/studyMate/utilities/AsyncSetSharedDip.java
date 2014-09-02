@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -131,8 +130,7 @@ public class AsyncSetSharedDip extends AsyncTask<Void, Void, Boolean> {
 			}
 
 			// setto i dipartimenti nello spinner
-			ArrayAdapter<String> adapterDep = new ArrayAdapter<String>(
-					act,
+			ArrayAdapter<String> adapterDep = new ArrayAdapter<String>(act,
 					R.layout.list_studymate_row_list_simple,
 					listStringDepartments);
 			spinnerDepartments.setAdapter(adapterDep);

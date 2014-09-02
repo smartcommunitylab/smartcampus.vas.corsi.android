@@ -1,6 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.R;
 
 // in EventsListingFragment
 public class MaterialAdapter extends ArrayAdapter<MaterialItem> {

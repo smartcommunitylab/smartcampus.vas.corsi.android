@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoLaurea;
 import eu.trentorise.smartcampus.android.studyMate.models.Dipartimento;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
@@ -32,10 +31,10 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
 public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
-//	private Dipartimento dipartimento;
+	// private Dipartimento dipartimento;
 	private Context context;
-//	private AlertDialog.Builder builder;
-//	private Spinner spinner1;
+	// private AlertDialog.Builder builder;
+	// private Spinner spinner1;
 	private Spinner spinnerDegree;
 	public static ProgressDialog pd;
 
@@ -130,8 +129,7 @@ public class AsyncSetSharedCds extends AsyncTask<Void, Void, Boolean> {
 
 			// setto i corsi di laurea nello spinner
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-					currentActivity,
-					R.layout.list_studymate_row_list_simple,
+					currentActivity, R.layout.list_studymate_row_list_simple,
 					listStringDegree);
 
 			spinnerDegree.setAdapter(adapter);

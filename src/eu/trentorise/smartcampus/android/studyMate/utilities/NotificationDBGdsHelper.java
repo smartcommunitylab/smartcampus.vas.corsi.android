@@ -10,7 +10,7 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 
 	static final int DB_VERSION = 1;
 
-	public static final  String DB_TABLE_NOTIFICATION = "tb_notification";
+	public static final String DB_TABLE_NOTIFICATION = "tb_notification";
 
 	static final String ID_KEY = "not_id";
 
@@ -18,14 +18,10 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 	public static final String GDS_KEY = "gds";
 	public static final String GDS_NAME = "gds_name";
 	public static final String DATE_KEY = "date";
-	
-
 
 	// 0 for read
 	// 1 for unread
 	public static final String READ_KEY = "read";
-
-	
 
 	public NotificationDBGdsHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -56,7 +52,4 @@ public class NotificationDBGdsHelper extends SQLiteOpenHelper {
 		// TODO nothing for now.
 	}
 
-	
-
 }
-

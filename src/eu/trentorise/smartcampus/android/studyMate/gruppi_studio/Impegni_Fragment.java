@@ -1,8 +1,5 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -23,6 +19,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
+import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
@@ -47,6 +45,7 @@ public class Impegni_Fragment extends SherlockFragment {
 	private View view;
 	private ListView impegni_listview;
 	private ProgressDialog pd;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,23 +54,19 @@ public class Impegni_Fragment extends SherlockFragment {
 		return view;
 	}
 
-
 	@Override
 	public void onStart() {
 
-
 		// TODO Auto-generated method stub
-		impegni_listview = (ListView) view
-				.findViewById(R.id.lista_impegni);
-		setHasOptionsMenu(true);	
-		new AsyncTimpegniLoader(getActivity()).execute();		
+		impegni_listview = (ListView) view.findViewById(R.id.lista_impegni);
+		setHasOptionsMenu(true);
+		new AsyncTimpegniLoader(getActivity()).execute();
 		gds = Overview_GDS.contextualGDS;
 
 		super.onStart();
-		
+
 	}
 
-	
 	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
 		public AsyncTimpegniLoader(Context taskcontext) {
@@ -83,8 +78,7 @@ public class Impegni_Fragment extends SherlockFragment {
 
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(gds
-							.getId()));
+					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(gds.getId()));
 			request.setMethod(Method.GET);
 
 			MessageResponse response;
@@ -118,7 +112,7 @@ public class Impegni_Fragment extends SherlockFragment {
 			super.onPreExecute();
 			pd = new ProgressDialog(getActivity());
 			// ripulisco la lista impegni prima di caricare i nuovi impegni
-			//contextualListaImpegni.clear();
+			// contextualListaImpegni.clear();
 		}
 
 		@Override
@@ -132,35 +126,37 @@ public class Impegni_Fragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			
-//			TextView tv = (TextView) getActivity().findViewById(R.id.suggerimento_listaimpegni_vuota);
-//			if (contextualListaImpegni.isEmpty()) {
-//				tv.setText(getResources().getString(R.string.att_message));
-//			} else {
-//				tv.setVisibility(View.GONE);
-				
+
+			// TextView tv = (TextView)
+			// getActivity().findViewById(R.id.suggerimento_listaimpegni_vuota);
+			// if (contextualListaImpegni.isEmpty()) {
+			// tv.setText(getResources().getString(R.string.att_message));
+			// } else {
+			// tv.setVisibility(View.GONE);
+
 			lista_impegni = contextualListaImpegni;
 			// gestione listaimpegni
-			
+
 			EventItem[] listEvItem = new EventItem[lista_impegni.size()];
 			int i = 0;
 			for (Evento ev : lista_impegni) {
 				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev.getEventoId()
-						.getStart().toString(), ev.getRoom());
+						.getDate(), ev.getTitle(), ev.getType(), ev
+						.getEventoId().getStart().toString(), ev.getRoom());
 				listEvItem[i++] = new EventItem(e, getActivity());
-				
+
 			}
 			EventAdapter adapter = new EventAdapter(getSherlockActivity(),
 					listEvItem);
 			impegni_listview.setAdapter(adapter);
-			
+
 			impegni_listview.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					final Evento selected_impegno = lista_impegni.get(position);
-					Intent intent = new Intent(getActivity(), ShowImpegnoGDS.class);
+					Intent intent = new Intent(getActivity(),
+							ShowImpegnoGDS.class);
 					intent.putExtra(Constants.CONTEXTUAL_ATT, selected_impegno);
 					intent.putExtra(Constants.CONTESTUAL_GDS, gds);
 					startActivity(intent);
@@ -168,8 +164,8 @@ public class Impegni_Fragment extends SherlockFragment {
 			});
 		}
 
-	//}
-		
+		// }
+
 	}
 
 }
