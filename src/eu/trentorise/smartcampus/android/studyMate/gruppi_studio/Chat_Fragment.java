@@ -124,7 +124,7 @@ public class Chat_Fragment extends SherlockFragment {
 					NotificationCenterGds notifCenter = new NotificationCenterGds(
 							getActivity().getApplicationContext());
 					notifCenter.deleteNotificationGds(contextualGDS.getId());
-					NotificationManager nMgr = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+					NotificationManager nMgr = (NotificationManager) getActivity().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 					nMgr.cancelAll();
 				}
 			}
