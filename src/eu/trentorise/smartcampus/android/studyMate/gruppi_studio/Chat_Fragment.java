@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.http.entity.mime.content.ContentBody;
+
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.google.android.gms.internal.ch;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -116,6 +120,12 @@ public class Chat_Fragment extends SherlockFragment {
 					// display our received message
 					addNewMessage(new Message(message.toString().trim(),
 							false));
+					
+					NotificationCenterGds notifCenter = new NotificationCenterGds(
+							getActivity().getApplicationContext());
+					notifCenter.deleteNotificationGds(contextualGDS.getId());
+					NotificationManager nMgr = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+					nMgr.cancelAll();
 				}
 			}
 		};
@@ -287,6 +297,7 @@ public class Chat_Fragment extends SherlockFragment {
 				adapter = new ChatAdapter(getActivity(), messages);
 				chat = (ListView) getActivity().findViewById(R.id.list_chat);
 				chat.setAdapter(adapter);
+				chat.setSelection(chat.getCount() - 1);
 				// setListAdapter(adapter);
 			}
 
