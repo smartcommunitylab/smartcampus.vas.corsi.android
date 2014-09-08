@@ -85,16 +85,16 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		super.onResume();
 		// setContentView(R.layout.overview_gds_waitingforforum_layout);
 		
-		try {
-			ViewConfiguration config = ViewConfiguration.get(this);
-			Field menuKeyField = ViewConfiguration.class
-					.getDeclaredField("sHasPermanentMenuKey");
-			if (menuKeyField != null) {
-				menuKeyField.setAccessible(true);
-				menuKeyField.setBoolean(config, false);
-			}
-		} catch (Exception ex) {
-		}
+//		try {
+//			ViewConfiguration config = ViewConfiguration.get(this);
+//			Field menuKeyField = ViewConfiguration.class
+//					.getDeclaredField("sHasPermanentMenuKey");
+//			if (menuKeyField != null) {
+//				menuKeyField.setAccessible(true);
+//				menuKeyField.setBoolean(config, false);
+//			}
+//		} catch (Exception ex) {
+//		}
 
 		// AsyncTimpegniLoader task = new
 		// AsyncTimpegniLoader(Overview_GDS.this);

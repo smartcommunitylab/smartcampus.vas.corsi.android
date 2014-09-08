@@ -50,18 +50,18 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
-		// codice per sistemare l'actionoverflow
-		try {
-			ViewConfiguration config = ViewConfiguration.get(this);
-			Field menuKeyField = ViewConfiguration.class
-					.getDeclaredField("sHasPermanentMenuKey");
-			if (menuKeyField != null) {
-				menuKeyField.setAccessible(true);
-				menuKeyField.setBoolean(config, false);
-			}
-		} catch (Exception ex) {
-			// Ignore
-		}
+//		// codice per sistemare l'actionoverflow
+//		try {
+//			ViewConfiguration config = ViewConfiguration.get(this);
+//			Field menuKeyField = ViewConfiguration.class
+//					.getDeclaredField("sHasPermanentMenuKey");
+//			if (menuKeyField != null) {
+//				menuKeyField.setAccessible(true);
+//				menuKeyField.setBoolean(config, false);
+//			}
+//		} catch (Exception ex) {
+//			// Ignore
+//		}
 		GetMyCds getCds = new GetMyCds(Lista_GDS_activity.this);
 		getCds.execute();
 
@@ -78,7 +78,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.lista__gds_activity, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);//return true;
 	}
 
 	@Override

@@ -1,14 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/action_iscriviti_nuovo_gruppo"
-        android:icon="@drawable/ic_social_add_group"
-        android:showAsAction="collapseActionView"
-        android:title="@string/menu_subscribe_group"/>
-    <item
-        android:id="@+id/action_crea_gruppo"
-        android:icon="@drawable/ic_action_add"
-        android:showAsAction="collapseActionView"
-        android:title="@string/menu_add_group"/>
+
+            <item
+                android:id="@+id/action_iscriviti_nuovo_gruppo"
+                android:icon="@drawable/ic_social_add_group"
+                android:title="@string/menu_subscribe_group"
+                android:showAsAction="always"/>
+            <item
+                android:id="@+id/action_crea_gruppo"
+                android:icon="@drawable/ic_action_add"
+                android:title="@string/menu_add_group"
+                android:showAsAction="always"/>
+
 
 </menu>

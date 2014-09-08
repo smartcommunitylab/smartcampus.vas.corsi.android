@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -18,10 +17,7 @@ import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -30,6 +26,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
@@ -46,7 +49,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 
-public class Add_attivita_studio_activity extends FragmentActivity {
+public class Add_attivita_studio_activity extends SherlockFragmentActivity{
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 	public Evento nuova_attivitaStudio = new Evento();
@@ -75,7 +78,7 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 		editTextTitleGDS = (EditText) findViewById(R.id.editTextTitleGDS);
 		Bundle myextras = getIntent().getExtras();
 		gds = (GruppoDiStudio) myextras.getSerializable(Constants.GDS);
-		ActionBar actionbar = getActionBar();
+		ActionBar actionbar = getSupportActionBar();
 
 		actionbar.setTitle(R.string.new_att_stud);
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
@@ -139,13 +142,13 @@ public class Add_attivita_studio_activity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.add_attivita_studio_activity, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(android.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_done: {
 			/*
