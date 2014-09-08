@@ -104,7 +104,7 @@ public class Chat_Fragment extends SherlockFragment {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		getActivity().unregisterReceiver(gcmReceiver);
+		getSherlockActivity().unregisterReceiver(gcmReceiver);
 	}
 	
 	

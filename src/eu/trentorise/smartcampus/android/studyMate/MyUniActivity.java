@@ -511,7 +511,7 @@ public class MyUniActivity extends SherlockActivity {
 
 			regId = getRegistrationId(mContext);
 
-			if (regId.isEmpty()) {
+			if (regId.length()==0){//isEmpty()) {
 
 				String msg = "";
 
@@ -641,7 +641,7 @@ public class MyUniActivity extends SherlockActivity {
 	private String getRegistrationId(Context context) {
 		final SharedPreferences prefs = getGCMPreferences(context);
 		String registrationId = prefs.getString(PROPERTY_REG_ID, "");
-		if (registrationId.isEmpty()) {
+		if (registrationId.length()==0){//||(registrationId.isEmpty())) {
 			Log.i(TAG, "Registration not found.");
 			return "";
 		}

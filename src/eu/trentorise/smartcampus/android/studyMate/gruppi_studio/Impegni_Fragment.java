@@ -75,7 +75,6 @@ public class Impegni_Fragment extends SherlockFragment {
 		private List<Evento> retrievedImpegni() {
 			mProtocolCarrier = new ProtocolCarrier(getActivity(),
 					SmartUniDataWS.TOKEN_NAME);
-
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(gds.getId()));
@@ -126,14 +125,6 @@ public class Impegni_Fragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-
-			// TextView tv = (TextView)
-			// getActivity().findViewById(R.id.suggerimento_listaimpegni_vuota);
-			// if (contextualListaImpegni.isEmpty()) {
-			// tv.setText(getResources().getString(R.string.att_message));
-			// } else {
-			// tv.setVisibility(View.GONE);
-
 			lista_impegni = contextualListaImpegni;
 			// gestione listaimpegni
 
@@ -163,8 +154,6 @@ public class Impegni_Fragment extends SherlockFragment {
 				}
 			});
 		}
-
-		// }
 
 	}
 

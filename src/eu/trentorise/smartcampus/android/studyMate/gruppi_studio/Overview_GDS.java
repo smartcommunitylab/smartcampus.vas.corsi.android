@@ -83,6 +83,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		// setContentView(R.layout.overview_gds_waitingforforum_layout);
+		
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);
 			Field menuKeyField = ViewConfiguration.class
