@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -102,7 +103,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.overview__gd, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -120,13 +122,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 					Add_attivita_studio_activity.class);
 			intent.putExtra(Constants.GDS, contextualGDS);
 			startActivity(intent);
-			return super.onOptionsItemSelected(item);
+			return true;
 		}
 		case R.id.action_abbandona_gruppo:
 			AsyncTabbandonaGruppo task = new AsyncTabbandonaGruppo(
 					Overview_GDS.this, contextualGDS);
 			task.execute();
-			return super.onOptionsItemSelected(item);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

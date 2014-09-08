@@ -60,13 +60,13 @@ public class Impegni_Fragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		impegni_listview = (ListView) view.findViewById(R.id.lista_impegni);
 		setHasOptionsMenu(true);
-		new AsyncTimpegniLoader(getActivity()).execute();
 		gds = Overview_GDS.contextualGDS;
-
+		new AsyncTimpegniLoader(getActivity()).execute();
 		super.onStart();
 
 	}
-
+	
+	
 	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
 		public AsyncTimpegniLoader(Context taskcontext) {
@@ -156,5 +156,6 @@ public class Impegni_Fragment extends SherlockFragment {
 		}
 
 	}
+	
 
 }
