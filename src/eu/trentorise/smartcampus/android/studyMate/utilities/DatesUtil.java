@@ -68,6 +68,6 @@ public class DatesUtil {
 
 	public String intToMonth(int month) {
 
-		return months[month+1];
+		return months[month + 1];
 	}
 }

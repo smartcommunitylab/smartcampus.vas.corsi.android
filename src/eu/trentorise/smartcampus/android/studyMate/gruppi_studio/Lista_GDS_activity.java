@@ -47,19 +47,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
-
-//		// codice per sistemare l'actionoverflow
-//		try {
-//			ViewConfiguration config = ViewConfiguration.get(this);
-//			Field menuKeyField = ViewConfiguration.class
-//					.getDeclaredField("sHasPermanentMenuKey");
-//			if (menuKeyField != null) {
-//				menuKeyField.setAccessible(true);
-//				menuKeyField.setBoolean(config, false);
-//			}
-//		} catch (Exception ex) {
-//			// Ignore
-//		}
 		GetMyCds getCds = new GetMyCds(Lista_GDS_activity.this);
 		getCds.execute();
 
@@ -76,7 +63,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.lista__gds_activity, menu);
-		return super.onCreateOptionsMenu(menu);//return true;
+		return super.onCreateOptionsMenu(menu);// return true;
 	}
 
 	@Override
@@ -175,13 +162,7 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 
 		@Override
 		protected List<GruppoDiStudio> doInBackground(Void... params) {
-			// user_gds_list.clear();
 			List<GruppoDiStudio> responselist = getMineGDS();
-			// if (responselist != null) {
-			// for (GruppoDiStudio gds : responselist) {
-			// user_gds_list.add(gds);
-			// }
-			// }
 			return responselist;// user_gds_list;
 		}
 
@@ -200,8 +181,6 @@ public class Lista_GDS_activity extends SherlockFragmentActivity {
 				for (GruppoDiStudio gds : result) {
 					user_gds_list.add(gds);
 				}
-				// se la user_gds_list è vuota proponiamo all'utente di fare
-				// qlcs..
 				TextView tv = (TextView) findViewById(R.id.suggerimento_lista_vuota);
 				if (user_gds_list.isEmpty() || user_gds_list == null) {
 					tv.setText(getResources().getString(R.string.no_gds));

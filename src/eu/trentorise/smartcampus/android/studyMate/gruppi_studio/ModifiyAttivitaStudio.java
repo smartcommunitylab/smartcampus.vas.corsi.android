@@ -169,9 +169,6 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			 * attivitaDiStudio
 			 */
 			String location = etLocation.getText().toString();
-
-			// String descrizione = descrizione_tv.getText().toString();
-
 			String stringdata = mPickDate.getText().toString();
 			String ora = mPickTime.getText().toString();
 			stringdata = stringdata + " " + ora;

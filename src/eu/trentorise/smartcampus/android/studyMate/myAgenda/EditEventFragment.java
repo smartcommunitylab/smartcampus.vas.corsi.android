@@ -277,9 +277,8 @@ public class EditEventFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pd = new ProgressDialog(getSherlockActivity());
-			pd = ProgressDialog.show(getSherlockActivity(),
-					"",
-					getResources().getString(R.string.dialog_loading));
+			pd = ProgressDialog.show(getSherlockActivity(), "", getResources()
+					.getString(R.string.dialog_loading));
 		}
 
 		private boolean changeEvent(long date, long from, long to) {

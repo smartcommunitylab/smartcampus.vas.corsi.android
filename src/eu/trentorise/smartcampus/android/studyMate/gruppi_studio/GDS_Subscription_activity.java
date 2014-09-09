@@ -59,7 +59,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
-		// ImageView logo_gds = (ImageView) findViewById(R.id.iv_logo_detail);
 		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
 		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
 		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);

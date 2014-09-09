@@ -54,7 +54,8 @@ public class Chat_Fragment extends SherlockFragment {
 	private ListView chat;
 	private GruppoDiStudio contextualGDS;
 	public static ProgressDialog pd;
-	// This intent filter will be set to filter on the string "GCM_RECEIVED_ACTION"
+	// This intent filter will be set to filter on the string
+	// "GCM_RECEIVED_ACTION"
 	IntentFilter gcmFilter;
 
 	@Override
@@ -69,19 +70,13 @@ public class Chat_Fragment extends SherlockFragment {
 
 		Bundle myextras = getActivity().getIntent().getExtras();
 		contextualGDS = (GruppoDiStudio) myextras.get(Constants.CONTESTUAL_GDS);
-		
+
 		// Create our IntentFilter, which will be used in conjunction with a
 		// broadcast receiver.
 		gcmFilter = new IntentFilter();
 		gcmFilter.addAction("GCM_RECEIVED_ACTION");
 
-
 		text = (EditText) getActivity().findViewById(R.id.text);
-
-		// sender = UtilityProvvisoria.sender[rand
-		// .nextInt(UtilityProvvisoria.sender.length - 1)];
-		// getActivity().setTitle(sender);
-		//
 		GetListMessages getMessagesTask = new GetListMessages();
 		getMessagesTask.execute();
 
@@ -95,39 +90,36 @@ public class Chat_Fragment extends SherlockFragment {
 		super.onStart();
 		getActivity().registerReceiver(gcmReceiver, gcmFilter);
 	}
-	
-	
+
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		getSherlockActivity().unregisterReceiver(gcmReceiver);
 	}
-	
-	
+
 	// A BroadcastReceiver must override the onReceive() event.
-		private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
+	private BroadcastReceiver gcmReceiver = new BroadcastReceiver() {
 
-			@Override
-			public void onReceive(Context context, Intent intent) {
+		@Override
+		public void onReceive(Context context, Intent intent) {
 
-				String message = intent.getExtras().getString("message");
+			String message = intent.getExtras().getString("message");
 
-				if (message != null) {
-					// display our received message
-					addNewMessage(new Message(message.toString().trim(),
-							false));
-					
-					NotificationCenterGds notifCenter = new NotificationCenterGds(
-							getActivity().getApplicationContext());
-					notifCenter.deleteNotificationGds(contextualGDS.getId());
-					NotificationManager nMgr = (NotificationManager) getActivity().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-					nMgr.cancelAll();
-				}
+			if (message != null) {
+				// display our received message
+				addNewMessage(new Message(message.toString().trim(), false));
+
+				NotificationCenterGds notifCenter = new NotificationCenterGds(
+						getActivity().getApplicationContext());
+				notifCenter.deleteNotificationGds(contextualGDS.getId());
+				NotificationManager nMgr = (NotificationManager) getActivity()
+						.getApplicationContext().getSystemService(
+								Context.NOTIFICATION_SERVICE);
+				nMgr.cancelAll();
 			}
-		};
-	
-	
+		}
+	};
 
 	public void sendMessage(View v) {
 		// String newMessage = text.getText().toString().trim();
@@ -216,7 +208,7 @@ public class Chat_Fragment extends SherlockFragment {
 			AsyncTask<Void, String, List<ChatMessage>> {
 
 		private ProtocolCarrier mProtocolCarrier;
-		//private List<ChatMessage> listMessages;
+		// private List<ChatMessage> listMessages;
 		private String bodyResponse;
 
 		@Override

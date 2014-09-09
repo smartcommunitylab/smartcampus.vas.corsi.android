@@ -57,7 +57,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 		// send notification to your server to remove that regId
 	}
 
-	private void sendGCMIntent(Context ctx, String message, String gds, String gds_name, String date) {
+	private void sendGCMIntent(Context ctx, String message, String gds,
+			String gds_name, String date) {
 
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction("GCM_RECEIVED_ACTION");
@@ -66,11 +67,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 		broadcastIntent.putExtra("gds", gds);
 		broadcastIntent.putExtra("gds_name", gds_name);
 		broadcastIntent.putExtra("date", date);
-		
+
 		ctx.sendBroadcast(broadcastIntent);
 
 	}
-	
-	
 
 }

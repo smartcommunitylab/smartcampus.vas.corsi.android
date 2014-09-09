@@ -66,8 +66,7 @@ public class Impegni_Fragment extends SherlockFragment {
 		super.onStart();
 
 	}
-	
-	
+
 	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
 
 		public AsyncTimpegniLoader(Context taskcontext) {
@@ -157,6 +156,5 @@ public class Impegni_Fragment extends SherlockFragment {
 		}
 
 	}
-	
 
 }

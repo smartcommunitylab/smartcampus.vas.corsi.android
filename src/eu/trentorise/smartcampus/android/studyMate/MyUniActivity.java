@@ -318,16 +318,6 @@ public class MyUniActivity extends SherlockActivity {
 				if (isFirstTime) {
 					registrationDevice();
 				}
-
-				// init connector
-				// PushServiceConnector connector = new PushServiceConnector();
-				// try {
-				// connector.init(getApplicationContext(), getAuthToken(),
-				// APP_ID, SERVER_URL);
-				// } catch (CommunicatorConnectorException e) {
-				// e.printStackTrace();
-				// }
-				// proviamo a recuperare i dati studente
 				mProtocolCarrier = new ProtocolCarrier(MyUniActivity.this,
 						SmartUniDataWS.TOKEN_NAME);
 				MessageResponse response;
@@ -396,7 +386,6 @@ public class MyUniActivity extends SherlockActivity {
 				return bp;
 			} catch (Exception e) {
 				e.printStackTrace();
-				// System.out.println(e.getMessage());
 				return null;
 			}
 
@@ -513,7 +502,7 @@ public class MyUniActivity extends SherlockActivity {
 
 			regId = getRegistrationId(mContext);
 
-			if (regId.length()==0){//isEmpty()) {
+			if (regId.length() == 0) {// isEmpty()) {
 
 				@SuppressWarnings("unused")
 				String msg = "";
@@ -644,7 +633,7 @@ public class MyUniActivity extends SherlockActivity {
 	private String getRegistrationId(Context context) {
 		final SharedPreferences prefs = getGCMPreferences(context);
 		String registrationId = prefs.getString(PROPERTY_REG_ID, "");
-		if (registrationId.length()==0){//||(registrationId.isEmpty())) {
+		if (registrationId.length() == 0) {// ||(registrationId.isEmpty())) {
 			Log.i(TAG, "Registration not found.");
 			return "";
 		}

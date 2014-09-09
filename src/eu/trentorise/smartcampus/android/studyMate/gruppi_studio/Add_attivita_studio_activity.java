@@ -49,7 +49,7 @@ import eu.trentorise.smartcampus.protocolcarrier.custom.MessageResponse;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 
-public class Add_attivita_studio_activity extends SherlockFragmentActivity{
+public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 	private ProtocolCarrier mProtocolCarrier;
 	public String body;
 	public Evento nuova_attivitaStudio = new Evento();

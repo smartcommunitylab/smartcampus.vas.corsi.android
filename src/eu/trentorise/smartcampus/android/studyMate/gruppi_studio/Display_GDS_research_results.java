@@ -48,9 +48,8 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 
 		ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
 
-		Adapter_gds adapter = new Adapter_gds(
-				getApplicationContext(), R.id.searchresults_gds_list,
-				possibleGDS);
+		Adapter_gds adapter = new Adapter_gds(getApplicationContext(),
+				R.id.searchresults_gds_list, possibleGDS);
 		results_list.setAdapter(adapter);
 		results_list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -58,8 +57,7 @@ public class Display_GDS_research_results extends SherlockFragmentActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				Adapter_gds adpt = (Adapter_gds) parent
-						.getAdapter();
+				Adapter_gds adpt = (Adapter_gds) parent.getAdapter();
 				ArrayList<GruppoDiStudio> entries = adpt.getEntries();
 				GruppoDiStudio selected_gds = entries.get(position);
 				Intent intent = new Intent(Display_GDS_research_results.this,

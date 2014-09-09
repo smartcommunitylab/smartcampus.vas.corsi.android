@@ -221,11 +221,6 @@ public class ShowImpegnoGDS extends SherlockFragmentActivity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			onBackPressed();
-			// ShowImpegnoGDS.this.finish();
-			// Intent intent = new Intent(ShowImpegnoGDS.this,
-			// Overview_GDS.class);
-			// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// startActivity(intent);
 		}
 
 	}

@@ -41,7 +41,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	Spinner spinner_materia;
 	Spinner spinner_nome_gruppo;
-	// AutoCompleteTextView autocomplete_ricercaXmembro;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
 	public List<CorsoCarriera> listaCorsi = new ArrayList<CorsoCarriera>();
 	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
@@ -233,17 +232,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 			listaCorsiString.clear();
 			listaCorsi.clear();
 
-			// if (result.size() < 1) {
-			// pd.dismiss();
-			// RicercaGruppiGenerale_activity.this.finish();
-			// Toast.makeText(
-			// getApplicationContext(),
-			// getResources().getString(
-			// R.string.toast_gds_no_courses_followed),
-			// Toast.LENGTH_LONG).show();
-			// return;
-			// }
-
 			if (result != null && !result.isEmpty()) {
 				for (CorsoCarriera tempcorso : result) {
 					listaCorsiString.add(tempcorso.getName());
@@ -361,10 +349,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				pd.dismiss();
 			} else {
 				pd.dismiss();
-				// String materia = ((Spinner)
-				// RicercaGruppiGenerale_activity.this
-				// .findViewById(R.id.spinner_materie)).getSelectedItem()
-				// .toString();
 				spinner_nome_gruppo.setAdapter(null);
 				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(
