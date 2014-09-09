@@ -1,17 +1,12 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewConfiguration;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -21,7 +16,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import eu.trentorise.smartcampus.ac.AACException;
-import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
@@ -144,6 +138,7 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		return contextualGDS;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setContextualGDS(GruppoDiStudio contextualGDS) {
 		this.contextualGDS = contextualGDS;
 	}
@@ -157,101 +152,101 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		this.contextualListaImpegni = contextualListaImpegni;
 	}
 
-	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
+//	private class AsyncTimpegniLoader extends AsyncTask<Void, Void, Void> {
+//
+//		Context taskcontext;
+//		public ProgressDialog pd;
 
-		Context taskcontext;
-		public ProgressDialog pd;
+//		public AsyncTimpegniLoader(Context taskcontext) {
+//			super();
+//			this.taskcontext = taskcontext;
+//		}
+//
+//		private List<Evento> retrievedImpegni() {
+//			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
+//					SmartUniDataWS.TOKEN_NAME);
+//
+//			MessageRequest request = new MessageRequest(
+//					SmartUniDataWS.URL_WS_SMARTUNI,
+//					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(contextualGDS
+//							.getId()));
+//			request.setMethod(Method.GET);
+//
+//			MessageResponse response;
+//			try {
+//				response = mProtocolCarrier
+//						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+//								MyUniActivity.getAuthToken());
+//
+//				if (response.getHttpStatus() == 200) {
+//
+//					body = response.getBody();
+//
+//				} else {
+//					return null;
+//				}
+//			} catch (ConnectionException e) {
+//				e.printStackTrace();
+//			} catch (ProtocolException e) {
+//				e.printStackTrace();
+//			} catch (SecurityException e) {
+//				e.printStackTrace();
+//			} catch (AACException e) {
+//				e.printStackTrace();
+//			}
+//
+//			return Utils.convertJSONToObjects(body, Evento.class);
+//		}
+//
+//		@Override
+//		protected void onPreExecute() {
+//			super.onPreExecute();
+//			// ripulisco la lista impegni prima di caricare i nuovi impegni
+//			contextualListaImpegni.clear();
+//			pd = new ProgressDialog(taskcontext);
+//			pd = ProgressDialog.show(taskcontext,
+//					getResources().getString(R.string.dialog_loading), "");
+//		}
+//
+//		@Override
+//		protected Void doInBackground(Void... params) {
+//			// faccio andare il metodo web per recuperare la lista impegni dal
+//			// web
+//			contextualListaImpegni = (ArrayList<Evento>) retrievedImpegni();
+//			return null;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(Void result) {
+//			super.onPostExecute(result);
+//			// ora che ho gli impegni pronti faccio partire la transaction che
+//			// porta alla schermata dove vengono mostrati gli impegni
+//
+//			// faccio un controllo se non ci sono impegni
+//			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
+//			TextView tv = (TextView) findViewById(R.id.suggerimento_listaimpegni_vuota);
+//			if (contextualListaImpegni.isEmpty()) {
+//				tv.setText(getResources().getString(R.string.att_message));
+//			} else {
+//				tv.setVisibility(View.GONE);
+//				// FragmentTransaction ft = Overview_GDS.this
+//				// .getSupportFragmentManager().beginTransaction();
+//				// Fragment fragment = new Impegni_Fragment();
+//				// Bundle args = new Bundle();
+//				// args.putSerializable(Constants.IMPEGNI_LIST,
+//				// contextualListaImpegni);
+//				// args.putSerializable(Constants.GDS, contextualGDS);
+//				// fragment.setArguments(args);
+//				// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				// ft.replace(android.R.id.content, fragment);
+//				// //ft.addToBackStack(null);
+//				// ft.commit();
+//			}
+//
+//			pd.dismiss();
+//		}
 
-		public AsyncTimpegniLoader(Context taskcontext) {
-			super();
-			this.taskcontext = taskcontext;
-		}
-
-		private List<Evento> retrievedImpegni() {
-			mProtocolCarrier = new ProtocolCarrier(Overview_GDS.this,
-					SmartUniDataWS.TOKEN_NAME);
-
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.GET_CONTEXTUAL_ATTIVITASTUDIO(contextualGDS
-							.getId()));
-			request.setMethod(Method.GET);
-
-			MessageResponse response;
-			try {
-				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-
-				if (response.getHttpStatus() == 200) {
-
-					body = response.getBody();
-
-				} else {
-					return null;
-				}
-			} catch (ConnectionException e) {
-				e.printStackTrace();
-			} catch (ProtocolException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (AACException e) {
-				e.printStackTrace();
-			}
-
-			return Utils.convertJSONToObjects(body, Evento.class);
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// ripulisco la lista impegni prima di caricare i nuovi impegni
-			contextualListaImpegni.clear();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.dialog_loading), "");
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// faccio andare il metodo web per recuperare la lista impegni dal
-			// web
-			contextualListaImpegni = (ArrayList<Evento>) retrievedImpegni();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			// ora che ho gli impegni pronti faccio partire la transaction che
-			// porta alla schermata dove vengono mostrati gli impegni
-
-			// faccio un controllo se non ci sono impegni
-			// se la user_gds_list è vuota proponiamo all'utente di fare qlcs..
-			TextView tv = (TextView) findViewById(R.id.suggerimento_listaimpegni_vuota);
-			if (contextualListaImpegni.isEmpty()) {
-				tv.setText(getResources().getString(R.string.att_message));
-			} else {
-				tv.setVisibility(View.GONE);
-				// FragmentTransaction ft = Overview_GDS.this
-				// .getSupportFragmentManager().beginTransaction();
-				// Fragment fragment = new Impegni_Fragment();
-				// Bundle args = new Bundle();
-				// args.putSerializable(Constants.IMPEGNI_LIST,
-				// contextualListaImpegni);
-				// args.putSerializable(Constants.GDS, contextualGDS);
-				// fragment.setArguments(args);
-				// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				// ft.replace(android.R.id.content, fragment);
-				// //ft.addToBackStack(null);
-				// ft.commit();
-			}
-
-			pd.dismiss();
-		}
-
-	}
+//	}
 
 	private class AsyncTabbandonaGruppo extends
 			AsyncTask<GruppoDiStudio, Void, Void> {

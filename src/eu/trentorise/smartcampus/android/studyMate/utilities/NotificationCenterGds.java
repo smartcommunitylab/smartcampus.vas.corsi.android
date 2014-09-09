@@ -21,9 +21,9 @@ import eu.trentorise.smartcampus.pushservice.PushNotification;
 import eu.trentorise.smartcampus.pushservice.R;
 
 public class NotificationCenterGds extends NotificationCenter {
-
-	private String message;
-	private String gds;
+//
+//	private String message;
+//	private String gds;
 	private Context mContext;
 	private NotificationDBGdsHelper mDB;
 	private static final String MESSAGE_KEY = "message";

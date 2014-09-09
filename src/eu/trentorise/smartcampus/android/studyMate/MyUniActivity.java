@@ -72,12 +72,14 @@ public class MyUniActivity extends SherlockActivity {
 	public static final String PROPERTY_REG_ID = "registration_id";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private String regId = "";
+	@SuppressWarnings("unused")
 	private String broadcastMessage = "No broadcast message";
 
 	/**
 	 * Tag used on log messages.
 	 */
 	static final String TAG = "GCMDemo";
+	@SuppressWarnings("unused")
 	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	// This intent filter will be set to filter on the string
 	// "GCM_RECEIVED_ACTION"
@@ -513,6 +515,7 @@ public class MyUniActivity extends SherlockActivity {
 
 			if (regId.length()==0){//isEmpty()) {
 
+				@SuppressWarnings("unused")
 				String msg = "";
 
 				try {

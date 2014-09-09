@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.http.entity.mime.content.ContentBody;
-
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -23,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.google.android.gms.internal.ch;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -219,7 +216,7 @@ public class Chat_Fragment extends SherlockFragment {
 			AsyncTask<Void, String, List<ChatMessage>> {
 
 		private ProtocolCarrier mProtocolCarrier;
-		private List<ChatMessage> listMessages;
+		//private List<ChatMessage> listMessages;
 		private String bodyResponse;
 
 		@Override

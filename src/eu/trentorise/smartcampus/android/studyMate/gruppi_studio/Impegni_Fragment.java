@@ -44,6 +44,7 @@ public class Impegni_Fragment extends SherlockFragment {
 	public String body;
 	private View view;
 	private ListView impegni_listview;
+	@SuppressWarnings("unused")
 	private ProgressDialog pd;
 
 	@Override

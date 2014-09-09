@@ -7,7 +7,6 @@ import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 
 import eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Lista_GDS_activity;
-import eu.trentorise.smartcampus.android.studyMate.models.ChatMessage;
 import eu.trentorise.smartcampus.android.studyMate.utilities.NotificationCenterGds;
 
 public class GCMIntentService extends GCMBaseIntentService {
