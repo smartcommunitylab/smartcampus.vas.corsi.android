@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -52,9 +53,13 @@ public class Impegni_Fragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.listaimpegni_fragment, container,
 				false);
+		hiddenKeyboard(view);
 		return view;
 	}
-
+	private void hiddenKeyboard(View v) {
+        InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 	@Override
 	public void onStart() {
 

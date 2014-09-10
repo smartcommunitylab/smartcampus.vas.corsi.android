@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:gravity="center" >
 
-        <Button
+        <!-- <Button
             android:id="@+id/phl_btn"
             android:layout_width="130dp"
             android:layout_height="90dp"
@@ -108,7 +108,7 @@
             android:drawableTop="@drawable/materiali"
             android:gravity="center_horizontal"
             android:paddingRight="10dp"
-            android:text="@string/phl_btn_label" />
+            android:text="@string/phl_btn_label" /> -->
 
          <Button
             android:id="@+id/gruppi_studio_btn"
