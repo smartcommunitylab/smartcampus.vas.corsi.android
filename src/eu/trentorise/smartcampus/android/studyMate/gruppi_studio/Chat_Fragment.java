@@ -84,7 +84,9 @@ public class Chat_Fragment extends SherlockFragment {
 		sendBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sendMessage(v);
+				if (text.getText().toString().length() > 0) {
+					sendMessage(v);
+				}
 			}
 		});
 		super.onStart();
