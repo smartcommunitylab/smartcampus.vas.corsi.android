@@ -206,18 +206,6 @@ public class MyUniActivity extends SherlockActivity {
 						}
 					});
 
-//			findViewById(R.id.phl_btn).setOnClickListener(
-//					new OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							Toast.makeText(
-//									getApplicationContext(),
-//									getResources().getString(
-//											R.string.dialog_coming_soon),
-//									Toast.LENGTH_SHORT).show();
-//						}
-//					});
-
 			findViewById(R.id.notices_btn).setOnClickListener(
 					new OnClickListener() {
 						@Override
