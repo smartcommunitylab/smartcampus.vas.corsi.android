@@ -37,6 +37,7 @@ import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
+import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -157,6 +158,7 @@ public class EditEventFragment extends SherlockFragment {
 				eventoModificato.setPersonalDescription(description.getText()
 						.toString());
 				eventoModificato.setEventoId(eId);
+
 				new ChangeEvent(getSherlockActivity()).execute();
 				getSherlockActivity().onBackPressed();
 			}
@@ -254,8 +256,9 @@ public class EditEventFragment extends SherlockFragment {
 			}
 			hour = hourOfDay;
 			EditEventFragment.this.minute = minute;
-			
+
 			eId.setStart(new Time(hour, EditEventFragment.this.minute, 0));
+			eId.setStop(new Time(hour, EditEventFragment.this.minute, 0));
 		}
 	}
 
