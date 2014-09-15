@@ -106,6 +106,8 @@ public class Chat_Fragment extends SherlockFragment {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			
+			System.out.println("Wow! I am on the OnReceive!!! ");
 
 			String message = intent.getExtras().getString("message");
 			String name = intent.getExtras().getString("name");

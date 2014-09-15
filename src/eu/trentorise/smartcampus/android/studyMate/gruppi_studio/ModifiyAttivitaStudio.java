@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import eu.trentorise.smartcampus.ac.AACException;
@@ -65,6 +66,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 	private long dateInitial;
 	private long timeFromInitial;
 	private long timeToInitial;
+	private TextView title;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -92,6 +94,8 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		eventoModificato = evento;
 		date = new Date();
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
+		title = (TextView) findViewById(R.id.editTextTitleGDS);
+		
 		mPickDate.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -187,7 +191,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 			 * salvataggio modifche in attivitaDiStudio
 			 */
 
-			eventoModificato.setTitle(evento.getTitle());
+			eventoModificato.setTitle(title.getText().toString());
 			// Date data = new Date();
 			if (data != null) {
 				EventoId eventoId = new EventoId();

@@ -119,22 +119,22 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
-		updateDisplay();
+ 		updateDisplay();
 
-		int customYear = mYear - 1900;
+ 		int customYear = mYear - 1900;
 		date.setYear(customYear);
 		date.setMonth(mMonth);
-		date.setDate(mDay);
+ 		date.setDate(mDay);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
 		description = (EditText) findViewById(R.id.editTextDescription);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
 		eventlocation = (EditText) findViewById(R.id.editText_eventlocation);
-		List<String> course = new ArrayList<String>();
-		course.add(new String(gds.getMateria()));
-		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
+ 		List<String> course = new ArrayList<String>();
+ 		course.add(new String(gds.getMateria()));
+ 		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
 				Add_attivita_studio_activity.this,
-				R.layout.list_studymate_row_list_simple, course);
+ 				R.layout.list_studymate_row_list_simple, course);
 		coursesSpinner.setAdapter(adapterCourse);
 		coursesSpinner.setClickable(false);
 
@@ -147,6 +147,7 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -164,18 +165,6 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 			String stringdata = mPickDate.getText().toString();
 			String ora = mPickTime.getText().toString();
 
-			stringdata = stringdata + " " + ora;
-			Date data = null;
-
-			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-			try {
-				data = format.parse(stringdata);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} catch (java.text.ParseException e) {
-				e.printStackTrace();
-			}
-
 			String location = etLocation.getText().toString();
 			String name = editTextTitleGDS.getText().toString();
 			if (name.equals("")) {
@@ -186,14 +175,12 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 			}
 			nuova_attivitaStudio.setTitle(name);// gds.getMateria()
 			// Date data = new Date();
-			if (data != null) {
+			if (date != null) {
+					
 				EventoId eventoId = new EventoId();
 				long dateR = 10000 * (date.getTime() / 10000);
 				eventoId.setDate(new Date(dateR));
-				Time time = new Time(data.getTime());
-				eventoId.setStart(time);
 				eventoId.setIdEventAd(-2);
-				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
 				nuova_attivitaStudio.setEventoId(eventoId);
 			}
@@ -241,9 +228,9 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
-			mYear = c.get(Calendar.YEAR);
-			mMonth = c.get(Calendar.MONTH);
-			mDay = c.get(Calendar.DAY_OF_MONTH);
+//			mYear = c.get(Calendar.YEAR);
+//			mMonth = c.get(Calendar.MONTH);
+//			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(Add_attivita_studio_activity.this,
 					this, mYear, mMonth, mDay);
