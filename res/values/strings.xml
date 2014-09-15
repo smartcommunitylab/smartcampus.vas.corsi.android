@@ -20,7 +20,7 @@
     <string name="salva">Salva</string>
     <string name="internet_connection">L\'applicazione richiede la connessione ad internet per funzionare</string>
     <string name="search">Cerca</string>
-    <string name="title_gicercagruppigenerale_activity">Ricerca gruppi di studio</string>
+    <string name="title_gicercagruppigenerale_activity">Unisciti a un gruppo</string>
     <string name="gruppi_studio_label">Gruppi di studio</string>
     <string name="app_uid_label">SmartCampus</string>
     <string name="app_name">StudyMate</string>
@@ -220,7 +220,7 @@
     <string name="addevent_location">Luogo</string>
     <string name="string_year_at">anno presso</string>
     <string name="my_gds">I miei gruppi</string>
-    <string name="menu_subscribe_group">Cerca gruppo</string>
+    <string name="menu_subscribe_group">Unisciti a un gruppo</string>
     <string name="menu_add_group">Crea gruppo</string>
     <string name="iscr_group_stud">Risultato ricerca</string>
     <string name="label_participants">Partecipanti:</string>
@@ -240,6 +240,7 @@
     <string name="no_group_name">Inserisci un nome per il gruppo</string>
 	<string name="no_att_name">Inserisci un nome per l\'attività</string>
 	<string name="gds_materia">Materia:</string>
+	<string name="gds_search_by">Ricerca gruppi in:</string>  
 	<string name="gds_name_of">Nome del gruppo:</string>
 	<string name="gds_result">Risultati:</string>
 	<string name="gds_mod_impegno">Modifica impegno</string>

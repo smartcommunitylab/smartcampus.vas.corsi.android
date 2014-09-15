@@ -22,7 +22,7 @@
             android:id="@+id/data_attivitastudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gds_materia" />
+            android:text="@string/gds_search_by" />
 
         <Spinner
             android:id="@+id/spinner_materie"

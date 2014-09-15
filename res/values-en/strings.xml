@@ -21,7 +21,7 @@
     <string name="salva">Save</string>
     <string name="internet_connection">An internet connection is required to use StudyMate</string>
     <string name="search">Search</string>
-    <string name="title_gicercagruppigenerale_activity">Search study groups</string>
+    <string name="title_gicercagruppigenerale_activity">Join study groups</string>
     <string name="gruppi_studio_label">Study groups</string>
     <string name="app_uid_label">SmartCampus</string>
     <string name="app_name">StudyMate</string>
@@ -218,7 +218,7 @@
     <string name="addevent_location">Location</string>
     <string name="string_year_at">Year at</string>
     <string name="my_gds">My study groups</string>
-    <string name="menu_subscribe_group">Search groups</string>
+    <string name="menu_subscribe_group">Join groups</string>
     <string name="menu_add_group">Create group</string>
     <string name="iscr_group_stud">Search results</string>
     <string name="label_participants">Participants:</string>
@@ -238,6 +238,7 @@
     <string name="no_group_name">Inserist a valid name</string>
     <string name="no_att_name">Inserist a valid name</string>
     <string name="gds_materia">Subject:</string>
+    <string name="gds_search_by">Search groups in</string> 
 	<string name="gds_name_of">Group\'s name:</string>
 	<string name="gds_result">Results:</string>
 	<string name="gds_mod_impegno">Modify activity</string>
