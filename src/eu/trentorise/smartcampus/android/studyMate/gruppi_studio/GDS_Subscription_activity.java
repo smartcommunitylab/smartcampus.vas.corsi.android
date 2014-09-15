@@ -2,15 +2,16 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -53,7 +54,7 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		setContentView(R.layout.gds_detail_activity);
 		// customize layout
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle(R.string.iscr_group_stud);
+		actionbar.setTitle(contextualGDS.getNome());
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
@@ -77,6 +78,22 @@ public class GDS_Subscription_activity extends SherlockActivity {
 	}
 
 	@Override
+	protected void onStart() {
+
+		findViewById(R.id.button_join_gds).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ASTaskSubscribe task = new ASTaskSubscribe(
+								GDS_Subscription_activity.this, contextualGDS);
+						task.execute();
+
+					}
+				});
+		super.onStart();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.menu_gds_subscription, menu);
@@ -89,45 +106,6 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		case android.R.id.home:
 			GDS_Subscription_activity.this.finish();
 			return true;
-		case R.id.action_subscribe:
-			AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(
-					GDS_Subscription_activity.this);
-			alertdialogbuilder
-					.setTitle(
-							getResources().getString(R.string.sure_group_stud))
-					.setMessage(
-							getResources().getString(
-									R.string.sure_group_stud_message)
-									+ " \"" + contextualGDS.getNome() + "\"?")
-					.setPositiveButton(R.string.yes,
-							new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									// some logic here
-									ASTaskSubscribe task = new ASTaskSubscribe(
-											GDS_Subscription_activity.this,
-											contextualGDS);
-									task.execute();
-
-								}
-							})
-
-					.setNegativeButton(R.string.no,
-							new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-								}
-							});
-			AlertDialog alertdialog = alertdialogbuilder.create();
-			alertdialog.show();
-			return true;
-
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -202,6 +180,8 @@ public class GDS_Subscription_activity extends SherlockActivity {
 					Lista_GDS_activity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			Toast.makeText(getApplicationContext(), R.string.gds_join_done,
+					Toast.LENGTH_SHORT).show();
 		}
 
 	}

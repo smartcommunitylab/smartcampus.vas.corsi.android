@@ -220,9 +220,9 @@
     <string name="addevent_location">Luogo</string>
     <string name="string_year_at">anno presso</string>
     <string name="my_gds">I miei gruppi</string>
-    <string name="menu_subscribe_group">Iscriviti ad un gruppo</string>
+    <string name="menu_subscribe_group">Cerca gruppo</string>
     <string name="menu_add_group">Crea gruppo</string>
-    <string name="iscr_group_stud">Iscrizione gruppo di studio</string>
+    <string name="iscr_group_stud">Risultato ricerca</string>
     <string name="label_participants">Partecipanti:</string>
     <string name="sure_group_stud_message">Vuoi iscriverti al gruppo</string>
     <string name="yes">Si</string>
@@ -246,6 +246,9 @@
 	<string name="gds_del_impegno">Elimina impegno</string>
 	<string name="gds_add_impegno">Aggiungi impegno</string>
 	<string name="gds_abb_group">Abbandona il gruppo</string>
+	<string name="gds_go">Vai</string>
+	<string name="gds_join">Iscriviti</string>
+	<string name="gds_join_done">Ora sei iscritto al gruppo!</string>
     <!-- Disclaimer -->
     <string name="disclaimer">Questa app utilizza alcuni dati provenienti dal tuo account UniTn. Per utilizzarne appieno le funzionalità, devi consentire all’Università di Trento di passare i tuoi dati a Smart Campus. Se non lo hai già fatto, per favore visita il seguente sito web, accedi con il tuo account UniTn e compila la scheda:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 

@@ -11,8 +11,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,7 +42,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	Spinner spinner_materia;
-	Spinner spinner_nome_gruppo;
+	//Spinner spinner_nome_gruppo;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
 	public List<CorsoCarriera> listaCorsi = new ArrayList<CorsoCarriera>();
 	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
@@ -60,7 +62,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
-		spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
+		//spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
 				RicercaGruppiGenerale_activity.this);
 		task.execute();
@@ -84,6 +86,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -97,66 +100,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		case android.R.id.home: {
 			RicercaGruppiGenerale_activity.this.finish();
 			return true;
-		}
-
-		case R.id.action_ricerca_GO: {
-			// recupero materia e nome_gruppo
-			String materia = ((Spinner) RicercaGruppiGenerale_activity.this
-					.findViewById(R.id.spinner_materie)).getSelectedItem()
-					.toString();
-
-			String nome_gruppo;
-			try {
-				nome_gruppo = ((Spinner) RicercaGruppiGenerale_activity.this
-						.findViewById(R.id.spinner_nomi_gruppi))
-						.getSelectedItem().toString();
-			} catch (NullPointerException e) {
-				nome_gruppo = null;
-			}
-
-			Intent intent;
-			if (listaGDSxMateria != null
-					&& !listaGDSxMateria.isEmpty()
-					&& nome_gruppo.equals(getResources().getString(
-							R.string.all_gds))) {
-				intent = new Intent(RicercaGruppiGenerale_activity.this,
-						Display_GDS_research_results.class);
-				intent.putExtra(Constants.POSSIBLE_GDS, listaGDSxMateria);
-				intent.putExtra(Constants.NOME_GRUPPO, nome_gruppo);
-				intent.putExtra(Constants.SELECTED_MATERIA, materia);
-			} else if (listaGDSxMateria != null
-					&& !listaGDSxMateria.isEmpty()
-					&& !nome_gruppo.equals(getResources().getString(
-							R.string.all_gds))) {
-				GruppoDiStudio gds_to_subscribe = null;
-				for (GruppoDiStudio gds : listaGDSxMateria) {
-					if (gds.getNome().equals(nome_gruppo))
-						gds_to_subscribe = gds;
-				}
-				intent = new Intent(RicercaGruppiGenerale_activity.this,
-						GDS_Subscription_activity.class);
-				intent.putExtra(Constants.GDS_SUBS, gds_to_subscribe);
-			} else {
-				if (listaCorsi != null && !listaCorsi.isEmpty()) {
-					Toast.makeText(
-							RicercaGruppiGenerale_activity.this,
-							materia
-									+ ": "
-									+ getResources().getString(
-											R.string.toast_gds_no_gds_course),
-							Toast.LENGTH_LONG).show();
-					return super.onOptionsItemSelected(item);
-				} else {
-					Toast.makeText(
-							RicercaGruppiGenerale_activity.this,
-							getResources().getString(
-									R.string.toast_gds_select_course),
-							Toast.LENGTH_LONG).show();
-					return super.onOptionsItemSelected(item);
-				}
-			}
-			startActivity(intent);
-			return super.onOptionsItemSelected(item);
 		}
 		default:
 			return super.onOptionsItemSelected(item);
@@ -324,6 +267,7 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+			ListView results_list = (ListView) findViewById(R.id.searchresults_gds_list);
 			// aggiorno la lista di GDS associati alla materia
 			listaGDSxMateria.clear();
 			listaGDSxMateria = temp_listaGDS;
@@ -335,22 +279,34 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				for (GruppoDiStudio g : listaGDSxMateria) {
 					nomi_GDS.add(g.getNome());
 				}
-				ArrayAdapter<String> adapter_spinner_gds = new ArrayAdapter<String>(
-						RicercaGruppiGenerale_activity.this,
-						android.R.layout.simple_spinner_item, nomi_GDS);
-				adapter_spinner_gds
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				spinner_nome_gruppo.setAdapter(adapter_spinner_gds);
-				// faccio in modo che lo spinner parta dal valore 'Tutti'
-				String myString = getResources().getString(R.string.all_gds);
-				int spinnerPosition = adapter_spinner_gds.getPosition(myString);
-				spinner_nome_gruppo.setSelection(spinnerPosition);
-				spinner_nome_gruppo.setEnabled(true);
+				
+
+				Adapter_gds adapter = new Adapter_gds(getApplicationContext(),
+						R.id.searchresults_gds_list, listaGDSxMateria);
+				results_list.setAdapter(adapter);
+				results_list.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+
+						Adapter_gds adpt = (Adapter_gds) parent.getAdapter();
+						ArrayList<GruppoDiStudio> entries = adpt.getEntries();
+						GruppoDiStudio selected_gds = entries.get(position);
+						Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
+								GDS_Subscription_activity.class);
+						intent.putExtra(Constants.GDS_SUBS, selected_gds);
+
+						startActivity(intent);
+					}
+				});
 				pd.dismiss();
 			} else {
+				listaGDSxMateria.clear();
+				Adapter_gds adapter = new Adapter_gds(getApplicationContext(),
+						R.id.searchresults_gds_list, listaGDSxMateria);
+				results_list.setAdapter(adapter);
 				pd.dismiss();
-				spinner_nome_gruppo.setAdapter(null);
-				spinner_nome_gruppo.setEnabled(false);
 				Toast.makeText(
 						getApplicationContext(),
 						getResources().getString(

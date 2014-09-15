@@ -106,7 +106,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Contenuti" />
+                android:text="@string/rating_context_contenuti" />
 
             <RatingBar
                 android:id="@+id/ratingBarRowContenuti"
@@ -134,7 +134,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Carico di studio/Cfu" />
+                android:text="@string/rating_context_carico_studio" />
 
             <RatingBar
                 android:id="@+id/ratingBarRowCfu"
@@ -162,7 +162,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Lezioni" />
+                android:text="@string/rating_context_lezioni" />
 
             <RatingBar
                 android:id="@+id/ratingBarRowLezioni"
@@ -190,7 +190,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Materiali" />
+                android:text="@string/rating_context_materiali" />
 
             <RatingBar
                 android:id="@+id/ratingBarRowMateriali"
@@ -219,7 +219,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Esame" />
+                android:text="@string/rating_context_esame" />
 
             <RatingBar
                 android:id="@+id/ratingBarRowEsame"

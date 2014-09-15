@@ -45,7 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="" />
+            android:hint="" 
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -55,5 +57,11 @@
         android:paddingTop="10dp" >
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_crea_gds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_add_group" />
 
 </LinearLayout>

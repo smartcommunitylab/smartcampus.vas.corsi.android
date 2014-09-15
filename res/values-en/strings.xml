@@ -218,9 +218,9 @@
     <string name="addevent_location">Location</string>
     <string name="string_year_at">Year at</string>
     <string name="my_gds">My study groups</string>
-    <string name="menu_subscribe_group">Join a group</string>
+    <string name="menu_subscribe_group">Search groups</string>
     <string name="menu_add_group">Create group</string>
-    <string name="iscr_group_stud">Subscription study group</string>
+    <string name="iscr_group_stud">Search results</string>
     <string name="label_participants">Participants:</string>
     <string name="sure_group_stud_message">Do you want to join the group</string>
     <string name="yes">Yes</string>
@@ -244,6 +244,9 @@
 	<string name="gds_del_impegno">Delete activity</string>
 	<string name="gds_add_impegno">Add activity</string>
 	<string name="gds_abb_group">Leave group</string>
+	<string name="gds_go">Go</string>
+	<string name="gds_join">Join group</string>
+	<string name="gds_join_done">You\'ve joined the group!</string>
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 

@@ -3,10 +3,13 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.trentorise.smartcampus.android.studyMate.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
@@ -20,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
 import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
-import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.CorsoCarriera;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -60,6 +62,30 @@ public class Crea_GDS_activity extends SherlockActivity {
 		task.execute();
 
 	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		findViewById(R.id.button_crea_gds).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (tv_nome_gds.getText().toString().equals("")) {
+
+							Toast.makeText(getApplicationContext(),
+									getResources().getString(R.string.no_group_name),
+									Toast.LENGTH_SHORT).show();
+						} else {
+							PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
+							task.execute();
+						}	
+						
+						
+					}
+				});
+		
+		super.onStart();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -75,20 +101,20 @@ public class Crea_GDS_activity extends SherlockActivity {
 			Crea_GDS_activity.this.finish();
 			return super.onOptionsItemSelected(item);
 		}
-		case R.id.action_done: {
-			// asynctask per aggiungere un gruppo di studio appena creato ai
-			// gruppi di studio persoanli
-			if (tv_nome_gds.getText().toString().equals("")) {
-
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.no_group_name),
-						Toast.LENGTH_SHORT).show();
-			} else {
-				PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
-				task.execute();
-			}
-			return super.onOptionsItemSelected(item);
-		}
+//		case R.id.action_done: {
+//			// asynctask per aggiungere un gruppo di studio appena creato ai
+//			// gruppi di studio persoanli
+//			if (tv_nome_gds.getText().toString().equals("")) {
+//
+//				Toast.makeText(getApplicationContext(),
+//						getResources().getString(R.string.no_group_name),
+//						Toast.LENGTH_SHORT).show();
+//			} else {
+//				PostNewGDS task = new PostNewGDS(Crea_GDS_activity.this);
+//				task.execute();
+//			}
+//			return super.onOptionsItemSelected(item);
+//		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}

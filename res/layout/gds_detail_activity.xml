@@ -42,6 +42,13 @@
                 android:paddingLeft="10dp"
                 android:text="@string/gds_materia"
                 android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/button_join_gds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gds_join" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -49,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="30dp" >
+        android:paddingTop="15dp" >
 
         <TextView
             android:id="@+id/tv_info_studente"

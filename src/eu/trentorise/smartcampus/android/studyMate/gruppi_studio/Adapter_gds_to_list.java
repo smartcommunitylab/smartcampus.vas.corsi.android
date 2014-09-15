@@ -2,7 +2,7 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -38,6 +38,7 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		this.listNotificationsGds = listNotifications;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
