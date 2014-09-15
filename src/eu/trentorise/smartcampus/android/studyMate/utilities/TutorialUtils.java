@@ -134,7 +134,7 @@ public class TutorialUtils {
 						return new TutorialItem("search", location,
 								(int) (v.getWidth() / 2.5f),
 								act.getString(R.string.gruppi_studio_label),
-								act.getString(R.string.tut_materials));
+								act.getString(R.string.tut_gds));
 					}
 					break;
 				}
