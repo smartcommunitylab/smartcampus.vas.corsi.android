@@ -121,6 +121,10 @@ public class EditEventFragment extends SherlockFragment {
 		// get the current Time
 		hour = evento.getEventoId().getStart().getHours();
 		minute = evento.getEventoId().getStart().getMinutes();
+		date.setYear(mYear - 1900);
+		date.setMonth(mMonth);
+		date.setDate(mDay);
+		eId.setDate(date);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
 		// display the current date
