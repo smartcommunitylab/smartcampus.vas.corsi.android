@@ -10,5 +10,5 @@
     <string name="tut_rate">Valuta I corsi che hai già superato</string>
     <string name="tut_notifications">Leggi gli avvisi dei dipartimenti e di altre fonti</string>
     <string name="tut_materials">Scopri quali materiali didattici sono disponibili per i tuoi corsi</string>
-
+	<string name="tut_gds">Crea un gruppo di studio o unisciti ad uno esistente e chatta con i partecipanti</string>
 </resources>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +54,9 @@ public class ChatAdapter extends BaseAdapter {
 		if(message.isMine()){
 			holder.message.setText(message.getMessage());
 		}else{
-			holder.message.setText(message.getName()+": "+message.getMessage());
+			holder.message.setText(Html.fromHtml("<small>"+ "<font color='#939393'>" +message.getName() + "</font>"+"</small>"+ "<br />"+ message.getMessage()));
 		}
-
+//		"<![CDATA[<font color='#145A14'>text</font>]]>"
 		LayoutParams lp = (LayoutParams) holder.message.getLayoutParams();
 		// check if it is a status message then remove background, and change
 		// text color.

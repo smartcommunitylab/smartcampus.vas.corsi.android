@@ -9,4 +9,5 @@
     <string name="tut_rate">Rate the classes you have already finished</string>
     <string name="tut_notifications">Read the notifications from various departments and channels</string>
     <string name="tut_materials">Find out what study materials are available for your courses</string>
+    <string name="tut_gds">Create a study group or join an existing one and chat with its members</string>
 </resources>
