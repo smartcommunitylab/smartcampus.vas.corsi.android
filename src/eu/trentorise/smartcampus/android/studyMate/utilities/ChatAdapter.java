@@ -50,7 +50,11 @@ public class ChatAdapter extends BaseAdapter {
 		} else
 			holder = (ViewHolder) convertView.getTag();
 
-		holder.message.setText(message.getMessage());
+		if(message.isMine()){
+			holder.message.setText(message.getMessage());
+		}else{
+			holder.message.setText(message.getName()+": "+message.getMessage());
+		}
 
 		LayoutParams lp = (LayoutParams) holder.message.getLayoutParams();
 		// check if it is a status message then remove background, and change

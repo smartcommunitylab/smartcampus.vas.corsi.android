@@ -156,10 +156,6 @@ public class EditEventFragment extends SherlockFragment {
 				eventoModificato.setType(title.getText().toString());
 				eventoModificato.setPersonalDescription(description.getText()
 						.toString());
-				long dateR = 10000 * (date.getTime() / 10000);
-				eId.setStart(new Time(hour, minute, 0));
-				eId.setStop(new Time(hour, minute, 0));
-				eId.setDate(new Date(dateR));
 				eventoModificato.setEventoId(eId);
 				new ChangeEvent(getSherlockActivity()).execute();
 				getSherlockActivity().onBackPressed();
@@ -227,8 +223,6 @@ public class EditEventFragment extends SherlockFragment {
 			date.setDate(day);
 
 			eId.setDate(date);
-
-			eventoModificato.setEventoId(eId);
 		}
 
 	}
@@ -260,6 +254,8 @@ public class EditEventFragment extends SherlockFragment {
 			}
 			hour = hourOfDay;
 			EditEventFragment.this.minute = minute;
+			
+			eId.setStart(new Time(hour, EditEventFragment.this.minute, 0));
 		}
 	}
 

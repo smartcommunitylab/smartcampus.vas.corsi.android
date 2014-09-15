@@ -52,6 +52,7 @@ public class Chat_Fragment extends SherlockFragment {
 	static Random rand = new Random();
 	static String sender;
 	private ListView chat;
+	private String name;
 	private GruppoDiStudio contextualGDS;
 	public static ProgressDialog pd;
 	// This intent filter will be set to filter on the string
@@ -107,10 +108,11 @@ public class Chat_Fragment extends SherlockFragment {
 		public void onReceive(Context context, Intent intent) {
 
 			String message = intent.getExtras().getString("message");
+			String name = intent.getExtras().getString("name");
 
 			if (message != null) {
 				// display our received message
-				addNewMessage(new Message(message.toString().trim(), false));
+				addNewMessage(new Message(message.toString().trim(), false, name));
 
 				NotificationCenterGds notifCenter = new NotificationCenterGds(
 						getActivity().getApplicationContext());
@@ -280,7 +282,7 @@ public class Chat_Fragment extends SherlockFragment {
 								.getUserId())) {
 					messages.add(new Message(chatMessage.getTesto(), true));
 				} else {
-					messages.add(new Message(chatMessage.getTesto(), false));
+					messages.add(new Message(chatMessage.getTesto(), false, chatMessage.getNome_studente()));
 				}
 			}
 
