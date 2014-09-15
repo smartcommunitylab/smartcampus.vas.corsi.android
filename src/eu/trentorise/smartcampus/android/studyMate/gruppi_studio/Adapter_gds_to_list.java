@@ -69,7 +69,7 @@ public class Adapter_gds_to_list extends ArrayAdapter<GruppoDiStudio> {
 		if (numberOfNotifications >= 1) {
 
 			int imageResource = 0;
-			
+
 			if (numberOfNotifications <= 9) {
 				imageResource = getFlagResource(context, "ic_notification_"
 						+ numberOfNotifications);

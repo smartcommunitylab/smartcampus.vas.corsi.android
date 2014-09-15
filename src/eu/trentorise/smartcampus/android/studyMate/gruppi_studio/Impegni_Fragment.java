@@ -56,10 +56,13 @@ public class Impegni_Fragment extends SherlockFragment {
 		hiddenKeyboard(view);
 		return view;
 	}
+
 	private void hiddenKeyboard(View v) {
-        InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
-    }
+		InputMethodManager keyboard = (InputMethodManager) getActivity()
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	}
+
 	@Override
 	public void onStart() {
 

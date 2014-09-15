@@ -42,7 +42,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	Spinner spinner_materia;
-	//Spinner spinner_nome_gruppo;
+	// Spinner spinner_nome_gruppo;
 	public ArrayList<String> listaCorsiString = new ArrayList<String>();
 	public List<CorsoCarriera> listaCorsi = new ArrayList<CorsoCarriera>();
 	public ArrayList<GruppoDiStudio> listaGDSxMateria = new ArrayList<GruppoDiStudio>();
@@ -62,7 +62,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 		// recupero delle componenti grafiche dal layout
 		spinner_materia = (Spinner) findViewById(R.id.spinner_materie);
-		//spinner_nome_gruppo = (Spinner) findViewById(R.id.spinner_nomi_gruppi);
+		// spinner_nome_gruppo = (Spinner)
+		// findViewById(R.id.spinner_nomi_gruppi);
 		LoadSpinnerMaterieAsTask task = new LoadSpinnerMaterieAsTask(
 				RicercaGruppiGenerale_activity.this);
 		task.execute();
@@ -86,7 +87,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 
 	}
 
-	
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -279,7 +279,6 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 				for (GruppoDiStudio g : listaGDSxMateria) {
 					nomi_GDS.add(g.getNome());
 				}
-				
 
 				Adapter_gds adapter = new Adapter_gds(getApplicationContext(),
 						R.id.searchresults_gds_list, listaGDSxMateria);
@@ -293,7 +292,8 @@ public class RicercaGruppiGenerale_activity extends SherlockFragmentActivity {
 						Adapter_gds adpt = (Adapter_gds) parent.getAdapter();
 						ArrayList<GruppoDiStudio> entries = adpt.getEntries();
 						GruppoDiStudio selected_gds = entries.get(position);
-						Intent intent = new Intent(RicercaGruppiGenerale_activity.this,
+						Intent intent = new Intent(
+								RicercaGruppiGenerale_activity.this,
 								GDS_Subscription_activity.class);
 						intent.putExtra(Constants.GDS_SUBS, selected_gds);
 

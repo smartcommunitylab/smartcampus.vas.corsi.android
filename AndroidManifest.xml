@@ -215,11 +215,6 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.Display_GDS_research_results"
-            android:windowSoftInputMode="stateHidden" 
-            android:configChanges="orientation|keyboard">
-        </activity>
-        <activity
             android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.ShowImpegnoGDS"
             android:windowSoftInputMode="stateHidden" 
             android:configChanges="orientation|keyboard">
