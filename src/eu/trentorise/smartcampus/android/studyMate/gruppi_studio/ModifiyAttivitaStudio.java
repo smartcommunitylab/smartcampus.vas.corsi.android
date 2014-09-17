@@ -96,7 +96,7 @@ public class ModifiyAttivitaStudio extends FragmentActivity {
 		mPickDate = (EditText) findViewById(R.id.myDatePickerButton);
 		title = (TextView) findViewById(R.id.editTextTitleGDS);
 		title.setText(evento.getTitle());
-		
+
 		mPickDate.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -171,6 +171,7 @@
     <string name="no_events_now">No events available at the moment for this course</string>
     <string name="attivitadistudio_string">Study\'s activity</string>
     <string name="sure_group_stud">Subscription confirmation</string>
+    <string name="attivita_string">Activity</string>
 
     <!-- Toasts -->
     <string name="toast_event_added">Personal event added</string>
@@ -218,7 +219,7 @@
     <string name="addevent_location">Location</string>
     <string name="string_year_at">Year at</string>
     <string name="my_gds">My study groups</string>
-    <string name="menu_subscribe_group">Join groups</string>
+    <string name="menu_subscribe_group">Join group</string>
     <string name="menu_add_group">Create group</string>
     <string name="iscr_group_stud">Search results</string>
     <string name="label_participants">Participants:</string>
@@ -245,9 +246,12 @@
 	<string name="gds_del_impegno">Delete activity</string>
 	<string name="gds_add_impegno">Add activity</string>
 	<string name="gds_abb_group">Leave group</string>
+	<string name="gds_show_users">Group details</string>
 	<string name="gds_go">Go</string>
 	<string name="gds_join">Join group</string>
 	<string name="gds_join_done">You\'ve joined the group!</string>
+	<string name="gds_unjoin">Leave group</string>
+	<string name="gds_unjoin_done">You\'ve left the group...</string>
     <!-- Disclaimer -->
     <string name="disclaimer">This app uses some of the data from your University of Trento account. In order to fully use all of the functions of this app, you will  first have to give the University permission to release your data to Smart Campus. Please go to the following website, sign into your UniTn account, and fill out the form:\n\n https://webapps.unitn.it/Apply/it/Web/GoHome/smartcampus/smartc</string>
 
@@ -257,4 +261,5 @@
     
     <!-- chat -->
     <string name="chat_messages">Chat messages</string>
+    <string name="chat_label">Chat</string>
 </resources>

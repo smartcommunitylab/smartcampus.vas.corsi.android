@@ -2,7 +2,6 @@ package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.util.ArrayList;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -36,7 +35,7 @@ import eu.trentorise.smartcampus.protocolcarrier.exceptions.ConnectionException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.ProtocolException;
 import eu.trentorise.smartcampus.protocolcarrier.exceptions.SecurityException;
 
-public class GDS_Subscription_activity extends SherlockActivity {
+public class GDS_members_activity extends SherlockActivity {
 	private GruppoDiStudio contextualGDS;
 	private ProtocolCarrier mProtocolCarrier;
 
@@ -48,21 +47,21 @@ public class GDS_Subscription_activity extends SherlockActivity {
 				.getSerializable(Constants.GDS_SUBS);
 
 		// questo carica la materia nel gruppo
-		new GetRelatedCorsoAS(GDS_Subscription_activity.this, contextualGDS)
+		new GetRelatedCorsoAS(GDS_members_activity.this, contextualGDS)
 				.execute();
 
-		setContentView(R.layout.gds_detail_activity);
+		setContentView(R.layout.gds_members_activity);
 		// customize layout
 		ActionBar actionbar = getSupportActionBar();
-		actionbar.setTitle(contextualGDS.getNome());
+		actionbar.setTitle(getResources().getString(R.string.gds_show_users));
 		actionbar.setLogo(R.drawable.gruppistudio_icon_white);
 		actionbar.setHomeButtonEnabled(true);
 		actionbar.setDisplayHomeAsUpEnabled(true);
 
 		// retrieving graphics from activity_layout
-		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail);
-		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
-		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds);
+		TextView nome_gds = (TextView) findViewById(R.id.tv_nome_gds_detail_members);
+		TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail_members);
+		ListView participants_gds = (ListView) findViewById(R.id.lv_partecipanti_gds_members);
 
 		nome_gds.setText(contextualGDS.getNome());
 		materia_gds.setText(contextualGDS.getMateria());
@@ -70,7 +69,8 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		if (contextualGDS.getStudentiGruppo() != null
 				&& !contextualGDS.getStudentiGruppo().isEmpty()) {
 			Students_to_listview_adapter adapter = new Students_to_listview_adapter(
-					GDS_Subscription_activity.this, R.id.lv_partecipanti_gds,
+					GDS_members_activity.this,
+					R.id.lv_partecipanti_gds_members,
 					((ArrayList<Studente>) contextualGDS.getStudentiGruppo()));
 			participants_gds.setAdapter(adapter);
 		}
@@ -80,12 +80,12 @@ public class GDS_Subscription_activity extends SherlockActivity {
 	@Override
 	protected void onStart() {
 
-		findViewById(R.id.button_join_gds).setOnClickListener(
+		findViewById(R.id.button_join_gds_members).setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						ASTaskSubscribe task = new ASTaskSubscribe(
-								GDS_Subscription_activity.this, contextualGDS);
+						AsyncTabbandonaGruppo task = new AsyncTabbandonaGruppo(
+								GDS_members_activity.this, contextualGDS);
 						task.execute();
 
 					}
@@ -104,86 +104,11 @@ public class GDS_Subscription_activity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			GDS_Subscription_activity.this.finish();
+			GDS_members_activity.this.finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	private class ASTaskSubscribe extends AsyncTask<Void, Void, Void> {
-
-		Context taskcontext;
-		public ProgressDialog pd;
-		private GruppoDiStudio gds_to_subscribe;
-
-		public ASTaskSubscribe(Context taskcontext,
-				GruppoDiStudio gds_to_subscribe) {
-			super();
-			this.taskcontext = taskcontext;
-			this.gds_to_subscribe = gds_to_subscribe;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			pd = new ProgressDialog(taskcontext);
-			pd = ProgressDialog.show(taskcontext,
-					getResources().getString(R.string.iscr_group_stud_dial)
-							+ gds_to_subscribe.getNome(), getResources()
-							.getString(R.string.dialog_loading));
-		}
-
-		void subscribetogds(GruppoDiStudio gds) {
-			mProtocolCarrier = new ProtocolCarrier(taskcontext,
-					SmartUniDataWS.TOKEN_NAME);
-
-			MessageRequest request = new MessageRequest(
-					SmartUniDataWS.URL_WS_SMARTUNI,
-					SmartUniDataWS.POST_ACCEPT_GDS);
-			request.setMethod(Method.POST);
-			String jsongds = Utils.convertToJSON(gds);
-			request.setBody(jsongds);
-
-			MessageResponse response;
-			try {
-				response = mProtocolCarrier
-						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
-								MyUniActivity.getAuthToken());
-
-				if (response.getHttpStatus() == 200) {
-
-				}
-			} catch (ConnectionException e) {
-				e.printStackTrace();
-			} catch (ProtocolException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (AACException e) {
-				e.printStackTrace();
-			}
-			return;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			subscribetogds(gds_to_subscribe);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			pd.dismiss();
-			Intent intent = new Intent(GDS_Subscription_activity.this,
-					Lista_GDS_activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			Toast.makeText(getApplicationContext(), R.string.gds_join_done,
-					Toast.LENGTH_SHORT).show();
-		}
-
 	}
 
 	private class GetRelatedCorsoAS extends AsyncTask<Void, Void, Void> {
@@ -248,11 +173,88 @@ public class GDS_Subscription_activity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail);
+			TextView materia_gds = (TextView) findViewById(R.id.tv_materia_gds_detail_members);
 			materia_gds.setText(GDS.getMateria());
-
 		}
 
 	}
 
+	private class AsyncTabbandonaGruppo extends
+			AsyncTask<GruppoDiStudio, Void, Void> {
+
+		@SuppressWarnings("unused")
+		Context taskcontext;
+		GruppoDiStudio toabandonGDS;
+
+		public AsyncTabbandonaGruppo(Context taskcontext,
+				GruppoDiStudio toabandonGDSgds) {
+			super();
+			this.taskcontext = taskcontext;
+			this.toabandonGDS = toabandonGDSgds;
+		}
+
+		private boolean abandonGDS(GruppoDiStudio gds_to_abandon) {
+			mProtocolCarrier = new ProtocolCarrier(GDS_members_activity.this,
+					SmartUniDataWS.TOKEN_NAME);
+
+			MessageRequest request = new MessageRequest(
+					SmartUniDataWS.URL_WS_SMARTUNI,
+					SmartUniDataWS.POST_ABANDON_GDS);
+			request.setMethod(Method.POST);
+
+			MessageResponse response;
+			try {
+				request.setBody(gds_to_abandon.getId() + "");
+				response = mProtocolCarrier
+						.invokeSync(request, SmartUniDataWS.TOKEN_NAME,
+								MyUniActivity.getAuthToken());
+
+				if (response.getHttpStatus() == 200) {
+
+					return true;
+
+				} else {
+					return false;
+				}
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			} catch (ProtocolException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (AACException e) {
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			GDS_members_activity.this.finish();
+			Intent intent = new Intent(GDS_members_activity.this,
+					Lista_GDS_activity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			Toast.makeText(getApplicationContext(),
+					getResources().getString(R.string.gds_unjoin_done),
+					Toast.LENGTH_SHORT).show();
+			// GDS_members_activity.this.finish();
+			// onBackPressed();
+
+		}
+
+		@Override
+		protected Void doInBackground(GruppoDiStudio... params) {
+			abandonGDS(toabandonGDS);
+			return null;
+		}
+
+	}
 }

@@ -13,6 +13,10 @@
                 android:id="@+id/action_abbandona_gruppo"
                 android:showAsAction="always"
                 android:title="@string/gds_abb_group"/>
+            <item
+                android:id="@+id/action_mostra_partecipanti"
+                android:showAsAction="always"
+                android:title="@string/gds_show_users"/>
         </menu>
     </item>
 

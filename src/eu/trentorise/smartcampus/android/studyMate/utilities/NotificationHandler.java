@@ -122,6 +122,7 @@ public class NotificationHandler extends
 
 		if (notifies == null) {
 			setVoidNotify();
+			// Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
 		} else
 			setListNotifications(notifies);
 	}

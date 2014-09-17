@@ -53,8 +53,8 @@ public class Overview_GDS extends SherlockFragmentActivity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 
-		String tab1_txt = "attività";// getResources().getString(R.string.tab_home);
-		String tab2_txt = "chat";// getResources().getString(R.string.tab_courses);
+		String tab1_txt = getResources().getString(R.string.attivita_string);
+		String tab2_txt = getResources().getString(R.string.chat_label);
 
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		Tab tab1 = ab
@@ -98,6 +98,13 @@ public class Overview_GDS extends SherlockFragmentActivity {
 			Intent intent = new Intent(getApplicationContext(),
 					Add_attivita_studio_activity.class);
 			intent.putExtra(Constants.GDS, contextualGDS);
+			startActivity(intent);
+			return true;
+		}
+		case R.id.action_mostra_partecipanti: {
+			Intent intent = new Intent(getApplicationContext(),
+					GDS_members_activity.class);
+			intent.putExtra(Constants.GDS_SUBS, contextualGDS);
 			startActivity(intent);
 			return true;
 		}

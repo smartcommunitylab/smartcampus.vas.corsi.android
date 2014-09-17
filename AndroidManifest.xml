@@ -2,11 +2,11 @@
     package="eu.trentorise.smartcampus.android.studyMate"
     android:sharedUserId="it.smartcampuslab.launcher"
     android:sharedUserLabel="@string/app_uid_label"
-    android:versionCode="8"
-    android:versionName="1.1.0" >
+    android:versionCode="9"
+    android:versionName="1.2.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="16" />
     
 	<permission
@@ -236,7 +236,12 @@
             android:label="@string/title_activity_modifiy_attivita_studio" 
             android:configChanges="orientation|keyboard">
         </activity>
-        
+        <activity
+            android:name="eu.trentorise.smartcampus.android.studyMate.gruppi_studio.GDS_members_activity"
+             android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateHidden" 
+            android:configChanges="orientation|keyboard">
+        </activity>
         <activity
             android:name="com.github.espiandev.showcaseview.TourActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard"

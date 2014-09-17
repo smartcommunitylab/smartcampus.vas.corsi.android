@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/listViewBg"
+    android:background="#C4C4C4"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -11,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-android:background="@drawable/message_bar" >
+        android:background="@drawable/message_bar" >
 
         <EditText
             android:id="@+id/text"
@@ -22,7 +21,7 @@ android:background="@drawable/message_bar" >
             android:hint="Write here"
             android:padding="5sp"
             android:textColor="@color/textFieldColor" />
-<!--             android:background="@drawable/message_field" -->
+        <!-- android:background="@drawable/message_field" -->
 
         <Button
             android:id="@+id/send_chat"
@@ -44,18 +43,20 @@ android:background="@drawable/message_bar" >
         android:listSelector="#00000000" >
     </ListView>
 
-    <!-- <TextView
+    <!--
+         <TextView
         android:id="@android:id/empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/bottom_write_bar"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/main_empty_list" /> -->
+        android:text="@string/main_empty_list" />
+    -->
 
 </RelativeLayout>
-
-<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearChat"
     android:layout_width="match_parent"
@@ -98,4 +99,5 @@ android:background="@drawable/message_bar" >
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout> -->
+</LinearLayout>
+-->

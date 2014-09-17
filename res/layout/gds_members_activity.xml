@@ -14,7 +14,7 @@
         android:weightSum="5" >
 
         <ImageView
-            android:id="@+id/iv_logo_detail"
+            android:id="@+id/iv_logo_detail_members"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -28,7 +28,7 @@
             android:paddingLeft="20dp" >
 
             <TextView
-                android:id="@+id/tv_nome_gds_detail"
+                android:id="@+id/tv_nome_gds_detail_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -36,7 +36,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_materia_gds_detail"
+                android:id="@+id/tv_materia_gds_detail_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -44,10 +44,11 @@
                 android:textStyle="italic" />
 
             <Button
-                android:id="@+id/button_join_gds"
+                android:id="@+id/button_join_gds_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/gds_join" />
+                android:text="@string/gds_unjoin" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -58,7 +59,7 @@
         android:paddingTop="15dp" >
 
         <TextView
-            android:id="@+id/tv_info_studente"
+            android:id="@+id/tv_info_studente_members"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -74,10 +75,10 @@
             android:paddingTop="10dp" />
 
         <ListView
-            android:id="@+id/lv_partecipanti_gds"
+            android:id="@+id/lv_partecipanti_gds_members"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:listSelector="@android:color/transparent">
+            android:layout_height="wrap_content" 
+            android:listSelector="@android:color/transparent" >
         </ListView>
     </LinearLayout>
 

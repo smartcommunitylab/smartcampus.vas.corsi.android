@@ -52,6 +52,7 @@ public class Chat_Fragment extends SherlockFragment {
 	static Random rand = new Random();
 	static String sender;
 	private ListView chat;
+	@SuppressWarnings("unused")
 	private String name;
 	private GruppoDiStudio contextualGDS;
 	public static ProgressDialog pd;
@@ -106,7 +107,7 @@ public class Chat_Fragment extends SherlockFragment {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			
+
 			System.out.println("Wow! I am on the OnReceive!!! ");
 
 			String message = intent.getExtras().getString("message");
@@ -114,7 +115,8 @@ public class Chat_Fragment extends SherlockFragment {
 
 			if (message != null) {
 				// display our received message
-				addNewMessage(new Message(message.toString().trim(), false, name));
+				addNewMessage(new Message(message.toString().trim(), false,
+						name));
 
 				NotificationCenterGds notifCenter = new NotificationCenterGds(
 						getActivity().getApplicationContext());
@@ -284,7 +286,8 @@ public class Chat_Fragment extends SherlockFragment {
 								.getUserId())) {
 					messages.add(new Message(chatMessage.getTesto(), true));
 				} else {
-					messages.add(new Message(chatMessage.getTesto(), false, chatMessage.getNome_studente()));
+					messages.add(new Message(chatMessage.getTesto(), false,
+							chatMessage.getNome_studente()));
 				}
 			}
 

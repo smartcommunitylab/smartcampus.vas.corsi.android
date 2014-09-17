@@ -1,7 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +12,6 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -119,22 +117,22 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 		// display the current date
- 		updateDisplay();
+		updateDisplay();
 
- 		int customYear = mYear - 1900;
+		int customYear = mYear - 1900;
 		date.setYear(customYear);
 		date.setMonth(mMonth);
- 		date.setDate(mDay);
+		date.setDate(mDay);
 		eId.setStart(new Time(hour, minute, 0));
 		eId.setStop(new Time(hour, minute, 0));
 		description = (EditText) findViewById(R.id.editTextDescription);
 		coursesSpinner = (Spinner) findViewById(R.id.spinnerCorsi);
 		eventlocation = (EditText) findViewById(R.id.editText_eventlocation);
- 		List<String> course = new ArrayList<String>();
- 		course.add(new String(gds.getMateria()));
- 		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
+		List<String> course = new ArrayList<String>();
+		course.add(new String(gds.getMateria()));
+		ArrayAdapter<String> adapterCourse = new ArrayAdapter<String>(
 				Add_attivita_studio_activity.this,
- 				R.layout.list_studymate_row_list_simple, course);
+				R.layout.list_studymate_row_list_simple, course);
 		coursesSpinner.setAdapter(adapterCourse);
 		coursesSpinner.setClickable(false);
 
@@ -175,12 +173,17 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 			}
 			nuova_attivitaStudio.setTitle(name);// gds.getMateria()
 			// Date data = new Date();
+
 			if (date != null) {
-					
+
 				EventoId eventoId = new EventoId();
+
 				long dateR = 10000 * (date.getTime() / 10000);
 				eventoId.setDate(new Date(dateR));
+				Time time = new Time(date.getTime());
+				eventoId.setStart(time);
 				eventoId.setIdEventAd(-2);
+				eventoId.setStop(time);
 				// nuova_attivitaStudio.getEventoId().setDate(data);
 				nuova_attivitaStudio.setEventoId(eventoId);
 			}
@@ -228,9 +231,9 @@ public class Add_attivita_studio_activity extends SherlockFragmentActivity {
 
 			// Use the current date as the default date in the picker
 			final Calendar c = Calendar.getInstance();
-//			mYear = c.get(Calendar.YEAR);
-//			mMonth = c.get(Calendar.MONTH);
-//			mDay = c.get(Calendar.DAY_OF_MONTH);
+			mYear = c.get(Calendar.YEAR);
+			mMonth = c.get(Calendar.MONTH);
+			mDay = c.get(Calendar.DAY_OF_MONTH);
 			// Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(Add_attivita_studio_activity.this,
 					this, mYear, mMonth, mDay);

@@ -14,7 +14,7 @@ public class Message {
 		this.isStatusMessage = false;
 		this.name = name;
 	}
-	
+
 	public Message(String message, boolean isMine) {
 		super();
 		this.message = message;
