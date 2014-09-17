@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#C4C4C4"
     android:orientation="vertical" >
 
+<!--     android:background="#C4C4C4" -->
     <LinearLayout
         android:id="@+id/bottom_write_bar"
         android:layout_width="fill_parent"

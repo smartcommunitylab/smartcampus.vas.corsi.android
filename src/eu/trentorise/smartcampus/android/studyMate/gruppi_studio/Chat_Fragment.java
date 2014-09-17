@@ -88,6 +88,8 @@ public class Chat_Fragment extends SherlockFragment {
 			public void onClick(View v) {
 				if (text.getText().toString().length() > 0) {
 					sendMessage(v);
+					GetListMessages getMessagesTask = new GetListMessages();
+					getMessagesTask.execute();
 				}
 			}
 		});

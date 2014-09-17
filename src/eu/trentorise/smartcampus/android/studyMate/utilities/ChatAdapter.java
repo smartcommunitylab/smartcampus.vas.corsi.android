@@ -78,7 +78,7 @@ public class ChatAdapter extends BaseAdapter {
 			// align to left
 			else {
 				holder.message
-						.setBackgroundResource(R.drawable.speech_bubble_white);
+						.setBackgroundResource(R.drawable.speech_bubble_cyan);//white);
 				lp.gravity = Gravity.LEFT;
 			}
 			holder.message.setLayoutParams(lp);
