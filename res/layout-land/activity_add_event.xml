@@ -95,7 +95,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
                     android:focusableInTouchMode="false"
+                    android:background="@drawable/borders_edittext_date"
                     android:onClick="showDatePickerDialog" />
 
                 <TextView
@@ -112,6 +115,9 @@
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
                     android:focusableInTouchMode="false"
+                    android:background="@drawable/borders_edittext_date"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
                     android:onClick="showTimePickerDialog" />
 
                 <Button
