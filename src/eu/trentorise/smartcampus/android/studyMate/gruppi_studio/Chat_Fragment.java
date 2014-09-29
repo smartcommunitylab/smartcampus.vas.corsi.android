@@ -200,6 +200,8 @@ public class Chat_Fragment extends SherlockFragment {
 					// from server.
 
 				} else {
+					addNewMessage(new Message(text.getText().toString(),
+							true));
 					text.setText("");
 				}
 

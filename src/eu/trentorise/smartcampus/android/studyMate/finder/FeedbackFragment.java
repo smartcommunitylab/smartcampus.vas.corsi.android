@@ -107,11 +107,12 @@ public class FeedbackFragment extends SherlockFragment {
 										.findViewById(R.id.imageViewExpand);
 								if (parent.isGroupExpanded(groupPosition)) {
 									parent.collapseGroup(groupPosition);
-									exp.setImageResource(R.drawable.ic_expand);
+									//exp.setImageResource(R.drawable.ic_expand);
 								} else {
-									exp.setImageResource(R.drawable.ic_expand1);
+									//exp.setImageResource(R.drawable.ic_expand1);
 									parent.expandGroup(groupPosition);
 								}
+								
 								return true;
 							}
 						});
