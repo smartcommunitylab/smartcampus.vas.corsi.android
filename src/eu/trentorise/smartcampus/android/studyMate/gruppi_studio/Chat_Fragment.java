@@ -188,8 +188,6 @@ public class Chat_Fragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Boolean operation) {
 
-			if (operation) {
-
 				if (messages.size() >= 1) {
 
 					if (messages.get(messages.size() - 1).isStatusMessage()) {
@@ -205,9 +203,7 @@ public class Chat_Fragment extends SherlockFragment {
 					text.setText("");
 				}
 
-			} else {
-				text.setText("");
-			}
+
 		}
 
 	}
