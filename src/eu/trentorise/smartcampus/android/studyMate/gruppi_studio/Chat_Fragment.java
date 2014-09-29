@@ -115,7 +115,7 @@ public class Chat_Fragment extends SherlockFragment {
 
 			if (message != null) {
 				// display our received message
-				addNewMessage(new Message(message.toString().trim(), false,
+				addNewMessage(new Message(message.toString(), false,
 						name));
 
 				NotificationCenterGds notifCenter = new NotificationCenterGds(
@@ -134,6 +134,7 @@ public class Chat_Fragment extends SherlockFragment {
 		if (text.getText().toString().length() > 0) {
 			// addNewMessage(new Message(newMessage, true));
 			new SendMessage().execute();
+			
 		}
 	}
 
@@ -149,8 +150,7 @@ public class Chat_Fragment extends SherlockFragment {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.POST_WS_MESSAGE_CHAT_GDS(
-							contextualGDS.getId(), text.getText().toString()
-									.trim()));
+							contextualGDS.getId(), text.getText().toString()));
 			request.setMethod(Method.POST);
 
 			MessageResponse response;
@@ -194,7 +194,7 @@ public class Chat_Fragment extends SherlockFragment {
 						messages.remove(messages.size() - 1);
 					}
 
-					addNewMessage(new Message(text.getText().toString().trim(),
+					addNewMessage(new Message(text.getText().toString(),
 							true)); // add the orignal
 					// message
 					// from server.
