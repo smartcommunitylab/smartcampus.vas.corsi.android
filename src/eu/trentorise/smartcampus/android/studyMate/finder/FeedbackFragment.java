@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -41,29 +40,29 @@ public class FeedbackFragment extends SherlockFragment {
 
 		View view = inflater.inflate(R.layout.fragment_home_course_feedback,
 				container, false);
-//		TextView titleRatingFeedback = (TextView) view
-//				.findViewById(R.id.textViewTitleFeedbackCourse);
+		// TextView titleRatingFeedback = (TextView) view
+		// .findViewById(R.id.textViewTitleFeedbackCourse);
 		if (FeedbackHandler.feedbackInfoList.get(0).getRating_contenuto() == -1) {
 			Toast.makeText(
 					getSherlockActivity(),
 					getActivity().getResources().getString(
 							R.string.feedback_not_present), Toast.LENGTH_SHORT)
 					.show();
-//			titleRatingFeedback.setVisibility(View.GONE);
+			// titleRatingFeedback.setVisibility(View.GONE);
 			return view;
 		} else {
 			List<Commento> comments = FeedbackHandler.feedbackInfoList;
 			if (comments != null) {
-//				if (comments.size() == 1) {
-//					titleRatingFeedback
-//							.setText(getActivity().getResources().getString(
-//									R.string.feedback_number_presents_for_1));
-//				} else {
-//					titleRatingFeedback.setText(comments.size()
-//							+ " "
-//							+ getActivity().getResources().getString(
-//									R.string.feedback_number_presents));
-//				}
+				// if (comments.size() == 1) {
+				// titleRatingFeedback
+				// .setText(getActivity().getResources().getString(
+				// R.string.feedback_number_presents_for_1));
+				// } else {
+				// titleRatingFeedback.setText(comments.size()
+				// + " "
+				// + getActivity().getResources().getString(
+				// R.string.feedback_number_presents));
+				// }
 				ArrayList<FeedbackRowGroup> ratings = new ArrayList<FeedbackRowGroup>();
 
 				for (int i = 0; i < comments.size(); i++) {
@@ -103,16 +102,16 @@ public class FeedbackFragment extends SherlockFragment {
 							public boolean onGroupClick(
 									ExpandableListView parent, View v,
 									int groupPosition, long id) {
-								ImageView exp = (ImageView) getActivity()
+								ImageView exp = (ImageView) v
 										.findViewById(R.id.imageViewExpand);
 								if (parent.isGroupExpanded(groupPosition)) {
 									parent.collapseGroup(groupPosition);
-									//exp.setImageResource(R.drawable.ic_expand);
+									exp.setImageResource(R.drawable.ic_expand);
 								} else {
-									//exp.setImageResource(R.drawable.ic_expand1);
+									exp.setImageResource(R.drawable.ic_expand1);
 									parent.expandGroup(groupPosition);
 								}
-								
+
 								return true;
 							}
 						});

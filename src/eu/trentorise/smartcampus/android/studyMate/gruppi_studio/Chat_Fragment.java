@@ -115,8 +115,7 @@ public class Chat_Fragment extends SherlockFragment {
 
 			if (message != null) {
 				// display our received message
-				addNewMessage(new Message(message.toString(), false,
-						name));
+				addNewMessage(new Message(message.toString(), false, name));
 
 				NotificationCenterGds notifCenter = new NotificationCenterGds(
 						getActivity().getApplicationContext());
@@ -134,7 +133,7 @@ public class Chat_Fragment extends SherlockFragment {
 		if (text.getText().toString().length() > 0) {
 			// addNewMessage(new Message(newMessage, true));
 			new SendMessage().execute();
-			
+
 		}
 	}
 
@@ -188,23 +187,22 @@ public class Chat_Fragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Boolean operation) {
 
-				if (messages.size() >= 1) {
+			if (messages.size() >= 1) {
 
-					if (messages.get(messages.size() - 1).isStatusMessage()) {
-						messages.remove(messages.size() - 1);
-					}
-
-					addNewMessage(new Message(text.getText().toString(),
-							true)); // add the orignal
-					// message
-					// from server.
-
-				} else {
-					addNewMessage(new Message(text.getText().toString(),
-							true));
-					text.setText("");
+				if (messages.get(messages.size() - 1).isStatusMessage()) {
+					messages.remove(messages.size() - 1);
 				}
 
+				addNewMessage(new Message(text.getText().toString(), true)); // add
+																				// the
+																				// orignal
+				// message
+				// from server.
+
+			} else {
+				addNewMessage(new Message(text.getText().toString(), true));
+				text.setText("");
+			}
 
 		}
 

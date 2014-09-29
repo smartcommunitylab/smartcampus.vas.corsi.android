@@ -299,8 +299,9 @@ public class MyUniActivity extends SherlockActivity {
 				if (SharedUtils.getStudentInfo(mContext) == null)
 					SharedUtils.setStudentInfo(mContext, bp);
 
-				String regId = getRegistrationId(mContext); //test ////////////////////////////////////////////////////////////
-				
+				// String regId = getRegistrationId(mContext); //test
+				// ////////////////////////////////////////////////////////////
+
 				boolean isFirstTime = SharedUtils.isFirstTime(mContext);
 
 				// se è il primo avvio dell'app sul dispositivo -> registro

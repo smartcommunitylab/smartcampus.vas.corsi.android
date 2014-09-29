@@ -182,7 +182,7 @@ public class DettailOfEventFragment extends SherlockFragment {
 								R.string.event_delete_not_allowed),
 						Toast.LENGTH_SHORT).show();
 			} else {
-				
+
 				new DeleteEvent(eventSelected).execute();
 			}
 			return true;

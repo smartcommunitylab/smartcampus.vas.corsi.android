@@ -49,10 +49,10 @@
     </ExpandableListView>
     <!-- android:paddingBottom="@dimen/activity_vertical_margin" -->
 
-    <View
+   <!--  <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@color/smartn_theme_color" />
+        android:background="@color/smartn_theme_color" /> -->
 
     <EditText
         android:id="@+id/AddCommentRatingCourse"

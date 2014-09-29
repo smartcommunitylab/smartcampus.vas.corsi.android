@@ -11,7 +11,6 @@ import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -127,10 +126,12 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		TextView textSearch = (TextView) findViewById(R.id.textViewLabelCerca);
-//		TextView textSearching = (TextView) findViewById(R.id.textViewLabelCercando);
-//		textSearching.setText(" " + searchTV.getText().toString());
-//		textSearch.setText(R.string.find_label_searchingnow);
+		// TextView textSearch = (TextView)
+		// findViewById(R.id.textViewLabelCerca);
+		// TextView textSearching = (TextView)
+		// findViewById(R.id.textViewLabelCercando);
+		// textSearching.setText(" " + searchTV.getText().toString());
+		// textSearch.setText(R.string.find_label_searchingnow);
 
 	}
 }
