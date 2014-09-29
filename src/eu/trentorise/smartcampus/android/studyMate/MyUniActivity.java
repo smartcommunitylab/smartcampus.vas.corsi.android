@@ -531,7 +531,10 @@ public class MyUniActivity extends SherlockActivity {
 			// would send the registration id, and other identifying
 			// information to your server, which should save the id
 			// for use when broadcasting messages.
-			sendRegistrationToServer(regId);
+
+			if (regId != null) {
+				sendRegistrationToServer(regId);
+			}
 
 		} catch (Exception e) {
 
