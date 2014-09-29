@@ -50,7 +50,7 @@
     <string name="title_activity_result_searched">Search Results</string>
     <string name="tab_overview">Overview</string>
     <string name="tab_courses">COURSE EVENTS</string>
-    <string name="tab_home">HOME</string>
+    <string name="tab_home">ALL EVENTS</string>
     <string name="tab_recensioni">REVIEWS</string>
     <string name="libretto">Academic transcript:</string>
     <string name="interesse">Courses of interest:</string>
@@ -59,7 +59,7 @@
     <string name="find_recensioni_per">Review for: COURSE</string>
     <string name="rate">Rate!</string>
     <string name="title_activity_find_home_course">Find Home Course</string>
-    <string name="rating">Student reviews:</string>
+    <string name="rating">Overall rating:</string>
     <string name="title_activity_dati">Data</string>
     <string name="my_courses">Courses that you follow</string>
     <string name="title_activity_search_home">Search courses</string>
@@ -92,7 +92,7 @@
     <string name="title_activity_add_event">Add an event</string>
     <string name="title_activity_rate">Rate!</string>
     <string name="tab_home_course">Description</string>
-    <string name="tab_feedback">Review</string>
+    <string name="tab_feedback">Reviews</string>
     <string name="feedback_title_of_list">Review for:</string>
     <string name="textview_description_label">Description:</string>
     <string name="add_rating_feedback_button">Add a review</string>
@@ -200,8 +200,8 @@
     <string name="feedback_course_is_career">The course is from the study plan</string>
     <string name="feedback_courses_can_review">Courses that I can review</string>
     <!-- Rate -->
-    <string name="rate_review_course">Rate the course!</string>
-    <string name="rate_insert_review">Please enter your comment ...</string>
+    <string name="rate_review_course">Rate </string>
+    <string name="rate_insert_review">Please enter a comment ...</string>
     <string name="rate_review_added">Review added!</string>
     <string name="homecourse_description_not_present">No description found</string>
     <!-- Notifications -->

@@ -52,11 +52,6 @@
             android:paddingTop="@dimen/adpt_activity_vertical_margin"
             android:text="@string/find_label_searching"
             android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/textViewLabelCercando"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <MultiAutoCompleteTextView

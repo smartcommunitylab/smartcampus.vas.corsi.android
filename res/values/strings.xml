@@ -48,8 +48,8 @@
     <string name="title_activity_find_courses">Ricerca corsi</string>
      <string name="title_activity_result_searched">Risultati della ricerca</string>
     <string name="tab_overview">Overview</string>
-    <string name="tab_courses">Corsi</string>
-    <string name="tab_home">ALL EVENTS</string>
+    <string name="tab_courses">EVENTI PER CORSO</string>
+    <string name="tab_home">TUTTI GLI EVENTI</string>
     <string name="tab_recensioni">RECENSIONI</string>
     <string name="libretto">Corsi da libretto:</string>
     <string name="interesse">Corsi di interesse:</string>
@@ -58,7 +58,7 @@
     <string name="find_recensioni_per">Recensioni per: MATERIA</string>
     <string name="rate">Vota!</string>
     <string name="title_activity_find_home_course">FindHomeCourse</string>
-    <string name="rating">Voto degli studenti:</string>
+    <string name="rating">Voto medio del corso:</string>
     <string name="title_activity_dati">Dati</string>
     <string name="my_courses">Corsi che seguo</string>
     <string name="title_activity_search_home">Ricerca dei corsi</string>
@@ -90,8 +90,8 @@
     <string name="monitor">Segnalazioni attive</string>
     <string name="title_activity_add_event">Aggiungi evento</string>
     <string name="title_activity_rate">Vota!</string>
-    <string name="tab_home_course">Descrizione</string>
-    <string name="tab_feedback">Commenti</string>
+    <string name="tab_home_course">Home</string>
+    <string name="tab_feedback">Recensioni</string>
     <string name="feedback_title_of_list">Recensioni per:</string>
     <string name="textview_description_label">Descrizione:</string>
     <string name="add_rating_feedback_button">Aggiungi commento</string>
@@ -200,8 +200,8 @@
     <string name="feedback_courses_can_review">Corsi che posso votare</string>
 
     <!-- Rate -->
-    <string name="rate_review_course">Valuta il corso!</string>
-    <string name="rate_insert_review">Inserisci il tuo commento...</string>
+    <string name="rate_review_course">Valuta</string>
+    <string name="rate_insert_review">Inserisci un commento...</string>
     <string name="rate_review_added">Valutazione aggiunta!</string>
     <string name="homecourse_description_not_present">Nessuna descrizione trovata</string>
 

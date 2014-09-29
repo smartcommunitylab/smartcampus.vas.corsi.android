@@ -58,7 +58,7 @@ public class AddRatingFromCoursesPassed extends SherlockFragmentActivity {
 		Intent intent = getIntent();
 		idCorso = intent.getLongExtra(Constants.COURSE_ID, 0);
 		CorsoName = intent.getStringExtra(Constants.COURSE_NAME);
-		setTitle(CorsoName);
+		setTitle(getResources().getString(R.string.rate_review_course) + " " + CorsoName);
 		new ProgressDialog(AddRatingFromCoursesPassed.this);
 		pd = ProgressDialog
 				.show(AddRatingFromCoursesPassed.this, getResources()

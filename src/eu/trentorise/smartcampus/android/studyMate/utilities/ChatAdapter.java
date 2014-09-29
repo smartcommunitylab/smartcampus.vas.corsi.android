@@ -54,6 +54,7 @@ public class ChatAdapter extends BaseAdapter {
 		if (message.isMine()) {
 			holder.message.setText(message.getMessage());
 		} else {
+
 			holder.message.setText(Html.fromHtml("<small>"
 					+ "<font color='#0066cc'>" + message.getName() + "</font>"
 					+ "</small>" + "<br />" + message.getMessage()));

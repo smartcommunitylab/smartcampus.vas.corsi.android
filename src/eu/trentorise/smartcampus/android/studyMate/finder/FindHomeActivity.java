@@ -128,9 +128,9 @@ public class FindHomeActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		TextView textSearch = (TextView) findViewById(R.id.textViewLabelCerca);
-		TextView textSearching = (TextView) findViewById(R.id.textViewLabelCercando);
-		textSearching.setText(" " + searchTV.getText().toString());
-		textSearch.setText(R.string.find_label_searchingnow);
+//		TextView textSearching = (TextView) findViewById(R.id.textViewLabelCercando);
+//		textSearching.setText(" " + searchTV.getText().toString());
+//		textSearch.setText(R.string.find_label_searchingnow);
 
 	}
 }
