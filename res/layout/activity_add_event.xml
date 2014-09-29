@@ -18,9 +18,9 @@
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingTop="3dp"
                 android:text="@string/addevent_title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -73,11 +73,9 @@
                     android:id="@+id/myDatePickerButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:cursorVisible="false"
                     android:focusableInTouchMode="false"
-                    android:background="@drawable/borders_edittext_date"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
                     android:onClick="showDatePickerDialog" />
 
                 <TextView
@@ -94,11 +92,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
                     android:focusableInTouchMode="false"
-                    android:background="@drawable/borders_edittext_date"
-                    android:onClick="showTimePickerDialog" />
+                    android:onClick="showTimePickerDialog"
+                    android:padding="4dp" />
+
             </LinearLayout>
 
             <TextView
