@@ -148,6 +148,7 @@
     <string name="dialog_sync_data">Synchronizing personal data</string>
     <string name="dialog_loading">Loading...</string>
     <string name="dialog_error">Oops! There was an error...</string>
+    <string name="dialog_error_old_course">Oops! There was an error. This course may not exist</string>
     <string name="dialog_courses_events">Courses that will display events</string>
     <string name="dialog_list_events">List of your events</string>
     <string name="dialog_list_courses">List of the courses</string>

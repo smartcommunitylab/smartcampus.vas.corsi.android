@@ -148,6 +148,7 @@
     <string name="dialog_sync_data">Sincronizzazione dei dati personali in corso</string>
     <string name="dialog_loading">Caricamento...</string>
     <string name="dialog_error">Ops! C\'è stato un errore...</string>
+    <string name="dialog_error_old_course">Ops! C\'è stato un errore. Il corso che vuoi votare potrebbe non esistere più</string>
     <string name="dialog_courses_events">Lista dei corsi registrati agli eventi</string>
     <string name="dialog_list_events">Lista dei tuoi eventi</string>
     <string name="dialog_list_courses">Lista dei tuoi corsi</string>

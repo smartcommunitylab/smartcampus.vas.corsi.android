@@ -96,7 +96,7 @@ public class AddFeedbackHandler extends AsyncTask<Commento, Void, Boolean> {
 					Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(context,
-					context.getResources().getString(R.string.dialog_error),
+					context.getResources().getString(R.string.dialog_error_old_course),
 					Toast.LENGTH_LONG).show();
 		}
 		AddRatingFromCoursesPassed.pd.dismiss();
