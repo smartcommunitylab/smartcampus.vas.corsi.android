@@ -241,6 +241,8 @@
     <string name="no_att_name">Inserist a valid name</string>
     <string name="gds_materia">Subject:</string>
     <string name="gds_search_by">Search groups in</string> 
+     <string name="notification_search_by">Search notifications in</string> 
+    
 	<string name="gds_name_of">Group\'s name:</string>
 	<string name="gds_result">Results:</string>
 	<string name="gds_mod_impegno">Modify activity</string>
