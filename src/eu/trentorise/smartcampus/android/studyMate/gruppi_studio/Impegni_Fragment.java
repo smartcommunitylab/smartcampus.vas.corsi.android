@@ -25,9 +25,11 @@ import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.Evento;
 import eu.trentorise.smartcampus.android.studyMate.models.GruppoDiStudio;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
+import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEventGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
+import eu.trentorise.smartcampus.android.studyMate.utilities.EventItemGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
 import eu.trentorise.smartcampus.protocolcarrier.ProtocolCarrier;
 import eu.trentorise.smartcampus.protocolcarrier.common.Constants.Method;
@@ -136,13 +138,11 @@ public class Impegni_Fragment extends SherlockFragment {
 			lista_impegni = contextualListaImpegni;
 			// gestione listaimpegni
 
-			EventItem[] listEvItem = new EventItem[lista_impegni.size()];
+			EventItemGds[] listEvItem = new EventItemGds[lista_impegni.size()];
 			int i = 0;
 			for (Evento ev : lista_impegni) {
-				AdptDetailedEvent e = new AdptDetailedEvent(ev.getEventoId()
-						.getDate(), ev.getTitle(), ev.getType(), ev
-						.getEventoId().getStart().toString(), ev.getRoom());
-				listEvItem[i++] = new EventItem(e, getActivity());
+				AdptDetailedEventGds e = new AdptDetailedEventGds(ev.getEventoId().getDate(), ev.getTitle(), ev.getType(), ev.getEventoId().getStart().toString(), ev.getRoom());
+				listEvItem[i++] = new EventItemGds(e, getActivity());
 
 			}
 			EventAdapter adapter = new EventAdapter(getSherlockActivity(),

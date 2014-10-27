@@ -107,9 +107,8 @@ public class OverviewFilterFragment extends SherlockFragment {
 						int i = 0;
 						for (Evento ev : listaEventiFiltrati) {
 							AdptDetailedEvent e = new AdptDetailedEvent(ev
-									.getEventoId().getDate(), ev.getTitle(),
-									ev.getType(), ev.getEventoId().getStart()
-											.toString(), ev.getRoom());
+									.getEventoId(), ev.getTitle(),
+									ev.getType(), ev.getRoom());
 							listEvItem[i++] = new EventItem(e, getActivity());
 						}
 

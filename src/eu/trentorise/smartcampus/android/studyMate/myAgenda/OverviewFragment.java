@@ -102,9 +102,8 @@ public class OverviewFragment extends SherlockFragment {
 
 					for (Evento ev : listaEventi) {
 						AdptDetailedEvent e = new AdptDetailedEvent(ev
-								.getEventoId().getDate(), ev.getTitle(),
-								ev.getType(), ev.getEventoId().getStart()
-										.toString(), ev.getRoom());
+								.getEventoId(), ev.getTitle(),
+								ev.getType(), ev.getRoom());
 						listEvItem[i++] = new EventItem(e, getActivity());
 
 					}

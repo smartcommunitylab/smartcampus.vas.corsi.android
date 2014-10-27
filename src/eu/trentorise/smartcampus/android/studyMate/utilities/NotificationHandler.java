@@ -1,19 +1,18 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import android.content.Context;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.google.android.gms.internal.ac;
 
 import eu.trentorise.smartcampus.ac.AACException;
 import eu.trentorise.smartcampus.android.common.Utils;
@@ -36,7 +35,6 @@ public class NotificationHandler extends
 	String body;
 	TextView textViewTitleNotices;
 	private ListView lvAllNotices;
-	private String dateString;
 	private ArrayList<String> descriptionsList;
 	@SuppressWarnings("unused")
 	private ArrayList<String> datetimeList;
@@ -49,18 +47,18 @@ public class NotificationHandler extends
 	private String type;
 	@SuppressWarnings("unused")
 	private TextView noNot;
+	private TextView voidNot;
 
-	public NotificationHandler(Context applicationContext,
-			TextView textViewTitleNotices, ListView lvAllNotices,
+	public NotificationHandler(Context applicationContext, ListView lvAllNotices,
 			SherlockFragmentActivity act, long fromDate, String type,
-			TextView noNot) {
+			TextView noNot, TextView voidNot) {
 		this.context = applicationContext;
-		this.textViewTitleNotices = textViewTitleNotices;
 		this.lvAllNotices = lvAllNotices;
 		this.activity = act;
 		this.fromDate = fromDate;
 		this.type = type;
 		this.noNot = noNot;
+		this.voidNot = voidNot;
 	}
 
 	private List<Notification> getNotification() throws Exception {
@@ -128,19 +126,7 @@ public class NotificationHandler extends
 	}
 
 	private void setListNotifications(final List<Notification> notifies) {
-		for (Notification n : notifies) {
-			textViewTitleNotices.setText(n.getTitle());
-
-		}
-
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
-				Locale.ITALY);
-		Date date = new Date();
-		dateString = dateFormat.format(date);
-
-		textViewTitleNotices.setText(R.string.notices_string_titlelistExist);
-		textViewTitleNotices.setText(textViewTitleNotices.getText() + " "
-				+ dateString);
+		
 
 		Iterator<Notification> i = notifies.iterator();
 
@@ -161,15 +147,8 @@ public class NotificationHandler extends
 	}
 
 	private void setVoidNotify() {
-		textViewTitleNotices.setText(R.string.notices_string_titlelist);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",
-				Locale.ITALY);
-		Date date = new Date();
-		dateString = dateFormat.format(date);
-
-		textViewTitleNotices.setText(R.string.notices_string_titlelistExist);
-		textViewTitleNotices.setText(textViewTitleNotices.getText() + " "
-				+ dateString);
+		lvAllNotices.setVisibility(View.GONE);
+		voidNot.setText(context.getResources().getString(R.string.notification_void));
 	}
 
 	@Override

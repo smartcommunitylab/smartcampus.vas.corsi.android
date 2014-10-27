@@ -208,6 +208,8 @@
 
     <!-- Notifications -->
     <string name="notification_name">Bacheca notifiche</string>
+    <string name="notification_void">Non sono presenti notifiche.</string>
+    
 
     <!-- Event -->
     <string name="event_change_success">Evento modificato con successo</string>

@@ -4,36 +4,38 @@ public class EventItem4Adapter {
 	private String title;
 	private String content;
 	private String description;
+	private EventoId evId;
 	private String ora;
-	private String room; // /prova
+	private String room;
 
 	public EventItem4Adapter() {
 		this.title = null;
 		this.content = null;
 		this.description = null;
+		this.evId = null;
 		this.ora = null;
 		this.room = null; // ///prova
 	}
 
 	public EventItem4Adapter(String title, String content, String description,
-			String ora, String room) {
+			String ora, String room, EventoId evId) {
 		super();
 		this.title = title;
 		this.content = content;
-		;
 		this.description = description;
 		this.ora = ora;
-		this.room = room; // /// prova
+		this.evId = evId;
+		this.room = room; 
 	}
 
 	public EventItem4Adapter(String title, String content, String description,
-			String ora) {
+			String ora, EventoId evId) {
 		super();
 		this.title = title;
 		this.content = content;
-		;
 		this.description = description;
 		this.ora = ora;
+		this.evId = evId;
 	}
 
 	public String getTitle() {
@@ -74,6 +76,14 @@ public class EventItem4Adapter {
 
 	public void setRoom(String room) {
 		this.room = room;
+	}
+
+	public EventoId getEvId() {
+		return evId;
+	}
+
+	public void setEvId(EventoId evId) {
+		this.evId = evId;
 	}
 
 }

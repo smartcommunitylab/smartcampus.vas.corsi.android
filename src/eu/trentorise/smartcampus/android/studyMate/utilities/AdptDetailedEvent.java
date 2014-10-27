@@ -1,39 +1,26 @@
 package eu.trentorise.smartcampus.android.studyMate.utilities;
 
-import java.util.Date;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 
 public class AdptDetailedEvent {
-	private Date date;
+	private EventoId evId;
 	private String name;
 	private String description;
-	private String ora;
 	private String room; // prova
 
-	public AdptDetailedEvent(Date date, String name, String description,
-			String ora, String room) {
+	public AdptDetailedEvent(EventoId evId, String name, String description, String room) {
 		super();
-		this.date = date;
+		this.evId = evId;
 		this.name = name;
 		this.description = description;
-		this.ora = ora;
 		this.room = room; // prova
 	}
 
-	public AdptDetailedEvent(Date date, String name, String description,
-			String ora) {
+	public AdptDetailedEvent(EventoId evId, String name, String description) {
 		super();
-		this.date = date;
+		this.evId = evId;
 		this.name = name;
 		this.description = description;
-		this.ora = ora;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getName() {
@@ -52,20 +39,20 @@ public class AdptDetailedEvent {
 		this.description = description;
 	}
 
-	public String getOra() {
-		return ora;
-	}
-
-	public void setOra(String ora) {
-		this.ora = ora;
-	}
-
 	public String getRoom() {
 		return room;
 	}
 
 	public void setRoom(String room) {
 		this.room = room;
+	}
+
+	public EventoId getEvId() {
+		return evId;
+	}
+
+	public void setEvId(EventoId evId) {
+		this.evId = evId;
 	}
 
 }

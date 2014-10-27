@@ -34,6 +34,7 @@ public class NoticesActivity extends SherlockFragmentActivity {
 	private String[] source;
 	private Spinner spinner;
 	private TextView noNot;
+	private TextView voidNot;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +44,13 @@ public class NoticesActivity extends SherlockFragmentActivity {
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 		noNot = (TextView) findViewById(R.id.textViewDescNotices);
+		voidNot = (TextView) findViewById(R.id.textViewVoidList);
 		source = getResources().getStringArray(R.array.Source);
 		spinner = (Spinner) findViewById(R.id.spinnerNotifiche);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				NoticesActivity.this, android.R.layout.simple_list_item_1,
 				source);
 		spinner.setAdapter(adapter);
-		textViewTitleNotices = (TextView) findViewById(R.id.textViewTitleNotices);
 		lvAllNotices = (ListView) findViewById(R.id.listViewNotices);
 
 		new ProgressDialog(NoticesActivity.this);
@@ -74,9 +75,8 @@ public class NoticesActivity extends SherlockFragmentActivity {
 									.getString(R.string.notification_name),
 							getResources().getString(R.string.dialog_loading));
 					String type = URLEncoder.encode(source[arg2], "UTF-8");
-					new NotificationHandler(getApplicationContext(),
-							textViewTitleNotices, lvAllNotices, activity,
-							fromDate, type, noNot).execute();
+					new NotificationHandler(getApplicationContext(), lvAllNotices, activity,
+							fromDate, type, noNot, voidNot).execute();
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}

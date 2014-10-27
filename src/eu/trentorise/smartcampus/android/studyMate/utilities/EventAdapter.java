@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
 
@@ -39,11 +41,18 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 				.findViewById(R.id.description_ev_text);
 		TextView ora = (TextView) row.findViewById(R.id.time_ev_edit);
 		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);
+		ImageView imageViewMyEvent = (ImageView) row.findViewById(R.id.icMyEvent);
 		title.setText(item.getTitle());
+		if(item.getEvId().getIdEventAd() == -1 && String.valueOf(item.getEvId().getIdStudente()).equals(MyUniActivity.bp.getUserId())){
+			imageViewMyEvent.setVisibility(View.VISIBLE);
+		}else{
+			imageViewMyEvent.setVisibility(View.GONE);
+		}
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
 		ora.setText(item.getOra());
 		room.setText(item.getRoom());
+		
 		content.setPadding(
 				10,
 				8,

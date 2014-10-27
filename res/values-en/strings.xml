@@ -207,6 +207,7 @@
     <string name="homecourse_description_not_present">No description found</string>
     <!-- Notifications -->
     <string name="notification_name">Wall notifications</string>
+    <string name="notification_void">There are no notifications..</string>
     <!-- Event -->
     <string name="event_change_success">Event successfully updated</string>
     <string name="menu_multi_courses_unfollow">Unfollow</string>

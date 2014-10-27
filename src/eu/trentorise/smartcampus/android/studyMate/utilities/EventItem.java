@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.content.Context;
 import android.content.res.Resources;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
+import eu.trentorise.smartcampus.android.studyMate.models.EventoId;
 
 public class EventItem extends EventItem4Adapter {
 
@@ -23,10 +24,10 @@ public class EventItem extends EventItem4Adapter {
 	@Override
 	public String getTitle() {
 		Calendar c = Calendar.getInstance();
-		c.setTime(object.getDate());
+		c.setTime(object.getEvId().getDate());
 
 		DatesUtil dateUtil = new DatesUtil(context);
-		day = dateUtil.dateToAgendaFormat(object.getDate());
+		day = dateUtil.dateToAgendaFormat(object.getEvId().getDate());
 		return this.toString();
 	}
 
@@ -35,6 +36,8 @@ public class EventItem extends EventItem4Adapter {
 		return object.getName();
 	}
 
+	
+	
 	@Override
 	public String getDescription() {
 		return object.getDescription();
@@ -42,12 +45,18 @@ public class EventItem extends EventItem4Adapter {
 
 	@Override
 	public String getOra() {
-		return object.getOra().substring(0, object.getOra().length() - 3);
+		String time = object.getEvId().getStart().toString();
+		return object.getEvId().getStart().toString().substring(0, (time.length()) - 3);
 	}
 
 	@Override
 	public String getRoom() {
 		return object.getRoom();
+	}
+	
+	@Override
+	public EventoId getEvId() {
+		return object.getEvId();
 	}
 
 	@Override
@@ -62,5 +71,9 @@ public class EventItem extends EventItem4Adapter {
 
 	public void setRes(Resources res) {
 		this.res = res;
+	}
+	
+	public AdptDetailedEvent getObject(){
+		return this.object;
 	}
 }
