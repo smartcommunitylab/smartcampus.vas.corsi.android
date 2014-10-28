@@ -5,8 +5,9 @@ import java.util.Calendar;
 import android.content.Context;
 import android.content.res.Resources;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
+import eu.trentorise.smartcampus.android.studyMate.models.EventItem4AdapterGDS;
 
-public class EventItemGds extends EventItem4Adapter {
+public class EventItemGds extends EventItem4AdapterGDS {
 
 	private AdptDetailedEventGds object;
 	private String day;

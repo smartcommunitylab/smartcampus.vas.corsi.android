@@ -10,14 +10,15 @@ import android.widget.TextView;
 import eu.trentorise.smartcampus.android.studyMate.MyUniActivity;
 import eu.trentorise.smartcampus.android.studyMate.R;
 import eu.trentorise.smartcampus.android.studyMate.models.EventItem4Adapter;
+import eu.trentorise.smartcampus.android.studyMate.models.EventItem4AdapterGDS;
 
 // in EventsListingFragment
-public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
+public class EventAdapterGDS extends ArrayAdapter<EventItem4AdapterGDS> {
 
 	private Context context;
 	private int layoutResourceId;
 
-	public EventAdapter(Context context, EventItem4Adapter[] arr) {
+	public EventAdapterGDS(Context context, EventItem4AdapterGDS[] arr) {
 		super(context, R.layout.event_row, arr);
 		this.context = context;
 		this.layoutResourceId = R.layout.event_row;
@@ -27,7 +28,7 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View row = convertView;
-		EventItem4Adapter item = getItem(position);
+		EventItem4AdapterGDS item = getItem(position);
 
 		if (row == null) {
 			LayoutInflater inflater = (LayoutInflater) context
@@ -43,11 +44,6 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 		TextView room = (TextView) row.findViewById(R.id.room_ev_edit);
 		ImageView imageViewMyEvent = (ImageView) row.findViewById(R.id.icMyEvent);
 		title.setText(item.getTitle());
-		if((item.getEvId().getIdEventAd() == -1 || item.getEvId().getIdEventAd() == -2) && String.valueOf(item.getEvId().getIdStudente()).equals(MyUniActivity.bp.getUserId())){
-			imageViewMyEvent.setVisibility(View.VISIBLE);
-		}else{
-			imageViewMyEvent.setVisibility(View.GONE);
-		}
 		content.setText(item.getContent());
 		description.setText(item.getDescription());
 		ora.setText(item.getOra());
@@ -68,7 +64,7 @@ public class EventAdapter extends ArrayAdapter<EventItem4Adapter> {
 				(int) context.getResources().getDimension(
 						R.dimen.adpt_activity_vertical_margin));
 		ora.setPadding(0, 0, 10, 0);
-		EventItem4Adapter prev = null;
+		EventItem4AdapterGDS prev = null;
 		if (position > 0)
 			prev = getItem(position - 1);
 

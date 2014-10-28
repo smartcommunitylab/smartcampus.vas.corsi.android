@@ -28,6 +28,7 @@ import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEvent;
 import eu.trentorise.smartcampus.android.studyMate.utilities.AdptDetailedEventGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.Constants;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapter;
+import eu.trentorise.smartcampus.android.studyMate.utilities.EventAdapterGDS;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItem;
 import eu.trentorise.smartcampus.android.studyMate.utilities.EventItemGds;
 import eu.trentorise.smartcampus.android.studyMate.utilities.SmartUniDataWS;
@@ -145,7 +146,7 @@ public class Impegni_Fragment extends SherlockFragment {
 				listEvItem[i++] = new EventItemGds(e, getActivity());
 
 			}
-			EventAdapter adapter = new EventAdapter(getSherlockActivity(),
+			EventAdapterGDS adapter = new EventAdapterGDS(getSherlockActivity(),
 					listEvItem);
 			impegni_listview.setAdapter(adapter);
 
