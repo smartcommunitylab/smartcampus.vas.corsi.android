@@ -67,7 +67,8 @@ public class MyUniActivity extends SherlockActivity {
 
 	// This is the project id generated from the Google console when
 	// you defined a Google APIs project.
-	private static final String PROJECT_ID = "674612024423";
+//	private static final String PROJECT_ID = "674612024423"; //TEST
+	private static final String PROJECT_ID = "453601816446";
 	public static final String EXTRA_MESSAGE = "message";
 	public static final String PROPERTY_REG_ID = "registration_id";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
