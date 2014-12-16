@@ -164,8 +164,8 @@ public final class SmartUniDataWS {
 		return "/rest/gcm/reg_id/" + regId;
 	}
 
-	public static final String POST_WS_MESSAGE_CHAT_GDS(long gdsId, String text) {
-		return "/rest/gcm/messagecommunicator/gds/" + gdsId + "/text/" + text;
+	public static final String POST_WS_MESSAGE_CHAT_GDS(long gdsId) {
+		return "/rest/gcm/messagecommunicator/gds/" + gdsId + "/text";
 	}
 
 	public static final String GET_WS_MESSAGE_CHAT_GDS(long gdsId) {

@@ -1,5 +1,6 @@
 package eu.trentorise.smartcampus.android.studyMate.gruppi_studio;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -130,16 +131,23 @@ public class Chat_Fragment extends SherlockFragment {
 
 	public void sendMessage(View v) {
 		// String newMessage = text.getText().toString().trim();
-		if (text.getText().toString().length() > 0) {
+
 			// addNewMessage(new Message(newMessage, true));
+		
 			new SendMessage().execute();
 
-		}
 	}
 
 	private class SendMessage extends AsyncTask<Void, Void, Boolean> {
 
 		private ProtocolCarrier mProtocolCarrier;
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			
+		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -149,8 +157,10 @@ public class Chat_Fragment extends SherlockFragment {
 			MessageRequest request = new MessageRequest(
 					SmartUniDataWS.URL_WS_SMARTUNI,
 					SmartUniDataWS.POST_WS_MESSAGE_CHAT_GDS(
-							contextualGDS.getId(), text.getText().toString()));
+							contextualGDS.getId()));
 			request.setMethod(Method.POST);
+			request.setBody(text.getText().toString());
+			request.setContentType("text/plain");
 
 			MessageResponse response;
 			try {
@@ -276,6 +286,14 @@ public class Chat_Fragment extends SherlockFragment {
 			messages = new ArrayList<Message>();
 
 			for (ChatMessage chatMessage : listMessages) {
+				String textDecoded = null;
+				try {
+					textDecoded = new String(chatMessage.getTesto().getBytes("ISO-8859-1"), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				chatMessage.setTesto(textDecoded);
 				if (String.valueOf(chatMessage.getId_studente()).equals(
 						SharedUtils.getStudentInfo(
 								getActivity().getApplicationContext())
