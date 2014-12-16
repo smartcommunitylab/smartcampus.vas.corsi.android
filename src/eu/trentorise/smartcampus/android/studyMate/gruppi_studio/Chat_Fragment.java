@@ -57,6 +57,7 @@ public class Chat_Fragment extends SherlockFragment {
 	private String name;
 	private GruppoDiStudio contextualGDS;
 	public static ProgressDialog pd;
+	boolean enabled = true;
 	// This intent filter will be set to filter on the string
 	// "GCM_RECEIVED_ACTION"
 	IntentFilter gcmFilter;
@@ -87,8 +88,9 @@ public class Chat_Fragment extends SherlockFragment {
 		sendBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (text.getText().toString().length() > 0) {
+				if (text.getText().toString().length() > 0 && enabled) {
 					sendMessage(v);
+					enabled = false;
 				}
 			}
 		});
@@ -213,6 +215,8 @@ public class Chat_Fragment extends SherlockFragment {
 				addNewMessage(new Message(text.getText().toString(), true));
 				text.setText("");
 			}
+			
+			enabled = true;
 
 		}
 

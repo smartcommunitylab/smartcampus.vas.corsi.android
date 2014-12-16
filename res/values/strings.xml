@@ -270,5 +270,7 @@
     <!-- chat -->
     <string name="chat_messages">Messaggi della chat</string>
     <string name="chat_label">Chat</string>
+    <string name="write_here">Scrivi qui...</string>
+    
     
 </resources>

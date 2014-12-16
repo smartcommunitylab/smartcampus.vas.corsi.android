@@ -18,7 +18,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="5sp"
             android:layout_weight="1"
-            android:hint="Write here"
+            android:hint="@string/write_here"
             android:padding="5sp"
             android:textColor="@color/textFieldColor" />
         <!-- android:background="@drawable/message_field" -->
